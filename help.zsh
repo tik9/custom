@@ -19,20 +19,16 @@ insert_sudo () { zle beginning-of-line; zle -U "sudo " }
 zle -N insert-sudo insert_sudo
 bindkey "^[s" insert-sudo
 
-las(){
+function las(){
 amixer set PCM $(expr $1 \* 10)%
-echo "Argument \$1 mit 10 multipliziert"
-}
-
-lag(){
-    amixer get PCM
+echo "Lautsprecher: Argument \$1 mit 10 multipliziert."
 }
 
 # login remote shell
 lss(){
 	base='192.168.1'
         ssh $base.$1
-        echo "Mit $base.$1 (\$1) verbunden"
+        echo "Ssh: Mit $base.$1 (\$1) verbunden"
 }
 
 m(){

@@ -45,9 +45,8 @@ function gi(){
 # (sorted alphabetically)
 #
 
-#alias g='git'
 
-alias ga='git add'
+alias ga='git config --get-regexp alias'
 alias gaa='git add --all'
 alias gapa='git add --patch'
 
@@ -199,8 +198,10 @@ alias gru='git reset --'
 alias grup='git remote update'
 alias grv='git remote -v'
 
+alias gs='git status'
 alias gsb='git status -sb'
 alias gsd='git svn dcommit'
+alias gsh='git show'
 alias gsi='git submodule init'
 alias gsps='git show --pretty=short --show-signature'
 alias gsr='git svn rebase'
