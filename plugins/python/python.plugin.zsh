@@ -9,6 +9,8 @@ function pyclean() {
 }
 
 alias pygrep='grep --include="*.py"'
+alias py='/root/progr/pycharm/bin/pycharm.sh&'
+
 
 # python django
 alias d0='d1;d2;dr'
