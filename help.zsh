@@ -21,7 +21,7 @@ bindkey "^[s" insert-sudo
 
 function las(){
 amixer set PCM $(expr $1 \* 10)%;
-echo "Lautsprecher: Argument \$1 mit 10 multipliziert."
+echo "Lautspr.: Argument \$1 mit 10 multipliziert."
 }
 
 # login remote shell
