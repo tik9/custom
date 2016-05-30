@@ -58,6 +58,17 @@ alias ra='cd rasp'
 alias oh='cd /root/.oh-my-zsh'
 alias oc='cd /root/.oh-my-zsh/custom'
 
+# network
+alias if="ifconfig" 
+alias iw='iwlist wlan0 scan'
+alias ie='iwgetid -r'
+alias ie2='iwconfig 2>&1 | grep ESSID'
+alias id='ifdown wlan0'
+alias iu='ifup wlan0'
+alias idu='ifdown wlan0;ifup wlan0'
+alias pi="p" 
+alias p="ping google.de -c4" 
+
 
 alias ad='echo user153015@gmail.com 015739598220'
 alias ad2='echo dkoerner@konzertagentur-koerner.de'
