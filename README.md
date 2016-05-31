@@ -1,1 +1,1 @@
-# custom
+# "Oh My Zsh" /customized/ 

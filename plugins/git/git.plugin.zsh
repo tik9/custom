@@ -34,9 +34,12 @@ function work_in_progress() {
 }
 
 function gi(){
-	git add .;
+	git status;
+	git add . ;
 	git commit -m "$1";
-	git push
+	git push;
+	git status;
+
 }
 
 

@@ -4,18 +4,18 @@
 #adb push "$1" storage/sdcard/
 #}
 
-g(){
+function g(){
 	geany $1 &
 }
 
 
 # Hilfe
-he(){
+function he(){
 $1 --help
 }
 
 # alt-s --> Sudo
-insert_sudo () { zle beginning-of-line; zle -U "sudo " }
+function insert_sudo () { zle beginning-of-line; zle -U "sudo " }
 zle -N insert-sudo insert_sudo
 bindkey "^[s" insert-sudo
 
@@ -58,7 +58,7 @@ alias ra='cd rasp'
 alias oh='cd /root/.oh-my-zsh'
 alias oc='cd /root/.oh-my-zsh/custom'
 
-# network
+# netzwerk
 alias if="ifconfig" 
 alias iw='iwlist wlan0 scan'
 alias ie='iwgetid -r'
@@ -77,6 +77,7 @@ alias cp='cp -r'
 alias da='date'
 alias df='df -h'
 alias du='du -h'
+alias ez="exec zsh"
 alias ex="exit"
 alias f="find / -name"
 alias f2="find -name"
