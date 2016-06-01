@@ -70,6 +70,18 @@ alias pi="p"
 alias p="ping google.de -c4" 
 
 
+#ps
+alias k="kill -9"
+alias ki="killall"
+alias kmp="ki mplayer"
+alias ksl="ki sleep"
+alias pr='ps -ef|grep'
+alias psl="pr sleep"
+alias pmp="pr mplay"
+alias ppy="pr python"
+alias sl="sleep"
+
+
 alias ad='echo user153015@gmail.com 015739598220'
 alias ad2='echo dkoerner@konzertagentur-koerner.de'
 alias co='da;date1=`date +%s`; while true; do ; echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r"; done'
@@ -86,6 +98,7 @@ alias ha='halt'
 alias lag='amixer get PCM'
 alias ma='man'
 alias mkdir='mkdir -p'
+alias ms='mysql d'
 alias nm="nmap -sP 192.168.1.*"
 alias sho='apt-cache show'
 alias snd='cat /dev/urandom | padsp tee | aplay'
