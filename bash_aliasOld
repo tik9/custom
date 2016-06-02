@@ -1,0 +1,89 @@
+di(){
+dict $1 |less
+}
+
+#verschieden
+alias a="alias|le"
+alias f="find / -name"
+alias gt='gnome-terminal&'
+alias py='cd /home/tk/pyte/'
+alias py2='p pyplot_simple.py '
+alias snmr='service network-manager restart'
+
+# enable color support of ls
+if [ -x /usr/bin/dircolors ]; then
+test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+fi
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+#mplay.
+alias mp="mplayer"
+# radio landsberg
+alias min="mp http://80.237.154.83:8120"
+#orf tirol
+alias mo="mp http://mp3stream10.apasf.apa.at:8000/"
+
+#programme
+alias ge="geany"
+alias v="vim"
+alias n="nano"
+
+
+#user man.
+alias st="su tk"
+alias sr="sudo -i"
+
+#Dateiops
+alias d="rm -r"
+alias m="mkdir -p"
+
+#Paketverwaltung
+alias sho='apt-cache show'
+
+#printing to terminal
+alias le='less'
+alias c='cat'
+#networkmanager
+alias nmr='service network-manager restart'
+#install
+alias in='apt-get install'
+alias au='apt-get remove'
+#pip
+alias pin='pip install'
+alias puin='pip uninstall'
+alias p3i='pip3.4 install'
+alias pl='pip list'
+# save energy
+alias s='pm-suspend'
+alias h='hibernate'
+alias cu='curl localhost:8000'
+#dir and file permission
+alias wp='chmod 777 -R .'
+alias wpf='chmod 777'
+#start bashrc
+alias ba='vi /etc/bash.bashrc'
+alias x='source /etc/bash.bashrc'
+#git
+alias gs='git status'
+alias gsh='git show'
+alias gd='git diff'
+alias ga='git add .'
+alias gr='git rm -r'
+# ----------------------py
+alias p='ipython'
+alias p3='ipython3'
+#python django
+#restart dev. server (kill and start)
+alias r='./run.sh'
+# management
+alias ma2='python2 manage.py'
+alias ma3='python3 manage.py'
+alias ma='python wsgi/openshift/manage.py runserver'
+alias djv='python -c "import django; print(django.get_version())"'
