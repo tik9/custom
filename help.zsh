@@ -51,12 +51,42 @@ function yt(){
 echo "$1 (\$1) heruntergeladen"
 }
 
+# alias
+alias a='alias|le|gr'
+alias ua='unalias'
+alias av='v  /etc/.aliases'
+alias as='so /etc/.aliases'
+
+
 #cd's
 alias dj="cd /root/dj3"
 alias mu="cd /root/musik"
 alias ra='cd rasp'
 alias oh='cd /root/.oh-my-zsh'
 alias oc='cd /root/.oh-my-zsh/custom'
+
+#curl
+alias cu='curl'
+alias cl1='cu localhost:8000'
+
+#dpkg
+alias ag='apt-get'
+alias in='ag install -y'
+alias ar='ag remove -y'
+alias aur='ag autoremove'
+alias up='ag update'
+alias ug='ag upgrade'
+
+# Energie
+alias hi='hibernate'
+alias h='hi'
+alias s='pm-suspend'
+
+# Hilfe
+alias hv='v /root/help.sh' 
+alias hc='c /root/help.sh'
+alias hl='le /root/help.sh|gr'
+alias hs='so /root/help.sh'
 
 # netzwerk
 alias if="ifconfig" 
@@ -70,7 +100,7 @@ alias pi="p"
 alias p="ping google.de -c4" 
 
 
-#ps
+# ps
 alias k="kill -9"
 alias ki="killall"
 alias kmp="ki mplayer"
@@ -80,6 +110,29 @@ alias psl="pr sleep"
 alias pmp="pr mplay"
 alias ppy="pr python"
 alias sl="sleep"
+
+# Radio
+alias ml="mplayer "
+
+alias b="int"
+alias bra="sleep 8h 40m; da;oe"
+alias cur="ml -playlist http://minnesota.publicradio.org/tools/play/streams/the_current.pls"
+alias fm4="ml http://mp3stream1.apasf.apa.at:8000/" #fm4 orf
+alias heartla='ml -playlist http://minnesota.publicradio.org/tools/play/streams/radio_heartland.pls'
+alias int="ml http://80.237.154.83:8120" # landsberg int.
+alias ri=int
+alias kl="ml -playlist http://minnesota.publicradio.org/tools/play/streams/classical.pls"
+alias mpr="ml -playlist http://minnesota.publicradio.org/tools/play/streams/news.pls"
+alias news=mpr
+alias oe="ml http://194.232.200.156:8000" #oe3
+alias sonicuniverse="ml -playlist http://somafm.com/sonicuniverse.pls"
+
+
+# zsh
+alias zs='so /root/.zshrc'
+alias zc='c /root/.zshrc'
+alias zl='le /root/.zshrc'
+alias zg='g /root/.zshrc'
 
 
 alias ad='echo user153015@gmail.com 015739598220'
