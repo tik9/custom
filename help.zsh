@@ -184,6 +184,7 @@ alias lag='amixer get PCM'
 alias ma='man'
 alias mkdir='mkdir -p'
 alias ms='mysql d'
+alias mt='mutt'
 alias nm="nmap -sP 192.168.1.*"
 alias sca='scp /etc/.aliases 192.168.1.115:/etc/'
 alias sho='apt-cache show'
