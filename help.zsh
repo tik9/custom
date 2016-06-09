@@ -69,6 +69,12 @@ alias oc='cd /root/.oh-my-zsh/custom'
 alias cu='curl'
 alias cl1='cu localhost:8000'
 
+
+#Dateiops
+alias d="rm -r"
+alias md="mkdir -p"
+alias to='touch'
+
 #dpkg
 alias ag='apt-get'
 alias in='ag install -y'
@@ -76,6 +82,12 @@ alias ar='ag remove -y'
 alias aur='ag autoremove'
 alias up='ag update'
 alias ug='ag upgrade'
+
+
+# Drucken auf terminal
+alias le='less'
+alias c='cat'
+
 
 # Energie
 alias hi='hibernate'
@@ -88,6 +100,17 @@ alias hc='c /root/help.sh'
 alias hl='le /root/help.sh|gr'
 alias hs='so /root/help.sh'
 
+# "ls" Aliase
+alias la='ls -A'
+alias l='ls -CF'
+alias lm="ls -l | more"
+alias lh="ls --help"
+alias ll='ls -alF --full-time'
+alias lsh="ls -halt --full-time"
+alias list='ls -cl --group-directories-first'
+alias biggest='find -type f -printf '\''%s %p\n'\'' | sort -nr | head -n 40 | gawk "{ print \$1/1000000 \" \" \$2 \" \" \$3 \" \" \$4 \" \" \$5 \" \" \$6 \" \" \$7 \" \" \$8 \" \" \$9 }"'
+
+
 # netzwerk
 alias if="ifconfig" 
 alias iw='iwlist wlan0 scan'
@@ -98,6 +121,11 @@ alias iu='ifup wlan0'
 alias idu='ifdown wlan0;ifup wlan0'
 alias pi="p" 
 alias p="ping google.de -c4" 
+
+#programme
+alias ec="/root/progr/eclipse/eclipse "
+alias ecb="export SWT_GTK3=0;/root/progr/eclipse/eclipse &"
+alias v="vim"
 
 
 # ps
@@ -127,6 +155,10 @@ alias news=mpr
 alias oe="ml http://194.232.200.156:8000" #oe3
 alias sonicuniverse="ml -playlist http://somafm.com/sonicuniverse.pls"
 
+#user
+alias st="su t"
+alias r="sudo -i"
+
 
 # zsh
 alias zs='so /root/.zshrc'
@@ -153,6 +185,7 @@ alias ma='man'
 alias mkdir='mkdir -p'
 alias ms='mysql d'
 alias nm="nmap -sP 192.168.1.*"
+alias sca='scp /etc/.aliases 192.168.1.115:/etc/'
 alias sho='apt-cache show'
 alias snd='cat /dev/urandom | padsp tee | aplay'
 alias so='source'
@@ -162,6 +195,7 @@ alias ta='tail'
 alias tar='tar xfvz'
 alias tb='thunderbird &'
 alias te='terminator &'
+alias tp='top'
 alias tr='tree'
 alias un='unzip'
 alias w="dict"

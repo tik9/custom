@@ -39,7 +39,6 @@ function gi(){
 	git commit -m "$1";
 	git push;
 	git status;
-
 }
 
 
@@ -148,6 +147,7 @@ compdef _git ggpur=git-checkout
 
 alias gignore='git update-index --assume-unchanged'
 alias gignored='git ls-files -v | grep "^[[:lower:]]"'
+alias gin='git init'
 alias git-svn-dcommit-push='git svn dcommit && git push github master:svntrunk'
 compdef git-svn-dcommit-push=git
 
