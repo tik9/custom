@@ -106,6 +106,7 @@ ggf() {
 git push --force origin "${b:=$1}"
 }
 compdef _git ggf=git-checkout
+
 ggl() {
 if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
 git pull origin "${*}"
@@ -115,8 +116,10 @@ git pull origin "${b:=$1}"
 fi
 }
 compdef _git ggl=git-checkout
+
 alias ggpull='git pull origin $(git_current_branch)'
 compdef _git ggpull=git-checkout
+
 ggp() {
 if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
 git push origin "${*}"
@@ -126,6 +129,7 @@ git push origin "${b:=$1}"
 fi
 }
 compdef _git ggp=git-checkout
+
 alias ggpush='git push origin $(git_current_branch)'
 compdef _git ggpush=git-checkout
 ggpnp() {
@@ -229,3 +233,5 @@ alias glum='git pull upstream master'
 
 alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"'
+
+alias nc='git nccommit'

@@ -36,7 +36,7 @@ function m(){
 }
 
 
-function sc(){
+function sc2(){
     prod=192.168.1.115 ;
 	scp -r $1  $prod:$2 ;
         echo "$1 (\$1) nach $prod:$2(\$2) kopiert"
@@ -59,11 +59,12 @@ alias as='so /etc/.aliases'
 
 
 #cd's
-alias dj="cd /root/dj3"
+alias da="cd /root/django"
 alias mu="cd /root/musik"
-alias ra='cd rasp'
 alias oh='cd /root/.oh-my-zsh'
 alias oc='cd /root/.oh-my-zsh/custom'
+alias pm='cd /root/pm'
+alias st='cd /root/git/StudiumSAS/'
 
 #curl
 alias cu='curl'
@@ -123,7 +124,7 @@ alias pi="p"
 alias p="ping google.de -c4" 
 
 #programme
-alias ec="/root/progr/eclipse/eclipse "
+alias ec="/root/progr/eclipse/eclipse &"
 alias ecb="export SWT_GTK3=0;/root/progr/eclipse/eclipse &"
 alias v="vim"
 
@@ -156,7 +157,7 @@ alias oe="ml http://194.232.200.156:8000" #oe3
 alias sonicuniverse="ml -playlist http://somafm.com/sonicuniverse.pls"
 
 #user
-alias st="su t"
+#alias st="su t"
 alias r="sudo -i"
 
 
@@ -171,7 +172,7 @@ alias ad='echo user153015@gmail.com 015739598220'
 alias ad2='echo dkoerner@konzertagentur-koerner.de'
 alias co='da;date1=`date +%s`; while true; do ; echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r"; done'
 alias cp='cp -r'
-alias da='date'
+alias dat='date'
 alias df='df -h'
 alias du='du -h'
 alias ez="exec zsh"

@@ -15,12 +15,10 @@ alias py='/root/progr/pycharm/bin/pycharm.sh&'
 # python django
 alias d0='d1;d2;dr'
 alias d2='kill $(netstat -lnp| grep 8000|awk "{print $7}"|cut -d"/" -f 1)'
-alias dr='wsgi/openshift/manage.py runserver&'
-alias dr2='wsgi/openshift/manage.py'
-alias d1="cd /root/dj3"
-alias pm3="pm runserver&"
-alias pm="./manage.py"
-alias pms="pm diffsettings |le"
+alias dr='wsgi/myproject/manage.py runserver&'
+alias dr2='wsgi/myproject/manage.py'
+alias d1="cd /root/django"
+
 
 #pip
 alias pi3='pip3 install'
