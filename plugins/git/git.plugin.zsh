@@ -48,8 +48,8 @@ function gi(){
 #
 
 
-alias ga='git config --get-regexp alias'
-alias gaa='git add --all'
+alias gal='git config --get-regexp alias'
+alias ga='git add --all'
 alias gapa='git add --patch'
 
 alias gb='git branch'
@@ -64,7 +64,7 @@ alias gbsg='git bisect good'
 alias gbsr='git bisect reset'
 alias gbss='git bisect start'
 
-alias gc='git commit -v'
+alias gc='git commit -a --allow-empty-message -m ""'
 alias gc!='git commit -v --amend'
 alias gcn!='git commit -v --no-edit --amend'
 alias gca='git commit -v -a'
@@ -95,8 +95,10 @@ alias gdw='git diff --word-diff'
 
 alias gf='git fetch'
 alias gfa='git fetch --all --prune'
+
 function gfg() { git ls-files | grep $@ }
 compdef gfg=grep
+
 alias gfo='git fetch origin'
 
 alias gg='git gui citool'

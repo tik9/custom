@@ -8,6 +8,8 @@ function pyclean() {
     find ${ZSH_PYCLEAN_PLACES} -type d -name "__pycache__" -delete
 }
 
+
+alias ip='ipython'
 alias pygrep='grep --include="*.py"'
 alias py='/root/progr/pycharm/bin/pycharm.sh&'
 

@@ -35,6 +35,9 @@ function m(){
 	mupdf $1 &
 }
 
+function mp(){
+	sleep $1;killall mplayer
+}
 
 function sc2(){
     prod=192.168.1.115 ;
@@ -44,6 +47,10 @@ function sc2(){
 
 function ta(){
 	tail $2
+}
+
+function ve(){
+$1 --version
 }
 
 function yt(){
@@ -65,6 +72,7 @@ alias oh='cd /root/.oh-my-zsh'
 alias oc='cd /root/.oh-my-zsh/custom'
 alias pm='cd /root/pm'
 alias st='cd /root/git/StudiumSAS/'
+alias fx='cd /root/git/fx/'
 
 #curl
 alias cu='curl'
@@ -85,15 +93,10 @@ alias up='ag update'
 alias ug='ag upgrade'
 
 
-# Drucken auf terminal
-alias le='less'
-alias c='cat'
-
-
 # Energie
 alias hi='hibernate'
 alias h='hi'
-alias s='pm-suspend'
+alias sp='pm-suspend'
 
 # Hilfe
 alias hv='v /root/help.sh' 
@@ -120,12 +123,16 @@ alias ie2='iwconfig 2>&1 | grep ESSID'
 alias id='ifdown wlan0'
 alias iu='ifup wlan0'
 alias idu='ifdown wlan0;ifup wlan0'
+alias i=idu
 alias pi="p" 
 alias p="ping google.de -c4" 
 
 #programme
-alias ec="/root/progr/eclipse/eclipse &"
-alias ecb="export SWT_GTK3=0;/root/progr/eclipse/eclipse &"
+alias ab='abiword'
+alias c='cat'
+alias ecb="/root/progr/eclipse/eclipse &"
+alias ec="export SWT_GTK3=0;/root/progr/eclipse/eclipse &"
+alias le='less'
 alias v="vim"
 
 
@@ -158,7 +165,7 @@ alias sonicuniverse="ml -playlist http://somafm.com/sonicuniverse.pls"
 
 #user
 #alias st="su t"
-alias r="sudo -i"
+alias sur="sudo -i"
 
 
 # zsh
@@ -169,13 +176,13 @@ alias zg='g /root/.zshrc'
 
 
 alias ad='echo user153015@gmail.com 015739598220'
-alias ad2='echo dkoerner@konzertagentur-koerner.de'
+alias ad2='echo timo.koerner@hof-university.de dkoerner@konzertagentur-koerner.de'
 alias co='da;date1=`date +%s`; while true; do ; echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r"; done'
 alias cp='cp -r'
 alias dat='date'
 alias df='df -h'
 alias du='du -h'
-alias ez="exec zsh"
+alias e="exec zsh"
 alias ex="exit"
 alias f="find / -name"
 alias f2="find -name"
@@ -187,6 +194,7 @@ alias mkdir='mkdir -p'
 alias ms='mysql d'
 alias mt='mutt'
 alias nm="nmap -sP 192.168.1.*"
+alias r=sr
 alias sca='scp /etc/.aliases 192.168.1.115:/etc/'
 alias sho='apt-cache show'
 alias snd='cat /dev/urandom | padsp tee | aplay'
