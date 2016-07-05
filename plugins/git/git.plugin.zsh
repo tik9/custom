@@ -36,7 +36,7 @@ function work_in_progress() {
 function gi(){
 	git status;
 	git add . ;
-	git commit -m "$1";
+	git nccommit;
 	git push;
 	git status;
 }
@@ -48,8 +48,8 @@ function gi(){
 #
 
 
-alias gal='git config --get-regexp alias'
 alias ga='git add --all'
+alias gal='git config --get-regexp alias'
 alias gapa='git add --patch'
 
 alias gb='git branch'
@@ -203,8 +203,7 @@ alias grmv='git remote rename'
 alias grrm='git remote remove'
 alias grset='git remote set-url'
 alias grt='cd $(git rev-parse --show-toplevel || echo ".")'
-alias gru='git reset --'
-alias grup='git remote update'
+alias gru='git remote update'
 alias grv='git remote -v'
 
 alias gs='git status'
@@ -237,3 +236,4 @@ alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"'
 
 alias nc='git nccommit'
+alias ocg='g /root/.oh-my-zsh/custom/plugins/git/git.plugin.zsh'

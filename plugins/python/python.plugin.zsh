@@ -10,6 +10,7 @@ function pyclean() {
 
 
 alias ip='ipython'
+alias ocp='g /root/.oh-my-zsh/custom/plugins/python/python.plugin.zsh'
 alias pygrep='grep --include="*.py"'
 alias py='/root/progr/pycharm/bin/pycharm.sh&'
 

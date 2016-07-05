@@ -61,18 +61,16 @@ echo "$1 (\$1) heruntergeladen"
 # alias
 alias a='alias|le|gr'
 alias ua='unalias'
-alias av='v  /etc/.aliases'
-alias as='so /etc/.aliases'
 
 
 #cd's
 alias da="cd /root/django"
+alias fx='cd /root/git/fx/'
 alias mu="cd /root/musik"
 alias oh='cd /root/.oh-my-zsh'
 alias oc='cd /root/.oh-my-zsh/custom'
-alias pm='cd /root/pm'
+alias rn='cd /root/rn/'
 alias st='cd /root/git/StudiumSAS/'
-alias fx='cd /root/git/fx/'
 
 #curl
 alias cu='curl'
@@ -195,7 +193,6 @@ alias ms='mysql d'
 alias mt='mutt'
 alias nm="nmap -sP 192.168.1.*"
 alias r=sr
-alias sca='scp /etc/.aliases 192.168.1.115:/etc/'
 alias sho='apt-cache show'
 alias snd='cat /dev/urandom | padsp tee | aplay'
 alias so='source'
