@@ -94,6 +94,7 @@ alias ug='ag upgrade'
 # Energie
 alias hi='hibernate'
 alias h='hi'
+alias rs='reboot'
 alias sp='pm-suspend'
 
 # Hilfe
