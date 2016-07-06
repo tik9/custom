@@ -186,7 +186,7 @@ alias zl='le /root/.zshrc'
 alias zg='g /root/.zshrc'
 
 
-alias ad='echo user153015@gmail.com'
+alias ad='echo user153015@gmail.com|cli'
 alias ad2='echo 015739598220 timo.koerner@hof-university.de dkoerner@konzertagentur-koerner.de'
 alias cli='xclip -sel clip'
 alias co='da;date1=`date +%s`; while true; do ; echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r"; done'
