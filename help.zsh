@@ -45,6 +45,17 @@ function sc2(){
         echo "$1 (\$1) nach $prod:$2(\$2) kopiert"
 }
 
+function startRoot(){
+#py #pycharm
+#e #eclipse
+
+#te # Terminal
+
+# ifup down up wlan
+
+da; echo Fertig $0
+}
+
 function ta(){
 	tail $2
 }
@@ -98,9 +109,9 @@ alias rs='reboot'
 alias sp='pm-suspend'
 
 # Hilfe
-alias hv='v /root/help.sh' 
-alias hc='c /root/help.sh'
-alias hl='le /root/help.sh|gr'
+alias hv='v /root/.oh-my-zsh/custom/help.zsh' 
+alias hc='c /root/.oh-my-zsh/custom/help.zsh'
+alias hl='le /root/.oh-my-zsh/custom/help.zsh|gr'
 alias hs='so /root/help.sh'
 
 # "ls" Aliase
@@ -129,6 +140,7 @@ alias p="ping google.de -c4"
 #programme
 alias ab='abiword'
 alias c='cat'
+alias cl='~/.oh-my-zsh/custom/plugins/cloudapp/cloudapp.rb'
 alias ecb="/root/progr/eclipse/eclipse &"
 alias ec="export SWT_GTK3=0;/root/progr/eclipse/eclipse &"
 alias le='less'
@@ -174,8 +186,9 @@ alias zl='le /root/.zshrc'
 alias zg='g /root/.zshrc'
 
 
-alias ad='echo user153015@gmail.com 015739598220'
-alias ad2='echo timo.koerner@hof-university.de dkoerner@konzertagentur-koerner.de'
+alias ad='echo user153015@gmail.com|cli'
+alias ad2='echo 015739598220 timo.koerner@hof-university.de dkoerner@konzertagentur-koerner.de'
+alias cli='xclip -sel clip'
 alias co='da;date1=`date +%s`; while true; do ; echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r"; done'
 alias cp='cp -r'
 alias dat='date'
