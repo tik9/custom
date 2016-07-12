@@ -11,6 +11,7 @@ function pyclean() {
 
 alias ip='ipython'
 alias ocp='g /root/.oh-my-zsh/custom/plugins/python/python.plugin.zsh'
+alias p3="python3"
 alias pygrep='grep --include="*.py"'
 alias py='/root/progr/pycharm/bin/pycharm.sh&'
 
@@ -18,8 +19,8 @@ alias py='/root/progr/pycharm/bin/pycharm.sh&'
 # python django
 alias d0='d1;d2;dr'
 alias d2='kill $(netstat -lnp| grep 8000|awk "{print $7}"|cut -d"/" -f 1)'
-alias dr='wsgi/myproject/manage.py runserver&'
-alias dr2='wsgi/myproject/manage.py'
+alias dr='p3 wsgi/myproject/manage.py runserver&'
+alias dr2='p3 wsgi/myproject/manage.py'
 alias d1="cd /root/django"
 
 
