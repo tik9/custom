@@ -38,8 +38,7 @@ end
 CloudApp.authenticate(email,password)
 url = CloudApp::Item.create(:upload, {:file => ARGV[0]}).url
 
-# Say it for good measure.
-puts "Hochgeladen nach #{url}."
+puts "Hochgeladen nach #{url}"
 
 # Get the embed link.
 url = "#{url}/#{ARGV[0].split('/').last}"

@@ -4,6 +4,11 @@
 #adb push "$1" storage/sdcard/
 #}
 
+function co(){
+	echo "$1" | xclip -sel clip
+	echo "$1 (\$1) in Zwischenablage"
+}
+
 function g(){
 	geany $1 &
 }
@@ -42,7 +47,7 @@ function mp(){
 function sc2(){
     prod=192.168.1.115 ;
 	scp -r $1  $prod:$2 ;
-        echo "$1 (\$1) nach $prod:$2(\$2) kopiert"
+        echo "$1 (\$1) nach $prod:$2 (\$2) kopiert"
 }
 
 function startRoot(){
@@ -141,6 +146,7 @@ alias p="ping google.de -c4"
 alias ab='abiword'
 alias c='cat'
 alias cl='~/.oh-my-zsh/custom/plugins/cloudapp/cloudapp.rb'
+alias cloudapp='cl'
 alias ecb="/root/progr/eclipse/eclipse &"
 alias ec="export SWT_GTK3=0;/root/progr/eclipse/eclipse &"
 alias le='less'
@@ -152,6 +158,8 @@ alias k="kill -9"
 alias ki="killall"
 alias kmp="ki mplayer"
 alias ksl="ki sleep"
+alias kfe="ki fetchmail"
+alias pfe='pr fetchmail'
 alias pr='ps -ef|grep'
 alias psl="pr sleep"
 alias pmp="pr mplay"
@@ -189,7 +197,7 @@ alias zg='g /root/.zshrc'
 alias ad='echo user153015@gmail.com|cli'
 alias ad2='echo 015739598220 timo.koerner@hof-university.de dkoerner@konzertagentur-koerner.de'
 alias cli='xclip -sel clip'
-alias co='da;date1=`date +%s`; while true; do ; echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r"; done'
+alias cou='da;date1=`date +%s`; while true; do ; echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r"; done'
 alias cp='cp -r'
 alias dat='date'
 alias df='df -h'
@@ -200,6 +208,7 @@ alias f="find / -name"
 alias f2="find -name"
 alias gr='grep'
 alias ha='halt'
+alias iban='DE63 7215 0000 0050 5242 71'
 alias lag='amixer get PCM'
 alias ma='man'
 alias mkdir='mkdir -p'
