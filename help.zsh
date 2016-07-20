@@ -4,6 +4,8 @@
 #adb push "$1" storage/sdcard/
 #}
 
+ver='/home/t/Downloads/';
+
 function co(){
 	echo "$1" | xclip -sel clip
 	echo "$1 (\$1) in Zwischenablage"
@@ -52,12 +54,9 @@ function sc2(){
 
 function startRoot(){
 #py #pycharm
-#e #eclipse
-
+#g #geany
 #te # Terminal
-
 # ifup down up wlan
-
 da; echo Fertig $0
 }
 
@@ -74,6 +73,34 @@ function yt(){
 echo "$1 (\$1) heruntergeladen"
 }
 
+function z2(){
+	#ver='.'
+	#dat= "$ver`ls -t $ver | head -n1`"
+	dat= 'a.jpg';
+	echo $dat;
+	extension=$(echo ${dat}|awk -F\. '{print $2}')
+if [ ${extension} == "jpg" ]; then
+   echo 1
+fi
+		#if [[ $dat == *.jpg ]] ; then
+		#gpicview $dat
+		#gpicview "$ver`ls -t $ver | head -n1`"
+	#else
+		#mupdf $dat
+	#fi
+	
+ }
+ 
+function mov(){
+	ver='/home/t/Downloads/';
+	#ver='.'
+	ls -t $ver
+	mv "$ver`ls -t $ver  | head -n1`" /root
+	echo \\n
+	ls /root
+ }
+
+ 
 # alias
 alias a='alias|le|gr'
 alias ua='unalias'
@@ -111,7 +138,7 @@ alias ug='ag upgrade'
 alias hi='hibernate'
 alias h='hi'
 alias rs='reboot'
-alias sp='pm-suspend'
+alias s='pm-suspend'
 
 # Hilfe
 alias hv='v /root/.oh-my-zsh/custom/help.zsh' 
@@ -120,14 +147,15 @@ alias hl='le /root/.oh-my-zsh/custom/help.zsh|gr'
 alias hs='so /root/help.sh'
 
 # "ls" Aliase
-alias la='ls -A'
+alias biggest='find -type f -printf '\''%s %p\n'\'' | sort -nr | head -n 40 | gawk "{ print \$1/1000000 \" \" \$2 \" \" \$3 \" \" \$4 \" \" \$5 \" \" \$6 \" \" \$7 \" \" \$8 \" \" \$9 }"'
 alias l='ls -CF'
-alias lm="ls -l | more"
+alias la='ls -A'
+alias ld='ls -t $ver'
 alias lh="ls --help"
+alias li='ls -cl --group-directories-first'
+alias lm="ls -l | more"
 alias ll='ls -alF --full-time'
 alias lsh="ls -halt --full-time"
-alias list='ls -cl --group-directories-first'
-alias biggest='find -type f -printf '\''%s %p\n'\'' | sort -nr | head -n 40 | gawk "{ print \$1/1000000 \" \" \$2 \" \" \$3 \" \" \$4 \" \" \$5 \" \" \$6 \" \" \$7 \" \" \$8 \" \" \$9 }"'
 
 
 # netzwerk
@@ -158,7 +186,9 @@ alias k="kill -9"
 alias ki="killall"
 alias kmp="ki mplayer"
 alias ksl="ki sleep"
+alias kf=kfe
 alias kfe="ki fetchmail"
+alias pf=pfe
 alias pfe='pr fetchmail'
 alias pr='ps -ef|grep'
 alias psl="pr sleep"
@@ -185,6 +215,7 @@ alias sonicuniverse="ml -playlist http://somafm.com/sonicuniverse.pls"
 #user
 #alias st="su t"
 alias sur="sudo -i"
+alias us="echo $USER"
 
 
 # zsh
@@ -211,15 +242,17 @@ alias ha='halt'
 alias iban='DE63 7215 0000 0050 5242 71'
 alias lag='amixer get PCM'
 alias ma='man'
+alias mmu='ma mupdf'
 alias mkdir='mkdir -p'
 alias ms='mysql d'
 alias mt='mutt'
 alias nm="nmap -sP 192.168.1.*"
+alias ocgh='le ../.oh-my-zsh/plugins/github/github.plugin.zsh'
 alias r=sr
 alias sho='apt-cache show'
 alias snd='cat /dev/urandom | padsp tee | aplay'
 alias so='source'
-alias sr='ssh 192.168.1.115'
+alias sr='expect /root/.oh-my-zsh/custom/login_rp'
 alias t='wget --output-document=/dev/null http://speedtest.wdc01.softlayer.com/downloads/test500.zip'
 alias ta='tail'
 alias tar='tar xfvz'

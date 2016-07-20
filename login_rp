@@ -1,0 +1,22 @@
+#!/usr/bin/expect
+
+set prompt "root@raspberry-pi:~#"
+set id "192.168.1.115"
+set rad [lindex $argv 0]
+
+if { [lindex $argv 0] eq "" } {
+    set rad "kl"
+}
+
+spawn ssh $id
+#set timeout 5
+
+expect "password"
+send "p\r"
+
+expect  "$prompt" {
+puts stdout "\nEingeloggt"
+send "$rad\r"
+}
+interact
+

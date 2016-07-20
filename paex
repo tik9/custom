@@ -1,0 +1,11 @@
+#!/usr/local/bin/expect
+log_user 0
+
+set newpass [lindex $argv 0]
+spawn passwd
+expect "Geben Sie ein neues UNIX-Passwort ein:" {send "$newpass\r"}
+expect "Geben Sie das neue UNIX-Passwort erneut ein:" {send "$newpass\r"}
+expect {
+  "passwd: Passwort erfolgreich geändert" {puts stdout "\nPaßwort erfolgreich geändert"}
+  default {puts stdout "\nHat nicht funktioniert!"}
+}
