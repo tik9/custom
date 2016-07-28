@@ -1,0 +1,24 @@
+[global_config]
+  enabled_plugins = CustomCommandsMenu, InactivityWatch, ActivityWatch, TerminalShot, 
+  LaunchpadCodeURLHandler, LaunchpadBugURLHandler
+[keybindings]
+[profiles]
+  [[default]]
+    scrollbar_position = hidden
+    visible_bell = True
+    scrollback_lines = 1000000
+    foreground_color = "#ffffff"
+    copy_on_selection = True
+    background_color = "#300a24"
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+      profile = default
+    [[[window0]]]
+      type = Window
+      parent = ""
+      profile = None
+      size = 900, 900
+[plugins]

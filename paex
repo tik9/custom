@@ -1,5 +1,5 @@
 #!/usr/local/bin/expect
-log_user 0
+##log_user 0
 
 set newpass [lindex $argv 0]
 spawn passwd

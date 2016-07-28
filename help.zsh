@@ -184,10 +184,11 @@ alias v="vim"
 # ps
 alias k="kill -9"
 alias ki="killall"
-alias kmp="ki mplayer"
+alias kmp="pmp;echo '\n';ki mplayer;echo '\n';pmp"
 alias ksl="ki sleep"
 alias kf=kfe
 alias kfe="ki fetchmail"
+alias kpy="ki python"
 alias pf=pfe
 alias pfe='pr fetchmail'
 alias pr='ps -ef|grep'

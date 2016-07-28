@@ -1,0 +1,21 @@
+#!/usr/bin/expect
+
+set rad [lindex $argv 0]
+
+if { [lindex $argv 0] eq "" } {
+    set rad "kl"
+}
+
+spawn su
+#set timeout 5
+
+expect "[sudo] Passwort für $USER:"
+send "p\r"
+
+expect  "$prompt" {
+	puts stdout "\nEingeloggt"
+	send "$rad\r"
+}
+
+interact
+

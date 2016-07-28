@@ -10,8 +10,6 @@ echo "Home ist $home"
 # apt-get
 apt-get install -y 
 
-# Java
-# aptget=("oracle-java8-installer" ant 'tomcat8' )
 
 # Python
   #"ipython3" "python3-pip"
@@ -24,13 +22,13 @@ apt-get install -y
 # texlive-latex-base
 
 #Browser
-#"chromium-browser" links2
+# links2
 
 # Dict
 # dict dict-de-en dictd
 
 # Server
-# git mysql-server libmysqlclient-dev openssh-server
+# git libmysqlclient-dev openssh-server
 
 # Mutt
 # mutt msmtp
@@ -39,7 +37,7 @@ apt-get install -y
 # "moc" mplayer ffmpeg
 
 # Sonstige Programme
-# mupdf ack-grep imagemagick tree
+# ack-grep expect imagemagick mupdf terminator tree
 
 #	pip install --upgrade "$i"
 
