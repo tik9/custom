@@ -108,12 +108,10 @@ alias ua='unalias'
 
 #cd's
 alias da="cd /root/django"
-alias fx='cd /root/git/fx/'
 alias mu="cd /root/musik"
 alias oh='cd /root/.oh-my-zsh'
 alias oc='cd /root/.oh-my-zsh/custom'
-alias rn='cd /root/rn/'
-alias st='cd /root/git/StudiumSAS/'
+alias vr='cd /root/vr'
 
 #curl
 alias cu='curl'
@@ -141,10 +139,11 @@ alias rs='reboot'
 alias s='pm-suspend'
 
 # Hilfe
-alias hv='v /root/.oh-my-zsh/custom/help.zsh' 
 alias hc='c /root/.oh-my-zsh/custom/help.zsh'
+alias hg='g /root/.oh-my-zsh/custom/help.zsh|gr'
 alias hl='le /root/.oh-my-zsh/custom/help.zsh|gr'
-alias hs='so /root/help.sh'
+alias hs='so /root/.oh-my-zsh/custom/help.zsh'
+alias hv='v /root/.oh-my-zsh/custom/help.zsh' 
 
 # "ls" Aliase
 alias biggest='find -type f -printf '\''%s %p\n'\'' | sort -nr | head -n 40 | gawk "{ print \$1/1000000 \" \" \$2 \" \" \$3 \" \" \$4 \" \" \$5 \" \" \$6 \" \" \$7 \" \" \$8 \" \" \$9 }"'
@@ -221,9 +220,6 @@ alias us="echo $USER"
 
 # zsh
 alias zs='so /root/.zshrc'
-alias zc='c /root/.zshrc'
-alias zl='le /root/.zshrc'
-alias zg='g /root/.zshrc'
 
 
 alias ad='echo user153015@gmail.com|cli'
