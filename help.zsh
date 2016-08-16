@@ -94,10 +94,12 @@ fi
 function mov(){
 	ver='/home/t/Downloads/';
 	#ver='.'
+	echo Inhalt $ver
 	ls -t $ver
-	mv "$ver`ls -t $ver  | head -n1`" /root
+	mv "$ver`ls -t $ver  | head -n1`" /root/$1
 	echo \\n
-	ls /root
+	echo Inhalt $1
+	ls /root/$1
  }
 
  
@@ -147,6 +149,7 @@ alias hv='v /root/.oh-my-zsh/custom/help.zsh'
 
 # "ls" Aliase
 alias biggest='find -type f -printf '\''%s %p\n'\'' | sort -nr | head -n 40 | gawk "{ print \$1/1000000 \" \" \$2 \" \" \$3 \" \" \$4 \" \" \$5 \" \" \$6 \" \" \$7 \" \" \$8 \" \" \$9 }"'
+alias dl='ls /home/t/Downloads'
 alias l='ls -CF'
 alias la='ls -A'
 alias ld='ls -t $ver'
@@ -187,25 +190,24 @@ alias kmp="pmp;echo '\n';ki mplayer;echo '\n';pmp"
 alias ksl="ki sleep"
 alias kf=kfe
 alias kfe="ki fetchmail"
-alias kpy="ki python"
+alias kpy="ki python3"
 alias pf=pfe
 alias pfe='pr fetchmail'
 alias pr='ps -ef|grep'
 alias psl="pr sleep"
 alias pmp="pr mplay"
 alias ppy="pr python"
+alias sfe='fetchmail'
 alias sl="sleep"
 
 # Radio
 alias ml="mplayer "
+alias sle="sleep 8h 40m; oe"
 
-alias b="int"
-alias bra="sleep 8h 40m; da;oe"
+alias b="ml http://80.237.154.83:8120" # landsberg int.
 alias cur="ml -playlist http://minnesota.publicradio.org/tools/play/streams/the_current.pls"
 alias fm4="ml http://mp3stream1.apasf.apa.at:8000/" #fm4 orf
-alias heartla='ml -playlist http://minnesota.publicradio.org/tools/play/streams/radio_heartland.pls'
-alias int="ml http://80.237.154.83:8120" # landsberg int.
-alias ri=int
+alias heart'ml -playlist http://minnesota.publicradio.org/tools/play/streams/radio_heartland.pls'
 alias kl="ml -playlist http://minnesota.publicradio.org/tools/play/streams/classical.pls"
 alias mpr="ml -playlist http://minnesota.publicradio.org/tools/play/streams/news.pls"
 alias news=mpr

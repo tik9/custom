@@ -79,7 +79,7 @@ alias gclean='git clean -fd'
 alias gpristine='git reset --hard && git clean -dfx'
 alias gcm='git checkout master'
 alias gcmsg='git commit -m'
-alias gco='git checkout'
+alias gco='g .git/config'
 alias gcount='git shortlog -sn'
 compdef gcount=git
 alias gcp='git cherry-pick'
@@ -101,7 +101,7 @@ compdef gfg=grep
 
 alias gfo='git fetch origin'
 
-alias gg='git gui citool'
+alias gg='g /root/.oh-my-zsh/custom/plugins/git/git.plugin.zsh'
 alias gga='git gui citool --amend'
 ggf() {
 [[ "$#" != 1 ]] && local b="$(git_current_branch)"
@@ -237,4 +237,3 @@ alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"'
 
 alias nc='git nccommit'
-alias ocg='g /root/.oh-my-zsh/custom/plugins/git/git.plugin.zsh'

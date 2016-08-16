@@ -1,4 +1,3 @@
-alias pyfind='find . -name "*.py"'
 
 # Remove python compiled byte-code in either current directory or in a
 # list of specified directories
@@ -10,10 +9,11 @@ function pyclean() {
 
 
 alias ip='ipython'
-alias ocp='g /root/.oh-my-zsh/custom/plugins/python/python.plugin.zsh'
+alias pg='g /root/.oh-my-zsh/custom/plugins/python/python.plugin.zsh'
 alias p3="python3"
-alias pygrep='grep --include="*.py"'
 alias py='/root/progr/pycharm/bin/pycharm.sh&'
+alias pygrep='grep --include="*.py"'
+alias pyfind='find . -name "*.py"'
 
 
 # python django
