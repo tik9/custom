@@ -26,6 +26,12 @@ function insert_sudo () { zle beginning-of-line; zle -U "sudo " }
 zle -N insert-sudo insert_sudo
 bindkey "^[s" insert-sudo
 
+function ki(){
+	killall $1;
+	ps -ef|grep $1;
+	echo "Prozess \$1 vernichtet"
+}
+	
 function las(){
 amixer set PCM $(expr $1 \* 10)%;
 echo "Lautspr.: Argument \$1 mit 10 multipliziert."
@@ -92,14 +98,15 @@ fi
  }
  
 function mov(){
-	ver='/home/t/Downloads/';
+	ver='/home/t/';
+	root="/root/$1"
 	#ver='.'
 	echo Inhalt $ver
 	ls -t $ver
-	mv "$ver`ls -t $ver  | head -n1`" /root/$1
+	mv "$ver`ls -t $ver  | head -n1`" $1
 	echo \\n
 	echo Inhalt $1
-	ls /root/$1
+	ls $1
  }
 
  
@@ -142,12 +149,12 @@ alias s='pm-suspend'
 
 # Hilfe
 alias hc='c /root/.oh-my-zsh/custom/help.zsh'
-alias hg='g /root/.oh-my-zsh/custom/help.zsh|gr'
+alias hg='g /root/.oh-my-zsh/custom/help.zsh'
 alias hl='le /root/.oh-my-zsh/custom/help.zsh|gr'
 alias hs='so /root/.oh-my-zsh/custom/help.zsh'
 alias hv='v /root/.oh-my-zsh/custom/help.zsh' 
 
-# "ls" Aliase
+# ls
 alias biggest='find -type f -printf '\''%s %p\n'\'' | sort -nr | head -n 40 | gawk "{ print \$1/1000000 \" \" \$2 \" \" \$3 \" \" \$4 \" \" \$5 \" \" \$6 \" \" \$7 \" \" \$8 \" \" \$9 }"'
 alias dl='ls /home/t/Downloads'
 alias l='ls -CF'
@@ -175,15 +182,19 @@ alias p="ping google.de -c4"
 #programme
 alias ab='abiword'
 alias c='cat'
-alias cl='~/.oh-my-zsh/custom/plugins/cloudapp/cloudapp.rb'
-alias cloudapp='cl'
+alias clo='~/.oh-my-zsh/custom/plugins/cloudapp/cloudapp.rb'
+alias cloudapp='clo'
 alias ecb="/root/progr/eclipse/eclipse &"
 alias ec="export SWT_GTK3=0;/root/progr/eclipse/eclipse &"
+alias et='expect'
+alias ee='et expect1'
 alias le='less'
 alias v="vim"
 
 
 # ps
+alias as="echo $0"
+alias ba="bash"
 alias k="kill -9"
 alias ki="killall"
 alias kmp="pmp;echo '\n';ki mplayer;echo '\n';pmp"
@@ -199,6 +210,7 @@ alias pmp="pr mplay"
 alias ppy="pr python"
 alias sfe='fetchmail'
 alias sl="sleep"
+alias tt="tty"
 
 # Radio
 alias ml="mplayer "
@@ -222,11 +234,12 @@ alias us="echo $USER"
 
 # zsh
 alias zs='so /root/.zshrc'
+alias zg='g /root/.zshrc'
 
 
 alias ad='echo user153015@gmail.com|cli'
 alias ad2='echo 015739598220 timo.koerner@hof-university.de dkoerner@konzertagentur-koerner.de'
-alias cli='xclip -sel clip'
+alias cl='xclip -sel clip'
 alias cou='da;date1=`date +%s`; while true; do ; echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r"; done'
 alias cp='cp -r'
 alias dat='date'
@@ -238,24 +251,25 @@ alias f="find / -name"
 alias f2="find -name"
 alias gr='grep'
 alias ha='halt'
-alias iban='DE63 7215 0000 0050 5242 71'
+alias hn='echo $(hostname)'
+alias iban='DE63721500000050524271'
 alias lag='amixer get PCM'
 alias ma='man'
 alias mmu='ma mupdf'
 alias mkdir='mkdir -p'
 alias ms='mysql d'
 alias mt='mutt'
-alias nm="nmap -sP 192.168.1.*"
+alias nm="nmap -sP 192.168.188.1/24"
 alias ocgh='le ../.oh-my-zsh/plugins/github/github.plugin.zsh'
+alias ps1="PS1='%$COLUMNS>╡>%F{cyan}╔╡%F{red}[%n]%F{cyan}:%F{yellow}[%m]%F{cyan}➾%F{green}[%~]%F{default}$PS1_GIT%F{cyan}${(l:COLUMNS::═:):-}%<<
+╚═╡%F{default}'"
 alias r=sr
 alias sho='apt-cache show'
-alias snd='cat /dev/urandom | padsp tee | aplay'
-alias so='source'
 alias sr='expect /root/.oh-my-zsh/custom/login_rp'
+alias srg='g /root/.oh-my-zsh/custom/login_rp'
 alias t='wget --output-document=/dev/null http://speedtest.wdc01.softlayer.com/downloads/test500.zip'
 alias ta='tail'
 alias tar='tar xfvz'
-alias tb='thunderbird &'
 alias te='terminator &'
 alias tp='top'
 alias tr='tree'
