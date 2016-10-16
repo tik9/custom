@@ -21,10 +21,6 @@ function he(){
 $1 --help
 }
 
-# alt-s --> Sudo
-function insert_sudo () { zle beginning-of-line; zle -U "sudo " }
-zle -N insert-sudo insert_sudo
-bindkey "^[s" insert-sudo
 
 function ki(){
 	killall $1;
@@ -52,6 +48,12 @@ function mp(){
 	sleep $1;killall mplayer
 }
 
+function pm(){
+df;pacman -S --noconfirm $1
+
+echo \\n
+df
+}
 function sc2(){
     prod=192.168.1.115 ;
 	scp -r $1  $prod:$2 ;
@@ -79,23 +81,6 @@ function yt(){
 echo "$1 (\$1) heruntergeladen"
 }
 
-function z2(){
-	#ver='.'
-	#dat= "$ver`ls -t $ver | head -n1`"
-	dat= 'a.jpg';
-	echo $dat;
-	extension=$(echo ${dat}|awk -F\. '{print $2}')
-if [ ${extension} == "jpg" ]; then
-   echo 1
-fi
-		#if [[ $dat == *.jpg ]] ; then
-		#gpicview $dat
-		#gpicview "$ver`ls -t $ver | head -n1`"
-	#else
-		#mupdf $dat
-	#fi
-	
- }
  
 function mov(){
 	ver='/home/t/';
@@ -132,14 +117,17 @@ alias d="rm -r"
 alias md="mkdir -p"
 alias to='touch'
 
-#dpkg
+# package mgt.
 alias ag='apt-get'
 alias in='ag install -y'
 alias ar='ag remove -y'
 alias aur='ag autoremove'
 alias up='ag update'
 alias ug='ag upgrade'
+alias p="pacman -S"
+alias pu='pacman -Syu'
 
+alias pre='pacman -R --noconfirm'
 
 # Energie
 alias hi='hibernate'
@@ -176,8 +164,7 @@ alias id='ifdown wlan0'
 alias iu='ifup wlan0'
 alias idu='ifdown wlan0;ifup wlan0'
 alias i=idu
-alias pi="p" 
-alias p="ping google.de -c4" 
+alias pi="ping google.de -c4" 
 
 #programme
 alias ab='abiword'
@@ -189,6 +176,7 @@ alias ec="export SWT_GTK3=0;/root/progr/eclipse/eclipse &"
 alias et='expect'
 alias ee='et expect1'
 alias le='less'
+alias li='links'
 alias v="vim"
 
 
@@ -274,7 +262,8 @@ alias te='terminator &'
 alias tp='top'
 alias tr='tree'
 alias un='unzip'
-alias w="dict"
+
+alias w="dict -d fd-eng-deu"
 alias wp='chmod 777 -R .'
 alias z='gpicview'
 
