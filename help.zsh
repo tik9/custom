@@ -55,18 +55,11 @@ echo \\n
 df
 }
 function sc2(){
-    prod=192.168.1.115 ;
+    prod=192.168.1.103 ;
 	scp -r $1  $prod:$2 ;
         echo "$1 (\$1) nach $prod:$2 (\$2) kopiert"
 }
 
-function startRoot(){
-#py #pycharm
-#g #geany
-#te # Terminal
-# ifup down up wlan
-da; echo Fertig $0
-}
 
 function ta(){
 	tail $2
@@ -198,11 +191,9 @@ alias pmp="pr mplay"
 alias ppy="pr python"
 alias sfe='fetchmail'
 alias sl="sleep"
-alias tt="tty"
 
 # Radio
 alias ml="mplayer "
-alias sle="sleep 8h 40m; oe"
 
 alias b="ml http://80.237.154.83:8120" # landsberg int.
 alias cur="ml -playlist http://minnesota.publicradio.org/tools/play/streams/the_current.pls"
@@ -210,7 +201,6 @@ alias fm4="ml http://mp3stream1.apasf.apa.at:8000/" #fm4 orf
 alias heart'ml -playlist http://minnesota.publicradio.org/tools/play/streams/radio_heartland.pls'
 alias kl="ml -playlist http://minnesota.publicradio.org/tools/play/streams/classical.pls"
 alias mpr="ml -playlist http://minnesota.publicradio.org/tools/play/streams/news.pls"
-alias news=mpr
 alias oe="ml http://194.232.200.156:8000" #oe3
 alias sonicuniverse="ml -playlist http://somafm.com/sonicuniverse.pls"
 
@@ -243,14 +233,11 @@ alias hn='echo $(hostname)'
 alias iban='DE63721500000050524271'
 alias lag='amixer get PCM'
 alias ma='man'
-alias mmu='ma mupdf'
 alias mkdir='mkdir -p'
+alias mn='mount'
 alias ms='mysql d'
 alias mt='mutt'
-alias nm="nmap -sP 192.168.188.1/24"
-alias ocgh='le ../.oh-my-zsh/plugins/github/github.plugin.zsh'
-alias ps1="PS1='%$COLUMNS>╡>%F{cyan}╔╡%F{red}[%n]%F{cyan}:%F{yellow}[%m]%F{cyan}➾%F{green}[%~]%F{default}$PS1_GIT%F{cyan}${(l:COLUMNS::═:):-}%<<
-╚═╡%F{default}'"
+alias nm="nmap -sP 192.168.1.1/24"
 alias r=sr
 alias sho='apt-cache show'
 alias sr='expect /root/.oh-my-zsh/custom/login_rp'
@@ -262,10 +249,8 @@ alias te='terminator &'
 alias tp='top'
 alias tr='tree'
 alias un='unzip'
-
 alias w="dict -d fd-eng-deu"
 alias wp='chmod 777 -R .'
 alias z='gpicview'
-
 
 echo "$0 aktualisiert von $$"
