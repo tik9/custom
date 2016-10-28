@@ -114,19 +114,6 @@ alias mn='mount'
 alias um='umount'
 
 
-# package mgt.
-alias ag='apt-get'
-alias ar='ag remove -y'
-alias aur='ag autoremove'
-alias in='ag install -y'
-alias pa="pacman -Ss"
-alias pm="pacman -S"
-alias pu='pacman -Syu'
-alias pre='pacman -R --noconfirm'
-alias sho='apt-cache show'
-alias up='ag update'
-alias ug='ag upgrade'
-
 # Energie
 alias hi='hibernate'
 alias h='hi'
@@ -160,6 +147,21 @@ alias if="ifconfig"
 alias iu='ifup wlan0'
 alias iw='iwlist wlan0 scan'
 alias pi="ping google.de -c4" 
+
+
+# package mgt.
+alias ag='apt-get'
+alias ar='ag remove -y'
+alias aur='ag autoremove'
+alias in='ag install -y'
+alias pa="pacman -Ss"
+alias pm="pacman -S"
+alias pu='pacman -Syu'
+alias pre='pacman -R --noconfirm'
+alias sho='apt-cache show'
+alias up='ag update'
+alias ug='ag upgrade'
+
 
 #programme
 alias ab='abiword'
@@ -200,7 +202,6 @@ alias heart'ml -playlist http://minnesota.publicradio.org/tools/play/streams/rad
 alias kl="ml -playlist http://minnesota.publicradio.org/tools/play/streams/classical.pls"
 alias mpr="ml -playlist http://minnesota.publicradio.org/tools/play/streams/news.pls"
 alias oe="ml http://194.232.200.156:8000" #oe3
-alias sonicuniverse="ml -playlist http://somafm.com/sonicuniverse.pls"
 
 #user
 #alias st="su t"
@@ -208,12 +209,8 @@ alias sur="sudo -i"
 alias us="echo $USER"
 
 
-# zsh
-alias zs='so /root/.zshrc'
-alias zg='g /root/.zshrc'
 
-
-alias ad='echo user153015@gmail.com|cli'
+alias ad='echo t@tk1.it|cli'
 alias ad2='echo 015739598220 timo.koerner@hof-university.de dkoerner@konzertagentur-koerner.de'
 alias cl='xclip -sel clip'
 alias cou='da;date1=`date +%s`; while true; do ; echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r"; done'
@@ -248,6 +245,7 @@ alias tr='tree'
 alias un='unzip'
 alias w="dict -d fd-eng-deu"
 alias wp='chmod 777 -R .'
+alias x='man'
 alias z='gpicview'
 
 echo "$0 aktualisiert von $$"
