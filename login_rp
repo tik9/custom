@@ -1,10 +1,8 @@
 #!/usr/bin/expect
 
 #set prompt "raspberry-pi"
-#set prompt "ban"
-set prompt "tjava.rhcloud"
-
-#puts stdout $prompt
+set prompt "ban"
+#set prompt "tjava.rhcloud"
 
 #set id "192.168.1.115"
 set id "192.168.188.44"
@@ -15,16 +13,18 @@ if { [lindex $argv 0] eq "" } {
     set rad "kl"
 }
 
-#spawn ssh $id
-spawn rhc ssh django
+spawn ssh $id
+#spawn rhc ssh django
 
-#expect "password"
-#send "p\r"
+expect "password"
+send "p\r"
 
 expect  $prompt {
 puts stdout "\nEingeloggt"
 send "df\n\r"
-send "ls app-root/data/\r"
+#send $rad\r
+#send kmp\r
+
 #puts "d $env(DESKTOP_SESSION)"
 
 #send ha\r
