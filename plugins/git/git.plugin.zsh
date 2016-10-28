@@ -166,21 +166,16 @@ alias gl='git pull'
 alias glg='git log --stat'
 alias glgp='git log --stat -p'
 alias glgg='git log --graph'
-alias glgga='git log --graph --decorate --all'
 alias glgm='git log --graph --max-count=10'
 alias glo='git log --oneline --decorate'
 alias glol="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias glola="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
-alias glog='git log --oneline --decorate --graph'
-alias gloga='git log --oneline --decorate --graph --all'
 alias glp="_git_log_prettily"
 compdef _git glp=git-log
 
 alias gm='git merge'
 alias gmom='git merge origin/master'
-alias gmt='git mergetool --no-prompt'
 alias gmtvim='git mergetool --no-prompt --tool=vimdiff'
-alias gmum='git merge upstream/master'
 
 alias gp='git push'
 alias gpd='git push --dry-run'
@@ -237,3 +232,4 @@ alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"'
 
 alias nc='git nccommit'
+alias og='oc;gi'

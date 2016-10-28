@@ -21,10 +21,6 @@ function he(){
 $1 --help
 }
 
-# alt-s --> Sudo
-function insert_sudo () { zle beginning-of-line; zle -U "sudo " }
-zle -N insert-sudo insert_sudo
-bindkey "^[s" insert-sudo
 
 function ki(){
 	killall $1;
@@ -50,21 +46,21 @@ function m(){
 
 function mp(){
 	sleep $1;killall mplayer
+	echo "wieder aufgewacht nach \$1"
 }
 
+function pm(){
+df;pacman -S --noconfirm $1
+
+echo \\n
+df
+}
 function sc2(){
-    prod=192.168.1.115 ;
+    prod=192.168.1.103 ;
 	scp -r $1  $prod:$2 ;
         echo "$1 (\$1) nach $prod:$2 (\$2) kopiert"
 }
 
-function startRoot(){
-#py #pycharm
-#g #geany
-#te # Terminal
-# ifup down up wlan
-da; echo Fertig $0
-}
 
 function ta(){
 	tail $2
@@ -79,33 +75,13 @@ function yt(){
 echo "$1 (\$1) heruntergeladen"
 }
 
-function z2(){
-	#ver='.'
-	#dat= "$ver`ls -t $ver | head -n1`"
-	dat= 'a.jpg';
-	echo $dat;
-	extension=$(echo ${dat}|awk -F\. '{print $2}')
-if [ ${extension} == "jpg" ]; then
-   echo 1
-fi
-		#if [[ $dat == *.jpg ]] ; then
-		#gpicview $dat
-		#gpicview "$ver`ls -t $ver | head -n1`"
-	#else
-		#mupdf $dat
-	#fi
-	
- }
  
 function mov(){
 	ver='/home/t/';
 	root="/root/$1"
 	#ver='.'
-	echo Inhalt $ver
 	ls -t $ver
 	mv "$ver`ls -t $ver  | head -n1`" $1
-	echo \\n
-	echo Inhalt $1
 	ls $1
  }
 
@@ -132,14 +108,24 @@ alias d="rm -r"
 alias md="mkdir -p"
 alias to='touch'
 
-#dpkg
+#Dateisystem
+alias pt='parted'
+alias mn='mount'
+alias um='umount'
+
+
+# package mgt.
 alias ag='apt-get'
-alias in='ag install -y'
 alias ar='ag remove -y'
 alias aur='ag autoremove'
+alias in='ag install -y'
+alias pa="pacman -Ss"
+alias pm="pacman -S"
+alias pu='pacman -Syu'
+alias pre='pacman -R --noconfirm'
+alias sho='apt-cache show'
 alias up='ag update'
 alias ug='ag upgrade'
-
 
 # Energie
 alias hi='hibernate'
@@ -155,8 +141,6 @@ alias hs='so /root/.oh-my-zsh/custom/help.zsh'
 alias hv='v /root/.oh-my-zsh/custom/help.zsh' 
 
 # ls
-alias biggest='find -type f -printf '\''%s %p\n'\'' | sort -nr | head -n 40 | gawk "{ print \$1/1000000 \" \" \$2 \" \" \$3 \" \" \$4 \" \" \$5 \" \" \$6 \" \" \$7 \" \" \$8 \" \" \$9 }"'
-alias dl='ls /home/t/Downloads'
 alias l='ls -CF'
 alias la='ls -A'
 alias ld='ls -t $ver'
@@ -168,32 +152,27 @@ alias lsh="ls -halt --full-time"
 
 
 # netzwerk
-alias if="ifconfig" 
-alias iw='iwlist wlan0 scan'
+alias i=if
+alias idu='ifdown wlan0;ifup wlan0'
 alias ie='iwgetid -r'
 alias ie2='iwconfig 2>&1 | grep ESSID'
-alias id='ifdown wlan0'
+alias if="ifconfig" 
 alias iu='ifup wlan0'
-alias idu='ifdown wlan0;ifup wlan0'
-alias i=idu
-alias pi="p" 
-alias p="ping google.de -c4" 
+alias iw='iwlist wlan0 scan'
+alias pi="ping google.de -c4" 
 
 #programme
 alias ab='abiword'
 alias c='cat'
-alias clo='~/.oh-my-zsh/custom/plugins/cloudapp/cloudapp.rb'
-alias cloudapp='clo'
-alias ecb="/root/progr/eclipse/eclipse &"
 alias ec="export SWT_GTK3=0;/root/progr/eclipse/eclipse &"
 alias et='expect'
 alias ee='et expect1'
 alias le='less'
+alias li='links'
 alias v="vim"
 
 
 # ps
-alias as="echo $0"
 alias ba="bash"
 alias k="kill -9"
 alias kf=kfe
@@ -203,19 +182,16 @@ alias km=kmp
 alias kmp="pmp;echo '\n';ki mplayer;echo '\n';pmp"
 alias ksl="ki sleep"
 alias kpy="ki python3"
+alias p="ps"
 alias pf=pfe
 alias pfe='pr fetchmail'
 alias pr='ps -ef|grep'
 alias psl="pr sleep"
-alias pmp="pr mplay"
-alias ppy="pr python"
-alias sfe='fetchmail'
+alias pmp="pr mplayer"
 alias sl="sleep"
-alias tt="tty"
 
 # Radio
 alias ml="mplayer "
-alias sle="sleep 8h 40m; oe"
 
 alias b="ml http://80.237.154.83:8120" # landsberg int.
 alias cur="ml -playlist http://minnesota.publicradio.org/tools/play/streams/the_current.pls"
@@ -223,7 +199,6 @@ alias fm4="ml http://mp3stream1.apasf.apa.at:8000/" #fm4 orf
 alias heart'ml -playlist http://minnesota.publicradio.org/tools/play/streams/radio_heartland.pls'
 alias kl="ml -playlist http://minnesota.publicradio.org/tools/play/streams/classical.pls"
 alias mpr="ml -playlist http://minnesota.publicradio.org/tools/play/streams/news.pls"
-alias news=mpr
 alias oe="ml http://194.232.200.156:8000" #oe3
 alias sonicuniverse="ml -playlist http://somafm.com/sonicuniverse.pls"
 
@@ -256,18 +231,14 @@ alias hn='echo $(hostname)'
 alias iban='DE63721500000050524271'
 alias lag='amixer get PCM'
 alias ma='man'
-alias mmu='ma mupdf'
 alias mkdir='mkdir -p'
 alias ms='mysql d'
 alias mt='mutt'
-alias nm="nmap -sP 192.168.188.1/24"
-alias ocgh='le ../.oh-my-zsh/plugins/github/github.plugin.zsh'
-alias ps1="PS1='%$COLUMNS>╡>%F{cyan}╔╡%F{red}[%n]%F{cyan}:%F{yellow}[%m]%F{cyan}➾%F{green}[%~]%F{default}$PS1_GIT%F{cyan}${(l:COLUMNS::═:):-}%<<
-╚═╡%F{default}'"
+alias nm="nmap -sP 192.168.1.1/24"
 alias r=sr
-alias sho='apt-cache show'
 alias sr='expect /root/.oh-my-zsh/custom/login_rp'
 alias srg='g /root/.oh-my-zsh/custom/login_rp'
+alias st='stty -a'
 alias t='wget --output-document=/dev/null http://speedtest.wdc01.softlayer.com/downloads/test500.zip'
 alias ta='tail'
 alias tar='tar xfvz'
@@ -275,9 +246,8 @@ alias te='terminator &'
 alias tp='top'
 alias tr='tree'
 alias un='unzip'
-alias w="dict"
+alias w="dict -d fd-eng-deu"
 alias wp='chmod 777 -R .'
 alias z='gpicview'
-
 
 echo "$0 aktualisiert von $$"

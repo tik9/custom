@@ -1,16 +1,19 @@
 #!/usr/bin/expect
 
-#set prompt "raspberry-pi"
-set prompt "ban"
+set prompt "raspberry-pi"
+#set prompt "ban"
 #set prompt "tjava.rhcloud"
+#set prompt alarmpi
 
-#set id "192.168.1.115"
-set id "192.168.188.44"
+#puts stdout $prompt
 
-set rad [lindex $argv 0]
+set id "192.168.1.105"
+#set id "192.168.188.44"
+
+set radio [lindex $argv 0]
 
 if { [lindex $argv 0] eq "" } {
-    set rad "kl"
+    set radio "Radio Int."
 }
 
 spawn ssh $id
@@ -20,16 +23,10 @@ expect "password"
 send "p\r"
 
 expect  $prompt {
-puts stdout "\nEingeloggt"
-send "df\n\r"
-#send $rad\r
-#send kmp\r
 
-#puts "d $env(DESKTOP_SESSION)"
+send [lindex $argv 0]\r
 
-#send ha\r
-
-#puts Radiosender $rad
+#send ex\r
 }
 
 interact
