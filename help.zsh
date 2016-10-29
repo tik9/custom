@@ -213,7 +213,6 @@ alias us="echo $USER"
 alias ad='echo t@tk1.it|cli'
 alias ad2='echo 015739598220 timo.koerner@hof-university.de dkoerner@konzertagentur-koerner.de'
 alias cl='xclip -sel clip'
-alias cou='da;date1=`date +%s`; while true; do ; echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r"; done'
 alias cp='cp -r'
 alias dat='date'
 alias df='df -h'
@@ -229,7 +228,6 @@ alias iban='DE63721500000050524271'
 alias lag='amixer get PCM'
 alias ma='man'
 alias mkdir='mkdir -p'
-alias ms='mysql d'
 alias mt='mutt'
 alias nm="nmap -sP 192.168.1.1/24"
 alias r=sr
