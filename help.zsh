@@ -1,8 +1,8 @@
 #!/bin/zsh
 
-#ad2(){
-#adb push "$1" storage/sdcard/
-#}
+ad2(){
+adb push "$1" storage/sdcard/
+}
 
 ver='/home/t/Downloads/';
 
@@ -22,6 +22,15 @@ $1 --help
 }
 
 
+function in(){
+if [ "$1" = "-h" ]; then
+  echo "Argumente für `basename $0` \n 1. Argument: Paket"
+  return
+fi
+	df;apt-get install -y $1;df
+}
+
+
 function ki(){
 	killall $1;
 	ps -ef|grep $1;
@@ -35,7 +44,7 @@ echo "Lautspr.: Argument \$1 mit 10 multipliziert."
 
 # login remote shell
 function lss(){
-	base='192.168.1';
+	base='192.168';
         ssh $base.$1;
         echo "Ssh: Mit $base.$1 (\$1) verbunden"
 }
@@ -56,9 +65,14 @@ echo \\n
 df
 }
 function sc2(){
-    prod=192.168.1.103 ;
-	scp -r $1  $prod:$2 ;
-        echo "$1 (\$1) nach $prod:$2 (\$2) kopiert"
+	
+if [ "$1" = "-h" ]; then
+  echo "Argumente: `basename $0` \n 1. Argument"
+  exit 0
+fi
+    prod=192.168.188.$1 ;
+	scp -r $2  $prod:$3 -p $4 ;
+        echo "$2 (\$2) nach $prod:$3 (\$3) kopiert"
 }
 
 
@@ -120,6 +134,15 @@ alias h='hi'
 alias rs='reboot'
 alias s='pm-suspend'
 
+#expect
+alias ee='et expect1'
+alias et='expect'
+alias r=sr
+alias sr='expect /root/.oh-my-zsh/custom/login_rp'
+alias src='c /root/.oh-my-zsh/custom/login_rp'
+alias srg='g /root/.oh-my-zsh/custom/login_rp'
+
+
 # Hilfe
 alias hc='c /root/.oh-my-zsh/custom/help.zsh'
 alias hg='g /root/.oh-my-zsh/custom/help.zsh'
@@ -153,12 +176,12 @@ alias pi="ping google.de -c4"
 alias ag='apt-get'
 alias ar='ag remove -y'
 alias aur='ag autoremove'
-alias in='ag install -y'
 alias pa="pacman -Ss"
 alias pm="pacman -S"
 alias pu='pacman -Syu'
 alias pre='pacman -R --noconfirm'
 alias sho='apt-cache show'
+alias u='ug'
 alias up='ag update'
 alias ug='ag upgrade'
 
@@ -167,10 +190,8 @@ alias ug='ag upgrade'
 alias ab='abiword'
 alias c='cat'
 alias ec="export SWT_GTK3=0;/root/progr/eclipse/eclipse &"
-alias et='expect'
-alias ee='et expect1'
 alias le='less'
-alias li='links'
+alias li='links2'
 alias v="vim"
 
 
@@ -204,10 +225,8 @@ alias mpr="ml -playlist http://minnesota.publicradio.org/tools/play/streams/news
 alias oe="ml http://194.232.200.156:8000" #oe3
 
 #user
-#alias st="su t"
 alias sur="sudo -i"
 alias us="echo $USER"
-
 
 
 alias ad='echo t@tk1.it|cli'
@@ -232,9 +251,7 @@ alias mkdir='mkdir -p'
 alias ms='mysql d'
 alias mt='mutt'
 alias nm="nmap -sP 192.168.1.1/24"
-alias r=sr
-alias sr='expect /root/.oh-my-zsh/custom/login_rp'
-alias srg='g /root/.oh-my-zsh/custom/login_rp'
+alias nm2="nmap -sP 192.168.188.1/24"
 alias st='stty -a'
 alias t='wget --output-document=/dev/null http://speedtest.wdc01.softlayer.com/downloads/test500.zip'
 alias ta='tail'
@@ -244,6 +261,7 @@ alias tp='top'
 alias tr='tree'
 alias un='unzip'
 alias w="dict -d fd-eng-deu"
+alias w2="dict"
 alias wp='chmod 777 -R .'
 alias x='man'
 alias z='gpicview'

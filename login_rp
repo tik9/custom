@@ -1,19 +1,21 @@
 #!/usr/bin/expect
 
-set prompt "raspberry-pi"
-#set prompt "ban"
-#set prompt "tjava.rhcloud"
 #set prompt alarmpi
+set prompt "ban"
+#set prompt "raspberry-pi"
 
-#puts stdout $prompt
+#set prompt "tjava.rhcloud"
 
-set id "192.168.1.105"
-#set id "192.168.188.44"
+#set id "192.168.1.105"
+set id "192.168.188.44"
 
-set radio [lindex $argv 0]
+set green "\033\[0;32;40m"
 
-if { [lindex $argv 0] eq "" } {
-    set radio "Radio Int."
+
+if { [lindex $argv 0] eq "-h" } {
+    puts "${green}Argumente\n Argument 1: standard\r
+    Arg. 2: exit"
+    exit 0
 }
 
 spawn ssh $id
@@ -24,9 +26,19 @@ send "p\r"
 
 expect  $prompt {
 
+send_user "Skript: $argv0 [lrange $argv 0 2]\n"
+
 send [lindex $argv 0]\r
 
-#send ex\r
+if { [lindex $argv 1] ne "" } {
+send ex\r
+}
+
+if { [lindex $argv 0] ne "" } {
+    send [lindex $argv 0]\r
+}
+
+
 }
 
 interact

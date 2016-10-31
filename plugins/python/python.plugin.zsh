@@ -8,12 +8,8 @@ function pyclean() {
 }
 
 
-alias ip='ipython'
-alias pg='g /root/.oh-my-zsh/custom/plugins/python/python.plugin.zsh'
 alias p3="python3"
 alias py='/root/progr/pycharm/bin/pycharm.sh&'
-alias pygrep='grep --include="*.py"'
-alias pyfind='find . -name "*.py"'
 
 
 # python django
