@@ -115,19 +115,6 @@ alias mn='mount'
 alias um='umount'
 
 
-# package mgt.
-alias ag='apt-get'
-alias ar='ag remove -y'
-alias aur='ag autoremove'
-alias in='ag install -y'
-alias pa="pacman -Ss"
-alias pm="pacman -S"
-alias pu='pacman -Syu'
-alias pre='pacman -R --noconfirm'
-alias sho='apt-cache show'
-alias up='ag update'
-alias ug='ag upgrade'
-
 # Energie
 alias hi='hibernate'
 alias h='hi'
@@ -163,6 +150,21 @@ alias iw='iwlist wlan0 scan'
 alias nm="nmap -sP 192.168.0.1/24"
 alias pi="ping google.de -c4" 
 
+
+# package mgt.
+alias ag='apt-get'
+alias ar='ag remove -y'
+alias aur='ag autoremove'
+alias in='ag install -y'
+alias pa="pacman -Ss"
+alias pm="pacman -S"
+alias pu='pacman -Syu'
+alias pre='pacman -R --noconfirm'
+alias sho='apt-cache show'
+alias up='ag update'
+alias ug='ag upgrade'
+
+
 #programme
 alias ab='abiword'
 alias c='cat'
@@ -177,11 +179,12 @@ alias v="vim"
 # ps
 alias ba="bash"
 alias k="kill -9"
-alias ki="killall"
-alias kmp="pmp;echo '\n';ki mplayer;echo '\n';pmp"
-alias ksl="ki sleep"
 alias kf=kfe
 alias kfe="ki fetchmail"
+alias ki="killall"
+alias km=kmp
+alias kmp="pmp;echo '\n';ki mplayer;echo '\n';pmp"
+alias ksl="ki sleep"
 alias kpy="ki python3"
 alias p="ps"
 alias pf=pfe
@@ -201,7 +204,6 @@ alias heart'ml -playlist http://minnesota.publicradio.org/tools/play/streams/rad
 alias kl="ml -playlist http://minnesota.publicradio.org/tools/play/streams/classical.pls"
 alias mpr="ml -playlist http://minnesota.publicradio.org/tools/play/streams/news.pls"
 alias oe="ml http://194.232.200.156:8000" #oe3
-alias sonicuniverse="ml -playlist http://somafm.com/sonicuniverse.pls"
 
 #user
 #alias st="su t"
@@ -209,15 +211,10 @@ alias sur="sudo -i"
 alias us="echo $USER"
 
 
-# zsh
-alias zs='so /root/.zshrc'
-alias zg='g /root/.zshrc'
 
-
-alias ad='echo user153015@gmail.com|cli'
+alias ad='echo t@tk1.it|cli'
 alias ad2='echo 015739598220 timo.koerner@hof-university.de dkoerner@konzertagentur-koerner.de'
 alias cl='xclip -sel clip'
-alias cou='da;date1=`date +%s`; while true; do ; echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r"; done'
 alias cp='cp -r'
 alias dat='date'
 alias df='df -h'
@@ -233,7 +230,6 @@ alias iban='DE63721500000050524271'
 alias lag='amixer get PCM'
 alias ma='man'
 alias mkdir='mkdir -p'
-alias ms='mysql d'
 alias mt='mutt'
 alias r=sr
 alias sr='expect /root/.oh-my-zsh/custom/login_rp'
@@ -248,6 +244,7 @@ alias tr='tree'
 alias un='unzip'
 alias w="dict -d fd-eng-deu"
 alias wp='chmod 777 -R .'
+alias x='man'
 alias z='gpicview'
 
 echo "$0 aktualisiert von $$"
