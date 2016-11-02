@@ -5,6 +5,7 @@
 #}
 
 ver='/home/t/Downloads/';
+    prod=192.168.0. ;
 
 function co(){
 	echo "$1" | xclip -sel clip
@@ -35,7 +36,7 @@ echo "Lautspr.: Argument \$1 mit 10 multipliziert."
 
 # login remote shell
 function lss(){
-	base='192.168.1';
+	base='192.168.0';
         ssh $base.$1;
         echo "Ssh: Mit $base.$1 (\$1) verbunden"
 }
@@ -56,8 +57,8 @@ echo \\n
 df
 }
 function sc2(){
-    prod=192.168.1.103 ;
-	scp -r $1  $prod:$2 ;
+if [ "$1" == "-h" ] ;then echo "\$1 = Datei, 2= letztes Oktett, 3= Ziel";fi
+	scp -r $1  $prod$2:$3 ;
         echo "$1 (\$1) nach $prod:$2 (\$2) kopiert"
 }
 
@@ -159,6 +160,7 @@ alias ie2='iwconfig 2>&1 | grep ESSID'
 alias if="ifconfig" 
 alias iu='ifup wlan0'
 alias iw='iwlist wlan0 scan'
+alias nm="nmap -sP 192.168.0.1/24"
 alias pi="ping google.de -c4" 
 
 #programme
@@ -233,7 +235,6 @@ alias ma='man'
 alias mkdir='mkdir -p'
 alias ms='mysql d'
 alias mt='mutt'
-alias nm="nmap -sP 192.168.1.1/24"
 alias r=sr
 alias sr='expect /root/.oh-my-zsh/custom/login_rp'
 alias srg='g /root/.oh-my-zsh/custom/login_rp'
