@@ -8,6 +8,7 @@ bold=`tput bold`
 normal=`tput sgr0`
 
 ver='/home/t/Downloads/';
+    prod=192.168.0. ;
 
 function co(){
 	echo "$1" | xclip -sel clip
@@ -51,8 +52,8 @@ if [ "$1" = "-h" ]; then
   echo "${bold}Argumente${normal} für `basename $0` \n 1. Argument: 3. und 4. Oktett"
   return
 fi
-	base='192.168';
-        ssh $base.$1;
+
+        ssh $prod.$1;
         echo "Ssh: Mit $base.$1 (\$1) verbunden"
 }
 
@@ -72,14 +73,10 @@ echo \\n
 df
 }
 function sc2(){
-	
-if [ "$1" = "-h" ]; then
-  echo "Argumente: `basename $0` \n 1. Argument"
-  exit 0
-fi
-    prod=192.168.188.$1 ;
-	scp -r $2  $prod:$3 -p $4 ;
-        echo "$2 (\$2) nach $prod:$3 (\$3) kopiert"
+
+if [ "$1" == "-h" ] ;then echo "\$1 = Datei, 2= letztes Oktett, 3= Ziel";fi
+	scp -r $1  $prod$2:$3 ;
+        echo "$1 (\$1) nach $prod:$2 (\$2) kopiert"
 }
 
 
@@ -177,6 +174,7 @@ alias ie2='iwconfig 2>&1 | grep ESSID'
 alias if="ifconfig" 
 alias iu='ifup wlan0'
 alias iw='iwlist wlan0 scan'
+alias nm="nmap -sP 192.168.0.1/24"
 alias pi="ping google.de -c4" 
 
 
@@ -256,8 +254,14 @@ alias lag='amixer get PCM'
 alias m='man'
 alias mkdir='mkdir -p'
 alias mt='mutt'
+<<<<<<< HEAD
 alias nm="nmap -sP 192.168.1.1/24"
 alias nm2="nmap -sP 192.168.188.1/24"
+=======
+alias r=sr
+alias sr='expect /root/.oh-my-zsh/custom/login_rp'
+alias srg='g /root/.oh-my-zsh/custom/login_rp'
+>>>>>>> 864fbda5d5022fd4c3b0e52fe8576175f71d58b4
 alias st='stty -a'
 alias t='wget --output-document=/dev/null http://speedtest.wdc01.softlayer.com/downloads/test500.zip'
 alias ta='tail'
