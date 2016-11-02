@@ -4,6 +4,9 @@ ad2(){
 adb push "$1" storage/sdcard/
 }
 
+bold=`tput bold`
+normal=`tput sgr0`
+
 ver='/home/t/Downloads/';
 
 function co(){
@@ -44,12 +47,16 @@ echo "Lautspr.: Argument \$1 mit 10 multipliziert."
 
 # login remote shell
 function lss(){
+if [ "$1" = "-h" ]; then
+  echo "${bold}Argumente${normal} für `basename $0` \n 1. Argument: 3. und 4. Oktett"
+  return
+fi
 	base='192.168';
         ssh $base.$1;
         echo "Ssh: Mit $base.$1 (\$1) verbunden"
 }
 
-function m(){
+function mup(){
 	mupdf $1 &
 }
 
@@ -141,6 +148,7 @@ alias r=sr
 alias sr='expect /root/.oh-my-zsh/custom/login_rp'
 alias src='c /root/.oh-my-zsh/custom/login_rp'
 alias srg='g /root/.oh-my-zsh/custom/login_rp'
+alias srv='v /root/.oh-my-zsh/custom/login_rp'
 
 
 # Hilfe
@@ -245,7 +253,7 @@ alias ha='halt'
 alias hn='echo $(hostname)'
 alias iban='DE63721500000050524271'
 alias lag='amixer get PCM'
-alias ma='man'
+alias m='man'
 alias mkdir='mkdir -p'
 alias mt='mutt'
 alias nm="nmap -sP 192.168.1.1/24"

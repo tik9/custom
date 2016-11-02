@@ -26,10 +26,6 @@ send "p\r"
 
 expect  $prompt {
 
-send_user "Skript: $argv0 [lrange $argv 0 2]\n"
-
-send [lindex $argv 0]\r
-
 if { [lindex $argv 1] ne "" } {
 send ex\r
 }
