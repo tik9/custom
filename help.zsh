@@ -7,12 +7,24 @@ adb push "$1" storage/sdcard/
 bold=`tput bold`
 normal=`tput sgr0`
 
-ver='/home/t/Downloads/';
-    prod=192.168.0. ;
+downl='/home/t/Downloads/';
+prodh=192.168.0 ;
+prodn=192.168.188 ;
+ip=`ip addr show wlan0 | grep -Po 'inet \K[\d.]+'`
+ipbas=$(echo $ip | cut -d . -f -3)
+#echo "ip3 ${ip}"
 
-function co(){
-	echo "$1" | xclip -sel clip
-	echo "$1 (\$1) in Zwischenablage"
+te2(){
+	echo $ipbas
+	echo $ip
+}
+
+he2(){
+
+  echo "${bold}Argumente${normal} für $1:"
+  for var in ${@:2} ; do
+  echo $var
+  done
 }
 
 function g(){
@@ -20,15 +32,9 @@ function g(){
 }
 
 
-# Hilfe
-function he(){
-$1 --help
-}
-
-
 function in(){
-if [ "$1" = "-h" ]; then
-  echo "Argumente für `basename $0` \n 1. Argument: Paket"
+if [ -z "$1" ]; then
+  he2 `basename $0` "Paket"
   return
 fi
 	df;apt-get install -y $1;df
@@ -42,47 +48,64 @@ function ki(){
 }
 	
 function las(){
+
+if [ -z "$1" ]; then
+  he2 `basename $0` "Lautstärke"
+  return
+fi
+
 amixer set PCM $(expr $1 \* 10)%;
 echo "Lautspr.: Argument \$1 mit 10 multipliziert."
 }
 
 # login remote shell
 function lss(){
-if [ "$1" = "-h" ]; then
-  echo "${bold}Argumente${normal} für `basename $0` \n 1. Argument: 3. und 4. Oktett"
+if [ -z "$1" ]; then
+  he2 `basename $0` "letztes Oktett"
   return
 fi
 
-        ssh $prod$1;
-        echo "Ssh: Mit $base.$1 (\$1) verbunden"
+        ssh $ipbas.$1;
 }
 
 function mup(){
+if [ -z "$1" ]; then
+  he2 `basename $0` "Datei"
+  return
+fi
 	mupdf $1 &
 }
 
 function mp(){
+if [ -z "$1" ]; then
+  he2 `basename $0` "Zeit"
+  return
+fi
+
 	sleep $1;killall mplayer
 	echo "wieder aufgewacht nach \$1"
 }
 
 function pm(){
+if [ -z "$1" ]; then
+  he2 `basename $0` "Paket"
+  return
+fi
+
 df;pacman -S --noconfirm $1
 
 echo \\n
 df
 }
 function sc2(){
+if [ -z "$1" ]; then
+  he2 `basename $0` Datei "letztes Oktett" Ziel
+  return
+fi
 
-if [ "$1" == "-h" ] ;then echo "\$1 = Datei, 2= letztes Oktett, 3= Ziel";fi
-	scp -r $1  $prod$2:$3 ;
-        echo "$1 (\$1) nach $prod:$2 (\$2) kopiert"
+	scp -r $1  $prodh$2:$3 ;
 }
 
-
-function ta(){
-	tail $2
-}
 
 function ve(){
 $1 --version
@@ -172,9 +195,10 @@ alias idu='ifdown wlan0;ifup wlan0'
 alias ie='iwgetid -r'
 alias ie2='iwconfig 2>&1 | grep ESSID'
 alias if="ifconfig" 
+alias ip2="echo $ip"
 alias iu='ifup wlan0'
 alias iw='iwlist wlan0 scan'
-alias nm="nmap -sP 192.168.0.1/24"
+alias nm="nmap -sP $(echo $ipbas).1/24"
 alias pi="ping google.de -c4" 
 
 
@@ -254,8 +278,6 @@ alias lag='amixer get PCM'
 alias m='man'
 alias mkdir='mkdir -p'
 alias mt='mutt'
-alias nm="nmap -sP 192.168.1.1/24"
-alias nm2="nmap -sP 192.168.188.1/24"
 alias r=sr
 alias sr='expect /root/.oh-my-zsh/custom/login_rp'
 alias srg='g /root/.oh-my-zsh/custom/login_rp'
