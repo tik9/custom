@@ -53,7 +53,7 @@ if [ "$1" = "-h" ]; then
   return
 fi
 
-        ssh $prod.$1;
+        ssh $prod$1;
         echo "Ssh: Mit $base.$1 (\$1) verbunden"
 }
 
@@ -254,14 +254,11 @@ alias lag='amixer get PCM'
 alias m='man'
 alias mkdir='mkdir -p'
 alias mt='mutt'
-<<<<<<< HEAD
 alias nm="nmap -sP 192.168.1.1/24"
 alias nm2="nmap -sP 192.168.188.1/24"
-=======
 alias r=sr
 alias sr='expect /root/.oh-my-zsh/custom/login_rp'
 alias srg='g /root/.oh-my-zsh/custom/login_rp'
->>>>>>> 864fbda5d5022fd4c3b0e52fe8576175f71d58b4
 alias st='stty -a'
 alias t='wget --output-document=/dev/null http://speedtest.wdc01.softlayer.com/downloads/test500.zip'
 alias ta='tail'
