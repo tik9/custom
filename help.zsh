@@ -42,6 +42,10 @@ fi
 
 
 function ki(){
+if [ -z "$1" ]; then
+  he2 `basename $0` "Prozess für killall"
+  return
+fi
 	killall $1;
 	ps -ef|grep $1;
 	echo "Prozess \$1 vernichtet"
@@ -50,7 +54,7 @@ function ki(){
 function las(){
 
 if [ -z "$1" ]; then
-  he2 `basename $0` "Lautstärke"
+  he2 `basename $0` "Lautstärke amixer"
   return
 fi
 
@@ -61,11 +65,11 @@ echo "Lautspr.: Argument \$1 mit 10 multipliziert."
 # login remote shell
 function lss(){
 if [ -z "$1" ]; then
-  he2 `basename $0` "letztes Oktett"
+  he2 `basename $0` "letztes Oktett" "opt. port"
   return
 fi
 
-        ssh $ipbas.$1;
+        ssh $2 $ipbas.$1 
 }
 
 function mup(){
@@ -97,13 +101,23 @@ df;pacman -S --noconfirm $1
 echo \\n
 df
 }
+
+function pr(){
+if [ -z "$1" ]; then
+  he2 `basename $0` "Prozess"
+  return
+  
+fi
+	grep $1 =(ps aux)
+}
+
 function sc2(){
 if [ -z "$1" ]; then
-  he2 `basename $0` Datei "letztes Oktett" Ziel
+  he2 `basename $0` Datei "letztes Oktett" Zielordner "(port)"
   return
 fi
 
-	scp -r $1  $prodh$2:$3 ;
+	scp -P $4 -r $1  $ipbas.$2:$3 ;
 }
 
 
@@ -112,8 +126,12 @@ $1 --version
 }
 
 function yt(){
-	youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.)s" "$1" ;
-echo "$1 (\$1) heruntergeladen"
+if [ -z "$1" ]; then
+  he2 `basename $0` Youtube-Datei
+  return
+fi	
+
+youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.)s" "$1" ;
 }
 
  
@@ -207,13 +225,12 @@ alias ag='apt-get'
 alias ar='ag remove -y'
 alias aur='ag autoremove'
 alias pa="pacman -Ss"
-alias pm="pacman -S"
+alias pm2="pacman -S"
 alias pu='pacman -Syu'
 alias pre='pacman -R --noconfirm'
 alias sho='apt-cache show'
-alias u='ug'
 alias up='ag update'
-alias ug='ag upgrade'
+alias u='ag upgrade'
 
 
 #programme
@@ -229,18 +246,14 @@ alias v="vim"
 alias ba="bash"
 alias k="kill -9"
 alias kf=kfe
-alias kfe="ki fetchmail"
-alias ki="killall"
-alias km=kmp
-alias kmp="pmp;echo '\n';ki mplayer;echo '\n';pmp"
-alias ksl="ki sleep"
-alias kpy="ki python3"
+alias km="pmp;echo '\n';ki mplayer;echo '\n';pmp"
 alias p="ps"
-alias pf=pfe
 alias pfe='pr fetchmail'
-alias pr='ps -ef|grep'
+alias pr2='ps -ef|grep'
 alias psl="pr sleep"
 alias pmp="pr mplayer"
+alias pts="ps -ef|gr pts/"
+alias psp="ps -p"
 alias sl="sleep"
 
 # Radio
