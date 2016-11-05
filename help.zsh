@@ -304,6 +304,7 @@ alias lsb="echo $lsb"
 alias m='man'
 alias mkdir='mkdir -p'
 alias mt='mutt'
+alias prp='pgrep'
 alias r=sr
 alias sr='expect /root/.oh-my-zsh/custom/login_rp'
 alias srg='g /root/.oh-my-zsh/custom/login_rp'
