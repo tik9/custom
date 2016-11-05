@@ -4,18 +4,18 @@ ad2(){
 adb push "$1" storage/sdcard/
 }
 
+
 bold=`tput bold`
 normal=`tput sgr0`
 
-downl='/home/t/Downloads/';
-prodh=192.168.0 ;
 prodn=192.168.188 ;
 ip=`ip addr show wlan0 | grep -Po 'inet \K[\d.]+'`
 ipbas=$(echo $ip | cut -d . -f -3)
-#echo "ip3 ${ip}"
+lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
+#echo $lsb
 
 te2(){
-	echo $ipbas
+	echo $lsb
 	echo $ip
 }
 
@@ -31,15 +31,29 @@ function g(){
 	geany $1 &
 }
 
-
-function in(){
-if [ -z "$1" ]; then
-  he2 `basename $0` "Paket"
-  return
-fi
-	df;apt-get install -y $1;df
+function he(){
+	$1 --help
 }
 
+
+function in(){
+	#if [ -z "$1" ]; then
+	  #he2 `basename $0` "Paket"
+	  #return
+	#fi
+
+  echo "${bold}Os: $lsb${normal}"
+df -h
+	if [ $lsb == 'ubuntu' ] ;then
+	#if [ 1==1 ] ;then
+echo "Ubuntu"
+		apt-get install -y $1
+	else
+echo "Arch"
+		pacman -S --noconfirm $1
+fi
+df -h
+}
 
 function ki(){
 if [ -z "$1" ]; then
@@ -65,7 +79,7 @@ echo "Lautspr.: Argument \$1 mit 10 multipliziert."
 # login remote shell
 function lss(){
 if [ -z "$1" ]; then
-  he2 `basename $0` "letztes Oktett" "opt. port"
+  he2 `basename $0` "letztes Oktett von ip " "opt. port"
   return
 fi
 
@@ -90,21 +104,10 @@ fi
 	echo "wieder aufgewacht nach \$1"
 }
 
-function pm(){
-if [ -z "$1" ]; then
-  he2 `basename $0` "Paket"
-  return
-fi
-
-df;pacman -S --noconfirm $1
-
-echo \\n
-df
-}
 
 function pr(){
 if [ -z "$1" ]; then
-  he2 `basename $0` "Prozess"
+  he2 `basename $0` "grep mit 'prozess substitution'" "Prozess"
   return
   
 fi
@@ -120,6 +123,20 @@ fi
 	scp -P $4 -r $1  $ipbas.$2:$3 ;
 }
 
+function sho(){
+	if [ $lsb -eq 'ubuntu' ] ;then
+apt-cache show $1
+	else
+		pacman -Ss $1
+fi	
+}
+
+function u(){
+	
+apt-get upgrade	
+pacman -Syu
+	
+}
 
 function ve(){
 $1 --version
@@ -224,13 +241,9 @@ alias pi="ping google.de -c4"
 alias ag='apt-get'
 alias ar='ag remove -y'
 alias aur='ag autoremove'
-alias pa="pacman -Ss"
 alias pm2="pacman -S"
-alias pu='pacman -Syu'
 alias pre='pacman -R --noconfirm'
-alias sho='apt-cache show'
 alias up='ag update'
-alias u='ag upgrade'
 
 
 #programme
@@ -262,7 +275,6 @@ alias ml="mplayer "
 alias b="ml http://80.237.154.83:8120" # landsberg int.
 alias cur="ml -playlist http://minnesota.publicradio.org/tools/play/streams/the_current.pls"
 alias fm4="ml http://mp3stream1.apasf.apa.at:8000/" #fm4 orf
-alias heart'ml -playlist http://minnesota.publicradio.org/tools/play/streams/radio_heartland.pls'
 alias kl="ml -playlist http://minnesota.publicradio.org/tools/play/streams/classical.pls"
 alias mpr="ml -playlist http://minnesota.publicradio.org/tools/play/streams/news.pls"
 alias oe="ml http://194.232.200.156:8000" #oe3
@@ -288,6 +300,7 @@ alias ha='halt'
 alias hn='echo $(hostname)'
 alias iban='DE63721500000050524271'
 alias lag='amixer get PCM'
+alias lsb="echo $lsb"
 alias m='man'
 alias mkdir='mkdir -p'
 alias mt='mutt'
@@ -307,5 +320,6 @@ alias w2="dict"
 alias wp='chmod 777 -R .'
 alias x='man'
 alias z='gpicview'
+alias zg='g /root/.zshrc'
 
 echo "$0 aktualisiert von $$"
