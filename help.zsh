@@ -4,6 +4,7 @@ ad2(){
 adb push "$1" storage/sdcard/
 }
 
+hilfedatei='/root/.oh-my-zsh/custom/help.zsh'
 
 bold=`tput bold`
 normal=`tput sgr0`
@@ -207,8 +208,8 @@ alias srv='v /root/.oh-my-zsh/custom/login_rp'
 
 
 # Hilfe
-alias hc='c /root/.oh-my-zsh/custom/help.zsh'
-alias hg='g /root/.oh-my-zsh/custom/help.zsh'
+alias hc="c $hilfedatei" 
+alias hg="g $hilfedatei"
 alias hl='le /root/.oh-my-zsh/custom/help.zsh|gr'
 alias hs='so /root/.oh-my-zsh/custom/help.zsh'
 alias hv='v /root/.oh-my-zsh/custom/help.zsh' 
@@ -316,6 +317,7 @@ alias te='terminator &'
 alias tp='top'
 alias tr='tree'
 alias un='unzip'
+alias vg="g /root/.vimrc"
 alias w="dict -d fd-eng-deu"
 alias w2="dict"
 alias wp='chmod 777 -R .'
