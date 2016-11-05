@@ -4,7 +4,9 @@ ad2(){
 adb push "$1" storage/sdcard/
 }
 
-hilfedatei='/root/.oh-my-zsh/custom/help.zsh'
+custom='/root/.oh-my-zsh/custom'
+hilfedatei=$custom/help.zsh
+login_rp=$custom/login_rp
 
 bold=`tput bold`
 normal=`tput sgr0`
@@ -38,22 +40,21 @@ function he(){
 
 
 function in(){
-	#if [ -z "$1" ]; then
-	  #he2 `basename $0` "Paket"
-	  #return
-	#fi
+	if [ -z "$1" ]; then
+	  he2 `basename $0` "Paket"
+	  return
+	fi
 
   echo "${bold}Os: $lsb${normal}"
-df -h
-	if [ $lsb == 'ubuntu' ] ;then
-	#if [ 1==1 ] ;then
+#df -h
+	if [[ "$lsb" == "Ubuntu" ]] ;then
 echo "Ubuntu"
 		apt-get install -y $1
 	else
 echo "Arch"
 		pacman -S --noconfirm $1
 fi
-df -h
+#df -h
 }
 
 function ki(){
@@ -63,18 +64,16 @@ if [ -z "$1" ]; then
 fi
 	killall $1;
 	ps -ef|grep $1;
-	echo "Prozess \$1 vernichtet"
 }
 	
 function las(){
 
 if [ -z "$1" ]; then
-  he2 `basename $0` "Lautstärke amixer"
+  he2 `basename $0` "Lautstärke amixer mit 10 multipliziert"
   return
 fi
 
 amixer set PCM $(expr $1 \* 10)%;
-echo "Lautspr.: Argument \$1 mit 10 multipliziert."
 }
 
 # login remote shell
@@ -102,7 +101,6 @@ if [ -z "$1" ]; then
 fi
 
 	sleep $1;killall mplayer
-	echo "wieder aufgewacht nach \$1"
 }
 
 
@@ -115,6 +113,22 @@ fi
 	grep $1 =(ps aux)
 }
 
+function re(){
+  echo "${bold}Os: $lsb${normal}"
+
+if [ -z "$1" ]; then
+  he2 `basename $0` "Löschen!" "Paket"
+  return
+  
+fi
+
+if [[ $lsb == 'Ubuntu' ]] ;then
+apt-get autoremove
+	else
+pacman -R --noconfirm
+fi
+}
+
 function sc2(){
 if [ -z "$1" ]; then
   he2 `basename $0` Datei "letztes Oktett" Zielordner "(port)"
@@ -125,7 +139,7 @@ fi
 }
 
 function sho(){
-	if [ $lsb -eq 'ubuntu' ] ;then
+	if [[ $lsb == 'Ubuntu' ]] ;then
 apt-cache show $1
 	else
 		pacman -Ss $1
@@ -133,10 +147,11 @@ fi
 }
 
 function u(){
-	
+	if [[ $lsb == 'Ubuntu' ]] ;then
 apt-get upgrade	
-pacman -Syu
-	
+	else
+		pacman -Syu
+fi	
 }
 
 function ve(){
@@ -240,10 +255,7 @@ alias pi="ping google.de -c4"
 
 # package mgt.
 alias ag='apt-get'
-alias ar='ag remove -y'
-alias aur='ag autoremove'
 alias pm2="pacman -S"
-alias pre='pacman -R --noconfirm'
 alias up='ag update'
 
 
@@ -307,8 +319,8 @@ alias mkdir='mkdir -p'
 alias mt='mutt'
 alias prp='pgrep'
 alias r=sr
-alias sr='expect /root/.oh-my-zsh/custom/login_rp'
-alias srg='g /root/.oh-my-zsh/custom/login_rp'
+alias sr="expect $login_rp"
+alias srg="g $login_rp"
 alias st='stty -a'
 alias t='wget --output-document=/dev/null http://speedtest.wdc01.softlayer.com/downloads/test500.zip'
 alias ta='tail'
