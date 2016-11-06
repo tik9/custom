@@ -4,6 +4,7 @@ ad2(){
 adb push "$1" storage/sdcard/
 }
 
+os='Arch'
 custom='/root/.oh-my-zsh/custom'
 hilfedatei=$custom/help.zsh
 login_rp=$custom/login_rp
@@ -19,15 +20,22 @@ lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
 
 te2(){
 	echo $lsb
-	echo $ip
 }
 
 he2(){
-
-  echo "${bold}Argumente${normal} für $1:"
-  for var in ${@:2} ; do
+#  echo "${bold}Os: $lsb${normal}"
+	echo "\n${bold}Hilfe"
+	schleife=3
+	if [[ $2 != argsleer ]] ;then
+  echo "Argumente für $1:"
+  schleife=2
+  fi
+  echo "${normal}"
+  
+  for var in ${@:$schleife} ; do
   echo $var
   done
+  echo
 }
 
 function g(){
@@ -45,16 +53,16 @@ function in(){
 	  return
 	fi
 
-  echo "${bold}Os: $lsb${normal}"
-#df -h
-	if [[ "$lsb" == "Ubuntu" ]] ;then
-echo "Ubuntu"
-		apt-get install -y $1
-	else
+df -h
+	if [[ "$lsb" == $os ]] ;then
 echo "Arch"
 		pacman -S --noconfirm $1
+	else
+echo "Ubuntu"
+		apt-get install -y $1
+
 fi
-#df -h
+df -h
 }
 
 function ki(){
@@ -104,9 +112,23 @@ fi
 }
 
 
+function pl(){
+if [ "$1" = -h ]; then
+  he2 `basename $0` "argsleer" "Installierte Pakete zeigen"
+  return
+  
+fi
+
+if [[ $lsb == $os ]]; then
+pacman -Qeq
+else
+dpkg -l	
+fi
+}
+
 function pr(){
 if [ -z "$1" ]; then
-  he2 `basename $0` "grep mit 'prozess substitution'" "Prozess"
+  he2 `basename $0` "grep mit 'prozess Substitution'" "Prozess"
   return
   
 fi
@@ -122,11 +144,12 @@ if [ -z "$1" ]; then
   
 fi
 
-if [[ $lsb == 'Ubuntu' ]] ;then
-apt-get autoremove
-	else
+if [[ $lsb == $os ]] ;then
 pacman -R --noconfirm
+	else
+apt-get autoremove
 fi
+$1
 }
 
 function sc2(){
@@ -139,18 +162,29 @@ fi
 }
 
 function sho(){
-	if [[ $lsb == 'Ubuntu' ]] ;then
-apt-cache show $1
-	else
+if [ -z "$1" ]; then
+  he2 `basename $0` "Paket"
+  return
+fi
+
+	if [[ $lsb == $os ]] ;then
 		pacman -Ss $1
+	else
+apt-cache show $1
 fi	
 }
 
 function u(){
-	if [[ $lsb == 'Ubuntu' ]] ;then
-apt-get upgrade	
-	else
+if [ "$1" = -h ]; then
+  he2 `basename $0` "argsleer" "Upgrade machen"
+  return
+  
+fi	
+
+if [[ $lsb == $os ]] ;then
 		pacman -Syu
+	else
+apt-get upgrade	
 fi	
 }
 
@@ -254,6 +288,9 @@ alias pi="ping google.de -c4"
 
 
 # package mgt.
+alias aci='apt-cyg install'
+alias acl='apt-cyg listall'
+alias acl2='cygcheck'
 alias ag='apt-get'
 alias pm2="pacman -S"
 alias up='ag update'
@@ -314,6 +351,7 @@ alias hn='echo $(hostname)'
 alias iban='DE63721500000050524271'
 alias lag='amixer get PCM'
 alias lsb="echo $lsb"
+alias lk="lsblk"
 alias m='man'
 alias mkdir='mkdir -p'
 alias mt='mutt'
