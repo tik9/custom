@@ -5,7 +5,7 @@ adb push "$1" storage/sdcard/
 }
 
 os='Arch'
-custom='/root/.oh-my-zsh/custom'
+custom='~/.oh-my-zsh/custom'
 hilfedatei=$custom/help.zsh
 login_rp=$custom/login_rp
 
@@ -120,9 +120,9 @@ if [ "$1" = -h ]; then
 fi
 
 if [[ $lsb == $os ]]; then
-pacman -Qeq
+pacman -Qeq |less
 else
-dpkg -l	
+dpkg -l	|less
 fi
 }
 
@@ -204,7 +204,7 @@ youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.)s" "$1" ;
  
 function mov(){
 	ver='/home/t/';
-	root="/root/$1"
+	root="~/$1"
 	#ver='.'
 	ls -t $ver
 	mv "$ver`ls -t $ver  | head -n1`" $1
@@ -218,11 +218,9 @@ alias ua='unalias'
 
 
 #cd's
-alias da="cd /root/django"
-alias mu="cd /root/musik"
-alias oh='cd /root/.oh-my-zsh'
-alias oc='cd /root/.oh-my-zsh/custom'
-alias vr='cd /root/vr'
+alias da="cd ~/django"
+alias mu="cd ~/musik"
+alias oc='cd ~/.oh-my-zsh/custom'
 
 #curl
 alias cu='curl'
@@ -250,25 +248,21 @@ alias s='pm-suspend'
 alias ee='et expect1'
 alias et='expect'
 alias r=sr
-alias sr='expect /root/.oh-my-zsh/custom/login_rp'
-alias src='c /root/.oh-my-zsh/custom/login_rp'
-alias srg='g /root/.oh-my-zsh/custom/login_rp'
-alias srv='v /root/.oh-my-zsh/custom/login_rp'
+alias sr='expect ~/.oh-my-zsh/custom/login_rp'
+alias src="c $custom/login_rp"
+alias srg="g $custom/login_rp"
+alias srv="v $custom/login_rp"
 
 
 # Hilfe
 alias hc="c $hilfedatei" 
 alias hg="g $hilfedatei"
-alias hl='le /root/.oh-my-zsh/custom/help.zsh|gr'
-alias hs='so /root/.oh-my-zsh/custom/help.zsh'
-alias hv='v /root/.oh-my-zsh/custom/help.zsh' 
+alias hl="le $hilfedatei|gr"
+alias hv="v $hilfedatei" 
 
 # ls
 alias l='ls -CF'
 alias la='ls -A'
-alias ld='ls -t $ver'
-alias lh="ls --help"
-alias li='ls -cl --group-directories-first'
 alias lm="ls -l | more"
 alias ll='ls -alF --full-time'
 alias lsh="ls -halt --full-time"
@@ -299,7 +293,7 @@ alias up='ag update'
 #programme
 alias ab='abiword'
 alias c='cat'
-alias ec="export SWT_GTK3=0;/root/progr/eclipse/eclipse &"
+alias ec="export SWT_GTK3=0;~/progr/eclipse/eclipse &"
 alias le='less'
 alias li='links2'
 alias v="vim"
@@ -367,12 +361,12 @@ alias te='terminator &'
 alias tp='top'
 alias tr='tree'
 alias un='unzip'
-alias vg="g /root/.vimrc"
+alias vg="g ~/.vimrc"
 alias w="dict -d fd-eng-deu"
 alias w2="dict"
 alias wp='chmod 777 -R .'
 alias x='man'
 alias z='gpicview'
-alias zg='g /root/.zshrc'
+alias zg='g ~/.zshrc'
 
 echo "$0 aktualisiert von $$"
