@@ -26,14 +26,14 @@ he2(){
 #  echo "${bold}Os: $lsb${normal}"
 	echo "\n${bold}Hilfe"
 	schleife=3
-	if [[ $2 != argsleer ]] ;then
-  echo "Argumente für $1:"
-  schleife=2
+  if [[ $2 != argsleer ]] ;then
+	  echo "Argumente für $1:"
+	  schleife=2
   fi
   echo "${normal}"
   
   for var in ${@:$schleife} ; do
-  echo $var
+	echo $var
   done
   echo
 }
@@ -46,6 +46,22 @@ function he(){
 	$1 --help
 }
 
+function i(){
+	
+if [ "$1" = '-h' ]; then
+  he2 `basename $0` "Ip je nach Os"
+  return
+fi
+
+if [ "$(expr $(uname -s))" = "Linux" ]; then
+echo "${bold}Linux${normal}"
+
+ifconfig
+elif [ "$(expr substr $(uname -s) 1 10)" = "MINGW32_NT" ]; then
+ipconfig
+fi
+
+}
 
 function in(){
 	if [ -z "$1" ]; then
@@ -94,13 +110,7 @@ fi
         ssh $2 $ipbas.$1 
 }
 
-function mup(){
-if [ -z "$1" ]; then
-  he2 `basename $0` "Datei"
-  return
-fi
-	mupdf $1 &
-}
+
 
 function mp(){
 if [ -z "$1" ]; then
@@ -110,6 +120,15 @@ fi
 
 	sleep $1;killall mplayer
 }
+
+function mup(){
+if [ -z "$1" ]; then
+  he2 `basename $0` "Datei"
+  return
+fi
+	mupdf $1 &
+}
+
 
 
 function pl(){
@@ -192,6 +211,21 @@ function ve(){
 $1 --version
 }
 
+function verschieb(){
+ver='/home/t/Downloads/';
+
+if [ -z "$1" ]; then
+  he2 `basename $0` "datei von '$ver' nach \$1"
+  return
+fi
+
+	#ver='.'
+	ls -t $ver
+	mv "$ver`ls -t $ver | head -n1`" $1
+	ls $1
+}
+
+
 function yt(){
 if [ -z "$1" ]; then
   he2 `basename $0` Youtube-Datei
@@ -200,16 +234,6 @@ fi
 
 youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.)s" "$1" ;
 }
-
- 
-function mov(){
-	ver='/home/t/';
-	root="~/$1"
-	#ver='.'
-	ls -t $ver
-	mv "$ver`ls -t $ver  | head -n1`" $1
-	ls $1
- }
 
  
 # alias
@@ -269,11 +293,9 @@ alias lsh="ls -halt --full-time"
 
 
 # netzwerk
-alias i=if
 alias idu='ifdown wlan0;ifup wlan0'
 alias ie='iwgetid -r'
 alias ie2='iwconfig 2>&1 | grep ESSID'
-alias if="ifconfig" 
 alias ip2="echo $ip"
 alias iu='ifup wlan0'
 alias iw='iwlist wlan0 scan'
