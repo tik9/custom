@@ -1,15 +1,13 @@
 #!/usr/bin/expect
 
-#set prompt alarmpi
-set prompt "ban"
+set prompt alarmpi
+#set prompt "ban"
 #set prompt "raspberry-pi"
 
 #set prompt "tjava.rhcloud"
 
-#set id "192.168.1.105"
-set id "192.168.188.44"
-
-set green "\033\[0;32;40m"
+set id "192.168.0.106"
+#set id "192.168.188.44"
 
 
 if { [lindex $argv 0] eq "-h" } {
