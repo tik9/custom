@@ -41,7 +41,7 @@ function gi(){
 	echo 'Status'
 	git status
 	echo 'Git Show'
-	Git Show
+	git Show
 }
 
 #
@@ -165,7 +165,7 @@ compdef _git gk='gitk'
 alias gke='\gitk --all $(git log -g --pretty=format:%h)'
 compdef _git gke='gitk'
 
-alias gl='git pull'
+alias gl='git pull;e'
 alias glg='git log --stat'
 alias glgp='git log --stat -p'
 alias glgg='git log --graph'
