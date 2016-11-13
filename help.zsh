@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/zgssh
 
 ad2(){
 adb push "$1" storage/sdcard/
@@ -282,6 +282,7 @@ alias srv="v $custom/login_rp"
 alias hc="c $hilfedatei" 
 alias hg="g $hilfedatei"
 alias hl="le $hilfedatei|gr"
+alias hn=" notepad++ $hilfedatei"
 alias hv="v $hilfedatei" 
 
 # ls
@@ -361,7 +362,7 @@ alias f="find / -name"
 alias f2="find -name"
 alias gr='grep'
 alias ha='halt'
-alias hn='echo $(hostname)'
+alias ho='echo $(hostname)'
 alias iban='DE63721500000050524271'
 alias lag='amixer get PCM'
 alias lsb="echo $lsb"
