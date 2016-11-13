@@ -324,16 +324,14 @@ alias v="vim"
 # ps
 alias ba="bash"
 alias k="kill -9"
-alias kf=kfe
-alias km="pmp;echo '\n';ki mplayer;echo '\n';pmp"
 alias p="ps"
-alias pfe='pr fetchmail'
 alias pr2='ps -ef|grep'
 alias psl="pr sleep"
 alias pmp="pr mplayer"
 alias pts="ps -ef|gr pts/"
 alias psp="ps -p"
 alias sl="sleep"
+alias wh="who"
 
 # Radio
 alias ml="mplayer "

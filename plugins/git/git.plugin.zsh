@@ -38,15 +38,15 @@ function gi(){
 	git add . ;
 	git nccommit;
 	git push;
-	git status;
+	echo 'Status'
+	git status
+	echo 'Git Show'
+	Git Show
 }
-
 
 #
 # Aliases
-# (sorted alphabetically)
 #
-
 
 alias ga='git add --all'
 alias gal='git config --get-regexp alias'
@@ -103,13 +103,15 @@ alias gfo='git fetch origin'
 
 alias gg='g /root/.oh-my-zsh/custom/plugins/git/git.plugin.zsh'
 alias gga='git gui citool --amend'
-ggf() {
+
+function ggf() {
 [[ "$#" != 1 ]] && local b="$(git_current_branch)"
 git push --force origin "${b:=$1}"
 }
+
 compdef _git ggf=git-checkout
 
-ggl() {
+function ggl() {
 if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
 git pull origin "${*}"
 else
@@ -122,7 +124,7 @@ compdef _git ggl=git-checkout
 alias ggpull='git pull origin $(git_current_branch)'
 compdef _git ggpull=git-checkout
 
-ggp() {
+function ggp() {
 if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
 git push origin "${*}"
 else
@@ -130,6 +132,7 @@ else
 git push origin "${b:=$1}"
 fi
 }
+
 compdef _git ggp=git-checkout
 
 alias ggpush='git push origin $(git_current_branch)'
