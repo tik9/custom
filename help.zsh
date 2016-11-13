@@ -176,8 +176,8 @@ if [ -z "$1" ]; then
   he2 `basename $0` Datei "letztes Oktett" Zielordner "(port)"
   return
 fi
-
-	scp -P $4 -r $1  $ipbas.$2:$3 ;
+#echo a2 $3
+	scp  $1 $ipbas.$2:$3 
 }
 
 function sho(){
