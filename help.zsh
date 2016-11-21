@@ -1,11 +1,10 @@
-#!/bin/zgssh
+#!/bin/zsh
 
 ad2(){
 adb push "$1" storage/sdcard/
 }
 
-os='Arch'
-custom='~/.oh-my-zsh/custom'
+custom=~/.oh-my-zsh/custom
 hilfedatei=$custom/help.zsh
 login_rp=$custom/login_rp
 
@@ -13,9 +12,14 @@ bold=`tput bold`
 normal=`tput sgr0`
 
 prodn=192.168.188 ;
+os=$(expr substr $(uname -s) 1 9)
+
+if [ $os != "CYGWIN_NT" ]; then
 ip=`ip addr show wlan0 | grep -Po 'inet \K[\d.]+'`
 ipbas=$(echo $ip | cut -d . -f -3)
 lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
+fi
+
 #echo $lsb
 
 te2(){
@@ -53,11 +57,11 @@ if [ "$1" = '-h' ]; then
   return
 fi
 
-if [ "$(expr $(uname -s))" = "Linux" ]; then
+if [ $os = "Linux" ]; then
 echo "${bold}Linux${normal}"
 
 ifconfig
-elif [ "$(expr substr $(uname -s) 1 10)" = "MINGW32_NT" ]; then
+elif [ $os = "CYGWIN_NT" ]; then
 ipconfig
 fi
 
@@ -240,6 +244,10 @@ youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.)s" "$1" ;
 alias a='alias|le|gr'
 alias ua='unalias'
 
+# betriebssystem
+alias pa='echo $path'
+alias she='echo $0'
+
 
 #cd's
 alias da="cd ~/django"
@@ -282,7 +290,7 @@ alias srv="v $custom/login_rp"
 alias hc="c $hilfedatei" 
 alias hg="g $hilfedatei"
 alias hl="le $hilfedatei|gr"
-alias hn=" notepad++ $hilfedatei"
+alias hn="n $hilfedatei"
 alias hv="v $hilfedatei" 
 
 # ls
@@ -319,6 +327,7 @@ alias c='cat'
 alias ec="export SWT_GTK3=0;~/progr/eclipse/eclipse &"
 alias le='less'
 alias li='links2'
+alias n='notepad++'
 alias v="vim"
 
 
