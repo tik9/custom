@@ -325,10 +325,10 @@ alias lsh="ls -halt --full-time"
 
 # netzwerk
 alias idu='ifdown wlan0;ifup wlan0'
+alias iu='ip link set wlan0 down; ip link set wlan0 up'
 alias ie='iwgetid -r'
 alias ie2='iwconfig 2>&1 | grep ESSID'
 alias ip2="echo $ip"
-alias iu='ifup wlan0'
 alias iw='iwlist wlan0 scan'
 alias nm="nmap -sP $(echo $ipbas).1/24"
 
