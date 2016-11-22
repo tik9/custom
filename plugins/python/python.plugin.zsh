@@ -17,7 +17,7 @@ alias d0='d1;d2;dr'
 alias d2='kill $(netstat -lnp | grep 8000 | awk "{print $7}" | cut -d"/" -f 1)'
 alias dr='p3 wsgi/myproject/manage.py runserver&'
 alias dr2='p3 wsgi/myproject/manage.py'
-alias d1="cd /root/django"
+alias d1="cd ~/django"
 
 
 #pip

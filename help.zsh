@@ -57,7 +57,7 @@ if [ "$1" = '-h' ]; then
   return
 fi
 
-if [ $os = "Linux" ]; then
+if [ $os = "LINUX" ]; then
 echo "${bold}Linux${normal}"
 
 ifconfig
@@ -69,20 +69,24 @@ fi
 
 function in(){
 	if [ -z "$1" ]; then
-	  he2 `basename $0` "Paket"
-	  return
+	he2 `basename $0` "Paket"
+	return
 	fi
 
-df -h
-	if [[ "$lsb" == $os ]] ;then
-echo "Arch"
-		pacman -S --noconfirm $1
+	df -h
+	if [[ $os = "LINUX" ]] ;then
+		if [[ $lsb = 'Arch' ]]; then
+			echo "Arch"
+			pacman -S --noconfirm $1
+		else
+			echo "Ubuntu"
+			apt-get install -y $1
+		fi
 	else
-echo "Ubuntu"
-		apt-get install -y $1
+		apt-cyg install $1
+	fi
 
-fi
-df -h
+	df -h
 }
 
 function ki(){
@@ -97,7 +101,7 @@ fi
 function las(){
 
 if [ -z "$1" ]; then
-  he2 `basename $0` "Lautstärke amixer mit 10 multipliziert"
+  he2 `basename $0` "Lautstärke amixer mit 10  	multipliziert"
   return
 fi
 
@@ -134,6 +138,13 @@ fi
 }
 
 
+function pi(){
+if [ $os = "CYGWIN_NT" ]; then
+ping google.de -n 4
+else
+ping google.de -c4
+fi
+}
 
 function pl(){
 if [ "$1" = -h ]; then
@@ -197,6 +208,12 @@ apt-cache show $1
 fi	
 }
 
+function t(){
+wget http://speedtest.wdc01.softlayer.com/downloads/test500.zip
+if [ $os = "LINUX" ]; then
+--output-document=/dev/null
+fi
+}
 function u(){
 if [ "$1" = -h ]; then
   he2 `basename $0` "argsleer" "Upgrade machen"
@@ -246,7 +263,6 @@ alias ua='unalias'
 
 # betriebssystem
 alias pa='echo $path'
-alias she='echo $0'
 
 
 #cd's
@@ -293,6 +309,12 @@ alias hl="le $hilfedatei|gr"
 alias hn="n $hilfedatei"
 alias hv="v $hilfedatei" 
 
+# Konsole
+alias she='echo $0'
+alias st='stty -a'
+alias tt='temp=$(tty) ; echo ${temp:5}'
+
+
 # ls
 alias l='ls -CF'
 alias la='ls -A'
@@ -309,7 +331,6 @@ alias ip2="echo $ip"
 alias iu='ifup wlan0'
 alias iw='iwlist wlan0 scan'
 alias nm="nmap -sP $(echo $ipbas).1/24"
-alias pi="ping google.de -c4" 
 
 
 # package mgt.
@@ -383,8 +404,6 @@ alias prp='pgrep'
 alias r=sr
 alias sr="expect $login_rp"
 alias srg="g $login_rp"
-alias st='stty -a'
-alias t='wget --output-document=/dev/null http://speedtest.wdc01.softlayer.com/downloads/test500.zip'
 alias ta='tail'
 alias tar='tar xfvz'
 alias te='terminator &'
