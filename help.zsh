@@ -305,7 +305,8 @@ alias srv="v $custom/login_rp"
 # Hilfe
 alias hc="c $hilfedatei" 
 alias hg="g $hilfedatei"
-alias hl="le $hilfedatei|gr"
+alias hl2="le $hilfedatei|gr"
+alias hl="le $hilfedatei"
 alias hn="n $hilfedatei"
 alias hv="v $hilfedatei" 
 
