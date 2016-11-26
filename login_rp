@@ -9,6 +9,7 @@ set prompt alarmpi
 set id "192.168.0.106"
 #set id "192.168.188.44"
 
+set green "\033\[0;32;40m"
 
 if { [lindex $argv 0] eq "-h" } {
     puts "${green}Argumente\n Argument 1: standard\r
@@ -24,12 +25,12 @@ send "p\r"
 
 expect  $prompt {
 
-if { [lindex $argv 1] ne "" } {
-send ex\r
-}
-
 if { [lindex $argv 0] ne "" } {
     send [lindex $argv 0]\r
+}
+
+if { [lindex $argv 1] ne "" } {
+send ex\r
 }
 
 

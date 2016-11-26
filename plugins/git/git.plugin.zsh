@@ -41,7 +41,7 @@ function gi(){
 	echo 'Status'
 	git status
 	echo 'Git Show'
-	git Show
+	git show
 }
 
 #
