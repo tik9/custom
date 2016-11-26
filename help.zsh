@@ -1,11 +1,10 @@
-#!/bin/zgssh
+#!/bin/zsh
 
 ad2(){
 adb push "$1" storage/sdcard/
 }
 
-os='Arch'
-custom='~/.oh-my-zsh/custom'
+custom=~/.oh-my-zsh/custom
 hilfedatei=$custom/help.zsh
 login_rp=$custom/login_rp
 
@@ -13,9 +12,14 @@ bold=`tput bold`
 normal=`tput sgr0`
 
 prodn=192.168.188 ;
+os=$(expr substr $(uname -s) 1 9)
+
+if [ $os != "CYGWIN_NT" ]; then
 ip=`ip addr show wlan0 | grep -Po 'inet \K[\d.]+'`
 ipbas=$(echo $ip | cut -d . -f -3)
 lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
+fi
+
 #echo $lsb
 
 te2(){
@@ -53,11 +57,11 @@ if [ "$1" = '-h' ]; then
   return
 fi
 
-if [ "$(expr $(uname -s))" = "Linux" ]; then
+if [ $os = "LINUX" ]; then
 echo "${bold}Linux${normal}"
 
 ifconfig
-elif [ "$(expr substr $(uname -s) 1 10)" = "MINGW32_NT" ]; then
+elif [ $os = "CYGWIN_NT" ]; then
 ipconfig
 fi
 
@@ -65,20 +69,24 @@ fi
 
 function in(){
 	if [ -z "$1" ]; then
-	  he2 `basename $0` "Paket"
-	  return
+	he2 `basename $0` "Paket"
+	return
 	fi
 
-df -h
-	if [[ "$lsb" == $os ]] ;then
-echo "Arch"
-		pacman -S --noconfirm $1
+	df -h
+	if [[ $os = "LINUX" ]] ;then
+		if [[ $lsb = 'Arch' ]]; then
+			echo "Arch"
+			pacman -S --noconfirm $1
+		else
+			echo "Ubuntu"
+			apt-get install -y $1
+		fi
 	else
-echo "Ubuntu"
-		apt-get install -y $1
+		apt-cyg install $1
+	fi
 
-fi
-df -h
+	df -h
 }
 
 function ki(){
@@ -93,7 +101,7 @@ fi
 function las(){
 
 if [ -z "$1" ]; then
-  he2 `basename $0` "Lautstärke amixer mit 10 multipliziert"
+  he2 `basename $0` "Lautstärke amixer mit 10  	multipliziert"
   return
 fi
 
@@ -130,6 +138,13 @@ fi
 }
 
 
+function pi(){
+if [ $os = "CYGWIN_NT" ]; then
+ping google.de -n 4
+else
+ping google.de -c4
+fi
+}
 
 function pl(){
 if [ "$1" = -h ]; then
@@ -193,6 +208,12 @@ apt-cache show $1
 fi	
 }
 
+function t(){
+wget http://speedtest.wdc01.softlayer.com/downloads/test500.zip
+if [ $os = "LINUX" ]; then
+--output-document=/dev/null
+fi
+}
 function u(){
 if [ "$1" = -h ]; then
   he2 `basename $0` "argsleer" "Upgrade machen"
@@ -240,6 +261,9 @@ youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.)s" "$1" ;
 alias a='alias|le|gr'
 alias ua='unalias'
 
+# betriebssystem
+alias pa='echo $path'
+
 
 #cd's
 alias da="cd ~/django"
@@ -281,9 +305,16 @@ alias srv="v $custom/login_rp"
 # Hilfe
 alias hc="c $hilfedatei" 
 alias hg="g $hilfedatei"
-alias hl="le $hilfedatei|gr"
-alias hn=" notepad++ $hilfedatei"
+alias hl2="le $hilfedatei|gr"
+alias hl="le $hilfedatei"
+alias hn="n $hilfedatei"
 alias hv="v $hilfedatei" 
+
+# Konsole
+alias she='echo $0'
+alias st='stty -a'
+alias tt='temp=$(tty) ; echo ${temp:5}'
+
 
 # ls
 alias l='ls -CF'
@@ -295,13 +326,12 @@ alias lsh="ls -halt --full-time"
 
 # netzwerk
 alias idu='ifdown wlan0;ifup wlan0'
+alias iu='ip link set wlan0 down; ip link set wlan0 up'
 alias ie='iwgetid -r'
 alias ie2='iwconfig 2>&1 | grep ESSID'
 alias ip2="echo $ip"
-alias iu='ifup wlan0'
 alias iw='iwlist wlan0 scan'
 alias nm="nmap -sP $(echo $ipbas).1/24"
-alias pi="ping google.de -c4" 
 
 
 # package mgt.
@@ -319,6 +349,7 @@ alias c='cat'
 alias ec="export SWT_GTK3=0;~/progr/eclipse/eclipse &"
 alias le='less'
 alias li='links2'
+alias n='notepad++'
 alias v="vim"
 
 
@@ -374,8 +405,6 @@ alias prp='pgrep'
 alias r=sr
 alias sr="expect $login_rp"
 alias srg="g $login_rp"
-alias st='stty -a'
-alias t='wget --output-document=/dev/null http://speedtest.wdc01.softlayer.com/downloads/test500.zip'
 alias ta='tail'
 alias tar='tar xfvz'
 alias te='terminator &'

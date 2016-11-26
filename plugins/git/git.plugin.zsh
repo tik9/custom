@@ -34,10 +34,10 @@ function work_in_progress() {
 }
 
 function gi(){
-	git status;
-	git add . ;
-	git nccommit;
-	git push;
+	git status
+	git add . 
+	git commit -a --allow-empty-message -m ""
+	git push
 	echo 'Status'
 	git status
 	echo 'Git Show'
