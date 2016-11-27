@@ -1,0 +1,28 @@
+#!/usr/bin/expect
+
+set prompt alarmpi
+#set prompt "ban"
+#set prompt "raspberry-pi"
+
+#set prompt "tjava.rhcloud"
+
+set id "192.168.0.106"
+#set id "192.168.188.44"
+set green "\033\[0;32;40m"
+
+
+if { [lindex $argv 0] eq "" } {
+    puts "${green}Argumente\n 
+    Argument 1: Datei\r
+    Arg. 2: Zielordner"
+    exit 0
+}
+
+spawn scp "[lindex $argv 0]" $id:[lindex $argv 1] 
+#spawn rhc ssh django
+
+expect "password"
+send "p\r"
+
+interact
+

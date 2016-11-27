@@ -6,32 +6,39 @@ set prompt alarmpi
 
 #set prompt "tjava.rhcloud"
 
-set id "192.168.0.106"
-#set id "192.168.188.44"
+#set id "192.168.0.106"
+set id "192.168.188"
 
 set green "\033\[0;32;40m"
 
 if { [lindex $argv 0] eq "-h" } {
-    puts "${green}Argumente\n Argument 1: standard\r
-    Arg. 2: exit"
+    puts "${green}Argumente\n Argument 1: letztes Oktett\r
+    Arg. 2: Befehl\r A. 3: exit"
     exit 0
 }
 
-spawn ssh $id
+
+if {[regexp {inet Adresse:(\S+)} [exec ifconfig wlan0] -> ipaddr]} {
+        puts $ipaddr
+    }
+
+#set ipbas $(echo $ipaddr | cut -d . -f -3)
+
+spawn ssh $id.[lindex $argv 0]
 #spawn rhc ssh django
 
 expect "password"
 send "p\r"
 
 expect  $prompt {
+	#send df\r
+	if { [lindex $argv 1] ne "" } {
+		send [lindex $argv 1]\r
+	}
 
-if { [lindex $argv 0] ne "" } {
-    send [lindex $argv 0]\r
-}
-
-if { [lindex $argv 1] ne "" } {
-send ex\r
-}
+	if { [lindex $argv 2] ne "" } {
+	send ex\r
+	}
 
 
 }

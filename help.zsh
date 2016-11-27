@@ -11,7 +11,6 @@ login_rp=$custom/login_rp
 bold=`tput bold`
 normal=`tput sgr0`
 
-prodn=192.168.188 ;
 os=$(expr substr $(uname -s) 1 9)
 
 if [ $os != "CYGWIN_NT" ]; then
@@ -23,7 +22,8 @@ fi
 #echo $lsb
 
 te2(){
-	echo $lsb
+df `if [ $os = "Linux" ]; then echo -h
+ fi`
 }
 
 he2(){
@@ -57,7 +57,7 @@ if [ "$1" = '-h' ]; then
   return
 fi
 
-if [ $os = "LINUX" ]; then
+if [ $os = "Linux" ]; then
 echo "${bold}Linux${normal}"
 
 ifconfig
@@ -74,7 +74,7 @@ function in(){
 	fi
 
 	df -h
-	if [[ $os = "LINUX" ]] ;then
+	if [[ $os = "Linux" ]] ;then
 		if [[ $lsb = 'Arch' ]]; then
 			echo "Arch"
 			pacman -S --noconfirm $1
@@ -89,6 +89,13 @@ function in(){
 	df -h
 }
 
+iu(){
+	if [[ $lsb = 'Arch' ]]; then
+ip link set wlan0 down; ip link set wlan0 up
+else
+	ifdown wlan0;ifup wlan0
+fi
+}
 function ki(){
 if [ -z "$1" ]; then
   he2 `basename $0` "Prozess für killall"
@@ -117,7 +124,6 @@ fi
 
         ssh $2 $ipbas.$1 
 }
-
 
 
 function mp(){
@@ -209,11 +215,10 @@ fi
 }
 
 function t(){
-wget http://speedtest.wdc01.softlayer.com/downloads/test500.zip
-if [ $os = "LINUX" ]; then
---output-document=/dev/null
-fi
+wget http://speedtest.wdc01.softlayer.com/downloads/test500.zip `if [ $os = "Linux" ]; then ; echo --output-document=/dev/null
+fi`
 }
+
 function u(){
 if [ "$1" = -h ]; then
   he2 `basename $0` "argsleer" "Upgrade machen"
@@ -278,6 +283,7 @@ alias cl1='cu localhost:8000'
 #Dateiops
 alias d="rm -r"
 alias md="mkdir -p"
+alias mo="chmod 700"
 alias to='touch'
 
 #Dateisystem
@@ -285,6 +291,10 @@ alias pt='parted'
 alias mn='mount'
 alias um='umount'
 
+#Dict
+alias wl="echo Dict.;dict -D"
+alias w="dict -d fd-eng-deu"
+alias w2="dict"
 
 # Energie
 alias hi='hibernate'
@@ -325,8 +335,7 @@ alias lsh="ls -halt --full-time"
 
 
 # netzwerk
-alias idu='ifdown wlan0;ifup wlan0'
-alias iu='ip link set wlan0 down; ip link set wlan0 up'
+
 alias ie='iwgetid -r'
 alias ie2='iwconfig 2>&1 | grep ESSID'
 alias ip2="echo $ip"
@@ -385,7 +394,8 @@ alias ad2='echo 015739598220 timo.koerner@hof-university.de dkoerner@konzertagen
 alias cl='xclip -sel clip'
 alias cp='cp -r'
 alias dat='date'
-alias df='df -h'
+alias dc='declare -f'
+alias dh='df -h'
 alias du='du -h'
 alias e="exec zsh"
 alias ex="exit"
@@ -412,8 +422,6 @@ alias tp='top'
 alias tr='tree'
 alias un='unzip'
 alias vg="g ~/.vimrc"
-alias w="dict -d fd-eng-deu"
-alias w2="dict"
 alias wp='chmod 777 -R .'
 alias x='man'
 alias z='gpicview'
