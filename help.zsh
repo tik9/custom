@@ -1,8 +1,6 @@
 #!/bin/zsh
 
-ad2(){
-adb push "$1" storage/sdcard/
-}
+alias osp='git clone ssh://583d51142d527182db000116@p-tjava.rhcloud.com/~/git/p.git/'
 
 custom=~/.oh-my-zsh/custom
 hilfedatei=$custom/help.zsh
@@ -19,7 +17,6 @@ ipbas=$(echo $ip | cut -d . -f -3)
 lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
 fi
 
-#echo $lsb
 
 te2(){
 df `if [ $os = "Linux" ]; then echo -h
@@ -90,10 +87,14 @@ function in(){
 }
 
 iu(){
+	if [[ $os = "Linux" ]] ;then
 	if [[ $lsb = 'Arch' ]]; then
 ip link set wlan0 down; ip link set wlan0 up
 else
 	ifdown wlan0;ifup wlan0
+fi
+else
+echo "Kein Linux"
 fi
 }
 function ki(){
@@ -154,15 +155,18 @@ fi
 
 function pl(){
 if [ "$1" = -h ]; then
-  he2 `basename $0` "argsleer" "Installierte Pakete zeigen"
+  he2 `basename $0` "argsleer" "Installierte Pakete zeigen, nur Linux"
   return
   
 fi
 
-if [[ $lsb == $os ]]; then
+	if [[ $os = "Linux" ]] ;then
+
+if [[ $lsb = 'Arch' ]]; then
 pacman -Qeq |less
 else
 dpkg -l	|less
+fi
 fi
 }
 
@@ -184,7 +188,7 @@ if [ -z "$1" ]; then
   
 fi
 
-if [[ $lsb == $os ]] ;then
+if [[ $lsb == 'Arch' ]] ;then
 pacman -R --noconfirm
 	else
 apt-get autoremove
@@ -226,7 +230,7 @@ if [ "$1" = -h ]; then
   
 fi	
 
-if [[ $lsb == $os ]] ;then
+if [[ $lsb == 'Arch' ]] ;then
 		pacman -Syu
 	else
 apt-get upgrade	
@@ -267,6 +271,8 @@ alias a='alias|le|gr'
 alias ua='unalias'
 
 # betriebssystem
+alias lsb="echo $lsb"
+alias os="echo $os"
 alias pa='echo $path'
 
 
@@ -277,7 +283,8 @@ alias oc='cd ~/.oh-my-zsh/custom'
 
 #curl
 alias cu='curl'
-alias cl1='cu localhost:8000'
+alias cl1='cu localhost'
+alias cl2='cu localhost:8000'
 
 
 #Dateiops
@@ -404,9 +411,8 @@ alias f2="find -name"
 alias gr='grep'
 alias ha='halt'
 alias ho='echo $(hostname)'
-alias iban='DE63721500000050524271'
+alias iban='DE637215 0000 00 5052 4271'
 alias lag='amixer get PCM'
-alias lsb="echo $lsb"
 alias lk="lsblk"
 alias m='man'
 alias mkdir='mkdir -p'
