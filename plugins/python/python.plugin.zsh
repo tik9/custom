@@ -21,10 +21,7 @@ alias d1="cd ~/django"
 
 
 #pip
-alias pi3='pip3 install'
-alias pi2='pip2 install'
-alias pui2='pip2 uninstall'
+alias pi3='p3 -m pip install'
 alias pui3='pip3 uninstall'
-alias pl2='pip2 list'
-alias pl3='pip3 list'
-#alias re='pi3 -r requirements.txt'
+alias pl3='p3 -m pip list'
+alias req='pi3 -r requirements.txt'

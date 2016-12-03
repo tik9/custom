@@ -15,8 +15,10 @@ if [ $os != "CYGWIN_NT" ]; then
 ip=`ip addr show wlan0 | grep -Po 'inet \K[\d.]+'`
 ipbas=$(echo $ip | cut -d . -f -3)
 lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
+alias mt='mutt'
+else
+alias mt='mintty'
 fi
-
 
 te2(){
 df `if [ $os = "Linux" ]; then echo -h
@@ -25,7 +27,7 @@ df `if [ $os = "Linux" ]; then echo -h
 
 he2(){
 #  echo "${bold}Os: $lsb${normal}"
-	echo "\n${bold}Hilfe"
+	echo "\n${bold}Hilfe, os: $os"
 	schleife=3
   if [[ $2 != argsleer ]] ;then
 	  echo "Argumente für $1:"
@@ -54,14 +56,7 @@ if [ "$1" = '-h' ]; then
   return
 fi
 
-if [ $os = "Linux" ]; then
-echo "${bold}Linux${normal}"
-
-ifconfig
-elif [ $os = "CYGWIN_NT" ]; then
-ipconfig
-fi
-
+if [ $os = "Linux" ]; then;ifconfig;else;ipconfig;fi
 }
 
 function in(){
@@ -88,15 +83,23 @@ function in(){
 
 iu(){
 	if [[ $os = "Linux" ]] ;then
-	if [[ $lsb = 'Arch' ]]; then
-ip link set wlan0 down; ip link set wlan0 up
-else
-	ifdown wlan0;ifup wlan0
+	if [[ $lsb = 'Arch' ]]; then;ip link set wlan0 down; ip link set wlan0 up;else;ifdown wlan0;ifup wlan0;fi
+else;echo "Kein Linux";fi
+}
+
+function k(){
+if [ -z "$1" ]; then
+  he2 `basename $0` "Prozess für kill"
+  return
 fi
+
+if [ $os = 'Linux' ];then
+k -9 $1
 else
-echo "Kein Linux"
+/bin/kill.exe $1
 fi
 }
+
 function ki(){
 if [ -z "$1" ]; then
   he2 `basename $0` "Prozess für killall"
@@ -188,12 +191,15 @@ if [ -z "$1" ]; then
   
 fi
 
+if [ $os = "CYGWIN_NT" ]; then
+apt-cyg remove $1
+else
 if [[ $lsb == 'Arch' ]] ;then
-pacman -R --noconfirm
+pacman -R --noconfirm $1
 	else
-apt-get autoremove
+apt-get autoremove $1
 fi
-$1
+fi
 }
 
 function sc2(){
@@ -206,16 +212,14 @@ fi
 }
 
 function sho(){
+
 if [ -z "$1" ]; then
   he2 `basename $0` "Paket"
   return
 fi
 
-	if [[ $lsb == $os ]] ;then
-		pacman -Ss $1
-	else
-apt-cache show $1
-fi	
+if [ $os = "CYGWIN_NT" ]; then
+apt-cyg show `echo $1`;else ;if [[ $lsb == 'Arch' ]] ;then;pacman -Ss $1 ;else;apt-cache show $1 ;fi;fi;
 }
 
 function t(){
@@ -351,7 +355,6 @@ alias nm="nmap -sP $(echo $ipbas).1/24"
 
 
 # package mgt.
-alias aci='apt-cyg install'
 alias acl='apt-cyg listall'
 alias acl2='cygcheck'
 alias ag='apt-get'
@@ -371,7 +374,6 @@ alias v="vim"
 
 # ps
 alias ba="bash"
-alias k="kill -9"
 alias p="ps"
 alias pr2='ps -ef|grep'
 alias psl="pr sleep"
@@ -415,8 +417,8 @@ alias iban='DE637215 0000 00 5052 4271'
 alias lag='amixer get PCM'
 alias lk="lsblk"
 alias m='man'
+alias mb='m bash'
 alias mkdir='mkdir -p'
-alias mt='mutt'
 alias prp='pgrep'
 alias r=sr
 alias sr="expect $login_rp"
