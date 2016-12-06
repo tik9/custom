@@ -211,6 +211,22 @@ fi
 	scp  $1 $ipbas.$2:$3 
 }
 
+
+function schieb(){
+ver='/home/t/Downloads/';
+
+if [ -z "$1" ]; then
+  he2 `basename $0` "datei von '$ver' nach \$1"
+  return
+fi
+
+	#ver='.'
+	ls -t $ver
+	mv "$ver`ls -t $ver | head -n1`" $1
+	ls $1
+}
+
+
 function sho(){
 
 if [ -z "$1" ]; then
@@ -245,20 +261,6 @@ function ve(){
 $1 --version
 }
 
-function verschieb(){
-ver='/home/t/Downloads/';
-
-if [ -z "$1" ]; then
-  he2 `basename $0` "datei von '$ver' nach \$1"
-  return
-fi
-
-	#ver='.'
-	ls -t $ver
-	mv "$ver`ls -t $ver | head -n1`" $1
-	ls $1
-}
-
 
 function yt(){
 if [ -z "$1" ]; then
@@ -283,7 +285,7 @@ alias pa='echo $path'
 #cd's
 alias da="cd ~/django"
 alias mu="cd ~/musik"
-alias oc='cd ~/.oh-my-zsh/custom'
+alias o='cd ~/.oh-my-zsh/custom'
 
 #curl
 alias cu='curl'
@@ -386,7 +388,7 @@ alias wh="who"
 # Radio
 alias ml="mplayer "
 
-alias b="ml http://80.237.154.83:8120" # landsberg int.
+alias b="ml http://80.237.156.8:8120" # landsberg int.
 alias cur="ml -playlist http://minnesota.publicradio.org/tools/play/streams/the_current.pls"
 alias fm4="ml http://mp3stream1.apasf.apa.at:8000/" #fm4 orf
 alias kl="ml -playlist http://minnesota.publicradio.org/tools/play/streams/classical.pls"
@@ -402,7 +404,7 @@ alias ad='echo t@tk1.it|cli'
 alias ad2='echo 015739598220 timo.koerner@hof-university.de dkoerner@konzertagentur-koerner.de'
 alias cl='xclip -sel clip'
 alias cp='cp -r'
-alias dat='date'
+alias dt='date'
 alias dc='declare -f'
 alias dh='df -h'
 alias du='du -h'
