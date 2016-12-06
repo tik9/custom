@@ -5,6 +5,7 @@ alias osp='git clone ssh://583d51142d527182db000116@p-tjava.rhcloud.com/~/git/p.
 custom=~/.oh-my-zsh/custom
 hilfedatei=$custom/help.zsh
 login_rp=$custom/login_rp
+ifdd='ifdown'
 
 bold=`tput bold`
 normal=`tput sgr0`
@@ -16,8 +17,6 @@ ip=`ip addr show wlan0 | grep -Po 'inet \K[\d.]+'`
 ipbas=$(echo $ip | cut -d . -f -3)
 lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
 alias mt='mutt'
-else
-alias mt='mintty'
 fi
 
 te2(){
@@ -45,19 +44,6 @@ function g(){
 	geany $1 &
 }
 
-function he(){
-	$1 --help
-}
-
-function i(){
-	
-if [ "$1" = '-h' ]; then
-  he2 `basename $0` "Ip je nach Os"
-  return
-fi
-
-if [ $os = "Linux" ]; then;ifconfig;else;ipconfig;fi
-}
 
 function in(){
 	if [ -z "$1" ]; then
@@ -81,9 +67,18 @@ function in(){
 	df -h
 }
 
+ifda(){
+	ip link set $1 down
+}
+
 iu(){
+		if [ -z "$1" ]; then
+	he2 `basename $0` "Interface"
+	return
+	fi
+	
 	if [[ $os = "Linux" ]] ;then
-	if [[ $lsb = 'Arch' ]]; then;ip link set wlan0 down; ip link set wlan0 up;else;ifdown wlan0;ifup wlan0;fi
+	if [[ $lsb = 'Arch' ]]; then;ifda $1;ip link set $1 up;else;$ifdd $1;ifup $1;fi
 else;echo "Kein Linux";fi
 }
 
@@ -148,13 +143,6 @@ fi
 }
 
 
-function pi(){
-if [ $os = "CYGWIN_NT" ]; then
-ping google.de -n 4
-else
-ping google.de -c4
-fi
-}
 
 function pl(){
 if [ "$1" = -h ]; then
@@ -163,7 +151,7 @@ if [ "$1" = -h ]; then
   
 fi
 
-	if [[ $os = "Linux" ]] ;then
+if [[ $os = "Linux" ]] ;then
 
 if [[ $lsb = 'Arch' ]]; then
 pacman -Qeq |less
@@ -191,15 +179,10 @@ if [ -z "$1" ]; then
   
 fi
 
-if [ $os = "CYGWIN_NT" ]; then
-apt-cyg remove $1
-else
-if [[ $lsb == 'Arch' ]] ;then
-pacman -R --noconfirm $1
-	else
-apt-get autoremove $1
-fi
-fi
+if [ $os = "CYGWIN_NT" ]; then;apt-cyg remove $1;else
+if [[ $lsb == 'Arch' ]] ;then;pacman -R --noconfirm $1
+	else;apt-get autoremove $1;fi
+fi; 
 }
 
 function sc2(){
@@ -216,7 +199,7 @@ function schieb(){
 ver='/home/t/Downloads/';
 
 if [ -z "$1" ]; then
-  he2 `basename $0` "datei von '$ver' nach \$1"
+  he2 `basename $0` "Ziel"
   return
 fi
 
@@ -238,10 +221,6 @@ if [ $os = "CYGWIN_NT" ]; then
 apt-cyg show `echo $1`;else ;if [[ $lsb == 'Arch' ]] ;then;pacman -Ss $1 ;else;apt-cache show $1 ;fi;fi;
 }
 
-function t(){
-wget http://speedtest.wdc01.softlayer.com/downloads/test500.zip `if [ $os = "Linux" ]; then ; echo --output-document=/dev/null
-fi`
-}
 
 function u(){
 if [ "$1" = -h ]; then
@@ -257,23 +236,12 @@ apt-get upgrade
 fi	
 }
 
-function ve(){
-$1 --version
-}
-
-
-function yt(){
-if [ -z "$1" ]; then
-  he2 `basename $0` Youtube-Datei
-  return
-fi	
-
-youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.)s" "$1" ;
-}
-
  
 # alias
+alias aa='wget http://speedtest.wdc01.softlayer.com/downloads/test500.zip `if [ $os = "Linux" ]; then ; echo --output-document=/dev/null
+fi`'
 alias a='alias|le|gr'
+alias am='alias -m'
 alias ua='unalias'
 
 # betriebssystem
@@ -286,6 +254,8 @@ alias pa='echo $path'
 alias da="cd ~/django"
 alias mu="cd ~/musik"
 alias o='cd ~/.oh-my-zsh/custom'
+alias oh='cd ~/.oh-my-zsh'
+alias pd='cd ~/git/p'
 
 #curl
 alias cu='curl'
@@ -309,29 +279,31 @@ alias wl="echo Dict.;dict -D"
 alias w="dict -d fd-eng-deu"
 alias w2="dict"
 
+
+# Editoren
+alias ab='abiword'
+alias n='notepad++'
+alias v="vim"
+
+
 # Energie
 alias hi='hibernate'
-alias h='hi'
 alias rs='reboot'
 alias s='pm-suspend'
 
 #expect
-alias ee='et expect1'
 alias et='expect'
 alias r=sr
 alias sr='expect ~/.oh-my-zsh/custom/login_rp'
 alias src="c $custom/login_rp"
-alias srg="g $custom/login_rp"
 alias srv="v $custom/login_rp"
 
 
 # Hilfe
-alias hc="c $hilfedatei" 
-alias hg="g $hilfedatei"
-alias hl2="le $hilfedatei|gr"
+alias -g h="--help"
+alias -g hd="$hilfedatei"
 alias hl="le $hilfedatei"
 alias hn="n $hilfedatei"
-alias hv="v $hilfedatei" 
 
 # Konsole
 alias she='echo $0'
@@ -340,20 +312,22 @@ alias tt='temp=$(tty) ; echo ${temp:5}'
 
 
 # ls
-alias l='ls -CF'
-alias la='ls -A'
-alias lm="ls -l | more"
-alias ll='ls -alF --full-time'
+#alias l='ls -CF'
 alias lsh="ls -halt --full-time"
 
 
 # netzwerk
 
+alias i='if [ $os = "Linux" ]; then;ifconfig;else;ipconfig;fi'
 alias ie='iwgetid -r'
 alias ie2='iwconfig 2>&1 | grep ESSID'
 alias ip2="echo $ip"
-alias iw='iwlist wlan0 scan'
+alias ifdd="$ifdd"
+alias ifda="$ifda"
+alias iw='iwlist wlan0 scan|gr'
 alias nm="nmap -sP $(echo $ipbas).1/24"
+alias pi="ping google.de `if [ $os = CYGWIN_NT ]; then
+ echo -n 4;else;echo -c4;fi`"
 
 
 # package mgt.
@@ -364,19 +338,8 @@ alias pm2="pacman -S"
 alias up='ag update'
 
 
-#programme
-alias ab='abiword'
-alias c='cat'
-alias ec="export SWT_GTK3=0;~/progr/eclipse/eclipse &"
-alias le='less'
-alias li='links2'
-alias n='notepad++'
-alias v="vim"
-
-
 # ps
 alias ba="bash"
-alias p="ps"
 alias pr2='ps -ef|grep'
 alias psl="pr sleep"
 alias pmp="pr mplayer"
@@ -402,6 +365,8 @@ alias us="echo $USER"
 
 alias ad='echo t@tk1.it|cli'
 alias ad2='echo 015739598220 timo.koerner@hof-university.de dkoerner@konzertagentur-koerner.de'
+alias c='cat'
+alias le='less'
 alias cl='xclip -sel clip'
 alias cp='cp -r'
 alias dt='date'
@@ -409,6 +374,7 @@ alias dc='declare -f'
 alias dh='df -h'
 alias du='du -h'
 alias e="exec zsh"
+alias ec="export SWT_GTK3=0;~/progr/eclipse/eclipse &"
 alias ex="exit"
 alias f="find / -name"
 alias f2="find -name"
@@ -417,23 +383,27 @@ alias ha='halt'
 alias ho='echo $(hostname)'
 alias iban='DE637215 0000 00 5052 4271'
 alias lag='amixer get PCM'
-alias lk="lsblk"
+alias li='links2'
 alias m='man'
 alias mb='m bash'
 alias mkdir='mkdir -p'
 alias prp='pgrep'
 alias r=sr
+alias so="source"
 alias sr="expect $login_rp"
 alias srg="g $login_rp"
+alias t='wget http://speedtest.wdc01.softlayer.com/downloads/test500.zip `if [ $os = "Linux" ]; then ; echo --output-document=/dev/null'
 alias ta='tail'
 alias tar='tar xfvz'
-alias te='terminator &'
+alias te='if [ $os != "CYGWIN_NT" ]; then;terminator &;else; mintty;fi'
 alias tp='top'
 alias tr='tree'
 alias un='unzip'
+alias -g ve="--version"
 alias vg="g ~/.vimrc"
 alias wp='chmod 777 -R .'
 alias x='man'
+alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.)s"'
 alias z='gpicview'
 alias zg='g ~/.zshrc'
 
