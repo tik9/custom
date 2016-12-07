@@ -44,6 +44,12 @@ function g(){
 	geany $1 &
 }
 
+i(){
+	
+	if [ $os = "Linux" ]; then;ifconfig;else;ipconfig;fi
+	
+}
+
 
 function in(){
 	if [ -z "$1" ]; then
@@ -71,8 +77,10 @@ ifda(){
 	ip link set $1 down
 }
 
-iu(){
-		if [ -z "$1" ]; then
+
+function iu(){
+	
+	if [ -z "$1" ]; then
 	he2 `basename $0` "Interface"
 	return
 	fi
@@ -80,6 +88,8 @@ iu(){
 	if [[ $os = "Linux" ]] ;then
 	if [[ $lsb = 'Arch' ]]; then;ifda $1;ip link set $1 up;else;$ifdd $1;ifup $1;fi
 else;echo "Kein Linux";fi
+
+i
 }
 
 function k(){
@@ -202,11 +212,15 @@ if [ -z "$1" ]; then
   he2 `basename $0` "Ziel"
   return
 fi
-
-	#ver='.'
+	ziel=$1
+	if [ $1 = 'r' ];then
+		ziel='/root'
+	fi
+	
 	ls -t $ver
-	mv "$ver`ls -t $ver | head -n1`" $1
-	ls $1
+	mv "$ver`ls -t $ver | head -n1`" $ziel
+	echo Inhalt von $ziel
+	ls $ziel
 }
 
 
@@ -264,7 +278,7 @@ alias cl2='cu localhost:8000'
 
 
 #Dateiops
-alias d="rm -r"
+alias d="rm -rf"
 alias md="mkdir -p"
 alias mo="chmod 700"
 alias to='touch'
@@ -318,7 +332,6 @@ alias lsh="ls -halt --full-time"
 
 # netzwerk
 
-alias i='if [ $os = "Linux" ]; then;ifconfig;else;ipconfig;fi'
 alias ie='iwgetid -r'
 alias ie2='iwconfig 2>&1 | grep ESSID'
 alias ip2="echo $ip"
@@ -392,9 +405,8 @@ alias r=sr
 alias so="source"
 alias sr="expect $login_rp"
 alias srg="g $login_rp"
-alias t='wget http://speedtest.wdc01.softlayer.com/downloads/test500.zip `if [ $os = "Linux" ]; then ; echo --output-document=/dev/null'
+alias t='wget http://speedtest.wdc01.softlayer.com/downloads/test500.zip `if [ $os = "Linux" ]; then ; echo --output-document=/dev/null;fi`'
 alias ta='tail'
-alias tar='tar xfvz'
 alias te='if [ $os != "CYGWIN_NT" ]; then;terminator &;else; mintty;fi'
 alias tp='top'
 alias tr='tree'
