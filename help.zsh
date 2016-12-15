@@ -20,8 +20,7 @@ alias mt='mutt'
 fi
 
 te2(){
-df `if [ $os = "Linux" ]; then echo -h
- fi`
+sleep 10&; kill $!
 }
 
 he2(){
@@ -77,6 +76,15 @@ ifda(){
 	ip link set $1 down
 }
 
+ipu(){
+		
+	if [ -z "$1" ]; then
+	he2 `basename $0` "Interface"
+	return
+	fi
+	if [[ $lsb = 'Arch' ]]; then;ip link set $1 up;else;ifup $1;fi
+
+}
 
 function iu(){
 	
@@ -84,7 +92,7 @@ function iu(){
 	he2 `basename $0` "Interface"
 	return
 	fi
-	
+t	
 	if [[ $os = "Linux" ]] ;then
 	if [[ $lsb = 'Arch' ]]; then;ifda $1;ip link set $1 up;else;$ifdd $1;ifup $1;fi
 else;echo "Kein Linux";fi
@@ -235,6 +243,10 @@ if [ $os = "CYGWIN_NT" ]; then
 apt-cyg show `echo $1`;else ;if [[ $lsb == 'Arch' ]] ;then;pacman -Ss $1 ;else;apt-cache show $1 ;fi;fi;
 }
 
+t(){
+	
+	wget http://speedtest.wdc01.softlayer.com/downloads/test500.zip `if [ $os = "Linux" ]; then ; echo --output-document=/dev/null;fi`
+}
 
 function u(){
 if [ "$1" = -h ]; then
@@ -371,6 +383,11 @@ alias kl="ml -playlist http://minnesota.publicradio.org/tools/play/streams/class
 alias mpr="ml -playlist http://minnesota.publicradio.org/tools/play/streams/news.pls"
 alias oe="ml http://194.232.200.156:8000" #oe3
 
+#rhc
+alias rha='rhc app-restart'
+alias rhs='rhc ssh'
+
+
 #user
 alias sur="sudo -i"
 alias us="echo $USER"
@@ -387,7 +404,8 @@ alias dc='declare -f'
 alias dh='df -h'
 alias du='du -h'
 alias e="exec zsh"
-alias ec="export SWT_GTK3=0;~/progr/eclipse/eclipse &"
+alias ecl="export SWT_GTK3=0;~/progr/eclipse/eclipse &"
+alias ec="echo"
 alias ex="exit"
 alias f="find / -name"
 alias f2="find -name"
@@ -405,18 +423,13 @@ alias r=sr
 alias so="source"
 alias sr="expect $login_rp"
 alias srg="g $login_rp"
-alias t='wget http://speedtest.wdc01.softlayer.com/downloads/test500.zip `if [ $os = "Linux" ]; then ; echo --output-document=/dev/null;fi`'
 alias ta='tail'
 alias te='if [ $os != "CYGWIN_NT" ]; then;terminator &;else; mintty;fi'
 alias tp='top'
 alias tr='tree'
-alias un='unzip'
 alias -g ve="--version"
-alias vg="g ~/.vimrc"
 alias wp='chmod 777 -R .'
-alias x='man'
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.)s"'
-alias z='gpicview'
 alias zg='g ~/.zshrc'
 
 echo "$0 aktualisiert von $$"
