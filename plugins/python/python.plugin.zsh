@@ -14,13 +14,18 @@ alias py='/root/progr/pycharm/bin/pycharm.sh&'
 
 
 # python django
-alias d0='d1;d2;dr'
-alias d2='kill $(netstat -lnp | grep 8000 | awk "{print $7}" | cut -d"/" -f 1)'
+alias dcd="cd ~/django"
+alias dg='p3 -c "import django; print(django.get_version())"'
+alias dk='dcd;kill $(netstat -lnp | grep 8000 | awk "{print $7}" | cut -d"/" -f 1);dr'
+alias dm='p3 wsgi/myproject/manage.py'
 alias dr='p3 wsgi/myproject/manage.py runserver&'
+
 alias ma='p3 wsgi/myproject/manage.py'
 alias d1="cd ~/django"
 alias mk="p3 wsgi/myproject/manage.py makemigrations"
 alias mi="p3 wsgi/myproject/manage.py migrate"
+
+alias z="dcd;dr"
 
 
 #pip
