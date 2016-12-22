@@ -94,7 +94,7 @@ function iu(){
 	fi
 t	
 	if [[ $os = "Linux" ]] ;then
-	if [[ $lsb = 'Arch' ]]; then;ifda $1;ip link set $1 up;else;$ifdd $1;ifup $1;fi
+	if [[ $lsb = 'Arch' ]]; then;ifda $1;ipu;else;$ifdd $1;ipu;fi
 else;echo "Kein Linux";fi
 
 i
@@ -107,7 +107,7 @@ if [ -z "$1" ]; then
 fi
 
 if [ $os = 'Linux' ];then
-k -9 $1
+kill -9 $1
 else
 /bin/kill.exe $1
 fi
@@ -337,11 +337,6 @@ alias st='stty -a'
 alias tt='temp=$(tty) ; echo ${temp:5}'
 
 
-# ls
-#alias l='ls -CF'
-alias lsh="ls -halt --full-time"
-
-
 # netzwerk
 
 alias ie='iwgetid -r'
@@ -415,6 +410,7 @@ alias ho='echo $(hostname)'
 alias iban='DE637215 0000 00 5052 4271'
 alias lag='amixer get PCM'
 alias li='links2'
+alias lsh="ls -halt --full-time"
 alias m='man'
 alias mb='m bash'
 alias mkdir='mkdir -p'
