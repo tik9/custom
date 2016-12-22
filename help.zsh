@@ -92,12 +92,12 @@ function iu(){
 	he2 `basename $0` "Interface"
 	return
 	fi
-t	
+	
 	if [[ $os = "Linux" ]] ;then
 	if [[ $lsb = 'Arch' ]]; then;ifda $1;ipu;else;$ifdd $1;ipu;fi
 else;echo "Kein Linux";fi
 
-i
+#i
 }
 
 function k(){
@@ -319,7 +319,7 @@ alias v="vim"
 
 # Energie
 alias hi='hibernate'
-alias rs='reboot'
+alias rest='reboot'
 alias s='pm-suspend'
 
 #expect
