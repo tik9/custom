@@ -111,6 +111,11 @@ kill -9 $1
 else
 /bin/kill.exe $1
 fi
+
+if [ -z "grep $1 =(ps aux)" ];then
+echo Prozess gekillt
+fi
+
 }
 
 function ki(){
@@ -413,7 +418,12 @@ alias li='links2'
 alias lsh="ls -halt --full-time"
 alias m='man'
 alias mb='m bash'
+alias msd='mysql -uroot d'
+alias ms='mysql -uroot d -e "select*from app1_$1"'
+alias msd='mysql -uroot d -e "describe app1_$1"'
+alias mss='mysql -uroot d -e "show tables"'
 alias mkdir='mkdir -p'
+alias p1='echo $1'
 alias prp='pgrep'
 alias r=sr
 alias so="source"
