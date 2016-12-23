@@ -214,12 +214,17 @@ fi
 
 
 function schieb(){
-ver='/home/t/Downloads/';
+	if [[ $os = "Linux" ]] ;then
+		ver='/home/t/Downloads/';
+	else
+		ver='/cygdrive/c/Users/tk/Downloads/'
+	fi
 
-if [ -z "$1" ]; then
-  he2 `basename $0` "Ziel"
-  return
-fi
+	if [ -z "$1" ]; then
+	  he2 `basename $0` "Ziel"
+	  return
+	fi
+	
 	ziel=$1
 	if [ $1 = 'r' ];then
 		ziel='/root'
