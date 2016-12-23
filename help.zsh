@@ -92,12 +92,12 @@ function iu(){
 	he2 `basename $0` "Interface"
 	return
 	fi
-t	
+	
 	if [[ $os = "Linux" ]] ;then
-	if [[ $lsb = 'Arch' ]]; then;ifda $1;ip link set $1 up;else;$ifdd $1;ifup $1;fi
+	if [[ $lsb = 'Arch' ]]; then;ifda $1;ipu;else;$ifdd $1;ipu;fi
 else;echo "Kein Linux";fi
 
-i
+#i
 }
 
 function k(){
@@ -107,10 +107,15 @@ if [ -z "$1" ]; then
 fi
 
 if [ $os = 'Linux' ];then
-k -9 $1
+kill -9 $1
 else
 /bin/kill.exe $1
 fi
+
+if [ -z "grep $1 =(ps aux)" ];then
+echo Prozess gekillt
+fi
+
 }
 
 function ki(){
@@ -319,7 +324,7 @@ alias v="vim"
 
 # Energie
 alias hi='hibernate'
-alias rs='reboot'
+alias rest='reboot'
 alias s='pm-suspend'
 
 #expect
@@ -340,11 +345,6 @@ alias hn="n $hilfedatei"
 alias she='echo $0'
 alias st='stty -a'
 alias tt='temp=$(tty) ; echo ${temp:5}'
-
-
-# ls
-#alias l='ls -CF'
-alias lsh="ls -halt --full-time"
 
 
 # netzwerk
@@ -420,9 +420,15 @@ alias ho='echo $(hostname)'
 alias iban='DE637215 0000 00 5052 4271'
 alias lag='amixer get PCM'
 alias li='links2'
+alias lsh="ls -halt --full-time"
 alias m='man'
 alias mb='m bash'
+alias msd='mysql -uroot d'
+alias ms='mysql -uroot d -e "select*from app1_$1"'
+alias msd='mysql -uroot d -e "describe app1_$1"'
+alias mss='mysql -uroot d -e "show tables"'
 alias mkdir='mkdir -p'
+alias p1='echo $1'
 alias prp='pgrep'
 alias r=sr
 alias so="source"
