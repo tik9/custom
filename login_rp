@@ -24,7 +24,7 @@ if {[regexp {inet Adresse:(\S+)} [exec ifconfig wlan0] -> ipaddr]} {
 
 #set ipbas $(echo $ipaddr | cut -d . -f -3)
 
-spawn ssh $id.[lindex $argv 0]
+spawn ssh $id
 #spawn rhc ssh django
 
 expect "password"

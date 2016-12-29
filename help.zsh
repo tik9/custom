@@ -5,7 +5,6 @@ alias osp='git clone ssh://583d51142d527182db000116@p-tjava.rhcloud.com/~/git/p.
 custom=~/.oh-my-zsh/custom
 hilfedatei=$custom/help.zsh
 login_rp=$custom/login_rp
-ifdd='ifdown'
 
 bold=`tput bold`
 normal=`tput sgr0`
@@ -13,30 +12,32 @@ normal=`tput sgr0`
 os=$(expr substr $(uname -s) 1 9)
 
 if [ $os != "CYGWIN_NT" ]; then
-ip=`ip addr show wlan0 | grep -Po 'inet \K[\d.]+'`
-ipbas=$(echo $ip | cut -d . -f -3)
+ip2=`ip addr show wlan0 | grep -Po 'inet \K[\d.]+'`
+ipbas=$(echo $ip2 | cut -d . -f -3)
 lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
 alias mt='mutt'
 fi
 
 te2(){
-sleep 10&; kill $!
+	echo h w
+	he2 tes gg
+#sleep 10&; kill $!
 }
 
 he2(){
 #  echo "${bold}Os: $lsb${normal}"
 	echo "\n${bold}Hilfe, os: $os"
 	schleife=3
-  if [[ $2 != argsleer ]] ;then
-	  echo "Argumente für $1:"
-	  schleife=2
-  fi
-  echo "${normal}"
-  
-  for var in ${@:$schleife} ; do
-	echo $var
-  done
-  echo
+	if [[ $2 != argsleer ]] ;then
+		echo "Argumente für $1:"
+		schleife=2
+	fi
+	echo "${normal}"
+
+	for var in ${@:$schleife} ; do
+		echo $var
+	done
+	echo
 }
 
 function g(){
@@ -59,10 +60,10 @@ function in(){
 	df -h
 	if [[ $os = "Linux" ]] ;then
 		if [[ $lsb = 'Arch' ]]; then
-			echo "Arch"
+			echo Arch
 			pacman -S --noconfirm $1
 		else
-			echo "Ubuntu"
+			echo Ubuntu
 			apt-get install -y $1
 		fi
 	else
@@ -72,8 +73,13 @@ function in(){
 	df -h
 }
 
-ifda(){
-	ip link set $1 down
+ipd(){
+	if [ -z "$1" ]; then
+	he2 `basename $0` "Interface"
+	return
+	fi
+	
+	if [[ $lsb = 'Arch' ]]; then; ip link set $1 down;else;ifdown $1;fi
 }
 
 ipu(){
@@ -82,6 +88,7 @@ ipu(){
 	he2 `basename $0` "Interface"
 	return
 	fi
+	
 	if [[ $lsb = 'Arch' ]]; then;ip link set $1 up;else;ifup $1;fi
 
 }
@@ -94,8 +101,8 @@ function iu(){
 	fi
 	
 	if [[ $os = "Linux" ]] ;then
-	if [[ $lsb = 'Arch' ]]; then;ifda $1;ipu;else;$ifdd $1;ipu;fi
-else;echo "Kein Linux";fi
+		ipd $1;ipu $1
+else;echo Kein Linux;fi
 
 #i
 }
@@ -150,12 +157,25 @@ fi
 
 function mp(){
 if [ -z "$1" ]; then
-  he2 `basename $0` "Zeit"
+  he2 `basename $0` "Zeit" "interface (op.)"
   return
 fi
 
-	sleep $1;killall mplayer
+	sleep $1;killall mplayer;ipd $2
 }
+
+ms(){
+if [ -z "$1" ]; then
+  he2 `basename $0` "Tab."
+  return
+fi
+
+mysql -uroot d -e "select*from app1_$1"
+}
+
+
+msde(){ mysql -uroot d -e "describe app1_$1"}
+
 
 function mup(){
 if [ -z "$1" ]; then
@@ -248,7 +268,7 @@ if [ $os = "CYGWIN_NT" ]; then
 apt-cyg show `echo $1`;else ;if [[ $lsb == 'Arch' ]] ;then;pacman -Ss $1 ;else;apt-cache show $1 ;fi;fi;
 }
 
-t(){
+function t(){
 	
 	wget http://speedtest.wdc01.softlayer.com/downloads/test500.zip `if [ $os = "Linux" ]; then ; echo --output-document=/dev/null;fi`
 }
@@ -292,6 +312,7 @@ alias pd='cd ~/git/p'
 alias cu='curl'
 alias cl1='cu localhost'
 alias cl2='cu localhost:8000'
+alias cud='cu http://django-tjava.rhcloud.com/de/admin/'
 
 
 #Dateiops
@@ -349,7 +370,7 @@ alias ie2='iwconfig 2>&1 | grep ESSID'
 alias ip2="echo $ip"
 alias ifdd="$ifdd"
 alias ifda="$ifda"
-alias iw='iwlist wlan0 scan|gr'
+alias iw='iwlist wlan0 scan'
 alias nm="nmap -sP $(echo $ipbas).1/24"
 alias pi="ping google.de `if [ $os = CYGWIN_NT ]; then
  echo -n 4;else;echo -c4;fi`"
@@ -378,7 +399,6 @@ alias ml="mplayer "
 
 alias b="ml http://80.237.156.8:8120" # landsberg int.
 alias cur="ml -playlist http://minnesota.publicradio.org/tools/play/streams/the_current.pls"
-alias fm4="ml http://mp3stream1.apasf.apa.at:8000/" #fm4 orf
 alias kl="ml -playlist http://minnesota.publicradio.org/tools/play/streams/classical.pls"
 alias mpr="ml -playlist http://minnesota.publicradio.org/tools/play/streams/news.pls"
 alias oe="ml http://194.232.200.156:8000" #oe3
@@ -409,19 +429,15 @@ alias ec="echo"
 alias ex="exit"
 alias f="find / -name"
 alias f2="find -name"
-alias gr='grep'
+alias gr="grep"
 alias ha='halt'
 alias ho='echo $(hostname)'
 alias iban='DE637215 0000 00 5052 4271'
 alias lag='amixer get PCM'
-alias li='links2'
 alias lsh="ls -halt --full-time"
 alias m='man'
-alias mb='m bash'
 alias msd='mysql -uroot d'
-alias ms='mysql -uroot d -e "select*from app1_$1"'
-alias msd='mysql -uroot d -e "describe app1_$1"'
-alias mss='mysql -uroot d -e "show tables"'
+alias mst='mysql -uroot d -e "show tables"'
 alias mkdir='mkdir -p'
 alias p1='echo $1'
 alias prp='pgrep'
