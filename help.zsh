@@ -2,7 +2,6 @@
 
 alias osp='git clone ssh://583d51142d527182db000116@p-tjava.rhcloud.com/~/git/p.git/'
 
-custom=~/.oh-my-zsh/custom
 hilfedatei=$custom/help.zsh
 login_rp=$custom/login_rp
 
@@ -303,6 +302,7 @@ alias pa='echo $path'
 
 #cd's
 alias da="cd ~/django"
+alias go="cd .git/objects/"
 alias mu="cd ~/musik"
 alias o='cd ~/.oh-my-zsh/custom'
 alias oh='cd ~/.oh-my-zsh'
@@ -316,7 +316,7 @@ alias cud='cu http://django-tjava.rhcloud.com/de/admin/'
 
 
 #Dateiops
-alias d="rm -rf"
+alias lö="rm -rf"
 alias md="mkdir -p"
 alias mo="chmod 700"
 alias to='touch'
@@ -420,7 +420,7 @@ alias le='less'
 alias cl='xclip -sel clip'
 alias cp='cp -r'
 alias dt='date'
-alias dc='declare -f'
+alias d='declare -f'
 alias dh='df -h'
 alias du='du -h'
 alias e="exec zsh"
@@ -442,7 +442,8 @@ alias mkdir='mkdir -p'
 alias p1='echo $1'
 alias prp='pgrep'
 alias r=sr
-alias so="source"
+alias so="sort"
+alias sou="source"
 alias sr="expect $login_rp"
 alias srg="g $login_rp"
 alias ta='tail'

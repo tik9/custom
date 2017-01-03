@@ -74,6 +74,7 @@ alias gcans!='git commit -v -a -s --no-edit --amend'
 alias gcam='git commit -a -m'
 alias gcb='git checkout -b'
 alias gcf='git config --list'
+alias gcg='git config --global'
 alias gcl='git clone --recursive'
 alias gclean='git clean -fd'
 alias gpristine='git reset --hard && git clean -dfx'
@@ -101,7 +102,7 @@ compdef gfg=grep
 
 alias gfo='git fetch origin'
 
-alias gg='g /root/.oh-my-zsh/custom/plugins/git/git.plugin.zsh'
+alias gg='g $custom/plugins/git/git.plugin.zsh'
 alias gga='git gui citool --amend'
 
 function ggf() {
