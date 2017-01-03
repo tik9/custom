@@ -357,7 +357,7 @@ alias ifda="$ifda"
 alias iw='iwlist wlan0 scan|gr'
 alias nm="nmap -sP $(echo $ipbas).1/24"
 alias pi="ping google.de `if [ $os = CYGWIN_NT ]; then
- echo -n 4;else;echo -c4;fi`"
+ echo '-n 4';else;echo -c4;fi`"
 
 
 # package mgt.
