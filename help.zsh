@@ -17,6 +17,11 @@ ip=`ip addr show wlan0 | grep -Po 'inet \K[\d.]+'`
 ipbas=$(echo $ip | cut -d . -f -3)
 lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
 alias mt='mutt'
+else
+bi=$(wmic OS get OSArchitecture)
+bi2=$(set | findstr ARCH)
+echo 2
+#alias bi2=$bi2
 fi
 
 te2(){
