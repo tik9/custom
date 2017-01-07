@@ -20,7 +20,6 @@ fi
 te2(){
 	echo h w
 	he2 tes gg
-#sleep 10&; kill $!
 }
 
 he2(){
@@ -43,10 +42,15 @@ function g(){
 	geany $1 &
 }
 
-i(){
-	
+function geo(){
+MAPSAPIURL="http://maps.googleapis.com/maps/api/geocode/json"
+
+curl -G -s --data sensor=true --data-urlencode address=$1 "$MAPSAPIURL" -o res.json
+/root/jshon/jshon  -e results -a -e geometry -e location -e "lat" -u -p -e "lng" -u < res.json
+#echo $res.json
+}
+function i(){
 	if [ $os = "Linux" ]; then;ifconfig;else;ipconfig;fi
-	
 }
 
 
@@ -103,7 +107,7 @@ function iu(){
 		ipd $1;ipu $1
 else;echo Kein Linux;fi
 
-#i
+i
 }
 
 function k(){
@@ -122,6 +126,20 @@ if [ -z "grep $1 =(ps aux)" ];then
 echo Prozess gekillt
 fi
 
+}
+
+function ka(){
+
+    cnt=$( pr $1 | wc -l)
+
+    echo -e "\nSuche '$1' -- Gefunden:" $cnt Laufende Prozesse
+    pr $1
+
+    echo -e \nBeenden der $cnt Prozesse 
+    ps aux  |  grep -i $1 |  grep -v grep   | awk '{print $2}' | xargs sudo kill -9
+    echo -e "Fertig!\n"
+
+    echo Suche:;pr $1;echo -e "\n"
 }
 
 function ki(){
@@ -184,6 +202,11 @@ fi
 	mupdf $1 &
 }
 
+
+pi(){
+	ping google.de `if [ $os = CYGWIN_NT ]; then
+ echo '-n 4';else;echo -c4;fi`
+}
 
 
 function pl(){
@@ -283,14 +306,13 @@ if [[ $lsb == 'Arch' ]] ;then
 		pacman -Syu
 	else
 apt-get upgrade	
+apt-get dist-upgrade	
 fi	
 }
 
  
 # alias
-alias aa='wget http://speedtest.wdc01.softlayer.com/downloads/test500.zip `if [ $os = "Linux" ]; then ; echo --output-document=/dev/null
-fi`'
-alias a='alias|le|gr'
+alias a='alias|le|grep'
 alias am='alias -m'
 alias ua='unalias'
 
@@ -358,6 +380,7 @@ alias hl="le $hilfedatei"
 alias hn="n $hilfedatei"
 
 # Konsole
+alias hs='history'
 alias she='echo $0'
 alias st='stty -a'
 alias tt='temp=$(tty) ; echo ${temp:5}'
@@ -372,8 +395,7 @@ alias ifdd="$ifdd"
 alias ifda="$ifda"
 alias iw='iwlist wlan0 scan'
 alias nm="nmap -sP $(echo $ipbas).1/24"
-alias pi="ping google.de `if [ $os = CYGWIN_NT ]; then
- echo -n 4;else;echo -c4;fi`"
+
 
 
 # package mgt.
@@ -389,8 +411,7 @@ alias ba="bash"
 alias pr2='ps -ef|grep'
 alias psl="pr sleep"
 alias pmp="pr mplayer"
-alias pts="ps -ef|gr pts/"
-alias psp="ps -p"
+alias pts="ps -ef|grep pts/"
 alias sl="sleep"
 alias wh="who"
 
@@ -409,7 +430,6 @@ alias rhs='rhc ssh'
 
 
 #user
-alias sur="sudo -i"
 alias us="echo $USER"
 
 
@@ -429,7 +449,8 @@ alias ec="echo"
 alias ex="exit"
 alias f="find / -name"
 alias f2="find -name"
-alias gr="grep"
+alias ge="grep"
+alias -g gr="|grep"
 alias ha='halt'
 alias ho='echo $(hostname)'
 alias iban='DE637215 0000 00 5052 4271'
@@ -442,11 +463,12 @@ alias mkdir='mkdir -p'
 alias p1='echo $1'
 alias prp='pgrep'
 alias r=sr
+alias sc="systemctl"
 alias so="sort"
 alias sou="source"
 alias sr="expect $login_rp"
 alias srg="g $login_rp"
-alias ta='tail'
+alias -g ta='|tail'
 alias te='if [ $os != "CYGWIN_NT" ]; then;terminator &;else; mintty;fi'
 alias tp='top'
 alias tr='tree'

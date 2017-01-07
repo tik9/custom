@@ -1,0 +1,118 @@
+{
+   "results" : [
+      {
+         "address_components" : [
+            {
+               "long_name" : "Hama",
+               "short_name" : "Hama",
+               "types" : [ "locality", "political" ]
+            },
+            {
+               "long_name" : "Hama",
+               "short_name" : "Hama",
+               "types" : [ "administrative_area_level_2", "political" ]
+            },
+            {
+               "long_name" : "Hama Governorate",
+               "short_name" : "Hama Governorate",
+               "types" : [ "administrative_area_level_1", "political" ]
+            },
+            {
+               "long_name" : "Syria",
+               "short_name" : "SY",
+               "types" : [ "country", "political" ]
+            }
+         ],
+         "formatted_address" : "Hama, Syria",
+         "geometry" : {
+            "bounds" : {
+               "northeast" : {
+                  "lat" : 35.1782599,
+                  "lng" : 36.8102111
+               },
+               "southwest" : {
+                  "lat" : 35.0951175,
+                  "lng" : 36.6906068
+               }
+            },
+            "location" : {
+               "lat" : 35.1408881,
+               "lng" : 36.7551993
+            },
+            "location_type" : "APPROXIMATE",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 35.1782599,
+                  "lng" : 36.8102111
+               },
+               "southwest" : {
+                  "lat" : 35.0951175,
+                  "lng" : 36.6906068
+               }
+            }
+         },
+         "place_id" : "ChIJZbjVzY-CJBUR77Vi7lY_1GI",
+         "types" : [ "locality", "political" ]
+      },
+      {
+         "address_components" : [
+            {
+               "long_name" : "Ham",
+               "short_name" : "Ham",
+               "types" : [ "locality", "political" ]
+            },
+            {
+               "long_name" : "Limburg",
+               "short_name" : "LI",
+               "types" : [ "administrative_area_level_2", "political" ]
+            },
+            {
+               "long_name" : "Flanders",
+               "short_name" : "Flanders",
+               "types" : [ "administrative_area_level_1", "political" ]
+            },
+            {
+               "long_name" : "Belgium",
+               "short_name" : "BE",
+               "types" : [ "country", "political" ]
+            },
+            {
+               "long_name" : "3945",
+               "short_name" : "3945",
+               "types" : [ "postal_code" ]
+            }
+         ],
+         "formatted_address" : "3945 Ham, Belgium",
+         "geometry" : {
+            "bounds" : {
+               "northeast" : {
+                  "lat" : 51.1403,
+                  "lng" : 5.2302799
+               },
+               "southwest" : {
+                  "lat" : 51.07385,
+                  "lng" : 5.0951
+               }
+            },
+            "location" : {
+               "lat" : 51.1038173,
+               "lng" : 5.177736299999999
+            },
+            "location_type" : "APPROXIMATE",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 51.1403,
+                  "lng" : 5.2302799
+               },
+               "southwest" : {
+                  "lat" : 51.07385,
+                  "lng" : 5.0951
+               }
+            }
+         },
+         "place_id" : "ChIJA37CryouwUcRn18Hw17yLMM",
+         "types" : [ "locality", "political" ]
+      }
+   ],
+   "status" : "OK"
+}
