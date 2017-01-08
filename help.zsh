@@ -19,7 +19,6 @@ fi
 
 te2(){
 	echo h w
-	he2 tes gg
 }
 
 he2(){
@@ -46,7 +45,7 @@ function geo(){
 MAPSAPIURL="http://maps.googleapis.com/maps/api/geocode/json"
 
 curl -G -s --data sensor=true --data-urlencode address=$1 "$MAPSAPIURL" -o res.json
-/root/jshon/jshon  -e results -a -e geometry -e location -e "lat" -u -p -e "lng" -u < res.json
+/root/jshon  -e results -a -e geometry -e location -e "lat" -u -p -e "lng" -u < res.json
 #echo $res.json
 }
 function i(){
@@ -81,8 +80,7 @@ ipd(){
 	he2 `basename $0` "Interface"
 	return
 	fi
-	
-	if [[ $lsb = 'Arch' ]]; then; ip link set $1 down;else;ifdown $1;fi
+	ip link set $1 down
 }
 
 ipu(){
@@ -91,9 +89,7 @@ ipu(){
 	he2 `basename $0` "Interface"
 	return
 	fi
-	
-	if [[ $lsb = 'Arch' ]]; then;ip link set $1 up;else;ifup $1;fi
-
+		ip link set $1 up
 }
 
 function iu(){
@@ -252,7 +248,7 @@ fi;
 
 function sc2(){
 if [ -z "$1" ]; then
-  he2 `basename $0` Datei "letztes Oktett" Zielordner "(port)"
+  he2 `basename $0` Basis:$ipbas Datei "letztes Oktett" Zielordner "(port)"
   return
 fi
 #echo a2 $3
@@ -425,7 +421,7 @@ alias mpr="ml -playlist http://minnesota.publicradio.org/tools/play/streams/news
 alias oe="ml http://194.232.200.156:8000" #oe3
 
 #rhc
-alias rha='rhc app-restart'
+alias rhr='rhc app-restart'
 alias rhs='rhc ssh'
 
 
