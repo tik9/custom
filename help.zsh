@@ -21,7 +21,7 @@ te2(){
 	echo h w
 }
 
-he2(){
+he(){
 #  echo "${bold}Os: $lsb${normal}"
 	echo "\n${bold}Hilfe, os: $os"
 	schleife=3
@@ -37,6 +37,32 @@ he2(){
 	echo
 }
 
+
+bis(){
+	if [ -z $1 ]; then
+	he `basename $0` 'Ziel: /m/t/j H:M';return;fi
+	
+	jetzt=$(date +%s)
+ziel=$(date -d $1 +%s)
+
+sleep=$(( $ziel - $jetzt ))
+
+sleep $sleep
+}
+
+bi(){
+	if [ -z $1 ]; then
+	he `basename $0` 'Stunde in Zukunft' Minute;return;fi
+	
+	target="$1.$2"
+cur=$(date '+%H.%M')
+while test $target != $cur; do
+    sleep 59
+    cur=$(date '+%H.%M')
+done
+}
+
+	
 function g(){
 	geany $1 &
 }
@@ -55,7 +81,7 @@ function i(){
 
 function in(){
 	if [ -z "$1" ]; then
-	he2 `basename $0` "Paket"
+	he `basename $0` "Paket"
 	return
 	fi
 
@@ -77,7 +103,7 @@ function in(){
 
 ipd(){
 	if [ -z "$1" ]; then
-	he2 `basename $0` "Interface"
+	he `basename $0` "Interface"
 	return
 	fi
 	ip link set $1 down
@@ -86,7 +112,7 @@ ipd(){
 ipu(){
 		
 	if [ -z "$1" ]; then
-	he2 `basename $0` "Interface"
+	he `basename $0` "Interface"
 	return
 	fi
 		ip link set $1 up
@@ -95,7 +121,7 @@ ipu(){
 function iu(){
 	
 	if [ -z "$1" ]; then
-	he2 `basename $0` "Interface"
+	he `basename $0` "Interface"
 	return
 	fi
 	
@@ -108,7 +134,7 @@ i
 
 function k(){
 if [ -z "$1" ]; then
-  he2 `basename $0` "Prozess für kill"
+  he `basename $0` "Prozess für kill"
   return
 fi
 
@@ -140,7 +166,7 @@ function ka(){
 
 function ki(){
 if [ -z "$1" ]; then
-  he2 `basename $0` "Prozess für killall"
+  he `basename $0` "Prozess für killall"
   return
 fi
 	killall $1;
@@ -150,7 +176,7 @@ fi
 function las(){
 
 if [ -z "$1" ]; then
-  he2 `basename $0` "Lautstärke amixer mit 10  	multipliziert"
+  he `basename $0` "Lautstärke amixer mit 10  	multipliziert"
   return
 fi
 
@@ -160,7 +186,7 @@ amixer set PCM $(expr $1 \* 10)%;
 # login remote shell
 function lss(){
 if [ -z "$1" ]; then
-  he2 `basename $0` "letztes Oktett von ip " "opt. port"
+  he `basename $0` "letztes Oktett von ip " "opt. port"
   return
 fi
 
@@ -170,7 +196,7 @@ fi
 
 function mp(){
 if [ -z "$1" ]; then
-  he2 `basename $0` "Zeit" "interface (op.)"
+  he `basename $0` "Zeit" "interface (op.)"
   return
 fi
 
@@ -179,7 +205,7 @@ fi
 
 ms(){
 if [ -z "$1" ]; then
-  he2 `basename $0` "Tab."
+  he `basename $0` "Tab."
   return
 fi
 
@@ -192,7 +218,7 @@ msde(){ mysql -uroot d -e "describe app1_$1"}
 
 function mup(){
 if [ -z "$1" ]; then
-  he2 `basename $0` "Datei"
+  he `basename $0` "Datei"
   return
 fi
 	mupdf $1 &
@@ -207,7 +233,7 @@ pi(){
 
 function pl(){
 if [ "$1" = -h ]; then
-  he2 `basename $0` "argsleer" "Installierte Pakete zeigen, nur Linux"
+  he `basename $0` "argsleer" "Installierte Pakete zeigen, nur Linux"
   return
   
 fi
@@ -224,7 +250,7 @@ fi
 
 function pr(){
 if [ -z "$1" ]; then
-  he2 `basename $0` "grep mit 'prozess Substitution'" "Prozess"
+  he `basename $0` "grep mit 'prozess Substitution'" "Prozess"
   return
   
 fi
@@ -235,7 +261,7 @@ function re(){
   echo "${bold}Os: $lsb${normal}"
 
 if [ -z "$1" ]; then
-  he2 `basename $0` "Löschen!" "Paket"
+  he `basename $0` "Löschen!" "Paket"
   return
   
 fi
@@ -248,7 +274,7 @@ fi;
 
 function sc2(){
 if [ -z "$1" ]; then
-  he2 `basename $0` Basis:$ipbas Datei "letztes Oktett" Zielordner "(port)"
+  he `basename $0` Basis:$ipbas Datei "letztes Oktett" Zielordner "(port)"
   return
 fi
 #echo a2 $3
@@ -260,7 +286,7 @@ function schieb(){
 ver='/home/t/Downloads/';
 
 if [ -z "$1" ]; then
-  he2 `basename $0` "Ziel"
+  he `basename $0` "Ziel"
   return
 fi
 	ziel=$1
@@ -278,7 +304,7 @@ fi
 function sho(){
 
 if [ -z "$1" ]; then
-  he2 `basename $0` "Paket"
+  he `basename $0` "Paket"
   return
 fi
 
@@ -293,7 +319,7 @@ function t(){
 
 function u(){
 if [ "$1" = -h ]; then
-  he2 `basename $0` "argsleer" "Upgrade machen"
+  he `basename $0` "argsleer" "Upgrade machen"
   return
   
 fi	
@@ -376,7 +402,7 @@ alias hl="le $hilfedatei"
 alias hn="n $hilfedatei"
 
 # Konsole
-alias hs='history'
+alias hs='\history -E'
 alias she='echo $0'
 alias st='stty -a'
 alias tt='temp=$(tty) ; echo ${temp:5}'
@@ -404,9 +430,11 @@ alias up='ag update'
 
 # ps
 alias ba="bash"
+alias ksl="ki sleep"
 alias pr2='ps -ef|grep'
 alias psl="pr sleep"
 alias pmp="pr mplayer"
+alias psp="ps -p"
 alias pts="ps -ef|grep pts/"
 alias sl="sleep"
 alias wh="who"
@@ -435,7 +463,7 @@ alias c='cat'
 alias le='less'
 alias cl='xclip -sel clip'
 alias cp='cp -r'
-alias dt='date'
+alias dt='date +"%T"'
 alias d='declare -f'
 alias dh='df -h'
 alias du='du -h'

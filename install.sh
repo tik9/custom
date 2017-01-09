@@ -7,10 +7,10 @@ echo "Home ist $home"
 
 # package mgt
 #apt-get install -y 
-pacman -S
+# pacman -S
 
 # Python
-  ipython3 python3-pip
+#  ipython3 python3-pip
 
 # Editoren
 #"geany" "vim"
@@ -30,7 +30,7 @@ pacman -S
 # "moc" ffmpeg
 
 # Sonstige Programme
- ack-grep expect fetchmail imagemagick mupdf terminator tree unzip
+ ack-grep expect tree unzip
 
 
 
