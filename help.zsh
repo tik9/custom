@@ -336,7 +336,7 @@ fi
 
  
 # alias
-alias a='alias|le|grep'
+alias a='alias|grep'
 alias am='alias -m'
 alias ua='unalias'
 
