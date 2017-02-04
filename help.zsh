@@ -40,10 +40,10 @@ he(){
 
 bis(){
 	if [ -z $1 ]; then
-	he `basename $0` 'Ziel: /m/t/j H:M';return;fi
+	he `basename $0` 'Ziel: /m/t/j'  'Ziel: H:M';return;fi
 	
 	jetzt=$(date +%s)
-ziel=$(date -d $1 +%s)
+ziel=$(date -d "$1 $2" +%s)
 
 sleep=$(( $ziel - $jetzt ))
 
@@ -468,8 +468,8 @@ alias d='declare -f'
 alias dh='df -h'
 alias du='du -h'
 alias e="exec zsh"
-alias ecl="export SWT_GTK3=0;~/progr/eclipse/eclipse &"
 alias ec="echo"
+alias eh="ec hw"
 alias ex="exit"
 alias f="find / -name"
 alias f2="find -name"
