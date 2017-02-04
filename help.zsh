@@ -313,8 +313,10 @@ apt-cyg show `echo $1`;else ;if [[ $lsb == 'Arch' ]] ;then;pacman -Ss $1 ;else;a
 }
 
 function t(){
-	
-	wget http://speedtest.wdc01.softlayer.com/downloads/test500.zip `if [ $os = "Linux" ]; then ; echo --output-document=/dev/null;fi`
+
+if [ -f test500.zip ];then ; lö test500.zip;fi	
+	wget http://speedtest.wdc01.softlayer.com/downloads/test500.zip `if [ $os = "Linux2" ]; then ; echo --output-document=/dev/null;fi`
+
 }
 
 function u(){
@@ -334,7 +336,7 @@ fi
 
  
 # alias
-alias a='alias|le|grep'
+alias a='alias|grep'
 alias am='alias -m'
 alias ua='unalias'
 
