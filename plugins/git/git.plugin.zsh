@@ -38,9 +38,6 @@ function gi(){
 	git add . 
 	git commit -a --allow-empty-message -m ""
 	git push
-	echo 'Status'
-	git status
-	echo 'Git Show'
 	git show
 }
 

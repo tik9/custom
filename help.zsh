@@ -24,11 +24,9 @@ fi
 
 te2(){
 	echo h w
-	he2 tes gg
-#sleep 10&; kill $!
 }
 
-he2(){
+he(){
 #  echo "${bold}Os: $lsb${normal}"
 	echo "\n${bold}Hilfe, os: $os"
 	schleife=3
@@ -44,20 +42,51 @@ he2(){
 	echo
 }
 
+
+bis(){
+	if [ -z $1 ]; then
+	he `basename $0` 'Ziel: /m/t/j H:M';return;fi
+	
+	jetzt=$(date +%s)
+ziel=$(date -d $1 +%s)
+
+sleep=$(( $ziel - $jetzt ))
+
+sleep $sleep
+}
+
+bi(){
+	if [ -z $1 ]; then
+	he `basename $0` 'Stunde in Zukunft' Minute;return;fi
+	
+	target="$1.$2"
+cur=$(date '+%H.%M')
+while test $target != $cur; do
+    sleep 59
+    cur=$(date '+%H.%M')
+done
+}
+
+	
 function g(){
 	geany $1 &
 }
 
-i(){
-	
+function geo(){
+MAPSAPIURL="http://maps.googleapis.com/maps/api/geocode/json"
+
+curl -G -s --data sensor=true --data-urlencode address=$1 "$MAPSAPIURL" -o res.json
+/root/jshon  -e results -a -e geometry -e location -e "lat" -u -p -e "lng" -u < res.json
+#echo $res.json
+}
+function i(){
 	if [ $os = "Linux" ]; then;ifconfig;else;ipconfig;fi
-	
 }
 
 
 function in(){
 	if [ -z "$1" ]; then
-	he2 `basename $0` "Paket"
+	he `basename $0` "Paket"
 	return
 	fi
 
@@ -79,28 +108,25 @@ function in(){
 
 ipd(){
 	if [ -z "$1" ]; then
-	he2 `basename $0` "Interface"
+	he `basename $0` "Interface"
 	return
 	fi
-	
-	if [[ $lsb = 'Arch' ]]; then; ip link set $1 down;else;ifdown $1;fi
+	ip link set $1 down
 }
 
 ipu(){
 		
 	if [ -z "$1" ]; then
-	he2 `basename $0` "Interface"
+	he `basename $0` "Interface"
 	return
 	fi
-	
-	if [[ $lsb = 'Arch' ]]; then;ip link set $1 up;else;ifup $1;fi
-
+		ip link set $1 up
 }
 
 function iu(){
 	
 	if [ -z "$1" ]; then
-	he2 `basename $0` "Interface"
+	he `basename $0` "Interface"
 	return
 	fi
 	
@@ -108,12 +134,12 @@ function iu(){
 		ipd $1;ipu $1
 else;echo Kein Linux;fi
 
-#i
+i
 }
 
 function k(){
 if [ -z "$1" ]; then
-  he2 `basename $0` "Prozess für kill"
+  he `basename $0` "Prozess für kill"
   return
 fi
 
@@ -129,9 +155,23 @@ fi
 
 }
 
+function ka(){
+
+    cnt=$( pr $1 | wc -l)
+
+    echo -e "\nSuche '$1' -- Gefunden:" $cnt Laufende Prozesse
+    pr $1
+
+    echo -e \nBeenden der $cnt Prozesse 
+    ps aux  |  grep -i $1 |  grep -v grep   | awk '{print $2}' | xargs sudo kill -9
+    echo -e "Fertig!\n"
+
+    echo Suche:;pr $1;echo -e "\n"
+}
+
 function ki(){
 if [ -z "$1" ]; then
-  he2 `basename $0` "Prozess für killall"
+  he `basename $0` "Prozess für killall"
   return
 fi
 	killall $1;
@@ -141,7 +181,7 @@ fi
 function las(){
 
 if [ -z "$1" ]; then
-  he2 `basename $0` "Lautstärke amixer mit 10  	multipliziert"
+  he `basename $0` "Lautstärke amixer mit 10  	multipliziert"
   return
 fi
 
@@ -151,7 +191,7 @@ amixer set PCM $(expr $1 \* 10)%;
 # login remote shell
 function lss(){
 if [ -z "$1" ]; then
-  he2 `basename $0` "letztes Oktett von ip " "opt. port"
+  he `basename $0` "letztes Oktett von ip " "opt. port"
   return
 fi
 
@@ -161,7 +201,7 @@ fi
 
 function mp(){
 if [ -z "$1" ]; then
-  he2 `basename $0` "Zeit" "interface (op.)"
+  he `basename $0` "Zeit" "interface (op.)"
   return
 fi
 
@@ -170,7 +210,7 @@ fi
 
 ms(){
 if [ -z "$1" ]; then
-  he2 `basename $0` "Tab."
+  he `basename $0` "Tab."
   return
 fi
 
@@ -183,17 +223,22 @@ msde(){ mysql -uroot d -e "describe app1_$1"}
 
 function mup(){
 if [ -z "$1" ]; then
-  he2 `basename $0` "Datei"
+  he `basename $0` "Datei"
   return
 fi
 	mupdf $1 &
 }
 
 
+pi(){
+	ping google.de `if [ $os = CYGWIN_NT ]; then
+ echo '-n 4';else;echo -c4;fi`
+}
+
 
 function pl(){
 if [ "$1" = -h ]; then
-  he2 `basename $0` "argsleer" "Installierte Pakete zeigen, nur Linux"
+  he `basename $0` "argsleer" "Installierte Pakete zeigen, nur Linux"
   return
   
 fi
@@ -210,7 +255,7 @@ fi
 
 function pr(){
 if [ -z "$1" ]; then
-  he2 `basename $0` "grep mit 'prozess Substitution'" "Prozess"
+  he `basename $0` "grep mit 'prozess Substitution'" "Prozess"
   return
   
 fi
@@ -221,7 +266,7 @@ function re(){
   echo "${bold}Os: $lsb${normal}"
 
 if [ -z "$1" ]; then
-  he2 `basename $0` "Löschen!" "Paket"
+  he `basename $0` "Löschen!" "Paket"
   return
   
 fi
@@ -234,7 +279,7 @@ fi;
 
 function sc2(){
 if [ -z "$1" ]; then
-  he2 `basename $0` Datei "letztes Oktett" Zielordner "(port)"
+  he `basename $0` Basis:$ipbas Datei "letztes Oktett" Zielordner "(port)"
   return
 fi
 #echo a2 $3
@@ -254,6 +299,7 @@ function schieb(){
 	  return
 	fi
 	
+
 	ziel=$1
 	if [ $1 = 'r' ];then
 		ziel='/root'
@@ -269,7 +315,7 @@ function schieb(){
 function sho(){
 
 if [ -z "$1" ]; then
-  he2 `basename $0` "Paket"
+  he `basename $0` "Paket"
   return
 fi
 
@@ -278,13 +324,15 @@ apt-cyg show `echo $1`;else ;if [[ $lsb == 'Arch' ]] ;then;pacman -Ss $1 ;else;a
 }
 
 function t(){
-	
-	wget http://speedtest.wdc01.softlayer.com/downloads/test500.zip `if [ $os = "Linux" ]; then ; echo --output-document=/dev/null;fi`
+
+if [ -f test500.zip ];then ; lö test500.zip;fi	
+	wget http://speedtest.wdc01.softlayer.com/downloads/test500.zip `if [ $os = "Linux2" ]; then ; echo --output-document=/dev/null;fi`
+
 }
 
 function u(){
 if [ "$1" = -h ]; then
-  he2 `basename $0` "argsleer" "Upgrade machen"
+  he `basename $0` "argsleer" "Upgrade machen"
   return
   
 fi	
@@ -293,14 +341,13 @@ if [[ $lsb == 'Arch' ]] ;then
 		pacman -Syu
 	else
 apt-get upgrade	
+apt-get dist-upgrade	
 fi	
 }
 
  
 # alias
-alias aa='wget http://speedtest.wdc01.softlayer.com/downloads/test500.zip `if [ $os = "Linux" ]; then ; echo --output-document=/dev/null
-fi`'
-alias a='alias|le|gr'
+alias a='alias|grep'
 alias am='alias -m'
 alias ua='unalias'
 
@@ -368,6 +415,7 @@ alias hl="le $hilfedatei"
 alias hn="n $hilfedatei"
 
 # Konsole
+alias hs='\history -E'
 alias she='echo $0'
 alias st='stty -a'
 alias tt='temp=$(tty) ; echo ${temp:5}'
@@ -382,8 +430,7 @@ alias ifdd="$ifdd"
 alias ifda="$ifda"
 alias iw='iwlist wlan0 scan'
 alias nm="nmap -sP $(echo $ipbas).1/24"
-alias pi="ping google.de `if [ $os = CYGWIN_NT ]; then
- echo -n 4;else;echo -c4;fi`"
+
 
 
 # package mgt.
@@ -396,11 +443,12 @@ alias up='ag update'
 
 # ps
 alias ba="bash"
+alias ksl="ki sleep"
 alias pr2='ps -ef|grep'
 alias psl="pr sleep"
 alias pmp="pr mplayer"
-alias pts="ps -ef|gr pts/"
 alias psp="ps -p"
+alias pts="ps -ef|grep pts/"
 alias sl="sleep"
 alias wh="who"
 
@@ -414,12 +462,11 @@ alias mpr="ml -playlist http://minnesota.publicradio.org/tools/play/streams/news
 alias oe="ml http://194.232.200.156:8000" #oe3
 
 #rhc
-alias rha='rhc app-restart'
+alias rhr='rhc app-restart'
 alias rhs='rhc ssh'
 
 
 #user
-alias sur="sudo -i"
 alias us="echo $USER"
 
 
@@ -429,7 +476,7 @@ alias c='cat'
 alias le='less'
 alias cl='xclip -sel clip'
 alias cp='cp -r'
-alias dt='date'
+alias dt='date +"%T"'
 alias d='declare -f'
 alias dh='df -h'
 alias du='du -h'
@@ -439,7 +486,8 @@ alias ec="echo"
 alias ex="exit"
 alias f="find / -name"
 alias f2="find -name"
-alias gr="grep"
+alias ge="grep"
+alias -g gr="|grep"
 alias ha='halt'
 alias ho='echo $(hostname)'
 alias iban='DE637215 0000 00 5052 4271'
@@ -452,11 +500,12 @@ alias mkdir='mkdir -p'
 alias p1='echo $1'
 alias prp='pgrep'
 alias r=sr
+alias sc="systemctl"
 alias so="sort"
 alias sou="source"
 alias sr="expect $login_rp"
 alias srg="g $login_rp"
-alias ta='tail'
+alias -g ta='|tail'
 alias te='if [ $os != "CYGWIN_NT" ]; then;terminator &;else; mintty;fi'
 alias tp='top'
 alias tr='tree'
