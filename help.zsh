@@ -90,9 +90,12 @@ function in(){
 		if [[ $lsb = 'Arch' ]]; then
 			echo Arch
 			pacman -S --noconfirm $1
-		else
+		elif [[ $lsb = 'Ubuntu' ]]; then
 			echo Ubuntu
 			apt-get install -y $1
+		else
+			apt install -y $1
+
 		fi
 	else
 		apt-cyg install $1
@@ -431,11 +434,12 @@ alias up='ag update'
 
 
 # ps
-alias ba="bash"
+alias -g ba="bash"
 alias ksl="ki sleep"
 alias pr2='ps -ef|grep'
 alias psl="pr sleep"
 alias pmp="pr mplayer"
+alias pse="ps -eo pid,comm,cmd,start,etime | grep -i"
 alias psp="ps -p"
 alias pts="ps -ef|grep pts/"
 alias sl="sleep"

@@ -7,7 +7,7 @@ set prompt alarmpi
 #set prompt "tjava.rhcloud"
 
 set id "192.168.0.106"
-#set id "192.168.188"
+set id "192.168.188.44"
 
 set green "\033\[0;32;40m"
 
