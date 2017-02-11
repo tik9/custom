@@ -15,6 +15,11 @@ ip2=`ip addr show wlan0 | grep -Po 'inet \K[\d.]+'`
 ipbas=$(echo $ip2 | cut -d . -f -3)
 lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
 alias mt='mutt'
+else
+bi=$(wmic OS get OSArchitecture)
+bi2=$(set | findstr ARCH)
+echo 2
+#alias bi2=$bi2
 fi
 
 te2(){
@@ -286,12 +291,18 @@ fi
 
 
 function schieb(){
-ver='/home/t/Downloads/';
+	if [[ $os = "Linux" ]] ;then
+		ver='/home/t/Downloads/';
+	else
+		ver='/cygdrive/c/Users/tk/Downloads/'
+	fi
 
-if [ -z "$1" ]; then
-  he `basename $0` "Ziel"
-  return
-fi
+	if [ -z "$1" ]; then
+	  he2 `basename $0` "Ziel"
+	  return
+	fi
+	
+
 	ziel=$1
 	if [ $1 = 'r' ];then
 		ziel='/root'
@@ -422,7 +433,8 @@ alias ifdd="$ifdd"
 alias ifda="$ifda"
 alias iw='iwlist wlan0 scan'
 alias nm="nmap -sP $(echo $ipbas).1/24"
-
+alias pi="ping google.de `if [ $os = CYGWIN_NT ]; then
+ echo '-n 4';else;echo -c 4;fi`"
 
 
 # package mgt.
