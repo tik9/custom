@@ -6,21 +6,19 @@ echo "Home ist $home"
 
 
 # package mgt
-#apt-get install -y 
-# pacman -S
+apt-get install -y 
 
 # Python
-#  ipython3 python3-pip
+ipython3 python3-pip
 
 # Editoren
-#"geany" "vim"
-
+#"vim"
 
 #Browser
 # links2
 
 # Dict
-# dict dict-de-en dictd
+dict dict-de-en dictd
 
 # Server
 # git openssh-server
@@ -30,7 +28,7 @@ echo "Home ist $home"
 # "moc" ffmpeg
 
 # Sonstige Programme
- ack-grep expect tree unzip
+ ack-grep expect tree
 
 
 
