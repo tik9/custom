@@ -391,6 +391,9 @@ alias wl="echo Dict.;dict -D"
 alias w="dict -d fd-eng-deu"
 alias w2="dict"
 
+#Download
+alias au="git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions"
+
 
 # Editoren
 alias ab='abiword'
@@ -516,7 +519,7 @@ alias tp='top'
 alias tr='tree'
 alias -g ve="--version"
 alias wp='chmod 777 -R .'
-alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.)s"'
+alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
 alias zg='g ~/.zshrc'
 
 echo "$0 aktualisiert von $$"
