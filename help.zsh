@@ -45,10 +45,10 @@ he(){
 
 bis(){
 	if [ -z $1 ]; then
-	he `basename $0` 'Ziel: /m/t/j H:M';return;fi
+	he `basename $0` 'Ziel: /m/t/j'  'Ziel: H:M';return;fi
 	
 	jetzt=$(date +%s)
-ziel=$(date -d $1 +%s)
+ziel=$(date -d "$1 $2" +%s)
 
 sleep=$(( $ziel - $jetzt ))
 
@@ -95,9 +95,12 @@ function in(){
 		if [[ $lsb = 'Arch' ]]; then
 			echo Arch
 			pacman -S --noconfirm $1
-		else
+		elif [[ $lsb = 'Ubuntu' ]]; then
 			echo Ubuntu
 			apt-get install -y $1
+		else
+			apt install -y $1
+
 		fi
 	else
 		apt-cyg install $1
@@ -388,6 +391,9 @@ alias wl="echo Dict.;dict -D"
 alias w="dict -d fd-eng-deu"
 alias w2="dict"
 
+#Download
+alias au="git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions"
+
 
 # Editoren
 alias ab='abiword'
@@ -443,11 +449,12 @@ alias up='ag update'
 
 
 # ps
-alias ba="bash"
+alias -g ba="bash"
 alias ksl="ki sleep"
 alias pr2='ps -ef|grep'
 alias psl="pr sleep"
 alias pmp="pr mplayer"
+alias pse="ps -eo pid,comm,cmd,start,etime | grep -i"
 alias psp="ps -p"
 alias pts="ps -ef|grep pts/"
 alias sl="sleep"
@@ -482,8 +489,8 @@ alias d='declare -f'
 alias dh='df -h'
 alias du='du -h'
 alias e="exec zsh"
-alias ecl="export SWT_GTK3=0;~/progr/eclipse/eclipse &"
 alias ec="echo"
+alias eh="ec hw"
 alias ex="exit"
 alias f="find / -name"
 alias f2="find -name"
@@ -512,7 +519,7 @@ alias tp='top'
 alias tr='tree'
 alias -g ve="--version"
 alias wp='chmod 777 -R .'
-alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.)s"'
+alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
 alias zg='g ~/.zshrc'
 
 echo "$0 aktualisiert von $$"
