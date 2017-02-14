@@ -2,8 +2,8 @@
 
 alias osp='git clone ssh://583d51142d527182db000116@p-tjava.rhcloud.com/~/git/p.git/'
 
-hilfedatei=$custom/help.zsh
-login_rp=$custom/login_rp
+hilfedatei=$ZSH_CUSTOM/help.zsh
+login_rp=$ZSH_CUSTOM/login_rp
 
 bold=`tput bold`
 normal=`tput sgr0`
