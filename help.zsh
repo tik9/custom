@@ -2,7 +2,7 @@
 
 alias osp='git clone ssh://583d51142d527182db000116@p-tjava.rhcloud.com/~/git/p.git/'
 
-hilfedatei=$custom/help.zsh
+hilfedatei=$ZSH_CUSTOM/help.zsh
 login_rp=$custom/login_rp
 
 bold=`tput bold`
@@ -15,6 +15,11 @@ ip2=`ip addr show wlan0 | grep -Po 'inet \K[\d.]+'`
 ipbas=$(echo $ip2 | cut -d . -f -3)
 lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
 alias mt='mutt'
+else
+bi=$(wmic OS get OSArchitecture)
+bi2=$(set | findstr ARCH)
+echo 2
+#alias bi2=$bi2
 fi
 
 te2(){
@@ -40,10 +45,10 @@ he(){
 
 bis(){
 	if [ -z $1 ]; then
-	he `basename $0` 'Ziel: /m/t/j H:M';return;fi
+	he `basename $0` 'Ziel: /m/t/j'  'Ziel: H:M';return;fi
 	
 	jetzt=$(date +%s)
-ziel=$(date -d $1 +%s)
+ziel=$(date -d "$1 $2" +%s)
 
 sleep=$(( $ziel - $jetzt ))
 
@@ -90,9 +95,12 @@ function in(){
 		if [[ $lsb = 'Arch' ]]; then
 			echo Arch
 			pacman -S --noconfirm $1
-		else
+		elif [[ $lsb = 'Ubuntu' ]]; then
 			echo Ubuntu
 			apt-get install -y $1
+		else
+			apt install -y $1
+
 		fi
 	else
 		apt-cyg install $1
@@ -283,12 +291,18 @@ fi
 
 
 function schieb(){
-ver='/home/t/Downloads/';
+	if [[ $os = "Linux" ]] ;then
+		ver='/home/t/Downloads/';
+	else
+		ver='/cygdrive/c/Users/tk/Downloads/'
+	fi
 
-if [ -z "$1" ]; then
-  he `basename $0` "Ziel"
-  return
-fi
+	if [ -z "$1" ]; then
+	  he2 `basename $0` "Ziel"
+	  return
+	fi
+	
+
 	ziel=$1
 	if [ $1 = 'r' ];then
 		ziel='/root'
@@ -377,6 +391,9 @@ alias wl="echo Dict.;dict -D"
 alias w="dict -d fd-eng-deu"
 alias w2="dict"
 
+#Download
+alias au="git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions"
+
 
 # Editoren
 alias ab='abiword'
@@ -415,7 +432,8 @@ alias ie2='iwconfig 2>&1 | grep ESSID'
 alias ip2="echo $ip"
 alias iw='iwlist wlan0 scan'
 alias nm="nmap -sP $(echo $ipbas).1/24"
-
+alias pi="ping google.de `if [ $os = CYGWIN_NT ]; then
+ echo '-n 4';else;echo -c 4;fi`"
 
 
 # package mgt.
@@ -427,11 +445,12 @@ alias up='ag update'
 
 
 # ps
-alias ba="bash"
+alias -g ba="bash"
 alias ksl="ki sleep"
 alias pr2='ps -ef|grep'
 alias psl="pr sleep"
 alias pmp="pr mplayer"
+alias pse="ps -eo pid,comm,cmd,start,etime | grep -i"
 alias psp="ps -p"
 alias pts="ps -ef|grep pts/"
 alias sl="sleep"
@@ -465,8 +484,8 @@ alias d='declare -f'
 alias dh='df -h'
 alias du='du -h'
 alias e="exec zsh"
-alias ecl="export SWT_GTK3=0;~/progr/eclipse/eclipse &"
 alias ec="echo"
+alias eh="ec hw"
 alias ex="exit"
 alias f="find / -name"
 alias f2="find -name"
@@ -495,7 +514,7 @@ alias tp='top'
 alias tr='tree'
 alias -g ve="--version"
 alias wp='chmod 777 -R .'
-alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.)s"'
+alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
 alias zg='g ~/.zshrc'
 
 echo "$0 aktualisiert von $$"
