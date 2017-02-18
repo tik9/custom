@@ -9,7 +9,7 @@ function pyclean() {
 
 
 alias dv='python -c "import django;print(django.get_version())"'
-alias p3="ipython3"
+alias p3="python3"
 alias py='/root/progr/pycharm/bin/pycharm.sh&'
 alias pg="g $custom/plugins/python/python.plugin.zsh"
 
