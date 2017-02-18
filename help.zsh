@@ -2,7 +2,7 @@
 
 alias osp='git clone ssh://583d51142d527182db000116@p-tjava.rhcloud.com/~/git/p.git/'
 
-hilfedatei=$custom/help.zsh
+hilfedatei=$ZSH_CUSTOM/help.zsh
 login_rp=$custom/login_rp
 
 bold=`tput bold`
@@ -235,7 +235,7 @@ fi
 
 pi(){
 	ping google.de `if [ $os = CYGWIN_NT ]; then
- echo '-n 4';else;echo -c4;fi`
+ echo '-n 4';else;echo -c 4;fi`
 }
 
 
@@ -410,8 +410,6 @@ alias s='pm-suspend'
 alias et='expect'
 alias r=sr
 alias sr='expect ~/.oh-my-zsh/custom/login_rp'
-alias src="c $custom/login_rp"
-alias srv="v $custom/login_rp"
 
 
 # Hilfe
@@ -432,8 +430,6 @@ alias tt='temp=$(tty) ; echo ${temp:5}'
 alias ie='iwgetid -r'
 alias ie2='iwconfig 2>&1 | grep ESSID'
 alias ip2="echo $ip"
-alias ifdd="$ifdd"
-alias ifda="$ifda"
 alias iw='iwlist wlan0 scan'
 alias nm="nmap -sP $(echo $ipbas).1/24"
 alias pi="ping google.de `if [ $os = CYGWIN_NT ]; then
@@ -464,7 +460,6 @@ alias wh="who"
 alias ml="mplayer "
 
 alias b="ml http://80.237.156.8:8120" # landsberg int.
-alias cur="ml -playlist http://minnesota.publicradio.org/tools/play/streams/the_current.pls"
 alias kl="ml -playlist http://minnesota.publicradio.org/tools/play/streams/classical.pls"
 alias mpr="ml -playlist http://minnesota.publicradio.org/tools/play/streams/news.pls"
 alias oe="ml http://194.232.200.156:8000" #oe3
