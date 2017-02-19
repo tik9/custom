@@ -95,9 +95,7 @@ function in(){
 		if [[ $lsb = 'Arch' ]]; then
 			echo Arch
 			pacman -S --noconfirm $1
-		elif [[ $lsb = 'Ubuntu' ]]; then
-			echo Ubuntu
-			apt-get install -y $1
+	
 		else
 			apt install -y $1
 
@@ -239,7 +237,7 @@ pi(){
 }
 
 
-function pl(){
+function pli(){
 if [ "$1" = -h ]; then
   he `basename $0` "argsleer" "Installierte Pakete zeigen, nur Linux"
   return
@@ -248,11 +246,11 @@ fi
 
 if [[ $os = "Linux" ]] ;then
 
-if [[ $lsb = 'Arch' ]]; then
-pacman -Qeq |less
-else
-dpkg -l	|less
-fi
+	if [[ $lsb = 'Arch' ]]; then
+		pacman -Qeq |less
+	else
+		dpkg -l	|less
+	fi
 fi
 }
 
@@ -357,6 +355,7 @@ alias ua='unalias'
 # betriebssystem
 alias lsb="echo $lsb"
 alias os="echo $os"
+alias os2='uname -a'
 alias pa='echo $path'
 
 
@@ -501,6 +500,7 @@ alias msd='mysql -uroot d'
 alias mst='mysql -uroot d -e "show tables"'
 alias mkdir='mkdir -p'
 alias p1='echo $1'
+alias ppi='ps -o ppid= -p'
 alias prp='pgrep'
 alias r=sr
 alias sc="systemctl"
