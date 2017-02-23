@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-alias osp='git clone ssh://583d51142d527182db000116@p-tjava.rhcloud.com/~/git/p.git/'
+myip="$(dig +short myip.opendns.com @resolver1.opendns.com)"
 
 hilfedatei=$ZSH_CUSTOM/help.zsh
 login_rp=$custom/login_rp
@@ -232,8 +232,8 @@ fi
 
 
 pi(){
-	ping google.de `if [ $os = CYGWIN_NT ]; then
- echo '-n 4';else;echo -c 4;fi`
+	ping `if [ $os = CYGWIN_NT ]; then
+ echo '-n 4';else;echo -c 4;fi; google.de`
 }
 
 

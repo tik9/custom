@@ -21,8 +21,6 @@ alias dk='dcd;kill $(netstat -lnp | grep 8000 | awk "{print $7}" | cut -d"/" -f 
 alias dm='p3 wsgi/myproject/manage.py'
 alias dr='p3 wsgi/myproject/manage.py runserver&'
 
-alias ma='p3 wsgi/myproject/manage.py'
-alias d1="cd ~/django"
 alias mk="p3 wsgi/myproject/manage.py makemigrations"
 alias mi="p3 wsgi/myproject/manage.py migrate"
 
