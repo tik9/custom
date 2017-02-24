@@ -31,5 +31,6 @@ alias z="dcd;dr"
 alias pi3='p3 -m pip install'
 alias p3i=pi3
 alias pui3='pip3 uninstall -y'
+alias pis='p3 -m pip show'
 alias pl='p3 -m pip list'
 alias req='pi3 -r requirements.txt'
