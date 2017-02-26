@@ -4,6 +4,7 @@ myip="$(dig +short myip.opendns.com @resolver1.opendns.com)"
 
 hilfedatei=$ZSH_CUSTOM/help.zsh
 login_rp=$custom/login_rp
+zr=~/.zshrc
 
 bold=`tput bold`
 normal=`tput sgr0`
@@ -361,11 +362,9 @@ alias pa='echo $path'
 
 #cd's
 alias da="cd ~/django"
-alias go="cd .git/objects/"
 alias mu="cd ~/musik"
 alias o='cd ~/.oh-my-zsh/custom'
 alias oh='cd ~/.oh-my-zsh'
-alias pd='cd ~/git/p'
 
 #curl
 alias cu='curl'
@@ -515,6 +514,7 @@ alias tr='tree'
 alias -g ve="--version"
 alias wp='chmod 777 -R .'
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
-alias zg='g ~/.zshrc'
+alias zg='g $zr'
+alias zv='v $zr'
 
 echo "$0 aktualisiert von $$"
