@@ -1,9 +1,10 @@
 #!/bin/zsh
 
-alias osp='git clone ssh://583d51142d527182db000116@p-tjava.rhcloud.com/~/git/p.git/'
+myip="$(dig +short myip.opendns.com @resolver1.opendns.com)"
 
 hilfedatei=$ZSH_CUSTOM/help.zsh
 login_rp=$ZSH_CUSTOM/login_rp
+zr=~/.zshrc
 
 bold=`tput bold`
 normal=`tput sgr0`
@@ -95,9 +96,7 @@ function in(){
 		if [[ $lsb = 'Arch' ]]; then
 			echo Arch
 			pacman -S --noconfirm $1
-		elif [[ $lsb = 'Ubuntu' ]]; then
-			echo Ubuntu
-			apt-get install -y $1
+	
 		else
 			apt install -y $1
 
@@ -234,12 +233,12 @@ fi
 
 
 pi(){
-	ping google.de `if [ $os = CYGWIN_NT ]; then
- echo '-n 4';else;echo -c4;fi`
+	ping `if [ $os = CYGWIN_NT ]; then
+ echo '-n 4';else;echo -c 4;fi; google.de`
 }
 
 
-function pl(){
+function pli(){
 if [ "$1" = -h ]; then
   he `basename $0` "argsleer" "Installierte Pakete zeigen, nur Linux"
   return
@@ -248,11 +247,11 @@ fi
 
 if [[ $os = "Linux" ]] ;then
 
-if [[ $lsb = 'Arch' ]]; then
-pacman -Qeq |less
-else
-dpkg -l	|less
-fi
+	if [[ $lsb = 'Arch' ]]; then
+		pacman -Qeq |less
+	else
+		dpkg -l	|less
+	fi
 fi
 }
 
@@ -357,16 +356,15 @@ alias ua='unalias'
 # betriebssystem
 alias lsb="echo $lsb"
 alias os="echo $os"
+alias os2='uname -a'
 alias pa='echo $path'
 
 
 #cd's
 alias da="cd ~/django"
-alias go="cd .git/objects/"
 alias mu="cd ~/musik"
 alias o='cd ~/.oh-my-zsh/custom'
 alias oh='cd ~/.oh-my-zsh'
-alias pd='cd ~/git/p'
 
 #curl
 alias cu='curl'
@@ -410,8 +408,6 @@ alias s='pm-suspend'
 alias et='expect'
 alias r=sr
 alias sr='expect ~/.oh-my-zsh/custom/login_rp'
-alias src="c $custom/login_rp"
-alias srv="v $custom/login_rp"
 
 
 # Hilfe
@@ -432,8 +428,6 @@ alias tt='temp=$(tty) ; echo ${temp:5}'
 alias ie='iwgetid -r'
 alias ie2='iwconfig 2>&1 | grep ESSID'
 alias ip2="echo $ip"
-alias ifdd="$ifdd"
-alias ifda="$ifda"
 alias iw='iwlist wlan0 scan'
 alias nm="nmap -sP $(echo $ipbas).1/24"
 alias pi="ping google.de `if [ $os = CYGWIN_NT ]; then
@@ -464,7 +458,6 @@ alias wh="who"
 alias ml="mplayer "
 
 alias b="ml http://80.237.156.8:8120" # landsberg int.
-alias cur="ml -playlist http://minnesota.publicradio.org/tools/play/streams/the_current.pls"
 alias kl="ml -playlist http://minnesota.publicradio.org/tools/play/streams/classical.pls"
 alias mpr="ml -playlist http://minnesota.publicradio.org/tools/play/streams/news.pls"
 alias oe="ml http://194.232.200.156:8000" #oe3
@@ -506,6 +499,7 @@ alias msd='mysql -uroot d'
 alias mst='mysql -uroot d -e "show tables"'
 alias mkdir='mkdir -p'
 alias p1='echo $1'
+alias ppi='ps -o ppid= -p'
 alias prp='pgrep'
 alias r=sr
 alias sc="systemctl"
@@ -520,6 +514,7 @@ alias tr='tree'
 alias -g ve="--version"
 alias wp='chmod 777 -R .'
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
-alias zg='g ~/.zshrc'
+alias zg='g $zr'
+alias zv='v $zr'
 
 echo "$0 aktualisiert von $$"
