@@ -8,7 +8,7 @@ function pyclean() {
 }
 
 
-alias dv='python -c "import django;print(django.get_version())"'
+alias dv='p3 -c "import django;print(django.get_version())"'
 alias p3="python3"
 alias py='/root/progr/pycharm/bin/pycharm.sh&'
 alias pg="g $custom/plugins/python/python.plugin.zsh"
@@ -17,9 +17,10 @@ alias pg="g $custom/plugins/python/python.plugin.zsh"
 # python django
 alias dcd="cd ~/django"
 alias dg='p3 -c "import django; print(django.get_version())"'
-alias dk='dcd;kill $(netstat -lnp | grep 8000 | awk "{print $7}" | cut -d"/" -f 1);dr'
+alias dk='dcd;kid ;dr'
 alias dm='p3 wsgi/myproject/manage.py'
 alias dr='p3 wsgi/myproject/manage.py runserver&'
+alias kid='kill $(netstat -lnp | grep 8000 | awk "{print $7}" | cut -d"/" -f 1)'
 
 alias mk="p3 wsgi/myproject/manage.py makemigrations"
 alias mi="p3 wsgi/myproject/manage.py migrate"
@@ -28,8 +29,7 @@ alias z="dcd;dr"
 
 
 #pip
-alias pi3='p3 -m pip install'
-alias p3i=pi3
+alias pii='p3 -m pip install'
 alias pui3='pip3 uninstall -y'
 alias pis='p3 -m pip show'
 alias pl='p3 -m pip list'
