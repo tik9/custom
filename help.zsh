@@ -1,6 +1,5 @@
 #!/bin/zsh
 
-
 hilfedatei=$ZSH_CUSTOM/help.zsh
 login_rp=$ZSH_CUSTOM/login_rp
 zr=~/.zshrc
@@ -11,8 +10,7 @@ normal=`tput sgr0`
 os=$(expr substr $(uname -s) 1 9)
 
 if [ $os != "CYGWIN_NT" ]; then
-	ip2=`ip addr show wlan0 | grep -Po 'inet \K[\d.]+'`
-	ipbas=$(echo $ip2 | cut -d . -f -3)
+
 	lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
 
 else
@@ -58,11 +56,11 @@ bi(){
 	he `basename $0` 'Stunde in Zukunft' Minute;return;fi
 	
 	target="$1.$2"
-cur=$(date '+%H.%M')
-while test $target != $cur; do
-    sleep 59
-    cur=$(date '+%H.%M')
-done
+	cur=$(date '+%H.%M')
+	while test $target != $cur; do
+		sleep 59
+		cur=$(date '+%H.%M')
+	done
 }
 
 	
@@ -74,9 +72,9 @@ function geo(){
 MAPSAPIURL="http://maps.googleapis.com/maps/api/geocode/json"
 
 curl -G -s --data sensor=true --data-urlencode address=$1 "$MAPSAPIURL" -o res.json
-/root/jshon  -e results -a -e geometry -e location -e "lat" -u -p -e "lng" -u < res.json
 #echo $res.json
 }
+
 function i(){
 	if [ $os = "Linux" ]; then;ifconfig;else;ipconfig;fi
 }
@@ -90,20 +88,26 @@ function in(){
 
 	df -h
 	if [[ $os = "Linux" ]] ;then
-		if [[ $lsb = 'Arch' ]]; then
-			echo Arch
-			pacman -S --noconfirm $1
-	
-		else
 			apt install -y $1
 
-		fi
 	else
 		apt-cyg install $1
 	fi
 
 	df -h
 }
+
+
+ipbas(){
+	if [ -z "$1" ]; then
+		he `basename $0` "Netzwerk Interface, wlan0 oder eth0"
+	return
+	fi
+	
+	ip2=`ip addr show $1 | grep -Po 'inet \K[\d.]+'`
+	echo $ip2 | cut -d . -f -3
+}
+
 
 ipd(){
 	if [ -z "$1" ]; then
@@ -137,20 +141,20 @@ i
 }
 
 function k(){
-if [ -z "$1" ]; then
-  he `basename $0` "Prozess für kill"
-  return
-fi
+	if [ -z "$1" ]; then
+	  he `basename $0` "Prozess für kill"
+	  return
+	fi
 
-if [ $os = 'Linux' ];then
-kill -9 $1
-else
-/bin/kill.exe $1
-fi
+	if [ $os = 'Linux' ];then
+	kill -9 $1
+	else
+	/bin/kill.exe $1
+	fi
 
-if [ -z "grep $1 =(ps aux)" ];then
-echo Prozess gekillt
-fi
+	if [ -z "grep $1 =(ps aux)" ];then
+	echo Prozess gekillt
+	fi
 
 }
 
@@ -298,17 +302,13 @@ function schieb(){
 	  he2 `basename $0` "Ziel"
 	  return
 	fi
-	
 
 	ziel=$1
-	if [ $1 = 'r' ];then
-		ziel='/root'
-	fi
+	if [ $1 = 'r' ];then;ziel='/root';fi
 	
 	ls -t $ver
 	mv "$ver`ls -t $ver | head -n1`" $ziel
-	echo Inhalt von $ziel
-	ls $ziel
+	echo Inhalt von $ziel;ls $ziel
 }
 
 
@@ -322,6 +322,15 @@ fi
 if [ $os = "CYGWIN_NT" ]; then
 apt-cyg show `echo $1`;else ;if [[ $lsb == 'Arch' ]] ;then;pacman -Ss $1 ;else;apt-cache show $1|less ;fi;fi;
 }
+
+function si(){
+if [ -z "$1" ]; then
+  he `basename $0` "Zeit in Minuten bevor Ruhezustand"
+  return
+fi
+	sleep $1m; hibernate 
+}
+
 
 function t(){
 
@@ -428,6 +437,7 @@ alias mst='mysql -uroot d -e "show tables"'
 
 # netzwerk
 
+alias dh='dhclient'
 alias ie='iwgetid -r'
 alias ie2='iwconfig 2>&1 | grep ESSID'
 alias ip2="echo $ip"
@@ -486,7 +496,7 @@ alias cl='xclip -sel clip'
 alias cp='cp -r'
 alias dt='date +"%T"'
 alias d='declare -f'
-alias dh='df -h'
+alias dfh='df -h'
 alias du='du -h'
 alias e="exec zsh"
 alias ec="echo"
