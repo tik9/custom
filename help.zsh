@@ -105,7 +105,8 @@ ipbas(){
 	fi
 	
 	ip2=`ip addr show $1 | grep -Po 'inet \K[\d.]+'`
-	echo $ip2 | cut -d . -f -3
+	ipbas=$(echo $ip2 | cut -d . -f -3)	
+	echo $ipbas
 }
 
 
