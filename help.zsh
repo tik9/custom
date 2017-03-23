@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+# schriftfarbe autocomplete fg8 default
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
 
 hilfedatei=$ZSH_CUSTOM/help.zsh
 login_rp=$ZSH_CUSTOM/login_rp
