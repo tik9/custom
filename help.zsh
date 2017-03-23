@@ -110,7 +110,7 @@ ipbas(){
 }
 
 
-ipd(){
+function ipd(){
 	if [ -z "$1" ]; then
 	he `basename $0` "Interface"
 	return
@@ -118,7 +118,7 @@ ipd(){
 	ip link set $1 down
 }
 
-ipu(){
+function ipu(){
 		
 	if [ -z "$1" ]; then
 	he `basename $0` "Interface"
@@ -205,6 +205,15 @@ fi
 
 function mp(){
 if [ -z "$1" ]; then
+  he `basename $0` "Datei"
+  return
+fi
+	mupdf $1 &
+}
+
+
+function mpk(){
+if [ -z "$1" ]; then
   he `basename $0` "Zeit" "interface (op.)"
   return
 fi
@@ -226,16 +235,7 @@ msde(){ mysql -uroot d -e "describe app1_$1"
 	}
 
 
-function mup(){
-if [ -z "$1" ]; then
-  he `basename $0` "Datei"
-  return
-fi
-	mupdf $1 &
-}
-
-
-pi(){
+p(){
 	ping `if [ $os = CYGWIN_NT ]; then
  echo '-n 4';else;echo -c 4;fi; google.de`
 }
@@ -462,6 +462,7 @@ alias up='ag update'
 
 # ps
 alias -g ba="bash"
+alias ks="ki ssh"
 alias ksl="ki sleep"
 alias pr2='ps -ef|grep'
 alias psl="pr sleep"
