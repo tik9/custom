@@ -235,11 +235,6 @@ msde(){ mysql -uroot d -e "describe app1_$1"
 	}
 
 
-p(){
-	ping `if [ $os = CYGWIN_NT ]; then
- echo '-n 4';else;echo -c 4;fi; google.de`
-}
-
 
 function pli(){
 if [ "$1" = -h ]; then
@@ -445,7 +440,7 @@ alias ip2="echo $ip"
 alias iw='iwlist wlan0 scan'
 alias mip="ec $(dig +short myip.opendns.com @resolver1.opendns.com)"
 alias nm="nmap -sP $(echo $ipbas).1/24"
-alias pi="ping google.de `if [ $os = CYGWIN_NT ]; then
+alias p="ping google.de `if [ $os = CYGWIN_NT ]; then
  echo '-n 4';else;echo -c 4;fi`"
 
 
