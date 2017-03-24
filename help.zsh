@@ -104,12 +104,12 @@ function in(){
 
 ipbas(){
 	if [ -z "$1" ]; then
-		he `basename $0` "Netzwerk Interface, wlan0 oder eth0"
+		he `basename $0` "Zeigt interne ip-Adresse\n Argument 1: Netzwerk Interface (wlan0 oder eth0)"
 	return
 	fi
 	
-	ip2=`ip addr show $1 | grep -Po 'inet \K[\d.]+'`
-	ipbas=$(echo $ip2 | cut -d . -f -3)	
+	ip=`ip addr show $1 | grep -Po 'inet \K[\d.]+'`
+	ipbas=$(echo $ip | cut -d . -f -3)	
 	echo $ipbas
 }
 
@@ -444,8 +444,7 @@ alias ip2="echo $ip"
 alias iw='iwlist wlan0 scan'
 alias mip="ec $(dig +short myip.opendns.com @resolver1.opendns.com)"
 alias nm="nmap -sP $(echo $ipbas).1/24"
-alias p="ping google.de `if [ $os = CYGWIN_NT ]; then
- echo '-n 4';else;echo -c 4;fi`"
+alias p="ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de"
 
 
 # package mgt.
