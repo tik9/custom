@@ -381,6 +381,7 @@ alias cud='cu http://django-tjava.rhcloud.com/de/admin/'
 
 
 #Dateiops
+alias cp='cp -r'
 alias lö="rm -rf"
 alias md="mkdir -p"
 alias mo="chmod 700"
@@ -466,7 +467,7 @@ alias pr2='ps -ef|grep'
 alias psl="pr sleep"
 alias pmp="pr mplayer"
 alias pse="ps -eo pid,comm,cmd,start,etime | grep -i"
-alias psh="pr ssh"
+alias ph="pr ssh"
 alias psp="ps -p"
 alias pts="ps -ef|grep pts/"
 alias sl="sleep"
@@ -476,6 +477,8 @@ alias wh="who"
 alias ml="mplayer "
 
 alias b="ml http://80.237.156.8:8120" # landsberg int.
+alias brh="ml http://br-mp3-brheimat-m.akacast.akamaistream.net/7/738/326703/v1/gnl.akacast.akamaistream.net/br_mp3_brheimat_m"
+alias br="ml http://br-mp3-bayern3-m.akacast.akamaistream.net/7/442/142692/v1/gnl.akacast.akamaistream.net/br_mp3_bayern3_m"
 alias kl="ml -playlist http://minnesota.publicradio.org/tools/play/streams/classical.pls"
 alias mpr="ml -playlist http://minnesota.publicradio.org/tools/play/streams/news.pls"
 alias oe="ml http://194.232.200.156:8000" #oe3
@@ -493,7 +496,7 @@ alias ad='echo t@tk1.it|cli'
 alias ad2='echo 015739598220 timo.koerner@hof-university.de dkoerner@konzertagentur-koerner.de'
 alias c='cat'
 alias cl='xclip -sel clip'
-alias cp='cp -r'
+alias co='xclip -sel clip'
 alias dt='date +"%T"'
 alias d='declare -f'
 alias dfh='df -h'

@@ -99,7 +99,8 @@ compdef gfg=grep
 
 alias gfo='git fetch origin'
 
-alias gg='g $custom/plugins/git/git.plugin.zsh'
+alias gg='git log --stat'
+
 alias gga='git gui citool --amend'
 
 function ggf() {
@@ -130,6 +131,8 @@ else
 git push origin "${b:=$1}"
 fi
 }
+
+alias ggpl='g $custom/plugins/git/git.plugin.zsh'
 
 compdef _git ggp=git-checkout
 
@@ -164,7 +167,6 @@ alias gke='\gitk --all $(git log -g --pretty=format:%h)'
 compdef _git gke='gitk'
 
 alias gl='git pull;e'
-alias glg='git log --stat'
 alias glgp='git log --stat -p'
 alias glgg='git log --graph'
 alias glgm='git log --graph --max-count=10'
