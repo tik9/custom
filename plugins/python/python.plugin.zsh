@@ -29,6 +29,8 @@ alias z="dcd;dr"
 
 
 #pip
+alias pd='pipdeptree --package'
+alias pdr='pipdeptree -r --package'
 alias pi='p3 -m pip install'
 alias pui='pip3 uninstall -y'
 alias pis='p3 -m pip show'
