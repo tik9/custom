@@ -249,11 +249,7 @@ fi
 
 if [[ $os = "Linux" ]] ;then
 
-	if [[ $lsb = 'Arch' ]]; then
-		pacman -Qeq |less
-	else
-		dpkg -l	|less
-	fi
+	dpkg -l	|less
 fi
 }
 
@@ -276,9 +272,8 @@ if [ -z "$1" ]; then
 fi
 
 if [ $os = "CYGWIN_NT" ]; then;apt-cyg remove $1;else
-if [[ $lsb == 'Arch' ]] ;then;pacman -R --noconfirm $1
-	else;apt-get autoremove $1;fi
-fi; 
+apt-get autoremove $1
+fi
 }
 
 function sc2(){
@@ -346,12 +341,8 @@ if [ "$1" = -h ]; then
   
 fi	
 
-if [[ $lsb == 'Arch' ]] ;then
-		pacman -Syu
-	else
 apt-get upgrade	
 apt-get dist-upgrade	
-fi	
 }
 
  
