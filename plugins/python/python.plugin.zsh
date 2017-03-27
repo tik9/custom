@@ -1,6 +1,5 @@
 
-# Remove python compiled byte-code in either current directory or in a
-# list of specified directories
+# Entferne python kompilierter byte-code im aktuellen Verzeichnis oder in einer Verzeichnisliste
 function pyclean() {
     ZSH_PYCLEAN_PLACES=${*:-'.'}
     find ${ZSH_PYCLEAN_PLACES} -type f -name "*.py[co]" -delete
@@ -18,12 +17,12 @@ alias pg="g $custom/plugins/python/python.plugin.zsh"
 alias dcd="cd ~/django"
 alias dg='p3 -c "import django; print(django.get_version())"'
 alias dk='dcd;kid ;dr'
-alias dm='p3 wsgi/myproject/manage.py'
-alias dr='p3 wsgi/myproject/manage.py runserver&'
+alias -g dm='p3 myproject/manage.py'
+alias dr='p3 dm runserver&'
 alias kid='kill $(netstat -lnp | grep 8000 | awk "{print $7}" | cut -d"/" -f 1)'
 
-alias mk="p3 wsgi/myproject/manage.py makemigrations"
-alias mi="p3 wsgi/myproject/manage.py migrate"
+alias mk="p3 dm makemigrations"
+alias mi="p3 dm migrate"
 
 alias z="dcd;dr"
 

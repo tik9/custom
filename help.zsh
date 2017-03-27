@@ -320,7 +320,7 @@ if [ -z "$1" ]; then
 fi
 
 if [ $os = "CYGWIN_NT" ]; then
-apt-cyg show `echo $1`;else ;if [[ $lsb == 'Arch' ]] ;then;pacman -Ss $1 ;else;apt-cache show $1|less ;fi;fi;
+apt-cyg show `echo $1`;else ;apt-cache show $1|less;fi;
 }
 
 function si(){
