@@ -177,6 +177,10 @@ fi
 	killall $1;
 	ps -ef|grep $1;
 }
+
+killscreens () {
+    screen -ls | cut -d. -f1 | awk '{print $1}' | xargs kill
+}
 	
 function las(){
 
@@ -232,17 +236,14 @@ msde(){ mysql -uroot d -e "describe app1_$1"
 
 
 
-function pli(){
+function pd(){
 if [ "$1" = -h ]; then
   he `basename $0` "argsleer" "Installierte Pakete zeigen, nur Linux"
   return
-  
 fi
 
 if [[ $os = "Linux" ]] ;then
-
-	dpkg -l	|less
-fi
+	dpkg -l	|less;else cygcheck -c|less;fi
 }
 
 function pr(){
@@ -360,8 +361,8 @@ alias un='cd ~/uni'
 
 #curl
 alias cu='curl'
-alias cl1='cu localhost'
-alias cl2='cu localhost:8000'
+alias cl2='cu localhost'
+alias cl='cu localhost:8000'
 alias cud='cu http://django-tjava.rhcloud.com/de/admin/'
 
 
