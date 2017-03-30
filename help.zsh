@@ -45,23 +45,6 @@ if [ $os = "Linux" ]; then;apt-get autoremove $1;else
 apt-cyg remove $1;fi
 }
 
-bis(){
-	if [ -z $1 ]; then
-	he `basename $0` 'Ziel: /m/t/j'  'Ziel: H:M';return;fi
-	
-	jetzt=$(date +%s);ziel=$(date -d "$1 $2" +%s)
-sleep=$(( $ziel - $jetzt ));sleep $sleep
-}
-
-bi(){
-	if [ -z $1 ]; then
-	he `basename $0` 'Stunde in Zukunft' Minute;return;fi
-	
-	target="$1.$2";cur=$(date '+%H.%M')
-	while test $target != $cur; do
-		sleep 59;cur=$(date '+%H.%M')
-	done
-}
 
 	
 function g(){
