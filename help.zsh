@@ -36,48 +36,40 @@ he(){
 	fi
 	echo "${normal}"
 
-	for var in ${@:$schleife} ; do
-		echo $var
-	done
+	for var in ${@:$schleife} ; do; echo $var;done
 	echo
 }
 
+function aur(){
+if [ $os = "Linux" ]; then;apt-get autoremove $1;else
+apt-cyg remove $1;fi
+}
 
 bis(){
 	if [ -z $1 ]; then
 	he `basename $0` 'Ziel: /m/t/j'  'Ziel: H:M';return;fi
 	
-	jetzt=$(date +%s)
-ziel=$(date -d "$1 $2" +%s)
-
-sleep=$(( $ziel - $jetzt ))
-
-sleep $sleep
+	jetzt=$(date +%s);ziel=$(date -d "$1 $2" +%s)
+sleep=$(( $ziel - $jetzt ));sleep $sleep
 }
 
 bi(){
 	if [ -z $1 ]; then
 	he `basename $0` 'Stunde in Zukunft' Minute;return;fi
 	
-	target="$1.$2"
-	cur=$(date '+%H.%M')
+	target="$1.$2";cur=$(date '+%H.%M')
 	while test $target != $cur; do
-		sleep 59
-		cur=$(date '+%H.%M')
+		sleep 59;cur=$(date '+%H.%M')
 	done
 }
 
 	
 function g(){
+if [[ $os = "Linux" ]] ;then
 	geany $1 &
+	else;notepad++;fi
 }
 
-function geo(){
-MAPSAPIURL="http://maps.googleapis.com/maps/api/geocode/json"
-
-curl -G -s --data sensor=true --data-urlencode address=$1 "$MAPSAPIURL" -o res.json
-#echo $res.json
-}
 
 function i(){
 	if [ $os = "Linux" ]; then;ifconfig;else;ipconfig;fi
@@ -360,9 +352,11 @@ alias pa='echo $path'
 
 #cd's
 alias da="cd ~/django"
+alias ma="cd ~/MyA"
 alias mu="cd ~/musik"
 alias o='cd ~/.oh-my-zsh/custom'
 alias oh='cd ~/.oh-my-zsh'
+alias un='cd ~/uni'
 
 #curl
 alias cu='curl'
@@ -394,7 +388,6 @@ alias au="git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/p
 
 # Editoren
 alias ab='abiword'
-alias n='notepad++'
 alias v="vim"
 
 
@@ -428,7 +421,6 @@ alias mst='mysql -uroot d -e "show tables"'
 
 
 # netzwerk
-
 alias dh='dhclient'
 alias ie='iwgetid -r'
 alias ie2='iwconfig 2>&1 | grep ESSID'
@@ -443,10 +435,9 @@ alias p="ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de"
 alias acl='apt-cyg listall'
 alias acl2='cygcheck'
 alias ag='apt-get'
-alias aur="apt-get autoremove"
+
 alias de="apt-cache depends"
 alias der="apt-cache rdepends"
-alias pm2="pacman -S"
 alias up='ag update'
 
 
