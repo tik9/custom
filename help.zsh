@@ -240,20 +240,14 @@ msde(){ mysql -uroot d -e "describe app1_$1"
 
 
 
-function pli(){
+function pd(){
 if [ "$1" = -h ]; then
   he `basename $0` "argsleer" "Installierte Pakete zeigen, nur Linux"
   return
-  
 fi
 
 if [[ $os = "Linux" ]] ;then
-
-	if [[ $lsb = 'Arch' ]]; then
-		pacman -Qeq |less
-	else
 		dpkg -l	|less
-	fi
 fi
 }
 
@@ -375,8 +369,8 @@ alias oh='cd ~/.oh-my-zsh'
 
 #curl
 alias cu='curl'
-alias cl1='cu localhost'
-alias cl2='cu localhost:8000'
+alias cl2='cu localhost'
+alias cl='cu localhost:8000'
 alias cud='cu http://django-tjava.rhcloud.com/de/admin/'
 
 

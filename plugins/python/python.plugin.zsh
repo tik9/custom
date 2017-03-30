@@ -17,8 +17,8 @@ alias pg="g $custom/plugins/python/python.plugin.zsh"
 alias dcd="cd ~/django"
 alias dg='p3 -c "import django; print(django.get_version())"'
 alias dk='dcd;kid ;dr'
-alias -g dm='p3 myproject/manage.py'
-alias dr='p3 dm runserver&'
+alias dm='p3 myproject/manage.py'
+alias dr='dm runserver&'
 alias kid='kill $(netstat -lnp | grep 8000 | awk "{print $7}" | cut -d"/" -f 1)'
 
 alias mk="p3 dm makemigrations"
@@ -28,10 +28,10 @@ alias z="dcd;dr"
 
 
 #pip
-alias pd='pipdeptree --package'
+alias pdn='pipdeptree --package'
 alias pdr='pipdeptree -r --package'
 alias pi='p3 -m pip install'
 alias pui='pip3 uninstall -y'
 alias pis='p3 -m pip show'
-alias pl='p3 -m pip list'
+alias pp='p3 -m pip list lp'
 alias req='pi3 -r requirements.txt'
