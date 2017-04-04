@@ -336,7 +336,7 @@ alias pa='echo $path'
 
 #cd's
 alias da="cd ~/django"
-alias ma="cd ~/MyA"
+alias ma="cd ~/AndroidStudioProjects/MyA"
 alias mu="cd ~/musik"
 alias o='cd ~/.oh-my-zsh/custom'
 alias oh='cd ~/.oh-my-zsh'
