@@ -17,7 +17,7 @@ alias pg="g $custom/plugins/python/python.plugin.zsh"
 alias dcd="cd ~/django"
 alias dg='p3 -c "import django; print(django.get_version())"'
 alias dk='dcd;kid ;dr'
-alias dm='p3 myproject/manage.py'
+alias dm='p3 manage.py'
 alias dr='dm runserver&'
 alias kid='kill $(netstat -lnp | grep 8000 | awk "{print $7}" | cut -d"/" -f 1)'
 

@@ -50,7 +50,7 @@ apt-cyg remove $1;fi
 function g(){
 if [[ $os = "Linux" ]] ;then
 	geany $1 &
-	else;notepad++;fi
+	else;notepad++ $1 &;fi
 }
 
 
@@ -461,7 +461,7 @@ alias us="echo $USER"
 alias ad='echo t@tk1.it|cli'
 alias ad2='echo 015739598220 timo.koerner@hof-university.de dkoerner@konzertagentur-koerner.de'
 alias c='cat'
-alias cl='xclip -sel clip'
+alias ci='xclip -sel clip'
 alias co='xclip -o'
 alias dt='date +"%T"'
 alias d='declare -f'
