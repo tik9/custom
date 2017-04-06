@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+tim = 'http://stackoverflow.com/users/1705829/timo'
+
 # schriftfarbe autocomplete fg8 default
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
 
