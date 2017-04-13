@@ -1,12 +1,13 @@
 #!/bin/zsh
-
-tim = 'http://stackoverflow.com/users/1705829/timo'
+# altes Konto
+tim=http://stackoverflow.com/users/1705829/timo
 
 # schriftfarbe autocomplete fg8 default
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
-
+zsha='git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions'
 
 hilfedatei=$ZSH_CUSTOM/help.zsh
+idrs=~/.ssh/id_rsa.pub 
 login_rp=$ZSH_CUSTOM/login_rp
 zr=~/.zshrc
 
@@ -69,7 +70,13 @@ function in(){
 
 	df -h
 	if [[ $os = "Linux" ]] ;then
+			     if [[ $lsb = 'Arch' ]]; then
+                        echo "Arch"
+                        pacman -S --noconfirm $1
+                else
+                      
 			apt install -y $1
+			fi
 
 	else
 		apt-cyg install $1
@@ -228,7 +235,11 @@ if [ "$1" = -h ]; then
 fi
 
 if [[ $os = "Linux" ]] ;then
-	dpkg -l	|less;else cygcheck -c|less;fi
+if [[ $lsb = 'Arch' ]]; then
+pacman -Qeq |less
+else
+	dpkg -l	|less;
+	fi;else cygcheck -c|less;fi
 }
 
 function pr(){
@@ -338,7 +349,10 @@ alias pa='echo $path'
 
 #cd's
 alias da="cd ~/django"
-alias ma="cd ~/AndroidStudioProjects/MyA"
+alias dp="cd ~/p"
+alias js="cd ~/JavaSe"
+alias jj="cd ~/JavaSe/lib/src/main/java"
+alias ma="cd ~/MyA"
 alias mu="cd ~/musik"
 alias o='cd ~/.oh-my-zsh/custom'
 alias oh='cd ~/.oh-my-zsh'
@@ -401,6 +415,7 @@ alias st='stty -a'
 alias tt='temp=$(tty) ; echo ${temp:5}'
 
 #mysql
+alias me='mysql -uroot d -e'
 alias msd='mysql -uroot d'
 alias ms='mysql d'
 alias mst='mysql -uroot d -e "show tables"'
@@ -412,7 +427,7 @@ alias ie='iwgetid -r'
 alias ie2='iwconfig 2>&1 | grep ESSID'
 alias ip2="echo $ip"
 alias iw='iwlist wlan0 scan'
-alias mip="ec $(dig +short myip.opendns.com @resolver1.opendns.com)"
+alias mip="echo $(dig +short myip.opendns.com @resolver1.opendns.com)"
 alias nm="nmap -sP $(echo $ipbas).1/24"
 alias p="ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de"
 
@@ -437,7 +452,6 @@ alias pmp="pr mplayer"
 alias pse="ps -eo pid,comm,cmd,start,etime | grep -i"
 alias ph="pr ssh"
 alias psp="ps -p"
-alias pts="ps -ef|grep pts/"
 alias sl="sleep"
 alias wh="who"
 
@@ -456,22 +470,17 @@ alias rhr='rhc app-restart'
 alias rhs='rhc ssh'
 
 
-#user
-alias us="echo $USER"
-
-
 alias ad='echo t@tk1.it|cli'
-alias ad2='echo 015739598220 timo.koerner@hof-university.de dkoerner@konzertagentur-koerner.de'
+alias ad2='echo 01573 9598 220 timo.koerner@hof-university.de dkoerner@konzertagentur-koerner.de'
 alias c='cat'
 alias ci='xclip -sel clip'
-alias co='xclip -o'
+alias -g co='xclip -o'
 alias dt='date +"%T"'
 alias d='declare -f'
 alias dfh='df -h'
 alias du='du -h'
 alias e="exec zsh"
 alias ec="echo"
-alias eh="ec hw"
 alias ex="exit"
 alias f="find / -name"
 alias f2="find -name"
@@ -486,23 +495,19 @@ alias -g lp='|less'
 alias lsh="ls -halt --full-time"
 alias -g m='man'
 alias mkdir='mkdir -p'
-alias p1='echo $1'
 alias ppi='ps -o ppid= -p'
 alias prp='pgrep'
-alias r=sr
+alias r="expect $login_rp"
 alias sc="systemctl"
 alias so="sort"
 alias sou="source"
-alias sr="expect $login_rp"
-alias srg="g $login_rp"
 alias -g ta='|tail'
 alias te='if [ $os != "CYGWIN_NT" ]; then;terminator &;else; mintty;fi'
 alias tp='top'
 alias tr='tree'
+alias us="echo $USER"
 alias -g ve="--version"
 alias wp='chmod 777 -R .'
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
-alias zg='g $zr'
-alias zv='v $zr'
 
 echo "$0 aktualisiert von $$"
