@@ -4,7 +4,7 @@ tim=http://stackoverflow.com/users/1705829/timo
 
 # schriftfarbe autocomplete fg8 default
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
-zsha='git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions'
+alias -g zsha='git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions'
 
 hilfedatei=$ZSH_CUSTOM/help.zsh
 idrs=~/.ssh/id_rsa.pub 
@@ -15,6 +15,8 @@ bold=`tput bold`
 normal=`tput sgr0`
 
 os=$(expr substr $(uname -s) 1 9)
+
+if [[ $os = "Linux" ]] ;then;if [[ $lsb = 'Arch' ]]; then;pm='pacman';else;pm='apt-get';fi;else;pm='apt-cyg';fi
 
 if [ $os != "CYGWIN_NT" ]; then
 
@@ -44,8 +46,13 @@ he(){
 }
 
 function aur(){
-if [ $os = "Linux" ]; then;apt-get autoremove $1;else
-apt-cyg remove $1;fi
+if [ $os = "Linux" ]; then;
+if [[ $lsb = 'Arch' ]]; then;
+pacman -Rs -
+else
+$pm autoremove;
+fi;else
+apt-cyg remove;fi
 }
 
 
@@ -70,14 +77,8 @@ function in(){
 
 	df -h
 	if [[ $os = "Linux" ]] ;then
-			     if [[ $lsb = 'Arch' ]]; then
-                        echo "Arch"
-                        pacman -S --noconfirm $1
-                else
-                      
-			apt install -y $1
-			fi
-
+			     if [[ $lsb = 'Arch' ]]; then; pacman -S --noconfirm $1
+                else;`echo $pm` install -y $1;fi
 	else
 		apt-cyg install $1
 	fi
@@ -86,7 +87,7 @@ function in(){
 }
 
 
-ipbas(){
+function ipbas {
 	if [ -z "$1" ]; then
 		he `basename $0` "Zeigt interne ip-Adresse\n Argument 1: Netzwerk Interface (wlan0 oder eth0)"
 	return
@@ -94,7 +95,7 @@ ipbas(){
 	
 	ip=`ip addr show $1 | grep -Po 'inet \K[\d.]+'`
 	ipbas=$(echo $ip | cut -d . -f -3)	
-	echo $ipbas
+	echo Basis Ip $ipbas
 }
 
 
@@ -147,19 +148,6 @@ function k(){
 
 }
 
-function ka(){
-
-    cnt=$( pr $1 | wc -l)
-
-    echo -e "\nSuche '$1' -- Gefunden:" $cnt Laufende Prozesse
-    pr $1
-
-    echo -e \nBeenden der $cnt Prozesse 
-    ps aux  |  grep -i $1 |  grep -v grep   | awk '{print $2}' | xargs sudo kill -9
-    echo -e "Fertig!\n"
-
-    echo Suche:;pr $1;echo -e "\n"
-}
 
 function ki(){
 if [ -z "$1" ]; then
@@ -173,6 +161,7 @@ fi
 killscreens () {
     screen -ls | cut -d. -f1 | awk '{print $1}' | xargs kill
 }
+
 	
 function las(){
 
@@ -187,11 +176,12 @@ amixer set PCM $(expr $1 \* 10)%;
 # login remote shell
 function lss(){
 if [ -z "$1" ]; then
-  he `basename $0` "letztes Oktett von ip " "opt. port"
+  he `basename $0` "Interface" "letztes Oktett von ip " "opt. port"
   return
 fi
+	ipbas $1
 
-        ssh $2 $ipbas.$1 
+        ssh $3 $ipbas.$2 
 }
 
 
@@ -203,17 +193,7 @@ fi
 	mupdf $1 &
 }
 
-
-function mpk(){
-if [ -z "$1" ]; then
-  he `basename $0` "Zeit" "interface (op.)"
-  return
-fi
-
-	sleep $1;killall mplayer;ipd $2
-}
-
-mss(){
+function mss(){
 	if [ -z "$1" ]; then
 	  he `basename $0` "Tab."
 	  return
@@ -223,10 +203,18 @@ mss(){
 }
 
 
-msde(){ mysql -uroot d -e "describe app1_$1"
-	}
+function msde(){ mysql -uroot d -e "describe app1_$1"}
 
 
+function nm(){
+	if [ -z "$1" ]; then
+	  he `basename $0` "Interface"
+	  return
+	fi
+ipbas $1
+	nmap -sP $ipbas.1/24
+}
+	
 
 function pd(){
 if [ "$1" = -h ]; then
@@ -235,8 +223,7 @@ if [ "$1" = -h ]; then
 fi
 
 if [[ $os = "Linux" ]] ;then
-if [[ $lsb = 'Arch' ]]; then
-pacman -Qeq |less
+if [[ $lsb = 'Arch' ]]; then;pacman -Qeq |less
 else
 	dpkg -l	|less;
 	fi;else cygcheck -c|less;fi
@@ -261,7 +248,8 @@ if [ -z "$1" ]; then
 fi
 
 if [ $os = "CYGWIN_NT" ]; then;apt-cyg remove $1;else
-apt-get autoremove $1
+if [[ $lsb == 'Arch' ]] ;then;pacman -R --noconfirm $1
+else;apt-get autoremove $1;fi
 fi
 }
 
@@ -304,7 +292,7 @@ if [ -z "$1" ]; then
 fi
 
 if [ $os = "CYGWIN_NT" ]; then
-apt-cyg show `echo $1`;else ;apt-cache show $1|less;fi;
+apt-cyg show `echo $1`;else ; if [[ $lsb == 'Arch' ]] ;then;pacman -Ss $1 ;else;apt-cache show $1|less;fi;fi;
 }
 
 function si(){
@@ -426,9 +414,8 @@ alias dh='dhclient'
 alias ie='iwgetid -r'
 alias ie2='iwconfig 2>&1 | grep ESSID'
 alias ip2="echo $ip"
-alias iw='iwlist wlan0 scan'
+alias iw2='iwlist wlan0 scan'
 alias mip="echo $(dig +short myip.opendns.com @resolver1.opendns.com)"
-alias nm="nmap -sP $(echo $ipbas).1/24"
 alias p="ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de"
 
 
