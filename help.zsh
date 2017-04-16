@@ -255,11 +255,11 @@ fi
 
 function sc2(){
 if [ -z "$1" ]; then
-  he `basename $0` Basis:$ipbas Datei "letztes Oktett" Zielordner "(port)"
+  he `basename $0` Basis:$ipbas 1.Interface 2.Datei "3.letztes Oktett" 4.Zielordner "(5.port)"
   return
 fi
-#echo a2 $3
-	scp  $1 $ipbas.$2:$3 
+ipbas $1
+	scp  $2 $ipbas.$3:$4 
 }
 
 
