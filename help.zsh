@@ -15,8 +15,11 @@ bold=`tput bold`
 normal=`tput sgr0`
 
 os=$(expr substr $(uname -s) 1 9)
+os2=`uname -a |cut -d' ' -f 14`
 
-if [[ $os = "Linux" ]] ;then;if [[ $lsb = 'Arch' ]]; then;pm='pacman';else;pm='apt-get';fi;else;pm='apt-cyg';fi
+if [[ $os = "Linux" ]] ;then;if [[ $lsb = 'Arch' ]]; then;pm='pacman';elif [[ $lsb = Ubuntu ]];then;pm='apt-get'; fi;else;pm='apt-cyg';fi
+
+alias pm='ec $pm'
 
 if [ $os != "CYGWIN_NT" ]; then
 
@@ -255,11 +258,15 @@ fi
 
 function sc2(){
 if [ -z "$1" ]; then
-  he `basename $0` Basis:$ipbas 1.Interface 2.Datei "3.letztes Oktett" 4.Zielordner "(5.port)"
+  he `basename $0` Basis:$ipbas 1.Interface 2.Datei "3.letztes Oktett" 4.Zielordner (5.user) "(6.port)"
   return
 fi
 ipbas $1
-	scp  $2 $ipbas.$3:$4 
+
+user=$5
+if [ -z $5 ];user=root
+
+scp  $2 $user@$ipbas.$3:$4 
 }
 
 
@@ -307,7 +314,7 @@ fi
 function t(){
 
 if [ -f test500.zip ];then ; lö test500.zip;fi	
-	wget http://speedtest.wdc01.softlayer.com/downloads/test500.zip `if [ $os = "Linux" ]; then ; echo --output-document=/dev/null;fi`
+	wget http://speedtest.wdc01.softlayer.com/downloads/test500.zip `if [ $os2 != "android" ]; then ; echo --output-document=/dev/null;fi`
 
 }
 
@@ -331,7 +338,7 @@ alias ua='unalias'
 # betriebssystem
 alias lsb="echo $lsb"
 alias os="echo $os"
-alias os2='uname -a'
+alias os2='echo $os2'
 alias pa='echo $path'
 
 
@@ -412,7 +419,7 @@ alias mst='mysql -uroot d -e "show tables"'
 # netzwerk
 alias dh='dhclient'
 alias ie='iwgetid -r'
-alias ie2='iwconfig 2>&1 | grep ESSID'
+alias ie2='iwconfig 2>&1 | grep -i ESSID'
 alias ip2="echo $ip"
 alias iw2='iwlist wlan0 scan'
 alias mip="echo $(dig +short myip.opendns.com @resolver1.opendns.com)"
@@ -436,7 +443,6 @@ alias ksl="ki sleep"
 alias pr2='ps -ef|grep'
 alias psl="pr sleep"
 alias pmp="pr mplayer"
-alias pse="ps -eo pid,comm,cmd,start,etime | grep -i"
 alias ph="pr ssh"
 alias psp="ps -p"
 alias sl="sleep"
@@ -471,8 +477,8 @@ alias ec="echo"
 alias ex="exit"
 alias f="find / -name"
 alias f2="find -name"
-alias ge="grep"
-alias -g gr="|grep"
+alias ge="grep -i"
+alias -g gr="|grep -i"
 alias ha='halt'
 alias ho='echo $(hostname)'
 alias iban='DE637215 0000 00 5052 4271'
