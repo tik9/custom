@@ -6,6 +6,14 @@ function pyclean() {
     find ${ZSH_PYCLEAN_PLACES} -type d -name "__pycache__" -delete
 }
 
+kid(){
+		if [ -z "$1" ]; then
+	echo `basename $0` "Port: 0 oder 1"
+	return
+	fi
+	kill $(netstat -lnp | grep 800$1 | awk "{print $7}" | cut -d"/" -f 1)
+
+}
 
 alias dv='p3 -c "import django;print(django.get_version())"'
 alias p3="python3"
@@ -14,15 +22,14 @@ alias pg="g $custom/plugins/python/python.plugin.zsh"
 
 
 # python django
+alias cm="dm compilemessages"
 alias dcd="cd ~/django"
-alias dg='p3 -c "import django; print(django.get_version())"'
-alias dk='dcd;kid ;dr'
+alias dk='dcd;kid 0;dr'
 alias dm='p3 manage.py'
-alias dr='dm runserver&'
-alias kid='kill $(netstat -lnp | grep 8000 | awk "{print $7}" | cut -d"/" -f 1)'
-
-alias mk="p3 dm makemigrations"
-alias mi="p3 dm migrate"
+alias dr='dm runserver'
+alias mi="dm migrate"
+alias mk="dm makemigrations"
+alias mm="dm makemessages"
 
 alias z="dcd;dr"
 

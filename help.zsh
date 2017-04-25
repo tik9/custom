@@ -1,12 +1,13 @@
 #!/bin/zsh
-
-tim = 'http://stackoverflow.com/users/1705829/timo'
+# altes Konto
+tim=http://stackoverflow.com/users/1705829/timo
 
 # schriftfarbe autocomplete fg8 default
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
-
+alias -g zsha='git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions'
 
 hilfedatei=$ZSH_CUSTOM/help.zsh
+idrs=~/.ssh/id_rsa.pub 
 login_rp=$ZSH_CUSTOM/login_rp
 zr=~/.zshrc
 
@@ -14,6 +15,11 @@ bold=`tput bold`
 normal=`tput sgr0`
 
 os=$(expr substr $(uname -s) 1 9)
+os2=`uname -a |cut -d' ' -f 14`
+
+if [[ $os = "Linux" ]] ;then;if [[ $lsb = 'Arch' ]]; then;pm='pacman';elif [[ $lsb = Ubuntu ]];then;pm='apt-get'; fi;else;pm='apt-cyg';fi
+
+alias pm='ec $pm'
 
 if [ $os != "CYGWIN_NT" ]; then
 
@@ -43,8 +49,13 @@ he(){
 }
 
 function aur(){
-if [ $os = "Linux" ]; then;apt-get autoremove $1;else
-apt-cyg remove $1;fi
+if [ $os = "Linux" ]; then;
+if [[ $lsb = 'Arch' ]]; then;
+pacman -Rs -
+else
+$pm autoremove;
+fi;else
+apt-cyg remove;fi
 }
 
 
@@ -69,8 +80,8 @@ function in(){
 
 	df -h
 	if [[ $os = "Linux" ]] ;then
-			apt install -y $1
-
+			     if [[ $lsb = 'Arch' ]]; then; pacman -S --noconfirm $1
+                else;`echo $pm` install -y $1;fi
 	else
 		apt-cyg install $1
 	fi
@@ -79,7 +90,7 @@ function in(){
 }
 
 
-ipbas(){
+function ipbas {
 	if [ -z "$1" ]; then
 		he `basename $0` "Zeigt interne ip-Adresse\n Argument 1: Netzwerk Interface (wlan0 oder eth0)"
 	return
@@ -87,7 +98,7 @@ ipbas(){
 	
 	ip=`ip addr show $1 | grep -Po 'inet \K[\d.]+'`
 	ipbas=$(echo $ip | cut -d . -f -3)	
-	echo $ipbas
+	echo Basis Ip $ipbas
 }
 
 
@@ -140,19 +151,6 @@ function k(){
 
 }
 
-function ka(){
-
-    cnt=$( pr $1 | wc -l)
-
-    echo -e "\nSuche '$1' -- Gefunden:" $cnt Laufende Prozesse
-    pr $1
-
-    echo -e \nBeenden der $cnt Prozesse 
-    ps aux  |  grep -i $1 |  grep -v grep   | awk '{print $2}' | xargs sudo kill -9
-    echo -e "Fertig!\n"
-
-    echo Suche:;pr $1;echo -e "\n"
-}
 
 function ki(){
 if [ -z "$1" ]; then
@@ -166,6 +164,7 @@ fi
 killscreens () {
     screen -ls | cut -d. -f1 | awk '{print $1}' | xargs kill
 }
+
 	
 function las(){
 
@@ -180,11 +179,12 @@ amixer set PCM $(expr $1 \* 10)%;
 # login remote shell
 function lss(){
 if [ -z "$1" ]; then
-  he `basename $0` "letztes Oktett von ip " "opt. port"
+  he `basename $0` "Interface" "letztes Oktett von ip " "opt. port"
   return
 fi
+	ipbas $1
 
-        ssh $2 $ipbas.$1 
+        ssh $3 $ipbas.$2 
 }
 
 
@@ -196,17 +196,7 @@ fi
 	mupdf $1 &
 }
 
-
-function mpk(){
-if [ -z "$1" ]; then
-  he `basename $0` "Zeit" "interface (op.)"
-  return
-fi
-
-	sleep $1;killall mplayer;ipd $2
-}
-
-mss(){
+function mss(){
 	if [ -z "$1" ]; then
 	  he `basename $0` "Tab."
 	  return
@@ -216,10 +206,18 @@ mss(){
 }
 
 
-msde(){ mysql -uroot d -e "describe app1_$1"
-	}
+function msde(){ mysql -uroot d -e "describe app1_$1"}
 
 
+function nm(){
+	if [ -z "$1" ]; then
+	  he `basename $0` "Interface"
+	  return
+	fi
+ipbas $1
+	nmap -sP $ipbas.1/24
+}
+	
 
 function pd(){
 if [ "$1" = -h ]; then
@@ -228,7 +226,10 @@ if [ "$1" = -h ]; then
 fi
 
 if [[ $os = "Linux" ]] ;then
-	dpkg -l	|less;else cygcheck -c|less;fi
+if [[ $lsb = 'Arch' ]]; then;pacman -Qeq |less
+else
+	dpkg -l	|less;
+	fi;else cygcheck -c|less;fi
 }
 
 function pr(){
@@ -250,17 +251,22 @@ if [ -z "$1" ]; then
 fi
 
 if [ $os = "CYGWIN_NT" ]; then;apt-cyg remove $1;else
-apt-get autoremove $1
+if [[ $lsb == 'Arch' ]] ;then;pacman -R --noconfirm $1
+else;apt-get autoremove $1;fi
 fi
 }
 
 function sc2(){
 if [ -z "$1" ]; then
-  he `basename $0` Basis:$ipbas Datei "letztes Oktett" Zielordner "(port)"
+  he `basename $0` Basis:$ipbas 1.Interface 2.Datei "3.letztes Oktett" 4.Zielordner (5.user) "(6.port)"
   return
 fi
-#echo a2 $3
-	scp  $1 $ipbas.$2:$3 
+ipbas $1
+
+user=$5
+if [ -z $5 ];user=root
+
+scp  $2 $user@$ipbas.$3:$4 
 }
 
 
@@ -293,7 +299,7 @@ if [ -z "$1" ]; then
 fi
 
 if [ $os = "CYGWIN_NT" ]; then
-apt-cyg show `echo $1`;else ;apt-cache show $1|less;fi;
+apt-cyg show `echo $1`;else ; if [[ $lsb == 'Arch' ]] ;then;pacman -Ss $1 ;else;apt-cache show $1|less;fi;fi;
 }
 
 function si(){
@@ -308,7 +314,7 @@ fi
 function t(){
 
 if [ -f test500.zip ];then ; lö test500.zip;fi	
-	wget http://speedtest.wdc01.softlayer.com/downloads/test500.zip `if [ $os = "Linux" ]; then ; echo --output-document=/dev/null;fi`
+	wget http://speedtest.wdc01.softlayer.com/downloads/test500.zip `if [ $os2 != "android" ]; then ; echo --output-document=/dev/null;fi`
 
 }
 
@@ -332,13 +338,16 @@ alias ua='unalias'
 # betriebssystem
 alias lsb="echo $lsb"
 alias os="echo $os"
-alias os2='uname -a'
+alias os2='echo $os2'
 alias pa='echo $path'
 
 
 #cd's
 alias da="cd ~/django"
-alias ma="cd ~/AndroidStudioProjects/MyA"
+alias dp="cd ~/p"
+alias js="cd ~/JavaSe"
+alias jj="cd ~/JavaSe/lib/src/main/java"
+alias ma="cd ~/MyA"
 alias mu="cd ~/musik"
 alias o='cd ~/.oh-my-zsh/custom'
 alias oh='cd ~/.oh-my-zsh'
@@ -401,6 +410,7 @@ alias st='stty -a'
 alias tt='temp=$(tty) ; echo ${temp:5}'
 
 #mysql
+alias me='mysql -uroot d -e'
 alias msd='mysql -uroot d'
 alias ms='mysql d'
 alias mst='mysql -uroot d -e "show tables"'
@@ -409,11 +419,10 @@ alias mst='mysql -uroot d -e "show tables"'
 # netzwerk
 alias dh='dhclient'
 alias ie='iwgetid -r'
-alias ie2='iwconfig 2>&1 | grep ESSID'
+alias ie2='iwconfig 2>&1 | grep -i ESSID'
 alias ip2="echo $ip"
-alias iw='iwlist wlan0 scan'
-alias mip="ec $(dig +short myip.opendns.com @resolver1.opendns.com)"
-alias nm="nmap -sP $(echo $ipbas).1/24"
+alias iw2='iwlist wlan0 scan'
+alias mip="echo $(dig +short myip.opendns.com @resolver1.opendns.com)"
 alias p="ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de"
 
 
@@ -434,10 +443,8 @@ alias ksl="ki sleep"
 alias pr2='ps -ef|grep'
 alias psl="pr sleep"
 alias pmp="pr mplayer"
-alias pse="ps -eo pid,comm,cmd,start,etime | grep -i"
 alias ph="pr ssh"
 alias psp="ps -p"
-alias pts="ps -ef|grep pts/"
 alias sl="sleep"
 alias wh="who"
 
@@ -456,27 +463,22 @@ alias rhr='rhc app-restart'
 alias rhs='rhc ssh'
 
 
-#user
-alias us="echo $USER"
-
-
 alias ad='echo t@tk1.it|cli'
-alias ad2='echo 015739598220 timo.koerner@hof-university.de dkoerner@konzertagentur-koerner.de'
+alias ad2='echo 01573 9598 220 timo.koerner@hof-university.de dkoerner@konzertagentur-koerner.de'
 alias c='cat'
 alias ci='xclip -sel clip'
-alias co='xclip -o'
+alias -g co='xclip -o'
 alias dt='date +"%T"'
 alias d='declare -f'
 alias dfh='df -h'
 alias du='du -h'
 alias e="exec zsh"
 alias ec="echo"
-alias eh="ec hw"
 alias ex="exit"
 alias f="find / -name"
 alias f2="find -name"
-alias ge="grep"
-alias -g gr="|grep"
+alias ge="grep -i"
+alias -g gr="|grep -i"
 alias ha='halt'
 alias ho='echo $(hostname)'
 alias iban='DE637215 0000 00 5052 4271'
@@ -486,23 +488,19 @@ alias -g lp='|less'
 alias lsh="ls -halt --full-time"
 alias -g m='man'
 alias mkdir='mkdir -p'
-alias p1='echo $1'
 alias ppi='ps -o ppid= -p'
 alias prp='pgrep'
-alias r=sr
+alias r="expect $login_rp"
 alias sc="systemctl"
 alias so="sort"
 alias sou="source"
-alias sr="expect $login_rp"
-alias srg="g $login_rp"
 alias -g ta='|tail'
 alias te='if [ $os != "CYGWIN_NT" ]; then;terminator &;else; mintty;fi'
 alias tp='top'
 alias tr='tree'
+alias us="echo $USER"
 alias -g ve="--version"
 alias wp='chmod 777 -R .'
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
-alias zg='g $zr'
-alias zv='v $zr'
 
 echo "$0 aktualisiert von $$"
