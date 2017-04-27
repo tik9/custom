@@ -167,6 +167,7 @@ alias gke='\gitk --all $(git log -g --pretty=format:%h)'
 compdef _git gke='gitk'
 
 alias gl='git pull;e'
+alias glr='git pull;e;req'
 alias glgp='git log --stat -p'
 alias glgg='git log --graph'
 alias glgm='git log --graph --max-count=10'
