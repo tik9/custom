@@ -30,6 +30,15 @@ else
 	bi2=$(set | findstr ARCH)
 fi
 
+upd(){
+	mysql -uroot d -e "select table_schema as DatabaseName,
+  table_name,
+  update_time as letzteAktual
+from information_schema.tables
+where update_time > '2017-04-18'
+order by update_time asc"
+}
+
 te2(){
 	echo h w
 }
@@ -45,7 +54,12 @@ he(){
 	echo "${normal}"
 
 	for var in ${@:$schleife} ; do; echo $var;done
-	echo
+}
+
+_alarm() {
+  ( speaker-test --frequency $1 --test sine )&
+  pid=$!;sleep ${2}s
+  kill -9 $pid
 }
 
 function aur(){
@@ -53,7 +67,7 @@ if [ $os = "Linux" ]; then;
 if [[ $lsb = 'Arch' ]]; then;
 pacman -Rs -
 else
-$pm autoremove;
+apt autoremove;
 fi;else
 apt-cyg remove;fi
 }
@@ -81,7 +95,7 @@ function in(){
 	df -h
 	if [[ $os = "Linux" ]] ;then
 			     if [[ $lsb = 'Arch' ]]; then; pacman -S --noconfirm $1
-                else;`echo $pm` install -y $1;fi
+                else;apt-get install -y $1;fi
 	else
 		apt-cyg install $1
 	fi
@@ -344,6 +358,7 @@ alias pa='echo $path'
 
 #cd's
 alias da="cd ~/django"
+alias cg="cd ~/git"
 alias dp="cd ~/p"
 alias js="cd ~/JavaSe"
 alias jj="cd ~/JavaSe/lib/src/main/java"
@@ -352,6 +367,7 @@ alias mu="cd ~/musik"
 alias o='cd ~/.oh-my-zsh/custom'
 alias oh='cd ~/.oh-my-zsh'
 alias un='cd ~/uni'
+alias sp='cd ~/git/ssp/FussballDB/'
 
 #curl
 alias cu='curl'
@@ -446,7 +462,7 @@ alias pmp="pr mplayer"
 alias ph="pr ssh"
 alias psp="ps -p"
 alias sl="sleep"
-alias wh="who"
+alias wh="which"
 
 # Radio
 alias ml="mplayer "
@@ -466,7 +482,7 @@ alias rhs='rhc ssh'
 alias ad='echo t@tk1.it|cli'
 alias ad2='echo 01573 9598 220 timo.koerner@hof-university.de dkoerner@konzertagentur-koerner.de'
 alias c='cat'
-alias ci='xclip -sel clip'
+alias -g ci='|xclip'
 alias -g co='xclip -o'
 alias dt='date +"%T"'
 alias d='declare -f'
