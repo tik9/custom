@@ -1,6 +1,6 @@
 #!/bin/zsh
 # altes Konto
-tim=http://stackoverflow.com/users/1705829/timo
+tim='https://github.com/gitaarik/django-admin-relation-links'
 
 # schriftfarbe autocomplete fg8 default
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
