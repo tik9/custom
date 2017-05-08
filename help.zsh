@@ -1,5 +1,4 @@
 #!/bin/zsh
-# altes Konto
 tim='https://github.com/gitaarik/django-admin-relation-links'
 
 # schriftfarbe autocomplete fg8 default
@@ -8,7 +7,7 @@ alias -g zsha='git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugin
 
 hilfedatei=$ZSH_CUSTOM/help.zsh
 idrs=~/.ssh/id_rsa.pub 
-login_rp=$ZSH_CUSTOM/login_rp
+login=$ZSH_CUSTOM/login_rp
 zr=~/.zshrc
 
 bold=`tput bold`
@@ -409,19 +408,21 @@ alias s='pm-suspend'
 
 #expect
 alias et='expect'
+alias log='g $login'
+
 alias r=sr
-alias sr='expect ~/.oh-my-zsh/custom/login_rp'
+alias sr='expect $login'
 
 
 # Hilfe
 alias -g h="--help"
 alias -g hd="$hilfedatei"
+alias hg="g $hilfedatei"
 alias hl="le $hilfedatei"
-alias hn="n $hilfedatei"
 
 # Konsole
 alias hs='\history -E'
-alias she='echo $0'
+alias se='echo $0'
 alias st='stty -a'
 alias tt='temp=$(tty) ; echo ${temp:5}'
 
@@ -459,6 +460,7 @@ alias ksl="ki sleep"
 alias pr2='ps -ef|grep'
 alias psl="pr sleep"
 alias pmp="pr mplayer"
+alias pn="pr ngro"
 alias ph="pr ssh"
 alias psp="ps -p"
 alias sl="sleep"
@@ -473,10 +475,6 @@ alias br="ml http://br-mp3-bayern3-m.akacast.akamaistream.net/7/442/142692/v1/gn
 alias kl="ml -playlist http://minnesota.publicradio.org/tools/play/streams/classical.pls"
 alias mpr="ml -playlist http://minnesota.publicradio.org/tools/play/streams/news.pls"
 alias oe="ml http://194.232.200.156:8000" #oe3
-
-#rhc
-alias rhr='rhc app-restart'
-alias rhs='rhc ssh'
 
 
 alias ad='echo t@tk1.it|cli'
@@ -506,7 +504,6 @@ alias -g m='man'
 alias mkdir='mkdir -p'
 alias ppi='ps -o ppid= -p'
 alias prp='pgrep'
-alias r="expect $login_rp"
 alias sc="systemctl"
 alias so="sort"
 alias sou="source"
