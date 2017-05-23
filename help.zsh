@@ -326,8 +326,9 @@ fi
 
 function t(){
 
-if [ -f test100.zip ];then ; rm test100.zip;fi	
-	wget http://speedtest.wdc01.softlayer.com/downloads/test500.zip `if [ $os2 != "Android" ]; then ; echo --output-document=/dev/null;fi`
+$datei=test100.zip
+if [ -f $datei ];then ; rm $datei;fi	
+	wget http://speedtest.wdc01.softlayer.com/downloads/$datei `if [ $os2 != "Android" ]; then ; echo --output-document=/dev/null;fi`
 
 }
 
