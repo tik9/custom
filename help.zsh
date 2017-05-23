@@ -1,6 +1,5 @@
 #!/bin/zsh
-# altes Konto
-tim=http://stackoverflow.com/users/1705829/timo
+tim='https://github.com/gitaarik/django-admin-relation-links'
 
 # schriftfarbe autocomplete fg8 default
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
@@ -8,15 +7,18 @@ alias -g zsha='git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugin
 
 hilfedatei=$ZSH_CUSTOM/help.zsh
 idrs=~/.ssh/id_rsa.pub 
-login_rp=$ZSH_CUSTOM/login_rp
+login=$ZSH_CUSTOM/login_rp
 zr=~/.zshrc
 
 bold=`tput bold`
 normal=`tput sgr0`
 
 os=$(expr substr $(uname -s) 1 9)
+os2=`uname -a |cut -d' ' -f 14`
 
-if [[ $os = "Linux" ]] ;then;if [[ $lsb = 'Arch' ]]; then;pm='pacman';else;pm='apt-get';fi;else;pm='apt-cyg';fi
+if [[ $os = "Linux" ]] ;then;if [[ $lsb = 'Arch' ]]; then;pm='pacman';elif [[ $lsb = Ubuntu ]];then;pm='apt-get'; fi;else;pm='apt-cyg';fi
+
+alias pm='ec $pm'
 
 if [ $os != "CYGWIN_NT" ]; then
 
@@ -26,6 +28,15 @@ else
 	bi=$(wmic OS get OSArchitecture)
 	bi2=$(set | findstr ARCH)
 fi
+
+upd(){
+	mysql -uroot d -e "select table_schema as DatabaseName,
+  table_name,
+  update_time as letzteAktual
+from information_schema.tables
+where update_time > '2017-04-18'
+order by update_time asc"
+}
 
 te2(){
 	echo h w
@@ -42,7 +53,12 @@ he(){
 	echo "${normal}"
 
 	for var in ${@:$schleife} ; do; echo $var;done
-	echo
+}
+
+_alarm() {
+  ( speaker-test --frequency $1 --test sine )&
+  pid=$!;sleep ${2}s
+  kill -9 $pid
 }
 
 function aur(){
@@ -50,7 +66,7 @@ if [ $os = "Linux" ]; then;
 if [[ $lsb = 'Arch' ]]; then;
 pacman -Rs -
 else
-$pm autoremove;
+apt autoremove;
 fi;else
 apt-cyg remove;fi
 }
@@ -78,7 +94,7 @@ function in(){
 	df -h
 	if [[ $os = "Linux" ]] ;then
 			     if [[ $lsb = 'Arch' ]]; then; pacman -S --noconfirm $1
-                else;`echo $pm` install -y $1;fi
+                else;apt-get install -y $1;fi
 	else
 		apt-cyg install $1
 	fi
@@ -255,11 +271,15 @@ fi
 
 function sc2(){
 if [ -z "$1" ]; then
-  he `basename $0` Basis:$ipbas 1.Interface 2.Datei "3.letztes Oktett" 4.Zielordner "(5.port)"
+  he `basename $0` Basis:$ipbas 1.Interface 2.Datei "3.letztes Oktett" 4.Zielordner (5.user) "(6.port)"
   return
 fi
 ipbas $1
-	scp  $2 $ipbas.$3:$4 
+
+user=$5
+if [ -z $5 ];user=root
+
+scp  $2 $user@$ipbas.$3:$4 
 }
 
 
@@ -307,7 +327,7 @@ fi
 function t(){
 
 if [ -f test500.zip ];then ; lö test500.zip;fi	
-	wget http://speedtest.wdc01.softlayer.com/downloads/test500.zip `if [ $os = "Linux" ]; then ; echo --output-document=/dev/null;fi`
+	wget http://speedtest.wdc01.softlayer.com/downloads/test500.zip `if [ $os2 != "android" ]; then ; echo --output-document=/dev/null;fi`
 
 }
 
@@ -331,12 +351,13 @@ alias ua='unalias'
 # betriebssystem
 alias lsb="echo $lsb"
 alias os="echo $os"
-alias os2='uname -a'
+alias os2='echo $os2'
 alias pa='echo $path'
 
 
 #cd's
 alias da="cd ~/django"
+alias cg="cd ~/git"
 alias dp="cd ~/p"
 alias js="cd ~/JavaSe"
 alias jj="cd ~/JavaSe/lib/src/main/java"
@@ -345,6 +366,7 @@ alias mu="cd ~/musik"
 alias o='cd ~/.oh-my-zsh/custom'
 alias oh='cd ~/.oh-my-zsh'
 alias un='cd ~/uni'
+alias sp='cd ~/git/ssp/FussballDB/'
 
 #curl
 alias cu='curl'
@@ -386,19 +408,21 @@ alias s='pm-suspend'
 
 #expect
 alias et='expect'
+alias log='g $login'
+
 alias r=sr
-alias sr='expect ~/.oh-my-zsh/custom/login_rp'
+alias sr='expect $login'
 
 
 # Hilfe
 alias -g h="--help"
 alias -g hd="$hilfedatei"
+alias hg="g $hilfedatei"
 alias hl="le $hilfedatei"
-alias hn="n $hilfedatei"
 
 # Konsole
 alias hs='\history -E'
-alias she='echo $0'
+alias se='echo $0'
 alias st='stty -a'
 alias tt='temp=$(tty) ; echo ${temp:5}'
 
@@ -412,7 +436,7 @@ alias mst='mysql -uroot d -e "show tables"'
 # netzwerk
 alias dh='dhclient'
 alias ie='iwgetid -r'
-alias ie2='iwconfig 2>&1 | grep ESSID'
+alias ie2='iwconfig 2>&1 | grep -i ESSID'
 alias ip2="echo $ip"
 alias iw2='iwlist wlan0 scan'
 alias mip="echo $(dig +short myip.opendns.com @resolver1.opendns.com)"
@@ -436,11 +460,11 @@ alias ksl="ki sleep"
 alias pr2='ps -ef|grep'
 alias psl="pr sleep"
 alias pmp="pr mplayer"
-alias pse="ps -eo pid,comm,cmd,start,etime | grep -i"
+alias pn="pr ngro"
 alias ph="pr ssh"
 alias psp="ps -p"
 alias sl="sleep"
-alias wh="who"
+alias wh="which"
 
 # Radio
 alias ml="mplayer "
@@ -452,15 +476,11 @@ alias kl="ml -playlist http://minnesota.publicradio.org/tools/play/streams/class
 alias mpr="ml -playlist http://minnesota.publicradio.org/tools/play/streams/news.pls"
 alias oe="ml http://194.232.200.156:8000" #oe3
 
-#rhc
-alias rhr='rhc app-restart'
-alias rhs='rhc ssh'
-
 
 alias ad='echo t@tk1.it|cli'
 alias ad2='echo 01573 9598 220 timo.koerner@hof-university.de dkoerner@konzertagentur-koerner.de'
 alias c='cat'
-alias ci='xclip -sel clip'
+alias -g ci='|xclip'
 alias -g co='xclip -o'
 alias dt='date +"%T"'
 alias d='declare -f'
@@ -471,8 +491,8 @@ alias ec="echo"
 alias ex="exit"
 alias f="find / -name"
 alias f2="find -name"
-alias ge="grep"
-alias -g gr="|grep"
+alias ge="grep -i"
+alias -g gr="|grep -i"
 alias ha='halt'
 alias ho='echo $(hostname)'
 alias iban='DE637215 0000 00 5052 4271'
@@ -484,7 +504,6 @@ alias -g m='man'
 alias mkdir='mkdir -p'
 alias ppi='ps -o ppid= -p'
 alias prp='pgrep'
-alias r="expect $login_rp"
 alias sc="systemctl"
 alias so="sort"
 alias sou="source"
