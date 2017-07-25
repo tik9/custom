@@ -75,8 +75,8 @@ apt-cyg remove;fi
 
 	
 function g(){
-if [[ $os = "Linux" ]] ;then
-	geany $1 &
+	if [[ $os = "Linux" ]] ;then
+		geany $1 &
 	else;notepad++ $1 &;fi
 }
 
@@ -406,12 +406,8 @@ alias wl="echo Dict.;dict -D"
 alias w="dict -d fd-eng-deu"
 alias w2="dict"
 
-#Download
-alias au="git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions"
-
 
 # Editoren
-alias ab='abiword'
 alias v="vim"
 
 
@@ -490,21 +486,19 @@ alias kl="ml -playlist http://minnesota.publicradio.org/tools/play/streams/class
 alias mpr="ml -playlist http://minnesota.publicradio.org/tools/play/streams/news.pls"
 alias oe="ml http://194.232.200.156:8000" #oe3
 
-
-alias ad2='echo 01573 9598 220 timo.koerner@hof-university.de dkoerner@konzertagentur-koerner.de'
+alias ad2='echo 01573 9598 220 timo.koerner@hof-university.de'
 alias c='cat'
 alias -g ci='|xclip'
 alias -g co='xclip -o'
 alias dt='date +"%T"'
 alias de='declare -f'
-alias dfh='df -he'
-alias duh='du -he'
+alias dfh='df -h'
+alias duh='du -h'
 alias e="exec zsh"
 alias ec="echo"
 alias ex="exit"
 alias f="find / -name"
 alias f2="find -name"
-alias ge="grep -i"
 alias -g gr="|grep -i"
 alias ha='halt'
 alias iban='DE637215 0000 00 5052 4271'
