@@ -1,4 +1,5 @@
 #!/bin/zsh
+
 tim='https://github.com/gitaarik/django-admin-relation-links'
 
 # schriftfarbe autocomplete fg8 default
@@ -39,10 +40,10 @@ order by update_time asc"
 }
 
 te2(){
-	echo h w
+	echo he w
 }
 
-he(){
+hilfe(){
 #  echo "${bold}Os: $lsb${normal}"
 	echo "\n${bold}Hilfe, os: $os"
 	schleife=3
@@ -87,11 +88,11 @@ function i(){
 
 function in(){
 	if [ -z "$1" ]; then
-	he `basename $0` "Paket"
+	hilfe `basename $0` "Paket"
 	return
 	fi
 
-	df -h
+	df -he
 	if [[ $os = "Linux" ]] ;then
 			     if [[ $lsb = 'Arch' ]]; then; pacman -S --noconfirm $1
                 else;apt-get install -y $1;fi
@@ -99,13 +100,13 @@ function in(){
 		apt-cyg install $1
 	fi
 
-	df -h
+	df -he
 }
 
 
 function ipbas {
 	if [ -z "$1" ]; then
-		he `basename $0` "Zeigt interne ip-Adresse\n Argument 1: Netzwerk Interface (wlan0 oder eth0)"
+		hilfe `basename $0` "Zeigt interne ip-Adresse\n Argument 1: Netzwerk Interface (wlan0 oder eth0)"
 	return
 	fi
 	
@@ -117,7 +118,7 @@ function ipbas {
 
 function ipd(){
 	if [ -z "$1" ]; then
-	he `basename $0` "Interface"
+	hilfe `basename $0` "Interface"
 	return
 	fi
 	ip link set $1 down
@@ -126,7 +127,7 @@ function ipd(){
 function ipu(){
 		
 	if [ -z "$1" ]; then
-	he `basename $0` "Interface"
+	hilfe `basename $0` "Interface"
 	return
 	fi
 		ip link set $1 up
@@ -135,7 +136,7 @@ function ipu(){
 function iu(){
 	
 	if [ -z "$1" ]; then
-	he `basename $0` "Interface"
+	hilfe `basename $0` "Interface"
 	return
 	fi
 	
@@ -148,7 +149,7 @@ i
 
 function k(){
 	if [ -z "$1" ]; then
-	  he `basename $0` "Prozess für kill"
+	  hilfe `basename $0` "Prozess für kill"
 	  return
 	fi
 
@@ -167,7 +168,7 @@ function k(){
 
 function ki(){
 if [ -z "$1" ]; then
-  he `basename $0` "Prozess für killall"
+  hilfe `basename $0` "Prozess für killall"
   return
 fi
 	killall $1;
@@ -182,7 +183,7 @@ killscreens () {
 function las(){
 
 if [ -z "$1" ]; then
-  he `basename $0` "Lautstärke amixer mit 10  	multipliziert"
+  hilfe `basename $0` "Lautstärke amixer mit 10  	multipliziert"
   return
 fi
 
@@ -192,7 +193,7 @@ amixer set PCM $(expr $1 \* 10)%;
 # login remote shell
 function lss(){
 if [ -z "$1" ]; then
-  he `basename $0` "Interface" "letztes Oktett von ip " "opt. port"
+  hilfe `basename $0` "Interface" "letztes Oktett von ip " "opt. port"
   return
 fi
 	ipbas $1
@@ -201,9 +202,17 @@ fi
 }
 
 
+function mo(){
+if [ -z "$1" ]; then
+  hilfe `basename $0` "letzter Laufwerkbuchstabe"
+  return
+fi
+	mount /dev/sd"$1" /media/t/
+}
+	
 function mp(){
 if [ -z "$1" ]; then
-  he `basename $0` "Datei"
+  hilfe `basename $0` "Datei"
   return
 fi
 	mupdf $1 &
@@ -211,7 +220,7 @@ fi
 
 function mss(){
 	if [ -z "$1" ]; then
-	  he `basename $0` "Tab."
+	  hilfe `basename $0` "Tab."
 	  return
 	fi
 
@@ -224,7 +233,7 @@ function msde(){ mysql -uroot d -e "describe app1_$1"}
 
 function nm(){
 	if [ -z "$1" ]; then
-	  he `basename $0` "Interface"
+	  hilfe `basename $0` "Interface"
 	  return
 	fi
 ipbas $1
@@ -233,21 +242,27 @@ ipbas $1
 	
 
 function pd(){
-if [ "$1" = -h ]; then
-  he `basename $0` "argsleer" "Installierte Pakete zeigen, nur Linux"
-  return
-fi
+	if [ "$1" = -he ]; then
+	  hilfe `basename $0` "argsleer" "Installierte Pakete zeigen, nur Linux"
+	  return
+	fi
 
-if [[ $os = "Linux" ]] ;then
-if [[ $lsb = 'Arch' ]]; then;pacman -Qeq |less
-else
-	dpkg -l	|less;
-	fi;else cygcheck -c|less;fi
+	if [[ $os = "Linux" ]] ;then
+	if [[ $lsb = 'Arch' ]]; then;pacman -Qeq |less
+	else
+		dpkg -l	|less;
+		fi;else cygcheck -c|less;fi
 }
+
+pl(){
+
+ls -l $1 |less	
+}
+
 
 function pr(){
 if [ -z "$1" ]; then
-  he `basename $0` "grep mit 'prozess Substitution'" "Prozess"
+  hilfe `basename $0` "grep mit 'prozess Substitution'" "Prozess"
   return
   
 fi
@@ -258,7 +273,7 @@ function re(){
   echo "${bold}Os: $lsb${normal}"
 
 if [ -z "$1" ]; then
-  he `basename $0` "Löschen!" "Paket"
+  hilfe `basename $0` "Löschen!" "Paket"
   return
   
 fi
@@ -271,7 +286,7 @@ fi
 
 function sc2(){
 if [ -z "$1" ]; then
-  he `basename $0` Basis:$ipbas 1.Interface 2.Datei "3.letztes Oktett" 4.Zielordner (5.user) "(6.port)"
+  hilfe `basename $0` Basis:$ipbas 1.Interface 2.Datei "3.letztes Oktett" 4.Zielordner (5.user) "(6.port)"
   return
 fi
 ipbas $1
@@ -307,7 +322,7 @@ function schieb(){
 function sho(){
 
 if [ -z "$1" ]; then
-  he `basename $0` "Paket"
+  hilfe `basename $0` "Paket"
   return
 fi
 
@@ -317,7 +332,7 @@ apt-cyg show `echo $1`;else ; if [[ $lsb == 'Arch' ]] ;then;pacman -Ss $1 ;else;
 
 function si(){
 if [ -z "$1" ]; then
-  he `basename $0` "Zeit in Minuten bevor Ruhezustand"
+  hilfe `basename $0` "Zeit in Minuten bevor Ruhezustand"
   return
 fi
 	sleep $1m; hibernate 
@@ -333,8 +348,8 @@ if [ -f $datei ];then ; rm $datei;fi
 }
 
 function u(){
-if [ "$1" = -h ]; then
-  he `basename $0` "argsleer" "Upgrade machen"
+if [ "$1" = -he ]; then
+  hilfe `basename $0` "argsleer" "Upgrade machen"
   return
   
 fi	
@@ -357,17 +372,14 @@ alias pa='echo $path'
 
 
 #cd's
+alias bi="cd ~/bilder"
 alias da="cd ~/django"
-alias cg="cd ~/git"
-alias dp="cd ~/p"
-alias js="cd ~/JavaSe"
-alias jj="cd ~/JavaSe/lib/src/main/java"
-alias ma="cd ~/MyA"
 alias mu="cd ~/musik"
+alias mtt="cd /media/t"
 alias o='cd ~/.oh-my-zsh/custom'
 alias oh='cd ~/.oh-my-zsh'
 alias un='cd ~/uni'
-alias sp='cd ~/git/ssp/FussballDB/'
+alias sp='cd ~/uni/ssp/'
 
 #curl
 alias cu='curl'
@@ -380,12 +392,13 @@ alias cud='cu http://django-tjava.rhcloud.com/de/admin/'
 alias cp='cp -r'
 alias lö="rm -rf"
 alias md="mkdir -p"
-alias mo="chmod 700"
+alias mod="chmod 700"
 alias to='touch'
 
 #Dateisystem
 alias pt='parted'
 alias mn='mount'
+alias mt='l /media/t'
 alias um='umount'
 
 #Dict
@@ -416,7 +429,7 @@ alias sr='expect $login'
 
 
 # Hilfe
-alias -g h="--help"
+alias -g he="--help"
 alias -g hd="$hilfedatei"
 alias hg="g $hilfedatei"
 alias hl="le $hilfedatei"
@@ -435,7 +448,7 @@ alias mst='mysql -uroot d -e "show tables"'
 
 
 # netzwerk
-alias dh='dhclient'
+alias d='dhclient'
 alias ie='iwgetid -r'
 alias ie2='iwconfig 2>&1 | grep -i ESSID'
 alias ip2="echo $ip"
@@ -449,7 +462,7 @@ alias acl='apt-cyg listall'
 alias acl2='cygcheck'
 alias ag='apt-get'
 
-alias de="apt-cache depends"
+alias dep="apt-cache depends"
 alias der="apt-cache rdepends"
 alias up='ag update'
 
@@ -478,15 +491,14 @@ alias mpr="ml -playlist http://minnesota.publicradio.org/tools/play/streams/news
 alias oe="ml http://194.232.200.156:8000" #oe3
 
 
-alias ad='echo t@tk1.it|cli'
 alias ad2='echo 01573 9598 220 timo.koerner@hof-university.de dkoerner@konzertagentur-koerner.de'
 alias c='cat'
 alias -g ci='|xclip'
 alias -g co='xclip -o'
 alias dt='date +"%T"'
-alias d='declare -f'
-alias dfh='df -h'
-alias du='du -h'
+alias de='declare -f'
+alias dfh='df -he'
+alias duh='du -he'
 alias e="exec zsh"
 alias ec="echo"
 alias ex="exit"
@@ -495,25 +507,16 @@ alias f2="find -name"
 alias ge="grep -i"
 alias -g gr="|grep -i"
 alias ha='halt'
-alias ho='echo $(hostname)'
 alias iban='DE637215 0000 00 5052 4271'
-alias lag='amixer get PCM'
 alias le='less'
 alias -g lp='|less'
 alias lsh="ls -halt --full-time"
-alias -g m='man'
+alias m='man'
 alias mkdir='mkdir -p'
-alias ppi='ps -o ppid= -p'
-alias prp='pgrep'
-alias sc="systemctl"
-alias so="sort"
-alias sou="source"
-alias -g ta='|tail'
 alias te='if [ $os != "CYGWIN_NT" ]; then;terminator &;else; mintty;fi'
 alias tp='top'
 alias tr='tree'
 alias us="echo $USER"
-alias -g ve="--version"
 alias wp='chmod 777 -R .'
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
 
