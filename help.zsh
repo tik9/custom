@@ -1,6 +1,5 @@
 #!/bin/zsh
 
-tim='https://github.com/gitaarik/django-admin-relation-links'
 
 # schriftfarbe autocomplete fg8 default
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
@@ -10,6 +9,7 @@ hilfedatei=$ZSH_CUSTOM/help.zsh
 idrs=~/.ssh/id_rsa.pub 
 login=$ZSH_CUSTOM/login_rp
 zr=~/.zshrc
+mediaDir='/media/t'
 
 bold=`tput bold`
 normal=`tput sgr0`
@@ -203,11 +203,15 @@ fi
 
 
 function mo(){
-if [ -z "$1" ]; then
-  hilfe `basename $0` "letzter Laufwerkbuchstabe"
+if [ "$1" = 'hel' ]; then
+  hilfe `basename $0` "Findet USB-Bezeichnung"
   return
 fi
-	mount /dev/sd"$1" /media/t/
+
+dev=`lsblk|sed -n 5p|cut -f1 -d' '`
+
+	mount /dev/$dev $mediaDir
+	echo $dev in $mediaDir eingehängt
 }
 	
 function mp(){
@@ -359,10 +363,13 @@ apt-get dist-upgrade
 }
 
  
-# alias
+# alias/Funktionen
 alias a='alias|grep'
 alias am='alias -m'
+alias de='declare -f'
+alias ty='type'
 alias ua='unalias'
+alias wh="which"
 
 # betriebssystem
 alias lsb="echo $lsb"
@@ -375,17 +382,16 @@ alias pa='echo $path'
 alias bi="cd ~/bilder"
 alias da="cd ~/django"
 alias mu="cd ~/musik"
-alias mtt="cd /media/t"
+alias mtt="cd $mediaDir"
 alias o='cd ~/.oh-my-zsh/custom'
 alias oh='cd ~/.oh-my-zsh'
 alias un='cd ~/uni'
-alias sp='cd ~/uni/ssp/'
 
 #curl
 alias cu='curl'
 alias cl2='cu localhost'
 alias cl='cu localhost:8000'
-alias cud='cu http://django-tjava.rhcloud.com/de/admin/'
+alias cud='cu a.tk1.biz'
 
 
 #Dateiops
@@ -396,9 +402,9 @@ alias mod="chmod 700"
 alias to='touch'
 
 #Dateisystem
+alias lk="lsblk"
 alias pt='parted'
 alias mn='mount'
-alias mt='l /media/t'
 alias um='umount'
 
 #Dict
@@ -464,9 +470,7 @@ alias up='ag update'
 
 
 # ps
-alias -g ba="bash"
 alias ks="ki ssh"
-alias ksl="ki sleep"
 alias pr2='ps -ef|grep'
 alias psl="pr sleep"
 alias pmp="pr mplayer"
@@ -474,14 +478,13 @@ alias pn="pr ngro"
 alias ph="pr ssh"
 alias psp="ps -p"
 alias sl="sleep"
-alias wh="which"
 
 # Radio
 alias ml="mplayer "
 
 alias b="ml http://80.237.156.8:8120" # landsberg int.
-alias brh="ml http://br-mp3-brheimat-m.akacast.akamaistream.net/7/738/326703/v1/gnl.akacast.akamaistream.net/br_mp3_brheimat_m"
-alias br="ml http://br-mp3-bayern3-m.akacast.akamaistream.net/7/442/142692/v1/gnl.akacast.akamaistream.net/br_mp3_bayern3_m"
+alias brh="ml http://br-br1-nbopf.cast.addradio.de/br/br1/nbopf/mp3/128/stream.mp3"
+alias br="ml http://br-br3-live.cast.addradio.de/br/br3/live/mp3/56/stream.mp3"
 alias kl="ml -playlist http://minnesota.publicradio.org/tools/play/streams/classical.pls"
 alias mpr="ml -playlist http://minnesota.publicradio.org/tools/play/streams/news.pls"
 alias oe="ml http://194.232.200.156:8000" #oe3
@@ -491,7 +494,6 @@ alias c='cat'
 alias -g ci='|xclip'
 alias -g co='xclip -o'
 alias dt='date +"%T"'
-alias de='declare -f'
 alias dfh='df -h'
 alias duh='du -h'
 alias e="exec zsh"
