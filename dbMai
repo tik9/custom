@@ -1,9 +1,0 @@
-wann=('sonntag' 'montag' '' '')
-was=('theorie records' 'übung 5')
-wieviel=(1 2)
-array_size=4
-
-for((i=0;i<array_size;i++))
-do
-    echo ${wann[$i]} $'\x1d' ${was[$i]} $'\x1d' ${wieviel[$i]}
-done | column -t -s$'\x1d'

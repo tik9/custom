@@ -14,8 +14,9 @@ mediaDir='/media/t'
 bold=`tput bold`
 normal=`tput sgr0`
 
+tes=`arch`
+
 os=$(expr substr $(uname -s) 1 9)
-os2=`uname -a |cut -d' ' -f 14`
 
 if [[ $os = "Linux" ]] ;then;if [[ $lsb = 'Arch' ]]; then;pm='pacman';elif [[ $lsb = Ubuntu ]];then;pm='apt-get'; fi;else;pm='apt-cyg';fi
 
@@ -347,7 +348,7 @@ function t(){
 
 datei=test100.zip
 if [ -f $datei ];then ; rm $datei;fi	
-	wget http://speedtest.wdc01.softlayer.com/downloads/$datei `if [ $os2 != "Android" ]; then ; echo --output-document=/dev/null;fi`
+	wget http://speedtest.wdc01.softlayer.com/downloads/$datei `if [ arch != "Android" ]; then ; echo --output-document=/dev/null;fi`
 
 }
 
@@ -374,7 +375,6 @@ alias wh="which"
 # betriebssystem
 alias lsb="echo $lsb"
 alias os="echo $os"
-alias os2='echo $os2'
 alias pa='echo $path'
 
 
