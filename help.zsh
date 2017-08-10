@@ -31,14 +31,6 @@ else
 	bi2=$(set | findstr ARCH)
 fi
 
-upd(){
-	mysql -uroot d -e "select table_schema as DatabaseName,
-  table_name,
-  update_time as letzteAktual
-from information_schema.tables
-where update_time > '2017-04-18'
-order by update_time asc"
-}
 
 te2(){
 	echo he w
@@ -64,13 +56,13 @@ _alarm() {
 }
 
 function aur(){
-if [ $os = "Linux" ]; then;
-if [[ $lsb = 'Arch' ]]; then;
-pacman -Rs -
-else
-apt autoremove;
-fi;else
-apt-cyg remove;fi
+	if [ $os = "Linux" ]; then;
+	if [[ $lsb = 'Arch' ]]; then;
+		pacman -Rs -
+	else
+		apt autoremove;
+	fi;else
+	apt-cyg remove;fi
 }
 
 
@@ -174,10 +166,6 @@ if [ -z "$1" ]; then
 fi
 	killall $1;
 	ps -ef|grep $1;
-}
-
-killscreens () {
-    screen -ls | cut -d. -f1 | awk '{print $1}' | xargs kill
 }
 
 	
@@ -367,7 +355,7 @@ apt-get dist-upgrade
 # alias/Funktionen
 alias a='alias|grep'
 alias am='alias -m'
-alias de='declare -f'
+alias d='declare -f'
 alias ty='type'
 alias ua='unalias'
 alias wh="which"
@@ -447,10 +435,11 @@ alias me='mysql -uroot d -e'
 alias msd='mysql -uroot d'
 alias ms='mysql d'
 alias mst='mysql -uroot d -e "show tables"'
+alias upd='mysql -uroot d -e '\''select table_schema as DatabaseName,table_name, update_time as letzteAktual from information_schema.tables where update_time > "2017-07-18" order by update_time asc'\'''
 
 
 # netzwerk
-alias d='dhclient'
+alias dh='dhclient'
 alias ie='iwgetid -r'
 alias ie2='iwconfig 2>&1 | grep -i ESSID'
 alias ip2="echo $ip"
@@ -470,6 +459,7 @@ alias up='ag update'
 
 
 # ps
+alias kp="ki ml"
 alias ks="ki ssh"
 alias pr2='ps -ef|grep'
 alias psl="pr sleep"
@@ -480,7 +470,7 @@ alias psp="ps -p"
 alias sl="sleep"
 
 # Radio
-alias ml="mplayer "
+alias -g ml='mplayer'
 
 alias b="ml http://80.237.156.8:8120" # landsberg int.
 alias brh="ml http://br-br1-nbopf.cast.addradio.de/br/br1/nbopf/mp3/128/stream.mp3"
