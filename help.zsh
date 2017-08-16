@@ -3,7 +3,6 @@
 
 # schriftfarbe autocomplete fg8 default
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
-alias -g zsha='git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions'
 
 hilfedatei=$ZSH_CUSTOM/help.zsh
 idrs=~/.ssh/id_rsa.pub 
@@ -502,5 +501,6 @@ alias tr='tree'
 alias us="echo $USER"
 alias wp='chmod 777 -R .'
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
+alias -g zsha='git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions'
 
 echo "$0 aktualisiert von $$"
