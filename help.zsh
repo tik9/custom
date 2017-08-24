@@ -179,15 +179,20 @@ fi
 amixer set PCM $(expr $1 \* 10)%;
 }
 
+function lö(){
+	rm -rf
+}
+
 # login remote shell
 function lss(){
-if [ -z "$1" ]; then
-  hilfe `basename $0` "Interface" "letztes Oktett von ip " "opt. port"
-  return
-fi
-	ipbas $1
+	if [ -z "$1" ]; then
+	  hilfe `basename $0` "Interface" "letztes Oktett von ip " "opt. port"
+	  return
+	fi
+		ipbas $1
 
-        ssh $3 $ipbas.$2 
+			ssh $3 $ipbas.$2 
+	lö $2
 }
 
 
@@ -247,7 +252,7 @@ function pd(){
 		fi;else cygcheck -c|less;fi
 }
 
-pl(){
+function pl(){
 
 ls -l $1 |less	
 }
@@ -278,16 +283,18 @@ fi
 }
 
 function sc2(){
-if [ -z "$1" ]; then
-  hilfe `basename $0` Basis:$ipbas 1.Interface 2.Datei "3.letztes Oktett" 4.Zielordner (5.user) "(6.port)"
-  return
-fi
-ipbas $1
+	if [ -z "$1" ]; then
+	  hilfe `basename $0` Basis:$ipbas 1.Interface 2.Datei "3.letztes Oktett" 4.Zielordner (5.user) "(6.port)"
+	  return
+	fi
+	ipbas $1
 
-user=$5
-if [ -z $5 ];user=root
+	user=$5
+	if [ -z $5 ];user=root
 
-scp  $2 $user@$ipbas.$3:$4 
+	scp  $2 $user@$ipbas.$3:$4 
+	lö $2
+	echo $2 gelöscht vom Server
 }
 
 
@@ -384,7 +391,6 @@ alias cud='cu a.tk1.biz'
 
 #Dateiops
 alias cp='cp -r'
-alias lö="rm -rf"
 alias md="mkdir -p"
 alias mod="chmod 700"
 alias to='touch'
@@ -411,18 +417,15 @@ alias rest='reboot'
 alias s='pm-suspend'
 
 #expect
-alias et='expect'
-alias log='g $login'
-
-alias r=sr
+alias b='sr 44'
 alias sr='expect $login'
 
 
 # Hilfe
-alias -g he="--help"
+alias -g h="he"
+alias -g he="--help |less"
 alias -g hd="$hilfedatei"
 alias hg="g $hilfedatei"
-alias hl="le $hilfedatei"
 
 # Konsole
 alias hs='\history -E'
@@ -443,8 +446,9 @@ alias dh='dhclient'
 alias ie='iwgetid -r'
 alias ie2='iwconfig 2>&1 | grep -i ESSID'
 alias ip2="echo $ip"
-alias iw2='iwlist wlan0 scan'
-alias mip="echo $(dig +short myip.opendns.com @resolver1.opendns.com)"
+alias iw2='iwlist wlan0 scan lp'
+#alias mip="echo $(dig +short myip.opendns.com @resolver1.opendns.com)"
+alias n='/etc/init.d/networking restart'
 alias p="ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de"
 
 
@@ -463,7 +467,7 @@ alias kp="ki ml"
 alias ks="ki ssh"
 alias pr2='ps -ef|grep'
 alias psl="pr sleep"
-alias pmp="pr mplayer"
+alias pmp="pr ml"
 alias pn="pr ngro"
 alias ph="pr ssh"
 alias psp="ps -p"
@@ -472,15 +476,15 @@ alias sl="sleep"
 # Radio
 alias -g ml='mplayer'
 
-alias b="ml http://80.237.156.8:8120" # landsberg int.
-alias brh="ml http://br-br1-nbopf.cast.addradio.de/br/br1/nbopf/mp3/128/stream.mp3"
+alias c="ml http://br-br1-nbopf.cast.addradio.de/br/br1/nbopf/mp3/128/stream.mp3"
 alias br="ml http://br-br3-live.cast.addradio.de/br/br3/live/mp3/56/stream.mp3"
 alias kl="ml -playlist http://minnesota.publicradio.org/tools/play/streams/classical.pls"
 alias mpr="ml -playlist http://minnesota.publicradio.org/tools/play/streams/news.pls"
 alias oe="ml http://194.232.200.156:8000" #oe3
+alias ri="ml http://80.237.156.8:8120" # landsberg int.
 
 alias ad2='echo 01573 9598 220 timo.koerner@hof-university.de'
-alias c='cat'
+alias ca='cat'
 alias -g ci='|xclip'
 alias -g co='xclip -o'
 alias dt='date +"%T"'
@@ -496,9 +500,12 @@ alias ha='halt'
 alias iban='DE637215 0000 00 5052 4271'
 alias le='less'
 alias -g lp='|less'
+alias lb="lsb_release -a
+"
 alias lsh="ls -halt --full-time"
 alias m='man'
 alias mkdir='mkdir -p'
+alias rf='rfkill list'
 alias te='if [ $os != "CYGWIN_NT" ]; then;terminator &;else; mintty;fi'
 alias tp='top'
 alias tr='tree'
