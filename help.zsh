@@ -437,6 +437,7 @@ alias iw2='iwlist wlan0 scan lp'
 alias j='journalctl -xe'
 #alias mip="echo $(dig +short myip.opendns.com @resolver1.opendns.com)"
 alias n='/etc/init.d/networking restart'
+
 alias p="ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de"
 
 
