@@ -14,8 +14,6 @@ mediaDir='/media/t'
 bold=`tput bold`
 normal=`tput sgr0`
 
-tes=`arch`
-
 os=$(expr substr $(uname -s) 1 9)
 os2=`uname -a |cut -d' ' -f 14`
 
@@ -36,6 +34,8 @@ fi
 
 te2(){
 	echo he w
+if [ ! -z $1 ];then;ziel=$1;fi
+	ziel =`pwd`
 }
 
 hilfe(){
@@ -50,23 +50,6 @@ hilfe(){
 
 	for var in ${@:$schleife} ; do; echo $var;done
 }
-
-_alarm() {
-  ( speaker-test --frequency $1 --test sine )&
-  pid=$!;sleep ${2}s
-  kill -9 $pid
-}
-
-function aur(){
-	if [ $os = "Linux" ]; then;
-	if [[ $lsb = 'Arch' ]]; then;
-		pacman -Rs -
-	else
-		apt autoremove;
-	fi;else
-	apt-cyg remove;fi
-}
-
 
 	
 function g(){
@@ -182,7 +165,7 @@ amixer set PCM $(expr $1 \* 10)%;
 }
 
 function lö(){
-	rm -rf
+	rm -rf $1
 }
 
 # login remote shell
@@ -191,10 +174,9 @@ function lss(){
 	  hilfe `basename $0` "Interface" "letztes Oktett von ip " "opt. port"
 	  return
 	fi
-		ipbas $1
+	ipbas $1
 
-			ssh $3 $ipbas.$2 
-	lö $2
+	ssh $3 $ipbas.$2 
 }
 
 
@@ -212,7 +194,7 @@ dev=`lsblk|sed -n 5p|cut -f1 -d' '`
 	
 function mp(){
 if [ -z "$1" ]; then
-  hilfe `basename $0` "Datei"
+  hilfe `basename $0` "Pdf"
   return
 fi
 	mupdf $1 &
@@ -272,16 +254,16 @@ fi
 function re(){
   echo "${bold}Os: $lsb${normal}"
 
-if [ -z "$1" ]; then
-  hilfe `basename $0` "Löschen!" "Paket"
-  return
-  
-fi
+	if [ -z "$1" ]; then
+	  hilfe `basename $0` "Löschen!" "Paket"
+	  return
+	  
+	fi
 
-if [ $os = "CYGWIN_NT" ]; then;apt-cyg remove $1;else
-if [[ $lsb == 'Arch' ]] ;then;pacman -R --noconfirm $1
-else;apt-get autoremove $1;fi
-fi
+	if [ $os = "CYGWIN_NT" ]; then;apt-cyg remove $1;else
+	if [[ $lsb == 'Arch' ]] ;then;pacman -R --noconfirm $1
+	else;apt-get autoremove $1;fi
+	fi
 }
 
 function sc2(){
@@ -301,25 +283,29 @@ function sc2(){
 
 
 function schieb(){
-	if [[ $os = "Linux" ]] ;then
-		ver='/home/t/Downloads/';
-	else
-		ver='/cygdrive/c/Users/tk/Downloads/'
-	fi
+	dow='/home/t/Downloads/';
 
 	if [ -z "$1" ]; then
-	  he2 `basename $0` "Ziel"
-	  return
+	  hilfe `basename $0` "Ziel"
+	  #return
 	fi
-
-	ziel=$1
-	if [ $1 = 'r' ];then;ziel='/root';fi
+	ziel=`pwd`
+	#echo $ziel
 	
-	ls -t $ver
-	mv "$ver`ls -t $ver | head -n1`" $ziel
-	echo Inhalt von $ziel;ls $ziel
+	if [ ! -z $1 ];then;ziel=$1;fi
+	#return $ziel
+	ls -hlt $dow
+	dat="$dow`ls -t $dow | head -n1`"
+	mv $dat $ziel
+	echo Inhalt von $ziel;ls -hl $ziel
+	#return $dat
 }
 
+function install()
+	a=schieb
+	echo $a
+	#a=t.tar.gz
+	#tar xzvf $a
 
 function sho(){
 
@@ -350,14 +336,14 @@ function t(){
 }
 
 function u(){
-if [ "$1" = -he ]; then
-  hilfe `basename $0` "argsleer" "Upgrade machen"
-  return
-  
-fi	
+	if [ "$1" = -he ]; then
+	  hilfe `basename $0` "argsleer" "Upgrade machen"
+	  return
+	  
+	fi	
 
-apt-get upgrade	
-apt-get dist-upgrade	
+	apt-get upgrade	
+	apt-get dist-upgrade	
 }
 
  
@@ -440,7 +426,7 @@ alias me='mysql -uroot d -e'
 alias msd='mysql -uroot d'
 alias ms='mysql d'
 alias mst='mysql -uroot d -e "show tables"'
-alias upd='mysql -uroot d -e '\''select table_schema as DatabaseName,table_name, update_time as letzteAktual from information_schema.tables where update_time > "2017-07-18" order by update_time asc'\'''
+alias upd='mysql -uroot d -e '\''select table_schema as DatabaseName,table_name, update_time as letzteAktual from information_schema.tables where update_time > "2017-08-18" order by update_time asc'\'''
 
 
 # netzwerk
@@ -449,6 +435,7 @@ alias ie='iwgetid -r'
 alias ie2='iwconfig 2>&1 | grep -i ESSID'
 alias ip2="echo $ip"
 alias iw2='iwlist wlan0 scan lp'
+alias j='journalctl -xe'
 #alias mip="echo $(dig +short myip.opendns.com @resolver1.opendns.com)"
 alias n='/etc/init.d/networking restart'
 alias p="ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de"
@@ -478,15 +465,16 @@ alias sl="sleep"
 # Radio
 alias -g ml='mplayer'
 
-alias c="ml http://br-br1-nbopf.cast.addradio.de/br/br1/nbopf/mp3/128/stream.mp3"
-alias br="ml http://br-br3-live.cast.addradio.de/br/br3/live/mp3/56/stream.mp3"
+alias b1="ml http://br-br1-nbopf.cast.addradio.de/br/br1/nbopf/mp3/128/stream.mp3"
+alias b3="ml http://br-br3-live.cast.addradio.de/br/br3/live/mp3/56/stream.mp3"
 alias kl="ml -playlist http://minnesota.publicradio.org/tools/play/streams/classical.pls"
 alias mpr="ml -playlist http://minnesota.publicradio.org/tools/play/streams/news.pls"
 alias oe="ml http://194.232.200.156:8000" #oe3
-alias ri="ml http://80.237.156.8:8120" # landsberg int.
+alias r="ml http://80.237.156.8:8120" # landsberg int.
+
 
 alias ad2='echo 01573 9598 220 timo.koerner@hof-university.de'
-alias ca='cat'
+alias c='cat'
 alias -g ci='|xclip'
 alias -g co='xclip -o'
 alias dt='date +"%T"'
