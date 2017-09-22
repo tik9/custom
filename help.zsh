@@ -433,7 +433,6 @@ alias tt='temp=$(tty) ; echo ${temp:5}'
 #mysql
 alias me='mysql -uroot d -e'
 alias msd='mysql -uroot d'
-alias ms='mysql d'
 alias mst='mysql -uroot d -e "show tables"'
 alias upd='mysql -uroot d -e '\''select table_schema as DatabaseName,table_name, update_time as letzteAktual from information_schema.tables where update_time > "2017-08-18" order by update_time asc'\'''
 
