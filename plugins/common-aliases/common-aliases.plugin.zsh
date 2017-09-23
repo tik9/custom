@@ -11,14 +11,14 @@ alias lS='ls -1FSsh'
 alias lrt='ls -1Fcrt'
 alias lsh="ls -halt --full-time"
 
-alias zshrc='g ~/.zshrc' # Quick access to the ~/.zshrc file
+alias zshrc='g ~/.zshrc' 
 
 alias grep='grep --color'
 alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS} '
 
 alias ta='tail -f'
 
-# Command line head / tail shortcuts
+# Command line head / tail
 alias -g H='| head'
 alias -g T='| tail'
 alias -g G='| grep'
@@ -35,16 +35,10 @@ alias ff='find . -type f -name'
 
 alias his='history'
 alias hgrep="fc -El 0 | grep"
-alias help='man'
-alias p='ps -f'
+alias pf='ps -f'
 alias sortnr='sort -n -r'
 alias unexport='unset'
 
-alias whereami=display_info
-
-alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
 
 # zsh is able to auto-do some kungfoo
 # depends on the SUFFIX :)
@@ -68,7 +62,6 @@ if is-at-least 4.2.0; then
 
   #Lese Dokumente
   alias -s pdf=mupdf
-  alias -s ps=gv
   alias -s dvi=xdvi
   alias -s chm=xchm
   alias -s djvu=djview
