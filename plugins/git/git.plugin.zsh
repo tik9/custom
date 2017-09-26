@@ -155,6 +155,7 @@ alias ggpur='ggu'
 compdef _git ggpur=git-checkout
 
 alias gh='grep -H -r "<<<<<<< HEAD"'
+alias ghh='git grep "<<<<<<< HEAD"'
 alias gignore='git update-index --assume-unchanged'
 alias gignored='git ls-files -v | grep "^[[:lower:]]"'
 alias gin='git init'
