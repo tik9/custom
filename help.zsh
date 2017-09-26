@@ -1,5 +1,11 @@
 #!/bin/zsh
 
+fu(){
+	cd /root
+	pwd
+	cd `pwd`
+	pwd
+}
 
 # schriftfarbe autocomplete fg8 default
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
@@ -9,12 +15,13 @@ idrs=~/.ssh/id_rsa.pub
 login=$ZSH_CUSTOM/login_rp
 zr=~/.zshrc
 mediaDir='/media/t'
+dowDir='/home/t/Downloads'
 
 bold=`tput bold`
 normal=`tput sgr0`
 
 os=$(expr substr $(uname -s) 1 9)
-os2=`uname -a |cut -d' ' -f 14`
+arc=`uname -a |cut -d' ' -f 14`
 
 
 if [[ $os = "Linux" ]] ;then;if [[ $lsb = 'Arch' ]]; then;pm='pacman';elif [[ $lsb = Ubuntu ]];then;pm='apt-get'; fi;else;pm='apt-cyg';fi
@@ -180,12 +187,12 @@ function lss(){
 
 
 function mo(){
-if [ "$1" = 'hel' ]; then
-  hilfe `basename $0` "Findet USB-Bezeichnung"
-  return
-fi
+	if [ "$1" = 'hel' ]; then
+	  hilfe `basename $0` "Findet USB-Bezeichnung"
+	  return
+	fi
 
-dev=`lsblk|sed -n 5p|cut -f1 -d' '`
+	dev=`lsblk|sed -n 5p|cut -f1 -d' '`
 
 	mount /dev/$dev $mediaDir
 	echo $dev in $mediaDir eingehängt
@@ -217,7 +224,7 @@ function nm(){
 	  hilfe `basename $0` "Interface"
 	  return
 	fi
-ipbas $1
+	ipbas $1
 	nmap -sP $ipbas.1/24
 }
 	
@@ -229,7 +236,7 @@ function pd(){
 	fi
 
 	if [[ $os = "Linux" ]] ;then
-	if [[ $lsb = 'Arch' ]]; then;pacman -Qeq |less
+		if [[ $lsb = 'Arch' ]]; then;pacman -Qeq |less
 	else
 		dpkg -l	|less;
 		fi;else cygcheck -c|less;fi
@@ -237,7 +244,7 @@ function pd(){
 
 function pl(){
 
-ls -l $1 |less	
+	ls -l $1 |less	
 }
 
 
@@ -284,27 +291,29 @@ function sc2(){
 function schieb(){
 	dow='/home/t/Downloads/';
 
-	if [ -z "$1" ]; then
-	  hilfe `basename $0` "Ziel"
-	  #return
+	if [ "$1" = -h ]; then
+	  hilfe `basename $0` "Ziel (optional)"
+	  return
 	fi
 	ziel=`pwd`
-	#echo $ziel
 	
 	if [ ! -z $1 ];then;ziel=$1;fi
-	#return $ziel
-	ls -hlt $dow
+	
+#	echo Inhalt von $dow;ls -hlt $dow
 	dat="$dow`ls -t $dow | head -n1`"
 	mv $dat $ziel
-	echo Inhalt von $ziel;ls -hl $ziel
-	#return $dat
+
+#	echo Inhalt von $ziel;ls -hl $ziel
+	echo $ziel/`ls -t $ziel | head -n1`
 }
 
-function install()
-	a=schieb
-	echo $a
-	#a=t.tar.gz
-	#tar xzvf $a
+function unt(){
+	#schieb
+	a=$(schieb)
+	#cd `pwd`
+	tar xzvf $a
+	rm $a
+}
 
 function sho(){
 
@@ -314,12 +323,12 @@ if [ -z "$1" ]; then
 fi
 
 if [ $os = "CYGWIN_NT" ]; then
-apt-cyg show `echo $1`;else ; if [[ $lsb == 'Arch' ]] ;then;pacman -Ss $1 ;else;apt-cache show $1|less;fi;fi;
+	apt-cyg show `echo $1`;else ; if [[ $lsb == 'Arch' ]] ;then;pacman -Ss $1 ;else;apt-cache show $1|less;fi;fi;
 }
 
 function si(){
 if [ -z "$1" ]; then
-  hilfe `basename $0` "Zeit in Minuten bevor Ruhezustand"
+  hilfe `basename $0` "Zeit in Minuten ohne Einheit bevor Ruhezustand"
   return
 fi
 	sleep $1m; hibernate 
@@ -330,7 +339,7 @@ function t(){
 
 	datei=test100.zip
 	if [ -f $datei ];then ; rm $datei;fi	
-		wget http://speedtest.wdc01.softlayer.com/downloads/$datei `if [ $os2 != "Android" ]; then ; echo --output-document=/dev/null;fi`
+		wget http://speedtest.wdc01.softlayer.com/downloads/$datei `if [ $arc != "Android" ]; then ; echo --output-document=/dev/null;fi`
 
 }
 
@@ -338,7 +347,6 @@ function u(){
 	if [ "$1" = -he ]; then
 	  hilfe `basename $0` "argsleer" "Upgrade machen"
 	  return
-	  
 	fi	
 
 	apt-get upgrade	
@@ -357,12 +365,14 @@ alias wh="which"
 # betriebssystem
 alias lsb="echo $lsb"
 alias os="echo $os"
+alias arc="echo $arc"
 alias pa='echo $path'
 
 
 #cd's
 alias bi="cd ~/bilder"
 alias da="cd ~/django"
+alias dow="cd $dowDir"
 alias mu="cd ~/musik"
 alias mtt="cd $mediaDir"
 alias o='cd ~/.oh-my-zsh/custom'
@@ -371,7 +381,6 @@ alias un='cd ~/uni'
 
 #curl
 alias cu='curl'
-alias cl2='cu localhost'
 alias cl='cu localhost:8000'
 alias cud='cu a.tk1.biz'
 
@@ -423,7 +432,6 @@ alias tt='temp=$(tty) ; echo ${temp:5}'
 #mysql
 alias me='mysql -uroot d -e'
 alias msd='mysql -uroot d'
-alias ms='mysql d'
 alias mst='mysql -uroot d -e "show tables"'
 alias upd='mysql -uroot d -e '\''select table_schema as DatabaseName,table_name, update_time as letzteAktual from information_schema.tables where update_time > "2017-08-18" order by update_time asc'\'''
 
@@ -468,8 +476,6 @@ alias -g ml='mplayer'
 alias b1="ml http://br-br1-nbopf.cast.addradio.de/br/br1/nbopf/mp3/128/stream.mp3"
 alias b3="ml http://br-br3-live.cast.addradio.de/br/br3/live/mp3/56/stream.mp3"
 alias kl="ml -playlist http://minnesota.publicradio.org/tools/play/streams/classical.pls"
-alias mpr="ml -playlist http://minnesota.publicradio.org/tools/play/streams/news.pls"
-alias oe="ml http://194.232.200.156:8000" #oe3
 alias r="ml http://80.237.156.8:8120" # landsberg int.
 
 
@@ -492,7 +498,6 @@ alias le='less'
 alias -g lp='|less'
 alias lb="lsb_release -a
 "
-alias lsh="ls -halt --full-time"
 alias m='man'
 alias mkdir='mkdir -p'
 alias rf='rfkill list'
@@ -503,5 +508,6 @@ alias us="echo $USER"
 alias wp='chmod 777 -R .'
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
 alias -g zsha='git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions'
+alias z='gpicview'
 
 echo "$0 aktualisiert von $$"

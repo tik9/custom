@@ -15,23 +15,17 @@ kid(){
 
 }
 
-alias dv='p3 -c "import django;print(django.get_version())"'
+# Finde python Dateien
+alias pyfind='find . -name "*.py"'
+
+
+# Greppe
+alias pygrep='grep --include="*.py"'
+
+
 alias p3="python3"
 alias py='/root/progr/pycharm/bin/pycharm.sh&'
 alias pg="g $custom/plugins/python/python.plugin.zsh"
-
-
-# python django
-alias cm="dm compilemessages"
-alias dcd="cd ~/django"
-alias dk='dcd;kid 0;dr'
-alias dm='p3 manage.py'
-alias dr='dm runserver'
-alias mi="dm migrate"
-alias mk="dm makemigrations"
-alias mm="dm makemessages"
-
-alias z="dcd;dr"
 
 
 #pip
