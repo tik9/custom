@@ -1,11 +1,5 @@
 #!/bin/zsh
 
-fu(){
-	cd /root
-	pwd
-	cd `pwd`
-	pwd
-}
 
 # schriftfarbe autocomplete fg8 default
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
@@ -22,11 +16,11 @@ normal=`tput sgr0`
 
 os=$(expr substr $(uname -s) 1 9)
 arc=`uname -a |cut -d' ' -f 14`
+ip=`ip addr show $1 | grep -Po 'inet \K[\d.]+'`
 
 
 if [[ $os = "Linux" ]] ;then;if [[ $lsb = 'Arch' ]]; then;pm='pacman';elif [[ $lsb = Ubuntu ]];then;pm='apt-get'; fi;else;pm='apt-cyg';fi
 
-alias pm='ec $pm'
 
 if [ $os != "CYGWIN_NT" ]; then
 
@@ -94,7 +88,6 @@ function ipbas {
 	return
 	fi
 	
-	ip=`ip addr show $1 | grep -Po 'inet \K[\d.]+'`
 	ipbas=$(echo $ip | cut -d . -f -3)	
 	echo Basis Ip $ipbas
 }
@@ -335,7 +328,7 @@ fi
 }
 
 
-function t(){
+function te(){
 
 	datei=test100.zip
 	if [ -f $datei ];then ; rm $datei;fi	
@@ -358,7 +351,7 @@ function u(){
 alias a='alias|grep'
 alias am='alias -m'
 alias d='declare -f'
-alias ty='type'
+alias t='type'
 alias ua='unalias'
 alias wh="which"
 
@@ -409,7 +402,6 @@ alias v="vim"
 
 # Energie
 alias hi='hibernate'
-alias rest='reboot'
 alias s='pm-suspend'
 
 #expect
@@ -437,7 +429,7 @@ alias upd='mysql -uroot d -e '\''select table_schema as DatabaseName,table_name,
 
 
 # netzwerk
-alias dh='dhclient'
+alias dh='dhclient;i'
 alias ie='iwgetid -r'
 alias ie2='iwconfig 2>&1 | grep -i ESSID'
 alias ip2="echo $ip"
@@ -456,6 +448,7 @@ alias ag='apt-get'
 
 alias dep="apt-cache depends"
 alias der="apt-cache rdepends"
+alias pm='ec $pm'
 alias up='ag update'
 
 
@@ -501,7 +494,7 @@ alias lb="lsb_release -a
 alias m='man'
 alias mkdir='mkdir -p'
 alias rf='rfkill list'
-alias te='if [ $os != "CYGWIN_NT" ]; then;terminator &;else; mintty;fi'
+alias ter='if [ $os != "CYGWIN_NT" ]; then;terminator &;else; mintty;fi'
 alias tp='top'
 alias tr='tree'
 alias us="echo $USER"
