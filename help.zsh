@@ -485,6 +485,7 @@ alias ex="exit"
 alias f="find / -name"
 alias f2="find -name"
 alias -g gr="|grep -i"
+alias -g gp="g++"
 alias ha='halt'
 alias iban='DE637215 0000 00 5052 4271'
 alias le='less'
