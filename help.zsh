@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-
+one='https://onedrive.live.com/?authkey=%21ACt0ADtNqXttMrg&id=A8C37D6344DA2882%21351875&cid=A8C37D6344DA2882'
 # schriftfarbe autocomplete fg8 default
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
 
@@ -280,6 +280,10 @@ function sc2(){
 	echo $2 gelöscht vom Server
 }
 
+function sc3(){
+	
+	scp ls -t | head -n1 192.168.188.44 /root/sqlBack
+}
 
 function schieb(){
 	dow='/home/t/Downloads/';
