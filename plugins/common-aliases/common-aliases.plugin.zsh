@@ -29,7 +29,17 @@ else
 	bi2=$(set | findstr ARCH)
 fi
 
-
+sortieren_datum(){
+	ls -lt $1| grep "^-" | awk '{
+key=$6$7
+freq[key]++
+}
+END {
+for (date in freq)
+        printf "%s\t%d\n", date, freq[date]
+}'
+#| head -n1
+}
 
 hilfe(){
 #  echo "${bold}Os: $lsb${normal}"
@@ -273,6 +283,26 @@ function sc2(){
 	echo $2 gelöscht vom Server
 }
 
+
+function schieb(){
+	dow='/home/t/Downloads/';
+
+	if [ "$1" = -h ]; then
+	  hilfe `basename $0` "anzahl Dat" "Ziel (optional)"
+	  return
+	fi
+	ziel=`pwd`
+	
+	if [ ! -z $2 ];then;ziel=$2;fi
+	for i in `seq 1 $1`; do; 	
+		dat="$dow`ls -t $dow | head -n1`"
+
+		mv $dat $ziel
+
+		echo $dat
+	done
+}
+
 function scmysql(){
 	if [ "$1" = -h ]; then
 	  hilfe `basename $0` "argsleer" "Erstelle sql-Datei, dann kopieren auf Laptop"
@@ -284,24 +314,6 @@ function scmysql(){
 	lö $(date +"%m_%Y").sql
 }
 
-function schieb(){
-	dow='/home/t/Downloads/';
-
-	if [ "$1" = -h ]; then
-	  hilfe `basename $0` "Ziel (optional)"
-	  return
-	fi
-	ziel=`pwd`
-	
-	if [ ! -z $1 ];then;ziel=$1;fi
-	
-#	echo Inhalt von $dow;ls -hlt $dow
-	dat="$dow`ls -t $dow | head -n1`"
-	mv $dat $ziel
-
-#	echo Inhalt von $ziel;ls -hl $ziel
-	echo $ziel/`ls -t $ziel | head -n1`
-}
 
 function unt(){
 	#schieb
@@ -445,14 +457,14 @@ alias mst='mysql -uroot d -e "show tables"'
 
 # netzwerk
 alias dh='dhclient;i'
-alias ie='iwgetid -r'
+alias f='iwgetid -r'
 alias ie2='iwconfig 2>&1 | grep -i ESSID'
 alias ip2="echo $ip"
 alias iw2='iwlist wlan0 scan n'
-alias j='journalctl -xe'
+alias j='iw2'
+alias jo='journalctl -xe'
 #alias mip="echo $(dig +short myip.opendns.com @resolver1.opendns.com)"
 alias ne='/etc/init.d/networking restart'
-
 alias p="ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de"
 
 
@@ -492,14 +504,13 @@ echo "$0 aktualisiert von $$"
 
 
 # Command line head / tail
-alias -g H='| head'
-alias -g T='| tail'
-alias -g G='| grep'
-alias -g LL="2>&1 | less"
-alias -g CA="2>&1 | cat -A"
+#alias -g H='| head'
+#alias -g LL="2>&1 | less"
+#alias -g CA="2>&1 | cat -A"
 alias -g NE="2> /dev/null"
 alias -g NUL="> /dev/null 2>&1"
-alias -g P="2>&1| pygmentize -l pytb"
+#alias -g P="2>&1| pygmentize -l pytb"
+#alias -g ti='| tail'
 
 
 alias ad2='echo 01573 9598 220 timo.koerner@hof-university.de'
@@ -536,32 +547,13 @@ alias ter='if [ $os != "CYGWIN_NT" ]; then;terminator &;else; mintty;fi'
 alias tp='top'
 alias tr='tree'
 alias us="echo $USER"
+alias -g ve="--version"
 alias wp='chmod 777 -R .'
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
 alias -g zsha='git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions'
 alias z='gpicview'
 alias zshrc='g ~/.zshrc' 
 
-
-# zsh is able to auto-do some kungfoo
-# depends on the SUFFIX :)
-if is-at-least 4.2.0; then
-  # open browser on urls
-  if [[ -n "$BROWSER" ]]; then
-    _browser_fts=(htm html de org net com at cx nl se dk)
-    for ft in $_browser_fts; do alias -s $ft=$BROWSER; done
-  fi
-
-  _editor_fts=(cpp cxx cc c hh h inl asc txt TXT tex)
-  for ft in $_editor_fts; do alias -s $ft=$EDITOR; done
-
-  if [[ -n "$XIVIEWER" ]]; then
-    _image_fts=(jpg jpeg png gif mng tiff tif xpm)
-    for ft in $_image_fts; do alias -s $ft=$XIVIEWER; done
-  fi
-
-  _media_fts=(ape avi flv m4a mkv mov mp3 mpeg mpg ogg ogm rm wav webm)
-  for ft in $_media_fts; do alias -s $ft=mplayer; done
 
   #Lese Dokumente
   alias -s pdf=mupdf
@@ -575,7 +567,6 @@ if is-at-least 4.2.0; then
   alias -s tar="tar tf"
   alias -s tar.gz="echo "
   alias -s ace="unace l"
-fi
 
-# Make zsh know about hosts already accessed by SSH
+# zsh soll wissen mit welchen hosts sich durch ssh verbunden wurde
 zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
