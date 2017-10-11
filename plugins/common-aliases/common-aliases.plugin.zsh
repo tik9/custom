@@ -58,7 +58,11 @@ hilfe(){
 function g(){
 	if [[ $os = "Linux" ]] ;then
 		geany $1 &
-	else;notepad++ $1 &;fi
+	elif
+	[[ $arc = "Android" ]] ;then
+	vi $1 &
+	else
+	;notepad++ $1 &;fi
 }
 
 
@@ -555,11 +559,10 @@ alias z='gpicview'
 alias zshrc='g ~/.zshrc' 
 
 
-  #Lese Dokumente
-  alias -s pdf=mupdf
-  alias -s dvi=xdvi
-  alias -s chm=xchm
-  alias -s djvu=djview
+#Lese Dokumente
+alias -s pdf=mupdf
+alias -s dvi=xdvi
+alias -s chm=xchm
 
   #list whats inside packed file
   alias -s zip="unzip -l"
