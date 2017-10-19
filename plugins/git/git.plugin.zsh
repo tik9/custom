@@ -188,7 +188,7 @@ compdef _git gpoat=git-push
 alias gpsum='git push --set-upstream origin master'
 alias gpv='git push -v'
 
-alias gr='git remote'
+alias gre='git remote'
 alias gra='git remote add'
 alias grb='git rebase'
 alias grba='git rebase --abort'

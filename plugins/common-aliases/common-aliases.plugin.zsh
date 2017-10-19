@@ -31,15 +31,15 @@ fi
 
 sortieren_datum(){
 	ls -lt $1| grep "^-" | awk '{
-key=$6$7
-freq[key]++
+	key=$6$7
+	freq[key]++
+	}
+	END {
+	for (date in freq)
+			printf "%s\t%d\n", date, freq[date]
+	}'| tail -n1
 }
-END {
-for (date in freq)
-        printf "%s\t%d\n", date, freq[date]
-}'
-#| head -n1
-}
+
 
 hilfe(){
 #  echo "${bold}Os: $lsb${normal}"
@@ -54,6 +54,12 @@ hilfe(){
 	for var in ${@:$schleife} ; do; echo $var;done
 }
 
+
+ersetz(){
+	for x in *" "*; do
+  mv -- "$x" "${x// /_}"
+	done
+}
 	
 function g(){
 	if [[ $os = "Linux" ]] ;then
@@ -127,11 +133,10 @@ function iu(){
 	if [[ $os = "Linux" ]] ;then
 		ipd $1;ipu $1
 else;echo Kein Linux;fi
-
-i
+i;p
 }
 
-function k(){
+function kil(){
 	if [ -z "$1" ]; then
 	  hilfe `basename $0` "Prozess für kill"
 	  return
@@ -228,6 +233,10 @@ function nm(){
 	nmap -sP $ipbas.1/24
 }
 	
+function p(){
+	ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de
+	
+}
 
 function pd(){
 	if [ "$1" = -he ]; then
@@ -343,12 +352,19 @@ function si(){
 	  hilfe `basename $0` "Zeit in Minuten ohne Einheit bevor Ruhezustand"
 	  return
 	fi
-		sleep $1m; hibernate 
+	secs=$(($1 * 60))
+	while [ $secs -gt 0 ]; do
+	   echo -ne "$secs\033[0K\r"
+	   sleep 1
+	   : $((secs--))
+	done
+	 hibernate 
 }
 
 
 function q(){
-
+# zeige WLAN ssid
+f
 	datei=test100.zip
 	if [ -f $datei ];then ; rm $datei;fi	
 		wget http://speedtest.wdc01.softlayer.com/downloads/$datei `if [ $arc != "Android" ]; then ; echo --output-document=/dev/null;fi`
@@ -391,6 +407,7 @@ alias o='cd ~/.oh-my-zsh/custom'
 alias oh='cd ~/.oh-my-zsh'
 alias sd='cd /sdcard'
 alias u='cd ~/uni'
+alias uc='cd ~/uni/c'
 
 #curl
 alias cu='curl'
@@ -417,6 +434,7 @@ alias w2="dict"
 
 # Editoren
 alias v="vim"
+alias ab="abiword"
 
 
 # Energie
@@ -449,7 +467,6 @@ alias lr='ls -tRFh'   #sortiert nach Datum,rekursiv,Typ,human readable
 alias lt='ls -ltFh'   #lange Liste,sortiert nach Datum,show type,human readable
 alias ll='ls -l'      #lange Liste
 alias lS='ls -1FSsh'
-alias lrt='ls -1Fcrt'
 alias lsh="ls -halt --full-time"
 
 
@@ -462,14 +479,13 @@ alias mst='mysql -uroot d -e "show tables"'
 # netzwerk
 alias dh='dhclient;i'
 alias f='iwgetid -r'
-alias ie2='iwconfig 2>&1 | grep -i ESSID'
+alias ie='iwconfig 2>&1 | grep -i ESSID'
 alias ip2="echo $ip"
-alias iw2='iwlist wlan0 scan n'
-alias j='iw2'
+alias iw2='iwlist wlan0 scan'
+alias j='iw2 gr bayern'
 alias jo='journalctl -xe'
 #alias mip="echo $(dig +short myip.opendns.com @resolver1.opendns.com)"
-alias ne='/etc/init.d/networking restart'
-alias p="ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de"
+alias ne='/etc/init.d/networking restart;sleep 1;i'
 
 
 # package mgt.
@@ -534,16 +550,15 @@ alias ff='find . -type f -name'
 alias fin="find / -name"
 alias -g gr="|grep -i"
 alias -g gp="g++"
-alias ha='halt'
 alias hgrep="fc -El 0 | grep"
 alias his='history'
 alias iban='DE637215 0000 00 5052 4271'
 alias le='less -WiNS'
-alias lb="lsb_release -a
-"
 alias m='man'
 alias mkdir='mkdir -p'
 alias -g n='|less'
+alias plu='ec $plugins'
+alias pro='ec $prompt'
 alias rf='rfkill list'
 alias sortnr='sort -n -r'
 alias ta='tail -f'

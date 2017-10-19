@@ -19,11 +19,16 @@ kid(){
 alias pyfind='find . -name "*.py"'
 
 
-# Greppe
+# Grep
 alias pygrep='grep --include="*.py"'
 
+p3(){
+if [ $os != "CYGWIN_NT" ]; then
 
-alias p3="python3"
+	python3
+else
+	python;fi
+}
 alias py='/root/progr/pycharm/bin/pycharm.sh&'
 alias pg="g $custom/plugins/python/python.plugin.zsh"
 
