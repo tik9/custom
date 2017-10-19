@@ -14,13 +14,13 @@ normal=`tput sgr0`
 
 os=$(expr substr $(uname -s) 1 9)
 arc=`uname -a |cut -d' ' -f 14`
-ip=`ip addr show $1 | grep -Po 'inet \K[\d.]+'`
 
 
 if [[ $os = "Linux" ]] ;then;if [[ $lsb = 'Arch' ]]; then;pm='pacman';elif [[ $lsb = Ubuntu ]];then;pm='apt-get'; fi;else;pm='apt-cyg';fi
 
 
 if [ $os != "CYGWIN_NT" ]; then
+ip=`ip addr show $1 | grep -Po 'inet \K[\d.]+'`
 
 	lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
 
