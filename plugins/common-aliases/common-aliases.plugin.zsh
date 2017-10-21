@@ -266,6 +266,19 @@ fi
 	grep $1 =(ps aux)
 }
 
+function q(){
+# zeige WLAN ssid
+if [ $os != "CYGWIN_NT" ]; then
+
+	f
+fi
+	datei=test100.zip
+#	if [ -f $datei ];then ; rm $datei;fi	
+		wget http://speedtest.wdc01.softlayer.com/downloads/$datei `if [ $os = "Linux" ]; then ; echo --output-document=/dev/null;fi`
+	if [ -f $datei ];then ; rm $datei;fi	
+
+}
+
 function re(){
   echo "${bold}Os: $lsb${normal}"
 
@@ -362,15 +375,6 @@ function si(){
 }
 
 
-function q(){
-# zeige WLAN ssid
-f
-	datei=test100.zip
-	if [ -f $datei ];then ; rm $datei;fi	
-		wget http://speedtest.wdc01.softlayer.com/downloads/$datei `if [ $arc != "Android" ]; then ; echo --output-document=/dev/null;fi`
-
-}
-
 function up(){
 	if [ "$1" = -he ]; then
 	  hilfe `basename $0` "argsleer" "Upgrade machen"
@@ -383,7 +387,7 @@ function up(){
 
  
 # alias/Funktionen
-alias a='alias|grep'
+alias al='alias|grep'
 alias am='alias -m'
 alias d='declare -f'
 alias t='type'

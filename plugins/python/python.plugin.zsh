@@ -30,7 +30,7 @@ else
 	python;fi
 }
 alias py='/root/progr/pycharm/bin/pycharm.sh&'
-alias pg="g $custom/plugins/python/python.plugin.zsh"
+alias pg="g $ZSH_CUSTOM/plugins/python/python.plugin.zsh"
 
 
 #pip
