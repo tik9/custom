@@ -523,6 +523,9 @@ alias b3="ml http://br-br3-live.cast.addradio.de/br/br3/live/mp3/56/stream.mp3"
 alias kl="ml -playlist http://minnesota.publicradio.org/tools/play/streams/classical.pls"
 alias r="ml http://80.237.156.8:8120" # landsberg int.
 
+# zsh
+alias plu='ec $plugins'
+alias pro='ec $prompt'
 
 echo "$0 aktualisiert von $$"
 
@@ -561,8 +564,7 @@ alias le='less -WiNS'
 alias m='man'
 alias mkdir='mkdir -p'
 alias -g n='|less'
-alias plu='ec $plugins'
-alias pro='ec $prompt'
+
 alias rf='rfkill list'
 alias sortnr='sort -n -r'
 alias ta='tail -f'
