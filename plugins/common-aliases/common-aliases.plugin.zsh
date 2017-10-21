@@ -20,7 +20,7 @@ if [[ $os = "Linux" ]] ;then;if [[ $lsb = 'Arch' ]]; then;pm='pacman';elif [[ $l
 
 
 if [ $os != "CYGWIN_NT" ]; then
-ip=`ip addr show $1 | grep -Po 'inet \K[\d.]+'`
+	ip=`ip addr show $1 | grep -Po 'inet \K[\d.]+'`
 
 	lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
 
@@ -29,7 +29,7 @@ else
 	bi2=$(set | findstr ARCH)
 fi
 
-sortieren_datum(){
+function sortieren_datum(){
 	ls -lt $1| grep "^-" | awk '{
 	key=$6$7
 	freq[key]++
@@ -41,7 +41,7 @@ sortieren_datum(){
 }
 
 
-hilfe(){
+function hilfe(){
 #  echo "${bold}Os: $lsb${normal}"
 	echo "\n${bold}Hilfe, os: $os"
 	schleife=3
@@ -55,7 +55,7 @@ hilfe(){
 }
 
 
-ersetz(){
+function ersetz(){
 	for x in *" "*; do
   mv -- "$x" "${x// /_}"
 	done
@@ -132,8 +132,8 @@ function iu(){
 	
 	if [[ $os = "Linux" ]] ;then
 		ipd $1;ipu $1
-else;echo Kein Linux;fi
-i;p
+	else;echo Kein Linux;fi
+	i;p
 }
 
 function kil(){
@@ -156,23 +156,23 @@ function kil(){
 
 
 function ki(){
-if [ -z "$1" ]; then
-  hilfe `basename $0` "Prozess für killall"
-  return
-fi
-	killall $1;
-	ps -ef|grep $1;
+	if [ -z "$1" ]; then
+	  hilfe `basename $0` "Prozess für killall"
+	  return
+	fi
+		killall $1;
+		ps -ef|grep $1;
 }
 
 	
 function las(){
 
-if [ -z "$1" ]; then
-  hilfe `basename $0` "Lautstärke amixer mit 10  	multipliziert"
-  return
-fi
+	if [ -z "$1" ]; then
+	  hilfe `basename $0` "Lautstärke amixer mit 10  	multipliziert"
+	  return
+	fi
 
-amixer set PCM $(expr $1 \* 10)%;
+	amixer set PCM $(expr $1 \* 10)%;
 }
 
 function lö(){
@@ -258,12 +258,25 @@ function pl(){
 
 
 function pr(){
-if [ -z "$1" ]; then
+	if [ -z "$1" ]; then
+	  hilfe `basename $0` "grep mit 'prozess Substitution'" "Prozess"
+	  return
+	fi
+	grep $1 =(ps aux)
+}
+
+function pre(){
+	if [ -z "$1" ]; then
   hilfe `basename $0` "grep mit 'prozess Substitution'" "Prozess"
   return
-  
 fi
-	grep $1 =(ps aux)
+	
+	for file in *;do
+	if [[ $file != *"c_"* ]]; then
+		mv "$file" ${1}${file}
+	fi
+	done
+	l
 }
 
 function q(){
@@ -526,6 +539,8 @@ alias r="ml http://80.237.156.8:8120" # landsberg int.
 # zsh
 alias plu='ec $plugins'
 alias pro='ec $prompt'
+alias ra='ec $RANDOM_THEME'
+alias zt='ec $zsh_THEME'
 
 echo "$0 aktualisiert von $$"
 
