@@ -519,6 +519,12 @@ alias b3="ml http://br-br3-live.cast.addradio.de/br/br3/live/mp3/56/stream.mp3"
 alias kl="ml -playlist http://minnesota.publicradio.org/tools/play/streams/classical.pls"
 alias r="ml http://80.237.156.8:8120" # landsberg int.
 
+# zsh
+alias e="exec zsh"
+alias rt="ec $RANDOM_THEME"
+alias zt="ec $ZSH_THEME"
+alias -g zsha='git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions'
+alias zshrc='g ~/.zshrc' 
 
 echo "$0 aktualisiert von $$"
 
@@ -542,7 +548,6 @@ alias dfh='df -h'
 alias dud='du -d 1 -h'
 alias duf='du -sh *'
 alias duh='du -h'
-alias e="exec zsh"
 alias ec="echo"
 alias ex="exit"
 alias fd='find . -type d -name'
@@ -569,9 +574,7 @@ alias us="echo $USER"
 alias -g ve="--version"
 alias wp='chmod 777 -R .'
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
-alias -g zsha='git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions'
 alias z='gpicview'
-alias zshrc='g ~/.zshrc' 
 
 
 #Lese Dokumente
@@ -585,6 +588,3 @@ alias -s chm=xchm
   alias -s tar="tar tf"
   alias -s tar.gz="echo "
   alias -s ace="unace l"
-
-# zsh soll wissen mit welchen hosts sich durch ssh verbunden wurde
-zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
