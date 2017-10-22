@@ -12,7 +12,7 @@ dowDir='/home/t/Downloads'
 bold=`tput bold`
 normal=`tput sgr0`
 
-os=$(expr substr $(uname -s) 1 9)
+os=`uname -a |cut -d' ' -f 1`
 arc=`uname -a |cut -d' ' -f 14`
 
 
@@ -59,6 +59,10 @@ function ersetz(){
 	for x in *" "*; do
   mv -- "$x" "${x// /_}"
 	done
+}
+
+function f(){
+	iwgetid -r	
 }
 	
 function g(){
@@ -279,18 +283,20 @@ fi
 	l
 }
 
-function q(){
-# zeige WLAN ssid
-if [ $os != "CYGWIN_NT" ]; then
 
-	f
-fi
+function q(){
+	# zeige WLAN ssid (iwget)
+	if [[ $os != "CYGWIN_NT" && $arc != 'Android' ]]; then
+
+		f;printf "\n";
+	fi
 	datei=test100.zip
 #	if [ -f $datei ];then ; rm $datei;fi	
 		wget http://speedtest.wdc01.softlayer.com/downloads/$datei `if [ $os = "Linux" ]; then ; echo --output-document=/dev/null;fi`
 	if [ -f $datei ];then ; rm $datei;fi	
 
 }
+
 
 function re(){
   echo "${bold}Os: $lsb${normal}"
@@ -495,7 +501,6 @@ alias mst='mysql -uroot d -e "show tables"'
 
 # netzwerk
 alias dh='dhclient;i'
-alias f='iwgetid -r'
 alias ie='iwconfig 2>&1 | grep -i ESSID'
 alias ip2="echo $ip"
 alias iw2='iwlist wlan0 scan'
