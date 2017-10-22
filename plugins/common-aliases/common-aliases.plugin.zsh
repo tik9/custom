@@ -283,6 +283,10 @@ fi
 	l
 }
 
+int_trap() {
+    echo "Ctrl-C gedrückt"
+}
+
 
 function q(){
 	# zeige WLAN ssid (iwget)
@@ -291,10 +295,14 @@ function q(){
 		f;printf "\n";
 	fi
 	datei=test100.zip
-#	if [ -f $datei ];then ; rm $datei;fi	
-		wget http://speedtest.wdc01.softlayer.com/downloads/$datei `if [[ $os = "Linux" && $arc != 'Android' ]]; then ; echo --output-document=/dev/null;fi`
-	if [ -f $datei ];then ; rm $datei;fi	
 
+	trap int_trap INT
+	echo drücke Ctrl-C
+
+		wget http://speedtest.wdc01.softlayer.com/downloads/$datei `if [[ $os = "Linux" && $arc != 'Android' ]]; then ; echo --output-document=/dev/null;fi`
+	
+	if [ -f $datei ];then ; rm $datei;fi	
+	echo Ende
 }
 
 
@@ -410,7 +418,6 @@ alias al='alias|grep'
 alias am='alias -m'
 alias d='declare -f'
 alias t='type'
-alias ua='unalias'
 alias wh="which"
 
 # betriebssystem
@@ -593,6 +600,7 @@ alias ta='tail -f'
 alias ter='if [ $os != "CYGWIN_NT" ]; then;terminator &;else; mintty;fi'
 alias tp='top'
 alias tr='tree'
+alias ua="uname -a"
 alias us="echo $USER"
 alias -g ve="--version"
 alias wp='chmod 777 -R .'
