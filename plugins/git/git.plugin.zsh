@@ -3,7 +3,7 @@ zstyle -s ":vcs_info:git:*:-all-" "command" _omz_git_git_cmd
 : ${_omz_git_git_cmd:=git}
 
 #
-# Functions
+# Funktionen
 #
 
 # The name of the current branch
@@ -41,9 +41,10 @@ function gi(){
 }
 
 #
-# Aliases
+# Aliase
 #
 
+alias a='gs'
 alias ga='git add --all'
 alias gal='git config --get-regexp alias'
 alias gapa='git add --patch'
