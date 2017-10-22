@@ -123,32 +123,33 @@ alias ggpull='git pull origin $(git_current_branch)'
 compdef _git ggpull=git-checkout
 
 function ggp() {
-if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
-git push origin "${*}"
-else
-[[ "$#" == 0 ]] && local b="$(git_current_branch)"
-git push origin "${b:=$1}"
-fi
+	if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
+		git push origin "${*}"
+	else
+		[[ "$#" == 0 ]] && local b="$(git_current_branch)"
+		git push origin "${b:=$1}"
+	fi
 }
 
-alias ggpl='g $custom/plugins/git/git.plugin.zsh'
+alias ggpl='g $ZSH_CUSTOM/plugins/git/git.plugin.zsh'
 
 compdef _git ggp=git-checkout
 
 alias ggpush='git push origin $(git_current_branch)'
+
 compdef _git ggpush=git-checkout
-ggpnp() {
-if [[ "$#" == 0 ]]; then
-ggl && ggp
-else
-ggl "${*}" && ggp "${*}"
-fi
+function ggpnp() {
+	if [[ "$#" == 0 ]]; then
+	ggl && ggp
+	else
+	ggl "${*}" && ggp "${*}"
+	fi
 }
 compdef _git ggpnp=git-checkout
 alias ggsup='git branch --set-upstream-to=origin/$(git_current_branch)'
-ggu() {
-[[ "$#" != 1 ]] && local b="$(git_current_branch)"
-git pull --rebase origin "${b:=$1}"
+function ggu() {
+	[[ "$#" != 1 ]] && local b="$(git_current_branch)"
+	git pull --rebase origin "${b:=$1}"
 }
 compdef _git ggu=git-checkout
 alias ggpur='ggu'
