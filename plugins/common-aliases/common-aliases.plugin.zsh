@@ -292,7 +292,7 @@ function q(){
 	fi
 	datei=test100.zip
 #	if [ -f $datei ];then ; rm $datei;fi	
-		wget http://speedtest.wdc01.softlayer.com/downloads/$datei `if [ $os = "Linux" ]; then ; echo --output-document=/dev/null;fi`
+		wget http://speedtest.wdc01.softlayer.com/downloads/$datei `if [[ $os = "Linux" && $arc != 'Android' ]]; then ; echo --output-document=/dev/null;fi`
 	if [ -f $datei ];then ; rm $datei;fi	
 
 }
