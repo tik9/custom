@@ -290,18 +290,18 @@ int_trap() {
 
 function q(){
 	# zeige WLAN ssid (iwget)
-	if [[ $os != "CYGWIN_NT" && $arc != 'Android' ]]; then
+	if [[ $os != "CYGWIN_NT" && $arc != 'Android' && `uname -m` != 'armv7l' ]]; then
 
 		f;printf "\n";
 	fi
 	datei=test100.zip
 
 	trap int_trap INT
-	echo drücke Ctrl-C
+	echo Ctrl-C zum Beenden des downloads $datei
 
 		wget http://speedtest.wdc01.softlayer.com/downloads/$datei `if [[ $os = "Linux" && $arc != 'Android' ]]; then ; echo --output-document=/dev/null;fi`
 	
-	if [ -f $datei ];then ; rm $datei;fi	
+	if [ -f $datei ];then ; rm $datei; echo "$datei wird gelöscht"; fi	
 	echo Ende
 }
 
