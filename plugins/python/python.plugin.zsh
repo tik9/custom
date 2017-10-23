@@ -23,11 +23,11 @@ alias pyfind='find . -name "*.py"'
 alias pygrep='grep --include="*.py"'
 
 p3(){
-if [ $os != "CYGWIN_NT" ]; then
+if [ $os != "CYGWIN_NT-6.1" ]; then
 
 	python3
 else
-	python;fi
+	python.exe;fi
 }
 alias py='/root/progr/pycharm/bin/pycharm.sh&'
 alias pg="g $ZSH_CUSTOM/plugins/python/python.plugin.zsh"

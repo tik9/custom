@@ -1,4 +1,4 @@
-one='https://onedrive.live.com/?authkey=%21ACt0ADtNqXttMrg&id=A8C37D6344DA2882%21351875&cid=A8C37D6344DA2882'
+
 # schriftfarbe autocomplete fg8 default
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
 
@@ -13,21 +13,27 @@ bold=`tput bold`
 normal=`tput sgr0`
 
 os=`uname -a |cut -d' ' -f 1`
-arc=`uname -a |cut -d' ' -f 14`
 
+if [ $os != "CYGWIN_NT-6.1" ]; then
+
+	arc=`uname -a |cut -d' ' -f 14`
+else
+	arc=`uname -a |cut -d' ' -f 6`
+fi
 
 if [[ $os = "Linux" ]] ;then;if [[ $lsb = 'Arch' ]]; then;pm='pacman';elif [[ $lsb = Ubuntu ]];then;pm='apt-get'; fi;else;pm='apt-cyg';fi
 
 
-if [ $os != "CYGWIN_NT" ]; then
+if [ $os != "CYGWIN_NT-6.1" ]; then
 	ip=`ip addr show $1 | grep -Po 'inet \K[\d.]+'`
 
 	lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
-
+	
 else
-	bi=$(wmic OS get OSArchitecture)
+	bim=$(wmic OS get OSArchitecture)
 	bi2=$(set | findstr ARCH)
-fi
+	#echo cygwin os
+	fi
 
 function sortieren_datum(){
 	ls -lt $1| grep "^-" | awk '{
@@ -56,8 +62,11 @@ function hilfe(){
 
 
 function ersetz(){
-	for x in *" "*; do
-  mv -- "$x" "${x// /_}"
+	dateien=`find . -name "* *"`
+
+	for x in $dateien; do
+	mv -- "$x" "${x// /_}"
+	echo $x ohne Leerzeichen 
 	done
 }
 
@@ -66,6 +75,7 @@ function f(){
 }
 	
 function g(){
+	
 	if [[ $os = "Linux" ]] ;then
 		geany $1 &
 	elif
@@ -83,8 +93,8 @@ function i(){
 
 function in(){
 	if [ -z "$1" ]; then
-	hilfe `basename $0` "Paket"
-	return
+		hilfe `basename $0` "Paket"
+		return
 	fi
 
 	df -he
@@ -271,7 +281,7 @@ function pr(){
 
 function pre(){
 	if [ -z "$1" ]; then
-  hilfe `basename $0` "grep mit 'prozess Substitution'" "Prozess"
+  hilfe `basename $0` "Prefix"
   return
 fi
 	
@@ -290,7 +300,7 @@ int_trap() {
 
 function q(){
 	# zeige WLAN ssid (iwget)
-	if [[ $os != "CYGWIN_NT" && $arc != 'Android' ]]; then
+	if [[ $os != "CYGWIN_NT-6.1" && $arc != 'Android' ]]; then
 
 		f;printf "\n";
 	fi
@@ -301,7 +311,7 @@ function q(){
 
 		wget http://speedtest.wdc01.softlayer.com/downloads/$datei `if [[ $os = "Linux" && $arc != 'Android' ]]; then ; echo --output-document=/dev/null;fi`
 	
-	if [ -f $datei ];then ; rm $datei;fi	
+	if [ -f $datei ];then ; echo rm;rm $datei;fi	
 	echo Ende
 }
 
@@ -309,13 +319,11 @@ function q(){
 function re(){
   echo "${bold}Os: $lsb${normal}"
 
-	if [ -z "$1" ]; then
-	  hilfe `basename $0` "Löschen!" "Paket"
+	if [ -z "$1" ]; then;hilfe `basename $0` "Löschen!" "Paket"
 	  return
-	  
 	fi
 
-	if [ $os = "CYGWIN_NT" ]; then;apt-cyg remove $1;else
+	if [ $os = "CYGWIN_NT-6.1" ]; then;apt-cyg remove $1;else
 	if [[ $lsb == 'Arch' ]] ;then;pacman -R --noconfirm $1
 	else;apt-get autoremove $1;fi
 	fi
@@ -383,7 +391,7 @@ function sho(){
 	  return
 	fi
 
-	if [ $os = "CYGWIN_NT" ]; then
+	if [ $os = "CYGWIN_NT-6.1" ]; then
 		apt-cyg show `echo $1`;else ; if [[ $lsb == 'Arch' ]] ;then;pacman -Ss $1 ;else;apt-cache show $1|less;fi;fi;
 }
 
@@ -432,7 +440,6 @@ alias bi="cd ~/bilder"
 alias da="cd ~/django"
 alias dow="cd $dowDir"
 alias mu="cd ~/musik"
-alias mtt="cd $mediaDir"
 alias o='cd ~/.oh-my-zsh/custom'
 alias oh='cd ~/.oh-my-zsh'
 alias sd='cd /sdcard'
@@ -597,7 +604,7 @@ alias -g n='|less'
 alias rf='rfkill list'
 alias sortnr='sort -n -r'
 alias ta='tail -f'
-alias ter='if [ $os != "CYGWIN_NT" ]; then;terminator &;else; mintty;fi'
+alias ter='if [ $os != "CYGWIN_NT-6.1" ]; then;terminator &;else; mintty;fi'
 alias tp='top'
 alias tr='tree'
 alias ua="uname -a"
