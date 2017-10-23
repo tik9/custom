@@ -56,10 +56,14 @@ function hilfe(){
 
 
 function ersetz(){
-	for x in *" "*; do
-  mv -- "$x" "${x// /_}"
+	for file in *; do
+  mv -- "$file" "${file// /_}"
+  	if [[ $file != *"c_"* ]]; then
+		mv "$file" ${1}${file}
+	fi
 	done
 }
+
 
 function f(){
 	iwgetid -r	
@@ -155,6 +159,7 @@ function kil(){
 	if [ -z "grep $1 =(ps aux)" ];then
 	echo Prozess gekillt
 	fi
+		echo Prozesse mit $1 \n;
 	ps -ef|grep $1
 }
 
@@ -540,7 +545,6 @@ alias ag='apt-get'
 
 alias dep="apt-cache depends"
 alias der="apt-cache rdepends"
-alias pm='ec $pm'
 alias upd='ag update'
 
 
