@@ -155,7 +155,7 @@ function kil(){
 	if [ -z "grep $1 =(ps aux)" ];then
 	echo Prozess gekillt
 	fi
-
+	ps -ef|grep $1
 }
 
 
@@ -165,7 +165,8 @@ function ki(){
 	  return
 	fi
 		killall $1;
-		ps -ef|grep $1;
+		echo Prozesse mit $1 \n
+		ps -ef|grep $1
 }
 
 	
@@ -206,6 +207,7 @@ function mo(){
 	mount /dev/$dev $mediaDir
 	echo $dev in $mediaDir eingehängt
 }
+
 	
 function mp(){
 if [ -z "$1" ]; then
@@ -215,12 +217,10 @@ fi
 	mupdf $1 &
 }
 
-function mss(){
-	if [ -z "$1" ]; then
-	  hilfe `basename $0` "Tab."
-	  return
-	fi
 
+function mss(){
+	if [ -z "$1" ]; then;hilfe `basename $0` "Tab.";return
+	fi
 	mysql -uroot d -e "select*from app1_$1"
 }
 
@@ -229,12 +229,10 @@ function msde(){ mysql -uroot d -e "describe app1_$1"}
 
 
 function nm(){
-	if [ -z "$1" ]; then
-	  hilfe `basename $0` "Interface"
+	if [ -z "$1" ]; then;hilfe `basename $0` "Interface"
 	  return
 	fi
-	ipbas $1
-	nmap -sP $ipbas.1/24
+	ipbas $1 ;nmap -sP $ipbas.1/24
 }
 	
 function p(){
@@ -461,6 +459,10 @@ alias wl="echo Dict.;dict -D"
 alias w="dict -d fd-eng-deu"
 alias w2="dict"
 
+#Dokumente
+alias -s pdf=mupdf
+alias -s dvi=xdvi
+
 
 # Editoren
 alias v="vim"
@@ -476,11 +478,25 @@ alias b='sr 44'
 alias sr='expect $login'
 
 
+# head / tail
+alias -g H='| head'
+alias -g LL="2>&1 | less"
+alias -g NUL="> /dev/null 2>&1"
+alias ta='tail -f'
+alias -g ti='| tail'
+
 # Hilfe
 alias -g h="he"
 alias -g he="--help |less"
 alias -g hd="$hilfedatei"
 alias hg="g $hilfedatei"
+
+#Komprimierung
+alias -s zip="unzip -l"
+alias -s rar="unrar l"
+alias -s tar="tar tf"
+alias -s tar.gz="echo "
+
 
 # Konsole
 alias hs='\history -E'
@@ -560,16 +576,6 @@ alias zshrc='g ~/.zshrc'
 echo "$0 aktualisiert von $$"
 
 
-# Command line head / tail
-#alias -g H='| head'
-#alias -g LL="2>&1 | less"
-#alias -g CA="2>&1 | cat -A"
-alias -g NE="2> /dev/null"
-alias -g NUL="> /dev/null 2>&1"
-#alias -g P="2>&1| pygmentize -l pytb"
-#alias -g ti='| tail'
-
-
 alias ad2='echo 01573 9598 220 timo.koerner@hof-university.de'
 alias c='cat'
 alias -g ci='|xclip'
@@ -580,7 +586,6 @@ alias dud='du -d 1 -h'
 alias duf='du -sh *'
 alias duh='du -h'
 alias ec="echo"
-alias ex="exit"
 alias fd='find . -type d -name'
 alias ff='find . -type f -name'
 alias fin="find / -name"
@@ -592,11 +597,11 @@ alias iban='DE637215 0000 00 5052 4271'
 alias le='less -WiNS'
 alias m='man'
 alias mkdir='mkdir -p'
+alias mt='man terminator'
 alias -g n='|less'
 
 alias rf='rfkill list'
 alias sortnr='sort -n -r'
-alias ta='tail -f'
 alias ter='if [ $os != "CYGWIN_NT" ]; then;terminator &;else; mintty;fi'
 alias tp='top'
 alias tr='tree'
@@ -604,18 +609,6 @@ alias ua="uname -a"
 alias us="echo $USER"
 alias -g ve="--version"
 alias wp='chmod 777 -R .'
+alias x="exit"
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
 alias z='gpicview'
-
-
-#Lese Dokumente
-alias -s pdf=mupdf
-alias -s dvi=xdvi
-alias -s chm=xchm
-
-  #list whats inside packed file
-  alias -s zip="unzip -l"
-  alias -s rar="unrar l"
-  alias -s tar="tar tf"
-  alias -s tar.gz="echo "
-  alias -s ace="unace l"

@@ -25,10 +25,11 @@ alias pygrep='grep --include="*.py"'
 p3(){
 if [ $os != "CYGWIN_NT" ]; then
 
-	python3
+	python3 $@
 else
-	python;fi
+	python $@;fi
 }
+
 alias py='/root/progr/pycharm/bin/pycharm.sh&'
 alias pg="g $ZSH_CUSTOM/plugins/python/python.plugin.zsh"
 
