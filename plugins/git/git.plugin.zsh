@@ -92,16 +92,12 @@ compdef _git gdv=git-diff
 alias gdw='git diff --word-diff'
 
 alias gf='git fetch'
-alias gfa='git fetch --all --prune'
 
 function gfg() { git ls-files | grep $@ }
 compdef gfg=grep
 
-alias gfo='git fetch origin'
-
 alias gg='git log --stat'
 
-alias gga='git gui citool --amend'
 
 function ggf() {
 [[ "$#" != 1 ]] && local b="$(git_current_branch)"
@@ -200,17 +196,13 @@ alias grbm='git rebase master'
 alias grbs='git rebase --skip'
 alias grh='git reset HEAD'
 alias grhh='git reset HEAD --hard'
-alias grmv='git remote rename'
-alias grrm='git remote remove'
 alias grset='git remote set-url'
 alias grt='cd $(git rev-parse --show-toplevel || echo ".")'
 alias grv='git remote -v'
 
 alias gs='git status'
 alias gsb='git status -sb'
-alias gsd='git svn dcommit'
 alias gsh='git show'
-alias gsi='git submodule init'
 alias gsps='git show --pretty=short --show-signature'
 alias gsr='git svn rebase'
 alias gss='git status -s'
@@ -226,7 +218,7 @@ alias gsu='git submodule update'
 alias gts='git tag -s'
 alias gtv='git tag | sort -V'
 
-alias gu='git remote update'
+alias gud='git remote update;gd master'
 alias gunignore='git update-index --no-assume-unchanged'
 alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
 alias gup='git pull --rebase'
