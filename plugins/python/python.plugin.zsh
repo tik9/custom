@@ -22,12 +22,12 @@ alias pyfind='find . -name "*.py"'
 # Grep
 alias pygrep='grep --include="*.py"'
 
-p3(){
-if [ $os != "CYGWIN_NT" ]; then
+function p3(){
+	if [ $os != "CYGWIN_NT-6.1" ]; then
 
-	python3 $@
-else
-	python $@;fi
+		python3 $@
+	else
+		python $@;fi
 }
 
 alias py='/root/progr/pycharm/bin/pycharm.sh&'
