@@ -87,21 +87,19 @@ alias gd='git diff'
 alias gdca='git diff --cached'
 alias gdct='git describe --tags `git rev-list --tags --max-count=1`'
 alias gdt='git diff-tree --no-commit-id --name-only -r'
-gdv() { git diff -w "$@" | view - }
+
+function gdv() { git diff -w "$@" | view - }
+
 compdef _git gdv=git-diff
 alias gdw='git diff --word-diff'
 
 alias gf='git fetch'
-alias gfa='git fetch --all --prune'
 
 function gfg() { git ls-files | grep $@ }
 compdef gfg=grep
 
-alias gfo='git fetch origin'
-
 alias gg='git log --stat'
 
-alias gga='git gui citool --amend'
 
 function ggf() {
 [[ "$#" != 1 ]] && local b="$(git_current_branch)"
@@ -161,13 +159,7 @@ alias ghh='git grep "<<<<<<< HEAD"'
 alias gignore='git update-index --assume-unchanged'
 alias gignored='git ls-files -v | grep "^[[:lower:]]"'
 alias gin='git init'
-alias git-svn-dcommit-push='git svn dcommit && git push github master:svntrunk'
-compdef git-svn-dcommit-push=git
 
-alias gk='\gitk --all --branches'
-compdef _git gk='gitk'
-alias gke='\gitk --all $(git log -g --pretty=format:%h)'
-compdef _git gke='gitk'
 
 alias gl='git pull'
 alias gle='gl;e'
@@ -200,17 +192,13 @@ alias grbm='git rebase master'
 alias grbs='git rebase --skip'
 alias grh='git reset HEAD'
 alias grhh='git reset HEAD --hard'
-alias grmv='git remote rename'
-alias grrm='git remote remove'
 alias grset='git remote set-url'
 alias grt='cd $(git rev-parse --show-toplevel || echo ".")'
 alias grv='git remote -v'
 
 alias gs='git status'
 alias gsb='git status -sb'
-alias gsd='git svn dcommit'
 alias gsh='git show'
-alias gsi='git submodule init'
 alias gsps='git show --pretty=short --show-signature'
 alias gsr='git svn rebase'
 alias gss='git status -s'
@@ -226,7 +214,7 @@ alias gsu='git submodule update'
 alias gts='git tag -s'
 alias gtv='git tag | sort -V'
 
-alias gu='git remote update'
+alias gud='git remote update;gd origin'
 alias gunignore='git update-index --no-assume-unchanged'
 alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
 alias gup='git pull --rebase'
@@ -236,5 +224,5 @@ alias glum='git pull upstream master'
 alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"'
 
-#alias nc='git nccommit'
+alias k='gg'
 alias og='o;gi'

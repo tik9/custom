@@ -62,13 +62,18 @@ function hilfe(){
 
 
 function ersetz(){
-	dateien=`find . -name "* *"`
-
-	for x in $dateien; do
-	mv -- "$x" "${x// /_}"
-	echo $x ohne Leerzeichen 
+	if [ "$1" = -h ]; then
+  hilfe `basename $0` "Prefix als Argument"
+  return
+	fi
+	for file in *; do
+		mv -- "$file" "${file// /_}"
+		if [[ $file != *"c_"* ]]; then
+			mv "$file" ${1}${file}
+		fi
 	done
 }
+
 
 function f(){
 	iwgetid -r	
@@ -165,6 +170,7 @@ function kil(){
 	if [ -z "grep $1 =(ps aux)" ];then
 	echo Prozess gekillt
 	fi
+		echo Prozesse mit $1 \n;
 	ps -ef|grep $1
 }
 
@@ -277,19 +283,6 @@ function pr(){
 	grep $1 =(ps aux)
 }
 
-function pre(){
-	if [ -z "$1" ]; then
-  hilfe `basename $0` "Prefix"
-  return
-fi
-	
-	for file in *;do
-	if [[ $file != *"c_"* ]]; then
-		mv "$file" ${1}${file}
-	fi
-	done
-	l
-}
 
 function int_trap() {
     echo "Ctrl-C gedrückt"
@@ -548,7 +541,6 @@ alias ag='apt-get'
 
 alias dep="apt-cache depends"
 alias der="apt-cache rdepends"
-alias pm='ec $pm'
 alias upd='ag update'
 
 
@@ -574,6 +566,7 @@ alias r="ml http://80.237.156.8:8120" # landsberg int.
 
 # zsh
 alias e="exec zsh"
+alias fp="ec $fpath"
 alias plu='ec $plugins'
 alias pro='ec $prompt'
 alias rt="ec $RANDOM_THEME"
@@ -584,6 +577,7 @@ alias zshrc='g ~/.zshrc'
 echo "$0 aktualisiert von $$"
 
 
+alias ac='ack'
 alias ad2='echo 01573 9598 220 timo.koerner@hof-university.de'
 alias c='cat'
 alias -g ci='|xclip'
