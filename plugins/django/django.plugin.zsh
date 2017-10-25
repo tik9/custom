@@ -204,7 +204,7 @@ _managepy-runfcgi(){
 
 _managepy-runserver(){
   _arguments -s : \
-    '--ipv6[Tells Django to use an IPv6 address.]' \
+    '--ipv6[IPv6 Adresse]' \
     '--nothreading[Tells Django to NOT use threading.]' \
     '--noreload[Tells Django to NOT use the auto-reloader.]' \
     '--nostatic[Tells Django to NOT automatically serve static files at STATIC_URL.]' \
@@ -347,7 +347,7 @@ _managepy-commands() {
     'makemigrations:Neue DB-Migration(en)'
     'migrate:Updates database schema. Manages both apps with migrations and those without.'
     'runfcgi:Run this project as a fastcgi (or some other protocol supported by flup) application,'
-    'runserver:geile Scheisse'
+    'runserver:starte Server'
     'shell:Python interaktiver Interpreter.'
     'shell_plus:Python interaktiver Interpreter von "Extensions"'
     'sql:Druckt CREATE TABLE SQL Befehle'
@@ -361,7 +361,7 @@ _managepy-commands() {
     'sqlsequencereset:Prints the SQL statements for resetting sequences for the given app name(s).'
     'squashmigrations:Squashes an existing set of migrations (from first until specified) into a single new one.'
     "startapp:App mit gegebenem App-Namen"
-    "startproject:Creates a Django project directory structure for the given project name in this current directory."
+    "startproject:Django Projekt im aktuellen Verzeichnis"
     "syncdb:Create the database tables for all apps in INSTALLED_APPS whose tables haven't already been created."
     'test:Runs the test suite for the specified applications, or the entire site if no apps are specified.'
     'testserver:Runs a development server with data from the given fixture(s).'

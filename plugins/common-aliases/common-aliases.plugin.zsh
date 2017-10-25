@@ -564,6 +564,7 @@ alias r="ml http://80.237.156.8:8120" # landsberg int.
 
 # zsh
 alias e="exec zsh"
+alias fp="ec $fpath"
 alias plu='ec $plugins'
 alias pro='ec $prompt'
 alias rt="ec $RANDOM_THEME"
@@ -574,6 +575,7 @@ alias zshrc='g ~/.zshrc'
 echo "$0 aktualisiert von $$"
 
 
+alias ac='ack'
 alias ad2='echo 01573 9598 220 timo.koerner@hof-university.de'
 alias c='cat'
 alias -g ci='|xclip'
