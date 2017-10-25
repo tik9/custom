@@ -291,7 +291,7 @@ fi
 	l
 }
 
-int_trap() {
+function int_trap() {
     echo "Ctrl-C gedrückt"
 }
 
@@ -443,6 +443,7 @@ alias oh='cd ~/.oh-my-zsh'
 alias sd='cd /sdcard'
 alias u='cd ~/uni'
 alias uc='cd ~/uni/c'
+alias vs='cd ~/vs/vs'
 
 #curl
 alias cu='curl'
@@ -589,8 +590,6 @@ alias -g ci='|xclip'
 alias -g co='xclip -o'
 alias dt='date +"%T"'
 alias dfh='df -h'
-alias dud='du -d 1 -h'
-alias duf='du -sh *'
 alias duh='du -h'
 alias ec="echo"
 alias fd='find . -type d -name'
