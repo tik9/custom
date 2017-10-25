@@ -275,13 +275,13 @@ function pl(){
 }
 
 
-function pr(){
-	if [ -z "$1" ]; then
-	  hilfe `basename $0` "grep mit 'prozess Substitution'" "Prozess"
-	  return
-	fi
-	grep $1 =(ps aux)
-}
+#function pr(){
+	#if [ -z "$1" ]; then
+	  #hilfe `basename $0` "grep mit 'prozess Substitution'" "Prozess"
+	  #return
+	#fi
+	#grep $1 =(ps aux)
+#}
 
 
 function int_trap() {
