@@ -574,8 +574,6 @@ alias zt="ec $ZSH_THEME"
 alias -g zsha='git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions'
 alias zshrc='g ~/.zshrc' 
 
-echo "$0 aktualisiert von $$"
-
 
 alias ac='ack'
 alias ad2='echo 01573 9598 220 timo.koerner@hof-university.de'
@@ -612,3 +610,5 @@ alias wp='chmod 777 -R .'
 alias x="exit"
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
 alias z='gpicview'
+
+echo "$0 aktualisiert von $$"
