@@ -567,6 +567,7 @@ alias r="ml http://80.237.156.8:8120" # landsberg int.
 # zsh
 alias e="exec zsh"
 alias fp="ec $fpath"
+alias grep='grep'
 alias plu='ec $plugins'
 alias pro='ec $prompt'
 alias rt="ec $RANDOM_THEME"
