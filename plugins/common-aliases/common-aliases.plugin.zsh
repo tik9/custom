@@ -63,7 +63,7 @@ function hilfe(){
 
 function ersetz(){
 	if [ "$1" = -h ]; then
-  hilfe `basename $0` "Prefix als Argument"
+  hilfe `basename $0` "Prefix"
   return
 	fi
 	for file in *; do
@@ -82,7 +82,7 @@ function f(){
 function g(){
 	
 	if [[ $os = "Linux" ]] ;then
-		geany $1 &
+		~/src/src_geany-1.28/usr/bin/geany $1 &
 	elif
 	[[ $arc = "Android" ]] ;then
 	vi $1 &
@@ -275,7 +275,7 @@ function pl(){
 }
 
 
-function pr(){
+function pr3(){
 	if [ -z "$1" ]; then
 	  hilfe `basename $0` "grep mit 'prozess Substitution'" "Prozess"
 	  return
@@ -343,15 +343,16 @@ function schieb(){
 	  hilfe `basename $0` "anzahl Dat" "Ziel (optional)"
 	  return
 	fi
-	ziel=`pwd`
+	ziel_dir=`pwd`
+	#ziel_dir=~/root
 	
-	if [ ! -z $2 ];then;ziel=$2;fi
+	#if [ -d $2 ];then;ziel_dir=$2;fi
 	for i in `seq 1 $1`; do; 	
 		dat="$dow`ls -t $dow | head -n1`"
 
-		mv $dat $ziel
+		mv $dat $ziel_dir
 
-		echo $dat
+		echo $ziel_dir/`ls -t $ziel_dir | head -n1`
 	done
 }
 
@@ -363,16 +364,16 @@ function scmysql(){
 	
 	mysqldump d> $(date +"%m_%Y").sql
 	scp `ls -t | head -n1` 192.168.188.148:/root/sqlBack
-	lö $(date +"%m_%Y").sql
+	#lö $(date +"%m_%Y").sql
 }
 
 
 function unt(){
 	#schieb
 	a=$(schieb)
-	#cd `pwd`
+	cd `pwd`
 	tar xzvf $a
-	rm $a
+	#rm $a
 }
 
 function sho(){
@@ -528,7 +529,7 @@ alias dh='dhclient;i'
 alias ie='iwconfig 2>&1 | grep -i ESSID'
 alias ip2="echo $ip"
 alias iw2='iwlist wlan0 scan'
-alias j='iw2 gr bayern'
+alias j='iw2 n'
 alias jo='journalctl -xe'
 #alias mip="echo $(dig +short myip.opendns.com @resolver1.opendns.com)"
 alias ne='/etc/init.d/networking restart;sleep 1;i'
@@ -548,12 +549,12 @@ alias upd='ag update'
 alias kp="ki ml"
 alias ks="ki ssh"
 alias pf='ps -f'
-alias pr2='ps -ef|grep'
-alias psl="pr sleep"
+alias ph="pr2 ssh"
 alias pmp="pr ml"
 alias pn="pr ngro"
-alias ph="pr ssh"
 alias psp="ps -p"
+alias pr2='ps -ef|grep'
+alias psl="pr sleep"
 alias sl="sleep"
 
 # Radio
@@ -567,6 +568,7 @@ alias r="ml http://80.237.156.8:8120" # landsberg int.
 # zsh
 alias e="exec zsh"
 alias fp="ec $fpath"
+#alias grep='grep'
 alias plu='ec $plugins'
 alias pro='ec $prompt'
 alias rt="ec $RANDOM_THEME"
@@ -578,8 +580,8 @@ alias zshrc='g ~/.zshrc'
 alias ac='ack'
 alias ad2='echo 01573 9598 220 timo.koerner@hof-university.de'
 alias c='cat'
-alias -g ci='|xclip'
-alias -g co='xclip -o'
+alias -g ci='|xclip -selection c'
+alias -g co='xclip -selection c -o'
 alias dt='date +"%T"'
 alias dfh='df -h'
 alias duh='du -h'
