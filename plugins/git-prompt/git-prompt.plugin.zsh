@@ -31,7 +31,7 @@ preexec_functions+=(preexec_update_git_vars)
 function update_current_git_vars() {
     unset __CURRENT_GIT_STATUS
 
-    local gitstatus="$__GIT_PROMPT_DIR/gitstatus.py"
+    local gitstatus="C:\\cygwin64\\$__GIT_PROMPT_DIR/gitstatus.py"
     _GIT_STATUS=$(python ${gitstatus} 2>/dev/null)
      __CURRENT_GIT_STATUS=("${(@s: :)_GIT_STATUS}")
     GIT_BRANCH=$__CURRENT_GIT_STATUS[1]
@@ -86,3 +86,5 @@ ZSH_THEME_GIT_PROMPT_BEHIND="%{↓%G%}"
 ZSH_THEME_GIT_PROMPT_AHEAD="%{↑%G%}"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{…%G%}"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}%{✔%G%}"
+
+ec $0

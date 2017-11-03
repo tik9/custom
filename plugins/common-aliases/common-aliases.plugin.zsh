@@ -102,7 +102,7 @@ function in(){
 		return
 	fi
 
-	df -he
+	dfh
 	if [[ $os = "Linux" ]] ;then
 			     if [[ $lsb = 'Arch' ]]; then; pacman -S --noconfirm $1
                 else;apt-get install -y $1;fi
