@@ -368,14 +368,6 @@ function scmysql(){
 }
 
 
-function unt(){
-	#schieb
-	a=$(schieb)
-	cd `pwd`
-	tar xzvf $a
-	#rm $a
-}
-
 function sho(){
 
 	if [ -z "$1" ]; then
@@ -401,6 +393,14 @@ function si(){
 	 hibernate 
 }
 
+
+function unt(){
+	#schieb
+	a=$(schieb)
+	cd `pwd`
+	tar xvf $a
+	#rm $a
+}
 
 function up(){
 	if [ "$1" = -he ]; then
@@ -586,6 +586,7 @@ alias dt='date +"%T"'
 alias dfh='df -h'
 alias duh='du -h'
 alias ec="echo"
+alias ee="~/progr/eclipse/eclipse &"
 alias fd='find . -type d -name'
 alias ff='find . -type f -name'
 alias fin="find / -name"
