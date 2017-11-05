@@ -41,9 +41,18 @@ fi
 
 
 
+<<<<<<< 9b0c93d4485c09863a27119b7e186b17ee57036d
 if [[ $os = "Linux" ]] ;then;if [[ $lsb = 'Arch' ]]; then;pm='pacman';elif [[ $lsb = Ubuntu ]];then;pm='apt-get'; fi;else;pm='apt-cyg';fi
 
 
+=======
+	lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
+	
+else
+	bim=$(wmic OS get OSArchitecture)
+	bi2=$(set | findstr ARCH)
+	fi
+>>>>>>> 
 
 function sortieren_datum(){
 	ls -lt $1| grep "^-" | awk '{
@@ -58,7 +67,6 @@ function sortieren_datum(){
 
 
 function hilfe(){
-#  echo "${bold}Os: $lsb${normal}"
 	echo "\n${bold}Hilfe, os: $os"
 	schleife=3
 	if [[ $2 != argsleer ]] ;then
@@ -70,6 +78,10 @@ function hilfe(){
 	for var in ${@:$schleife} ; do; echo $var;done
 }
 
+function dif(){
+	diff <(pdftotext -layout $1 /dev/stdout) <(pdftotext -layout $2 /dev/stdout)
+	
+}
 
 function ersetz(){
 	if [ "$1" = -h ]; then
@@ -606,6 +618,7 @@ alias -g ci='|xclip -selection c'
 alias -g co='xclip -selection c -o'
 alias dt='date +"%T"'
 alias dfh='df -h'
+alias dowDir='l dowDir'
 alias duh='du -h'
 alias ec="echo"
 alias ee="~/progr/eclipse/eclipse &"
