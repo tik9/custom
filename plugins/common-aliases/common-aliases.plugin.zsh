@@ -2,12 +2,11 @@
 # schriftfarbe autocomplete fg8 default
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
 
-hilfedatei=$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
 idrs=~/.ssh/id_rsa.pub 
 login=$ZSH_CUSTOM/login_rp
 zr=~/.zshrc
 mediaDir='/media/t'
-dowDir='/home/t/Downloads'
+dow='Downloads'
 
 bold=`tput bold`
 normal=`tput sgr0`
@@ -15,25 +14,35 @@ normal=`tput sgr0`
 os=`uname -a |cut -d' ' -f 1`
 
 if [ $os != "CYGWIN_NT-6.1" ]; then
+	homeT='/home/t/'
+	home='/home/root/'
+	hilfedatei=$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
+	ggpl=$ZSH_CUSTOM/plugins/git/git.plugin.zsh
+	
+	ip=`ip addr show $1 | grep -Po 'inet \K[\d.]+'`
 
+	lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
 	arc=`uname -a |cut -d' ' -f 14`
+
 else
+	home2='/cygdrive/C/Users/itdlz-koer/'
+	
+	cyg=c:/cygwin64
+	hilfedatei=$cyg$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
+ggpl=$cyg$ZSH_CUSTOM/plugins/git/git.plugin.zsh
+
+	bim=$(wmic OS get OSArchitecture)
+	bi2=$(set | findstr ARCH)
 	arc=`uname -a |cut -d' ' -f 6`
 fi
+
+#ZSH_CUSTOM=$home$ZSH_CUSTOM
+
+
 
 if [[ $os = "Linux" ]] ;then;if [[ $lsb = 'Arch' ]]; then;pm='pacman';elif [[ $lsb = Ubuntu ]];then;pm='apt-get'; fi;else;pm='apt-cyg';fi
 
 
-if [ $os != "CYGWIN_NT-6.1" ]; then
-	ip=`ip addr show $1 | grep -Po 'inet \K[\d.]+'`
-
-	lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
-	
-else
-	bim=$(wmic OS get OSArchitecture)
-	bi2=$(set | findstr ARCH)
-	#echo cygwin os
-	fi
 
 function sortieren_datum(){
 	ls -lt $1| grep "^-" | awk '{
@@ -337,22 +346,22 @@ function sc2(){
 
 
 function schieb(){
-	dow='/home/t/Downloads/';
-
+	
 	if [ "$1" = -h ]; then
 	  hilfe `basename $0` "anzahl Dat" "Ziel (optional)"
 	  return
 	fi
+	
 	ziel_dir=`pwd`
 	#ziel_dir=~/root
 	
 	#if [ -d $2 ];then;ziel_dir=$2;fi
 	for i in `seq 1 $1`; do; 	
-		dat="$dow`ls -t $dow | head -n1`"
+		dat="{$home}Downloads/`ls -t $dow | head -n1`"
 
 		mv $dat $ziel_dir
 
-		echo $ziel_dir/`ls -t $ziel_dir | head -n1`
+		echo aktuelle Datei $ziel_dir/`ls -t $ziel_dir | head -n1`
 	done
 }
 
@@ -374,6 +383,11 @@ function unt(){
 	cd `pwd`
 	tar xzvf $a
 	#rm $a
+}
+
+function uz(){
+	unzip $1
+	rm $1
 }
 
 function sho(){
@@ -430,8 +444,10 @@ alias pa='echo $path'
 #cd's
 alias bi="cd ~/bilder"
 alias da="cd ~/django"
-alias dow="cd $dowDir"
+alias dow="cd $home$dow"
+alias lu="cd ~/lu/src"
 alias mu="cd ~/musik"
+alias mte="cd ~/mte/my-app"
 alias o='cd ~/.oh-my-zsh/custom'
 alias oh='cd ~/.oh-my-zsh'
 alias sd='cd /sdcard'
@@ -493,6 +509,11 @@ alias -g he="--help |less"
 alias -g hd="$hilfedatei"
 alias hg="g $hilfedatei"
 
+# Java
+alias j="javac"
+alias ja="java"
+
+
 #Komprimierung
 alias -s zip="unzip -l"
 alias -s rar="unrar l"
@@ -529,7 +550,7 @@ alias dh='dhclient;i'
 alias ie='iwconfig 2>&1 | grep -i ESSID'
 alias ip2="echo $ip"
 alias iw2='iwlist wlan0 scan'
-alias j='iw2 n'
+alias ji='iw2 n'
 alias jo='journalctl -xe'
 #alias mip="echo $(dig +short myip.opendns.com @resolver1.opendns.com)"
 alias ne='/etc/init.d/networking restart;sleep 1;i'

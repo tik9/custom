@@ -31,7 +31,7 @@ function p3(){
 }
 
 alias py='/root/progr/pycharm/bin/pycharm.sh&'
-alias pg="g $ZSH_CUSTOM/plugins/python/python.plugin.zsh"
+alias pg="g $home/plugins/python/python.plugin.zsh"
 
 
 #pip

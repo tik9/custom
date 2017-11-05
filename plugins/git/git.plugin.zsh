@@ -34,11 +34,17 @@ function work_in_progress() {
 }
 
 function gi(){
-	git status
+	
+	for dir in mte/my-app .oh-my-zsh/custom arduino; do
+	cd ~/$dir
+	echo ~/$dir
+	#git status
 	git add . 
 	git commit -a --allow-empty-message -m ""
 	git push
+	done
 }
+cd
 
 #
 # Aliase
@@ -130,9 +136,10 @@ function ggp() {
 	fi
 }
 
-alias ggpl='g $ZSH_CUSTOM/plugins/git/git.plugin.zsh'
-
 compdef _git ggp=git-checkout
+
+
+alias ggpl='g $ggpl'
 
 alias ggpush='git push origin $(git_current_branch)'
 
