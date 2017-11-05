@@ -43,8 +43,8 @@ function gi(){
 	git commit -a --allow-empty-message -m ""
 	git push
 	done
-}
 cd
+}
 
 #
 # Aliase
