@@ -35,7 +35,8 @@ function work_in_progress() {
 
 function gi(){
 	
-	for dir in mte/my-app .oh-my-zsh/custom arduino; do
+#	for dir in mte/my-app .oh-my-zsh/custom arduino; do
+	for dir in uni .oh-my-zsh/custom; do
 	cd ~/$dir
 	echo ~/$dir
 	#git status

@@ -18,7 +18,7 @@ if [ $os != "CYGWIN_NT-6.1" ]; then
 	home='/home/root/'
 	hilfedatei=$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
 	ggpl=$ZSH_CUSTOM/plugins/git/git.plugin.zsh
-	
+	pg=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
 	ip=`ip addr show $1 | grep -Po 'inet \K[\d.]+'`
 
 	lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
@@ -30,6 +30,7 @@ else
 	cyg=c:/cygwin64
 	hilfedatei=$cyg$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
 ggpl=$cyg$ZSH_CUSTOM/plugins/git/git.plugin.zsh
+pg=$cyg$ZSH_CUSTOM/plugins/python/python.plugin.zsh
 
 	bim=$(wmic OS get OSArchitecture)
 	bi2=$(set | findstr ARCH)
