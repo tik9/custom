@@ -33,6 +33,30 @@ function work_in_progress() {
   fi
 }
 
+
+function gc(){
+	
+	while getopts ":m:n:" opt; do
+  case $opt in
+    m) kurz="$OPTARG"
+    ;;
+    n) lang="$OPTARG"
+    ;;
+    \?) echo "Invalid option -$OPTARG" >&2
+    ;;
+  esac
+done
+
+printf "Argument m is %s\n" "$kurz"
+printf "Argument n is %s\n" "$lang"
+	git commit -am $kurz -m $lang
+}
+
+
+subcmds=('m:msg header' 'n:lange nachricht')
+compdef _describe gc subcmds
+
+
 function gi(){
 	
 #	for dir in mte/my-app .oh-my-zsh/custom arduino; do
@@ -68,7 +92,6 @@ alias gbsg='git bisect good'
 alias gbsr='git bisect reset'
 alias gbss='git bisect start'
 
-alias gc='git commit -am'
 alias gc!='git commit -v --amend'
 alias gcn!='git commit -v --no-edit --amend'
 alias gca='git commit -v -a'
@@ -98,6 +121,7 @@ alias gdt='git diff-tree --no-commit-id --name-only -r'
 function gdv() { git diff -w "$@" | view - }
 
 compdef _git gdv=git-diff
+
 alias gdw='git diff --word-diff'
 
 alias gf='git fetch'
@@ -235,6 +259,6 @@ alias glum='git pull upstream master'
 alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"'
 
-alias k='git log --stat | head -n 10'
+alias k='git log --stat | head -n 15'
 alias ogp='o;gi'
 alias ogl='o;gl'
