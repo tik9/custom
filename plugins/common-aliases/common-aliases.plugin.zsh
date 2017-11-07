@@ -40,22 +40,9 @@ dowDir='c:/users/itdlz-koer/Downloads'
 
 fi
 
-#ZSH_CUSTOM=$home$ZSH_CUSTOM
 
-
-
-<<<<<<< 9b0c93d4485c09863a27119b7e186b17ee57036d
 if [[ $os = "Linux" ]] ;then;if [[ $lsb = 'Arch' ]]; then;pm='pacman';elif [[ $lsb = Ubuntu ]];then;pm='apt-get'; fi;else;pm='apt-cyg';fi
 
-
-=======
-	lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
-	
-else
-	bim=$(wmic OS get OSArchitecture)
-	bi2=$(set | findstr ARCH)
-	fi
->>>>>>> 
 
 function sortieren_datum(){
 	ls -lt $1| grep "^-" | awk '{

@@ -36,15 +36,15 @@ function work_in_progress() {
 function gi(){
 	
 #	for dir in mte/my-app .oh-my-zsh/custom arduino; do
-	for dir in uni .oh-my-zsh/custom; do
-	cd ~/$dir
-	echo ~/$dir
+	#for dir in uni .oh-my-zsh/custom; do
+	#cd ~/$dir
+	#echo ~/$dir
 	#git status
 	git add . 
-	git commit -a --allow-empty-message -m ""
+	git commit -am "$1"
 	git push
-	done
-cd
+	#done
+#cd
 }
 
 #
@@ -68,7 +68,7 @@ alias gbsg='git bisect good'
 alias gbsr='git bisect reset'
 alias gbss='git bisect start'
 
-alias gc='git commit -a --allow-empty-message -m ""'
+alias gc='git commit -am'
 alias gc!='git commit -v --amend'
 alias gcn!='git commit -v --no-edit --amend'
 alias gca='git commit -v -a'
@@ -105,6 +105,7 @@ alias gf='git fetch'
 function gfg() { git ls-files | grep $@ }
 compdef gfg=grep
 
+
 alias gg='git log --stat'
 
 
@@ -117,12 +118,13 @@ compdef _git ggf=git-checkout
 
 function ggl() {
 if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
-git pull origin "${*}"
+	git pull origin "${*}"
 else
-[[ "$#" == 0 ]] && local b="$(git_current_branch)"
-git pull origin "${b:=$1}"
+	[[ "$#" == 0 ]] && local b="$(git_current_branch)"
+	git pull origin "${b:=$1}"
 fi
 }
+
 compdef _git ggl=git-checkout
 
 alias ggpull='git pull origin $(git_current_branch)'
@@ -145,6 +147,7 @@ alias ggpl='g $ggpl'
 alias ggpush='git push origin $(git_current_branch)'
 
 compdef _git ggpush=git-checkout
+
 function ggpnp() {
 	if [[ "$#" == 0 ]]; then
 	ggl && ggp
@@ -153,7 +156,7 @@ function ggpnp() {
 	fi
 }
 compdef _git ggpnp=git-checkout
-alias ggsup='git branch --set-upstream-to=origin/$(git_current_branch)'
+
 function ggu() {
 	[[ "$#" != 1 ]] && local b="$(git_current_branch)"
 	git pull --rebase origin "${b:=$1}"
@@ -232,5 +235,6 @@ alias glum='git pull upstream master'
 alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"'
 
-alias k='gg'
-alias og='o;gi'
+alias k='git log --stat | head -n 10'
+alias ogp='o;gi'
+alias ogl='o;gl'
