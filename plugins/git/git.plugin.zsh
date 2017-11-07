@@ -1,5 +1,5 @@
-# Query/use custom command for `git`.
 zmodload zsh/zutil
+autoload gitcommit
 
 zstyle -s ":vcs_info:git:*:-all-" "command" _omz_git_git_cmd
 : ${_omz_git_git_cmd:=git}
@@ -37,20 +37,18 @@ function work_in_progress() {
 
 
 function gc(){
-	
-zparseopts -A ARGUMENTS -m1: -m2:
+	#Aufruf: gc --m1 foo
+	zparseopts -A ARGUMENTS -m1: -m2:
 
-p_out=$ARGUMENTS[--m1]
-arg1=$ARGUMENTS[--m2]
+	m1=$ARGUMENTS[--m1]
+	m2=$ARGUMENTS[--m2]
 
-printf 'Argument p_out is "%s"\n' "$p_out"
-printf 'Argument arg_1 is "%s"\n' "$arg_1"
-	git commit -am $m1 -m $m2
+	printf 'Argument m1 ist "%s"\n' "$m1"
+	printf 'Argument m2 ist "%s"\n' "$m2"
+	git commit -am "$m1" -m "$m2"
 }
 
-
-subcmds=('m:msg header' 'n:lange nachricht')
-compdef _describe gc subcmds
+compdef _gitcommit gc
 
 
 function gi(){
