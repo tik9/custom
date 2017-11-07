@@ -23,6 +23,7 @@ if [ $os != "CYGWIN_NT-6.1" ]; then
 
 	lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
 	arc=`uname -a |cut -d' ' -f 14`
+	dowDir='/home/t/Downloads'
 
 else
 	home2='/cygdrive/C/Users/itdlz-koer/'
@@ -35,6 +36,8 @@ pg=$cyg$ZSH_CUSTOM/plugins/python/python.plugin.zsh
 	bim=$(wmic OS get OSArchitecture)
 	bi2=$(set | findstr ARCH)
 	arc=`uname -a |cut -d' ' -f 6`
+dowDir='c:/users/itdlz-koer/Downloads'
+
 fi
 
 #ZSH_CUSTOM=$home$ZSH_CUSTOM
@@ -618,7 +621,7 @@ alias -g ci='|xclip -selection c'
 alias -g co='xclip -selection c -o'
 alias dt='date +"%T"'
 alias dfh='df -h'
-alias dowDir='l dowDir'
+alias dowDir='l $dowDir'
 alias duh='du -h'
 alias ec="echo"
 alias ee="~/progr/eclipse/eclipse &"
