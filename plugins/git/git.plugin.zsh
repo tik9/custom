@@ -1,4 +1,6 @@
 # Query/use custom command for `git`.
+zmodload zsh/zutil
+
 zstyle -s ":vcs_info:git:*:-all-" "command" _omz_git_git_cmd
 : ${_omz_git_git_cmd:=git}
 
@@ -36,20 +38,14 @@ function work_in_progress() {
 
 function gc(){
 	
-	while getopts ":m:n:" opt; do
-  case $opt in
-    m) kurz="$OPTARG"
-    ;;
-    n) lang="$OPTARG"
-    ;;
-    \?) echo "Invalid option -$OPTARG" >&2
-    ;;
-  esac
-done
+zparseopts -A ARGUMENTS -m1: -m2:
 
-printf "Argument m is %s\n" "$kurz"
-printf "Argument n is %s\n" "$lang"
-	git commit -am $kurz -m $lang
+p_out=$ARGUMENTS[--m1]
+arg1=$ARGUMENTS[--m2]
+
+printf 'Argument p_out is "%s"\n' "$p_out"
+printf 'Argument arg_1 is "%s"\n' "$arg_1"
+	git commit -am $m1 -m $m2
 }
 
 
