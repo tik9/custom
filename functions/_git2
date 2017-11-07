@@ -1,0 +1,26 @@
+#compdef git2
+
+echo initialising git2..
+
+_gitcommit(){
+cmds=('--m1:Message Title' '--m2: Message Body')
+_describe 'Git Commit Parameter' cmds
+}
+
+
+_gitlog(){
+cmds=('--stat:Zeige Dateinamen' '-p: Zeige Inhalte der Dateien')
+_describe 'Git Log Parameter' cmds
+}
+
+
+# Now you should redefine the "hello" function (which currently contains
+# all the code from the file) to something that covers its actual
+# functionality. After that, the two helper functions along with the core
+# function will be defined and visible in global scope.
+
+
+# Finally run the redefined function with the same arguments as the current
+# run. If this is left out, the functionality implemented by the newly
+# defined "hello" function is not executed upon its first call. So:
+#git2 "$@"

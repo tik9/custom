@@ -58,7 +58,7 @@ function gi(){
 	#echo ~/$dir
 	#git status
 	git add . 
-	git commit -am "$1" -m $2
+	git commit -am $1 -m $2
 	git push
 	#done
 #cd
@@ -258,7 +258,7 @@ alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commi
 alias k='git log --stat | head -n 15'
 
 function n(){
-	git log
+	git log $1
 }
 
 compdef _gitlog n
