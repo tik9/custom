@@ -624,7 +624,7 @@ alias le='less -WiNS'
 alias m='man'
 alias mkdir='mkdir -p'
 alias mt='man terminator'
-alias -g n='|less'
+alias -g n2='|less'
 
 alias rf='rfkill list'
 alias sortnr='sort -n -r'

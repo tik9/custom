@@ -1,5 +1,4 @@
 zmodload zsh/zutil
-autoload gitcommit
 
 zstyle -s ":vcs_info:git:*:-all-" "command" _omz_git_git_cmd
 : ${_omz_git_git_cmd:=git}
@@ -59,11 +58,14 @@ function gi(){
 	#echo ~/$dir
 	#git status
 	git add . 
-	git commit -am "$1"
+	git commit -am "$1" -m $2
 	git push
 	#done
 #cd
 }
+
+compdef _gitcommit gi
+
 
 #
 # Aliase
@@ -254,5 +256,12 @@ alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"'
 
 alias k='git log --stat | head -n 15'
+
+function n(){
+	git log
+}
+
+compdef _gitlog n
+
 alias ogp='o;gi'
 alias ogl='o;gl'
