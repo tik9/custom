@@ -9,7 +9,7 @@ _describe 'Git Commit Parameter' cmds
 
 
 _gitlog(){
-cmds=('--stat:Zeige Dateinamen' '-p: Zeige Inhalte der Dateien')
+cmds=('--stat:Zeige Dateinamen' '-p: Zeige Inhalte der Dateien' '--graph:Zeige den Graphen links an')
 _describe 'Git Log Parameter' cmds
 }
 
