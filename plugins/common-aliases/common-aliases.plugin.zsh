@@ -454,6 +454,7 @@ alias mte="cd ~/mte/my-app"
 alias o='cd ~/.oh-my-zsh/custom'
 alias oh='cd ~/.oh-my-zsh'
 alias sd='cd /sdcard'
+alias tt='cd target'
 alias u='cd ~/uni'
 alias uc='cd ~/uni/c'
 alias vs='cd ~/vs/vs'
@@ -466,7 +467,6 @@ alias cud='cu a.tk1.biz'
 
 #Dateiops
 alias cp='cp -r'
-alias md="mkdir -p"
 alias mod="chmod 700"
 alias to='touch'
 
@@ -482,7 +482,6 @@ alias w2="dict"
 
 #Dokumente
 alias -s pdf=mupdf
-alias -s dvi=xdvi
 
 
 # Editoren
@@ -526,18 +525,12 @@ alias -s tar.gz="echo "
 
 # Konsole
 alias hs='\history -E'
-alias se='echo $0'
-alias st='stty -a'
-alias tt='temp=$(tty) ; echo ${temp:5}'
 
 # ls
-alias l='ls -lFh'     #Größe, Typ
-alias la='ls -lAFh'   #lange liste, fast alles
 alias lart='ls -1Fcart'
 alias ldot='ls -ld .*'
 alias lr='ls -tRFh'   #sortiert nach Datum,rekursiv,Typ,human readable
 alias lt='ls -ltFh'   #lange Liste,sortiert nach Datum,show type,human readable
-alias ll='ls -l'      #lange Liste
 alias lS='ls -1FSsh'
 alias lsh="ls -halt --full-time"
 
@@ -584,7 +577,7 @@ alias psl="pr sleep"
 alias sl="sleep"
 
 # Radio
-alias -g ml='mplayer'
+alias ml='mplayer'
 
 alias b1="ml http://br-br1-nbopf.cast.addradio.de/br/br1/nbopf/mp3/128/stream.mp3"
 alias b3="ml http://br-br3-live.cast.addradio.de/br/br3/live/mp3/56/stream.mp3"
@@ -617,13 +610,11 @@ alias fd='find . -type d -name'
 alias ff='find . -type f -name'
 alias fin="find / -name"
 alias -g gr="|grep -i"
-alias -g gp="g++"
+alias gp="g++"
 alias hgrep="fc -El 0 | grep"
 alias his='history'
-alias iban='DE637215 0000 00 5052 4271'
 alias le='less -WiNS'
 alias m='man'
-alias mkdir='mkdir -p'
 alias mt='man terminator'
 alias -g n2='|less'
 
