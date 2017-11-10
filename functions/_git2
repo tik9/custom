@@ -13,6 +13,10 @@ cmds=('--stat:Zeige Dateinamen' '-p: Zeige Inhalte der Dateien' '--graph:Zeige d
 _describe 'Git Log Parameter' cmds
 }
 
+_gitCommitSimple(){
+cmds=('1. Titel' '2. Langer Text')
+_describe 'Git Commit Parameter nur Pos.' cmds
+}
 
 # Now you should redefine the "hello" function (which currently contains
 # all the code from the file) to something that covers its actual

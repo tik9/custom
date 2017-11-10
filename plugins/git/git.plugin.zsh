@@ -54,17 +54,17 @@ function gi(){
 	
 #	for dir in mte/my-app .oh-my-zsh/custom arduino; do
 	#for dir in uni .oh-my-zsh/custom; do
-	#cd ~/$dir
+	command $3
 	#echo ~/$dir
 	#git status
 	git add . 
-	git commit -am $1 -m $2
+	git commit -am "$1" -m "$2" 
 	git push
 	#done
 #cd
 }
 
-compdef _gitcommit gi
+compdef _gitCommitSimple gi
 
 
 #
@@ -243,6 +243,7 @@ alias glum='git pull upstream master'
 alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"'
 
+alias i='git'
 alias k='git log --stat | head -n 15'
 
 function n(){

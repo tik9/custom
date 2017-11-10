@@ -13,6 +13,12 @@ normal=`tput sgr0`
 
 os=`uname -a |cut -d' ' -f 1`
 
+bb(){
+zsh -x 2>zsh.trace
+exit
+grep 'alias.*subl' zsh.trace
+}
+
 if [ $os != "CYGWIN_NT-6.1" ]; then
 	homeT='/home/t/'
 	home='/home/root/'
@@ -103,7 +109,7 @@ function g(){
 }
 
 
-function i(){
+function ig(){
 	if [ $os = "Linux" ]; then;ifconfig;else;ipconfig;fi
 }
 
@@ -223,6 +229,12 @@ function lss(){
 	ssh $3 $ipbas.$2 
 }
 
+function ml(){
+
+mplayer "$*"
+}
+
+compdef _mus ml
 
 function mo(){
 	if [ "$1" = 'h' ]; then
@@ -233,7 +245,6 @@ function mo(){
 	dev=`lsblk|sed -n 5p|cut -f1 -d' '`
 
 	mount /dev/$dev $mediaDir
-	echo $dev in $mediaDir eingehängt
 }
 
 	
@@ -577,7 +588,6 @@ alias psl="pr sleep"
 alias sl="sleep"
 
 # Radio
-alias ml='mplayer'
 
 alias b1="ml http://br-br1-nbopf.cast.addradio.de/br/br1/nbopf/mp3/128/stream.mp3"
 alias b3="ml http://br-br3-live.cast.addradio.de/br/br3/live/mp3/56/stream.mp3"
