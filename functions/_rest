@@ -1,0 +1,15 @@
+#compdef rest
+
+echo initialisiere rest..
+
+_inter(){
+	_arguments '-f[datei]:dateiname:_files' '-i[interface]:interf:_net_interfaces' '-o[letztes Oktett]' 
+}
+
+_mus(){
+
+	_arguments '-m[datei]:dat:_files'
+     local -a music_files
+        music_files=( **/*.{mp3,wav,flac,ogg} )
+        _multi_parts / music_files
+}

@@ -122,7 +122,7 @@ function in(){
 		apt-cyg install $1
 	fi
 
-	df -he
+	df -h
 }
 
 
@@ -445,10 +445,10 @@ alias pa='echo $path'
 
 
 #cd's
+alias ar="cd ~/arduino"
 alias bi="cd ~/bilder"
 alias da="cd ~/django"
 alias dow="cd $home$dow"
-alias lu="cd ~/lu/src"
 alias mu="cd ~/musik"
 alias mte="cd ~/mte/my-app"
 alias o='cd ~/.oh-my-zsh/custom'
@@ -568,6 +568,10 @@ alias dep="apt-cache depends"
 alias der="apt-cache rdepends"
 alias upd='ag update'
 
+#progr
+alias ard='~/progr/arduino-1.8.5/arduino &'
+alias ee="~/progr/eclipse/eclipse &"
+
 
 # ps
 alias kp="ki ml"
@@ -575,8 +579,6 @@ alias ks="ki ssh"
 alias pf='ps -f'
 alias ph="pr2 ssh"
 alias pmp="pr ml"
-alias pn="pr ngro"
-alias psp="ps -p"
 alias pr2='ps -ef|grep'
 alias psl="pr sleep"
 alias sl="sleep"
@@ -611,7 +613,6 @@ alias dfh='df -h'
 alias dowDir='l $dowDir'
 alias duh='du -h'
 alias ec="echo"
-alias ee="~/progr/eclipse/eclipse &"
 alias fd='find . -type d -name'
 alias ff='find . -type f -name'
 alias fin="find / -name"
