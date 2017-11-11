@@ -20,8 +20,8 @@ grep 'alias.*subl' zsh.trace
 }
 
 if [ $os != "CYGWIN_NT-6.1" ]; then
-	homeT='/home/t/'
-	home='/home/root/'
+	homeT='/home/t'
+	home='/root'
 	hilfedatei=$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
 	ggpl=$ZSH_CUSTOM/plugins/git/git.plugin.zsh
 	pg=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
@@ -29,10 +29,10 @@ if [ $os != "CYGWIN_NT-6.1" ]; then
 
 	lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
 	arc=`uname -a |cut -d' ' -f 14`
-	dowDir='/home/t/Downloads'
-
+	dowDir=$homeT/Downloads
+	mteDir=$home/git/mte
 else
-	home2='/cygdrive/C/Users/itdlz-koer/'
+	home2='/cygdrive/C/Users/itdlz-koer'
 	
 	cyg=c:/cygwin64
 	hilfedatei=$cyg$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
@@ -42,8 +42,8 @@ pg=$cyg$ZSH_CUSTOM/plugins/python/python.plugin.zsh
 	bim=$(wmic OS get OSArchitecture)
 	bi2=$(set | findstr ARCH)
 	arc=`uname -a |cut -d' ' -f 6`
-dowDir='c:/users/itdlz-koer/Downloads'
-
+dowDir=$home2/Downloads
+mteDir=$cyg/home/itdlz-koer/mte/my-app
 fi
 
 
@@ -458,10 +458,11 @@ alias pa='echo $path'
 #cd's
 alias ar="cd ~/arduino"
 alias bi="cd ~/bilder"
+alias y="cd"
 alias da="cd ~/django"
-alias dow="cd $home$dow"
+alias dow="cd $dowDir"
 alias mu="cd ~/musik"
-alias mte="cd ~/mte/my-app"
+alias mte='cd $mteDir'
 alias o='cd ~/.oh-my-zsh/custom'
 alias oh='cd ~/.oh-my-zsh'
 alias sd='cd /sdcard'
@@ -639,6 +640,6 @@ alias -g ve="--version"
 alias wp='chmod 777 -R .'
 alias x="exit"
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
-alias z='gpicview'
+alias z='ne'
 
 echo "$0 aktualisiert von $$"
