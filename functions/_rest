@@ -1,9 +1,13 @@
 #compdef rest
 
-echo initialisiere rest..
+#echo initialisiere rest..
 
 _inter(){
 	_arguments '-f[datei]:dateiname:_files' '-i[interface]:interf:_net_interfaces' '-o[letztes Oktett]' 
+}
+
+_schieb(){
+	_arguments '-f[datei]:dateiname:_files' '-z[Ziel, wohin]' 
 }
 
 _mus(){

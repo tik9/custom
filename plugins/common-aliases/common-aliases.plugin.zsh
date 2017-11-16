@@ -14,9 +14,9 @@ normal=`tput sgr0`
 os=`uname -a |cut -d' ' -f 1`
 
 bb(){
-zsh -x 2>zsh.trace
-exit
-grep 'alias.*subl' zsh.trace
+	zsh -x 2>zsh.trace
+	exit
+	grep 'alias.*subl' zsh.trace
 }
 
 if [ $os != "CYGWIN_NT-6.1" ]; then
@@ -36,14 +36,14 @@ else
 	
 	cyg=c:/cygwin64
 	hilfedatei=$cyg$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
-ggpl=$cyg$ZSH_CUSTOM/plugins/git/git.plugin.zsh
-pg=$cyg$ZSH_CUSTOM/plugins/python/python.plugin.zsh
+	ggpl=$cyg$ZSH_CUSTOM/plugins/git/git.plugin.zsh
+	pg=$cyg$ZSH_CUSTOM/plugins/python/python.plugin.zsh
 
 	bim=$(wmic OS get OSArchitecture)
 	bi2=$(set | findstr ARCH)
 	arc=`uname -a |cut -d' ' -f 6`
-dowDir=$home2/Downloads
-mteDir=$cyg/home/itdlz-koer/mte/my-app
+	dowDir=$home2/Downloads
+	mteDir=$cyg/home/itdlz-koer/mte/my-app
 fi
 
 
@@ -203,17 +203,6 @@ function ki(){
 		ps -ef|grep $1
 }
 
-	
-function las(){
-
-	if [ -z "$1" ]; then
-	  hilfe `basename $0` "Lautstärke amixer mit 10  	multipliziert"
-	  return
-	fi
-
-	amixer set PCM $(expr $1 \* 10)%;
-}
-
 function lö(){
 	rm -rf $1
 }
@@ -281,7 +270,7 @@ function p(){
 
 function pd(){
 	if [ "$1" = -he ]; then
-	  hilfe `basename $0` "argsleer" "Installierte Pakete zeigen, nur Linux"
+	  hilfe `basename $0` "argsleer" "Installierte Pakete zeigen"
 	  return
 	fi
 
@@ -371,13 +360,15 @@ function schieb(){
 	
 	#if [ -d $2 ];then;ziel_dir=$2;fi
 	for i in `seq 1 $1`; do; 	
-		dat="{$home}Downloads/`ls -t $dow | head -n1`"
-
+		dat="$dowDir/`ls -t $dowDir | head -n1`"
+echo $dat
 		mv $dat $ziel_dir
 
 		echo aktuelle Datei $ziel_dir/`ls -t $ziel_dir | head -n1`
 	done
 }
+
+compdef _schieb schieb
 
 function scmysql(){
 	if [ "$1" = -h ]; then
@@ -431,13 +422,22 @@ function up(){
 	  return
 	fi	
 
+if [[ $lsb == 'Arch' ]] ;then;
+pacman -Syu 
+else
+	apt-get update	
 	apt-get upgrade	
 	apt-get dist-upgrade	
+fi
 }
 
 function uz(){
 	unzip $1
 	rm $1
+}
+
+function yt(){
+youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "$*"
 }
 
  
@@ -639,7 +639,6 @@ alias us="echo $USER"
 alias -g ve="--version"
 alias wp='chmod 777 -R .'
 alias x="exit"
-alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
 alias z='ne'
 
 echo "$0 aktualisiert von $$"
