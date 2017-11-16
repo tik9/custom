@@ -1,4 +1,4 @@
-zmodload zsh/zutil
+#zmodload zsh/zutil
 
 zstyle -s ":vcs_info:git:*:-all-" "command" _omz_git_git_cmd
 : ${_omz_git_git_cmd:=git}
@@ -113,9 +113,7 @@ alias gf='git fetch'
 function gfg() { git ls-files | grep $@ }
 compdef gfg=grep
 
-
-alias gg='git log --stat'
-
+alias gg='git config --list'
 
 function ggf() {
 [[ "$#" != 1 ]] && local b="$(git_current_branch)"
@@ -179,10 +177,8 @@ alias gignore='git update-index --assume-unchanged'
 alias gignored='git ls-files -v | grep "^[[:lower:]]"'
 alias gin='git init'
 
-
 alias gl='git pull'
 alias gle='gl;e'
-alias glr='gl;req'
 alias glgp='git log --stat -p'
 alias glgg='git log --graph'
 alias glgm='git log --graph --max-count=10'

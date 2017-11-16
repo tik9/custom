@@ -2,14 +2,16 @@
 
 echo initialisiere rest..
 
-_inter(){
-	_arguments '-f[datei]:dateiname:_files' '-i[interface]:interf:_net_interfaces' '-o[letztes Oktett]' 
+_sc2(){
+	_arguments '-f[datei]:dateiname:_files' '-i[interface]:interf:_net_interfaces' '-o[letztes Oktett]' '-d[ziel]'
 }
 
-_mus(){
+_ml(){
 
-	_arguments '-m[datei]:dat:_files'
+	_arguments '-f[datei]:dat:_files'
      local -a music_files
-        music_files=( **/*.{mp3,wav,flac,ogg} )
+        music_files=( *.mp3,*.wav )
         _multi_parts / music_files
 }
+
+
