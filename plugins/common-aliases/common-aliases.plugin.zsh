@@ -3,7 +3,7 @@
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
 
 idrs=~/.ssh/id_rsa.pub 
-login=$ZSH_CUSTOM/login_rp
+login_ssh=$ZSH_CUSTOM/login_rp
 zr=~/.zshrc
 mediaDir='/media/t'
 dow='Downloads'
@@ -74,10 +74,31 @@ function hilfe(){
 	for var in ${@:$schleife} ; do; echo $var;done
 }
 
+function ai(){
+	zsh -x 2>zsh.trace
+	exit
+	grep "alias.*$1" zsh.trace
+}
+
+function b(){
+	
+	if [[ $os = "Linux" && $arc != 'Android' ]];then
+		~/src/src_geany-1.28/usr/bin/geany $1 &
+	elif [ $os = "CYGWIN_NT-6.1" ];then
+		notepad++ $1 &
+	# android und arch
+	else 
+		vi $1 &
+	fi
+
+}
+
+
 function dif(){
 	diff <(pdftotext -layout $1 /dev/stdout) <(pdftotext -layout $2 /dev/stdout)
 	
 }
+
 
 function ersetz(){
 	if [ "$1" = -h ]; then
@@ -95,17 +116,6 @@ function ersetz(){
 
 function f(){
 	iwgetid -r	
-}
-	
-function g(){
-	
-	if [[ $os = "Linux" ]] ;then
-		~/src/src_geany-1.28/usr/bin/geany $1 &
-	elif
-	[[ $arc = "Android" ]] ;then
-	vi $1 &
-	else
-	;notepad++ $1 &;fi
 }
 
 
@@ -219,11 +229,15 @@ function lss(){
 }
 
 function ml(){
+	zparseopts -A ARGUMENTS f:
 
-mplayer "$*"
+	f=$ARGUMENTS[-f]
+
+	printf 'Argument ist "%s"\n' "$f"
+	mplayer "$f"
 }
 
-compdef _mus ml
+compdef _ml ml
 
 function mo(){
 	if [ "$1" = 'h' ]; then
@@ -305,7 +319,7 @@ function q(){
 	# zeige WLAN ssid (iwget)
 	if [[ $os != "CYGWIN_NT-6.1" && $arc != 'Android' && `uname -m` != 'armv7l' ]]; then
 
-		f;printf "\n";
+		iwgetid -r;printf "\n";
 	fi
 	datei=test100.zip
 
@@ -331,8 +345,17 @@ function re(){
 	else;apt-get autoremove $1;fi
 	fi
 }
-
+# -f[datei]:dateiname:_files' '-i[interface]:interf:_net_interfaces' '-o[letztes Oktett]' '-d[ziel]'
 function sc2(){
+	zparseopts -A ARGUMENTS d:f:i: o:
+
+	dir=$ARGUMENTS[-d]
+	file=$ARGUMENTS[-f]
+	interface=$ARGUMENTS[-i]
+	oktett=$ARGUMENTS[-o]
+
+	printf 'Argument ist "%s"\n' "$f"
+
 	if [ -z "$1" ]; then
 	  hilfe `basename $0` Basis:$ipbas 1.Interface 2.Datei "3.letztes Oktett" 4.Zielordner (5.user) "(6.port)"
 	  return
@@ -346,6 +369,7 @@ function sc2(){
 	lö $2
 	echo $2 gelöscht vom Server
 }
+compdef _sc2 sc2
 
 
 function schieb(){
@@ -377,7 +401,7 @@ function scmysql(){
 	fi
 	
 	mysqldump d> $(date +"%m_%Y").sql
-	scp `ls -t | head -n1` 192.168.188.148:/root/sqlBack
+	scp `ls -t | head -n1` 192.168.0.148:/root/sqlBack
 	#lö $(date +"%m_%Y").sql
 }
 
@@ -395,7 +419,7 @@ function sho(){
 
 function si(){
 	if [ -z "$1" ]; then
-	  hilfe `basename $0` "Zeit in Minuten ohne Einheit bevor Ruhezustand"
+	  hilfe `basename $0` "Zeit in Minuten ohne Einheit bevor Aktion"
 	  return
 	fi
 	secs=$(($1 * 60))
@@ -404,7 +428,7 @@ function si(){
 	   sleep 1
 	   : $((secs--))
 	done
-	 hibernate 
+	 $1 
 }
 
 
@@ -474,18 +498,15 @@ alias vs='cd ~/vs/vs'
 #curl
 alias cu='curl'
 alias cl='cu localhost:8000'
-alias cud='cu a.tk1.biz'
 
 
 #Dateiops
 alias cp='cp -r'
-alias mod="chmod 700"
 alias to='touch'
 
 #Dateisystem
 alias lk="lsblk"
 alias mn='mount'
-alias um='umount'
 
 #Dict
 alias wl="echo Dict.;dict -D"
@@ -506,8 +527,7 @@ alias hi='hibernate'
 alias s='pm-suspend'
 
 #expect
-alias b='sr 44'
-alias sr='expect $login'
+alias sr='expect $login_ssh 111'
 
 
 # head / tail
