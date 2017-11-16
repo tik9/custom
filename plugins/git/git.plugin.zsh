@@ -66,10 +66,17 @@ function gi(){
 
 compdef _gitCommitSimple gi
 
+function gl(){
+	for dir in $mteDir $ZSH_CUSTOM; do
+		ec hole $dir ..
+		cd $dir
+		git pull
+	done
+	2
+}
 
-#
+
 # Aliase
-#
 
 alias a='gs'
 alias ga='git add --all'
@@ -171,18 +178,14 @@ compdef _git ggu=git-checkout
 alias ggpur='ggu'
 compdef _git ggpur=git-checkout
 
-alias gh='grep -H -n "<<<<<<< HEAD"'
 alias ghh='git grep "<<<<<<< HEAD"'
 alias gignore='git update-index --assume-unchanged'
 alias gignored='git ls-files -v | grep "^[[:lower:]]"'
 alias gin='git init'
 
-alias gl='git pull'
-alias gle='gl;e'
 alias glgp='git log --stat -p'
 alias glgg='git log --graph'
 alias glgm='git log --graph --max-count=10'
-alias glo='git log --oneline --decorate'
 alias glol="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias glola="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
 alias glp="_git_log_prettily"
