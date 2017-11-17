@@ -31,7 +31,10 @@ if [ $os != "CYGWIN_NT-6.1" ]; then
 	arc=`uname -a |cut -d' ' -f 14`
 	dowDir=$homeT/Downloads
 	mteDir=$home/git/mte
+	pts=pts
 else
+	pts=pty
+	lsb=cygwin
 	home2='/cygdrive/C/Users/itdlz-koer'
 	
 	cyg=c:/cygwin64
@@ -54,6 +57,11 @@ fi
 
 if [[ $os = "Linux" ]] ;then;if [[ $lsb = 'Arch' ]]; then;pm='pacman';elif [[ $lsb = Ubuntu ]];then;pm='apt-get'; fi;else;pm='apt-cyg';fi
 
+
+function ohm(){
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+}
 
 function sortieren_datum(){
 	ls -lt $1| grep "^-" | awk '{
@@ -556,28 +564,26 @@ alias -s tar.gz="echo "
 # Konsole
 alias hs='\history -E'
 alias pr2='ps -ef|grep'
-alias pts='ps -ef |grep pts/'
+alias pts='ps -ef |grep $pts
+'
 alias pz='pr2 zsh'
 alias tt='tty'
-alias us ='ec $$'
+alias us='ec $$'
 
 # ls
 alias lart='ls -1Fcart'
-alias ldot='ls -ld .*'
 alias lr='ls -tRFh'   #sortiert nach Datum,rekursiv,Typ,human readable
-alias lt='ls -ltFh'   #lange Liste,sortiert nach Datum,show type,human readable
-alias lS='ls -1FSsh'
 alias lsh="ls -halt --full-time"
 
 
 #mysql
-alias me='mysql -uroot d -e'
 alias msd='mysql -uroot d'
 alias mst='mysql -uroot d -e "show tables"'
 
 
 # netzwerk
-alias dh='dhclient;i'
+alias cor='ec 178.27.250.8|xclip -selection c'
+alias col='ec 192.168.0.111^_|xclip -selection c'
 alias ie='iwconfig 2>&1 | grep -i ESSID'
 alias ip2="echo $ip"
 alias iw2='iwlist wlan0 scan'
@@ -610,10 +616,8 @@ alias psl="pr sleep"
 alias sl="sleep"
 
 # Radio
-
 alias b1="ml http://br-br1-nbopf.cast.addradio.de/br/br1/nbopf/mp3/128/stream.mp3"
 alias b3="ml http://br-br3-live.cast.addradio.de/br/br3/live/mp3/56/stream.mp3"
-alias kl="ml -playlist http://minnesota.publicradio.org/tools/play/streams/classical.pls"
 alias ml="mplayer"
 
 alias r="ml http://80.237.156.8:8120" # landsberg int.
