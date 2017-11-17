@@ -67,12 +67,12 @@ function gi(){
 compdef _gitCommitSimple gi
 
 function gl(){
-	for dir in $mteDir $ZSH_CUSTOM; do
+	for dir in $ZSH_CUSTOM; do
 		ec hole $dir ..
 		cd $dir
 		git pull
 	done
-	2
+	1
 }
 
 

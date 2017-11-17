@@ -25,7 +25,7 @@ if [ $os != "CYGWIN_NT-6.1" ]; then
 	hilfedatei=$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
 	ggpl=$ZSH_CUSTOM/plugins/git/git.plugin.zsh
 	pg=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
-	ip=`ip addr show $1 | grep -Po 'inet \K[\d.]+'`
+	ip=`ip addr show wlan0 | grep -Po 'inet \K[\d.]+'`
 
 	lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
 	arc=`uname -a |cut -d' ' -f 14`
@@ -44,6 +44,11 @@ else
 	arc=`uname -a |cut -d' ' -f 6`
 	dowDir=$home2/Downloads
 	mteDir=$cyg/home/itdlz-koer/mte/my-app
+fi
+
+
+if [ $lsb = 'Ubuntu' ] ; then
+	alias mip="echo $(dig +short myip.opendns.com @resolver1.opendns.com)"
 fi
 
 
@@ -228,7 +233,7 @@ function lss(){
 	ssh $3 $ipbas.$2 
 }
 
-function ml(){
+function mr(){
 	zparseopts -A ARGUMENTS f:
 
 	f=$ARGUMENTS[-f]
@@ -271,10 +276,8 @@ function msde(){ mysql -uroot d -e "describe app1_$1"}
 
 
 function nm(){
-	if [ -z "$1" ]; then;hilfe `basename $0` "Interface"
-	  return
-	fi
-	ipbas $1 ;nmap -sP $ipbas.1/24
+	
+	ipbas ;nmap -sP $ipbas.1/24
 }
 	
 function p(){
@@ -335,10 +338,6 @@ function q(){
 
 function re(){
   echo "${bold}Os: $lsb${normal}"
-
-	if [ -z "$1" ]; then;hilfe `basename $0` "Löschen!" "Paket"
-	  return
-	fi
 
 	if [ $os = "CYGWIN_NT-6.1" ]; then;apt-cyg remove $1;else
 	if [[ $lsb == 'Arch' ]] ;then;pacman -R --noconfirm $1
@@ -490,7 +489,6 @@ alias mte='cd $mteDir'
 alias o='cd ~/.oh-my-zsh/custom'
 alias oh='cd ~/.oh-my-zsh'
 alias sd='cd /sdcard'
-alias tt='cd target'
 alias u='cd ~/uni'
 alias uc='cd ~/uni/c'
 alias vs='cd ~/vs/vs'
@@ -557,6 +555,11 @@ alias -s tar.gz="echo "
 
 # Konsole
 alias hs='\history -E'
+alias pr2='ps -ef|grep'
+alias pts='ps -ef |grep pts/'
+alias pz='pr2 zsh'
+alias tt='tty'
+alias us ='ec $$'
 
 # ls
 alias lart='ls -1Fcart'
@@ -580,7 +583,6 @@ alias ip2="echo $ip"
 alias iw2='iwlist wlan0 scan'
 alias ji='iw2 n'
 alias jo='journalctl -xe'
-#alias mip="echo $(dig +short myip.opendns.com @resolver1.opendns.com)"
 alias ne='/etc/init.d/networking restart;sleep 1;i'
 
 
@@ -604,7 +606,6 @@ alias ks="ki ssh"
 alias pf='ps -f'
 alias ph="pr2 ssh"
 alias pmp="pr ml"
-alias pr2='ps -ef|grep'
 alias psl="pr sleep"
 alias sl="sleep"
 
@@ -613,18 +614,20 @@ alias sl="sleep"
 alias b1="ml http://br-br1-nbopf.cast.addradio.de/br/br1/nbopf/mp3/128/stream.mp3"
 alias b3="ml http://br-br3-live.cast.addradio.de/br/br3/live/mp3/56/stream.mp3"
 alias kl="ml -playlist http://minnesota.publicradio.org/tools/play/streams/classical.pls"
+alias ml="mplayer"
+
 alias r="ml http://80.237.156.8:8120" # landsberg int.
 
 # zsh
 alias e="exec zsh"
 alias fp="ec $fpath"
-#alias grep='grep'
+alias ohmyzsh="b ~/.oh-my-zsh/oh-my-zsh.sh"
 alias plu='ec $plugins'
 alias pro='ec $prompt'
 alias rt="ec $RANDOM_THEME"
 alias zt="ec $ZSH_THEME"
 alias -g zsha='git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions'
-alias zshrc='g ~/.zshrc' 
+alias zshrc='b ~/.zshrc' 
 
 
 alias ac='ack'
@@ -648,6 +651,7 @@ alias le='less -WiNS'
 alias m='man'
 alias mt='man terminator'
 alias -g n2='|less'
+alias re2='apt-get autoremove'
 
 alias rf='rfkill list'
 alias sortnr='sort -n -r'
@@ -655,7 +659,6 @@ alias ter='if [ $os != "CYGWIN_NT-6.1" ]; then;terminator &;else; mintty;fi'
 alias tp='top'
 alias tr='tree'
 alias ua="uname -a"
-alias us="echo $USER"
 alias -g ve="--version"
 alias wp='chmod 777 -R .'
 alias x="exit"
