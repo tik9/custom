@@ -52,15 +52,26 @@ compdef _gitcommit gc
 
 function gi(){
 	
-#	for dir in mte/my-app .oh-my-zsh/custom arduino; do
-	#for dir in uni .oh-my-zsh/custom; do
-	command $3
-	#echo ~/$dir
+		zparseopts -A #ARGUMENTS m1h:m1t: m2h:m2t:
+
+	m1h=$ARGUMENTS[-m1h]
+	m1t=$ARGUMENTS[-m1t]
+	m2h=$ARGUMENTS[-m2h]
+	m2t=$ARGUMENTS[-m2t]
+#	for dir in mte/my-app arduino; do
+	i=1
+	#for dir in ~/vs/vs $ZSH_CUSTOM; do
+echo $(m{$i}h) 
+# m"$i"t 
+	echo $dir
+	# cd $dir
 	#git status
-	git add . 
-	git commit -am "$1" -m "$2" 
-	git push
-	#done
+	 git add . 
+	 git commit -am m"$i"
+	 #h -m m"$i"t 
+	 git push
+	#i++
+#	done
 #cd
 }
 

@@ -6,14 +6,8 @@ function pyclean() {
     find ${ZSH_PYCLEAN_PLACES} -type d -name "__pycache__" -delete
 }
 
-kid(){
-		if [ -z "$1" ]; then
-	echo `basename $0` "Port: 0 oder 1"
-	return
-	fi
-	kill $(netstat -lnp | grep 800$1 | awk "{print $7}" | cut -d"/" -f 1)
+alias kid=	'kill $(netstat -lnp | grep 8000 | awk "{print $7}" | cut -d"/" -f 1)'
 
-}
 
 # Finde python Dateien
 alias pyfind='find . -name "*.py"'
@@ -40,5 +34,6 @@ alias pdr='pipdeptree -r --package'
 alias pi='p3 -m pip install'
 alias pui='pip3 uninstall -y'
 alias pis='p3 -m pip show'
-alias pp='p3 -m pip list lp'
+alias pp='pr2 python' # grep ps nach python
+alias ppl='p3 -m pip list n2'
 alias req='pi -r requirements.txt'

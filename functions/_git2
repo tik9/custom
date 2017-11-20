@@ -1,6 +1,6 @@
 #compdef git2
 
-#echo initialising git2..
+echo initialising git2..
 
 _gitcommit(){
 cmds=('--m1:Message Title' '--m2: Message Body')

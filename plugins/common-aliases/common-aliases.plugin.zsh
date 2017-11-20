@@ -1,4 +1,3 @@
-
 # schriftfarbe autocomplete fg8 default
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
 
@@ -51,15 +50,19 @@ fi
 
 
 if [ $lsb = 'Ubuntu' ] ; then
-	alias mip="echo $(dig +short myip.opendns.com @resolver1.opendns.com)"
 fi
 
 
-if [[ $os = "Linux" ]] ;then;if [[ $lsb = 'Arch' ]]; then;pm='pacman';elif [[ $lsb = Ubuntu ]];then;pm='apt-get'; fi;else;pm='apt-cyg';fi
+if [[ $os = "Linux" ]] ;then;if [[ $lsb = 'Arch' ]]; then;pm='pacman'
+elif [[ $lsb = Ubuntu ]];then;
+	pm='apt-get';
+	alias mip="echo $(dig +short myip.opendns.com @resolver1.opendns.com)"
+
+ fi;else;pm='apt-cyg';fi
 
 
 function ohm(){
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 }
 
@@ -546,7 +549,7 @@ alias s='pm-suspend'
 alias -g H='| head'
 alias -g LL="2>&1 | less"
 alias -g NUL="> /dev/null 2>&1"
-alias ta='tail -f'
+alias tai='tail -f'
 alias -g ti='| tail'
 
 # Hilfe
@@ -626,7 +629,13 @@ alias b1="ml http://br-br1-nbopf.cast.addradio.de/br/br1/nbopf/mp3/128/stream.mp
 alias b3="ml http://br-br3-live.cast.addradio.de/br/br3/live/mp3/56/stream.mp3"
 alias ml="mplayer"
 
-alias r="ml http://80.237.156.8:8120" # landsberg int.
+alias ra="ml http://80.237.156.8:8120" # landsberg int.
+
+#tmux
+alias tl="tmux ls"
+alias ta="tmux attach"
+alias tk="tmux kill-session"
+
 
 # zsh
 alias e="exec zsh"
@@ -661,10 +670,11 @@ alias le='less -WiNS'
 alias m='man'
 alias mt='man terminator'
 alias -g n2='|less'
+alias r='expect $login_ssh'
 alias re2='apt-get autoremove'
 
 alias rf='rfkill list'
-alias sr='expect $login_ssh'
+
 alias ter='if [ $os != "CYGWIN_NT-6.1" ]; then;terminator &;else; mintty;fi'
 alias tp='top'
 alias tr='tree'
@@ -674,4 +684,4 @@ alias wp='chmod 777 -R .'
 alias x="exit"
 alias z='ne'
 
-echo "$0 aktualisiert"
+echo "$0 aktualisiert !"
