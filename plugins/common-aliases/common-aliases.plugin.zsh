@@ -87,7 +87,7 @@ function ai(){
 
 function b(){
 	
-	if [[ $os = "Linux" && $arc != 'Android' ]];then
+	if [[ $lsb = "Ubuntu" ]];then
 		~/src/src_geany-1.28/usr/bin/geany $1 &
 	elif [ $os = "CYGWIN_NT-6.1" ];then
 		notepad++ $1 &
@@ -558,8 +558,8 @@ alias hs='\history -E'
 alias pr2='ps -ef|grep'
 alias pts='ps -ef |grep pts/'
 alias pz='pr2 zsh'
-alias tt='tty'
-alias us ='ec $$'
+alias tt='ttyhogggho $$'
+#alias us ='echo $$'
 
 # ls
 alias lart='ls -1Fcart'
@@ -627,7 +627,7 @@ alias pro='ec $prompt'
 alias rt="ec $RANDOM_THEME"
 alias zt="ec $ZSH_THEME"
 alias -g zsha='git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions'
-alias zshrc='b ~/.zshrc' 
+alias -g zshrc='~/.zshrc' 
 
 
 alias ac='ack'
@@ -664,4 +664,4 @@ alias wp='chmod 777 -R .'
 alias x="exit"
 alias z='ne'
 
-echo "$0 aktualisiert von $$"
+echo "$0 aktualisiert" 
