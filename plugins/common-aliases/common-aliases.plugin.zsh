@@ -295,14 +295,14 @@ function p(){
 
 function pd(){
 	if [ "$1" = -he ]; then
-	  hilfe `basename $0` "argsleer" "Installierte Pakete zeigen"
+	  hilfe `basename $0`  "Paket installiert?"
 	  return
 	fi
 
 	if [[ $os = "Linux" ]] ;then
-		if [[ $lsb = 'Arch' ]]; then;pacman -Qeq |less
+		if [[ $lsb = 'Arch' ]]; then;pacman -Qeq |grep $1
 	else
-		dpkg -l	|less;
+		dpkg -l	|grep $1
 		fi;else cygcheck -c|less;fi
 }
 
@@ -504,7 +504,8 @@ alias mu="cd ~/musik"
 alias mte='cd $mteDir'
 alias o='cd $ZSH_CUSTOM'
 alias oh='cd $ZSH'
-alias sd='cd /sdcard'
+alias oh='cd $ZSH'
+alias op='/opt/git/pr.git'
 #alias u='cd ~/uni'
 alias uc='cd ~/uni/c'
 alias vs='cd ~/vs/vs'
@@ -540,9 +541,6 @@ alias ab="abiword"
 alias hi='hibernate'
 alias s='pm-suspend'
 
-#expect
-alias sr='expect $login_ssh'
-
 
 # head / tail
 alias -g H='| head'
@@ -571,6 +569,7 @@ alias -s tar.gz="echo "
 
 # Konsole
 alias hs='\history -E'
+alias ho='ec $HOST'
 alias pr2='ps -ef|grep'
 alias pz='pr2 zsh'
 alias tt='tty'
@@ -605,6 +604,7 @@ alias ag='apt-get'
 
 alias dep="apt-cache depends"
 alias der="apt-cache rdepends"
+alias ii="apt-get install"
 alias upd='ag update'
 
 #progr
@@ -641,7 +641,7 @@ alias -g zshrc='zr'
 
 alias ac='ack'
 alias ad2='echo 01573 9598 220 timo.koerner@hof-university.de'
-alias c='cu tk1.biz'
+alias c='cu -L tk1.biz'
 alias ca='cat'
 alias -g ci='|xclip -selection c'
 alias -g co='xclip -selection c -o'
@@ -664,6 +664,7 @@ alias -g n2='|less'
 alias re2='apt-get autoremove'
 
 alias rf='rfkill list'
+alias sr='expect $login_ssh'
 alias ter='if [ $os != "CYGWIN_NT-6.1" ]; then;terminator &;else; mintty;fi'
 alias tp='top'
 alias tr='tree'

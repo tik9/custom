@@ -405,9 +405,10 @@ compdef _managepy django-manage
 
 alias cm="dm compilemessages"
 alias dcd="cd ~/django"
+# kid definiert in python.zsh
 alias dk='dcd;kid 0;dr'
 alias dm='p3 manage.py'
-alias dr='dm runserver'
+alias dr='dm runserver 0.0.0.0:8000'
 alias dv='p3 -c "import django;print(django.get_version())"'
 alias mi="dm migrate"
 alias mk="dm makemigrations"
