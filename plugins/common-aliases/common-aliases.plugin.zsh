@@ -95,7 +95,7 @@ function ai(){
 
 function b(){
 	
-	if [[ $os = "Linux" && $arc != 'Android' ]];then
+	if [[ $lsb = 'Ubuntu' ]];then
 		~/src/src_geany-1.28/usr/bin/geany $1 &
 	elif [ $os = "CYGWIN_NT-6.1" ];then
 		notepad++ $1 &
@@ -321,6 +321,7 @@ function pr3(){
 }
 
 
+
 function int_trap() {
     echo "Ctrl-C gedrückt"
 }
@@ -435,7 +436,7 @@ function si(){
 	   sleep 1
 	   : $((secs--))
 	done
-	 $1 
+	 $2 
 }
 
 
@@ -446,6 +447,14 @@ function unt(){
 	tar xvf $a
 	#rm $a
 }
+
+
+function u(){
+	
+	ps -ef |grep $pts/$1
+}
+compdef _pts u
+
 
 function up(){
 	if [ "$1" = -he ]; then
@@ -483,7 +492,6 @@ alias wh="which"
 alias lsb="echo $lsb"
 alias os="echo $os"
 alias arc="echo $arc"
-alias pa='echo $path'
 
 
 #cd's
@@ -494,10 +502,10 @@ alias da="cd ~/django"
 alias dow="cd $dowDir"
 alias mu="cd ~/musik"
 alias mte='cd $mteDir'
-alias o='cd ~/.oh-my-zsh/custom'
-alias oh='cd ~/.oh-my-zsh'
+alias o='cd $ZSH_CUSTOM'
+alias oh='cd $ZSH'
 alias sd='cd /sdcard'
-alias u='cd ~/uni'
+#alias u='cd ~/uni'
 alias uc='cd ~/uni/c'
 alias vs='cd ~/vs/vs'
 
@@ -533,7 +541,7 @@ alias hi='hibernate'
 alias s='pm-suspend'
 
 #expect
-alias sr='expect $login_ssh 111'
+alias sr='expect $login_ssh'
 
 
 # head / tail
@@ -564,11 +572,9 @@ alias -s tar.gz="echo "
 # Konsole
 alias hs='\history -E'
 alias pr2='ps -ef|grep'
-alias pts='ps -ef |grep $pts
-'
 alias pz='pr2 zsh'
 alias tt='tty'
-alias us='ec $$'
+alias us='ec $USER'
 
 # ls
 alias lart='ls -1Fcart'
@@ -589,7 +595,7 @@ alias ip2="echo $ip"
 alias iw2='iwlist wlan0 scan'
 alias ji='iw2 n'
 alias jo='journalctl -xe'
-alias ne='/etc/init.d/networking restart;sleep 1;i'
+alias ne='/etc/init.d/networking restart;sleep 1;ig'
 
 
 # package mgt.
@@ -624,19 +630,19 @@ alias r="ml http://80.237.156.8:8120" # landsberg int.
 
 # zsh
 alias e="exec zsh"
-alias fp="ec $fpath"
 alias ohmyzsh="b ~/.oh-my-zsh/oh-my-zsh.sh"
 alias plu='ec $plugins'
 alias pro='ec $prompt'
 alias rt="ec $RANDOM_THEME"
 alias zt="ec $ZSH_THEME"
 alias -g zsha='git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions'
-alias zshrc='b ~/.zshrc' 
+alias -g zshrc='zr' 
 
 
 alias ac='ack'
 alias ad2='echo 01573 9598 220 timo.koerner@hof-university.de'
-alias c='cat'
+alias c='cu tk1.biz'
+alias ca='cat'
 alias -g ci='|xclip -selection c'
 alias -g co='xclip -selection c -o'
 alias dt='date +"%T"'
@@ -658,7 +664,6 @@ alias -g n2='|less'
 alias re2='apt-get autoremove'
 
 alias rf='rfkill list'
-alias sortnr='sort -n -r'
 alias ter='if [ $os != "CYGWIN_NT-6.1" ]; then;terminator &;else; mintty;fi'
 alias tp='top'
 alias tr='tree'
@@ -668,4 +673,4 @@ alias wp='chmod 777 -R .'
 alias x="exit"
 alias z='ne'
 
-echo "$0 aktualisiert von $$"
+echo "$0 aktualisiert"
