@@ -31,7 +31,10 @@ if [ $os != "CYGWIN_NT-6.1" ]; then
 	arc=`uname -a |cut -d' ' -f 14`
 	dowDir=$homeT/Downloads
 	mteDir=$home/git/mte
+	pts=pts
 else
+	pts=pty
+	lsb=cygwin
 	home2='/cygdrive/C/Users/itdlz-koer'
 	
 	cyg=c:/cygwin64
@@ -54,6 +57,11 @@ fi
 
 if [[ $os = "Linux" ]] ;then;if [[ $lsb = 'Arch' ]]; then;pm='pacman';elif [[ $lsb = Ubuntu ]];then;pm='apt-get'; fi;else;pm='apt-cyg';fi
 
+
+function ohm(){
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+}
 
 function sortieren_datum(){
 	ls -lt $1| grep "^-" | awk '{
@@ -87,7 +95,7 @@ function ai(){
 
 function b(){
 	
-	if [[ $lsb = "Ubuntu" ]];then
+	if [[ $lsb = 'Ubuntu' ]];then
 		~/src/src_geany-1.28/usr/bin/geany $1 &
 	elif [ $os = "CYGWIN_NT-6.1" ];then
 		notepad++ $1 &
@@ -287,14 +295,14 @@ function p(){
 
 function pd(){
 	if [ "$1" = -he ]; then
-	  hilfe `basename $0` "argsleer" "Installierte Pakete zeigen"
+	  hilfe `basename $0`  "Paket installiert?"
 	  return
 	fi
 
 	if [[ $os = "Linux" ]] ;then
-		if [[ $lsb = 'Arch' ]]; then;pacman -Qeq |less
+		if [[ $lsb = 'Arch' ]]; then;pacman -Qeq |grep $1
 	else
-		dpkg -l	|less;
+		dpkg -l	|grep $1
 		fi;else cygcheck -c|less;fi
 }
 
@@ -311,6 +319,7 @@ function pr3(){
 	fi
 	grep $1 =(ps aux)
 }
+
 
 
 function int_trap() {
@@ -427,7 +436,7 @@ function si(){
 	   sleep 1
 	   : $((secs--))
 	done
-	 $1 
+	 $2 
 }
 
 
@@ -438,6 +447,14 @@ function unt(){
 	tar xvf $a
 	#rm $a
 }
+
+
+function u(){
+	
+	ps -ef |grep $pts/$1
+}
+compdef _pts u
+
 
 function up(){
 	if [ "$1" = -he ]; then
@@ -475,7 +492,6 @@ alias wh="which"
 alias lsb="echo $lsb"
 alias os="echo $os"
 alias arc="echo $arc"
-alias pa='echo $path'
 
 
 #cd's
@@ -486,10 +502,11 @@ alias da="cd ~/django"
 alias dow="cd $dowDir"
 alias mu="cd ~/musik"
 alias mte='cd $mteDir'
-alias o='cd ~/.oh-my-zsh/custom'
-alias oh='cd ~/.oh-my-zsh'
-alias sd='cd /sdcard'
-alias u='cd ~/uni'
+alias o='cd $ZSH_CUSTOM'
+alias oh='cd $ZSH'
+alias oh='cd $ZSH'
+alias op='/opt/git/pr.git'
+#alias u='cd ~/uni'
 alias uc='cd ~/uni/c'
 alias vs='cd ~/vs/vs'
 
@@ -524,9 +541,6 @@ alias ab="abiword"
 alias hi='hibernate'
 alias s='pm-suspend'
 
-#expect
-alias sr='expect $login_ssh 111'
-
 
 # head / tail
 alias -g H='| head'
@@ -555,35 +569,32 @@ alias -s tar.gz="echo "
 
 # Konsole
 alias hs='\history -E'
+alias ho='ec $HOST'
 alias pr2='ps -ef|grep'
-alias pts='ps -ef |grep pts/'
 alias pz='pr2 zsh'
-alias tt='ttyhogggho $$'
-#alias us ='echo $$'
+alias tt='tty'
+alias us='ec $USER'
 
 # ls
 alias lart='ls -1Fcart'
-alias ldot='ls -ld .*'
 alias lr='ls -tRFh'   #sortiert nach Datum,rekursiv,Typ,human readable
-alias lt='ls -ltFh'   #lange Liste,sortiert nach Datum,show type,human readable
-alias lS='ls -1FSsh'
 alias lsh="ls -halt --full-time"
 
 
 #mysql
-alias me='mysql -uroot d -e'
 alias msd='mysql -uroot d'
 alias mst='mysql -uroot d -e "show tables"'
 
 
 # netzwerk
-alias dh='dhclient;i'
+alias cor='ec 178.27.250.8|xclip -selection c'
+alias col='ec 192.168.0.111^_|xclip -selection c'
 alias ie='iwconfig 2>&1 | grep -i ESSID'
 alias ip2="echo $ip"
 alias iw2='iwlist wlan0 scan'
 alias ji='iw2 n'
 alias jo='journalctl -xe'
-alias ne='/etc/init.d/networking restart;sleep 1;i'
+alias ne='/etc/init.d/networking restart;sleep 1;ig'
 
 
 # package mgt.
@@ -593,6 +604,7 @@ alias ag='apt-get'
 
 alias dep="apt-cache depends"
 alias der="apt-cache rdepends"
+alias ii="apt-get install"
 alias upd='ag update'
 
 #progr
@@ -610,29 +622,27 @@ alias psl="pr sleep"
 alias sl="sleep"
 
 # Radio
-
 alias b1="ml http://br-br1-nbopf.cast.addradio.de/br/br1/nbopf/mp3/128/stream.mp3"
 alias b3="ml http://br-br3-live.cast.addradio.de/br/br3/live/mp3/56/stream.mp3"
-alias kl="ml -playlist http://minnesota.publicradio.org/tools/play/streams/classical.pls"
 alias ml="mplayer"
 
 alias r="ml http://80.237.156.8:8120" # landsberg int.
 
 # zsh
 alias e="exec zsh"
-alias fp="ec $fpath"
 alias ohmyzsh="b ~/.oh-my-zsh/oh-my-zsh.sh"
 alias plu='ec $plugins'
 alias pro='ec $prompt'
 alias rt="ec $RANDOM_THEME"
 alias zt="ec $ZSH_THEME"
 alias -g zsha='git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions'
-alias -g zshrc='~/.zshrc' 
+alias -g zshrc='zr' 
 
 
 alias ac='ack'
 alias ad2='echo 01573 9598 220 timo.koerner@hof-university.de'
-alias c='cat'
+alias c='cu -L tk1.biz'
+alias ca='cat'
 alias -g ci='|xclip -selection c'
 alias -g co='xclip -selection c -o'
 alias dt='date +"%T"'
@@ -654,7 +664,7 @@ alias -g n2='|less'
 alias re2='apt-get autoremove'
 
 alias rf='rfkill list'
-alias sortnr='sort -n -r'
+alias sr='expect $login_ssh'
 alias ter='if [ $os != "CYGWIN_NT-6.1" ]; then;terminator &;else; mintty;fi'
 alias tp='top'
 alias tr='tree'
@@ -664,4 +674,4 @@ alias wp='chmod 777 -R .'
 alias x="exit"
 alias z='ne'
 
-echo "$0 aktualisiert" 
+echo "$0 aktualisiert"

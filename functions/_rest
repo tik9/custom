@@ -20,4 +20,7 @@ _ml(){
         _multi_parts / music_files
 }
 
-
+_pts(){
+cmds=('-pts:Nummer')
+_describe 'Nummern' cmds
+}
