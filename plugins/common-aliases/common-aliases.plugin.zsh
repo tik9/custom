@@ -541,8 +541,8 @@ alias ab="abiword"
 
 
 # Energie
-alias hi='hibernate'
-alias s='pm-suspend'
+alias hi='sudo hibernate'
+alias s='sudo pm-suspend'
 
 
 # head / tail
