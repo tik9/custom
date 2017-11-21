@@ -194,7 +194,7 @@ alias gignore='git update-index --assume-unchanged'
 alias gignored='git ls-files -v | grep "^[[:lower:]]"'
 alias gin='git init'
 
-alias glgp='git log --stat -p'
+alias glg='git log --stat -p'
 alias glgg='git log --graph'
 alias glgm='git log --graph --max-count=10'
 alias glol="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
@@ -257,7 +257,7 @@ alias i='git'
 alias k='git log --stat | head -n 15'
 
 function n(){
-	git log $1
+	git log $1 --stat
 }
 
 compdef _gitlog n

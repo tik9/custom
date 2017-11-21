@@ -15,7 +15,19 @@ os=`uname -a |cut -d' ' -f 1`
 bb(){
 	zsh -x 2>zsh.trace
 	exit
-	grep 'alias.*subl' zsh.trace
+	grep 'alias.a' zsh.trace
+}
+
+cc(){
+	#mvn clean compile assembly:single  -e
+	pkill java
+	echo .. compile fertig
+	java -jar target/my-app-2.jar &
+	#pr2 jav
+
+	echo ..jar hintergrund
+	tmux split-window "zsh;sleep 2;target/classes; ja LClient;read"
+
 }
 
 if [ $os != "CYGWIN_NT-6.1" ]; then
@@ -46,10 +58,6 @@ else
 	arc=`uname -a |cut -d' ' -f 6`
 	dowDir=$home2/Downloads
 	mteDir=$cyg/home/itdlz-koer/mte/my-app
-fi
-
-
-if [ $lsb = 'Ubuntu' ] ; then
 fi
 
 
@@ -341,7 +349,7 @@ function q(){
 	trap int_trap INT
 	echo Ctrl-C zum Beenden des downloads $datei
 
-		wget http://speedtest.wdc01.softlayer.com/downloads/$datei `if [[ $os = "Linux" && $arc != 'Android' ]]; then ; echo --output-document=/dev/null;fi`
+	wget http://speedtest.wdc01.softlayer.com/downloads/$datei `if [[ $os = "Linux" && $arc != 'Android' ]]; then ; echo --output-document=/dev/null;fi`
 	
 	if [ -f $datei ];then ; rm $datei; echo "$datei wird gelöscht"; fi	
 	echo Ende
