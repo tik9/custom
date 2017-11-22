@@ -1,5 +1,17 @@
 #compdef manage.py
 
+alias 0="dcd;kid 0;dr &"
+alias cm="dm compilemessages"
+alias dcd="cd ~/django"
+# kid definiert in python.zsh
+alias dm='p3 manage.py'
+alias dr='dm runserver 0.0.0.0:8000'
+alias dv='echo django version; p3 -c "import django;print(django.get_version())"'
+alias mi="dm migrate"
+alias mk="dm makemigrations"
+alias mm="dm makemessages"
+
+
 typeset -ga nul_args
 nul_args=(
   '--verbosity=-[verboses Level; 0=minimal output, 1=normal output, 2=all output.]:Verbosity:((0\:minimal 1\:normal 2\:all))'
@@ -401,15 +413,3 @@ compdef _managepy django
 compdef _managepy django-admin
 compdef _managepy django-admin.py
 compdef _managepy django-manage
-
-
-alias cm="dm compilemessages"
-alias dcd="cd ~/django"
-# kid definiert in python.zsh
-alias dk='dcd;kid 0;dr'
-alias dm='p3 manage.py'
-alias dr='dm runserver 0.0.0.0:8000'
-alias dv='p3 -c "import django;print(django.get_version())"'
-alias mi="dm migrate"
-alias mk="dm makemigrations"
-alias mm="dm makemessages"

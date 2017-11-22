@@ -78,12 +78,13 @@ echo $(m{$i}h)
 compdef _gitCommitSimple gi
 
 function gl(){
-	for dir in $ZSH_CUSTOM; do
-		ec hole $dir ..
-		cd $dir
+	#for dir in $ZSH_CUSTOM; do
+		ec hole ..
+		cd $ZSH_CUSTOM
 		git pull
-	done
-	1
+	e	
+	#done
+	
 }
 
 
@@ -243,7 +244,7 @@ alias gsu='git submodule update'
 alias gts='git tag -s'
 alias gtv='git tag | sort -V'
 
-alias gu='git remote update'
+alias gu='git pull'
 alias gunignore='git update-index --no-assume-unchanged'
 alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
 alias gup='git pull --rebase'

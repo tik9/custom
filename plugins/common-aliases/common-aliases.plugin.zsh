@@ -99,7 +99,7 @@ function ai(){
 function b(){
 	
 	if [[ $lsb = 'Ubuntu' ]];then
-		~/src/src_geany-1.28/usr/bin/geany $1 &
+		/root/src/src_geany-1.28/usr/bin/geany $1 &
 	elif [ $os = "CYGWIN_NT-6.1" ];then
 		notepad++ $1 &
 	# android und arch
@@ -225,7 +225,7 @@ function ki(){
 	  return
 	fi
 		killall $1;
-		echo Prozesse mit $1 \n
+		echo "Prozesse mit $1 \n"
 		ps -ef|grep $1
 }
 
@@ -598,6 +598,7 @@ alias iw2='iwlist wlan0 scan'
 alias ji='iw2 n'
 alias jo='journalctl -xe'
 alias ne='/etc/init.d/networking restart;sleep 1;ig'
+alias z='ne'
 
 
 # package mgt.
@@ -632,9 +633,10 @@ alias ml="mplayer"
 alias ra="ml http://80.237.156.8:8120" # landsberg int.
 
 #tmux
-alias tl="tmux ls"
 alias ta="tmux attach"
 alias tk="tmux kill-session"
+alias tl="tmux ls"
+alias tm="tmux"
 
 
 # zsh
@@ -644,8 +646,7 @@ alias plu='ec $plugins'
 alias pro='ec $prompt'
 alias rt="ec $RANDOM_THEME"
 alias zt="ec $ZSH_THEME"
-alias -g zsha='git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions'
-alias -g zshrc='zr' 
+alias zr='b $zr' # zshrc 
 
 
 alias ac='ack'
@@ -682,6 +683,5 @@ alias ua="uname -a"
 alias -g ve="--version"
 alias wp='chmod 777 -R .'
 alias x="exit"
-alias z='ne'
 
 echo "$0 aktualisiert !"
