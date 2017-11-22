@@ -12,6 +12,10 @@ normal=`tput sgr0`
 
 os=`uname -a |cut -d' ' -f 1`
 
+aa(){
+
+}
+
 bb(){
 	zsh -x 2>zsh.trace
 	exit
@@ -71,7 +75,6 @@ elif [[ $lsb = Ubuntu ]];then;
 
 function ohm(){
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
 }
 
 function sortieren_datum(){
@@ -88,11 +91,8 @@ function sortieren_datum(){
 
 function hilfe(){
 	echo "\n${bold}Hilfe, os: $os"
-	schleife=3
-	if [[ $2 != argsleer ]] ;then
-		echo "Argumente für $1:"
-		schleife=2
-	fi
+	schleife=2
+	echo "Argumente für $1:"
 	echo "${normal}"
 
 	for var in ${@:$schleife} ; do; echo $var;done
@@ -414,10 +414,6 @@ echo $dat
 compdef _schieb schieb
 
 function scmysql(){
-	if [ "$1" = -h ]; then
-	  hilfe `basename $0` "argsleer" "Erstelle sql-Datei, dann kopieren auf Laptop"
-	  return
-	fi
 	
 	mysqldump d> $(date +"%m_%Y").sql
 	scp `ls -t | head -n1` 192.168.0.148:/root/sqlBack
@@ -438,7 +434,7 @@ function sho(){
 
 function si(){
 	if [ -z "$1" ]; then
-	  hilfe `basename $0` "Zeit in Minuten ohne Einheit bevor Aktion"
+	  hilfe `basename $0` "Zeit in Minuten ohne Einheit bevor Aktion" Aktion
 	  return
 	fi
 	secs=$(($1 * 60))
@@ -468,27 +464,22 @@ compdef _pts u
 
 
 function up(){
-	if [ "$1" = -he ]; then
-	  hilfe `basename $0` "argsleer" "Upgrade machen"
-	  return
-	fi	
 
-if [[ $lsb == 'Arch' ]] ;then;
-pacman -Syu 
-else
+	if [[ $lsb == 'Arch' ]] ;then;
+	pacman -Syu 
+	exit
+	fi
 	apt-get update	
 	apt-get upgrade	
 	apt-get dist-upgrade	
-fi
 }
 
 function uz(){
-	unzip $1
-	rm $1
+	unzip $1;rm $1
 }
 
 function yt(){
-youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "$*"
+	youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "$*"
 }
 
  
