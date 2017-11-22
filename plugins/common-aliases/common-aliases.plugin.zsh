@@ -12,9 +12,6 @@ normal=`tput sgr0`
 
 os=`uname -a |cut -d' ' -f 1`
 
-aa(){
-
-}
 
 bb(){
 	zsh -x 2>zsh.trace
@@ -22,17 +19,7 @@ bb(){
 	grep 'alias.a' zsh.trace
 }
 
-cc(){
-	#mvn clean compile assembly:single  -e
-	pkill java
-	echo .. compile fertig
-	java -jar target/my-app-2.jar &
-	#pr2 jav
 
-	echo ..jar hintergrund
-	tmux split-window "zsh;sleep 2;target/classes; ja LClient;read"
-
-}
 
 if [ $os != "CYGWIN_NT-6.1" ]; then
 	homeT='/home/t'
@@ -62,6 +49,9 @@ else
 	arc=`uname -a |cut -d' ' -f 6`
 	dowDir=$home2/Downloads
 	mteDir=$cyg/home/itdlz-koer/mte/my-app
+	alias acl='apt-cyg listall'
+	alias acl2='cygcheck'
+	
 fi
 
 
@@ -104,8 +94,7 @@ function ai(){
 	grep "alias.*$1" zsh.trace
 }
 
-function b(){
-	
+function b(){	
 	if [[ $lsb = 'Ubuntu' ]];then
 		/root/src/src_geany-1.28/usr/bin/geany $1 &
 	elif [ $os = "CYGWIN_NT-6.1" ];then
@@ -117,6 +106,21 @@ function b(){
 
 }
 
+function ci(){
+	if [[ $lsb = 'Ubuntu' ]];then
+$1|xclip -selection c
+else
+echo $1 > /dev/clipboard
+fi
+}
+
+function co(){
+	if [[ $lsb = 'Ubuntu' ]];then
+xclip -selection o
+else
+cat /dev/clipboard
+fi
+}
 
 function dif(){
 	diff <(pdftotext -layout $1 /dev/stdout) <(pdftotext -layout $2 /dev/stdout)
@@ -195,12 +199,6 @@ function ipu(){
 }
 
 function iu(){
-	
-	if [ -z "$1" ]; then
-	hilfe `basename $0` "Interface"
-	return
-	fi
-	
 	if [[ $os = "Linux" ]] ;then
 		ipd $1;ipu $1
 	else;echo Kein Linux;fi
@@ -208,38 +206,23 @@ function iu(){
 }
 
 function kil(){
-	if [ -z "$1" ]; then
-	  hilfe `basename $0` "Prozess für kill"
-	  return
-	fi
-
-	if [ $os = 'Linux' ];then
 	kill -9 $1
-	else
-	/bin/kill.exe $1
-	fi
 
 	if [ -z "grep $1 =(ps aux)" ];then
-	echo Prozess gekillt
+		echo Prozess gekillt
 	fi
-		echo Prozesse mit $1 \n;
+	
+	echo "Prozesse mit $1 \n";
 	ps -ef|grep $1
 }
 
 
 function ki(){
-	if [ -z "$1" ]; then
-	  hilfe `basename $0` "Prozess für killall"
-	  return
-	fi
 		killall $1;
 		echo "Prozesse mit $1 \n"
 		ps -ef|grep $1
 }
 
-function lö(){
-	rm -rf $1
-}
 
 # login remote shell
 function lss(){
@@ -283,19 +266,18 @@ fi
 	mupdf $1 &
 }
 
+mv0(){
+	mvn clean compile assembly:single  -e
+	#pkill java
+	echo .. compile fertig
+	java -jar target/my-app-2.jar 
+	#pr2 jav
 
-function mss(){
-	if [ -z "$1" ]; then;hilfe `basename $0` "Tab.";return
-	fi
-	mysql -uroot d -e "select*from app1_$1"
+#	echo ..jar hintergrund
+	#tmux split-window "zsh;sleep 2;target/classes; ja LClient;read"
 }
 
-
-function msde(){ mysql -uroot d -e "describe app1_$1"}
-
-
 function nm(){
-	
 	ipbas ;nmap -sP $ipbas.1/24
 }
 	
@@ -317,9 +299,12 @@ function pd(){
 		fi;else cygcheck -c|less;fi
 }
 
-function pl(){
-
-	ls -l $1 |less	
+function pen(){
+	while true; do
+		echo "telnet/curl 178.27.250.8 8000"
+		curl 178.27.250.8:8000
+		sleep 30m
+	done
 }
 
 
@@ -356,7 +341,7 @@ function q(){
 }
 
 
-function re(){
+function rem(){
   echo "${bold}Os: $lsb${normal}"
 
 	if [ $os = "CYGWIN_NT-6.1" ]; then;apt-cyg remove $1;else
@@ -385,7 +370,7 @@ function sc2(){
 	if [ -z $5 ];user=root
 
 	scp  $2 $user@$ipbas.$3:$4 
-	lö $2
+	rm -rf $2
 	echo $2 gelöscht vom Server
 }
 compdef _sc2 sc2
@@ -404,7 +389,7 @@ function schieb(){
 	#if [ -d $2 ];then;ziel_dir=$2;fi
 	for i in `seq 1 $1`; do; 	
 		dat="$dowDir/`ls -t $dowDir | head -n1`"
-echo $dat
+		echo $dat
 		mv $dat $ziel_dir
 
 		echo aktuelle Datei $ziel_dir/`ls -t $ziel_dir | head -n1`
@@ -491,7 +476,7 @@ alias t='type'
 alias wh="which"
 
 # betriebssystem
-alias lsb="echo $lsb"
+alias lsb="echo $lsb"	
 alias os="echo $os"
 alias arc="echo $arc"
 
@@ -506,19 +491,21 @@ alias mu="cd ~/musik"
 alias mte='cd $mteDir'
 alias o='cd $ZSH_CUSTOM'
 alias oh='cd $ZSH'
-alias oh='cd $ZSH'
 alias op='/opt/git/pr.git'
 #alias u='cd ~/uni'
 alias uc='cd ~/uni/c'
 alias vs='cd ~/vs/vs'
 
 #curl
+alias c='cu tk1.biz'
+alias cm='cu http://178.27.250.8:8000/de/admin/'
 alias cu='curl'
 alias cl='cu localhost:8000'
 
 
 #Dateiops
 alias cp='cp -r'
+alias lö='rm -rf'
 alias to='touch'
 
 #Dateisystem
@@ -566,19 +553,16 @@ alias ja="java"
 alias -s zip="unzip -l"
 alias -s rar="unrar l"
 alias -s tar="tar tf"
-alias -s tar.gz="echo "
 
 
 # Konsole
 alias hs='\history -E'
 alias ho='ec $HOST'
-alias pr2='ps -ef|grep'
-alias pz='pr2 zsh'
+alias pz='pr3 zsh'
 alias tt='tty'
 alias us='ec $USER'
 
 # ls
-alias lart='ls -1Fcart'
 alias lr='ls -tRFh'   #sortiert nach Datum,rekursiv,Typ,human readable
 alias lsh="ls -halt --full-time"
 
@@ -589,8 +573,7 @@ alias mst='mysql -uroot d -e "show tables"'
 
 
 # netzwerk
-alias cor='ec 178.27.250.8|xclip -selection c'
-alias col='ec 192.168.0.111^_|xclip -selection c'
+alias -g re='178.27.250.8'
 alias ie='iwconfig 2>&1 | grep -i ESSID'
 alias ip2="echo $ip"
 alias iw2='iwlist wlan0 scan'
@@ -600,35 +583,23 @@ alias ne='/etc/init.d/networking restart;sleep 1;ig'
 alias z='ne'
 
 
-# package mgt.
-alias acl='apt-cyg listall'
-alias acl2='cygcheck'
-alias ag='apt-get'
-
-alias dep="apt-cache depends"
-alias der="apt-cache rdepends"
-alias ii="apt-get install"
-alias upd='ag update'
-
 #progr
 alias ard='~/progr/arduino-1.8.5/arduino &'
 alias ee="~/progr/eclipse/eclipse &"
 
 
 # ps
-alias kp="ki ml"
 alias ks="ki ssh"
-alias pf='ps -f'
 alias ph="pr2 ssh"
 alias pmp="pr ml"
-alias psl="pr sleep"
-alias sl="sleep"
+alias pr2='ps -ef|grep'
+alias psl="pr2 sleep"
+alias -g sl="sleep"
 
 # Radio
 alias b1="ml http://br-br1-nbopf.cast.addradio.de/br/br1/nbopf/mp3/128/stream.mp3"
-alias b3="ml http://br-br3-live.cast.addradio.de/br/br3/live/mp3/56/stream.mp3"
-alias ml="mplayer"
 
+alias ml="mplayer"
 alias ra="ml http://80.237.156.8:8120" # landsberg int.
 
 #tmux
@@ -650,10 +621,7 @@ alias zr='b $zr' # zshrc
 
 alias ac='ack'
 alias ad2='echo 01573 9598 220 timo.koerner@hof-university.de'
-alias c='cu -L tk1.biz'
 alias ca='cat'
-alias -g ci='|xclip -selection c'
-alias -g co='xclip -selection c -o'
 alias dt='date +"%T"'
 alias dfh='df -h'
 alias dowDir='l $dowDir'

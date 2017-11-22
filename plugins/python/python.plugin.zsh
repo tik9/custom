@@ -25,8 +25,8 @@ function p3(){
 }
 
 alias py='/root/progr/pycharm/bin/pycharm.sh&'
-alias pg="g $pg"
-
+alias pb="b $pg"
+alias pp='pr3 python' # grep ps nach python
 
 #pip
 alias pdn='pipdeptree --package'
@@ -34,6 +34,5 @@ alias pdr='pipdeptree -r --package'
 alias pi='p3 -m pip install'
 alias pui='pip3 uninstall -y'
 alias pis='p3 -m pip show'
-alias pp='pr2 python' # grep ps nach python
 alias ppl='p3 -m pip list n2'
 alias req='pi -r requirements.txt'

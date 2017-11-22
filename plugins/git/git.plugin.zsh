@@ -203,9 +203,6 @@ alias glola="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Crese
 alias glp="_git_log_prettily"
 compdef _git glp=git-log
 
-alias gm='git merge'
-alias gmom='git merge origin/master'
-alias gmtvim='git mergetool --no-prompt --tool=vimdiff'
 
 alias gpu='git push'
 compdef _git gpoat=git-push
@@ -230,13 +227,9 @@ alias gst='git stash'
 alias gstl='git stash list'
 alias gstp='git stash pop'
 
-alias gts='git tag -s'
-alias gtv='git tag | sort -V'
-
 alias gu='git pull'
 alias gunignore='git update-index --no-assume-unchanged'
 alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
-alias gup='git pull --rebase'
 alias gupv='git pull --rebase -v'
 
 alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
