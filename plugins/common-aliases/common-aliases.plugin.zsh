@@ -7,18 +7,9 @@ zr=~/.zshrc
 mediaDir='/media/t'
 dow='Downloads'
 
-bold=`tput bold`
-normal=`tput sgr0`
+bold=`tput bold`;normal=`tput sgr0`
 
 os=`uname -a |cut -d' ' -f 1`
-
-
-bb(){
-	zsh -x 2>zsh.trace
-	exit
-	grep 'alias.a' zsh.trace
-}
-
 
 
 if [ $os != "CYGWIN_NT-6.1" ]; then
@@ -88,11 +79,6 @@ function hilfe(){
 	for var in ${@:$schleife} ; do; echo $var;done
 }
 
-function ai(){
-	zsh -x 2>zsh.trace
-	exit
-	grep "alias.*$1" zsh.trace
-}
 
 function b(){	
 	if [[ $lsb = 'Ubuntu' ]];then
@@ -108,18 +94,23 @@ function b(){
 
 function ci(){
 	if [[ $lsb = 'Ubuntu' ]];then
-$1|xclip -selection c
-else
-echo $1 > /dev/clipboard
-fi
+	echo "$1"|xclip
+	else
+	echo $1 > /dev/clipboard
+	fi
 }
+
+ci2(){
+	echo "$1"|xclip -selection clipboard
+}
+	
 
 function co(){
 	if [[ $lsb = 'Ubuntu' ]];then
-xclip -selection o
-else
-cat /dev/clipboard
-fi
+	xclip -o
+	else
+	cat /dev/clipboard
+	fi
 }
 
 function dif(){
@@ -134,9 +125,12 @@ function ersetz(){
   return
 	fi
 	for file in *; do
-		mv -- "$file" "${file// /_}"
-		if [[ $file != *"c_"* ]]; then
-			mv "$file" ${1}${file}
+		if [[ $file = \ ]];then
+			mv -- "$file" "${file// /_}"
+		fi
+		if [[ `pwd` = '/root/uni/c' && $file != *"c_"* ]]; then
+			#mv "$file" ${1}${file}
+			echo kein c_
 		fi
 	done
 }
@@ -527,7 +521,7 @@ alias ab="abiword"
 
 
 # Energie
-alias hi='sudo hibernate'
+alias -g hi='sudo hibernate'
 alias s='sudo pm-suspend'
 
 

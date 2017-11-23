@@ -55,9 +55,9 @@ function gi(){
 		zparseopts -A #ARGUMENTS m1h:m1t: m2h:m2t:
 
 	m1h=$ARGUMENTS[-m1h]
-	m1t=$ARGUMENTS[-m1t]
-	m2h=$ARGUMENTS[-m2h]
-	m2t=$ARGUMENTS[-m2t]
+	#m1t=$ARGUMENTS[-m1t]
+	#m2h=$ARGUMENTS[-m2h]
+	#m2t=$ARGUMENTS[-m2t]
 #	for dir in mte/my-app arduino; do
 	i=1
 	#for dir in ~/vs/vs $ZSH_CUSTOM; do
@@ -67,7 +67,7 @@ echo $(m{$i}h)
 	# cd $dir
 	#git status
 	 git add . 
-	 git commit -am m"$i"
+	 git commit -am "$1"
 	 #h -m m"$i"t 
 	 git push
 	#i++
@@ -79,14 +79,27 @@ compdef _gitCommitSimple gi
 
 function gl(){
 	#for dir in $ZSH_CUSTOM; do
-		ec hole ..
-		cd $ZSH_CUSTOM
-		git pull
-	e	
+		
+	if [ $# -eq 0 ];then
+		echo keine Argumente
+		exit 1
+	fi
+		
+	ec hole ~/$1..
+	#ec hole $ZSH_CUSTOM..
+	cd ~/$1
+	#cd $ZSH_CUSTOM
+	git pull
+	if [[ $1 = $ZSH_CUSTOM ]];then
+		exec zsh
+	fi
 	#done
-	
 }
 
+mg(){
+	dir= ~/mte
+	cd $dir
+}
 
 # Aliase
 
@@ -226,6 +239,7 @@ alias gsps='git show --pretty=short --show-signature'
 alias gst='git stash'
 alias gstl='git stash list'
 alias gstp='git stash pop'
+alias gsts='git stash show -p'
 
 alias gu='git pull'
 alias gunignore='git update-index --no-assume-unchanged'
