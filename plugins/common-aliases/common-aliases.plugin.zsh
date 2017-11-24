@@ -2,7 +2,7 @@
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
 
 idrs=~/.ssh/id_rsa.pub 
-login_ssh=$ZSH_CUSTOM/login_rp
+login_rp=$ZSH_CUSTOM/login_rp
 zr=~/.zshrc
 mediaDir='/media/t'
 dow='Downloads'
@@ -54,10 +54,6 @@ elif [[ $lsb = Ubuntu ]];then;
  fi;else;pm='apt-cyg';fi
 
 
-function ohm(){
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-}
-
 function sortieren_datum(){
 	ls -lt $1| grep "^-" | awk '{
 	key=$6$7
@@ -92,15 +88,15 @@ function b(){
 
 }
 
-function ci(){
+function ci2(){
 	if [[ $lsb = 'Ubuntu' ]];then
-	echo "$1"|xclip
+		echo "$1"|xclip
 	else
-	echo $1 > /dev/clipboard
+		echo $1 > /dev/clipboard
 	fi
 }
 
-ci2(){
+ci(){
 	echo "$1"|xclip -selection clipboard
 }
 	
@@ -120,14 +116,17 @@ function dif(){
 
 
 function ersetz(){
-	if [ "$1" = -h ]; then
-  hilfe `basename $0` "Prefix"
-  return
-	fi
+
 	for file in *; do
-		if [[ $file = \ ]];then
+		if [[ $file = '\ ' ]];then
 			mv -- "$file" "${file// /_}"
 		fi
+		if [[ $file =~ '[A-Z]' ]];then
+		echo $file
+		mv $file $file | tr '[:upper:]' '[:lower:]'
+		echo $file
+		fi
+		
 		if [[ `pwd` = '/root/uni/c' && $file != *"c_"* ]]; then
 			#mv "$file" ${1}${file}
 			echo kein c_
@@ -147,10 +146,6 @@ function ig(){
 
 
 function in(){
-	if [ -z "$1" ]; then
-		hilfe `basename $0` "Paket"
-		return
-	fi
 
 	dfh
 	if [[ $os = "Linux" ]] ;then
@@ -165,10 +160,6 @@ function in(){
 
 
 function ipbas {
-	if [ -z "$1" ]; then
-		hilfe `basename $0` "Zeigt interne ip-Adresse\n Argument 1: Netzwerk Interface (wlan0 oder eth0)"
-	return
-	fi
 	
 	ipbas=$(echo $ip | cut -d . -f -3)	
 	echo Basis Ip $ipbas
@@ -176,19 +167,13 @@ function ipbas {
 
 
 function ipd(){
-	if [ -z "$1" ]; then
-	hilfe `basename $0` "Interface"
-	return
-	fi
+
 	ip link set $1 down
 }
 
 function ipu(){
 		
-	if [ -z "$1" ]; then
-	hilfe `basename $0` "Interface"
-	return
-	fi
+
 		ip link set $1 up
 }
 
@@ -302,14 +287,13 @@ function pen(){
 }
 
 
-function pr3(){
+function pr2(){
 	if [ -z "$1" ]; then
 	  hilfe `basename $0` "grep mit 'prozess Substitution'" "Prozess"
 	  return
 	fi
 	grep $1 =(ps aux)
 }
-
 
 
 function int_trap() {
@@ -491,7 +475,7 @@ alias uc='cd ~/uni/c'
 alias vs='cd ~/vs/vs'
 
 #curl
-alias c='cu tk1.biz'
+alias c='cu -L tk1.biz'
 alias cm='cu http://178.27.250.8:8000/de/admin/'
 alias cu='curl'
 alias cl='cu localhost:8000'
@@ -586,7 +570,7 @@ alias ee="~/progr/eclipse/eclipse &"
 alias ks="ki ssh"
 alias ph="pr2 ssh"
 alias pmp="pr ml"
-alias pr2='ps -ef|grep'
+alias pr3='ps -ef|grep'
 alias psl="pr2 sleep"
 alias -g sl="sleep"
 
@@ -605,12 +589,13 @@ alias tm="tmux"
 
 # zsh
 alias e="exec zsh"
-alias ohmyzsh="b ~/.oh-my-zsh/oh-my-zsh.sh"
+alias ohmyzsh="b $ZSH/oh-my-zsh.sh"
+alias ohm='sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
 alias plu='ec $plugins'
 alias pro='ec $prompt'
 alias rt="ec $RANDOM_THEME"
-alias zt="ec $ZSH_THEME"
 alias zr='b $zr' # zshrc 
+alias zt="ec $ZSH_THEME"
 
 
 alias ac='ack'
@@ -632,7 +617,7 @@ alias le='less -WiNS'
 alias m='man'
 alias mt='man terminator'
 alias -g n2='|less'
-alias r='expect $login_ssh'
+alias r='expect $login_rp'
 alias re2='apt-get autoremove'
 
 alias rf='rfkill list'
