@@ -52,7 +52,7 @@ compdef _gitcommit gc
 
 function gi(){
 	
-		zparseopts -A ARGUMENTS mzh: mzt: mlh: mlt:
+		zparseopts -A ARGUMENTS mzh: mzt: m2h: m2t:
 
 	mh[1]=$ARGUMENTS[-mzh]
 	mt[1]=$ARGUMENTS[-mzt]
@@ -60,18 +60,18 @@ function gi(){
 	mt[2]=$ARGUMENTS[-m2t]
 	
 	i=1
-	for dir in $ZSH_CUSTOM mte/my-app; do
+	for dir in $ZSH_CUSTOM $mteDir; do
 	#for dir in $ZSH_CUSTOM ~/vs/vs ; do
 
-	#echo ${mh[$i]} ${mt[$i]} $dir
+	echo "${mh[$i]} ${mt[$i]} $dir"
 
 	 cd $dir
-	 git add . 
+	 #git add . 
 	 git commit -am ${mh[$i]} -m ${mt[$i]}
 	 git push
 	i=$((i+1))
 	done
-	2
+	#1
 }
 
 compdef _gi gi
