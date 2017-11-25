@@ -82,7 +82,7 @@ function gl(){
 		
 	if [ $# -eq 0 ];then
 		echo keine Argumente
-		exit 1
+		return
 	fi
 		
 	ec hole ~/$1..

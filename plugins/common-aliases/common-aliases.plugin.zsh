@@ -3,7 +3,6 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
 
 idrs=~/.ssh/id_rsa.pub 
 login_ssh=$ZSH_CUSTOM/login_rp
-zr=~/.zshrc
 mediaDir='/media/t'
 dow='Downloads'
 
@@ -25,10 +24,12 @@ if [ $os != "CYGWIN_NT-6.1" ]; then
 	dowDir=$homeT/Downloads
 	mteDir=$home/git/mte
 	pts=pts
+	zr=~/.zshrc
+
 else
 	pts=pty
 	lsb=cygwin
-	home2='/cygdrive/C/Users/itdlz-koer'
+	home='/cygdrive/C/Users/itdlz-koer'
 	
 	cyg=c:/cygwin64
 	com_alias=$cyg$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
@@ -38,10 +39,12 @@ else
 	bim=$(wmic OS get OSArchitecture)
 	bi2=$(set | findstr ARCH)
 	arc=`uname -a |cut -d' ' -f 6`
-	dowDir=$home2/Downloads
-	mteDir=$cyg/home/itdlz-koer/mte/my-app
+	dowDir=$home/Downloads
+	mteDir=$home/mte/my-app
 	alias acl='apt-cyg listall'
 	alias acl2='cygcheck'
+	zr=$cyg/home/itdlz-koer/.zshrc
+
 	
 fi
 
