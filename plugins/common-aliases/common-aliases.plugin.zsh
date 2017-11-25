@@ -16,7 +16,7 @@ os=`uname -a |cut -d' ' -f 1`
 if [ $os != "CYGWIN_NT-6.1" ]; then
 	homeT='/home/t'
 	home='/root'
-	hilfedatei=$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
+	com_alias=$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
 	ggpl=$ZSH_CUSTOM/plugins/git/git.plugin.zsh
 	pg=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
 
@@ -25,23 +25,27 @@ if [ $os != "CYGWIN_NT-6.1" ]; then
 	dowDir=$homeT/Downloads
 	mteDir=$home/git/mte
 	pts=pts
+	zr=~/.zshrc
+
 else
 	pts=pty
 	lsb=cygwin
-	home2='/cygdrive/C/Users/itdlz-koer'
+	home='/cygdrive/C/Users/itdlz-koer'
 	
 	cyg=c:/cygwin64
-	hilfedatei=$cyg$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
+	com_alias=$cyg$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
 	ggpl=$cyg$ZSH_CUSTOM/plugins/git/git.plugin.zsh
 	pg=$cyg$ZSH_CUSTOM/plugins/python/python.plugin.zsh
 
 	bim=$(wmic OS get OSArchitecture)
 	bi2=$(set | findstr ARCH)
 	arc=`uname -a |cut -d' ' -f 6`
-	dowDir=$home2/Downloads
-	mteDir=$cyg/home/itdlz-koer/mte/my-app
+	dowDir=$home/Downloads
+	mteDir=$home/mte/my-app
 	alias acl='apt-cyg listall'
 	alias acl2='cygcheck'
+	zr=$cyg/home/itdlz-koer/.zshrc
+
 	
 fi
 
@@ -227,7 +231,7 @@ function ml(){
 	mplayer "$1"
 }
 
-compdef _ml ml
+compdef _ml mr
 
 function mo(){
 	dev=`lsblk|sed -n 5p|cut -f1 -d' '`
@@ -281,6 +285,10 @@ function pen(){
 	done
 }
 
+pk(){
+	pkill $1;ps $1
+}
+
 
 function pr2(){
 	if [ -z "$1" ]; then
@@ -322,27 +330,23 @@ function rem(){
 }
 # -f[datei]:dateiname:_files' '-i[interface]:interf:_net_interfaces' '-o[letztes Oktett]' '-d[ziel]'
 function sc2(){
-	zparseopts -A ARGUMENTS d:f:i: o:
+	zparseopts -A ARGUMENTS d:f:i: o:u:
 
 	dir=$ARGUMENTS[-d]
-	file=$ARGUMENTS[-f]
+	datei=$ARGUMENTS[-f]
 	interface=$ARGUMENTS[-i]
 	oktett=$ARGUMENTS[-o]
+	user=$ARGUMENTS[-u]
 
-	printf 'Argument ist "%s"\n' "$f"
+	printf 'dir, datei %s %s', $dir,$datei
+	
+	ipbas $interface
+	
+	if [ -z $user ];user=root
 
-	if [ -z "$1" ]; then
-	  hilfe `basename $0` Basis:$ipbas 1.Interface 2.Datei "3.letztes Oktett" 4.Zielordner (5.user) "(6.port)"
-	  return
-	fi
-	ipbas $1
-
-	user=$5
-	if [ -z $5 ];user=root
-
-	scp  $2 $user@$ipbas.$3:$4 
-	rm -rf $2
-	echo $2 gelöscht vom Server
+	scp  $datei $user@$ipbas.$oktett:$dir
+	rm -rf $datei
+	echo $datei gelöscht vom Server
 }
 compdef _sc2 sc2
 
@@ -457,7 +461,6 @@ alias arc="echo $arc"
 
 #cd's
 alias ar="cd ~/arduino"
-alias bi="cd ~/bilder"
 alias y="cd"
 alias da="cd ~/django"
 alias dow="cd $dowDir"
@@ -474,7 +477,6 @@ alias vs='cd ~/vs/vs'
 alias c='cu -L tk1.biz'
 alias cm='cu http://178.27.250.8:8000/de/admin/'
 alias cu='curl'
-alias cl='cu localhost:8000'
 
 
 #Dateiops
@@ -484,7 +486,6 @@ alias to='touch'
 
 #Dateisystem
 alias lk="lsblk"
-alias mn='mount'
 
 #Dict
 alias wl="echo Dict.;dict -D"
@@ -507,16 +508,14 @@ alias s='sudo pm-suspend'
 
 # head / tail
 alias -g H='| head'
-alias -g LL="2>&1 | less"
-alias -g NUL="> /dev/null 2>&1"
 alias tai='tail -f'
 alias -g ti='| tail'
 
 # Hilfe
 alias -g h="he"
 alias -g he="--help |less"
-alias -g hd="$hilfedatei"
-alias hg="g $hilfedatei"
+alias -g hd="$com_alias"
+alias hg="g $com_alias"
 
 # Java
 alias j="javac"
@@ -556,15 +555,9 @@ alias ne='/etc/init.d/networking restart;sleep 1;ig'
 alias z='ne'
 
 
-#progr
-alias ard='~/progr/arduino-1.8.5/arduino &'
-alias ee="~/progr/eclipse/eclipse &"
-
-
 # ps
 alias ks="ki ssh"
 alias ph="pr2 ssh"
-alias pmp="pr ml"
 alias pr3='ps -ef|grep'
 alias psl="pr2 sleep"
 alias -g sl="sleep"
