@@ -156,10 +156,10 @@ function in(){
 	df -h
 }
 
-ip2(){
+i(){
 		ip addr show $1 | grep -Po 'inet \K[\d.]+'
 }
-compdef _ip ip2
+compdef _ip i
 
 
 function ipbas {
@@ -222,13 +222,9 @@ function lss(){
 	ssh $3 $ipbas.$2 
 }
 
-function mr(){
-	zparseopts -A ARGUMENTS f:
+function ml(){
 
-	f=$ARGUMENTS[-f]
-
-	printf 'Argument ist "%s"\n' "$f"
-	mplayer "$f"
+	mplayer "$1"
 }
 
 compdef _ml ml
@@ -367,7 +363,7 @@ function schieb(){
 		echo $dat
 		mv $dat $ziel_dir
 
-		echo aktuelle Datei $ziel_dir/`ls -t $ziel_dir | head -n1`
+		#echo aktuelle Datei $ziel_dir/`ls -t $ziel_dir | head -n1`
 	done
 }
 
@@ -389,21 +385,23 @@ function sho(){
 
 function si(){
 	
-	secs=$(($1 * 6))
+	secs=$(($1 * 60))
 	while [ $secs -gt 0 ]; do
 	   echo -ne "$secs\033[0K\r"
 	   sleep 1
 	   : $((secs--))
 	done
-	$(2)
+	eval $2
 }
 
 
 function unt(){
 	#schieb
-	a=$(schieb)
-	cd `pwd`
-	tar xvf $a
+	#a=$(schieb)
+	#cd `pwd`
+	# gz: z flag
+	a=`ls -t | head -n1`
+	tar zxvf $a
 	#rm $a
 }
 
@@ -503,7 +501,7 @@ alias ab="abiword"
 
 
 # Energie
-alias -g hi='sudo hibernate'
+alias hi='sudo hibernate'
 alias s='sudo pm-suspend'
 
 
@@ -574,7 +572,6 @@ alias -g sl="sleep"
 # Radio
 alias b1="ml http://br-br1-nbopf.cast.addradio.de/br/br1/nbopf/mp3/128/stream.mp3"
 
-alias ml="mplayer"
 alias ra="ml http://80.237.156.8:8120" # landsberg int.
 
 #tmux

@@ -37,10 +37,10 @@ function work_in_progress() {
 
 function gc(){
 	#Aufruf: gc --m1 foo
-	zparseopts -A ARGUMENTS -m1: -m2:
+	zparseopts -A ARGUMENTS m1: m2:
 
-	m1=$ARGUMENTS[--m1]
-	m2=$ARGUMENTS[--m2]
+	m1=$ARGUMENTS[-m1]
+	m2=$ARGUMENTS[-m2]
 
 	printf 'Argument m1 ist "%s"\n' "$m1"
 	printf 'Argument m2 ist "%s"\n' "$m2"
@@ -63,7 +63,7 @@ function gi(){
 	for dir in $ZSH_CUSTOM $mteDir; do
 	#for dir in $ZSH_CUSTOM ~/vs/vs ; do
 
-	echo "${mh[$i]} ${mt[$i]} $dir"
+	#echo "${mh[$i]} ${mt[$i]} $dir"
 
 	 cd $dir
 	 #git add . 
@@ -230,6 +230,7 @@ alias grbc='git rebase --continue'
 alias grh='git reset HEAD'
 alias grset='git remote set-url'
 alias grt='cd $(git rev-parse --show-toplevel || echo ".")'
+alias gru='git remote update'
 alias grv='git remote -v'
 
 alias gs='git status'
@@ -249,7 +250,7 @@ alias gupv='git pull --rebase -v'
 alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"'
 
-alias i='git'
+#alias i='git'
 alias k='git log --stat | head -n 15'
 
 function n(){
