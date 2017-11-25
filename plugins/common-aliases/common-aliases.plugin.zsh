@@ -7,7 +7,8 @@ zr=~/.zshrc
 mediaDir='/media/t'
 dow='Downloads'
 
-bold=`tput bold`;normal=`tput sgr0`
+bold=`tput bold`
+normal=`tput sgr0`
 
 os=`uname -a |cut -d' ' -f 1`
 
@@ -18,7 +19,6 @@ if [ $os != "CYGWIN_NT-6.1" ]; then
 	hilfedatei=$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
 	ggpl=$ZSH_CUSTOM/plugins/git/git.plugin.zsh
 	pg=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
-	ip=`ip addr show wlan0 | grep -Po 'inet \K[\d.]+'`
 
 	lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
 	arc=`uname -a |cut -d' ' -f 14`
@@ -62,15 +62,14 @@ function sortieren_datum(){
 	END {
 	for (date in freq)
 			printf "%s\t%d\n", date, freq[date]
-	}'| tail -n1
+	}'| sort -k2|tail -n2
 }
 
 
 function hilfe(){
 	echo "\n${bold}Hilfe, os: $os"
 	schleife=2
-	echo "Argumente für $1:"
-	echo "${normal}"
+	echo "Argumente für $1:${normal}"
 
 	for var in ${@:$schleife} ; do; echo $var;done
 }
@@ -118,25 +117,24 @@ function dif(){
 function ersetz(){
 
 	for file in *; do
-		if [[ $file = '\ ' ]];then
-			mv -- "$file" "${file// /_}"
+		if [[ $file =~ \  ]];then
+			echo mit Leerzeichen: $file
+			mv "$file" "${file// /_}"
 		fi
+		
 		if [[ $file =~ '[A-Z]' ]];then
-		echo $file
-		mv $file $file | tr '[:upper:]' '[:lower:]'
-		echo $file
+		echo Zu verändern: $file
+		rename 'y/A-Z/a-z/' *
 		fi
 		
 		if [[ `pwd` = '/root/uni/c' && $file != *"c_"* ]]; then
-			#mv "$file" ${1}${file}
-			echo kein c_
+			mv "$file" ${1}${file}
+			echo Zu verändern: $file
 		fi
 	done
-}
+	echo "\n${bold}Dateien nach Op $normal"
+	for f in *;do;echo $f;done
 
-
-function f(){
-	iwgetid -r	
 }
 
 
@@ -158,31 +156,41 @@ function in(){
 	df -h
 }
 
+ip2(){
+		ip addr show $1 | grep -Po 'inet \K[\d.]+'
+}
+compdef _ip ip2
+
 
 function ipbas {
 	
-	ipbas=$(echo $ip | cut -d . -f -3)	
+	ipbas=$(echo `ip2 $1` | cut -d . -f -3)	
 	echo Basis Ip $ipbas
 }
 
+compdef _ip ipbas
 
 function ipd(){
 
 	ip link set $1 down
 }
+compdef _ip ipd
+
 
 function ipu(){
 		
 
 		ip link set $1 up
 }
+compdef _ip ipu
+
 
 function iu(){
-	if [[ $os = "Linux" ]] ;then
 		ipd $1;ipu $1
-	else;echo Kein Linux;fi
-	i;p
+	ig;p
 }
+compdef _ip iu
+
 
 function kil(){
 	kill -9 $1
@@ -226,22 +234,12 @@ function mr(){
 compdef _ml ml
 
 function mo(){
-	if [ "$1" = 'h' ]; then
-	  hilfe `basename $0` "Findet USB-Bezeichnung"
-	  return
-	fi
-
 	dev=`lsblk|sed -n 5p|cut -f1 -d' '`
-
 	mount /dev/$dev $mediaDir
 }
 
 	
 function mp(){
-if [ -z "$1" ]; then
-  hilfe `basename $0` "Pdf"
-  return
-fi
 	mupdf $1 &
 }
 
@@ -257,8 +255,9 @@ mv0(){
 }
 
 function nm(){
-	ipbas ;nmap -sP $ipbas.1/24
+	ipbas $1;nmap -sP $ipbas.1/24
 }
+compdef _ip nm
 	
 function p(){
 	ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de
@@ -320,8 +319,6 @@ function q(){
 
 
 function rem(){
-  echo "${bold}Os: $lsb${normal}"
-
 	if [ $os = "CYGWIN_NT-6.1" ]; then;apt-cyg remove $1;else
 	if [[ $lsb == 'Arch' ]] ;then;pacman -R --noconfirm $1
 	else;apt-get autoremove $1;fi
@@ -386,27 +383,19 @@ function scmysql(){
 
 function sho(){
 
-	if [ -z "$1" ]; then
-	  hilfe `basename $0` "Paket"
-	  return
-	fi
-
 	if [ $os = "CYGWIN_NT-6.1" ]; then
 		apt-cyg show `echo $1`;else ; if [[ $lsb == 'Arch' ]] ;then;pacman -Ss $1 ;else;apt-cache show $1|less;fi;fi;
 }
 
 function si(){
-	if [ -z "$1" ]; then
-	  hilfe `basename $0` "Zeit in Minuten ohne Einheit bevor Aktion" Aktion
-	  return
-	fi
-	secs=$(($1 * 60))
+	
+	secs=$(($1 * 6))
 	while [ $secs -gt 0 ]; do
 	   echo -ne "$secs\033[0K\r"
 	   sleep 1
 	   : $((secs--))
 	done
-	 $2 
+	$(2)
 }
 
 
@@ -441,8 +430,17 @@ function uz(){
 	unzip $1;rm $1
 }
 
-function yt(){
-	youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "$*"
+
+yt2(){
+	typeset -A assoc_array
+	assoc_array=('classic1' 'hSnD30bcAS8'
+	'classic2' '2dgPv7vH_BQ' 
+	'pop1' 'glkT4AhKrcI'
+	)
+
+	for k in "${(@k)assoc_array}"; do
+	  echo "$k ->https://www.youtube.com/watch?v=$assoc_array[$k]"
+	done
 }
 
  
@@ -551,9 +549,8 @@ alias mst='mysql -uroot d -e "show tables"'
 
 
 # netzwerk
+alias f='iwgetid -r'
 alias -g re='178.27.250.8'
-alias ie='iwconfig 2>&1 | grep -i ESSID'
-alias ip2="echo $ip"
 alias iw2='iwlist wlan0 scan'
 alias ji='iw2 n'
 alias jo='journalctl -xe'
@@ -618,16 +615,12 @@ alias m='man'
 alias mt='man terminator'
 alias -g n2='|less'
 alias r='expect $login_rp'
-alias re2='apt-get autoremove'
-
 alias rf='rfkill list'
-
 alias ter='if [ $os != "CYGWIN_NT-6.1" ]; then;terminator &;else; mintty;fi'
 alias tp='top'
 alias tr='tree'
-alias ua="uname -a"
 alias -g ve="--version"
-alias wp='chmod 777 -R .'
 alias x="exit"
+alias yt='	youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
 
-echo "$0 aktualisiert !"
+echo "$0 aktualisiert"

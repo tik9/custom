@@ -2,23 +2,26 @@
 
 #echo initialisiere rest..
 
-_sc2(){
-	_arguments '-f[datei]:dateiname:_files' '-i[interface]:interf:_net_interfaces' '-o[letztes Oktett]' '-d[ziel]'
-}
-
-
-_schieb(){
-	_arguments '-f[datei]:dateiname:_files' '-z[Ziel, wohin]' 
-}
-
-
 _ml(){
-
 	_arguments '-f[datei]:dat:_files'
      local -a music_files
         music_files=( *.mp3,*.wav )
         _multi_parts / music_files
 }
+
+_ip(){
+_arguments '-i[interface]:interf:_net_interfaces'
+}
+
+_sc2(){
+	_arguments '-d[zielverzeichnis]:_path_files' '-f[quell datei]:dateiname:_files' '-i[interface]:interf:_net_interfaces' '-o[letztes Oktett]' 
+}
+
+
+_schieb(){
+	_arguments '-f[datei]:datei:_files' '-z[Ziel, wohin]:' 
+}
+
 
 _pts(){
 cmds=('-pts:Nummer')
