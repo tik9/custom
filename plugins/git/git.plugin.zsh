@@ -52,30 +52,29 @@ compdef _gitcommit gc
 
 function gi(){
 	
-		zparseopts -A #ARGUMENTS m1h:m1t: m2h:m2t:
+		zparseopts -A ARGUMENTS mzh: mzt: m2h: m2t:
 
-	m1h=$ARGUMENTS[-m1h]
-	#m1t=$ARGUMENTS[-m1t]
-	#m2h=$ARGUMENTS[-m2h]
-	#m2t=$ARGUMENTS[-m2t]
-#	for dir in mte/my-app arduino; do
+	mh[1]=$ARGUMENTS[-mzh]
+	mt[1]=$ARGUMENTS[-mzt]
+	mh[2]=$ARGUMENTS[-m2h]
+	mt[2]=$ARGUMENTS[-m2t]
+	
 	i=1
-	#for dir in ~/vs/vs $ZSH_CUSTOM; do
-echo $(m{$i}h) 
-# m"$i"t 
-	echo $dir
-	# cd $dir
-	#git status
-	 git add . 
-	 git commit -am "$1"
-	 #h -m m"$i"t 
+	for dir in $ZSH_CUSTOM $mteDir; do
+	#for dir in $ZSH_CUSTOM ~/vs/vs ; do
+
+	echo "${mh[$i]} ${mt[$i]} $dir"
+
+	 cd $dir
+	 #git add . 
+	 git commit -am ${mh[$i]} -m ${mt[$i]}
 	 git push
-	#i++
-#	done
-#cd
+	i=$((i+1))
+	done
+	#1
 }
 
-compdef _gitCommitSimple gi
+compdef _gi gi
 
 function gl(){
 	#for dir in $ZSH_CUSTOM; do
@@ -94,6 +93,7 @@ function gl(){
 		exec zsh
 	fi
 	#done
+	git log --stat | head -n 15
 }
 
 mg(){

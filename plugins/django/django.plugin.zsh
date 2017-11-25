@@ -1,6 +1,6 @@
 #compdef manage.py
 
-alias 0="dcd;kid 0;dr &"
+alias 0="dcd;kid;dr &"
 alias dcd="cd ~/django"
 # kid definiert in python.zsh
 alias dm='p3 manage.py'

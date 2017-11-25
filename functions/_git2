@@ -18,13 +18,7 @@ cmds=('1. Titel' '2. Langer Text')
 _describe 'Git Commit Parameter nur Pos.' cmds
 }
 
-# Now you should redefine the "hello" function (which currently contains
-# all the code from the file) to something that covers its actual
-# functionality. After that, the two helper functions along with the core
-# function will be defined and visible in global scope.
-
-
-# Finally run the redefined function with the same arguments as the current
-# run. If this is left out, the functionality implemented by the newly
-# defined "hello" function is not executed upon its first call. So:
-#git2 "$@"
+_gi(){
+	cmds=('-mzh: Header msg zsh' '-m2h: Header msg 2. Repo' '-m2t: Text msg 2. Repo' '-mzt: Text msg zsh')
+_describe 'param' cmds	
+}

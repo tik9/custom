@@ -2,11 +2,13 @@
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
 
 idrs=~/.ssh/id_rsa.pub 
-login_ssh=$ZSH_CUSTOM/login_rp
+login_rp=$ZSH_CUSTOM/login_rp
+zr=~/.zshrc
 mediaDir='/media/t'
 dow='Downloads'
 
-bold=`tput bold`;normal=`tput sgr0`
+bold=`tput bold`
+normal=`tput sgr0`
 
 os=`uname -a |cut -d' ' -f 1`
 
@@ -17,7 +19,6 @@ if [ $os != "CYGWIN_NT-6.1" ]; then
 	com_alias=$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
 	ggpl=$ZSH_CUSTOM/plugins/git/git.plugin.zsh
 	pg=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
-	ip=`ip addr show wlan0 | grep -Po 'inet \K[\d.]+'`
 
 	lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
 	arc=`uname -a |cut -d' ' -f 14`
@@ -57,10 +58,6 @@ elif [[ $lsb = Ubuntu ]];then;
  fi;else;pm='apt-cyg';fi
 
 
-function ohm(){
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-}
-
 function sortieren_datum(){
 	ls -lt $1| grep "^-" | awk '{
 	key=$6$7
@@ -69,15 +66,14 @@ function sortieren_datum(){
 	END {
 	for (date in freq)
 			printf "%s\t%d\n", date, freq[date]
-	}'| tail -n1
+	}'| sort -k2|tail -n2
 }
 
 
 function hilfe(){
 	echo "\n${bold}Hilfe, os: $os"
 	schleife=2
-	echo "Argumente für $1:"
-	echo "${normal}"
+	echo "Argumente für $1:${normal}"
 
 	for var in ${@:$schleife} ; do; echo $var;done
 }
@@ -95,15 +91,15 @@ function b(){
 
 }
 
-function ci(){
+function ci2(){
 	if [[ $lsb = 'Ubuntu' ]];then
-	echo "$1"|xclip
+		echo "$1"|xclip
 	else
-	echo $1 > /dev/clipboard
+		echo $1 > /dev/clipboard
 	fi
 }
 
-ci2(){
+ci(){
 	echo "$1"|xclip -selection clipboard
 }
 	
@@ -123,19 +119,26 @@ function dif(){
 
 
 function ersetz(){
-	if [ "$1" = -h ]; then
-  hilfe `basename $0` "Prefix"
-  return
-	fi
+
 	for file in *; do
-		if [[ $file = '\ ' ]];then
-			mv -- "$file" "${file// /_}"
+		if [[ $file =~ \  ]];then
+			echo mit Leerzeichen: $file
+			mv "$file" "${file// /_}"
 		fi
+		
+		if [[ $file =~ '[A-Z]' ]];then
+		echo Zu verändern: $file
+		rename 'y/A-Z/a-z/' *
+		fi
+		
 		if [[ `pwd` = '/root/uni/c' && $file != *"c_"* ]]; then
-			#mv "$file" ${1}${file}
-			echo kein c_
+			mv "$file" ${1}${file}
+			echo Zu verändern: $file
 		fi
 	done
+	echo "\n${bold}Dateien nach Op $normal"
+	for f in *;do;echo $f;done
+
 }
 
 
@@ -145,10 +148,6 @@ function ig(){
 
 
 function in(){
-	if [ -z "$1" ]; then
-		hilfe `basename $0` "Paket"
-		return
-	fi
 
 	dfh
 	if [[ $os = "Linux" ]] ;then
@@ -161,41 +160,41 @@ function in(){
 	df -h
 }
 
+ip2(){
+		ip addr show $1 | grep -Po 'inet \K[\d.]+'
+}
+compdef _ip ip2
+
 
 function ipbas {
-	if [ -z "$1" ]; then
-		hilfe `basename $0` "Zeigt interne ip-Adresse\n Argument 1: Netzwerk Interface (wlan0 oder eth0)"
-	return
-	fi
 	
-	ipbas=$(echo $ip | cut -d . -f -3)	
+	ipbas=$(echo `ip2 $1` | cut -d . -f -3)	
 	echo Basis Ip $ipbas
 }
 
+compdef _ip ipbas
 
 function ipd(){
-	if [ -z "$1" ]; then
-	hilfe `basename $0` "Interface"
-	return
-	fi
+
 	ip link set $1 down
 }
+compdef _ip ipd
+
 
 function ipu(){
 		
-	if [ -z "$1" ]; then
-	hilfe `basename $0` "Interface"
-	return
-	fi
+
 		ip link set $1 up
 }
+compdef _ip ipu
+
 
 function iu(){
-	if [[ $os = "Linux" ]] ;then
 		ipd $1;ipu $1
-	else;echo Kein Linux;fi
-	i;p
+	ig;p
 }
+compdef _ip iu
+
 
 function kil(){
 	kill -9 $1
@@ -239,22 +238,12 @@ function mr(){
 compdef _ml mr
 
 function mo(){
-	if [ "$1" = 'h' ]; then
-	  hilfe `basename $0` "Findet USB-Bezeichnung"
-	  return
-	fi
-
 	dev=`lsblk|sed -n 5p|cut -f1 -d' '`
-
 	mount /dev/$dev $mediaDir
 }
 
 	
 function mp(){
-if [ -z "$1" ]; then
-  hilfe `basename $0` "Pdf"
-  return
-fi
 	mupdf $1 &
 }
 
@@ -270,8 +259,9 @@ mv0(){
 }
 
 function nm(){
-	ipbas ;nmap -sP $ipbas.1/24
+	ipbas $1;nmap -sP $ipbas.1/24
 }
+compdef _ip nm
 	
 function p(){
 	ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de
@@ -300,18 +290,17 @@ function pen(){
 }
 
 pk(){
-pkill $1;ps $1
+	pkill $1;ps $1
 }
 
 
-function pr3(){
+function pr2(){
 	if [ -z "$1" ]; then
 	  hilfe `basename $0` "grep mit 'prozess Substitution'" "Prozess"
 	  return
 	fi
 	grep $1 =(ps aux)
 }
-
 
 
 function int_trap() {
@@ -338,8 +327,6 @@ function q(){
 
 
 function rem(){
-  echo "${bold}Os: $lsb${normal}"
-
 	if [ $os = "CYGWIN_NT-6.1" ]; then;apt-cyg remove $1;else
 	if [[ $lsb == 'Arch' ]] ;then;pacman -R --noconfirm $1
 	else;apt-get autoremove $1;fi
@@ -400,27 +387,19 @@ function scmysql(){
 
 function sho(){
 
-	if [ -z "$1" ]; then
-	  hilfe `basename $0` "Paket"
-	  return
-	fi
-
 	if [ $os = "CYGWIN_NT-6.1" ]; then
 		apt-cyg show `echo $1`;else ; if [[ $lsb == 'Arch' ]] ;then;pacman -Ss $1 ;else;apt-cache show $1|less;fi;fi;
 }
 
 function si(){
-	if [ -z "$1" ]; then
-	  hilfe `basename $0` "Zeit in Minuten ohne Einheit bevor Aktion" Aktion
-	  return
-	fi
-	secs=$(($1 * 60))
+	
+	secs=$(($1 * 6))
 	while [ $secs -gt 0 ]; do
 	   echo -ne "$secs\033[0K\r"
 	   sleep 1
 	   : $((secs--))
 	done
-	 $2 
+	$(2)
 }
 
 
@@ -455,8 +434,17 @@ function uz(){
 	unzip $1;rm $1
 }
 
-function yt(){
-	youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "$*"
+
+yt2(){
+	typeset -A assoc_array
+	assoc_array=('classic1' 'hSnD30bcAS8'
+	'classic2' '2dgPv7vH_BQ' 
+	'pop1' 'glkT4AhKrcI'
+	)
+
+	for k in "${(@k)assoc_array}"; do
+	  echo "$k ->https://www.youtube.com/watch?v=$assoc_array[$k]"
+	done
 }
 
  
@@ -488,8 +476,7 @@ alias uc='cd ~/uni/c'
 alias vs='cd ~/vs/vs'
 
 #curl
-alias c='cu tk1.biz'
-alias cl='cu localhost:8000'
+alias c='cu -L tk1.biz'
 alias cm='cu http://178.27.250.8:8000/de/admin/'
 alias cu='curl'
 
@@ -561,9 +548,8 @@ alias mst='mysql -uroot d -e "show tables"'
 
 
 # netzwerk
+alias f='iwgetid -r'
 alias -g re='178.27.250.8'
-alias ie='iwconfig 2>&1 | grep -i ESSID'
-alias ip2="echo $ip"
 alias iw2='iwlist wlan0 scan'
 alias ji='iw2 n'
 alias jo='journalctl -xe'
@@ -574,7 +560,7 @@ alias z='ne'
 # ps
 alias ks="ki ssh"
 alias ph="pr2 ssh"
-alias pr2='ps -ef|grep'
+alias pr3='ps -ef|grep'
 alias psl="pr2 sleep"
 alias -g sl="sleep"
 
@@ -593,12 +579,13 @@ alias tm="tmux"
 
 # zsh
 alias e="exec zsh"
-alias ohmyzsh="b ~/.oh-my-zsh/oh-my-zsh.sh"
+alias ohmyzsh="b $ZSH/oh-my-zsh.sh"
+alias ohm='sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
 alias plu='ec $plugins'
 alias pro='ec $prompt'
 alias rt="ec $RANDOM_THEME"
-alias zt="ec $ZSH_THEME"
 alias zr='b $zr' # zshrc 
+alias zt="ec $ZSH_THEME"
 
 
 alias ac='ack'
@@ -620,17 +607,13 @@ alias le='less -WiNS'
 alias m='man'
 alias mt='man terminator'
 alias -g n2='|less'
-alias r='expect $login_ssh'
-alias re2='apt-get autoremove'
-
+alias r='expect $login_rp'
 alias rf='rfkill list'
-
 alias ter='if [ $os != "CYGWIN_NT-6.1" ]; then;terminator &;else; mintty;fi'
 alias tp='top'
 alias tr='tree'
-alias ua="uname -a"
 alias -g ve="--version"
-alias wp='chmod 777 -R .'
 alias x="exit"
+alias yt='	youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
 
-echo "$0 aktualisiert !"
+echo "$0 aktualisiert"

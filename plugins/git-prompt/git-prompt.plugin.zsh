@@ -2,7 +2,6 @@
 
 __GIT_PROMPT_DIR="${0:A:h}"
 
-## funktionen definitionen
 function chpwd_update_git_vars() {
     update_current_git_vars
 }
@@ -27,7 +26,6 @@ precmd_functions+=(precmd_update_git_vars)
 preexec_functions+=(preexec_update_git_vars)
 
 
-## Funktion definitionen
 function update_current_git_vars() {
     unset __CURRENT_GIT_STATUS
 
