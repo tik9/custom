@@ -2,18 +2,20 @@
 
 #echo initialisiere rest..
 
+
+_ip(){
+	_arguments '*: :_net_interfaces'
+}
+
+
 _ml(){
-	_arguments '*:datei:_files:->dateien' 'radio:("http://80.237.156.8:8120" "b1")'
+	_arguments '*:datei:_files:->dateien' 'rad_stat:radio:(http://80.237.156.8:8120 b1)' '-c[count]'
 	case "$state" in
-    files)
+    dateien)
      local -a music_files
         music_files=( *.mp3,*.ogg )
         _multi_parts / music_files
     esac
-}
-
-_ip(){
-	_arguments '*: :_net_interfaces'
 }
 
 _sc2(){

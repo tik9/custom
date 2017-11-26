@@ -1,36 +1,24 @@
 # schriftfarbe autocomplete fg8 default
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
+#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
 
-idrs=~/.ssh/id_rsa.pub 
-login_rp=$ZSH_CUSTOM/login_rp
-zr=~/.zshrc
-mediaDir='/media/t'
-dow='Downloads'
-
-bold=`tput bold`
-normal=`tput sgr0`
 
 os=`uname -a |cut -d' ' -f 1`
 
-
 if [ $os != "CYGWIN_NT-6.1" ]; then
-	homeT='/home/t'
-	home='/root'
 	com_alias=$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
 	ggpl=$ZSH_CUSTOM/plugins/git/git.plugin.zsh
 	pg=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
 
 	lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
 	arc=`uname -a |cut -d' ' -f 14`
-	dowDir=$homeT/Downloads
-	mteDir=$home/git/mte
+	dowDir=/home/t/Downloads
+	mteDir=/root/git/mte
 	pts=pts
 	zr=~/.zshrc
 
 else
 	pts=pty
 	lsb=cygwin
-	home='/cygdrive/C/Users/itdlz-koer'
 	
 	cyg=c:/cygwin64
 	com_alias=$cyg$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
@@ -40,13 +28,12 @@ else
 	bim=$(wmic OS get OSArchitecture)
 	bi2=$(set | findstr ARCH)
 	arc=`uname -a |cut -d' ' -f 6`
-	dowDir=$home/Downloads
-	mteDir=$home/mte/my-app
+	dowDir=/cygdrive/C/Users/itdlz-koer/Downloads
+	mteDir=$cyg/home/itdlz-koer/mte/my-app
 	alias acl='apt-cyg listall'
 	alias acl2='cygcheck'
 	zr=$cyg/home/itdlz-koer/.zshrc
 
-	
 fi
 
 
@@ -71,6 +58,9 @@ function sortieren_datum(){
 
 
 function hilfe(){
+
+	bold=`tput bold`
+	normal=`tput sgr0`
 	echo "\n${bold}Hilfe, os: $os"
 	schleife=2
 	echo "Argumente für $1:${normal}"
@@ -149,10 +139,10 @@ function ig(){
 
 function in(){
 
-	dfh
+	df -h
 	if [[ $os = "Linux" ]] ;then
-			     if [[ $lsb = 'Arch' ]]; then; pacman -S --noconfirm $1
-                else;apt-get install -y $1;fi
+		if [[ $lsb = 'Arch' ]]; then; pacman -S --noconfirm $1
+        else;apt-get install -y $1;fi
 	else
 		apt-cyg install $1
 	fi
@@ -227,13 +217,15 @@ function lss(){
 }
 
 function ml(){
-
-	mplayer "$1"
+	zparseopts -A ARGUMENTS c:
+	
+	mplayer "$1" -count $ARGUMENTS[-c]
 }
 
-compdef _ml mr
+compdef _ml ml
 
 function mo(){
+	mediaDir='/media/t'
 	dev=`lsblk|sed -n 5p|cut -f1 -d' '`
 	mount /dev/$dev $mediaDir
 }
@@ -556,7 +548,7 @@ alias z='ne'
 
 
 # ps
-alias ks="ki ssh"
+alias ks="ki ssh;ph"
 alias ph="pr2 ssh"
 alias pr3='ps -ef|grep'
 alias psl="pr2 sleep"
@@ -589,7 +581,7 @@ alias ac='ack'
 alias ad2='echo 01573 9598 220 timo.koerner@hof-university.de'
 alias ca='cat'
 alias dt='date +"%T"'
-alias dfh='df -h'
+alias dh='df -h'
 alias dowDir='l $dowDir'
 alias duh='du -h'
 alias ec="echo"
@@ -600,11 +592,12 @@ alias -g gr="|grep -i"
 alias gp="g++"
 alias hgrep="fc -El 0 | grep"
 alias his='history'
+alias -g idrs=~/.ssh/id_rsa.pub 
 alias le='less -WiNS'
 alias m='man'
 alias mt='man terminator'
 alias -g n2='|less'
-alias r='expect $login_rp'
+alias r='expect $ZSH_CUSTOM/login_rp'
 alias rf='rfkill list'
 alias ter='if [ $os != "CYGWIN_NT-6.1" ]; then;terminator &;else; mintty;fi'
 alias tp='top'

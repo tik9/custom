@@ -1,11 +1,7 @@
-#zmodload zsh/zutil
 
 zstyle -s ":vcs_info:git:*:-all-" "command" _omz_git_git_cmd
 : ${_omz_git_git_cmd:=git}
 
-#
-# Funktionen
-#
 
 # The name of the current branch
 # Back-compatibility wrapper for when this function was defined here in
@@ -60,7 +56,7 @@ function gi(){
 	mt[2]=$ARGUMENTS[-m2t]
 	
 	i=1
-	for dir in $ZSH_CUSTOM $mteDir; do
+	for dir in $ZSH_CUSTOM ; do
 	#for dir in $ZSH_CUSTOM ~/vs/vs ; do
 
 	#echo "${mh[$i]} ${mt[$i]} $dir"
@@ -69,7 +65,7 @@ function gi(){
 	 #git add . 
 	 git commit -am ${mh[$i]} -m ${mt[$i]}
 	 git push
-	i=$((i+1))
+	#i=$((i+1))
 	done
 	#1
 }
@@ -78,16 +74,15 @@ compdef _gi gi
 
 function gl(){
 	#for dir in $ZSH_CUSTOM; do
-		
+	dir=$1
 	if [ $# -eq 0 ];then
 		echo keine Argumente
-		return
+		#return
+		dir=$ZSH_CUSTOM
 	fi
 		
-	ec hole ~/$1..
-	#ec hole $ZSH_CUSTOM..
-	cd ~/$1
-	#cd $ZSH_CUSTOM
+	ec hole $dir
+	cd $dir
 	git pull
 	if [[ $1 = $ZSH_CUSTOM ]];then
 		exec zsh
