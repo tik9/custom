@@ -1,11 +1,7 @@
-#zmodload zsh/zutil
 
 zstyle -s ":vcs_info:git:*:-all-" "command" _omz_git_git_cmd
 : ${_omz_git_git_cmd:=git}
 
-#
-# Funktionen
-#
 
 # The name of the current branch
 # Back-compatibility wrapper for when this function was defined here in
@@ -37,7 +33,7 @@ function work_in_progress() {
 
 function gc(){
 	#Aufruf: gc --m1 foo
-	zparseopts -A ARGUMENTS -m1: -m2:
+	zparseopts -A ARGUMENTS m1: m2:
 
 	mh=$ARGUMENTS[-m1]
 	mt=$ARGUMENTS[-m2]
@@ -61,16 +57,16 @@ function gi(){
 	mt[2]=$ARGUMENTS[-m2t]
 	
 	i=1
-	for dir in $ZSH_CUSTOM $mteDir; do
+	for dir in $ZSH_CUSTOM ; do
 	#for dir in $ZSH_CUSTOM ~/vs/vs ; do
 
-	echo "${mh[$i]} ${mt[$i]} $dir"
+	#echo "${mh[$i]} ${mt[$i]} $dir"
 
 	 cd $dir
 	 #git add . 
 	 git commit -am ${mh[$i]} -m ${mt[$i]}
 	 git push
-	i=$((i+1))
+	#i=$((i+1))
 	done
 	#1
 }
@@ -79,16 +75,16 @@ compdef _gi gi
 
 function gl(){
 	#for dir in $ZSH_CUSTOM; do
-		
-	dir=$1	
+
+	dir=$1
 	if [ $# -eq 0 ];then
 		echo keine Argumente
-		dir=`pwd`
+		#return
+		dir=$ZSH_CUSTOM
 	fi
 		
-	ec hole $dir ..
+	ec hole $dir
 	cd $dir
-	#cd $ZSH_CUSTOM
 	git pull
 	if [[ $1 = $ZSH_CUSTOM ]];then
 		exec zsh
@@ -214,6 +210,7 @@ alias grbc='git rebase --continue'
 alias grh='git reset HEAD'
 alias grset='git remote set-url'
 alias grt='cd $(git rev-parse --show-toplevel || echo ".")'
+alias gru='git remote update'
 alias grv='git remote -v'
 
 alias gs='git status'
@@ -222,7 +219,7 @@ alias gsh='git show'
 alias gsps='git show --pretty=short --show-signature'
 alias gst='git stash;a'
 alias gstl='git stash list'
-alias gstp='git stash pop'
+alias gstp='git stash pop;gstl'
 alias gsts='git stash show -p'
 
 alias gu='git pull'
@@ -233,7 +230,7 @@ alias gupv='git pull --rebase -v'
 alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"'
 
-alias i='git'
+#alias i='git'
 alias k='git log --stat | head -n 15'
 
 function n(){

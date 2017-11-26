@@ -2,15 +2,20 @@
 
 #echo initialisiere rest..
 
-_ml(){
-	_arguments '-f[datei]:dat:_files'
-     local -a music_files
-        music_files=( *.mp3,*.wav )
-        _multi_parts / music_files
-}
 
 _ip(){
-_arguments '-i[interface]:interf:_net_interfaces'
+	_arguments '*: :_net_interfaces'
+}
+
+
+_ml(){
+	_arguments '*:datei:_files:->dateien' 'rad_stat:radio:(http://80.237.156.8:8120 b1)' '-c[count]'
+	case "$state" in
+    dateien)
+     local -a music_files
+        music_files=( *.mp3,*.ogg )
+        _multi_parts / music_files
+    esac
 }
 
 _sc2(){
@@ -19,11 +24,11 @@ _sc2(){
 
 
 _schieb(){
-	_arguments '-f[datei]:datei:_files' '-z[Ziel, wohin]:' 
+	_arguments '-f[datei]:datei:_files' '-z[Ziel, wohin]: :_path_files' 
 }
 
 
 _pts(){
-cmds=('-pts:Nummer')
-_describe 'Nummern' cmds
+cmds=('-ptsNummer')
+_describe 'Nummer pts' cmds
 }

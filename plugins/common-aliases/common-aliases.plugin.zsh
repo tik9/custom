@@ -1,36 +1,24 @@
 # schriftfarbe autocomplete fg8 default
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
+#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
 
-idrs=~/.ssh/id_rsa.pub 
-login_rp=$ZSH_CUSTOM/login_rp
-zr=~/.zshrc
-mediaDir='/media/t'
-dow='Downloads'
-
-bold=`tput bold`
-normal=`tput sgr0`
 
 os=`uname -a |cut -d' ' -f 1`
 
-
 if [ $os != "CYGWIN_NT-6.1" ]; then
-	homeT='/home/t'
-	home='/root'
 	com_alias=$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
 	ggpl=$ZSH_CUSTOM/plugins/git/git.plugin.zsh
 	pg=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
 
 	lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
 	arc=`uname -a |cut -d' ' -f 14`
-	dowDir=$homeT/Downloads
-	mteDir=$home/git/mte
+	dowDir=/home/t/Downloads
+	mteDir=/root/git/mte
 	pts=pts
 	zr=~/.zshrc
 
 else
 	pts=pty
 	lsb=cygwin
-	home='/cygdrive/C/Users/itdlz-koer'
 	
 	cyg=c:/cygwin64
 	home2=$cyg/home/itdlz-koer
@@ -41,13 +29,12 @@ else
 	bim=$(wmic OS get OSArchitecture)
 	bi2=$(set | findstr ARCH)
 	arc=`uname -a |cut -d' ' -f 6`
-	dowDir=$home/Downloads
+	dowDir=/cygdrive/C/Users/itdlz-koer/Downloads
 	mteDir=$home2/mte/my-app
 	alias acl='apt-cyg listall'
 	alias acl2='cygcheck'
 	zr=$home2/.zshrc
 
-	
 fi
 
 
@@ -72,6 +59,9 @@ function sortieren_datum(){
 
 
 function hilfe(){
+
+	bold=`tput bold`
+	normal=`tput sgr0`
 	echo "\n${bold}Hilfe, os: $os"
 	schleife=2
 	echo "Argumente für $1:${normal}"
@@ -150,10 +140,10 @@ function ig(){
 
 function in(){
 
-	dfh
+	df -h
 	if [[ $os = "Linux" ]] ;then
-			     if [[ $lsb = 'Arch' ]]; then; pacman -S --noconfirm $1
-                else;apt-get install -y $1;fi
+		if [[ $lsb = 'Arch' ]]; then; pacman -S --noconfirm $1
+        else;apt-get install -y $1;fi
 	else
 		apt-cyg install $1
 	fi
@@ -161,10 +151,10 @@ function in(){
 	df -h
 }
 
-ip2(){
+i(){
 		ip addr show $1 | grep -Po 'inet \K[\d.]+'
 }
-compdef _ip ip2
+compdef _ip i
 
 
 function ipbas {
@@ -227,18 +217,16 @@ function lss(){
 	ssh $3 $ipbas.$2 
 }
 
-function mr(){
-	zparseopts -A ARGUMENTS f:
-
-	f=$ARGUMENTS[-f]
-
-	printf 'Argument ist "%s"\n' "$f"
-	mplayer "$f"
+function ml(){
+	zparseopts -A ARGUMENTS c:
+	
+	mplayer "$1" -count $ARGUMENTS[-c]
 }
 
-compdef _ml mr
+compdef _ml ml
 
 function mo(){
+	mediaDir='/media/t'
 	dev=`lsblk|sed -n 5p|cut -f1 -d' '`
 	mount /dev/$dev $mediaDir
 }
@@ -372,7 +360,7 @@ function schieb(){
 		echo $dat
 		mv $dat $ziel_dir
 
-		echo aktuelle Datei $ziel_dir/`ls -t $ziel_dir | head -n1`
+		#echo aktuelle Datei $ziel_dir/`ls -t $ziel_dir | head -n1`
 	done
 }
 
@@ -394,21 +382,23 @@ function sho(){
 
 function si(){
 	
-	secs=$(($1 * 6))
+	secs=$(($1 * 60))
 	while [ $secs -gt 0 ]; do
 	   echo -ne "$secs\033[0K\r"
 	   sleep 1
 	   : $((secs--))
 	done
-	$(2)
+	eval $2
 }
 
 
 function unt(){
 	#schieb
-	a=$(schieb)
-	cd `pwd`
-	tar xvf $a
+	#a=$(schieb)
+	#cd `pwd`
+	# gz: z flag
+	a=`ls -t | head -n1`
+	tar zxvf $a
 	#rm $a
 }
 
@@ -505,7 +495,7 @@ alias ab="abiword"
 
 
 # Energie
-alias -g hi='sudo hibernate'
+alias hi='sudo hibernate'
 alias s='sudo pm-suspend'
 
 
@@ -559,7 +549,7 @@ alias z='ne'
 
 
 # ps
-alias ks="ki ssh"
+alias ks="ki ssh;ph"
 alias ph="pr2 ssh"
 alias pr3='ps -ef|grep'
 alias psl="pr2 sleep"
@@ -568,7 +558,6 @@ alias -g sl="sleep"
 # Radio
 alias b1="ml http://br-br1-nbopf.cast.addradio.de/br/br1/nbopf/mp3/128/stream.mp3"
 
-alias ml="mplayer"
 alias ra="ml http://80.237.156.8:8120" # landsberg int.
 
 #tmux
@@ -593,7 +582,7 @@ alias ac='ack'
 alias ad2='echo 01573 9598 220 timo.koerner@hof-university.de'
 alias ca='cat'
 alias dt='date +"%T"'
-alias dfh='df -h'
+alias dh='df -h'
 alias dowDir='l $dowDir'
 alias duh='du -h'
 alias ec="echo"
@@ -604,11 +593,12 @@ alias -g gr="|grep -i"
 alias gp="g++"
 alias hgrep="fc -El 0 | grep"
 alias his='history'
+alias -g idrs=~/.ssh/id_rsa.pub 
 alias le='less -WiNS'
 alias m='man'
 alias mt='man terminator'
 alias -g n2='|less'
-alias r='expect $login_rp'
+alias r='expect $ZSH_CUSTOM/login_rp'
 alias rf='rfkill list'
 alias ter='if [ $os != "CYGWIN_NT-6.1" ]; then;terminator &;else; mintty;fi'
 alias tp='top'
