@@ -33,6 +33,7 @@ else
 	home='/cygdrive/C/Users/itdlz-koer'
 	
 	cyg=c:/cygwin64
+	home2=$cyg/home/itdlz-koer
 	com_alias=$cyg$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
 	ggpl=$cyg$ZSH_CUSTOM/plugins/git/git.plugin.zsh
 	pg=$cyg$ZSH_CUSTOM/plugins/python/python.plugin.zsh
@@ -41,10 +42,10 @@ else
 	bi2=$(set | findstr ARCH)
 	arc=`uname -a |cut -d' ' -f 6`
 	dowDir=$home/Downloads
-	mteDir=$home/mte/my-app
+	mteDir=$home2/mte/my-app
 	alias acl='apt-cyg listall'
 	alias acl2='cygcheck'
-	zr=$cyg/home/itdlz-koer/.zshrc
+	zr=$home2/.zshrc
 
 	
 fi
@@ -443,7 +444,7 @@ yt2(){
 	)
 
 	for k in "${(@k)assoc_array}"; do
-	  echo "$k ->https://www.youtube.com/watch?v=$assoc_array[$k]"
+	  echo yt "https://www.youtube.com/watch?v=$assoc_array[$k]"
 	done
 }
 

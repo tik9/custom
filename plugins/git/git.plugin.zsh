@@ -39,12 +39,13 @@ function gc(){
 	#Aufruf: gc --m1 foo
 	zparseopts -A ARGUMENTS -m1: -m2:
 
-	m1=$ARGUMENTS[--m1]
-	m2=$ARGUMENTS[--m2]
+	mh=$ARGUMENTS[-m1]
+	mt=$ARGUMENTS[-m2]
 
-	printf 'Argument m1 ist "%s"\n' "$m1"
-	printf 'Argument m2 ist "%s"\n' "$m2"
-	git commit -am "$m1" -m "$m2"
+	printf 'Argument m1 ist "%s"\n' "$mh"
+	printf 'Argument m2 ist "%s"\n' "$mt"
+	git commit -am "$mh" -m "$mt"
+	git status
 }
 
 compdef _gitcommit gc
@@ -79,14 +80,14 @@ compdef _gi gi
 function gl(){
 	#for dir in $ZSH_CUSTOM; do
 		
+	dir=$1	
 	if [ $# -eq 0 ];then
 		echo keine Argumente
-		return
+		dir=`pwd`
 	fi
 		
-	ec hole ~/$1..
-	#ec hole $ZSH_CUSTOM..
-	cd ~/$1
+	ec hole $dir ..
+	cd $dir
 	#cd $ZSH_CUSTOM
 	git pull
 	if [[ $1 = $ZSH_CUSTOM ]];then
@@ -96,31 +97,17 @@ function gl(){
 	git log --stat | head -n 15
 }
 
-mg(){
-	dir= ~/mte
-	cd $dir
-}
-
-# Aliase
 
 alias a='gs'
-alias ga='git add --all'
-alias gal='git config --get-regexp alias'
-alias gapa='git add --patch'
+alias ga='git add --all;a'
 
 alias gb='git branch'
 alias gba='git branch -a'
-alias gbda='git branch --merged | command grep -vE "^(\*|\s*master\s*$)" | command xargs -n 1 git branch -d'
-alias gbl='git blame -b -w'
-alias gbnm='git branch --no-merged'
 alias gbr='git branch --remote'
 
-alias gc!='git commit -v --amend'
-
 alias gcam='git commit -a -m'
-alias gcb='git checkout -b'
 alias gcf='git config --list --show-origin'
-alias gcg='git config --global'
+alias gcg='b .git/config'
 alias gcl='git clone --recursive'
 alias gclean='git clean -fd'
 alias gcm='git checkout master'
@@ -131,8 +118,6 @@ compdef gcount=git
 
 alias gd='git diff'
 alias gdca='git diff --cached'
-alias gdct='git describe --tags `git rev-list --tags --max-count=1`'
-alias gdt='git diff-tree --no-commit-id --name-only -r'
 
 function gdv() { git diff -w "$@" | view - }
 
@@ -140,12 +125,12 @@ compdef _git gdv=git-diff
 
 alias gdw='git diff --word-diff'
 
-alias gf='git fetch'
+alias gf='git config --list'
 
 function gfg() { git ls-files | grep $@ }
 compdef gfg=grep
 
-alias gg='git config --list'
+alias gg='git log'
 
 function ggf() {
 [[ "$#" != 1 ]] && local b="$(git_current_branch)"
@@ -204,7 +189,7 @@ alias ggpur='ggu'
 compdef _git ggpur=git-checkout
 
 alias ghh='git grep "<<<<<<< HEAD"'
-alias gignore='git update-index --assume-unchanged'
+alias gignore='b .gitignore'
 alias gignored='git ls-files -v | grep "^[[:lower:]]"'
 alias gin='git init'
 
@@ -217,8 +202,7 @@ alias glp="_git_log_prettily"
 compdef _git glp=git-log
 
 
-alias gpu='git push'
-compdef _git gpoat=git-push
+alias gpu='git push;a'
 alias gpsum='git push --set-upstream origin master'
 alias gpv='git push -v'
 
@@ -236,7 +220,7 @@ alias gs='git status'
 alias gsb='git status -sb'
 alias gsh='git show'
 alias gsps='git show --pretty=short --show-signature'
-alias gst='git stash'
+alias gst='git stash;a'
 alias gstl='git stash list'
 alias gstp='git stash pop'
 alias gsts='git stash show -p'
