@@ -442,13 +442,14 @@ function uz(){
 
 yt2(){
 	typeset -A assoc_array
-	assoc_array=('classic1' 'hSnD30bcAS8'
-	'classic2' '2dgPv7vH_BQ' 
-	'pop1' 'glkT4AhKrcI'
+	assoc_array=('classic1' ''
+	'welt' '' 
+	'pop1' ''
 	)
 
 	for k in "${(@k)assoc_array}"; do
 	  echo yt "https://www.youtube.com/watch?v=$assoc_array[$k]"
+	  mv `ls -t|head -n1`
 	done
 }
 

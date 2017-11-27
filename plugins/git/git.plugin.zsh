@@ -99,7 +99,6 @@ alias ga='git add --all;a'
 
 alias gb='git branch'
 alias gba='git branch -a'
-alias gbr='git branch --remote'
 
 alias gcam='git commit -a -m'
 alias gcf='git config --list --show-origin'
