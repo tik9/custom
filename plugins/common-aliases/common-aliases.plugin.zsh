@@ -337,7 +337,7 @@ function rem(){
 }
 # -f[datei]:dateiname:_files' '-i[interface]:interf:_net_interfaces' '-o[letztes Oktett]' '-d[ziel]'
 function sc2(){
-	zparseopts -A ARGUMENTS d:f:i: o:u:
+	zparseopts -A ARGUMENTS d:f:i:o:u:
 
 	dir=$ARGUMENTS[-d]
 	datei=$ARGUMENTS[-f]
@@ -435,21 +435,22 @@ function up(){
 	apt-get dist-upgrade	
 }
 
-function uz(){
-	unzip $1;rm $1
-}
 
-
-yt2(){
-	typeset -A assoc_array
-	assoc_array=('classic1' ''
-	'welt' '' 
+function yt2(){
+		zparseopts -A ARGUMENTS m
+	m=$ARGUMENTS[-m]
+	
+	typeset -A a_array
+	a_array=('classic1' ''
+	'welt' 'https://www.youtube.com/watch?v=jX8HxO-ylHU' 
 	'pop1' ''
 	)
 
-	for k in "${(@k)assoc_array}"; do
+	for k in "${(@k)a_array}"; do
 	  echo yt "https://www.youtube.com/watch?v=$assoc_array[$k]"
-	  mv `ls -t|head -n1`
+	  if $1;then
+		mv `ls -t|head -n1` /dev/sdb
+	  fi
 	done
 }
 
@@ -604,7 +605,7 @@ alias ec="echo"
 alias fd='find . -type d -name'
 alias ff='find . -type f -name'
 alias fin="find / -name"
-alias -g gr="|grep -i"
+alias -g gr="|grep -ai --color=auto"
 alias gp="g++"
 alias hgrep="fc -El 0 | grep"
 alias his='history'

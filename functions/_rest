@@ -32,3 +32,9 @@ _pts(){
 cmds=('-ptsNummer')
 _describe 'Nummer pts' cmds
 }
+
+
+_yt2(){
+	cmd=('usb')
+	_describe 'usb_speichern' cmd
+}

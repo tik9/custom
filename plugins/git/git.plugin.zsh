@@ -221,6 +221,8 @@ alias gstl='git stash list'
 alias gstp='git stash pop;gstl'
 alias gsts='git stash show -p'
 
+alias gt='git checkout'
+
 alias gu='git pull'
 alias gunignore='git update-index --no-assume-unchanged'
 alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'

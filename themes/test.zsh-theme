@@ -1,4 +1,5 @@
 PROMPT='%{$fg[cyan]%}%m %{$fg[yellow]%} %(4~|.../%3~|%~) - %{$fg[cyan]%}$(get_ssi) - $(git_super_status) %{$reset_color%}→ '
+
 #PROMPT="%n@%m %(4~|.../%3~|%~) - test_int %# "
 
 
