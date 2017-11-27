@@ -448,7 +448,7 @@ function yt2(){
 
 	for k in "${(@k)a_array}"; do
 	  echo yt "https://www.youtube.com/watch?v=$assoc_array[$k]"
-	  if $1;then
+	  if [ $1 ];then
 		mv `ls -t|head -n1` /dev/sdb
 	  fi
 	done

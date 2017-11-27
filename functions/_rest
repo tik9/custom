@@ -35,6 +35,6 @@ _describe 'Nummer pts' cmds
 
 
 _yt2(){
-	cmd=('usb')
+	cmd=('u oder egal:usb')
 	_describe 'usb_speichern' cmd
 }

@@ -56,8 +56,10 @@ function gi(){
 	mh[2]=$ARGUMENTS[-m2h]
 	mt[2]=$ARGUMENTS[-m2t]
 	
+	dir=.
 	i=1
-	for dir in $ZSH_CUSTOM ; do
+	for dir in $dir ; do
+	#for dir in $ZSH_CUSTOM ; do
 	#for dir in $ZSH_CUSTOM ~/vs/vs ; do
 
 	#echo "${mh[$i]} ${mt[$i]} $dir"
