@@ -7,6 +7,10 @@ _ip(){
 	_arguments '*: :_net_interfaces'
 }
 
+_kil(){
+_alternative "pids:process ID:($(ps -A o pid=))"
+}
+
 
 _ml(){
 	_arguments '*:datei:_files:->dateien' ':radio:("http://80.237.156.8:8120" b1)' '-c[count]'
@@ -35,6 +39,7 @@ _describe 'Nummer pts' cmds
 
 
 _yt2(){
-	cmd=('u oder egal:usb')
-	_describe 'usb_speichern' cmd
+	local -a cmds
+	cmds=('u:usb')
+	_describe 'usb_speichern' cmds
 }

@@ -215,6 +215,7 @@ function kil(){
 	ps -ef|grep $1
 }
 
+compdef _kil kil
 
 function ki(){
 		killall $1;
@@ -447,12 +448,13 @@ function yt2(){
 	)
 
 	for k in "${(@k)a_array}"; do
-	  echo yt "https://www.youtube.com/watch?v=$assoc_array[$k]"
+	  youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=$assoc_array[$k]"
 	  if [ $1 ];then
 		mv `ls -t|head -n1` /dev/sdb
 	  fi
 	done
 }
+compdef _yt2 yt2
 
  
 # alias/Funktionen
