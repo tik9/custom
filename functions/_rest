@@ -9,7 +9,7 @@ _ip(){
 
 
 _ml(){
-	_arguments '*:datei:_files:->dateien' 'rad_stat:radio:(http://80.237.156.8:8120 b1)' '-c[count]'
+	_arguments '*:datei:_files:->dateien' ':radio:("http://80.237.156.8:8120" b1)' '-c[count]'
 	case "$state" in
     dateien)
      local -a music_files

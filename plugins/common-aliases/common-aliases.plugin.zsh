@@ -41,10 +41,24 @@ fi
 if [[ $os = "Linux" ]] ;then;if [[ $lsb = 'Arch' ]]; then;pm='pacman'
 elif [[ $lsb = Ubuntu ]];then;
 	pm='apt-get';
-	alias mip="echo $(dig +short myip.opendns.com @resolver1.opendns.com)"
-
+	
+	wget -q --spider http://google.com
+	if [ $? -eq 0 ];then
+		alias mip="echo $(dig +short myip.opendns.com @resolver1.opendns.com)"
+	fi
  fi;else;pm='apt-cyg';fi
 
+
+try () {
+  result=$(eval "$1" 2>&1)
+  if [ $? -ne 0 ]; then
+
+	printf "[\033[31mFehler\033[0m]\n"
+    echo $result
+    return
+  fi
+  printf "[\033[32mErfolg\033[0m]\n"
+}
 
 function sortieren_datum(){
 	ls -lt $1| grep "^-" | awk '{
@@ -114,17 +128,20 @@ function ersetz(){
 	for file in *; do
 		if [[ $file =~ \  ]];then
 			echo mit Leerzeichen: $file
-			mv "$file" "${file// /_}"
+			neu="${file// /_}"
+			mv "$file" $neu
 		fi
 		
-		if [[ $file =~ '[A-Z]' ]];then
-		echo Zu verändern: $file
+		if [[ $neu =~ '[A-Z]' ]];then
+			echo Zu verändern da Großbuchst.: $neu
+		
 		rename 'y/A-Z/a-z/' *
 		fi
 		
-		if [[ `pwd` = '/root/uni/c' && $file != *"c_"* ]]; then
-			mv "$file" ${1}${file}
-			echo Zu verändern: $file
+		if [[ `pwd` = '/root/uni/c' && $neu != *"c_"* ]]; then
+			neu_c=c_${neu}
+			mv "$neu" $neu_c
+			echo c uni pdf zu ändern: $neu
 		fi
 	done
 	echo "\n${bold}Dateien nach Op $normal"
@@ -242,9 +259,6 @@ mv0(){
 	echo .. compile fertig
 	java -jar target/my-app-2.jar 
 	#pr2 jav
-
-#	echo ..jar hintergrund
-	#tmux split-window "zsh;sleep 2;target/classes; ja LClient;read"
 }
 
 function nm(){
@@ -274,7 +288,7 @@ function pen(){
 	while true; do
 		echo "telnet/curl 178.27.250.8 8000"
 		curl 178.27.250.8:8000
-		sleep 30m
+		sleep 10m
 	done
 }
 
