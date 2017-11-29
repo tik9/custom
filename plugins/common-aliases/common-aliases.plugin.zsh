@@ -2,6 +2,8 @@
 #ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
 
 
+rp=$ZSH_CUSTOM/login_rp
+
 os=`uname -a |cut -d' ' -f 1`
 
 if [ $os != "CYGWIN_NT-6.1" ]; then
@@ -176,7 +178,7 @@ compdef _ip i
 
 function ipbas {
 	
-	ipbas=$(echo `ip2 $1` | cut -d . -f -3)	
+	ipbas=$(echo `i $1` | cut -d . -f -3)	
 	echo Basis Ip $ipbas
 }
 
@@ -238,6 +240,8 @@ function lss(){
 function ml(){
 	zparseopts -A ARGUMENTS c:
 	
+	ffprobe $1 2> >(grep Duration)
+
 	mplayer "$1" -count $ARGUMENTS[-c]
 }
 
@@ -306,6 +310,11 @@ function pr2(){
 	grep $1 =(ps aux)
 }
 
+function pt(){
+	
+	ps -ef |grep $pts/$1
+}
+compdef _pt pt
 
 function int_trap() {
     echo "Ctrl-C gedrückt"
@@ -338,7 +347,7 @@ function rem(){
 }
 # -f[datei]:dateiname:_files' '-i[interface]:interf:_net_interfaces' '-o[letztes Oktett]' '-d[ziel]'
 function sc2(){
-	zparseopts -A ARGUMENTS d:f:i:o:u:
+	zparseopts -A ARGUMENTS d: f: i: o: u:
 
 	dir=$ARGUMENTS[-d]
 	datei=$ARGUMENTS[-f]
@@ -347,14 +356,15 @@ function sc2(){
 	user=$ARGUMENTS[-u]
 
 	printf 'dir, datei %s %s', $dir,$datei
-	
-	ipbas $interface
+
+	ipbas=178.27.250.8
+
+	#ipbas $interface
 	
 	if [ -z $user ];user=root
 
 	scp  $datei $user@$ipbas.$oktett:$dir
-	rm -rf $datei
-	echo $datei gelöscht vom Server
+	#rm -rf $datei
 }
 compdef _sc2 sc2
 
@@ -418,13 +428,6 @@ function unt(){
 }
 
 
-function u(){
-	
-	ps -ef |grep $pts/$1
-}
-compdef _pts u
-
-
 function up(){
 
 	if [[ $lsb == 'Arch' ]] ;then;
@@ -441,16 +444,20 @@ function yt2(){
 		zparseopts -A ARGUMENTS m
 	m=$ARGUMENTS[-m]
 	
+	if [[ -f $2 ]];then
+	while read name;do;youtube-dl $name;done < $2;return;fi
+	
 	typeset -A a_array
 	a_array=('classic1' ''
-	'welt' 'https://www.youtube.com/watch?v=jX8HxO-ylHU' 
+	'welt' 'jX8HxO-ylHU' 
 	'pop1' ''
 	)
 
 	for k in "${(@k)a_array}"; do
-	  youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=$assoc_array[$k]"
-	  if [ $1 ];then
-		mv `ls -t|head -n1` /dev/sdb
+	  youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=$a_array[$k]"
+	  if [ $1 = u ];then
+		#mv `ls -t|head -n1` /dev/sdb
+		echo auf usb speichern
 	  fi
 	done
 }
@@ -480,7 +487,7 @@ alias mte='cd $mteDir'
 alias o='cd $ZSH_CUSTOM'
 alias oh='cd $ZSH'
 alias op='/opt/git/pr.git'
-#alias u='cd ~/uni'
+alias u='cd ~/uni'
 alias uc='cd ~/uni/c'
 alias vs='cd ~/vs/vs'
 
@@ -616,7 +623,7 @@ alias le='less -WiNS'
 alias m='man'
 alias mt='man terminator'
 alias -g n2='|less'
-alias r='expect $ZSH_CUSTOM/login_rp'
+alias r='expect $rp'
 alias rf='rfkill list'
 alias ter='if [ $os != "CYGWIN_NT-6.1" ]; then;terminator &;else; mintty;fi'
 alias tp='top'

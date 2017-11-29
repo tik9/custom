@@ -35,16 +35,20 @@ function gc(){
 	#Aufruf: gc --m1 foo
 	zparseopts -A ARGUMENTS m1: m2:
 
-	mh=$ARGUMENTS[-m1]
-	mt=$ARGUMENTS[-m2]
+	#mh=$1
+	#mh= $ARGUMENTS[-m1] <	
+	#mh=$([[ -n $ARGUMENTS[-m1] ]] && $ARGUMENTS[-m1] || $1)
+#int a = (b == 5) ? c : d;
+ [[ -n $ARGUMENTS[-m1] ]] && mh=$ARGUMENTS[-m1] || mh="$1"
+ [[ -n $ARGUMENTS[-m2] ]] && mh=$ARGUMENTS[-m2] || mt="$2"
 
-	printf 'Argument m1 ist "%s"\n' "$mh"
-	printf 'Argument m2 ist "%s"\n' "$mt"
+	printf 'Argument mh ist "%s"\n' "$mh"
+	printf 'Argument mt ist "%s"\n' "$mt"
 	git commit -am "$mh" -m "$mt"
 	git status
 }
 
-compdef _gitcommit gc
+compdef _gitcommitSim gc
 
 
 function gi(){
@@ -56,9 +60,9 @@ function gi(){
 	mh[2]=$ARGUMENTS[-m2h]
 	mt[2]=$ARGUMENTS[-m2t]
 	
-	dir=.
 	i=1
-	for dir in $dir ; do
+	dirs=.
+	for dir in $dirs ; do
 	#for dir in $ZSH_CUSTOM ; do
 	#for dir in $ZSH_CUSTOM ~/vs/vs ; do
 
@@ -198,7 +202,7 @@ alias glola="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Crese
 alias glp="_git_log_prettily"
 compdef _git glp=git-log
 
-
+alias go='o;gd'
 alias gpu='git push;a'
 alias gpsum='git push --set-upstream origin master'
 alias gpv='git push -v'
