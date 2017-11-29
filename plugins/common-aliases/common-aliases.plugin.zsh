@@ -151,10 +151,10 @@ function in(){
 	df -h
 }
 
-i(){
+ig(){
 		ip addr show $1 | grep -Po 'inet \K[\d.]+'
 }
-compdef _ip i
+compdef _ip ig
 
 
 function ipbas {
@@ -434,7 +434,7 @@ yt2(){
 	)
 
 	for k in "${(@k)assoc_array}"; do
-	  echo yt "https://www.youtube.com/watch?v=$assoc_array[$k]"
+	  youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=$assoc_array[$k]"
 	done
 }
 
@@ -605,6 +605,6 @@ alias tp='top'
 alias tr='tree'
 alias -g ve="--version"
 alias x="exit"
-alias yt='	youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
+alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
 
 echo "$0 aktualisiert"

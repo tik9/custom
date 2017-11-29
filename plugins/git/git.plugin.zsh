@@ -57,9 +57,9 @@ function gi(){
 	mt[2]=$ARGUMENTS[-m2t]
 	
 	i=1
-	for dir in $ZSH_CUSTOM ; do
-	#for dir in $ZSH_CUSTOM ~/vs/vs ; do
-
+	# for dir in $ZSH_CUSTOM ; do
+	for dir in `pwd` ; do
+	echo $dir
 	#echo "${mh[$i]} ${mt[$i]} $dir"
 
 	 cd $dir
@@ -230,8 +230,8 @@ alias gupv='git pull --rebase -v'
 alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"'
 
-#alias i='git'
-alias k='git log --stat | head -n 15'
+alias i='git'
+alias k='git log --stat | head -n 3|sed -n 3p'
 
 function n(){
 	git log $1 --stat
