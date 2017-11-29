@@ -6,7 +6,7 @@ function pyclean() {
     find ${ZSH_PYCLEAN_PLACES} -type d -name "__pycache__" -delete
 }
 
-alias kid=	'kill $(netstat -lnp | grep 8000 | awk "{print $7}" | cut -d"/" -f 1)'
+alias kid=	'kill $(netstat -lnp | grep 8000 | awk "{print $6}" | cut -d"/" -f 1)'
 
 
 # Finde python Dateien

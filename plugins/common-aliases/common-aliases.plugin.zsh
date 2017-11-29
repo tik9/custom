@@ -2,6 +2,8 @@
 #ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
 
 
+rp=$ZSH_CUSTOM/login_rp
+
 os=`uname -a |cut -d' ' -f 1`
 
 if [ $os != "CYGWIN_NT-6.1" ]; then
@@ -41,10 +43,24 @@ fi
 if [[ $os = "Linux" ]] ;then;if [[ $lsb = 'Arch' ]]; then;pm='pacman'
 elif [[ $lsb = Ubuntu ]];then;
 	pm='apt-get';
-	alias mip="echo $(dig +short myip.opendns.com @resolver1.opendns.com)"
-
+	
+	wget -q --spider http://google.com
+	if [ $? -eq 0 ];then
+		alias mip="echo $(dig +short myip.opendns.com @resolver1.opendns.com)"
+	fi
  fi;else;pm='apt-cyg';fi
 
+
+try () {
+  result=$(eval "$1" 2>&1)
+  if [ $? -ne 0 ]; then
+
+	printf "[\033[31mFehler\033[0m]\n"
+    echo $result
+    return
+  fi
+  printf "[\033[32mErfolg\033[0m]\n"
+}
 
 function sortieren_datum(){
 	ls -lt $1| grep "^-" | awk '{
@@ -114,17 +130,20 @@ function ersetz(){
 	for file in *; do
 		if [[ $file =~ \  ]];then
 			echo mit Leerzeichen: $file
-			mv "$file" "${file// /_}"
+			neu="${file// /_}"
+			mv "$file" $neu
 		fi
 		
-		if [[ $file =~ '[A-Z]' ]];then
-		echo Zu verändern: $file
+		if [[ $neu =~ '[A-Z]' ]];then
+			echo Zu verändern da Großbuchst.: $neu
+		
 		rename 'y/A-Z/a-z/' *
 		fi
 		
-		if [[ `pwd` = '/root/uni/c' && $file != *"c_"* ]]; then
-			mv "$file" ${1}${file}
-			echo Zu verändern: $file
+		if [[ `pwd` = '/root/uni/c' && $neu != *"c_"* ]]; then
+			neu_c=c_${neu}
+			mv "$neu" $neu_c
+			echo c uni pdf zu ändern: $neu
 		fi
 	done
 	echo "\n${bold}Dateien nach Op $normal"
@@ -159,7 +178,7 @@ compdef _ip ig
 
 function ipbas {
 	
-	ipbas=$(echo `ip2 $1` | cut -d . -f -3)	
+	ipbas=$(echo `i $1` | cut -d . -f -3)	
 	echo Basis Ip $ipbas
 }
 
@@ -198,6 +217,7 @@ function kil(){
 	ps -ef|grep $1
 }
 
+compdef _kil kil
 
 function ki(){
 		killall $1;
@@ -220,6 +240,8 @@ function lss(){
 function ml(){
 	zparseopts -A ARGUMENTS c:
 	
+	ffprobe $1 2> >(grep Duration)
+
 	mplayer "$1" -count $ARGUMENTS[-c]
 }
 
@@ -242,9 +264,6 @@ mv0(){
 	echo .. compile fertig
 	java -jar target/my-app-2.jar 
 	#pr2 jav
-
-#	echo ..jar hintergrund
-	#tmux split-window "zsh;sleep 2;target/classes; ja LClient;read"
 }
 
 function nm(){
@@ -274,7 +293,7 @@ function pen(){
 	while true; do
 		echo "telnet/curl 178.27.250.8 8000"
 		curl 178.27.250.8:8000
-		sleep 30m
+		sleep 10m
 	done
 }
 
@@ -291,6 +310,11 @@ function pr2(){
 	grep $1 =(ps aux)
 }
 
+function pt(){
+	
+	ps -ef |grep $pts/$1
+}
+compdef _pt pt
 
 function int_trap() {
     echo "Ctrl-C gedrückt"
@@ -323,7 +347,7 @@ function rem(){
 }
 # -f[datei]:dateiname:_files' '-i[interface]:interf:_net_interfaces' '-o[letztes Oktett]' '-d[ziel]'
 function sc2(){
-	zparseopts -A ARGUMENTS d:f:i: o:u:
+	zparseopts -A ARGUMENTS d: f: i: o: u:
 
 	dir=$ARGUMENTS[-d]
 	datei=$ARGUMENTS[-f]
@@ -332,14 +356,15 @@ function sc2(){
 	user=$ARGUMENTS[-u]
 
 	printf 'dir, datei %s %s', $dir,$datei
-	
-	ipbas $interface
+
+	ipbas=178.27.250.8
+
+	#ipbas $interface
 	
 	if [ -z $user ];user=root
 
 	scp  $datei $user@$ipbas.$oktett:$dir
-	rm -rf $datei
-	echo $datei gelöscht vom Server
+	#rm -rf $datei
 }
 compdef _sc2 sc2
 
@@ -403,13 +428,6 @@ function unt(){
 }
 
 
-function u(){
-	
-	ps -ef |grep $pts/$1
-}
-compdef _pts u
-
-
 function up(){
 
 	if [[ $lsb == 'Arch' ]] ;then;
@@ -421,22 +439,29 @@ function up(){
 	apt-get dist-upgrade	
 }
 
-function uz(){
-	unzip $1;rm $1
-}
 
-
-yt2(){
-	typeset -A assoc_array
-	assoc_array=('classic1' 'hSnD30bcAS8'
-	'classic2' '2dgPv7vH_BQ' 
-	'pop1' 'glkT4AhKrcI'
+function yt2(){
+		zparseopts -A ARGUMENTS m
+	m=$ARGUMENTS[-m]
+	
+	if [[ -f $2 ]];then
+	while read name;do;youtube-dl $name;done < $2;return;fi
+	
+	typeset -A a_array
+	a_array=('classic' ''
+	'welt' '' 
+	'pop' ''
 	)
 
-	for k in "${(@k)assoc_array}"; do
-	  youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=$assoc_array[$k]"
+	for k in "${(@k)a_array}"; do
+	  youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=$a_array[$k]"
+	  if [ $1 = u ];then
+		#mv `ls -t|head -n1` /dev/sdb
+		echo auf usb speichern
+	  fi
 	done
 }
+compdef _yt2 yt2
 
  
 # alias/Funktionen
@@ -462,7 +487,7 @@ alias mte='cd $mteDir'
 alias o='cd $ZSH_CUSTOM'
 alias oh='cd $ZSH'
 alias op='/opt/git/pr.git'
-#alias u='cd ~/uni'
+alias u='cd ~/uni'
 alias uc='cd ~/uni/c'
 alias vs='cd ~/vs/vs'
 
@@ -589,7 +614,7 @@ alias ec="echo"
 alias fd='find . -type d -name'
 alias ff='find . -type f -name'
 alias fin="find / -name"
-alias -g gr="|grep -i"
+alias -g gr="|grep -ai --color=auto"
 alias gp="g++"
 alias hgrep="fc -El 0 | grep"
 alias his='history'
@@ -598,7 +623,7 @@ alias le='less -WiNS'
 alias m='man'
 alias mt='man terminator'
 alias -g n2='|less'
-alias r='expect $ZSH_CUSTOM/login_rp'
+alias r='expect $rp'
 alias rf='rfkill list'
 alias ter='if [ $os != "CYGWIN_NT-6.1" ]; then;terminator &;else; mintty;fi'
 alias tp='top'

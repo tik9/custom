@@ -1,21 +1,22 @@
 #compdef rest
 
-#echo initialisiere rest..
-
 
 _ip(){
 	_arguments '*: :_net_interfaces'
 }
 
+_kil(){
+_alternative "pids:process ID:($(ps -A o pid=))"
+}
+
 
 _ml(){
-	_arguments '*:datei:_files:->dateien' 'rad_stat:radio:(http://80.237.156.8:8120 b1)' '-c[count]'
-	case "$state" in
-    dateien)
-     local -a music_files
-        music_files=( *.mp3,*.ogg )
-        _multi_parts / music_files
-    esac
+	_arguments '*:datei:_files' ':radio:("http://80.237.156.8:8120" b1)' '-count[count]'
+	#case "$state" in
+    #dateien)
+        #music_files=( *.mp3,*.ogg )
+        #_multi_parts / music_files
+    #esac
 }
 
 _sc2(){
@@ -28,7 +29,11 @@ _schieb(){
 }
 
 
-_pts(){
-cmds=('-ptsNummer')
-_describe 'Nummer pts' cmds
+_pt(){
+	_alternative 'Nummer:pts:((n\:"pts-endnr."))'
+}
+
+
+_yt2(){
+	_alternative 'argumente:eigene args:((u\:"usb einsatz" ku\:"kein usb"))' 'files:filename:_files'
 }

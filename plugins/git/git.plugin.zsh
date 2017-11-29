@@ -35,16 +35,20 @@ function gc(){
 	#Aufruf: gc --m1 foo
 	zparseopts -A ARGUMENTS m1: m2:
 
-	mh=$ARGUMENTS[-m1]
-	mt=$ARGUMENTS[-m2]
+	#mh=$1
+	#mh= $ARGUMENTS[-m1] <	
+	#mh=$([[ -n $ARGUMENTS[-m1] ]] && $ARGUMENTS[-m1] || $1)
+#int a = (b == 5) ? c : d;
+ [[ -n $ARGUMENTS[-m1] ]] && mh=$ARGUMENTS[-m1] || mh="$1"
+ [[ -n $ARGUMENTS[-m2] ]] && mh=$ARGUMENTS[-m2] || mt="$2"
 
-	printf 'Argument m1 ist "%s"\n' "$mh"
-	printf 'Argument m2 ist "%s"\n' "$mt"
+	printf 'Argument mh ist "%s"\n' "$mh"
+	printf 'Argument mt ist "%s"\n' "$mt"
 	git commit -am "$mh" -m "$mt"
 	git status
 }
 
-compdef _gitcommit gc
+compdef _gitcommitSim gc
 
 
 function gi(){
@@ -57,9 +61,10 @@ function gi(){
 	mt[2]=$ARGUMENTS[-m2t]
 	
 	i=1
-	# for dir in $ZSH_CUSTOM ; do
-	for dir in `pwd` ; do
-	echo $dir
+	dirs=.
+	for dir in $dirs ; do
+	#for dir in $ZSH_CUSTOM ~/vs/vs ; do
+
 	#echo "${mh[$i]} ${mt[$i]} $dir"
 
 	 cd $dir
@@ -68,7 +73,6 @@ function gi(){
 	 git push
 	#i=$((i+1))
 	done
-	#1
 }
 
 compdef _gi gi
@@ -99,7 +103,6 @@ alias ga='git add --all;a'
 
 alias gb='git branch'
 alias gba='git branch -a'
-alias gbr='git branch --remote'
 
 alias gcam='git commit -a -m'
 alias gcf='git config --list --show-origin'
@@ -197,7 +200,7 @@ alias glola="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Crese
 alias glp="_git_log_prettily"
 compdef _git glp=git-log
 
-
+alias go='o;gd'
 alias gpu='git push;a'
 alias gpsum='git push --set-upstream origin master'
 alias gpv='git push -v'
@@ -221,6 +224,8 @@ alias gst='git stash;a'
 alias gstl='git stash list'
 alias gstp='git stash pop;gstl'
 alias gsts='git stash show -p'
+
+alias gt='git checkout'
 
 alias gu='git pull'
 alias gunignore='git update-index --no-assume-unchanged'
