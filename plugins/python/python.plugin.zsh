@@ -25,7 +25,7 @@ function p3(){
 }
 
 alias py='/root/progr/pycharm/bin/pycharm.sh&'
-alias pb="b $pg"
+alias pb="b $pb"
 alias pp='pr3 python' # grep ps nach python
 
 #pip

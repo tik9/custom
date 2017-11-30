@@ -66,9 +66,15 @@ function gi(){
 
 	 cd $dir
 	 #git add . 
+<<<<<<< HEAD
+	 git commit -am ${mh[$i]}
+	 # -m ${mt[$i]}
+=======
 	 git commit -am ${mh[$i]} 
 	 #-m ${mt[$i]}
+>>>>>>> 9eff55331ef61a8e0cd1d0eacf98f9db03a496c2
 	 git push
+	#i=$((i+1))
 	done
 }
 
