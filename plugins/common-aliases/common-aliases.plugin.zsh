@@ -3,7 +3,7 @@
 
 
 os=`uname -a |cut -d' ' -f 1`
-com=$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
+cb=$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
 db=$ZSH_CUSTOM/plugins/django/django.plugin.zsh
 gb=$ZSH_CUSTOM/plugins/git/git.plugin.zsh
 lb=$ZSH_CUSTOM/login_rp
@@ -541,14 +541,9 @@ alias -g ti='| tail'
 # Hilfe
 alias -g h="he"
 alias -g he="--help |less"
-<<<<<<< HEAD
-alias -g hd="$com_alias"
-alias cb="b $cb"
-=======
 alias cb="b $cb"
 alias -g com="$cb"
 alias lb="b $lb"
->>>>>>> 9eff55331ef61a8e0cd1d0eacf98f9db03a496c2
 
 # Java
 alias j="javac"
