@@ -2,15 +2,16 @@
 #ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
 
 
-rp=$ZSH_CUSTOM/login_rp
-
 os=`uname -a |cut -d' ' -f 1`
+com=$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
+db=$ZSH_CUSTOM/plugins/django/django.plugin.zsh
+gb=$ZSH_CUSTOM/plugins/git/git.plugin.zsh
+lb=$ZSH_CUSTOM/login_rp
+pb=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
+
 
 if [ $os != "CYGWIN_NT-6.1" ]; then
-	com_alias=$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
-	ggpl=$ZSH_CUSTOM/plugins/git/git.plugin.zsh
-	pg=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
-
+	
 	lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
 	arc=`uname -a |cut -d' ' -f 14`
 	dowDir=/home/t/Downloads
@@ -24,10 +25,12 @@ else
 	
 	cyg=c:/cygwin64
 	home2=$cyg/home/itdlz-koer
-	com_alias=$cyg$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
-	ggpl=$cyg$ZSH_CUSTOM/plugins/git/git.plugin.zsh
-	pg=$cyg$ZSH_CUSTOM/plugins/python/python.plugin.zsh
-
+	com=$cyg$com
+	db=$cyg$db
+	gb=$cyg$ggpl
+	lb=$cyg$lb
+	pb=$cyg$pb
+	
 	bim=$(wmic OS get OSArchitecture)
 	bi2=$(set | findstr ARCH)
 	arc=`uname -a |cut -d' ' -f 6`
@@ -523,6 +526,15 @@ alias ab="abiword"
 alias hi='sudo hibernate'
 alias s='sudo pm-suspend'
 
+#find
+alias ff='find . -type f -name'
+alias fin="find / -name"
+
+#grep
+alias -g gr="|grep -ai --color=auto"
+alias grep="grep -i"
+alias hgrep="fc -El 0 | grep"
+
 
 # head / tail
 alias -g H='| head'
@@ -532,8 +544,9 @@ alias -g ti='| tail'
 # Hilfe
 alias -g h="he"
 alias -g he="--help |less"
-alias -g hd="$com_alias"
-alias hg="g $com_alias"
+alias cb="b $cb"
+alias -g com="$cb"
+alias lb="b $lb"
 
 # Java
 alias j="javac"
@@ -549,7 +562,9 @@ alias -s tar="tar tf"
 # Konsole
 alias hs='\history -E'
 alias ho='ec $HOST'
+alias pe='printenv n2'
 alias pz='pr3 zsh'
+alias se='set gr'
 alias tt='tty'
 alias us='ec $USER'
 
@@ -603,20 +618,15 @@ alias zr='b $zr' # zshrc
 alias zt="ec $ZSH_THEME"
 
 
-alias ac='ack'
-alias ad2='echo 01573 9598 220 timo.koerner@hof-university.de'
+alias ac='ack -i'
+alias ad='echo 01573 9598 220 timo.koerner@hof-university.de'
 alias ca='cat'
 alias dt='date +"%T"'
 alias dh='df -h'
 alias dowDir='l $dowDir'
 alias duh='du -h'
 alias ec="echo"
-alias fd='find . -type d -name'
-alias ff='find . -type f -name'
-alias fin="find / -name"
-alias -g gr="|grep -ai --color=auto"
 alias gp="g++"
-alias hgrep="fc -El 0 | grep"
 alias his='history'
 alias -g idrs=~/.ssh/id_rsa.pub 
 alias le='less -WiNS'

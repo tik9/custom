@@ -70,7 +70,8 @@ function gi(){
 
 	 cd $dir
 	 #git add . 
-	 git commit -am ${mh[$i]} -m ${mt[$i]}
+	 git commit -am ${mh[$i]} 
+	 #-m ${mt[$i]}
 	 git push
 	#i=$((i+1))
 	done
@@ -80,22 +81,18 @@ function gi(){
 compdef _gi gi
 
 function gl(){
-	#for dir in $ZSH_CUSTOM; do
 
-	dir=$1
 	if [ $# -eq 0 ];then
-		echo keine Argumente
-		#return
-		dir=$ZSH_CUSTOM
+		#echo keine Argumente
+		dir=.
 	fi
 		
 	ec hole $dir
 	cd $dir
 	git pull
-	if [[ $1 = $ZSH_CUSTOM ]];then
+	if [[ $dir = $ZSH_CUSTOM ]];then
 		exec zsh
 	fi
-	#done
 	git log --stat | head -n 15
 }
 
@@ -103,7 +100,7 @@ function gl(){
 alias a='gs'
 alias ga='git add --all;a'
 
-alias gb='git branch'
+alias gbr='git branch'
 alias gba='git branch -a'
 
 alias gcam='git commit -a -m'
@@ -131,7 +128,7 @@ alias gf='git config --list'
 function gfg() { git ls-files | grep $@ }
 compdef gfg=grep
 
-alias gg='git log'
+alias glg='git log'
 
 function ggf() {
 [[ "$#" != 1 ]] && local b="$(git_current_branch)"
@@ -166,7 +163,7 @@ function ggp() {
 compdef _git ggp=git-checkout
 
 
-alias ggpl='g $ggpl'
+alias gb='b $gb'
 
 alias ggpush='git push origin $(git_current_branch)'
 
@@ -194,7 +191,7 @@ alias gignore='b .gitignore'
 alias gignored='git ls-files -v | grep "^[[:lower:]]"'
 alias gin='git init'
 
-alias glg='git log --stat -p'
+alias gg='git log --stat -p'
 alias glgg='git log --graph'
 alias glgm='git log --graph --max-count=10'
 alias glol="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
@@ -212,7 +209,6 @@ alias gra='git remote add'
 alias grb='git rebase'
 alias grba='git rebase --abort'
 alias grbc='git rebase --continue'
-alias grh='git reset HEAD'
 alias grset='git remote set-url'
 alias grt='cd $(git rev-parse --show-toplevel || echo ".")'
 alias gru='git remote update'
