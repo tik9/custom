@@ -32,28 +32,24 @@ else
 	pb=$cyg$pb
 	
 	bim=$(wmic OS get OSArchitecture)
-	bi2=$(set | findstr ARCH)
 	arc=`uname -a |cut -d' ' -f 6`
 	dowDir=/cygdrive/C/Users/itdlz-koer/Downloads
 	mteDir=$home2/mte/my-app
 	alias acl='apt-cyg listall'
-	alias acl2='cygcheck'
+	alias in='apt-cyg install'
 	alias op='cygstart'
+	alias rem='apt-cyg remove';
+
 	zr=$home2/.zshrc
 
 fi
 
-
-if [[ $os = "Linux" ]] ;then;if [[ $lsb = 'Arch' ]]; then;pm='pacman'
-elif [[ $lsb = Ubuntu ]];then;
-	pm='apt-get';
-	
+function mip(){
 	wget -q --spider http://google.com
 	if [ $? -eq 0 ];then
-		alias mip="echo $(dig +short myip.opendns.com @resolver1.opendns.com)"
+		echo $(dig +short myip.opendns.com @resolver1.opendns.com)
 	fi
- fi;else;pm='apt-cyg';fi
-
+}
 
 try () {
   result=$(eval "$1" 2>&1)
@@ -117,7 +113,7 @@ ci(){
 
 function co(){
 	if [[ $lsb = 'Ubuntu' ]];then
-	xclip -o
+		xclip -o
 	else
 		cat /dev/clipboard
 	fi
@@ -152,7 +148,6 @@ function ersetz(){
 	done
 	echo "\n${bold}Dateien nach Op $normal"
 	for f in *;do;echo $f;done
-
 }
 
 
@@ -161,23 +156,10 @@ function ig(){
 }
 
 
-function in(){
-
-	df -h
-	if [[ $os = "Linux" ]] ;then
-		if [[ $lsb = 'Arch' ]]; then; pacman -S --noconfirm $1
-        else;apt-get install -y $1;fi
-	else
-		apt-cyg install $1
-	fi
-
-	df -h
-}
-
-ig(){
+function i(){
 		ip addr show $1 | grep -Po 'inet \K[\d.]+'
 }
-compdef _ip ig
+compdef _ip i
 
 
 function ipbas {
@@ -281,16 +263,9 @@ function p(){
 }
 
 function pd(){
-	if [ "$1" = -he ]; then
-	  hilfe `basename $0`  "Paket installiert?"
-	  return
-	fi
 
-	if [[ $os = "Linux" ]] ;then
 		if [[ $lsb = 'Arch' ]]; then;pacman -Qeq |grep $1
-	else
-		dpkg -l	|grep $1
-		fi;else cygcheck -c|less;fi
+else cygcheck -c|less;fi
 }
 
 function pe(){
@@ -340,12 +315,6 @@ function q(){
 }
 
 
-function rem(){
-	if [ $os = "CYGWIN_NT-6.1" ]; then;apt-cyg remove $1;else
-	if [[ $lsb == 'Arch' ]] ;then;pacman -R --noconfirm $1
-	else;apt-get autoremove $1;fi
-	fi
-}
 # -f[datei]:dateiname:_files' '-i[interface]:interf:_net_interfaces' '-o[letztes Oktett]' '-d[ziel]'
 function sc2(){
 	zparseopts -A ARGUMENTS d: f: i: o: u:
@@ -371,11 +340,7 @@ compdef _sc2 sc2
 
 
 function schieb(){
-	
-	if [ "$1" = -h ]; then
-	  hilfe `basename $0` "anzahl Dat" "Ziel (optional)"
-	  return
-	fi
+
 	
 	ziel_dir=`pwd`
 	#ziel_dir=~/root
@@ -403,7 +368,7 @@ function scmysql(){
 function sho(){
 
 	if [ $os = "CYGWIN_NT-6.1" ]; then
-		apt-cyg show `echo $1`;else ; if [[ $lsb == 'Arch' ]] ;then;pacman -Ss $1 ;else;apt-cache show $1|less;fi;fi;
+		apt-cyg show `echo $1`;else ; apt-cache show $1|less;fi
 }
 
 function si(){
@@ -430,14 +395,7 @@ function unt(){
 
 
 function up(){
-
-	if [[ $lsb == 'Arch' ]] ;then;
-	pacman -Syu 
-	exit
-	fi
-	apt-get update	
-	apt-get upgrade	
-	apt-get dist-upgrade	
+	
 }
 
 
@@ -632,6 +590,7 @@ alias rf='rfkill list'
 alias ter='if [ $os != "CYGWIN_NT-6.1" ]; then;terminator &;else; mintty;fi'
 alias tp='top'
 alias tr='tree'
+alias up='apt-get dist-upgrade'
 alias -g ve="--version"
 alias x="exit"
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
