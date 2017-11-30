@@ -63,7 +63,6 @@ function gi(){
 	i=1
 	dirs=.
 	for dir in $dirs ; do
-	#for dir in $ZSH_CUSTOM ; do
 	#for dir in $ZSH_CUSTOM ~/vs/vs ; do
 
 	#echo "${mh[$i]} ${mt[$i]} $dir"
@@ -75,7 +74,6 @@ function gi(){
 	 git push
 	#i=$((i+1))
 	done
-	#1
 }
 
 compdef _gi gi
@@ -233,8 +231,8 @@ alias gupv='git pull --rebase -v'
 alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"'
 
-#alias i='git'
-alias k='git log --stat | head -n 15'
+alias i='git'
+alias k='git log --stat | head -n 3|sed -n 3p'
 
 function n(){
 	git log $1 --stat
