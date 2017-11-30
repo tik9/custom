@@ -36,8 +36,6 @@ function gc(){
 	zparseopts -A ARGUMENTS m1: m2:
 
 	#mh=$1
-	#mh= $ARGUMENTS[-m1] <	
-	#mh=$([[ -n $ARGUMENTS[-m1] ]] && $ARGUMENTS[-m1] || $1)
 #int a = (b == 5) ? c : d;
  [[ -n $ARGUMENTS[-m1] ]] && mh=$ARGUMENTS[-m1] || mh="$1"
  [[ -n $ARGUMENTS[-m2] ]] && mh=$ARGUMENTS[-m2] || mt="$2"
@@ -52,7 +50,6 @@ compdef _gitcommitSim gc
 
 
 function gi(){
-	
 		zparseopts -A ARGUMENTS mzh: mzt: m2h: m2t:
 
 	mh[1]=$ARGUMENTS[-mzh]
@@ -69,7 +66,8 @@ function gi(){
 
 	 cd $dir
 	 #git add . 
-	 git commit -am ${mh[$i]} -m ${mt[$i]}
+	 git commit -am ${mh[$i]}
+	 # -m ${mt[$i]}
 	 git push
 	#i=$((i+1))
 	done
@@ -149,8 +147,6 @@ fi
 
 compdef _git ggl=git-checkout
 
-alias ggpull='git pull origin $(git_current_branch)'
-compdef _git ggpull=git-checkout
 
 function ggp() {
 	if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
@@ -164,7 +160,7 @@ function ggp() {
 compdef _git ggp=git-checkout
 
 
-alias ggpl='g $ggpl'
+alias gb='b $gb'
 
 alias ggpush='git push origin $(git_current_branch)'
 
@@ -236,7 +232,7 @@ alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"'
 
 alias i='git'
-alias k='git log --stat | head -n 3|sed -n 3p'
+alias k='git log --stat | head -n 10'
 
 function n(){
 	git log $1 --stat

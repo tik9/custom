@@ -35,6 +35,7 @@ else
 	mteDir=$home2/mte/my-app
 	alias acl='apt-cyg listall'
 	alias acl2='cygcheck'
+	alias op='cygstart'
 	zr=$home2/.zshrc
 
 fi
@@ -115,7 +116,7 @@ function co(){
 	if [[ $lsb = 'Ubuntu' ]];then
 	xclip -o
 	else
-	cat /dev/clipboard
+		cat /dev/clipboard
 	fi
 }
 
@@ -289,13 +290,14 @@ function pd(){
 		fi;else cygcheck -c|less;fi
 }
 
-function pen(){
+function pe(){
 	while true; do
 		echo "telnet/curl 178.27.250.8 8000"
 		curl 178.27.250.8:8000
-		sleep 10m
+		sleep $1
 	done
 }
+compdef _pe pe
 
 pk(){
 	pkill $1;ps $1
@@ -303,10 +305,6 @@ pk(){
 
 
 function pr2(){
-	if [ -z "$1" ]; then
-	  hilfe `basename $0` "grep mit 'prozess Substitution'" "Prozess"
-	  return
-	fi
 	grep $1 =(ps aux)
 }
 
@@ -486,7 +484,6 @@ alias mu="cd ~/musik"
 alias mte='cd $mteDir'
 alias o='cd $ZSH_CUSTOM'
 alias oh='cd $ZSH'
-alias op='/opt/git/pr.git'
 alias u='cd ~/uni'
 alias uc='cd ~/uni/c'
 alias vs='cd ~/vs/vs'
@@ -533,7 +530,7 @@ alias -g ti='| tail'
 alias -g h="he"
 alias -g he="--help |less"
 alias -g hd="$com_alias"
-alias hg="g $com_alias"
+alias cb="b $cb"
 
 # Java
 alias j="javac"
@@ -542,7 +539,6 @@ alias ja="java"
 
 #Komprimierung
 alias -s zip="unzip -l"
-alias -s rar="unrar l"
 alias -s tar="tar tf"
 
 
@@ -565,11 +561,11 @@ alias mst='mysql -uroot d -e "show tables"'
 
 # netzwerk
 alias f='iwgetid -r'
-alias -g re='178.27.250.8'
 alias iw2='iwlist wlan0 scan'
 alias ji='iw2 n'
 alias jo='journalctl -xe'
 alias ne='/etc/init.d/networking restart;sleep 1;ig'
+alias -g re='178.27.250.8'
 alias z='ne'
 
 
@@ -582,8 +578,6 @@ alias -g sl="sleep"
 
 # Radio
 alias b1="ml http://br-br1-nbopf.cast.addradio.de/br/br1/nbopf/mp3/128/stream.mp3"
-
-alias ra="ml http://80.237.156.8:8120" # landsberg int.
 
 #tmux
 alias ta="tmux attach"

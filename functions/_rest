@@ -6,7 +6,7 @@ _ip(){
 }
 
 _kil(){
-_alternative "pids:process ID:($(ps -A o pid=))"
+	_alternative "pids:process ID:($(ps -A o pid=))"
 }
 
 
@@ -17,6 +17,11 @@ _ml(){
         #music_files=( *.mp3,*.ogg )
         #_multi_parts / music_files
     #esac
+}
+
+function _pe(){
+	cmd=('10m' '20m' '')
+	_describe 'Minuten zwischen Curl' cmd
 }
 
 _sc2(){
