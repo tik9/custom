@@ -225,7 +225,7 @@ alias gupv='git pull --rebase -v'
 alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"'
 
-alias i='git'
+alias g='git'
 alias k='git log --stat | head -n 10'
 
 function n(){

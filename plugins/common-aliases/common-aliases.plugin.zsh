@@ -44,13 +44,6 @@ else
 
 fi
 
-function mip(){
-	wget -q --spider http://google.com
-	if [ $? -eq 0 ];then
-		echo $(dig +short myip.opendns.com @resolver1.opendns.com)
-	fi
-}
-
 try () {
   result=$(eval "$1" 2>&1)
   if [ $? -ne 0 ]; then
@@ -156,10 +149,10 @@ function ig(){
 }
 
 
-function i(){
+function ip2(){
 		ip addr show $1 | grep -Po 'inet \K[\d.]+'
 }
-compdef _ip i
+compdef _ip ip2
 
 
 function ipbas {
@@ -223,6 +216,15 @@ function lss(){
 	ssh $3 $ipbas.$2 
 }
 
+
+function mip(){
+	wget -q --spider http://google.com
+	if [ $? -eq 0 ];then
+		echo $(dig +short myip.opendns.com @resolver1.opendns.com)
+	fi
+}
+
+
 function ml(){
 	zparseopts -A ARGUMENTS c:
 	
@@ -272,6 +274,7 @@ function pe(){
 	while true; do
 		echo "telnet/curl 178.27.250.8 8000"
 		curl 178.27.250.8:8000
+		curl localhost:8000
 		sleep $1
 	done
 }
@@ -428,7 +431,8 @@ alias al='alias|grep'
 alias am='alias -m'
 alias d='declare -f'
 alias t='type'
-alias wh="which"
+alias w='who'
+alias whi="which"
 
 # betriebssystem
 alias lsb="echo $lsb"	
@@ -465,7 +469,7 @@ alias lk="lsblk"
 
 #Dict
 alias wl="echo Dict.;dict -D"
-alias w="dict -d fd-eng-deu"
+alias di="dict -d fd-eng-deu"
 alias w2="dict"
 
 #Dokumente
@@ -535,10 +539,12 @@ alias mst='mysql -uroot d -e "show tables"'
 # netzwerk
 alias f='iwgetid -r'
 alias iw2='iwlist wlan0 scan'
-alias ji='iw2 n'
+alias i='ip2 wlan0'
+alias ii='iw2 n'
 alias jo='journalctl -xe'
 alias ne='/etc/init.d/networking restart;sleep 1;ig'
 alias -g re='178.27.250.8'
+alias wh='whois'
 alias z='ne'
 
 
@@ -585,12 +591,11 @@ alias le='less -WiNS'
 alias m='man'
 alias mt='man terminator'
 alias -g n2='|less'
-alias r='expect $rp'
+alias r="expect $lb"
 alias rf='rfkill list'
 alias ter='if [ $os != "CYGWIN_NT-6.1" ]; then;terminator &;else; mintty;fi'
 alias tp='top'
 alias tr='tree'
-alias up='apt-get dist-upgrade'
 alias -g ve="--version"
 alias x="exit"
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
