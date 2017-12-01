@@ -3,9 +3,12 @@
 
 
 os=`uname -a |cut -d' ' -f 1`
-cb=$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
-db=$ZSH_CUSTOM/plugins/django/django.plugin.zsh
-gb=$ZSH_CUSTOM/plugins/git/git.plugin.zsh
+cb2=plugins/common-aliases/common-aliases.plugin.zsh
+cb=$ZSH_CUSTOM/$cb2
+db2=plugins/django/django.plugin.zsh
+db=$ZSH_CUSTOM/$db2
+gb2=plugins/git/git.plugin.zsh
+gb=$ZSH_CUSTOM/$gb2
 lb=$ZSH_CUSTOM/login_rp
 pb=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
 
@@ -20,16 +23,17 @@ if [ $os != "CYGWIN_NT-6.1" ]; then
 	zr=~/.zshrc
 
 else
+	zHome=.oh-my-zsh/custom
 	pts=pty
 	lsb=cygwin
 	
-	cyg=c:/cygwin64
-	home2=$cyg/home/itdlz-koer
-	com=$cyg$com
-	db=$cyg$db
-	gb=$cyg$ggpl
-	lb=$cyg$lb
-	pb=$cyg$pb
+	# cyg=c:/cygwin64
+	home2=c:/cygwin64/home/itdlz-koer
+	db=$home2/$zHome/$db2
+	gb=$home2/$zHome/$gb2
+	cb=$home2/$zHome/$cb2
+	lb=$home2/$zHome/login_rp
+	pb=$home2/$zHome/$pb2
 	
 	bim=$(wmic OS get OSArchitecture)
 	arc=`uname -a |cut -d' ' -f 6`
