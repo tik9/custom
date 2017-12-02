@@ -33,30 +33,29 @@ function work_in_progress() {
 
 function gc(){
 	#Aufruf: gc --m1 foo
-	zparseopts -A ARGUMENTS m1: m2:
+	zparseopts -A ARGUMENTS m: m2:
 
 	#mh=$1
 #int a = (b == 5) ? c : d;
- [[ -n $ARGUMENTS[-m1] ]] && mh=$ARGUMENTS[-m1] || mh="$1"
- [[ -n $ARGUMENTS[-m2] ]] && mh=$ARGUMENTS[-m2] || mt="$2"
+ [[ -n $ARGUMENTS[-m] ]] && mh=$ARGUMENTS[-m] || mh="$1"
 
 	printf 'Argument mh ist "%s"\n' "$mh"
-	printf 'Argument mt ist "%s"\n' "$mt"
-	git commit -am "$mh" -m "$mt"
+	git commit -am "$mh"
 	git status
 }
 
-compdef _gitcommitSim gc
+compdef _gc gc
 
 
 function gi(){
-		zparseopts -A ARGUMENTS mzh: mzt: m2h: m2t:
+		zparseopts -A ARGUMENTS m: mzt: m2h: m2t:
 
-	mh[1]=$ARGUMENTS[-mzh]
-	mt[1]=$ARGUMENTS[-mzt]
-	mh[2]=$ARGUMENTS[-m2h]
-	mt[2]=$ARGUMENTS[-m2t]
-	
+	#mh[1]=$ARGUMENTS[-mzh]
+	#mt[1]=$ARGUMENTS[-mzt]
+	#mh[2]=$ARGUMENTS[-m2h]
+
+	 [[ -n $ARGUMENTS[-m] ]] && mh=$ARGUMENTS[-m] || mh="$1"
+
 	i=1
 	dirs=.
 	for dir in $dirs ; do
@@ -66,13 +65,13 @@ function gi(){
 
 	 cd $dir
 	 #git add . 
-	 git commit -am ${mh[$i]} 
+	 git commit -am ${mh} 
 	 #-m ${mt[$i]}
 	 git push
 	done
 }
 
-compdef _gi gi
+compdef _gc gc
 
 function gl(){
 
@@ -101,7 +100,7 @@ alias gcam='git commit -a -m'
 alias gcf='git config --list --show-origin'
 alias gcg='b .git/config'
 alias gcl='git clone --recursive'
-alias gclean='git clean -fd'
+alias gclean='git clean -dnx'
 alias gcm='git checkout master'
 alias gcmsg='git commit -m'
 alias gco='g .git/config'
@@ -179,7 +178,7 @@ alias ggpur='ggu'
 compdef _git ggpur=git-checkout
 
 alias ghh='git grep "<<<<<<< HEAD"'
-alias gignore='b .gitignore'
+alias gig='b .gitignore'
 alias gignored='git ls-files -v | grep "^[[:lower:]]"'
 alias gin='git init'
 
@@ -226,7 +225,7 @@ alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"'
 
 alias g='git'
-alias k='git log --stat | head -n 10'
+alias gh='git log --stat | head -n 10'
 
 function n(){
 	git log $1 --stat
