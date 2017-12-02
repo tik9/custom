@@ -10,8 +10,13 @@ _kil(){
 }
 
 
+_ki(){
+	_alternative "pids:process ID:($(ps -A o cmd=))"
+}
+
+
 _ml(){
-	_arguments '*:datei:_files' ':radio:("http://80.237.156.8:8120" b1)' '-count[count]'
+	_arguments ':datei:_files' ':radio:("http://80.237.156.8:8120" b1)' '-l[loop]'
 	#case "$state" in
     #dateien)
         #music_files=( *.mp3,*.ogg )
