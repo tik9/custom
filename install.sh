@@ -19,7 +19,6 @@ ipython3 python3-pip
 # git openssh-server
 
 # musik
-# "moc" ffmpeg
-
+mplayer
 
 echo "${0} fertig"

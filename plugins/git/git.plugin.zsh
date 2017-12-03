@@ -1,10 +1,7 @@
-# Query/use custom command for `git`.
+
 zstyle -s ":vcs_info:git:*:-all-" "command" _omz_git_git_cmd
 : ${_omz_git_git_cmd:=git}
 
-#
-# Funktionen
-#
 
 # The name of the current branch
 # Back-compatibility wrapper for when this function was defined here in
@@ -33,79 +30,98 @@ function work_in_progress() {
   fi
 }
 
-function gi(){
-	
-	for dir in mte/my-app .oh-my-zsh/custom arduino; do
-	cd ~/$dir
-	echo ~/$dir
-	#git status
-	git add . 
-	git commit -a --allow-empty-message -m ""
-	git push
-	done
-cd
+
+function gc(){
+	#Aufruf: gc --m1 foo
+	zparseopts -A ARGUMENTS m: m2:
+
+	#mh=$1
+#int a = (b == 5) ? c : d;
+ [[ -n $ARGUMENTS[-m] ]] && mh=$ARGUMENTS[-m] || mh="$1"
+
+	printf 'Argument mh ist "%s"\n' "$mh"
+	git commit -am "$mh"
+	git status
 }
 
-#
-# Aliase
-#
+compdef _gc gc
+
+
+function gi(){
+		zparseopts -A ARGUMENTS m: mzt: m2h: m2t:
+
+	#mh[1]=$ARGUMENTS[-mzh]
+	#mt[1]=$ARGUMENTS[-mzt]
+	#mh[2]=$ARGUMENTS[-m2h]
+
+	 [[ -n $ARGUMENTS[-m] ]] && mh=$ARGUMENTS[-m] || mh="$1"
+
+	i=1
+	dirs=.
+	for dir in $dirs ; do
+	#for dir in $ZSH_CUSTOM ~/vs/vs ; do
+
+	#echo "${mh[$i]} ${mt[$i]} $dir"
+
+	 cd $dir
+	 #git add . 
+	 git commit -am ${mh} 
+	 #-m ${mt[$i]}
+	 git push
+	done
+}
+
+compdef _gc gc
+
+function gl(){
+
+	if [ $# -eq 0 ];then
+		#echo keine Argumente
+		dir=.
+	fi
+		
+	ec hole $dir
+	cd $dir
+	git pull
+	if [[ $dir = $ZSH_CUSTOM ]];then
+		exec zsh
+	fi
+	git log --stat | head -n 15
+}
+
 
 alias a='gs'
-alias ga='git add --all'
-alias gal='git config --get-regexp alias'
-alias gapa='git add --patch'
+alias ga='git add --all;a'
 
-alias gb='git branch'
+alias gbr='git branch'
 alias gba='git branch -a'
-alias gbda='git branch --merged | command grep -vE "^(\*|\s*master\s*$)" | command xargs -n 1 git branch -d'
-alias gbl='git blame -b -w'
-alias gbnm='git branch --no-merged'
-alias gbr='git branch --remote'
-alias gbs='git bisect'
-alias gbsb='git bisect bad'
-alias gbsg='git bisect good'
-alias gbsr='git bisect reset'
-alias gbss='git bisect start'
 
-alias gc='git commit -a --allow-empty-message -m ""'
-alias gc!='git commit -v --amend'
-alias gcn!='git commit -v --no-edit --amend'
-alias gca='git commit -v -a'
-alias gca!='git commit -v -a --amend'
-alias gcan!='git commit -v -a --no-edit --amend'
-alias gcans!='git commit -v -a -s --no-edit --amend'
 alias gcam='git commit -a -m'
-alias gcb='git checkout -b'
-alias gcf='git config --list'
-alias gcg='git config --global'
+alias gcf='git config --list --show-origin'
+alias gcg='b .git/config'
 alias gcl='git clone --recursive'
-alias gclean='git clean -fd'
-alias gpristine='git reset --hard && git clean -dfx'
+alias gclean='git clean -dnx'
 alias gcm='git checkout master'
 alias gcmsg='git commit -m'
 alias gco='g .git/config'
 alias gcount='git shortlog -sn'
 compdef gcount=git
-alias gcp='git cherry-pick'
-alias gcs='git commit -S'
 
 alias gd='git diff'
 alias gdca='git diff --cached'
-alias gdct='git describe --tags `git rev-list --tags --max-count=1`'
-alias gdt='git diff-tree --no-commit-id --name-only -r'
 
 function gdv() { git diff -w "$@" | view - }
 
 compdef _git gdv=git-diff
+
 alias gdw='git diff --word-diff'
 
-alias gf='git fetch'
+alias gf='git config --list'
 
 function gfg() { git ls-files | grep $@ }
 compdef gfg=grep
 
-alias gg='git log --stat'
-
+alias glg='git log'
 
 function ggf() {
 [[ "$#" != 1 ]] && local b="$(git_current_branch)"
@@ -116,16 +132,15 @@ compdef _git ggf=git-checkout
 
 function ggl() {
 if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
-git pull origin "${*}"
+	git pull origin "${*}"
 else
-[[ "$#" == 0 ]] && local b="$(git_current_branch)"
-git pull origin "${b:=$1}"
+	[[ "$#" == 0 ]] && local b="$(git_current_branch)"
+	git pull origin "${b:=$1}"
 fi
 }
+
 compdef _git ggl=git-checkout
 
-alias ggpull='git pull origin $(git_current_branch)'
-compdef _git ggpull=git-checkout
 
 function ggp() {
 	if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
@@ -139,11 +154,12 @@ function ggp() {
 compdef _git ggp=git-checkout
 
 
-alias ggpl='g $ggpl'
+alias gb='b $gb'
 
 alias ggpush='git push origin $(git_current_branch)'
 
 compdef _git ggpush=git-checkout
+
 function ggpnp() {
 	if [[ "$#" == 0 ]]; then
 	ggl && ggp
@@ -152,7 +168,7 @@ function ggpnp() {
 	fi
 }
 compdef _git ggpnp=git-checkout
-alias ggsup='git branch --set-upstream-to=origin/$(git_current_branch)'
+
 function ggu() {
 	[[ "$#" != 1 ]] && local b="$(git_current_branch)"
 	git pull --rebase origin "${b:=$1}"
@@ -161,31 +177,21 @@ compdef _git ggu=git-checkout
 alias ggpur='ggu'
 compdef _git ggpur=git-checkout
 
-alias gh='grep -H -n "<<<<<<< HEAD"'
 alias ghh='git grep "<<<<<<< HEAD"'
-alias gignore='git update-index --assume-unchanged'
+alias gig='b .gitignore'
 alias gignored='git ls-files -v | grep "^[[:lower:]]"'
 alias gin='git init'
 
-
-alias gl='git pull'
-alias gle='gl;e'
-alias glr='gl;req'
-alias glgp='git log --stat -p'
+alias gg='git log --stat -p'
 alias glgg='git log --graph'
 alias glgm='git log --graph --max-count=10'
-alias glo='git log --oneline --decorate'
 alias glol="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias glola="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
 alias glp="_git_log_prettily"
 compdef _git glp=git-log
 
-alias gm='git merge'
-alias gmom='git merge origin/master'
-alias gmtvim='git mergetool --no-prompt --tool=vimdiff'
-
-alias gpu='git push'
-compdef _git gpoat=git-push
+alias go='o;gd'
+alias gpu='git push;a'
 alias gpsum='git push --set-upstream origin master'
 alias gpv='git push -v'
 
@@ -194,42 +200,38 @@ alias gra='git remote add'
 alias grb='git rebase'
 alias grba='git rebase --abort'
 alias grbc='git rebase --continue'
-alias grbi='git rebase -i'
-alias grbm='git rebase master'
-alias grbs='git rebase --skip'
-alias grh='git reset HEAD'
-alias grhh='git reset HEAD --hard'
 alias grset='git remote set-url'
 alias grt='cd $(git rev-parse --show-toplevel || echo ".")'
+alias gru='git remote update'
 alias grv='git remote -v'
 
 alias gs='git status'
 alias gsb='git status -sb'
 alias gsh='git show'
 alias gsps='git show --pretty=short --show-signature'
-alias gsr='git svn rebase'
-alias gss='git status -s'
-alias gst='git status'
-alias gsta='git stash save'
-alias gstaa='git stash apply'
-alias gstd='git stash drop'
+alias gst='git stash;a'
 alias gstl='git stash list'
-alias gstp='git stash pop'
-alias gsts='git stash show --text'
-alias gsu='git submodule update'
+alias gstp='git stash pop;gstl'
+alias gsts='git stash show -p'
 
-alias gts='git tag -s'
-alias gtv='git tag | sort -V'
+alias gt='git checkout'
 
-alias gu='git remote update'
+alias gu='git pull'
 alias gunignore='git update-index --no-assume-unchanged'
 alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
-alias gup='git pull --rebase'
 alias gupv='git pull --rebase -v'
-alias glum='git pull upstream master'
 
 alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"'
 
-alias k='gg'
-alias og='o;gi'
+alias g='git'
+alias gh='git log --stat | head -n 10'
+
+function n(){
+	git log $1 --stat
+}
+
+compdef _gitlog n
+
+alias ogp='o;gi'
+alias ogl='o;gl'

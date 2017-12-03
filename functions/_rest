@@ -1,0 +1,49 @@
+#compdef rest
+
+
+_ip(){
+	_arguments '*: :_net_interfaces'
+}
+
+_kil(){
+	_alternative "pids:process ID:($(ps -A o pid=))"
+}
+
+
+_ki(){
+	_alternative "pids:process ID:($(ps -A o cmd=))"
+}
+
+
+_ml(){
+	_arguments ':datei:_files' ':radio:("http://80.237.156.8:8120" b1)' '-l[loop]'
+	#case "$state" in
+    #dateien)
+        #music_files=( *.mp3,*.ogg )
+        #_multi_parts / music_files
+    #esac
+}
+
+function _pe(){
+	cmd=('10m' '20m' '')
+	_describe 'Minuten zwischen Curl' cmd
+}
+
+_sc2(){
+	_arguments '-d[zielverzeichnis]:_path_files' '-f[quell datei]:dateiname:_files' '-i[interface]:interf:_net_interfaces' '-o[letztes Oktett]' 
+}
+
+
+_schieb(){
+	_arguments '-f[datei]:datei:_files' '-z[Ziel, wohin]: :_path_files' 
+}
+
+
+_pt(){
+	_alternative 'Nummer:pts:((n\:"pts-endnr."))'
+}
+
+
+_yt2(){
+	_alternative 'argumente:eigene args:((u\:"usb einsatz" ku\:"kein usb"))' 'files:filename:_files'
+}

@@ -1,0 +1,11 @@
+#compdef git2
+
+_gc(){
+cmds=('1. Titel || -m..' '2. (Langer Text || -m2..)' ' ')
+_describe 'Git Commit Parameter ohne Flag' cmds
+}
+
+_gitlog(){
+cmds=('--stat:Zeige Dateinamen' '-p: Zeige Inhalte der Dateien' '--graph:Zeige den Graphen links an')
+_describe 'Git Log Parameter' cmds
+}

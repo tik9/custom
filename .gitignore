@@ -1,3 +1,9 @@
 login_rp
 aliasesBanOld
-themes/mein.zsh-theme
+plugins/mvn
+
+escp
+plugins/archlinux
+plugins/example
+example.zsh
+plugins/ubuntu/
