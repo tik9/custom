@@ -3,9 +3,12 @@
 
 
 os=`uname -a |cut -d' ' -f 1`
-cb=$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
-db=$ZSH_CUSTOM/plugins/django/django.plugin.zsh
-gb=$ZSH_CUSTOM/plugins/git/git.plugin.zsh
+cb2=plugins/common-aliases/common-aliases.plugin.zsh
+cb=$ZSH_CUSTOM/$cb2
+db2=plugins/django/django.plugin.zsh
+db=$ZSH_CUSTOM/$db2
+gb2=plugins/git/git.plugin.zsh
+gb=$ZSH_CUSTOM/$gb2
 lb=$ZSH_CUSTOM/login_rp
 pb=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
 
@@ -20,16 +23,17 @@ if [ $os != "CYGWIN_NT-6.1" ]; then
 	zr=~/.zshrc
 
 else
+	zHome=.oh-my-zsh/custom
 	pts=pty
 	lsb=cygwin
 	
-	cyg=c:/cygwin64
-	home2=$cyg/home/itdlz-koer
-	com=$cyg$com
-	db=$cyg$db
-	gb=$cyg$ggpl
-	lb=$cyg$lb
-	pb=$cyg$pb
+	# cyg=c:/cygwin64
+	home2=c:/cygwin64/home/itdlz-koer
+	db=$home2/$zHome/$db2
+	gb=$home2/$zHome/$gb2
+	cb=$home2/$zHome/$cb2
+	lb=$home2/$zHome/login_rp
+	pb=$home2/$zHome/$pb2
 	
 	bim=$(wmic OS get OSArchitecture)
 	arc=`uname -a |cut -d' ' -f 6`
@@ -179,13 +183,13 @@ compdef _ip ipu
 
 
 function iu(){
-		ipd $1;ipu $1
+	ipd $1;ipu $1
 	ig;p
 }
 compdef _ip iu
 
 
-function kil(){
+function k(){
 	kill -9 $1
 
 	if [ -z "grep $1 =(ps aux)" ];then
@@ -196,7 +200,7 @@ function kil(){
 	ps -ef|grep $1
 }
 
-compdef _kil kil
+compdef _kil k
 
 function ki(){
 		killall $1;
@@ -226,11 +230,16 @@ function mip(){
 
 
 function ml(){
-	zparseopts -A ARGUMENTS c:
+	zparseopts -A ARGUMENTS l:
 	
 	ffprobe $1 2> >(grep Duration)
-
-	mplayer "$1" -count $ARGUMENTS[-c]
+	
+	loop=1
+	if [ ! $? -eq 0 ]; then
+		loop=$ARGUMENTS[-l]
+	fi
+	
+	mplayer "$1" -loop $loop 
 }
 
 compdef _ml ml
@@ -273,14 +282,15 @@ else cygcheck -c|less;fi
 function pe(){
 	while true; do
 		echo "telnet/curl 178.27.250.8 8000"
-		curl 178.27.250.8:8000
-		curl localhost:8000
-		sleep $1
+		curl -f 178.27.250.8:8000 && echo Erfolg || echo Keine Verbindung
+		#curl localhost:8000
+		sleep $1 
 	done
 }
 compdef _pe pe
 
-pk(){
+
+function pk(){
 	pkill $1;ps $1
 }
 
@@ -508,7 +518,6 @@ alias -g com="$cb"
 alias lb="b $lb"
 
 # Java
-alias j="javac"
 alias ja="java"
 
 
@@ -520,7 +529,9 @@ alias -s tar="tar tf"
 # Konsole
 alias hs='\history -E'
 alias ho='ec $HOST'
-alias pe='printenv n2'
+alias j='jobs -l'
+alias pen='printenv n2'
+alias pg='pgrep -P $$'
 alias pz='pr3 zsh'
 alias se='set gr'
 alias tt='tty'
@@ -550,9 +561,10 @@ alias z='ne'
 
 # ps
 alias ks="ki ssh;ph"
+alias ksl="ki sl;ph"
 alias ph="pr2 ssh"
 alias pr3='ps -ef|grep'
-alias psl="pr2 sleep"
+alias pl="pr2 sleep"
 alias -g sl="sleep"
 
 # Radio
@@ -583,6 +595,7 @@ alias dt='date +"%T"'
 alias dh='df -h'
 alias dowDir='l $dowDir'
 alias duh='du -h'
+alias ecl="progr/eclipse/eclipse & "
 alias ec="echo"
 alias gp="g++"
 alias his='history'

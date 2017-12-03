@@ -6,3 +6,4 @@ escp
 plugins/archlinux
 plugins/example
 example.zsh
+plugins/ubuntu/
