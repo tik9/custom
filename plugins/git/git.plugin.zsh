@@ -75,9 +75,10 @@ compdef _gc gc
 
 function gl(){
 
-	if [ $# -eq 0 ];then
-		#echo keine Argumente
+	if git rev-parse --git-dir > /dev/null 2>&1;then
 		dir=.
+	else
+		dir=$ZSH_CUSTOM
 	fi
 		
 	ec hole $dir
@@ -86,6 +87,7 @@ function gl(){
 	if [[ $dir = $ZSH_CUSTOM ]];then
 		exec zsh
 	fi
+	
 	git log --stat | head -n 15
 }
 

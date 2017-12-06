@@ -1,9 +1,7 @@
+#root
 
 # Pfad zur oh-my-zsh installation.
   export ZSH=/usr/share/oh-my-zsh
-
-# Rechtschreibung!
-#setopt CORRECT
 
 zstyle ':completion:*' special-dirs true
 
@@ -11,15 +9,8 @@ HOSTNAME=$(hostname)
 
 fpath=($ZSH/custom/functions $fpath)
 
-#custom=~/.oh-my-zsh/custom
-
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-#ZSH_THEME="random"
-ZSH_THEME="robbyrussell"
-#ZSH_THEME="test"
-#PROMPT='%B%m%~%b$(git_super_status) %# '
+#ZSH_THEME="robbyrussell"
+ZSH_THEME="test"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -29,8 +20,6 @@ autoload _rest
 _git2
 _rest 
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
@@ -41,7 +30,7 @@ DISABLE_AUTO_UPDATE="true"
 
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+#ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -56,17 +45,13 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # HIST_STAMPS="mm/dd/yyyy"
 
-# Would you like to use another custom folder than $ZSH/custom?
-#ZSH_CUSTOM=~/.oh-my-zsh/custom
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(common-aliases django git git-prompt python zsh-autosuggestions)
+plugins=(common-aliases django git git-prompt python ubuntu zsh-autosuggestions)
 
-# User configuration
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
-source ~/.oh-my-zsh.sh
+source $ZSH/custom/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8

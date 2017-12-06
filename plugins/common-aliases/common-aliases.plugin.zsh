@@ -1,7 +1,6 @@
 # schriftfarbe autocomplete fg8 default
 #ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
 
-
 os=`uname -a |cut -d' ' -f 1`
 cb=$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
 db=$ZSH_CUSTOM/plugins/django/django.plugin.zsh
@@ -9,6 +8,8 @@ gb=$ZSH_CUSTOM/plugins/git/git.plugin.zsh
 lb=$ZSH_CUSTOM/login_rp
 pb=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
 
+sa=178.27.250.8
+sm=192.168.43
 
 if [ $os != "CYGWIN_NT-6.1" ]; then
 	
@@ -217,7 +218,7 @@ function lss(){
 }
 
 
-function mip(){
+function mi(){
 	wget -q --spider http://google.com
 	if [ $? -eq 0 ];then
 		echo $(dig +short myip.opendns.com @resolver1.opendns.com)
@@ -277,8 +278,8 @@ else cygcheck -c|less;fi
 
 function pe(){
 	while true; do
-		echo "telnet/curl 178.27.250.8 8000"
-		curl -f 178.27.250.8:8000 && echo Erfolg || echo Keine Verbindung
+		echo "telnet/curl $ss 8000"
+		curl -f $ss:8000 && echo Erfolg || echo Keine Verbindung
 		#curl localhost:8000
 		sleep $1 
 	done
@@ -326,23 +327,25 @@ function q(){
 
 # -f[datei]:dateiname:_files' '-i[interface]:interf:_net_interfaces' '-o[letztes Oktett]' '-d[ziel]'
 function sc2(){
-	zparseopts -A ARGUMENTS d: f: i: o: u:
+	zparseopts -A ARGUMENTS d: f: i: o: p: u:
 
 	dir=$ARGUMENTS[-d]
 	datei=$ARGUMENTS[-f]
 	interface=$ARGUMENTS[-i]
 	oktett=$ARGUMENTS[-o]
+	port=$ARGUMENTS[-p]
 	user=$ARGUMENTS[-u]
 
-	printf 'dir, datei %s %s', $dir,$datei
+	printf 'Dir %s, Datei %s, Port %s', $dir,$datei, $port
 
-	ipbas=178.27.250.8
+#	ipbas=$ss
+	ipbas=$sm
 
 	#ipbas $interface
 	
 	if [ -z $user ];user=root
 
-	scp  $datei $user@$ipbas.$oktett:$dir
+	scp -P $port $datei $user@$ipbas.$oktett:$dir
 	#rm -rf $datei
 }
 compdef _sc2 sc2
@@ -391,6 +394,12 @@ function si(){
 	eval $2
 }
 
+function ss(){
+	
+	echo $1 | ssh root@$ss 'cat >> .ssh/authorized_keys'
+	#cat .ssh/id_rsa.pub | ssh root@$ss 'cat >> .ssh/authorized_keys'
+	
+}
 
 function unt(){
 	#schieb
@@ -460,8 +469,8 @@ alias uc='cd ~/uni/c'
 alias vs='cd ~/vs/vs'
 
 #curl
-alias c='cu -L tk1.biz'
-alias cm='cu http://178.27.250.8:8000/de/admin/'
+alias c='cu $ss:8000'
+alias cm='cu http://$ss:8000/de/admin/'
 alias cu='curl'
 
 
@@ -545,12 +554,13 @@ alias mst='mysql -uroot d -e "show tables"'
 
 # netzwerk
 alias f='iwgetid -r'
-alias iw2='iwlist wlan0 scan'
 alias i='ip2 wlan0'
+alias ie='curl ifconfig.me'
 alias ii='iw2 n'
+alias iw2='iwlist wlan0 scan'
 alias jo='journalctl -xe'
 alias ne='/etc/init.d/networking restart;sleep 1;ig'
-alias -g re='178.27.250.8'
+alias -g re='$ss'
 alias wh='whois'
 alias z='ne'
 
@@ -566,6 +576,10 @@ alias -g sl="sleep"
 # Radio
 alias b1="ml http://br-br1-nbopf.cast.addradio.de/br/br1/nbopf/mp3/128/stream.mp3"
 
+#ssh
+alias -g idr=~/.ssh/id_rsa.pub 
+alias -g ida=~/.ssh/authorized_keys 
+
 #tmux
 alias ta="tmux attach"
 alias tk="tmux kill-session"
@@ -580,6 +594,7 @@ alias ohm='sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh
 alias plu='ec $plugins'
 alias pro='ec $prompt'
 alias rt="ec $RANDOM_THEME"
+alias -g zc='$ZSH_CUSTOM' # zshrc 
 alias zr='b $zr' # zshrc 
 alias zt="ec $ZSH_THEME"
 
@@ -595,13 +610,13 @@ alias ecl="progr/eclipse/eclipse & "
 alias ec="echo"
 alias gp="g++"
 alias his='history'
-alias -g idrs=~/.ssh/id_rsa.pub 
 alias le='less -WiNS'
 alias m='man'
 alias mt='man terminator'
 alias -g n2='|less'
 alias r="expect $lb"
 alias rf='rfkill list'
+alias -g sm='$sm'
 alias ter='if [ $os != "CYGWIN_NT-6.1" ]; then;terminator &;else; mintty;fi'
 alias tp='top'
 alias tr='tree'

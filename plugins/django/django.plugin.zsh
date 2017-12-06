@@ -6,7 +6,7 @@ alias dcd="cd ~/django"
 alias dm='p3 manage.py'
 alias dr='dm runserver 0.0.0.0:8000'
 alias dv='echo django version; p3 -c "import django;print(django.get_version())"'
-alias mi="dm migrate"
+alias mig="dm migrate"
 alias mk="dm makemigrations"
 alias mm="dm makemessages"
 
