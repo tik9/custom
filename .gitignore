@@ -1,5 +1,9 @@
 login_rp
 aliasesBanOld
 plugins/mvn
+
 escp
+plugins/archlinux
+plugins/example
+example.zsh
 plugins/ubuntu/
