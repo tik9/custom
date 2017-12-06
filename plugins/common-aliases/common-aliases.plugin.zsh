@@ -473,8 +473,8 @@ alias uc='cd ~/uni/c'
 alias vs='cd ~/vs/vs'
 
 #curl
-alias c='cu $ss:8000'
-alias cm='cu http://$ss:8000/de/admin/'
+alias c='cu $sa:8000'
+alias cm='cu http://$sa:8000/de/admin/'
 alias cu='curl'
 
 
