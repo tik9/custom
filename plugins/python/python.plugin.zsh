@@ -6,8 +6,6 @@ function pyclean() {
     find ${ZSH_PYCLEAN_PLACES} -type d -name "__pycache__" -delete
 }
 
-alias kid=	'kill $(netstat -lnp | grep 8000 | awk "{print $6}" | cut -d"/" -f 1)'
-
 
 # Finde python Dateien
 alias pyfind='find . -name "*.py"'
@@ -24,9 +22,10 @@ function p3(){
 		python $@;fi
 }
 
+alias kid="kill $(netstat -lnp | grep 8000 | awk '{print $7}' | cut -d"/" -f 1)"
 alias py='/root/progr/pycharm/bin/pycharm.sh&'
 alias pb="b $pb"
-alias pp='pr3 python' # grep ps nach python
+alias pp='pr python' # grep ps nach python
 
 #pip
 alias pdn='pipdeptree --package'
