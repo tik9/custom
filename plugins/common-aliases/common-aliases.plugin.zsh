@@ -269,10 +269,6 @@ function nm(){
 }
 compdef _ip nm
 	
-function p(){
-	ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de
-	
-}
 
 function pd(){
 
@@ -282,8 +278,8 @@ else cygcheck -c|less;fi
 
 function pe(){
 	while true; do
-		echo "telnet/curl $ss 8000"
-		curl -f $ss:8000 && echo Erfolg || echo Keine Verbindung
+		echo "telnet/curl $sa 8000"
+		curl -f $sa:8000/te && echo Erfolg || echo Keine Verbindung
 		#curl localhost:8000
 		sleep $1 
 	done
@@ -296,7 +292,7 @@ function pk(){
 }
 
 
-function pr2(){
+function p(){
 	grep $1 =(ps aux)
 }
 
@@ -342,12 +338,14 @@ function sc2(){
 
 	printf 'Dir %s, Datei %s, Port %s', $dir,$datei, $port
 
-#	ipbas=$ss
+#	ipbas=$sa
 	ipbas=$sm
 
 	#ipbas $interface
 	
-	if [ -z $user ];user=root
+	if [ -z $dir ];then;dir=/root;fi
+	if [ -z $port ];then;port=8022;fi
+	if [ -z $user ];then;user=root;fi
 
 	scp -P $port $datei $user@$ipbas.$oktett:$dir
 	#rm -rf $datei
@@ -400,8 +398,8 @@ function si(){
 
 function ss(){
 	
-	echo $1 | ssh root@$ss 'cat >> .ssh/authorized_keys'
-	#cat .ssh/id_rsa.pub | ssh root@$ss 'cat >> .ssh/authorized_keys'
+	#echo $1 | ssh root@$sa 'cat >> .ssh/authorized_keys'
+	cat ~/.ssh/id_rsa.pub | ssh root@$sa 'cat >> ~/.ssh/authorized_keys'
 	
 }
 
@@ -413,11 +411,6 @@ function unt(){
 	a=`ls -t | head -n1`
 	tar zxvf $a
 	#rm $a
-}
-
-
-function up(){
-	
 }
 
 
@@ -450,7 +443,7 @@ alias al='alias|grep'
 alias am='alias -m'
 alias d='declare -f'
 alias t='type'
-alias w='who'
+alias wo='who'
 alias whi="which"
 
 # betriebssystem
@@ -473,8 +466,8 @@ alias uc='cd ~/uni/c'
 alias vs='cd ~/vs/vs'
 
 #curl
-alias c='cu $ss:8000'
-alias cm='cu http://$ss:8000/de/admin/'
+alias c='cu $sa:8000/te'
+alias cm='cu http://$sa:8000/de/admin/'
 alias cu='curl'
 
 
@@ -545,10 +538,7 @@ alias pz='pr3 zsh'
 alias se='set gr'
 alias tt='tty'
 alias us='ec $USER'
-
-# ls
-alias lr='ls -tRFh'   #sortiert nach Datum,rekursiv,Typ,human readable
-alias lsh="ls -halt --full-time"
+alias wh='whois'
 
 
 #mysql
@@ -564,8 +554,8 @@ alias ii='iw2 n'
 alias iw2='iwlist wlan0 scan'
 alias jo='journalctl -xe'
 alias ne='/etc/init.d/networking restart;sleep 1;ig'
-alias -g re='$ss'
-alias wh='whois'
+alias pn='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
+alias -g re='$sa'
 alias z='ne'
 
 
@@ -573,12 +563,9 @@ alias z='ne'
 alias ks="ki ssh;ph"
 alias ksl="ki sl;ph"
 alias ph="pr2 ssh"
-alias pr3='ps -ef|grep'
+alias pr='ps -ef|grep'
 alias pl="pr2 sleep"
 alias -g sl="sleep"
-
-# Radio
-alias b1="ml http://br-br1-nbopf.cast.addradio.de/br/br1/nbopf/mp3/128/stream.mp3"
 
 #ssh
 alias -g idr=~/.ssh/id_rsa.pub 
@@ -588,7 +575,7 @@ alias -g ida=~/.ssh/authorized_keys
 alias ta="tmux attach"
 alias tk="tmux kill-session"
 alias tl="tmux ls"
-alias tm="tmux"
+alias -g tm="tmux"
 
 
 # zsh
@@ -610,7 +597,7 @@ alias dt='date +"%T"'
 alias dh='df -h'
 alias dowDir='l $dowDir'
 alias duh='du -h'
-alias ecl="progr/eclipse/eclipse & "
+alias ecl="/root/progr/eclipse/eclipse & "
 alias ec="echo"
 alias gp="g++"
 alias his='history'
