@@ -22,7 +22,7 @@ function p3(){
 		python $@;fi
 }
 
-alias kid="kill $(netstat -lnp | grep 8000 | awk '{print $7}' | cut -d"/" -f 1)"
+alias kid="kill -9 $(netstat -lnp | grep 8000 | awk '{print $7}' | cut -d"/" -f 1)"
 alias py='/root/progr/pycharm/bin/pycharm.sh&'
 alias pb="b $pb"
 alias pp='pr python' # grep ps nach python
