@@ -24,9 +24,14 @@ _ml(){
     #esac
 }
 
-function _pe(){
-	cmd=('10m' '20m' '')
-	_describe 'Minuten zwischen Curl' cmd
+_pe(){
+	cmds=('10' '20' '')
+	_describe 'Minuten zwischen Curl' cmds
+}
+
+
+_pt(){
+	_alternative 'Nummer:pts:((n\:"pts-endnr."))'
 }
 
 _sc2(){
@@ -38,10 +43,6 @@ _schieb(){
 	_arguments '-f[datei]:datei:_files' '-z[Ziel, wohin]: :_path_files' 
 }
 
-
-_pt(){
-	_alternative 'Nummer:pts:((n\:"pts-endnr."))'
-}
 
 
 _yt2(){

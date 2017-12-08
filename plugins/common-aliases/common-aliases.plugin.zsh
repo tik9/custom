@@ -526,6 +526,7 @@ alias -g he="--help |less"
 alias cb="b $cb"
 alias -g com="$cb"
 alias lb="b $lb"
+alias rb="b $rb"
 
 # Java
 alias ja="java"
