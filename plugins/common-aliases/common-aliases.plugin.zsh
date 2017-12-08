@@ -21,7 +21,9 @@ sm=192.168.43
 if [ $os != "CYGWIN_NT-6.1" ]; then
 	
 	lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
-	arc=`uname -a |cut -d' ' -f 14`
+	arc=`uname -a |cut -d' ' -f 14`++-
+	if [ $lsb = arch ] ;then
+		arc=`uname -a |cut -d' ' -f 12`;fi; 	
 	dowDir=/home/t/Downloads
 	mteDir=/root/git/mte
 	pts=pts
@@ -52,19 +54,11 @@ else
 	alias rem='apt-cyg remove';
 
 	zr=$home2/.zshrc
-
 fi
 
-try () {
-  result=$(eval "$1" 2>&1)
-  if [ $? -ne 0 ]; then
-
-	printf "[\033[31mFehler\033[0m]\n"
-    echo $result
-    return
-  fi
-  printf "[\033[32mErfolg\033[0m]\n"
-}
+if [ $arc = 'Android' ]; then
+	alias lo="logcat -s 'syslog:*'"
+fi
 
 function sortieren_datum(){
 	ls -lt $1| grep "^-" | awk '{
@@ -343,16 +337,17 @@ function sc2(){
 	port=$ARGUMENTS[-p]
 	user=$ARGUMENTS[-u]
 
-	printf 'Dir %s, Datei %s, Port %s', $dir,$datei, $port
-
-#	ipbas=$sa
 	ipbas=$sm
 
 	#ipbas $interface
-	
-	if [ -z $dir ];then;dir=/root;fi
+
+	if [ -z $datei ];then;datei=`ls -t|head -n1`;fi
+	if [ -z $dir ];then;dir=/root;fi # storage/music
 	if [ -z $port ];then;port=8022;fi
 	if [ -z $user ];then;user=root;fi
+	if [ -z $oktett ];then;oktett=1;fi
+
+	printf 'Dir %s, Datei %s, Port %s', $dir,$datei, $port
 
 	scp -P $port $datei $user@$ipbas.$oktett:$dir
 	#rm -rf $datei
@@ -580,6 +575,7 @@ alias -g sl="sleep"
 #ssh
 alias -g idr=~/.ssh/id_rsa.pub 
 alias -g ida=~/.ssh/authorized_keys 
+alias sd=sshd 
 
 #tmux
 alias ta="tmux attach"
