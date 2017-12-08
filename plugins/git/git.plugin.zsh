@@ -192,6 +192,11 @@ alias glola="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Crese
 alias glp="_git_log_prettily"
 compdef _git glp=git-log
 
+function gls(){
+	git log $1 --stat
+}
+
+compdef _gitlog gls
 alias go='o;gd'
 alias gpu='git push;a'
 alias gpsum='git push --set-upstream origin master'
@@ -229,11 +234,6 @@ alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commi
 alias g='git'
 alias gh='git log --stat | head -n 10'
 
-function n(){
-	git log $1 --stat
-}
-
-compdef _gitlog n
 
 alias ogp='o;gi'
 alias ogl='o;gl'

@@ -8,8 +8,12 @@ db2=plugins/django/django.plugin.zsh
 db=$ZSH_CUSTOM/$db2
 gb2=plugins/git/git.plugin.zsh
 gb=$ZSH_CUSTOM/$gb2
+gb3=functions/_git2
+gb4=$ZSH_CUSTOM/$gb3
 lb=$ZSH_CUSTOM/login_rp
 pb=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
+rb2=functions/_rest
+rb=$ZSH_CUSTOM/$rb2
 
 sa=178.27.250.8
 sm=192.168.43
@@ -32,9 +36,11 @@ else
 	home2=c:/cygwin64/home/itdlz-koer
 	db=$home2/$zHome/$db2
 	gb=$home2/$zHome/$gb2
+	gb2=$home2/$zHome/$gb3
 	cb=$home2/$zHome/$cb2
 	lb=$home2/$zHome/login_rp
 	pb=$home2/$zHome/$pb2
+	rb=$home2/$zHome/$rb2
 	
 	bim=$(wmic OS get OSArchitecture)
 	arc=`uname -a |cut -d' ' -f 6`
@@ -279,9 +285,10 @@ else cygcheck -c|less;fi
 function pe(){
 	while true; do
 		echo "telnet/curl $sa 8000"
-		curl -f $sa:8000/te && echo Erfolg || echo Keine Verbindung
+		curl -f $sa:8000 && echo Erfolg || echo Keine Verbindung
 		#curl localhost:8000
-		sleep $1 
+		sleep ${1}m 
+		ec $(date +"%T")
 	done
 }
 compdef _pe pe
@@ -467,6 +474,7 @@ alias vs='cd ~/vs/vs'
 
 #curl
 alias c='cu $sa:8000/te'
+alias cl='cu localhost:8000'
 alias cm='cu http://$sa:8000/de/admin/'
 alias cu='curl'
 
@@ -562,6 +570,7 @@ alias z='ne'
 # ps
 alias ks="ki ssh;ph"
 alias ksl="ki sl;ph"
+alias n='pkill -P $$;pe 30'
 alias ph="pr2 ssh"
 alias pr='ps -ef|grep'
 alias pl="pr2 sleep"
