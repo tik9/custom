@@ -72,11 +72,11 @@ function sortieren_datum(){
 }
 
 
-function hilfe(){
+function _hilfe(){
 
 	bold=`tput bold`
 	normal=`tput sgr0`
-	echo "\n${bold}Hilfe, os: $os"
+	echo "\n${bold}os: $os"
 	schleife=2
 	echo "Argumente für $1:${normal}"
 
@@ -155,14 +155,18 @@ function ig(){
 
 
 function ip2(){
-		ip addr show $1 | grep -Po 'inet \K[\d.]+'
+	
+	interf=$1
+	if [ -z $1 ]; then ; interf=wlan0;fi
+	
+		ip addr show $interf | grep -Po 'inet \K[\d.]+'
 }
 compdef _ip ip2
 
 
 function ipbas {
 	
-	ipbas=$(echo `i $1` | cut -d . -f -3)	
+	ipbas=$(echo `i` | cut -d . -f -3)	
 	echo Basis Ip $ipbas
 }
 
@@ -213,7 +217,7 @@ function ki(){
 # login remote shell
 function lss(){
 	if [ -z "$1" ]; then
-	  hilfe `basename $0` "Interface" "letztes Oktett von ip " "opt. port"
+	  _hilfe `basename $0` "Interface" "letztes Oktett von ip " "opt. port"
 	  return
 	fi
 	ipbas $1
@@ -328,28 +332,33 @@ function q(){
 
 # -f[datei]:dateiname:_files' '-i[interface]:interf:_net_interfaces' '-o[letztes Oktett]' '-d[ziel]'
 function sc2(){
-	zparseopts -A ARGUMENTS d: f: i: o: p: u:
+	zparseopts -A ARGUMENTS d: f: i: ip: o: p: u:
 
+	dir=storage/music
+	
 	dir=$ARGUMENTS[-d]
 	datei=$ARGUMENTS[-f]
 	interface=$ARGUMENTS[-i]
+	ip2=$ARGUMENTS[-ip]
 	oktett=$ARGUMENTS[-o]
 	port=$ARGUMENTS[-p]
 	user=$ARGUMENTS[-u]
 
-	ipbas=$sm
+	#ipba=ipbas
+	ipba=$ip2
+	#ipba=$sm
 
 	#ipbas $interface
 
 	if [ -z $datei ];then;datei=`ls -t|head -n1`;fi
-	if [ -z $dir ];then;dir=/root;fi # storage/music
+	if [ -z $dir ];then;dir=/root;fi 
 	if [ -z $port ];then;port=8022;fi
 	if [ -z $user ];then;user=root;fi
-	if [ -z $oktett ];then;oktett=1;fi
+	#if [ -z $oktett ];then;oktett=.1;fi
 
-	printf 'Dir %s, Datei %s, Port %s', $dir,$datei, $port
+	printf 'Dir: %s, Datei: %s, Port: %s, Ip: %s', $dir,$datei, $port, $ipba
 
-	scp -P $port $datei $user@$ipbas.$oktett:$dir
+	scp -P $port $datei $user@$ipba$oktett:$dir
 	#rm -rf $datei
 }
 compdef _sc2 sc2
@@ -463,7 +472,7 @@ alias mu="cd ~/musik"
 alias mte='cd $mteDir'
 alias o='cd $ZSH_CUSTOM'
 alias oh='cd $ZSH'
-alias u='cd ~/uni'
+alias un='cd ~/uni'
 alias uc='cd ~/uni/c'
 alias vs='cd ~/vs/vs'
 
@@ -515,7 +524,7 @@ alias -g H='| head'
 alias tai='tail -f'
 alias -g ti='| tail'
 
-# Hilfe
+# Rest
 alias -g h="he"
 alias -g he="--help |less"
 alias cb="b $cb"

@@ -3,10 +3,14 @@ zstyle -s ":vcs_info:git:*:-all-" "command" _omz_git_git_cmd
 : ${_omz_git_git_cmd:=git}
 
 
-# The name of the current branch
-# Back-compatibility wrapper for when this function was defined here in
-# the plugin, before being pulled in to core lib/git.zsh as git_current_branch()
-# to fix the core -> git plugin dependency.
+function _check(){
+	dir=$ZSH_CUSTOM
+	if git rev-parse --git-dir > /dev/null 2>&1;then
+		dir=.
+	fi	
+	echo $dir
+}
+
 function current_branch() {
   git_current_branch
 }
@@ -53,34 +57,27 @@ function gi(){
 	#mh[1]=$ARGUMENTS[-mzh]
 	#mt[1]=$ARGUMENTS[-mzt]
 	#mh[2]=$ARGUMENTS[-m2h]
+	
+	dir=$(_check)
 
 	 [[ -n $ARGUMENTS[-m] ]] && mh=$ARGUMENTS[-m] || mh="$1"
-
-	i=1
-	dirs=.
-	for dir in $dirs ; do
-	#for dir in $ZSH_CUSTOM ~/vs/vs ; do
 
 	#echo "${mh[$i]} ${mt[$i]} $dir"
 
 	 cd $dir
+ 	ec hole $dir
+
 	 #git add . 
 	 git commit -am ${mh} 
 	 #-m ${mt[$i]}
 	 git push
-	done
 }
 
 compdef _gc gc
 
 function gl(){
-
-	if git rev-parse --git-dir > /dev/null 2>&1;then
-		dir=.
-	else
-		dir=$ZSH_CUSTOM
-	fi
-		
+	dir=$(_check)
+	
 	ec hole $dir
 	cd $dir
 	git pull
@@ -158,6 +155,7 @@ compdef _git ggp=git-checkout
 
 alias gb='b $gb'
 
+alias gg='git log --stat -p'
 alias ggpush='git push origin $(git_current_branch)'
 
 compdef _git ggpush=git-checkout
@@ -184,7 +182,6 @@ alias gig='b .gitignore'
 alias gignored='git ls-files -v | grep "^[[:lower:]]"'
 alias gin='git init'
 
-alias gg='git log --stat -p'
 alias glgg='git log --graph'
 alias glgm='git log --graph --max-count=10'
 alias glol="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
@@ -232,8 +229,5 @@ alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"'
 
 alias g='git'
-alias gh='git log --stat | head -n 10'
 
-
-alias ogp='o;gi'
-alias ogl='o;gl'
+alias u='cd $(_check);git log --stat | head -n 10'
