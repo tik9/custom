@@ -16,7 +16,7 @@ _ki(){
 
 
 _ml(){
-	_arguments ':datei:_files' ':radio:("http://80.237.156.8:8120" b1)' '-l[loop]'
+	_arguments ':datei:_path_files' '*:radio:("http://80.237.156.8:8120" b1)' '-l[loop]'
 	#case "$state" in
     #dateien)
         #music_files=( *.mp3,*.ogg )
@@ -35,7 +35,7 @@ _pt(){
 }
 
 _sc2(){
-	_arguments '-d[zielverzeichnis]:_path_files' '-f[quell datei]:dateiname:_files' '-i[interface]:interf:_net_interfaces' '-o[letztes Oktett]' 
+	_arguments '-d[zielverzeichnis]:verz:_files -/' '-f[quell datei]:dateiname:_files' '-p[port]' '-o[letztes Oktett]' '-ip[ip-basis]' 
 }
 
 

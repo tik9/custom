@@ -90,7 +90,11 @@ function gl(){
 
 
 alias a='gs'
+alias g='git diff'
 alias ga='git add --all;a'
+
+alias gb='b $gb'
+alias gb2='b $gb3'
 
 alias gbr='git branch'
 alias gba='git branch -a'
@@ -102,7 +106,7 @@ alias gcl='git clone --recursive'
 alias gclean='git clean -dnx'
 alias gcm='git checkout master'
 alias gcmsg='git commit -m'
-alias gco='g .git/config'
+alias gco='git .git/config'
 alias gcount='git shortlog -sn'
 compdef gcount=git
 
@@ -152,8 +156,6 @@ function ggp() {
 
 compdef _git ggp=git-checkout
 
-
-alias gb='b $gb'
 
 alias gg='git log --stat -p'
 alias ggpush='git push origin $(git_current_branch)'
@@ -226,8 +228,5 @@ alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
 alias gupv='git pull --rebase -v'
 
 alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
-alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"'
-
-alias g='git'
 
 alias u='cd $(_check);git log --stat | head -n 10'

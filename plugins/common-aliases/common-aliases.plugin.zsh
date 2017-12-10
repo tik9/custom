@@ -8,8 +8,8 @@ db2=plugins/django/django.plugin.zsh
 db=$ZSH_CUSTOM/$db2
 gb2=plugins/git/git.plugin.zsh
 gb=$ZSH_CUSTOM/$gb2
-gb3=functions/_git2
-gb4=$ZSH_CUSTOM/$gb3
+gb4=functions/_git2
+gb3=$ZSH_CUSTOM/$gb4
 lb=$ZSH_CUSTOM/login_rp
 pb=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
 rb2=functions/_rest
@@ -20,8 +20,8 @@ sm=192.168.43
 
 if [ $os != "CYGWIN_NT-6.1" ]; then
 	
-	lsb=`lsb_release -i|cut -d: -f2|sed -e 's/^[[:blank:]]*//'`
-	arc=`uname -a |cut -d' ' -f 14`++-
+	lsb=`lsb_release -i|cut -d: -f2|sed -e 's/ //'`
+	arc=`uname -a |cut -d' ' -f 14`
 	if [ $lsb = arch ] ;then
 		arc=`uname -a |cut -d' ' -f 12`;fi; 	
 	dowDir=/home/t/Downloads
@@ -38,7 +38,7 @@ else
 	home2=c:/cygwin64/home/itdlz-koer
 	db=$home2/$zHome/$db2
 	gb=$home2/$zHome/$gb2
-	gb2=$home2/$zHome/$gb3
+	gb3=$home2/$zHome/$gb4
 	cb=$home2/$zHome/$cb2
 	lb=$home2/$zHome/login_rp
 	pb=$home2/$zHome/$pb2
@@ -127,21 +127,21 @@ function ersetz(){
 
 	for file in *; do
 		if [[ $file =~ \  ]];then
-			echo mit Leerzeichen: $file
+			echo Leerzeichen: $file
 			neu="${file// /_}"
-			mv "$file" $neu
+			mv $file $neu
+		v_ersetz++
 		fi
-		
-		if [[ $neu =~ '[A-Z]' ]];then
-			echo Zu verändern da Großbuchst.: $neu
-		
-		rename 'y/A-Z/a-z/' *
+		file=$neu
+		if [[ $file =~ '[A-Z]' ]];then
+			echo Großbuchst.: $file
+			rename 'y/A-Z/a-z/' $file
 		fi
-		
-		if [[ `pwd` = '/root/uni/c' && $neu != *"c_"* ]]; then
-			neu_c=c_${neu}
-			mv "$neu" $neu_c
-			echo c uni pdf zu ändern: $neu
+
+		if [[ `pwd` = '/root/uni/c' && $file != *"c_"* ]]; then
+			neu_c=c_$file
+			mv $file $neu_c
+			echo c uni pdf: $file
 		fi
 	done
 	echo "\n${bold}Dateien nach Op $normal"
@@ -167,7 +167,7 @@ compdef _ip ip2
 function ipbas {
 	
 	ipbas=$(echo `i` | cut -d . -f -3)	
-	echo Basis Ip $ipbas
+	echo $ipbas
 }
 
 compdef _ip ipbas
@@ -248,6 +248,7 @@ function ml(){
 }
 
 compdef _ml ml
+#compdef _path_files ml
 
 function mo(){
 	mediaDir='/media/t'
@@ -273,11 +274,14 @@ function nm(){
 }
 compdef _ip nm
 	
+function p(){
+	grep $1 =(ps aux)
+}
 
 function pd(){
 
 		if [[ $lsb = 'Arch' ]]; then;pacman -Qeq |grep $1
-else cygcheck -c|less;fi
+	else cygcheck -c|less;fi
 }
 
 function pe(){
@@ -296,10 +300,6 @@ function pk(){
 	pkill $1;ps $1
 }
 
-
-function p(){
-	grep $1 =(ps aux)
-}
 
 function pt(){
 	
@@ -338,23 +338,19 @@ function sc2(){
 	
 	dir=$ARGUMENTS[-d]
 	datei=$ARGUMENTS[-f]
-	interface=$ARGUMENTS[-i]
-	ip2=$ARGUMENTS[-ip]
+	ipba=$ARGUMENTS[-ip]
 	oktett=$ARGUMENTS[-o]
 	port=$ARGUMENTS[-p]
 	user=$ARGUMENTS[-u]
 
-	#ipba=ipbas
-	ipba=$ip2
 	#ipba=$sm
-
-	#ipbas $interface
 
 	if [ -z $datei ];then;datei=`ls -t|head -n1`;fi
 	if [ -z $dir ];then;dir=/root;fi 
+	if [ -z $ipba ];then;ipba=$(ipbas);fi
+	if [ -z $oktett ];then;oktett=.162;fi
 	if [ -z $port ];then;port=8022;fi
 	if [ -z $user ];then;user=root;fi
-	#if [ -z $oktett ];then;oktett=.1;fi
 
 	printf 'Dir: %s, Datei: %s, Port: %s, Ip: %s', $dir,$datei, $port, $ipba
 
@@ -424,6 +420,11 @@ function unt(){
 	#rm $a
 }
 
+function we(){
+	URL='https://www.accuweather.com/en/de/hof/95028/weather-forecast/172202'
+
+	wget -q -O- "$URL" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print $2": "$13", "$12"°" }'| head -1
+}
 
 function yt2(){
 		zparseopts -A ARGUMENTS m
@@ -434,9 +435,8 @@ function yt2(){
 	
 	typeset -A a_array
 	a_array=('classic' ''
-	'welt' '' 
-	'pop' ''
-	)
+	'latino' 'B0KH-fiVnCc' 
+	'pop' '')
 
 	for k in "${(@k)a_array}"; do
 	  youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=$a_array[$k]"
@@ -576,9 +576,9 @@ alias z='ne'
 alias ks="ki ssh;ph"
 alias ksl="ki sl;ph"
 alias n='pkill -P $$;pe 30'
-alias ph="pr2 ssh"
+alias ph="pr ssh"
 alias pr='ps -ef|grep'
-alias pl="pr2 sleep"
+alias pl="pr sleep"
 alias -g sl="sleep"
 
 #ssh
@@ -599,14 +599,13 @@ alias ohmyzsh="b $ZSH/oh-my-zsh.sh"
 alias ohm='sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
 alias plu='ec $plugins'
 alias pro='ec $prompt'
-alias rt="ec $RANDOM_THEME"
-alias -g zc='$ZSH_CUSTOM' # zshrc 
 alias zr='b $zr' # zshrc 
 alias zt="ec $ZSH_THEME"
 
-
 alias ac='ack -i'
 alias ad='echo 01573 9598 220 timo.koerner@hof-university.de'
+alias a+='amixer -q sset Master 3%+'
+alias a-='amixer -q sset Master 3%-'
 alias ca='cat'
 alias dt='date +"%T"'
 alias dh='df -h'
@@ -622,12 +621,15 @@ alias mt='man terminator'
 alias -g n2='|less'
 alias r="expect $lb"
 alias rf='rfkill list'
+alias -g sa='$sa'
 alias -g sm='$sm'
 alias ter='if [ $os != "CYGWIN_NT-6.1" ]; then;terminator &;else; mintty;fi'
 alias tp='top'
 alias tr='tree'
-alias -g ve="--version"
-alias x="exit"
+alias -g ve='--version'
+alias x='exit'
+alias x+='xbacklight -set 40'
+alias x-='xbacklight -dec 10'
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
 
 echo "$0 aktualisiert"
