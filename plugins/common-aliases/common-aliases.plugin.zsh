@@ -22,8 +22,6 @@ if [ $os != "CYGWIN_NT-6.1" ]; then
 	
 	lsb=`lsb_release -i|cut -d: -f2|sed -e 's/[[:blank:]]//'`
 	arc=`uname -a |cut -d' ' -f 14`
-	if [ $lsb = arch ] ;then
-		arc=`uname -a |cut -d' ' -f 12`;fi; 	
 	dowDir=/home/t/Downloads
 	mteDir=/root/git/mte
 	pts=pts
@@ -34,7 +32,6 @@ else
 	pts=pty
 	lsb=cygwin
 	
-	# cyg=c:/cygwin64
 	home2=c:/cygwin64/home/itdlz-koer
 	db=$home2/$zHome/$db2
 	gb=$home2/$zHome/$gb2
@@ -54,10 +51,6 @@ else
 	alias rem='apt-cyg remove';
 
 	zr=$home2/.zshrc
-fi
-
-if [ $arc = 'Android' ]; then
-	alias lo="logcat -s 'syslog:*'"
 fi
 
 function sortieren_datum(){
@@ -89,11 +82,7 @@ function b(){
 		/root/src/src_geany-1.28/usr/bin/geany $1 &
 	elif [ $os = "CYGWIN_NT-6.1" ];then
 		notepad++ $1 &
-	# android und arch
-	else 
-		vi $1 &
 	fi
-
 }
 
 function ci2(){
@@ -104,7 +93,7 @@ function ci2(){
 	fi
 }
 
-ci(){
+function ci(){
 	echo "$1"|xclip -selection clipboard
 }
 	
@@ -298,8 +287,7 @@ function p(){
 
 function pd(){
 
-		if [[ $lsb = 'Arch' ]]; then;pacman -Qeq |grep $1
-	else cygcheck -c|less;fi
+	cygcheck -c|less
 }
 
 
@@ -356,7 +344,7 @@ function sc2(){
 	if [ -z $datei ];then;datei=`ls -t|head -n1`;fi
 	if [ -z $dir ];then;dir=/root;fi 
 	if [ -z $ipba ];then;ipba=$(ipbas);fi
-	if [ -z $oktett ];then;oktett=.162;fi
+	#if [ -z $oktett ];then;oktett=.162;fi
 	if [ -z $port ];then;port=8022;fi
 	if [ -z $user ];then;user=root;fi
 
@@ -447,17 +435,19 @@ function yt2(){
 	while read name;do;youtube-dl $name;done < $2;return;fi
 	
 	typeset -A a_array
-	a_array=('classic' ''
-	'latino' 'B0KH-fiVnCc' 
-	'pop' '')
+	#a_array=('classic' ''
+	#'latino' 'B0KH-fiVnCc' 
+	#'pop' 'OPf0YbXqDm0')
 
 	for k in "${(@k)a_array}"; do
 	  youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=$a_array[$k]"
-	  if [ $1 = u ];then
+	  if [[ $1 = u ]];then
 		#mv `ls -t|head -n1` /dev/sdb
-		echo auf usb speichern
 	  fi
 	done
+	
+	ersetz
+	sc2 -o .1 -f "`ls -t |head -1`" -d /data/data/com.termux/files/home
 }
 compdef _yt2 yt2
 
@@ -614,7 +604,7 @@ alias zr='b $zr' # zshrc
 alias zt="ec $ZSH_THEME"
 
 alias ac='ack -i'
-alias ad='echo 01573 9598 220 timo.koerner@hof-university.de'
+alias -g ad='user153015@gmail.com' # 01573 9598 220
 alias a+='amixer -q sset Master 3%+'
 alias a-='amixer -q sset Master 3%-'
 alias ca='cat'

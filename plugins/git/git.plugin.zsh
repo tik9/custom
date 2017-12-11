@@ -6,7 +6,7 @@ zstyle -s ":vcs_info:git:*:-all-" "command" _omz_git_git_cmd
 function _check(){
 	dir=$ZSH_CUSTOM
 	if git rev-parse --git-dir > /dev/null 2>&1;then
-		dir=.
+		dir=`pwd`
 	fi	
 	echo $dir
 }
