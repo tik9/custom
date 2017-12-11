@@ -5,12 +5,8 @@ _ip(){
 	_arguments '*: :_net_interfaces'
 }
 
-_kil(){
-	_alternative "pids:process ID:($(ps -A o pid=))"
-}
 
-
-_ki(){
+_k(){
 	_alternative "pids:process ID:($(ps -A o cmd=))"
 }
 

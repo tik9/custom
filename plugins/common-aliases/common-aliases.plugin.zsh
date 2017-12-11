@@ -20,7 +20,7 @@ sm=192.168.43
 
 if [ $os != "CYGWIN_NT-6.1" ]; then
 	
-	lsb=`lsb_release -i|cut -d: -f2|sed -e 's/ //'`
+	lsb=`lsb_release -i|cut -d: -f2|sed -e 's/[[:blank:]]//'`
 	arc=`uname -a |cut -d' ' -f 14`
 	if [ $lsb = arch ] ;then
 		arc=`uname -a |cut -d' ' -f 12`;fi; 	
@@ -143,11 +143,17 @@ function ersetz(){
 			mv $file $neu_c
 			echo c uni pdf: $file
 		fi
+		#mv $f `echo "$f" | sed -e 's!\(.*\).........................\(\.[^.]*\)!\1\2!'`
+		#mv $f `echo -n $f | sed  -E -e "s/[^/]{10}(\\.[^\\.]+)?$/\\1/"` 
 	done
 	echo "\n${bold}Dateien nach Op $normal"
 	for f in *;do;echo $f;done
 }
 
+function his(){
+	history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n10
+
+}
 
 function ig(){
 	if [ $os = "Linux" ]; then;ifconfig;else;ipconfig;fi
@@ -205,7 +211,7 @@ function k(){
 	ps -ef|grep $1
 }
 
-compdef _kil k
+compdef _k k
 
 function ki(){
 		killall $1;
@@ -234,7 +240,7 @@ function mi(){
 }
 
 
-function ml(){
+function m(){
 	zparseopts -A ARGUMENTS l:
 	
 	ffprobe $1 2> >(grep Duration)
@@ -247,7 +253,7 @@ function ml(){
 	mplayer "$1" -loop $loop 
 }
 
-compdef _ml ml
+compdef _ml m
 #compdef _path_files ml
 
 function mo(){
@@ -261,13 +267,25 @@ function mp(){
 	mupdf $1 &
 }
 
-mv0(){
+function mv0(){
 	mvn clean compile assembly:single  -e
 	#pkill java
 	echo .. compile fertig
 	java -jar target/my-app-2.jar 
 	#pr2 jav
 }
+
+function cu_kv(){
+	pkill -P $$
+	while true; do
+		echo "telnet/curl $sa 8000"
+		curl -f $sa:8000 && echo Erfolg || echo Keine Verbindung
+		#curl localhost:8000
+		sleep 30m 
+		ec $(date +"%T")
+	done
+}
+compdef _pe cu_kv
 
 function nm(){
 	ipbas $1;nmap -sP $ipbas.1/24
@@ -284,16 +302,6 @@ function pd(){
 	else cygcheck -c|less;fi
 }
 
-function pe(){
-	while true; do
-		echo "telnet/curl $sa 8000"
-		curl -f $sa:8000 && echo Erfolg || echo Keine Verbindung
-		#curl localhost:8000
-		sleep ${1}m 
-		ec $(date +"%T")
-	done
-}
-compdef _pe pe
 
 
 function pk(){
@@ -359,6 +367,9 @@ function sc2(){
 }
 compdef _sc2 sc2
 
+function sh2(){
+	ssh -p8022 root@$sm.$1
+}
 
 function schieb(){
 
@@ -404,10 +415,12 @@ function si(){
 }
 
 function ss(){
-	
 	#echo $1 | ssh root@$sa 'cat >> .ssh/authorized_keys'
 	cat ~/.ssh/id_rsa.pub | ssh root@$sa 'cat >> ~/.ssh/authorized_keys'
-	
+}
+
+function start(){
+	cp /root/.zshrc ~/
 }
 
 function unt(){
@@ -422,9 +435,9 @@ function unt(){
 
 function we(){
 	URL='https://www.accuweather.com/en/de/hof/95028/weather-forecast/172202'
-
 	wget -q -O- "$URL" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print $2": "$13", "$12"°" }'| head -1
 }
+
 
 function yt2(){
 		zparseopts -A ARGUMENTS m
@@ -481,6 +494,7 @@ alias c='cu $sa:8000/te'
 alias cl='cu localhost:8000'
 alias cm='cu http://$sa:8000/de/admin/'
 alias cu='curl'
+alias n='cu_kv &'
 
 
 #Dateiops
@@ -532,9 +546,6 @@ alias -g com="$cb"
 alias lb="b $lb"
 alias rb="b $rb"
 
-# Java
-alias ja="java"
-
 
 #Komprimierung
 alias -s zip="unzip -l"
@@ -542,6 +553,7 @@ alias -s tar="tar tf"
 
 
 # Konsole
+alias hist='history'
 alias hs='\history -E'
 alias ho='ec $HOST'
 alias j='jobs -l'
@@ -563,19 +575,17 @@ alias mst='mysql -uroot d -e "show tables"'
 alias f='iwgetid -r'
 alias i='ip2 wlan0'
 alias ie='curl ifconfig.me'
-alias ii='iw2 n'
+alias ii='iw2 n2'
 alias iw2='iwlist wlan0 scan'
 alias jo='journalctl -xe'
-alias ne='/etc/init.d/networking restart;sleep 1;ig'
 alias pn='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
 alias -g re='$sa'
-alias z='ne'
+alias z='/etc/init.d/networking restart;sleep 1;ig'
 
 
 # ps
 alias ks="ki ssh;ph"
 alias ksl="ki sl;ph"
-alias n='pkill -P $$;pe 30'
 alias ph="pr ssh"
 alias pr='ps -ef|grep'
 alias pl="pr sleep"
@@ -584,6 +594,7 @@ alias -g sl="sleep"
 #ssh
 alias -g idr=~/.ssh/id_rsa.pub 
 alias -g ida=~/.ssh/authorized_keys 
+alias -g sc=/etc/ssh/sshd_config 
 alias sd=sshd 
 
 #tmux
@@ -614,9 +625,9 @@ alias duh='du -h'
 alias ecl="/root/progr/eclipse/eclipse & "
 alias ec="echo"
 alias gp="g++"
-alias his='history'
+alias ja="java"
 alias le='less -WiNS'
-alias m='man'
+alias ma='man'
 alias mt='man terminator'
 alias -g n2='|less'
 alias r="expect $lb"

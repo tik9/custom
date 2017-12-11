@@ -110,7 +110,7 @@ alias gco='git .git/config'
 alias gcount='git shortlog -sn'
 compdef gcount=git
 
-alias gd='git diff'
+alias gd='$(_check);git diff'
 alias gdca='git diff --cached'
 
 function gdv() { git diff -w "$@" | view - }
@@ -196,7 +196,7 @@ function gls(){
 }
 
 compdef _gitlog gls
-alias go='o;gd'
+alias go='`_check`;git log'
 alias gpu='git push;a'
 alias gpsum='git push --set-upstream origin master'
 alias gpv='git push -v'
