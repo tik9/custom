@@ -197,7 +197,7 @@ function gls(){
 
 compdef _gitlog gls
 alias go='`_check`;git log'
-alias gpu='git push;a'
+alias gp='git push;a'
 alias gpsum='git push --set-upstream origin master'
 alias gpv='git push -v'
 
