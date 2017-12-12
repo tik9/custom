@@ -22,7 +22,6 @@ zr=~/.zshrc
 
 if [[ $os != "CYGWIN_NT-6.1" && $arc != Android ]]; then
 	
-	lsb=`lsb_release -i|cut -d: -f2|sed -e 's/[[:blank:]]//'`
 fi
 
 aa(){}
@@ -51,26 +50,23 @@ function _hilfe(){
 }
 
 
-function ci2(){
-	if [[ $lsb = 'Ubuntu' ]];then
-		echo "$1"|xclip
-	else
-		echo $1 > /dev/clipboard
-	fi
-}
-
-function ci(){
-	echo "$1"|xclip -selection clipboard
+function add(){
+	ec $1 >> .gitignore
 }
 	
 
-function co(){
-	if [[ $lsb = 'Ubuntu' ]];then
-		xclip -o
-	else
-		cat /dev/clipboard
-	fi
+function cu_kv(){
+	pkill -P $$
+	while true; do
+		echo "telnet/curl $sa 8000"
+		curl -f $sa:8000 && echo Erfolg || echo Keine Verbindung
+		#curl localhost:8000
+		sleep 30m 
+		ec $(date +"%T")
+	done
 }
+compdef _pe cu_kv
+
 
 function dif(){
 	diff <(pdftotext -layout $1 /dev/stdout) <(pdftotext -layout $2 /dev/stdout)
@@ -175,16 +171,6 @@ function ki(){
 }
 
 
-# login remote shell
-function lss(){
-	if [ -z "$1" ]; then
-	  _hilfe `basename $0` "Interface" "letztes Oktett von ip " "opt. port"
-	  return
-	fi
-	ipbas $1
-
-	ssh $3 $ipbas.$2 
-}
 
 
 function mi(){
@@ -230,17 +216,6 @@ function mv0(){
 	#pr2 jav
 }
 
-function cu_kv(){
-	pkill -P $$
-	while true; do
-		echo "telnet/curl $sa 8000"
-		curl -f $sa:8000 && echo Erfolg || echo Keine Verbindung
-		#curl localhost:8000
-		sleep 30m 
-		ec $(date +"%T")
-	done
-}
-compdef _pe cu_kv
 
 function nm(){
 	ipbas $1;nmap -sP $ipbas.1/24
@@ -560,7 +535,7 @@ alias ohmyzsh="b $ZSH/oh-my-zsh.sh"
 alias ohm='sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
 alias plu='ec $plugins'
 alias pro='ec $prompt'
-alias zr='b $zr' # zshrc 
+alias -g zr='$zr' # zshrc 
 alias zt="ec $ZSH_THEME"
 
 alias ac='ack -i'
