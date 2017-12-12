@@ -124,7 +124,7 @@ alias gf='git config --list'
 function gfg() { git ls-files | grep $@ }
 compdef gfg=grep
 
-alias glg='git log'
+alias gg='git log --stat'
 
 function ggf() {
 [[ "$#" != 1 ]] && local b="$(git_current_branch)"
@@ -157,7 +157,6 @@ function ggp() {
 compdef _git ggp=git-checkout
 
 
-alias gg='git log --stat -p'
 alias ggpush='git push origin $(git_current_branch)'
 
 compdef _git ggpush=git-checkout
@@ -184,6 +183,7 @@ alias gig='b .gitignore'
 alias gignored='git ls-files -v | grep "^[[:lower:]]"'
 alias gin='git init'
 
+alias glg='git log'
 alias glgg='git log --graph'
 alias glgm='git log --graph --max-count=10'
 alias glol="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"

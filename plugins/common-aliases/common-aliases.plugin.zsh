@@ -18,40 +18,15 @@ rb=$ZSH_CUSTOM/$rb2
 sa=178.27.250.8
 sm=192.168.43
 
-if [ $os != "CYGWIN_NT-6.1" ]; then
+arc=`uname -a |cut -d' ' -f 14`
+zr=~/.zshrc
+
+if [[ $os != "CYGWIN_NT-6.1" && $arc != Android ]]; then
 	
 	lsb=`lsb_release -i|cut -d: -f2|sed -e 's/[[:blank:]]//'`
-	arc=`uname -a |cut -d' ' -f 14`
-	dowDir=/home/t/Downloads
-	mteDir=/root/git/mte
-	pts=pts
-	zr=~/.zshrc
-
-else
-	zHome=.oh-my-zsh/custom
-	pts=pty
-	lsb=cygwin
-	
-	home2=c:/cygwin64/home/itdlz-koer
-	db=$home2/$zHome/$db2
-	gb=$home2/$zHome/$gb2
-	gb3=$home2/$zHome/$gb4
-	cb=$home2/$zHome/$cb2
-	lb=$home2/$zHome/login_rp
-	pb=$home2/$zHome/$pb2
-	rb=$home2/$zHome/$rb2
-	
-	bim=$(wmic OS get OSArchitecture)
-	arc=`uname -a |cut -d' ' -f 6`
-	dowDir=/cygdrive/C/Users/itdlz-koer/Downloads
-	mteDir=$home2/mte/my-app
-	alias acl='apt-cyg listall'
-	alias in='apt-cyg install'
-	alias op='cygstart'
-	alias rem='apt-cyg remove';
-
-	zr=$home2/.zshrc
 fi
+
+aa(){}
 
 function sortieren_datum(){
 	ls -lt $1| grep "^-" | awk '{
@@ -76,14 +51,6 @@ function _hilfe(){
 	for var in ${@:$schleife} ; do; echo $var;done
 }
 
-
-function b(){	
-	if [[ $lsb = 'Ubuntu' ]];then
-		/root/src/src_geany-1.28/usr/bin/geany $1 &
-	elif [ $os = "CYGWIN_NT-6.1" ];then
-		notepad++ $1 &
-	fi
-}
 
 function ci2(){
 	if [[ $lsb = 'Ubuntu' ]];then
@@ -385,11 +352,6 @@ function scmysql(){
 }
 
 
-function sho(){
-
-	if [ $os = "CYGWIN_NT-6.1" ]; then
-		apt-cyg show `echo $1`;else ; apt-cache show $1|less;fi
-}
 
 function si(){
 	
@@ -624,7 +586,7 @@ alias r="expect $lb"
 alias rf='rfkill list'
 alias -g sa='$sa'
 alias -g sm='$sm'
-alias ter='if [ $os != "CYGWIN_NT-6.1" ]; then;terminator &;else; mintty;fi'
+alias ter='if [ $os != "CYGWIN_NT-6.1" ]; then;terminator &;fi'
 alias tp='top'
 alias tr='tree'
 alias -g ve='--version'
