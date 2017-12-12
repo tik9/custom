@@ -18,7 +18,6 @@ rb=$ZSH_CUSTOM/$rb2
 sa=178.27.250.8
 sm=192.168.43
 
-arc=`uname -a |cut -d' ' -f 14`
 zr=~/.zshrc
 
 if [[ $os != "CYGWIN_NT-6.1" && $arc != Android ]]; then
@@ -425,7 +424,6 @@ alias whi="which"
 # betriebssystem
 alias lsb="echo $lsb"	
 alias os="echo $os"
-alias arc="echo $arc"
 
 
 #cd's
@@ -576,7 +574,7 @@ alias dowDir='l $dowDir'
 alias duh='du -h'
 alias ecl="/root/progr/eclipse/eclipse & "
 alias ec="echo"
-alias gp="g++"
+alias g+="g++"
 alias ja="java"
 alias le='less -WiNS'
 alias ma='man'
