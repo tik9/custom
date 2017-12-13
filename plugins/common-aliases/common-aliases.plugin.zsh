@@ -20,9 +20,6 @@ sm=192.168.43
 
 zr=~/.zshrc
 
-if [[ $os != "CYGWIN_NT-6.1" && $arc != Android ]]; then
-	
-fi
 
 aa(){}
 
@@ -55,7 +52,7 @@ function add(){
 }
 	
 
-function cu_kv(){
+function n(){
 	pkill -P $$
 	while true; do
 		echo "telnet/curl $sa 8000"
@@ -183,9 +180,8 @@ function mi(){
 
 function m(){
 	zparseopts -A ARGUMENTS l:
-	
+	cd ~/musik
 	ffprobe $1 2> >(grep Duration)
-	
 	loop=1
 	if [ ! $? -eq 0 ]; then
 		loop=$ARGUMENTS[-l]
@@ -204,16 +200,10 @@ function mo(){
 }
 
 	
-function mp(){
-	mupdf $1 &
-}
-
 function mv0(){
 	mvn clean compile assembly:single  -e
-	#pkill java
 	echo .. compile fertig
 	java -jar target/my-app-2.jar 
-	#pr2 jav
 }
 
 
@@ -225,12 +215,6 @@ compdef _ip nm
 function p(){
 	grep $1 =(ps aux)
 }
-
-function pd(){
-
-	cygcheck -c|less
-}
-
 
 
 function pk(){
@@ -267,7 +251,6 @@ function q(){
 }
 
 
-# -f[datei]:dateiname:_files' '-i[interface]:interf:_net_interfaces' '-o[letztes Oktett]' '-d[ziel]'
 function sc2(){
 	zparseopts -A ARGUMENTS d: f: i: ip: o: p: u:
 
@@ -340,10 +323,9 @@ function si(){
 
 function ss(){
 	#echo $1 | ssh root@$sa 'cat >> .ssh/authorized_keys'
+	in git zsh
 	cat ~/.ssh/id_rsa.pub | ssh root@$sa 'cat >> ~/.ssh/authorized_keys'
-}
-
-function start(){
+	git config --global user.email
 	cp /root/.zshrc ~/
 }
 
@@ -397,7 +379,6 @@ alias wo='who'
 alias whi="which"
 
 # betriebssystem
-alias lsb="echo $lsb"	
 alias os="echo $os"
 
 
@@ -419,7 +400,6 @@ alias c='cu $sa:8000/te'
 alias cl='cu localhost:8000'
 alias cm='cu http://$sa:8000/de/admin/'
 alias cu='curl'
-alias n='cu_kv &'
 
 
 #Dateiops
@@ -435,18 +415,9 @@ alias wl="echo Dict.;dict -D"
 alias di="dict -d fd-eng-deu"
 alias w2="dict"
 
-#Dokumente
-alias -s pdf=mupdf
-
 
 # Editoren
 alias v="vim"
-alias ab="abiword"
-
-
-# Energie
-alias hi='sudo hibernate'
-alias s='sudo pm-suspend'
 
 #find
 alias ff='find . -type f -name'

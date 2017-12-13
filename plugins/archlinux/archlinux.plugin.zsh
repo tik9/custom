@@ -15,6 +15,21 @@ function pd(){
 		pacman -Qeq |grep $1
 }
 
+function q(){
+	# zeige WLAN ssid (iwget)
+
+	iwgetid -r;printf "\n";
+	datei=test100.zip
+
+	trap int_trap INT
+	echo Ctrl-C zum Beenden des downloads $datei
+
+	wget http://speedtest.wdc01.softlayer.com/downloads/$datei --output-document=/dev/null
+	
+	echo Ende
+}
+
+
 alias arc="echo $arc"
 
 

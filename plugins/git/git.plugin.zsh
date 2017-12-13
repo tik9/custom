@@ -91,7 +91,7 @@ function gl(){
 
 alias a='$(_check); gs'
 alias g='git diff'
-alias ga='git add --all;a'
+alias ga='$(_check);git add --all;a'
 
 alias gb='b $gb'
 alias gb2='b $gb3'
@@ -197,7 +197,7 @@ function gls(){
 
 compdef _gitlog gls
 alias go='`_check`;git log'
-alias gp='git push;a'
+alias gp='$(_check);git push;a'
 alias gpsum='git push --set-upstream origin master'
 alias gpv='git push -v'
 

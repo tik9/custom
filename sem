@@ -1,6 +1,2 @@
-		arch	and			ubun
-arc		armv7l	and			x86_64
-
-os 		linux	lin			lin
-lsb 	arch				ubu
-host	arch	localhost t-laptop
+man bash
+Aliase sind fast für alle Zwecke veraltet und sollten durch Funktionen ersetzt werden.
