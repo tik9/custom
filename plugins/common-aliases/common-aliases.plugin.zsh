@@ -2,6 +2,10 @@
 #ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
 
 os=`uname -a |cut -d' ' -f 1`
+
+
+alb=plugins/archlinux/archlinux.plugin.zsh
+ab=plugins/android/android.plugin.zsh
 cb2=plugins/common-aliases/common-aliases.plugin.zsh
 cb=$ZSH_CUSTOM/$cb2
 db2=plugins/django/django.plugin.zsh
@@ -14,6 +18,7 @@ lb=$ZSH_CUSTOM/login_rp
 pb=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
 rb2=functions/_rest
 rb=$ZSH_CUSTOM/$rb2
+ub=$ZSH_CUSTOM/plugins/ubuntu/ubuntu.plugin.zsh
 
 sa=178.27.250.8
 sm=192.168.43
@@ -161,13 +166,12 @@ function k(){
 
 compdef _k k
 
+
 function ki(){
 		killall $1;
 		echo "Prozesse mit $1 \n"
 		ps -ef|grep $1
 }
-
-
 
 
 function mi(){
@@ -179,15 +183,18 @@ function mi(){
 
 
 function m(){
-	zparseopts -A ARGUMENTS l:
+	zparseopts -A ARGUMENTS l: m:
 	cd ~/musik
 	ffprobe $1 2> >(grep Duration)
+
+	mus=$ARGUMENTS[-m]
+
 	loop=1
 	if [ ! $? -eq 0 ]; then
 		loop=$ARGUMENTS[-l]
 	fi
 	
-	mplayer "$1" -loop $loop 
+	mplayer -loop $loop $mus  
 }
 
 compdef _ml m
@@ -233,24 +240,6 @@ function int_trap() {
 }
 
 
-function q(){
-	# zeige WLAN ssid (iwget)
-	if [[ $os != "CYGWIN_NT-6.1" && $arc != 'Android' && `uname -m` != 'armv7l' ]]; then
-
-		iwgetid -r;printf "\n";
-	fi
-	datei=test100.zip
-
-	trap int_trap INT
-	echo Ctrl-C zum Beenden des downloads $datei
-
-	wget http://speedtest.wdc01.softlayer.com/downloads/$datei `if [[ $os = "Linux" && $arc != 'Android' ]]; then ; echo --output-document=/dev/null;fi`
-	
-	if [ -f $datei ];then ; rm $datei; echo "$datei wird gelöscht"; fi	
-	echo Ende
-}
-
-
 function sc2(){
 	zparseopts -A ARGUMENTS d: f: i: ip: o: p: u:
 
@@ -285,9 +274,7 @@ function sh2(){
 
 function schieb(){
 
-	
 	ziel_dir=`pwd`
-	#ziel_dir=~/root
 	
 	#if [ -d $2 ];then;ziel_dir=$2;fi
 	for i in `seq 1 $1`; do; 	
@@ -307,7 +294,6 @@ function scmysql(){
 	scp `ls -t | head -n1` 192.168.0.148:/root/sqlBack
 	#lö $(date +"%m_%Y").sql
 }
-
 
 
 function si(){
@@ -434,14 +420,6 @@ alias -g H='| head'
 alias tai='tail -f'
 alias -g ti='| tail'
 
-# Rest
-alias -g h="he"
-alias -g he="--help |less"
-alias cb="b $cb"
-alias -g com="$cb"
-alias lb="b $lb"
-alias rb="b $rb"
-
 
 #Komprimierung
 alias -s zip="unzip -l"
@@ -455,6 +433,7 @@ alias ho='ec $HOST'
 alias j='jobs -l'
 alias pen='printenv n2'
 alias pg='pgrep -P $$'
+alias po='ec $prompt'
 alias pz='pr3 zsh'
 alias se='set gr'
 alias tt='tty'
@@ -487,17 +466,30 @@ alias pr='ps -ef|grep'
 alias pl="pr sleep"
 alias -g sl="sleep"
 
+
+# Rest
+alias ab="b $ab"
+alias alb="b $alb"
+#alias arc="echo $arc"
+alias cb="b $cb"
+alias -g com="$cb"
+alias -g h="--help |less"
+alias lb="b $lb"
+alias lsb='ec $lsb'
+alias rb="b $rb"
+alias ub="b $ub"
+
 #ssh
 alias -g idr=~/.ssh/id_rsa.pub 
 alias -g ida=~/.ssh/authorized_keys 
 alias -g sc=/etc/ssh/sshd_config 
-alias sd=sshd 
+alias sd='sshd;ph' 
 
 #tmux
 alias ta="tmux attach"
 alias tk="tmux kill-session"
 alias tl="tmux ls"
-alias -g tm="tmux"
+alias tm="tmux"
 
 
 # zsh
@@ -505,7 +497,6 @@ alias e="exec zsh"
 alias ohmyzsh="b $ZSH/oh-my-zsh.sh"
 alias ohm='sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
 alias plu='ec $plugins'
-alias pro='ec $prompt'
 alias -g zr='$zr' # zshrc 
 alias zt="ec $ZSH_THEME"
 

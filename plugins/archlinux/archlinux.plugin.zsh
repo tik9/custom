@@ -1,19 +1,7 @@
 
-arc=`uname -a |cut -d' ' -f 12`
-		
-function upgrade() {
-    sudo pacman -Syu
-}
+arc=`uname -a |cut -d' ' -f 12`		
+lsb=`lsb_release -i|cut -d: -f2|sed -e 's/[[:blank:]]//'`
 
-function b(){	
-		vi $1
-}
-
-
-function pd(){
-
-		pacman -Qeq |grep $1
-}
 
 function q(){
 	# zeige WLAN ssid (iwget)
@@ -31,6 +19,10 @@ function q(){
 
 
 alias arc="echo $arc"
+alias b="vi"
+
+#alias lsb='ec $lsb'
+alias pd='pacman -Qeq |grep'
 
 
 # Pacman - https://wiki.archlinux.org/index.php/Pacman_Tips

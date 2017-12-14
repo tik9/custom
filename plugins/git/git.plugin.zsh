@@ -188,8 +188,7 @@ alias glgg='git log --graph'
 alias glgm='git log --graph --max-count=10'
 alias glol="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias glola="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
-alias glp="_git_log_prettily"
-compdef _git glp=git-log
+alias glp='git log -p'
 
 function gls(){
 	git log $1 --stat

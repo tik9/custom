@@ -1,4 +1,5 @@
-
+arc=`uname -a |cut -d' ' -f 13`
+lsb=`uname -a |cut -d' ' -f 14`
 
 function q(){
 
@@ -13,7 +14,13 @@ function q(){
 	echo Ende
 }
 
-
+alias agr='sudo apt-get remove'
+alias aglu="apt list --upgradable "
+alias aguu='sudo apt-get update && sudo apt-get upgrade'      #adg
+alias arc="echo $arc"
+alias b="vi"
 alias inst='apt list --installed'
 alias lo="logcat -s 'syslog:*'"
-alias b="vi"
+alias m="play-audio"
+alias allpkgs="apt list --installed "
+
