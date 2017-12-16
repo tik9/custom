@@ -36,12 +36,11 @@ function work_in_progress() {
 
 
 function gc(){
-	#Aufruf: gc --m1 foo
+	#Aufruf: gc -m foo
 	zparseopts -A ARGUMENTS m: m2:
 
-	#mh=$1
-#int a = (b == 5) ? c : d;
- [[ -n $ARGUMENTS[-m] ]] && mh=$ARGUMENTS[-m] || mh="$1"
+	#int a = (b == 5) ? c : d;
+	[[ -n $ARGUMENTS[-m] ]] && mh=$ARGUMENTS[-m] || mh="$1"
 
 	printf 'Argument mh ist "%s"\n' "$mh"
 	git commit -am "$mh"
@@ -55,25 +54,22 @@ function gi(){
 		zparseopts -A ARGUMENTS m: mzt: m2h: m2t:
 
 	#mh[1]=$ARGUMENTS[-mzh]
-	#mt[1]=$ARGUMENTS[-mzt]
-	#mh[2]=$ARGUMENTS[-m2h]
 	
 	dir=$(_check)
 
 	 [[ -n $ARGUMENTS[-m] ]] && mh=$ARGUMENTS[-m] || mh="$1"
 
-	#echo "${mh[$i]} ${mt[$i]} $dir"
-
 	 cd $dir
  	ec hole $dir
 
-	 #git add . 
+	 git add . 
 	 git commit -am ${mh} 
-	 #-m ${mt[$i]}
 	 git push
+	git log
 }
 
 compdef _gc gc
+
 
 function gl(){
 	dir=$(_check)
@@ -124,7 +120,7 @@ alias gf='git config --list'
 function gfg() { git ls-files | grep $@ }
 compdef gfg=grep
 
-alias gg='git log --stat'
+alias gg='$(_check); git log --stat'
 
 function ggf() {
 [[ "$#" != 1 ]] && local b="$(git_current_branch)"
@@ -183,12 +179,11 @@ alias gig='b .gitignore'
 alias gignored='git ls-files -v | grep "^[[:lower:]]"'
 alias gin='git init'
 
-alias glg='git log'
 alias glgg='git log --graph'
 alias glgm='git log --graph --max-count=10'
 alias glol="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias glola="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
-alias glp='git log -p'
+alias glp='; git log -p'
 
 function gls(){
 	git log $1 --stat

@@ -19,7 +19,7 @@ function q(){
 
 
 alias arc="echo $arc"
-alias b="vi"
+alias b="vim"
 
 #alias lsb='ec $lsb'
 alias pd='pacman -Qeq |grep'

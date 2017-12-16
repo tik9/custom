@@ -11,6 +11,7 @@ lb=$home2/$zHome/login
 pb=$home2/$zHome/$pb2
 rb=$home2/$zHome/$rb2
 
+
 bim=$(wmic OS get OSArchitecture)
 
 dowDir=/cygdrive/C/Users/itdlz-koer/Downloads
@@ -22,11 +23,6 @@ function b(){
 		notepad++ $1 &
 }
 
-
-function sho(){
-
-		apt-cyg show `echo $1`;
-}
 
 function ci(){
 		echo $1 > /dev/clipboard
@@ -54,10 +50,17 @@ function q(){
 	echo Ende
 }
 
+function sho(){
+
+		apt-cyg show `echo $1`;
+}
+
 
 alias agr='apt-cyg remove';
 alias allpkgs='apt-cyg listall'
 alias arc="echo $arc"
 alias in='apt-cyg install'
+alias lb="b $lb"
 alias op='cygstart'
+alias so='cp /cygdrive/c/Users/itdlz-koer/AppData/Roaming/Microsoft/Bibliography/sources.xml $un'
 alias ter='mintty'

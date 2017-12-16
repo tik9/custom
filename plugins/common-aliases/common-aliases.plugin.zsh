@@ -1,5 +1,4 @@
-# schriftfarbe autocomplete fg8 default
-#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
+mv $lb $ZSH_CUSTOM/login
 
 os=`uname -a |cut -d' ' -f 1`
 
@@ -20,13 +19,15 @@ rb2=functions/_rest
 rb=$ZSH_CUSTOM/$rb2
 ub=$ZSH_CUSTOM/plugins/ubuntu/ubuntu.plugin.zsh
 
+un=~/uni
+
 sa=178.27.250.8
 sm=192.168.43
 
 zr=~/.zshrc
 
 
-aa(){}
+aaa(){}
 
 function sortieren_datum(){
 	ls -lt $1| grep "^-" | awk '{
@@ -57,18 +58,6 @@ function add(){
 }
 	
 
-function n(){
-	pkill -P $$
-	while true; do
-		echo "telnet/curl $sa 8000"
-		curl -f $sa:8000 && echo Erfolg || echo Keine Verbindung
-		#curl localhost:8000
-		sleep 30m 
-		ec $(date +"%T")
-	done
-}
-compdef _pe cu_kv
-
 
 function dif(){
 	diff <(pdftotext -layout $1 /dev/stdout) <(pdftotext -layout $2 /dev/stdout)
@@ -96,8 +85,6 @@ function ersetz(){
 			mv $file $neu_c
 			echo c uni pdf: $file
 		fi
-		#mv $f `echo "$f" | sed -e 's!\(.*\).........................\(\.[^.]*\)!\1\2!'`
-		#mv $f `echo -n $f | sed  -E -e "s/[^/]{10}(\\.[^\\.]+)?$/\\1/"` 
 	done
 	echo "\n${bold}Dateien nach Op $normal"
 	for f in *;do;echo $f;done
@@ -173,15 +160,6 @@ function ki(){
 		ps -ef|grep $1
 }
 
-
-function mi(){
-	wget -q --spider http://google.com
-	if [ $? -eq 0 ];then
-		echo $(dig +short myip.opendns.com @resolver1.opendns.com)
-	fi
-}
-
-
 function m(){
 	zparseopts -A ARGUMENTS l: m:
 	cd ~/musik
@@ -194,11 +172,18 @@ function m(){
 		loop=$ARGUMENTS[-l]
 	fi
 	
-	mplayer -loop $loop $mus  
+	mplayer -loop $loop $1  
 }
+
+
+function mi(){
+		echo $(dig +short myip.opendns.com @resolver1.opendns.com)
+}
+
 
 compdef _ml m
 #compdef _path_files ml
+
 
 function mo(){
 	mediaDir='/media/t'
@@ -214,10 +199,24 @@ function mv0(){
 }
 
 
+function n(){
+	pkill -P $$
+	while true; do
+		echo "telnet/curl $sa 8000"
+		curl -f $sa:8000 && echo Erfolg || echo Keine Verbindung
+		#curl localhost:8000
+		sleep 30m 
+		ec $(date +"%T")
+	done
+}
+compdef _pe n
+
+
 function nm(){
 	ipbas $1;nmap -sP $ipbas.1/24
 }
 compdef _ip nm
+
 	
 function p(){
 	grep $1 =(ps aux)
@@ -291,7 +290,7 @@ compdef _schieb schieb
 function scmysql(){
 	
 	mysqldump d> $(date +"%m_%Y").sql
-	scp `ls -t | head -n1` 192.168.0.148:/root/sqlBack
+	scp -P $1 `ls -t | head -n1` 0.tcp.eu.ngrok.io:/root/sqlBack 
 	#lö $(date +"%m_%Y").sql
 }
 
@@ -377,8 +376,8 @@ alias mu="cd ~/musik"
 alias mte='cd $mteDir'
 alias o='cd $ZSH_CUSTOM'
 alias oh='cd $ZSH'
-alias un='cd ~/uni'
-alias uc='cd ~/uni/c'
+alias un='cd $un'
+alias uc='cd $un/c'
 alias vs='cd ~/vs/vs'
 
 #curl
@@ -502,8 +501,8 @@ alias zt="ec $ZSH_THEME"
 
 alias ac='ack -i'
 alias -g ad='user153015@gmail.com' # 01573 9598 220
-alias a+='amixer -q sset Master 3%+'
-alias a-='amixer -q sset Master 3%-'
+alias bb='amixer -q sset Master 3%+'
+alias aa='amixer -q sset Master 3%-'
 alias ca='cat'
 alias dt='date +"%T"'
 alias dh='df -h'

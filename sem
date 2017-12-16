@@ -1,12 +1,1 @@
-man bash
-Aliase sind fast für alle Zwecke veraltet und sollten durch Funktionen ersetzt werden.
-
-http://www.makeuseof.com/tag/use-linux-command-line-android-termux/
-
-Termux is a self-contained Linux environment. Its programs are (for all intents and purposes) exactly the same as their Linux counterparts. This conveys some advantages over the ported applications
-Vorteile
-Consistency
-Termux apps are the same as the Linux versions, from keyboard shortcuts to how you install them.
-Kompakt - Schlanke App da kein Android Zusatz-Code
-updates - Unabhängigkeit von App Entwicklern
 
