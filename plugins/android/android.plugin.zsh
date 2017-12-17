@@ -14,6 +14,12 @@ function q(){
 	echo Ende
 }
 
+function te(){
+	printf %s `termux-sms-inbox` | jq '.[0].number' 
+	
+}
+
+
 alias agr='sudo apt-get remove'
 alias aglu="apt list --upgradable "
 alias aguu='sudo apt-get update && sudo apt-get upgrade'      #adg

@@ -5,7 +5,6 @@ lsb=`lsb_release -i|cut -d: -f2|sed -e 's/[[:blank:]]//'`
 
 function q(){
 	# zeige WLAN ssid (iwget)
-
 	iwgetid -r;printf "\n";
 	datei=test100.zip
 
@@ -14,7 +13,6 @@ function q(){
 
 	wget http://speedtest.wdc01.softlayer.com/downloads/$datei --output-document=/dev/null
 	
-	echo Ende
 }
 
 
@@ -27,10 +25,10 @@ alias pd='pacman -Qeq |grep'
 
 # Pacman - https://wiki.archlinux.org/index.php/Pacman_Tips
 alias pacupg='sudo pacman -Syu'
-alias pacin='sudo pacman -S'
+alias in='sudo pacman -S'
 alias pacins='sudo pacman -U'
 alias pacre='sudo pacman -R'
-alias pacrem='sudo pacman -Rns'
+alias rem='sudo pacman -Rns'
 alias pacrep='pacman -Si'
 alias pacreps='pacman -Ss'
 alias pacloc='pacman -Qi'

@@ -1,22 +1,36 @@
-mv $lb $ZSH_CUSTOM/login
 
 os=`uname -a |cut -d' ' -f 1`
 
+declare -A ad
+ad['ms']='schuhmaier@playglobe.eu'
+ad['uk']='ukoerner@konzertagentur-koerner.de'
+ad['tk']='user153015@gmail.com'
+ad['t']='01573 9598 220'
+
+for a in ${(@a)ad};do ;echo "$a $ad[$a]" ; done
+#echo $ad['ms']
 
 alb=plugins/archlinux/archlinux.plugin.zsh
 ab=plugins/android/android.plugin.zsh
+
 cb2=plugins/common-aliases/common-aliases.plugin.zsh
 cb=$ZSH_CUSTOM/$cb2
+
 db2=plugins/django/django.plugin.zsh
 db=$ZSH_CUSTOM/$db2
+
 gb2=plugins/git/git.plugin.zsh
 gb=$ZSH_CUSTOM/$gb2
 gb4=functions/_git2
 gb3=$ZSH_CUSTOM/$gb4
-lb=$ZSH_CUSTOM/login_rp
+
+lb=$ZSH_CUSTOM/login
+
 pb=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
+
 rb2=functions/_rest
 rb=$ZSH_CUSTOM/$rb2
+
 ub=$ZSH_CUSTOM/plugins/ubuntu/ubuntu.plugin.zsh
 
 un=~/uni
@@ -100,6 +114,11 @@ function ig(){
 }
 
 
+function int_trap() {
+    echo "Ctrl-C gedrückt"
+}
+
+
 function ip2(){
 	
 	interf=$1
@@ -175,13 +194,22 @@ function m(){
 	mplayer -loop $loop $1  
 }
 
+function mai(){
+		zparseopts -A argumente b: t: a:
+		
+	printf "Subject:$argumente[-b]\n$argumente[-t] Gruß,Timo" |msmtp $ad['${argumente[-a]']
+	#printf "Subject:$argumente[-b]\n$argumente[-t] Gruß,Timo" |msmtp $ad['tk']
+	#cat ~/.msmtp.log
+}
+compdef _ma mai
+
 
 function mi(){
 		echo $(dig +short myip.opendns.com @resolver1.opendns.com)
 }
 
 
-compdef _ml m
+compdef _m m
 #compdef _path_files ml
 
 
@@ -234,10 +262,6 @@ function pt(){
 }
 compdef _pt pt
 
-function int_trap() {
-    echo "Ctrl-C gedrückt"
-}
-
 
 function sc2(){
 	zparseopts -A ARGUMENTS d: f: i: ip: o: p: u:
@@ -267,7 +291,7 @@ function sc2(){
 }
 compdef _sc2 sc2
 
-function sh2(){
+function s2(){
 	ssh -p8022 root@$sm.$1
 }
 
@@ -331,16 +355,16 @@ function we(){
 
 
 function yt2(){
-		zparseopts -A ARGUMENTS m
+		zparseopts -A ARGUMENTS m:
 	m=$ARGUMENTS[-m]
 	
 	if [[ -f $2 ]];then
 	while read name;do;youtube-dl $name;done < $2;return;fi
 	
 	typeset -A a_array
-	#a_array=('classic' ''
-	#'latino' 'B0KH-fiVnCc' 
-	#'pop' 'OPf0YbXqDm0')
+	a_array=(
+	'latino' '' 
+	'pop' 'OPf0YbXqDm0')
 
 	for k in "${(@k)a_array}"; do
 	  youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=$a_array[$k]"
@@ -499,10 +523,10 @@ alias plu='ec $plugins'
 alias -g zr='$zr' # zshrc 
 alias zt="ec $ZSH_THEME"
 
-alias ac='ack -i'
-alias -g ad='user153015@gmail.com' # 01573 9598 220
-alias bb='amixer -q sset Master 3%+'
+
 alias aa='amixer -q sset Master 3%-'
+alias ac='ack -i'
+alias bb='amixer -q sset Master 3%+'
 alias ca='cat'
 alias dt='date +"%T"'
 alias dh='df -h'

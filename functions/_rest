@@ -11,7 +11,7 @@ _k(){
 }
 
 
-_ml(){
+_m(){
 	_arguments ':datei:_path_files' '*:radio:("http://80.237.156.8:8120" b1)' '-l[loop]'
 	#case "$state" in
     #dateien)
@@ -19,6 +19,12 @@ _ml(){
         #_multi_parts / music_files
     #esac
 }
+
+
+_ma(){
+	_arguments '-t[Text]:text2:text3' '-b[Betreff]::' '-a[Adress-Kürzel]::'
+}
+
 
 _pe(){
 	cmds=('10' '20' '')
