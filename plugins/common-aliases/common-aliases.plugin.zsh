@@ -2,15 +2,16 @@
 os=`uname -a |cut -d' ' -f 1`
 
 declare -A ad
-ad['ms']='schuhmaier@playglobe.eu'
+ad[ms]='schuhmaier@playglobe.eu'
 ad['uk']='ukoerner@konzertagentur-koerner.de'
 ad['tk']='user153015@gmail.com'
 ad['t']='01573 9598 220'
 
-for a in ${(@a)ad};do ;echo "$a $ad[$a]" ; done
-#echo $ad['ms']
+#ad=(k1 v1 k2 v2)
 
-alb=plugins/archlinux/archlinux.plugin.zsh
+#for k in ${(@k)ad};do ;echo "$k $ad[$k]" ; done
+
+arb=plugins/archlinux/archlinux.plugin.zsh
 ab=plugins/android/android.plugin.zsh
 
 cb2=plugins/common-aliases/common-aliases.plugin.zsh
@@ -25,6 +26,7 @@ gb4=functions/_git2
 gb3=$ZSH_CUSTOM/$gb4
 
 lb=$ZSH_CUSTOM/login
+ob=$ZSH/oh-my-zsh.sh
 
 pb=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
 
@@ -263,14 +265,14 @@ function pt(){
 compdef _pt pt
 
 
-function sc2(){
+function s2(){
 	zparseopts -A ARGUMENTS d: f: i: ip: o: p: u:
 
 	dir=storage/music
 	
 	dir=$ARGUMENTS[-d]
 	datei=$ARGUMENTS[-f]
-	ipba=$ARGUMENTS[-ip]
+	ip=$ARGUMENTS[-ip]
 	oktett=$ARGUMENTS[-o]
 	port=$ARGUMENTS[-p]
 	user=$ARGUMENTS[-u]
@@ -279,7 +281,7 @@ function sc2(){
 
 	if [ -z $datei ];then;datei=`ls -t|head -n1`;fi
 	if [ -z $dir ];then;dir=/root;fi 
-	if [ -z $ipba ];then;ipba=$(ipbas);fi
+	if [ -z $ip ];then;ip=$sm;fi
 	#if [ -z $oktett ];then;oktett=.162;fi
 	if [ -z $port ];then;port=8022;fi
 	if [ -z $user ];then;user=root;fi
@@ -289,7 +291,7 @@ function sc2(){
 	scp -P $port $datei $user@$ipba$oktett:$dir
 	#rm -rf $datei
 }
-compdef _sc2 sc2
+compdef _sc2 s2
 
 function s2(){
 	ssh -p8022 root@$sm.$1
@@ -363,15 +365,16 @@ function yt2(){
 	
 	typeset -A a_array
 	a_array=(
-	'latino' '' 
-	'pop' 'OPf0YbXqDm0')
+	'chill decem' 'GHeMUZ0dbKI'
+       'ronson' 'OPf0YbXqDm0')
+
 
 	for k in "${(@k)a_array}"; do
 	  youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=$a_array[$k]"
-	  if [[ $1 = u ]];then
-		#mv `ls -t|head -n1` /dev/sdb
-	  fi
 	done
+	for f in *.webm; do
+		mv $f /cygdrive/h
+	done 
 	
 	ersetz
 	sc2 -o .1 -f "`ls -t |head -1`" -d /data/data/com.termux/files/home
@@ -421,7 +424,7 @@ alias lk="lsblk"
 
 #Dict
 alias wl="echo Dict.;dict -D"
-alias di="dict -d fd-eng-deu"
+alias w="dict -d fd-eng-deu"
 alias w2="dict"
 
 
@@ -499,6 +502,7 @@ alias -g com="$cb"
 alias -g h="--help |less"
 alias lb="b $lb"
 alias lsb='ec $lsb'
+alias ob='b $ob'
 alias rb="b $rb"
 alias ub="b $ub"
 
@@ -517,7 +521,7 @@ alias tm="tmux"
 
 # zsh
 alias e="exec zsh"
-alias ohmyzsh="b $ZSH/oh-my-zsh.sh"
+alias ohmyzsh='b $oh'
 alias ohm='sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
 alias plu='ec $plugins'
 alias -g zr='$zr' # zshrc 
@@ -526,8 +530,8 @@ alias zt="ec $ZSH_THEME"
 
 alias aa='amixer -q sset Master 3%-'
 alias ac='ack -i'
-alias bb='amixer -q sset Master 3%+'
-alias ca='cat'
+alias bb='amixer -q sset Master 3%+;amixer get Master'
+alias c='cat'
 alias dt='date +"%T"'
 alias dh='df -h'
 alias dowDir='l $dowDir'
@@ -537,7 +541,7 @@ alias ec="echo"
 alias g+="g++"
 alias ja="java"
 alias le='less -WiNS'
-alias ma='man'
+alias m='man'
 alias mt='man terminator'
 alias -g n2='|less'
 alias r="expect $lb"

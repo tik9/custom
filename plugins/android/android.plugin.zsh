@@ -22,11 +22,12 @@ function te(){
 
 alias agr='sudo apt-get remove'
 alias aglu="apt list --upgradable "
-alias aguu='sudo apt-get update && sudo apt-get upgrade'      #adg
+alias aguu='apt-get update && sudo apt-get upgrade'      #adg
+alias allpkgs="apt list --installed "
 alias arc="echo $arc"
 alias b="vi"
-alias inst='apt list --installed'
+alias in='apt install'
 alias lo="logcat -s 'syslog:*'"
-alias m="play-audio"
-alias allpkgs="apt list --installed "
+alias pla="play-audio"
+alias rem="apt remove"
 

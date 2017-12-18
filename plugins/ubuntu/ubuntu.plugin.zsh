@@ -67,8 +67,6 @@ alias arc="echo $arc"
 
 alias hi='sudo hibernate'
 
-#alias lsb='ec $lsb'
-
 alias -s pdf=mupdf
 
 alias ppap='sudo ppa-purge'
