@@ -8,6 +8,7 @@ db=$home2/$zHome/$db2
 gb=$home2/$zHome/$gb2
 gb3=$home2/$zHome/$gb4
 lb=$home2/$zHome/login
+ob=$home2/ZSH/oh-my-zsh.sh
 pb=$home2/$zHome/$pb2
 rb=$home2/$zHome/$rb2
 
@@ -61,6 +62,7 @@ alias allpkgs='apt-cyg listall'
 alias arc="echo $arc"
 alias in='apt-cyg install'
 alias lb="b $lb"
+alias ob="b $ob"
 alias op='cygstart'
 alias so='cp /cygdrive/c/Users/itdlz-koer/AppData/Roaming/Microsoft/Bibliography/sources.xml $un'
 alias ter='mintty'

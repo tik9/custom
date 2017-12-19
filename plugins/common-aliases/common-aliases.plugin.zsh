@@ -1,17 +1,28 @@
+function arg(){
+	if [ -z $1 ];then;echo Argument fehlt;return; fi
+}
+
+function pe(){
+	if [ -z $1 ];then;echo Argument fehlt;return; fi
+	sed -i 's/\(^plugins=\).*/\1(common-aliases git git-prompt ubuntu zsh-autosuggestions $1)/' b $zr
+}
 
 os=`uname -a |cut -d' ' -f 1`
 
 declare -A ad
-ad['ms']='schuhmaier@playglobe.eu'
+ad[ms]='schuhmaier@playglobe.eu'
 ad['uk']='ukoerner@konzertagentur-koerner.de'
 ad['tk']='user153015@gmail.com'
 ad['t']='01573 9598 220'
 
-for a in ${(@a)ad};do ;echo "$a $ad[$a]" ; done
-#echo $ad['ms']
+#ad=(k1 v1 k2 v2)
 
-alb=plugins/archlinux/archlinux.plugin.zsh
-ab=plugins/android/android.plugin.zsh
+#for k in ${(@k)ad};do ;echo "$k $ad[$k]" ; done
+
+arb=plugins/archlinux/archlinux.plugin.zsh
+
+ab2=plugins/android/android.plugin.zsh
+ab=$ZSH_CUSTOM/$ab2
 
 cb2=plugins/common-aliases/common-aliases.plugin.zsh
 cb=$ZSH_CUSTOM/$cb2
@@ -25,12 +36,14 @@ gb4=functions/_git2
 gb3=$ZSH_CUSTOM/$gb4
 
 lb=$ZSH_CUSTOM/login
+ob=$ZSH/oh-my-zsh.sh
 
 pb=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
 
 rb2=functions/_rest
 rb=$ZSH_CUSTOM/$rb2
 
+tb=$ZSH_CUSTOM/todo
 ub=$ZSH_CUSTOM/plugins/ubuntu/ubuntu.plugin.zsh
 
 un=~/uni
@@ -43,50 +56,19 @@ zr=~/.zshrc
 
 aaa(){}
 
-function sortieren_datum(){
-	ls -lt $1| grep "^-" | awk '{
-	key=$6$7
-	freq[key]++
-	}
-	END {
-	for (date in freq)
-			printf "%s\t%d\n", date, freq[date]
-	}'| sort -k2|tail -n2
-}
-
-
-function _hilfe(){
-
-	bold=`tput bold`
-	normal=`tput sgr0`
-	echo "\n${bold}os: $os"
-	schleife=2
-	echo "Argumente für $1:${normal}"
-
-	for var in ${@:$schleife} ; do; echo $var;done
-}
-
 
 function add(){
 	ec $1 >> .gitignore
 }
 	
 
-
-function dif(){
-	diff <(pdftotext -layout $1 /dev/stdout) <(pdftotext -layout $2 /dev/stdout)
-	
-}
-
-
 function ersetz(){
-
 	for file in *; do
 		if [[ $file =~ \  ]];then
 			echo Leerzeichen: $file
 			neu="${file// /_}"
 			mv $file $neu
-		v_ersetz++
+		$(v_ersetz++)
 		fi
 		file=$neu
 		if [[ $file =~ '[A-Z]' ]];then
@@ -100,14 +82,10 @@ function ersetz(){
 			echo c uni pdf: $file
 		fi
 	done
-	echo "\n${bold}Dateien nach Op $normal"
+	echo "\nDateien nach Op\nAnzahl Ersetzung: $v_ersetz"
 	for f in *;do;echo $f;done
 }
 
-function his(){
-	history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n10
-
-}
 
 function ig(){
 	if [ $os = "Linux" ]; then;ifconfig;else;ipconfig;fi
@@ -139,7 +117,7 @@ compdef _ip ipbas
 
 function ipd(){
 
-	ip link set $1 down
+	ip link set wlan0 down
 }
 compdef _ip ipd
 
@@ -147,7 +125,7 @@ compdef _ip ipd
 function ipu(){
 		
 
-		ip link set $1 up
+		ip link set wlan0 up
 }
 compdef _ip ipu
 
@@ -179,7 +157,7 @@ function ki(){
 		ps -ef|grep $1
 }
 
-function m(){
+function ml(){
 	zparseopts -A ARGUMENTS l: m:
 	cd ~/musik
 	ffprobe $1 2> >(grep Duration)
@@ -190,23 +168,17 @@ function m(){
 	if [ ! $? -eq 0 ]; then
 		loop=$ARGUMENTS[-l]
 	fi
-	
 	mplayer -loop $loop $1  
 }
 
 function mai(){
 		zparseopts -A argumente b: t: a:
 		
-	printf "Subject:$argumente[-b]\n$argumente[-t] Gruß,Timo" |msmtp $ad['${argumente[-a]']
-	#printf "Subject:$argumente[-b]\n$argumente[-t] Gruß,Timo" |msmtp $ad['tk']
-	#cat ~/.msmtp.log
+	#printf "Subject:$argumente[-b]\n$argumente[-t] Gruß,Timo" |msmtp $ad['$argumente[-a]']
+	printf "Subject:test betreff\ntest body eintrag" |msmtp $ad['tk']
+	cat ~/.msmtp.log
 }
 compdef _ma mai
-
-
-function mi(){
-		echo $(dig +short myip.opendns.com @resolver1.opendns.com)
-}
 
 
 compdef _m m
@@ -241,7 +213,7 @@ compdef _pe n
 
 
 function nm(){
-	ipbas $1;nmap -sP $ipbas.1/24
+	nmap -sP $(ipbas).1/24
 }
 compdef _ip nm
 
@@ -270,26 +242,28 @@ function sc2(){
 	
 	dir=$ARGUMENTS[-d]
 	datei=$ARGUMENTS[-f]
-	ipba=$ARGUMENTS[-ip]
+	ip=$ARGUMENTS[-ip]
 	oktett=$ARGUMENTS[-o]
 	port=$ARGUMENTS[-p]
 	user=$ARGUMENTS[-u]
 
 	#ipba=$sm
 
-	if [ -z $datei ];then;datei=`ls -t|head -n1`;fi
-	if [ -z $dir ];then;dir=/root;fi 
-	if [ -z $ipba ];then;ipba=$(ipbas);fi
-	#if [ -z $oktett ];then;oktett=.162;fi
+	#if [ -z $datei ];then;datei=`ls *.webm|head -n1`;fi
+	if [ -z $dir ];then;dir=/root/musik;fi 
+	if [ -z $ip ];then;ip=$sm;fi
+	if [ -z $oktett ];then;oktett=.162;fi
 	if [ -z $port ];then;port=8022;fi
 	if [ -z $user ];then;user=root;fi
+	
+	#for datei in *.webm;do
+		printf 'Dir: %s, Datei: %s, Port: %s, Ip: %s', $dir,$datei, $port, $ipba
 
-	printf 'Dir: %s, Datei: %s, Port: %s, Ip: %s', $dir,$datei, $port, $ipba
-
-	scp -P $port $datei $user@$ipba$oktett:$dir
+		scp -P $port $datei $user@$ip$oktett:$dir
+	#done
 	#rm -rf $datei
 }
-compdef _sc2 sc2
+compdef _sc2 s2
 
 function s2(){
 	ssh -p8022 root@$sm.$1
@@ -354,7 +328,7 @@ function we(){
 }
 
 
-function yt2(){
+function y2(){
 		zparseopts -A ARGUMENTS m:
 	m=$ARGUMENTS[-m]
 	
@@ -363,15 +337,15 @@ function yt2(){
 	
 	typeset -A a_array
 	a_array=(
-	'latino' '' 
-	'pop' 'OPf0YbXqDm0')
+	'chill decem' ''
+       '' '')
 
 	for k in "${(@k)a_array}"; do
 	  youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=$a_array[$k]"
-	  if [[ $1 = u ]];then
-		#mv `ls -t|head -n1` /dev/sdb
-	  fi
 	done
+	for f in *.webm; do
+		cp $f /cygdrive/h
+	done 
 	
 	ersetz
 	sc2 -o .1 -f "`ls -t |head -1`" -d /data/data/com.termux/files/home
@@ -380,6 +354,7 @@ compdef _yt2 yt2
 
  
 # alias/Funktionen
+#alias -g uk=$ad['uk']
 alias al='alias|grep'
 alias am='alias -m'
 alias d='declare -f'
@@ -421,7 +396,7 @@ alias lk="lsblk"
 
 #Dict
 alias wl="echo Dict.;dict -D"
-alias di="dict -d fd-eng-deu"
+alias w="dict -d fd-eng-deu"
 alias w2="dict"
 
 
@@ -453,12 +428,9 @@ alias -s tar="tar tf"
 alias hist='history'
 alias hs='\history -E'
 alias ho='ec $HOST'
-alias j='jobs -l'
-alias pen='printenv n2'
 alias pg='pgrep -P $$'
 alias po='ec $prompt'
 alias pz='pr3 zsh'
-alias se='set gr'
 alias tt='tty'
 alias us='ec $USER'
 alias wh='whois'
@@ -475,7 +447,7 @@ alias i='ip2 wlan0'
 alias ie='curl ifconfig.me'
 alias ii='iw2 n2'
 alias iw2='iwlist wlan0 scan'
-alias jo='journalctl -xe'
+alias mi='echo $(dig +short myip.opendns.com @resolver1.opendns.com)'
 alias pn='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
 alias -g re='$sa'
 alias z='/etc/init.d/networking restart;sleep 1;ig'
@@ -493,13 +465,14 @@ alias -g sl="sleep"
 # Rest
 alias ab="b $ab"
 alias alb="b $alb"
-#alias arc="echo $arc"
 alias cb="b $cb"
 alias -g com="$cb"
 alias -g h="--help |less"
 alias lb="b $lb"
 alias lsb='ec $lsb'
+alias ob='b $ob'
 alias rb="b $rb"
+alias tb="b $tb"
 alias ub="b $ub"
 
 #ssh
@@ -517,17 +490,17 @@ alias tm="tmux"
 
 # zsh
 alias e="exec zsh"
-alias ohmyzsh="b $ZSH/oh-my-zsh.sh"
+alias ohmyzsh='b $oh'
 alias ohm='sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
-alias plu='ec $plugins'
+alias pu='ec $plugins'
 alias -g zr='$zr' # zshrc 
 alias zt="ec $ZSH_THEME"
 
 
-alias aa='amixer -q sset Master 3%-'
+alias aa='amixer -q sset Master 3%-;amixer get Master'
 alias ac='ack -i'
-alias bb='amixer -q sset Master 3%+'
-alias ca='cat'
+alias bb='amixer -q sset Master 3%+;amixer get Master'
+alias c='cat'
 alias dt='date +"%T"'
 alias dh='df -h'
 alias dowDir='l $dowDir'
@@ -537,7 +510,7 @@ alias ec="echo"
 alias g+="g++"
 alias ja="java"
 alias le='less -WiNS'
-alias ma='man'
+alias m='man'
 alias mt='man terminator'
 alias -g n2='|less'
 alias r="expect $lb"
