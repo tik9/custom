@@ -2,18 +2,26 @@ function arg(){
 	if [ -z $1 ];then;echo Argument fehlt;return; fi
 }
 
-function pe(){
-	if [ -z $1 ];then;echo Argument fehlt;return; fi
-	sed -i 's/\(^plugins=\).*/\1(common-aliases git git-prompt ubuntu zsh-autosuggestions $1)/' b $zr
+function b(){	
+	/root/src/src_geany-1.28/usr/bin/geany $1 &
 }
+
+
+function pe(){
+	if [ -z $1 ];then;echo Argument fehlt in ${FUNCNAME[0]};return; fi
+	sed -i "s/\(^plugins=\).*/\1(common-aliases git git-prompt ubuntu zsh-autosuggestions $1)/" $zr
+	exec zsh
+}
+
 
 os=`uname -a |cut -d' ' -f 1`
 
 declare -A ad
 ad[ms]='schuhmaier@playglobe.eu'
-ad['uk']='ukoerner@konzertagentur-koerner.de'
-ad['tk']='user153015@gmail.com'
-ad['t']='01573 9598 220'
+ad[ss]='sstirner@konzertagentur-koerner.de'
+ad[tk]='user153015@gmail.com'
+ad[t]='01573 9598 220'
+ad[uk]='ukoerner@konzertagentur-koerner.de'
 
 #ad=(k1 v1 k2 v2)
 
@@ -24,11 +32,9 @@ arb=plugins/archlinux/archlinux.plugin.zsh
 ab2=plugins/android/android.plugin.zsh
 ab=$ZSH_CUSTOM/$ab2
 
-cb2=plugins/common-aliases/common-aliases.plugin.zsh
-cb=$ZSH_CUSTOM/$cb2
+cb2=plugins/common-aliases/common-aliases.plugin.zsh;cb=$ZSH_CUSTOM/$cb2
 
-db2=plugins/django/django.plugin.zsh
-db=$ZSH_CUSTOM/$db2
+db2=plugins/django/django.plugin.zsh;db=$ZSH_CUSTOM/$db2
 
 gb2=plugins/git/git.plugin.zsh
 gb=$ZSH_CUSTOM/$gb2
@@ -40,15 +46,14 @@ ob=$ZSH/oh-my-zsh.sh
 
 pb=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
 
-rb2=functions/_rest
-rb=$ZSH_CUSTOM/$rb2
+rb2=functions/_rest;rb=$ZSH_CUSTOM/$rb2
 
 tb=$ZSH_CUSTOM/todo
 ub=$ZSH_CUSTOM/plugins/ubuntu/ubuntu.plugin.zsh
 
 un=~/uni
 
-sa=178.27.250.8
+sa=188.194.163.73
 sm=192.168.43
 
 zr=~/.zshrc
@@ -157,6 +162,23 @@ function ki(){
 		ps -ef|grep $1
 }
 
+
+function mai(){
+		zparseopts -A arg b: t: a:
+		
+	printf "Subject:$arg[-b]\n${arg[-t]} Gruß,Timo" |msmtp $ad[$arg[-a]]
+	#printf "Subject:test betreff\ntest body eintrag" |msmtp $ad['tk']
+	tail -n5 ~/.msmtp.log
+}
+compdef _ma mai
+
+function ma2(){
+	if [ -z $1 ];then;echo Argument fehlt;return; fi
+	cat email|msmtp $ad[$1] $ad[$2]	
+	tail -n5 ~/.msmtp.log
+}
+
+
 function ml(){
 	zparseopts -A ARGUMENTS l: m:
 	cd ~/musik
@@ -170,15 +192,6 @@ function ml(){
 	fi
 	mplayer -loop $loop $1  
 }
-
-function mai(){
-		zparseopts -A argumente b: t: a:
-		
-	#printf "Subject:$argumente[-b]\n$argumente[-t] Gruß,Timo" |msmtp $ad['$argumente[-a]']
-	printf "Subject:test betreff\ntest body eintrag" |msmtp $ad['tk']
-	cat ~/.msmtp.log
-}
-compdef _ma mai
 
 
 compdef _m m
@@ -453,16 +466,7 @@ alias -g re='$sa'
 alias z='/etc/init.d/networking restart;sleep 1;ig'
 
 
-# ps
-alias ks="ki ssh;ph"
-alias ksl="ki sl;ph"
-alias ph="pr ssh"
-alias pr='ps -ef|grep'
-alias pl="pr sleep"
-alias -g sl="sleep"
-
-
-# Rest
+# plugins
 alias ab="b $ab"
 alias alb="b $alb"
 alias cb="b $cb"
@@ -474,6 +478,15 @@ alias ob='b $ob'
 alias rb="b $rb"
 alias tb="b $tb"
 alias ub="b $ub"
+
+# ps
+alias ks="ki ssh;ph"
+alias ksl="ki sl;ph"
+alias ph="pr ssh"
+alias pr='ps -ef|grep'
+alias pl="pr sleep"
+alias -g sl="sleep"
+
 
 #ssh
 alias -g idr=~/.ssh/id_rsa.pub 
@@ -511,6 +524,7 @@ alias g+="g++"
 alias ja="java"
 alias le='less -WiNS'
 alias m='man'
+alias ma='mail'
 alias mt='man terminator'
 alias -g n2='|less'
 alias r="expect $lb"

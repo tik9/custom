@@ -85,7 +85,7 @@ function gl(){
 }
 
 
-alias a='$(_check); gs'
+alias a='$(_check); git status'
 alias g='git diff'
 alias ga='$(_check);git add --all;a'
 

@@ -6,9 +6,6 @@ mteDir=/root/git/mte
 
 arc=`uname -a |cut -d' ' -f 14`
 
-function b(){	
-	/root/src/src_geany-1.28/usr/bin/geany $1 &
-}
 
 function ci(){
 		echo "$1"|xclip
