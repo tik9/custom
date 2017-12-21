@@ -8,11 +8,11 @@ arc=`uname -a |cut -d' ' -f 14`
 
 
 function ci(){
-		echo "$1"|xclip
+		echo "$1"|xclip -selection clipboard
 }
 
 function co(){
-		xclip -o
+		xclip -o -selection clipboard
 }
 
 function mp(){

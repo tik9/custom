@@ -36,8 +36,7 @@ function work_in_progress() {
 
 
 function gc(){
-	#Aufruf: gc -m foo
-	zparseopts -A ARGUMENTS m: m2:
+	zparseopts -A ARGUMENTS m:
 
 	#int a = (b == 5) ? c : d;
 	[[ -n $ARGUMENTS[-m] ]] && mh=$ARGUMENTS[-m] || mh="$1"
@@ -86,6 +85,13 @@ function gl(){
 
 
 alias a='$(_check); git status'
+
+alias adc='git rm -r --cached'
+
+function adg(){
+	echo $1 >> .gitignore
+}
+	
 alias g='git diff'
 alias ga='$(_check);git add --all;a'
 
@@ -120,7 +126,6 @@ alias gf='git config --list'
 function gfg() { git ls-files | grep $@ }
 compdef gfg=grep
 
-alias gg='$(_check); git log --stat'
 
 function ggf() {
 [[ "$#" != 1 ]] && local b="$(git_current_branch)"
@@ -221,5 +226,6 @@ alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
 alias gupv='git pull --rebase -v'
 
 alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
+alias i='$(_check); git log --stat'
 
 alias u='cd $(_check);git log --stat | head -n 10'

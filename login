@@ -9,9 +9,7 @@ if { [lindex $argv 1] eq "" } {
 #set letzesOktett 111
 #set basis "192.168.43."
 
-set basis "188.194.163.73"
-
-spawn ssh root@${basis}
+spawn ssh root@188.194.163.73
 
 #expect arch {
 send "0;cd\r"

@@ -25,7 +25,7 @@ ad[uk]='ukoerner@konzertagentur-koerner.de'
 
 #ad=(k1 v1 k2 v2)
 
-#for k in ${(@k)ad};do ;echo "$k $ad[$k]" ; done
+alias ad='for k in ${(@k)ad};do ;echo "$k $ad[$k]" ; done'
 
 arb=plugins/archlinux/archlinux.plugin.zsh
 
@@ -61,11 +61,6 @@ zr=~/.zshrc
 
 aaa(){}
 
-
-function add(){
-	ec $1 >> .gitignore
-}
-	
 
 function ersetz(){
 	for file in *; do
@@ -253,21 +248,14 @@ function sc2(){
 
 	dir=storage/music
 	
-	dir=$ARGUMENTS[-d]
-	datei=$ARGUMENTS[-f]
-	ip=$ARGUMENTS[-ip]
-	oktett=$ARGUMENTS[-o]
-	port=$ARGUMENTS[-p]
-	user=$ARGUMENTS[-u]
+	dir=$ARGUMENTS[-d]; 	if [ -z $dir ];then;dir=/root/musik;fi 
+	datei=$ARGUMENTS[-f]; 	if [ -z $datei ];then;datei=`ls |head -n1`;fi
+	ip=$ARGUMENTS[-ip];		if [ -z $ip ];then;ip=$sm;fi
+	#oktett=$ARGUMENTS[-o];	if [ -z $oktett ];then;oktett=.162;fi
+	port=$ARGUMENTS[-p];	if [ -z $port ];then;port=8022;fi
+	user=$ARGUMENTS[-u]; 	if [ -z $user ];then;user=root;fi
 
 	#ipba=$sm
-
-	#if [ -z $datei ];then;datei=`ls *.webm|head -n1`;fi
-	if [ -z $dir ];then;dir=/root/musik;fi 
-	if [ -z $ip ];then;ip=$sm;fi
-	if [ -z $oktett ];then;oktett=.162;fi
-	if [ -z $port ];then;port=8022;fi
-	if [ -z $user ];then;user=root;fi
 	
 	#for datei in *.webm;do
 		printf 'Dir: %s, Datei: %s, Port: %s, Ip: %s', $dir,$datei, $port, $ipba
@@ -278,22 +266,11 @@ function sc2(){
 }
 compdef _sc2 s2
 
-function s2(){
-	ssh -p8022 root@$sm.$1
-}
+function s2(){ssh -p8022 root@$sm.$1}
 
 function schieb(){
-
-	ziel_dir=`pwd`
-	
-	#if [ -d $2 ];then;ziel_dir=$2;fi
-	for i in `seq 1 $1`; do; 	
-		dat="$dowDir/`ls -t $dowDir | head -n1`"
-		echo $dat
-		mv $dat $ziel_dir
-
-		#echo aktuelle Datei $ziel_dir/`ls -t $ziel_dir | head -n1`
-	done
+	for i in `seq 1 $1`
+	echo ls|head -n1	#cp $dowDir/`ls -t $dowDir | head -n1` `pwd`
 }
 
 compdef _schieb schieb
@@ -302,17 +279,15 @@ function scmysql(){
 	
 	mysqldump d> $(date +"%m_%Y").sql
 	scp -P $1 `ls -t | head -n1` 0.tcp.eu.ngrok.io:/root/sqlBack 
-	#lö $(date +"%m_%Y").sql
+	#rm $(date +"%m_%Y").sql
 }
 
 
 function si(){
-	
 	secs=$(($1 * 60))
 	while [ $secs -gt 0 ]; do
 	   echo -ne "$secs\033[0K\r"
-	   sleep 1
-	   : $((secs--))
+	   sleep 1; : $((secs--))
 	done
 	eval $2
 }
@@ -326,13 +301,11 @@ function ss(){
 }
 
 function unt(){
-	#schieb
-	#a=$(schieb)
+	#schieb;	#a=$(schieb)
 	#cd `pwd`
 	# gz: z flag
 	a=`ls -t | head -n1`
-	tar zxvf $a
-	#rm $a
+	tar zxvf $a ;#rm $a
 }
 
 function we(){
@@ -401,7 +374,7 @@ alias cu='curl'
 
 #Dateiops
 alias cp='cp -r'
-alias lö='rm -rf'
+alias lö='rm -rf;ls'
 alias to='touch'
 
 #Dateisystem
@@ -471,6 +444,7 @@ alias ab="b $ab"
 alias alb="b $alb"
 alias cb="b $cb"
 alias -g com="$cb"
+alias gic="c .gitignore"
 alias -g h="--help |less"
 alias lb="b $lb"
 alias lsb='ec $lsb'

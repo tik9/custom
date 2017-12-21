@@ -16,3 +16,5 @@ The compinit function is what loads the tab-completion system by defining a shel
 Using the setopt command, you can configure over 150 different options that impact how zsh works. For instance:
 
 setopt autocd
+
+git als eigene plugin datei
