@@ -64,7 +64,7 @@ function gi(){
 	 git add . 
 	 git commit -am ${mh} 
 	 git push
-	git log
+	git log --stat
 }
 
 compdef _gc gc
@@ -227,5 +227,6 @@ alias gupv='git pull --rebase -v'
 
 alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 alias i='$(_check); git log --stat'
+alias n='$(_check); git log --stat -p'
 
 alias u='cd $(_check);git log --stat | head -n 10'

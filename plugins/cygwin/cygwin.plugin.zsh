@@ -4,6 +4,7 @@ zHome=.oh-my-zsh/custom
 
 home2=c:/cygwin64/home/itdlz-koer
 cb=$home2/$zHome/$cb2
+cyb=$home2/$zHome/$cy2
 db=$home2/$zHome/$db2
 gb=$home2/$zHome/$gb2
 gb3=$home2/$zHome/$gb4
@@ -12,11 +13,10 @@ ob=$home2/ZSH/oh-my-zsh.sh
 pb=$home2/$zHome/$pb2
 rb=$home2/$zHome/$rb2
 
-
 bim=$(wmic OS get OSArchitecture)
 
 dowDir=/cygdrive/C/Users/itdlz-koer/Downloads
-mteDir=$home2/mte/my-app
+mteDir=$home2/mte/
 
 zr=$home2/.zshrc
 
@@ -60,6 +60,12 @@ function sho(){
 alias agr='apt-cyg remove';
 alias allpkgs='apt-cyg listall'
 alias arc="echo $arc"
+
+#plugins
+alias cb="b $cb"
+alias -g com="$cb"
+alias cyb="b $cyb"
+
 alias in='apt-cyg install'
 alias lb="b $lb"
 alias ob="b $ob"

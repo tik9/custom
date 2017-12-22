@@ -32,9 +32,10 @@ arb=plugins/archlinux/archlinux.plugin.zsh
 ab2=plugins/android/android.plugin.zsh
 ab=$ZSH_CUSTOM/$ab2
 
-cb2=plugins/common-aliases/common-aliases.plugin.zsh;cb=$ZSH_CUSTOM/$cb2
+cb2=plugins/common-aliases/common-aliases.plugin.zsh; cb=$ZSH_CUSTOM/$cb2
+cy2=plugins/cygwin/cygwin.plugin.zsh; cyb=$ZSH_CUSTOM/$cy2
 
-db2=plugins/django/django.plugin.zsh;db=$ZSH_CUSTOM/$db2
+db2=plugins/django/django.plugin.zsh; db=$ZSH_CUSTOM/$db2
 
 gb2=plugins/git/git.plugin.zsh
 gb=$ZSH_CUSTOM/$gb2
@@ -57,7 +58,6 @@ sa=188.194.163.73
 sm=192.168.43
 
 zr=~/.zshrc
-
 
 aaa(){}
 
@@ -98,7 +98,6 @@ function int_trap() {
 
 
 function ip2(){
-	
 	interf=$1
 	if [ -z $1 ]; then ; interf=wlan0;fi
 	
@@ -108,7 +107,7 @@ compdef _ip ip2
 
 
 function ipbas {
-	
+
 	ipbas=$(echo `i` | cut -d . -f -3)	
 	echo $ipbas
 }
@@ -116,15 +115,12 @@ function ipbas {
 compdef _ip ipbas
 
 function ipd(){
-
 	ip link set wlan0 down
 }
 compdef _ip ipd
 
 
 function ipu(){
-		
-
 		ip link set wlan0 up
 }
 compdef _ip ipu
@@ -157,6 +153,9 @@ function ki(){
 		ps -ef|grep $1
 }
 
+function lö(){
+	rm -rf "$@";ls -a
+}
 
 function mai(){
 		zparseopts -A arg b: t: a:
@@ -207,14 +206,14 @@ function mv0(){
 }
 
 
-function n(){
+function cua(){
 	pkill -P $$
 	while true; do
 		echo "telnet/curl $sa 8000"
 		curl -f $sa:8000 && echo Erfolg || echo Keine Verbindung
 		#curl localhost:8000
 		sleep 30m 
-		ec $(date +"%T")
+		echo $(date +"%T")
 	done
 }
 compdef _pe n
@@ -237,7 +236,6 @@ function pk(){
 
 
 function pt(){
-	
 	ps -ef |grep $pts/$1
 }
 compdef _pt pt
@@ -255,10 +253,8 @@ function sc2(){
 	port=$ARGUMENTS[-p];	if [ -z $port ];then;port=8022;fi
 	user=$ARGUMENTS[-u]; 	if [ -z $user ];then;user=root;fi
 
-	#ipba=$sm
-	
 	#for datei in *.webm;do
-		printf 'Dir: %s, Datei: %s, Port: %s, Ip: %s', $dir,$datei, $port, $ipba
+		printf "Dir: %s, Datei: %s, Port: %s, Ip: %s", $dir,$datei, $port, $ipba
 
 		scp -P $port $datei $user@$ip$oktett:$dir
 	#done
@@ -372,13 +368,11 @@ alias cm='cu http://$sa:8000/de/admin/'
 alias cu='curl'
 
 
-#Dateiops
+#Dateien
 alias cp='cp -r'
-alias lö='rm -rf;ls'
-alias to='touch'
-
-#Dateisystem
 alias lk="lsblk"
+
+alias to='touch'
 
 #Dict
 alias wl="echo Dict.;dict -D"
@@ -444,6 +438,7 @@ alias ab="b $ab"
 alias alb="b $alb"
 alias cb="b $cb"
 alias -g com="$cb"
+alias cyb="b $cyb"
 alias gic="c .gitignore"
 alias -g h="--help |less"
 alias lb="b $lb"
