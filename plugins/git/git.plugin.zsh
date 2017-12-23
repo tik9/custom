@@ -92,6 +92,7 @@ function adg(){
 	echo $1 >> .gitignore
 }
 	
+alias cg='c .gitignore'
 alias g='git diff'
 alias ga='$(_check);git add --all;a'
 
@@ -188,7 +189,6 @@ alias glgg='git log --graph'
 alias glgm='git log --graph --max-count=10'
 alias glol="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias glola="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
-alias glp='; git log -p'
 
 function gls(){
 	git log $1 --stat
@@ -218,7 +218,7 @@ alias gstl='git stash list'
 alias gstp='git stash pop;gstl'
 alias gsts='git stash show -p'
 
-alias gt='git checkout'
+alias gt='git checkout -- .'
 
 alias gu='git pull'
 alias gunignore='git update-index --no-assume-unchanged'
@@ -230,3 +230,4 @@ alias i='$(_check); git log --stat'
 alias n='$(_check); git log --stat -p'
 
 alias u='cd $(_check);git log --stat | head -n 10'
+alias w='$(_check); git log -p'

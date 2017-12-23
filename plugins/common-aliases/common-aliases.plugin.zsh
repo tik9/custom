@@ -8,20 +8,28 @@ function b(){
 
 
 function pe(){
-	if [ -z $1 ];then;echo Argument fehlt in ${FUNCNAME[0]};return; fi
 	sed -i "s/\(^plugins=\).*/\1(common-aliases git git-prompt ubuntu zsh-autosuggestions $1)/" $zr
+	#${array[@]/$delete}
 	exec zsh
 }
 
+function pe2(){
+	sed -i "s/\(^plugins=\)\((common-aliases git git-prompt ubuntu zsh-autosuggestions .*)\)/\1 `unset '\2[${#\2[@]}-1]'`" $zr
+}
+
+function mut(){
+	#mutt -a $arg[-a] -s "$arg[-s]" -- $arg[-e] < $arg[-t]
+	mutt -s "test" -- $ad[tk]
+}
 
 os=`uname -a |cut -d' ' -f 1`
 
 declare -A ad
 ad[ms]='schuhmaier@playglobe.eu'
 ad[ss]='sstirner@konzertagentur-koerner.de'
-ad[tk]='user153015@gmail.com'
+ad[tk]='user153015@gmail.com';alias -g tk=$ad['tk']
 ad[t]='01573 9598 220'
-ad[uk]='ukoerner@konzertagentur-koerner.de'
+ad[uk]='ukoerner@konzertagentur-koerner.de' #;alias -g uk=$ad['uk']
 
 #ad=(k1 v1 k2 v2)
 
@@ -53,6 +61,7 @@ tb=$ZSH_CUSTOM/todo
 ub=$ZSH_CUSTOM/plugins/ubuntu/ubuntu.plugin.zsh
 
 un=~/uni
+dirt=/data/data/com.termux/files/home
 
 sa=188.194.163.73
 sm=192.168.43
@@ -84,11 +93,6 @@ function ersetz(){
 	done
 	echo "\nDateien nach Op\nAnzahl Ersetzung: $v_ersetz"
 	for f in *;do;echo $f;done
-}
-
-
-function ig(){
-	if [ $os = "Linux" ]; then;ifconfig;else;ipconfig;fi
 }
 
 
@@ -198,13 +202,6 @@ function mo(){
 	mount /dev/$dev $mediaDir
 }
 
-	
-function mv0(){
-	mvn clean compile assembly:single  -e
-	echo .. compile fertig
-	java -jar target/my-app-2.jar 
-}
-
 
 function cua(){
 	pkill -P $$
@@ -247,15 +244,14 @@ function sc2(){
 	dir=storage/music
 	
 	dir=$ARGUMENTS[-d]; 	if [ -z $dir ];then;dir=/root/musik;fi 
-	datei=$ARGUMENTS[-f]; 	if [ -z $datei ];then;datei=`ls |head -n1`;fi
+	datei=$ARGUMENTS[-f]; 	if [ -z $datei ];then;datei=`ls -p | grep -v / |head -n1`;fi
 	ip=$ARGUMENTS[-ip];		if [ -z $ip ];then;ip=$sm;fi
-	#oktett=$ARGUMENTS[-o];	if [ -z $oktett ];then;oktett=.162;fi
+	oktett=$ARGUMENTS[-o];	if [ -z $oktett ];then;oktett=.162;fi
 	port=$ARGUMENTS[-p];	if [ -z $port ];then;port=8022;fi
 	user=$ARGUMENTS[-u]; 	if [ -z $user ];then;user=root;fi
 
 	#for datei in *.webm;do
-		printf "Dir: %s, Datei: %s, Port: %s, Ip: %s", $dir,$datei, $port, $ipba
-
+		printf "Dir: %s, Datei: %s, Port: %s, Ip: %s", $dir,$datei, $port, $ip
 		scp -P $port $datei $user@$ip$oktett:$dir
 	#done
 	#rm -rf $datei
@@ -289,7 +285,6 @@ function si(){
 }
 
 function ss(){
-	#echo $1 | ssh root@$sa 'cat >> .ssh/authorized_keys'
 	in git zsh
 	cat ~/.ssh/id_rsa.pub | ssh root@$sa 'cat >> ~/.ssh/authorized_keys'
 	git config --global user.email
@@ -319,24 +314,23 @@ function y2(){
 	
 	typeset -A a_array
 	a_array=(
-	'chill decem' ''
+	'jazz latin' ''
        '' '')
 
 	for k in "${(@k)a_array}"; do
 	  youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=$a_array[$k]"
 	done
 	for f in *.webm; do
-		cp $f /cygdrive/h
+		#cp $f /cygdrive/h
 	done 
 	
 	ersetz
-	sc2 -o .1 -f "`ls -t |head -1`" -d /data/data/com.termux/files/home
+	sc2 -o .1 -f "`ls  *.webm |head -1`" -d $dirt
 }
 compdef _yt2 yt2
 
  
 # alias/Funktionen
-#alias -g uk=$ad['uk']
 alias al='alias|grep'
 alias am='alias -m'
 alias d='declare -f'
@@ -376,7 +370,7 @@ alias to='touch'
 
 #Dict
 alias wl="echo Dict.;dict -D"
-alias w="dict -d fd-eng-deu"
+alias di="dict -d fd-eng-deu"
 alias w2="dict"
 
 
@@ -406,7 +400,7 @@ alias -s tar="tar tf"
 
 # Konsole
 alias hist='history'
-alias hs='\history -E'
+alias hs='fc -li 9950 n2'
 alias ho='ec $HOST'
 alias pg='pgrep -P $$'
 alias po='ec $prompt'
@@ -427,6 +421,7 @@ alias i='ip2 wlan0'
 alias ie='curl ifconfig.me'
 alias ii='iw2 n2'
 alias iw2='iwlist wlan0 scan'
+alias j=ifconfig
 alias mi='echo $(dig +short myip.opendns.com @resolver1.opendns.com)'
 alias pn='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
 alias -g re='$sa'

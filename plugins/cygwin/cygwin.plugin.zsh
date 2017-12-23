@@ -33,11 +33,22 @@ function co(){
 		cat /dev/clipboard
 }
 
+function mv0(){
+	mvn clean compile
+	echo .. kompilieren fertig
+	java -jar target/my-app-2.jar 
+}
 
 function pd(){
 
 	cygcheck -c|less
 }
+
+function pe(){
+	sed -i "s/\(^plugins=\).*/\1(common-aliases git cygwin $1)/" $zr
+	exec zsh
+}
+
 
 function q(){
 	datei=test100.zip
@@ -67,6 +78,7 @@ alias -g com="$cb"
 alias cyb="b $cyb"
 
 alias in='apt-cyg install'
+alias j='ipconfig'
 alias lb="b $lb"
 alias ob="b $ob"
 alias op='cygstart'

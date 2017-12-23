@@ -9,7 +9,7 @@ alias dv='echo django version; p3 -c "import django;print(django.get_version())"
 alias mig="dm migrate"
 alias mk="dm makemigrations"
 alias mm="dm makemessages"
-alias w='dm runserver'
+alias rs='dm runserver'
 
 
 typeset -ga nul_args
