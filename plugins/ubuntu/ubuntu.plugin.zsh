@@ -8,7 +8,7 @@ arc=`uname -a |cut -d' ' -f 14`
 
 
 function ci(){
-		echo "$1"|xclip -selection clipboard
+		echo $@|xclip -selection clipboard
 }
 
 function co(){
@@ -65,6 +65,7 @@ alias arc="echo $arc"
 alias hi='sudo hibernate'
 
 alias -s pdf=mupdf
+alias pi=gpicview
 
 alias ppap='sudo ppa-purge'
 compdef _ppap ppap='sudo ppa-purge'
@@ -104,7 +105,6 @@ compdef _agar agar='sudo apt-get autoremove'
 alias kclean='sudo aptitude remove -P ?and(~i~nlinux-(ima|hea) \
 	?not(~n`uname -r`))'
 
-# print all installed packages
 alias allpkgs='dpkg --get-selections | grep -v deinstall'
 alias pkgsu="apt list --upgradable "
 

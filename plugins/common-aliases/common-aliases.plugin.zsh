@@ -27,7 +27,8 @@ os=`uname -a |cut -d' ' -f 1`
 declare -A ad
 ad[ms]='schuhmaier@playglobe.eu'
 ad[ss]='sstirner@konzertagentur-koerner.de'
-ad[tk]='user153015@gmail.com';alias -g tk=$ad['tk']
+ad[tk]='user153015@gmail.com';alias -g tk=$ad[tk]
+ad[t2]='studienkreis.timo.koerner@gmail.com';alias -g t2=$ad[t2]
 ad[t]='01573 9598 220'
 ad[uk]='ukoerner@konzertagentur-koerner.de' #;alias -g uk=$ad['uk']
 
@@ -262,7 +263,8 @@ function s2(){ssh -p8022 root@$sm.$1}
 
 function schieb(){
 	for i in `seq 1 $1`
-	echo ls|head -n1	#cp $dowDir/`ls -t $dowDir | head -n1` `pwd`
+	echo ls|head -n1	
+	cp $dowDir/`ls -t $dowDir | head -n1` .
 }
 
 compdef _schieb schieb
@@ -347,7 +349,7 @@ alias ar="cd ~/arduino"
 alias y="cd"
 alias da="cd ~/django"
 alias dow="cd $dowDir"
-alias mu="cd ~/musik"
+alias mus="cd ~/musik"
 alias mte='cd $mteDir'
 alias o='cd $ZSH_CUSTOM'
 alias oh='cd $ZSH'
@@ -407,7 +409,12 @@ alias po='ec $prompt'
 alias pz='pr3 zsh'
 alias tt='tty'
 alias us='ec $USER'
-alias wh='whois'
+
+#Mail
+alias mm='c .msmtprc'
+alias mf='c .fetchmailrc'
+alias mr='c /etc/mail.rc'
+alias mu='mutt'
 
 
 #mysql
@@ -425,7 +432,7 @@ alias j=ifconfig
 alias mi='echo $(dig +short myip.opendns.com @resolver1.opendns.com)'
 alias pn='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
 alias -g re='$sa'
-alias z='/etc/init.d/networking restart;sleep 1;ig'
+alias z='/etc/init.d/networking restart'
 
 
 # plugins
@@ -460,7 +467,6 @@ alias sd='sshd;ph'
 
 #tmux
 alias ta="tmux attach"
-alias tk="tmux kill-session"
 alias tl="tmux ls"
 alias tm="tmux"
 
