@@ -12,7 +12,7 @@ if { [lindex $argv 1] eq "" } {
 spawn ssh root@188.194.163.73
 
 #expect arch {
-send "0;cd\r"
+#send "0;cd\r"
 #}
 
 interact

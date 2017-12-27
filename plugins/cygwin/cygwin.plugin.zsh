@@ -1,24 +1,39 @@
 arc=`uname -a |cut -d' ' -f 6`
 
-zHome=.oh-my-zsh/custom
+home=c:/cygwin64/home/itdlz-koer
+# oHome=
+cHome=$home/.oh-my-zsh/custom
 
-home2=c:/cygwin64/home/itdlz-koer
-cb=$home2/$zHome/$cb2
-cyb=$home2/$zHome/$cy2
-db=$home2/$zHome/$db2
-gb=$home2/$zHome/$gb2
-gb3=$home2/$zHome/$gb4
-lb=$home2/$zHome/login
-ob=$home2/ZSH/oh-my-zsh.sh
-pb=$home2/$zHome/$pb2
-rb=$home2/$zHome/$rb2
+an=$cHome/$an2
+co=$cHome/$co2
+cy=$cHome/$cy2
+dj=$cHome/$dj2
+gi=$cHome/$gi2
+gb3=$cHome/$gb4
+lo=$cHome/login
+oh=$cHome/oh-my-zsh.sh
+py=$cHome/$py2
+re=$cHome/$re2
+to=$cHome/$to2
+ub=$cHome/$ub2
+zr=$home/.zshrc
+
+#plugins
+alias anb="b $an"
+alias arb="b $ar"
+alias cb="b $co"
+alias -g com="$co"
+alias cyb="b $cy"
+alias lb="b $lo"
+alias ob="b $oh"
+alias ub="b $ub"
+alias zb="b $zr"
 
 bim=$(wmic OS get OSArchitecture)
 
 dowDir=/cygdrive/C/Users/itdlz-koer/Downloads
-mteDir=$home2/mte/
+mteDir=$home/mte/
 
-zr=$home2/.zshrc
 
 function b(){	
 		notepad++ $1 &
@@ -31,6 +46,12 @@ function ci(){
 
 function co(){
 		cat /dev/clipboard
+}
+
+function ki(){
+		pkill $1;
+		echo "Prozesse mit $1 \n"
+		ps -ef|grep $1
 }
 
 function mv0(){
@@ -72,10 +93,6 @@ alias agr='apt-cyg remove';
 alias allpkgs='apt-cyg listall'
 alias arc="echo $arc"
 
-#plugins
-alias cb="b $cb"
-alias -g com="$cb"
-alias cyb="b $cyb"
 
 alias in='apt-cyg install'
 alias j='ipconfig'

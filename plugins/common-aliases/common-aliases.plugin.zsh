@@ -1,5 +1,66 @@
+ar=plugins/archlinux/archlinux.plugin.zsh
+
+an2=plugins/android/android.plugin.zsh
+an=$ZSH_CUSTOM/$an2
+
+co2=plugins/common-aliases/common-aliases.plugin.zsh; co=$ZSH_CUSTOM/$co2
+cy2=plugins/cygwin/cygwin.plugin.zsh; cy=$ZSH_CUSTOM/$cy2
+
+dj2=plugins/django/django.plugin.zsh; dj=$ZSH_CUSTOM/$dj2
+
+gi2=plugins/git/git.plugin.zsh
+gi=$ZSH_CUSTOM/$gi2
+gi4=functions/_git2
+gi3=$ZSH_CUSTOM/$gi4
+
+lo=$ZSH_CUSTOM/login
+oh=$ZSH_CUSTOM/oh-my-zsh.sh
+
+py=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
+
+re2=functions/_rest;re=$ZSH_CUSTOM/$re2
+
+to=$ZSH_CUSTOM/todo
+ub2=plugins/ubuntu/ubuntu.plugin.zsh
+ub=$ZSH_CUSTOM/$ub2
+zr=~/.zshrc
+
+un=~/uni
+dirt=/data/data/com.termux/files/home
+
+os=`uname -a |cut -d' ' -f 1`
+
+declare -A ad
+ad[ms]='schuhmaier@playglobe.eu'
+ad[ss]='sstirner@konzertagentur-koerner.de'
+ad[tk]='user153015@gmail.com';alias -g tk=$ad[tk]
+ad[t2]='studienkreis.timo.koerner@gmail.com';alias -g t2=$ad[t2]
+ad[t]='01573 9598 220'
+ad[uk]='ukoerner@konzertagentur-koerner.de' #;alias -g uk=$ad['uk']
+
+#ad=(k1 v1 k2 v2)
+
+sa=188.194.163.73
+sm=192.168.43
+
+# plugins
+alias anb="b $an"
+alias arb="b $ar"
+alias cb="b $co"
+alias -g com="$co"
+alias cyb="b $cy"
+alias gic="c .gitignore"
+#alias lb="b $lo"
+alias ob="b $oh"
+alias rb="b $re"
+alias tb="b $to"
+alias ub="b $ub"
+alias zb='b $zr'
+alias -g zr='$zr' # zshrc 
+
 function arg(){
-	if [ -z $1 ];then;echo Argument fehlt;return; fi
+	# if [ -z $1 ];then;echo Argument fehlt;return; fi
+	((!$#)) && echo Keine Argumente!
 }
 
 function b(){	
@@ -22,52 +83,6 @@ function mut(){
 	mutt -s "test" -- $ad[tk]
 }
 
-os=`uname -a |cut -d' ' -f 1`
-
-declare -A ad
-ad[ms]='schuhmaier@playglobe.eu'
-ad[ss]='sstirner@konzertagentur-koerner.de'
-ad[tk]='user153015@gmail.com';alias -g tk=$ad[tk]
-ad[t2]='studienkreis.timo.koerner@gmail.com';alias -g t2=$ad[t2]
-ad[t]='01573 9598 220'
-ad[uk]='ukoerner@konzertagentur-koerner.de' #;alias -g uk=$ad['uk']
-
-#ad=(k1 v1 k2 v2)
-
-alias ad='for k in ${(@k)ad};do ;echo "$k $ad[$k]" ; done'
-
-arb=plugins/archlinux/archlinux.plugin.zsh
-
-ab2=plugins/android/android.plugin.zsh
-ab=$ZSH_CUSTOM/$ab2
-
-cb2=plugins/common-aliases/common-aliases.plugin.zsh; cb=$ZSH_CUSTOM/$cb2
-cy2=plugins/cygwin/cygwin.plugin.zsh; cyb=$ZSH_CUSTOM/$cy2
-
-db2=plugins/django/django.plugin.zsh; db=$ZSH_CUSTOM/$db2
-
-gb2=plugins/git/git.plugin.zsh
-gb=$ZSH_CUSTOM/$gb2
-gb4=functions/_git2
-gb3=$ZSH_CUSTOM/$gb4
-
-lb=$ZSH_CUSTOM/login
-ob=$ZSH/oh-my-zsh.sh
-
-pb=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
-
-rb2=functions/_rest;rb=$ZSH_CUSTOM/$rb2
-
-tb=$ZSH_CUSTOM/todo
-ub=$ZSH_CUSTOM/plugins/ubuntu/ubuntu.plugin.zsh
-
-un=~/uni
-dirt=/data/data/com.termux/files/home
-
-sa=188.194.163.73
-sm=192.168.43
-
-zr=~/.zshrc
 
 aaa(){}
 
@@ -105,7 +120,6 @@ function int_trap() {
 function ip2(){
 	interf=$1
 	if [ -z $1 ]; then ; interf=wlan0;fi
-	
 		ip addr show $interf | grep -Po 'inet \K[\d.]+'
 }
 compdef _ip ip2
@@ -197,13 +211,6 @@ compdef _m m
 #compdef _path_files ml
 
 
-function mo(){
-	mediaDir='/media/t'
-	dev=`lsblk|sed -n 5p|cut -f1 -d' '`
-	mount /dev/$dev $mediaDir
-}
-
-
 function cua(){
 	pkill -P $$
 	while true; do
@@ -215,12 +222,6 @@ function cua(){
 	done
 }
 compdef _pe n
-
-
-function nm(){
-	nmap -sP $(ipbas).1/24
-}
-compdef _ip nm
 
 	
 function p(){
@@ -425,7 +426,7 @@ alias mst='mysql -uroot d -e "show tables"'
 # netzwerk
 alias f='iwgetid -r'
 alias i='ip2 wlan0'
-alias ie='curl ifconfig.me'
+alias i2='curl ifconfig.me'
 alias ii='iw2 n2'
 alias iw2='iwlist wlan0 scan'
 alias j=ifconfig
@@ -433,22 +434,6 @@ alias mi='echo $(dig +short myip.opendns.com @resolver1.opendns.com)'
 alias pn='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
 alias -g re='$sa'
 alias z='/etc/init.d/networking restart'
-
-
-# plugins
-alias ab="b $ab"
-alias alb="b $alb"
-alias cb="b $cb"
-alias -g com="$cb"
-alias cyb="b $cyb"
-alias gic="c .gitignore"
-alias -g h="--help |less"
-alias lb="b $lb"
-alias lsb='ec $lsb'
-alias ob='b $ob'
-alias rb="b $rb"
-alias tb="b $tb"
-alias ub="b $ub"
 
 # ps
 alias ks="ki ssh;ph"
@@ -473,15 +458,14 @@ alias tm="tmux"
 
 # zsh
 alias e="exec zsh"
-alias ohmyzsh='b $oh'
 alias ohm='sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
 alias pu='ec $plugins'
-alias -g zr='$zr' # zshrc 
 alias zt="ec $ZSH_THEME"
 
 
 alias aa='amixer -q sset Master 3%-;amixer get Master'
 alias ac='ack -i'
+alias ad='for k in ${(@k)ad};do ;echo "$k $ad[$k]" ; done'
 alias bb='amixer -q sset Master 3%+;amixer get Master'
 alias c='cat'
 alias dt='date +"%T"'
@@ -491,6 +475,7 @@ alias duh='du -h'
 alias ecl="/root/progr/eclipse/eclipse & "
 alias ec="echo"
 alias g+="g++"
+alias -g h="--help |less"
 alias ja="java"
 alias le='less -WiNS'
 alias m='man'
