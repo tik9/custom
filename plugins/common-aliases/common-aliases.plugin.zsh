@@ -70,12 +70,11 @@ function b(){
 
 function pe(){
 	sed -i "s/\(^plugins=\).*/\1(common-aliases git git-prompt ubuntu zsh-autosuggestions $1)/" $zr
-	#${array[@]/$delete}
 	exec zsh
 }
 
 function pe2(){
-	sed -i "s/\(^plugins=\)\((common-aliases git git-prompt ubuntu zsh-autosuggestions .*)\)/\1 `unset '\2[${#\2[@]}-1]'`" $zr
+	sed -i "s/^plugins=\(.*\)/`\1[3]=()`/" $zr
 }
 
 function mut(){
