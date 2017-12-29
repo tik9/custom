@@ -23,6 +23,11 @@ function mp(){
 	mupdf $1 &
 }
 
+function mut(){
+	#mutt -a $arg[-a] -s "$arg[-s]" -- $arg[-e] < $arg[-t]
+	mutt -s "test" -- $ad[tk]
+}
+
 
 function q(){
 	# zeige WLAN ssid (iwget)

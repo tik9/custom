@@ -191,10 +191,7 @@ alias glgg='git log --graph'
 alias glgm='git log --graph --max-count=10'
 alias glol="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias glola="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
-
-function gls(){
-	git log $1 --stat
-}
+alias glp='$(_check); git log -p'
 
 compdef _gitlog gls
 alias go='`_check`;git log'
@@ -214,7 +211,6 @@ alias grv='git remote -v'
 
 alias gsb='git status -sb'
 alias gs='git show'
-alias gsps='git show --pretty=short --show-signature'
 alias gst='git stash;a'
 alias gstl='git stash list'
 alias gstp='git stash pop;gstl'
@@ -232,4 +228,3 @@ alias i='$(_check); git log --stat'
 alias n='$(_check); git log --stat -p'
 
 alias u='cd $(_check);git log --stat | head -n 10'
-alias w='$(_check); git log -p'

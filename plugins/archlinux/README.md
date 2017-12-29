@@ -2,7 +2,6 @@
 
 ## Features
 
-
 #### PACMAN
 
 | Alias        | Command                                 | Description                                                  |

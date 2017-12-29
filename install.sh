@@ -2,23 +2,17 @@
 
 home="~/";
 
-echo "Home ist $home"
+echo Skript $0 Start
 
 apt-get install -y ack-grep dict dict-de-en dictd expect ipython3 python3-pip   tree xclip
-
-# package mgt
-apt-get install  
+ 
 
 ipython3 python3-pip
 # Editoren
 #"vim"
-#Browser
-# links2
+
 
 # Server
-# git openssh-server
-
-# musik
-mplayer
+# openssh-server
 
 echo "${0} fertig"

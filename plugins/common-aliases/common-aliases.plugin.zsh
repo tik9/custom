@@ -31,14 +31,11 @@ dirt=/data/data/com.termux/files/home
 os=`uname -a |cut -d' ' -f 1`
 
 declare -A ad
-ad[ms]='schuhmaier@playglobe.eu'
 ad[ss]='sstirner@konzertagentur-koerner.de'
 ad[tk]='user153015@gmail.com';alias -g tk=$ad[tk]
 ad[t2]='studienkreis.timo.koerner@gmail.com';alias -g t2=$ad[t2]
 ad[t]='01573 9598 220'
 ad[uk]='ukoerner@konzertagentur-koerner.de' #;alias -g uk=$ad['uk']
-
-#ad=(k1 v1 k2 v2)
 
 sa=188.194.163.73
 sm=192.168.43
@@ -63,10 +60,6 @@ function arg(){
 	((!$#)) && echo Keine Argumente!
 }
 
-function b(){	
-	/root/src/src_geany-1.28/usr/bin/geany $1 &
-}
-
 
 function pe(){
 	sed -i "s/\(^plugins=\).*/\1(common-aliases git git-prompt ubuntu zsh-autosuggestions $1)/" $zr
@@ -74,16 +67,32 @@ function pe(){
 }
 
 function pe2(){
-	sed -i "s/^plugins=\(.*\)/`\1[3]=()`/" $zr
-}
-
-function mut(){
-	#mutt -a $arg[-a] -s "$arg[-s]" -- $arg[-e] < $arg[-t]
-	mutt -s "test" -- $ad[tk]
+	sed -i 's/[[:space:]][a-z]+)/)/' $zr
 }
 
 
-aaa(){}
+
+aaa(){
+
+while true;do
+	echo `curl ifconfig.me` `date` >> ifco
+	sleep 60m
+done
+	trap int_trap INT
+}
+
+
+function cua(){
+	pkill -P $$
+	trap int_trap int
+	while true; do
+		echo "telnet/curl $sa 8000"
+		curl -f $sa:8000 && echo Erfolg || echo Keine Verbindung
+		#curl localhost:8000
+		sleep 30m 
+		echo $(date +"%T")
+	done
+}
 
 
 function ersetz(){
@@ -125,12 +134,9 @@ compdef _ip ip2
 
 
 function ipbas {
-
-	ipbas=$(echo `i` | cut -d . -f -3)	
-	echo $ipbas
+	echo $(echo `ip2` | cut -d . -f -3)	
 }
 
-compdef _ip ipbas
 
 function ipd(){
 	ip link set wlan0 down
@@ -196,47 +202,17 @@ function ml(){
 	cd ~/musik
 	ffprobe $1 2> >(grep Duration)
 
-	mus=$ARGUMENTS[-m]
-
-	loop=1
-	if [ ! $? -eq 0 ]; then
-		loop=$ARGUMENTS[-l]
-	fi
-	mplayer -loop $loop $1  
+	mplayer $1  
 }
 
 
 compdef _m m
 #compdef _path_files ml
 
-
-function cua(){
-	pkill -P $$
-	while true; do
-		echo "telnet/curl $sa 8000"
-		curl -f $sa:8000 && echo Erfolg || echo Keine Verbindung
-		#curl localhost:8000
-		sleep 30m 
-		echo $(date +"%T")
-	done
-}
-compdef _pe n
-
 	
-function p(){
+function p2(){
 	grep $1 =(ps aux)
 }
-
-
-function pk(){
-	pkill $1;ps $1
-}
-
-
-function pt(){
-	ps -ef |grep $pts/$1
-}
-compdef _pt pt
 
 
 function sc2(){
@@ -287,7 +263,6 @@ function si(){
 }
 
 function ss(){
-	in git zsh
 	cat ~/.ssh/id_rsa.pub | ssh root@$sa 'cat >> ~/.ssh/authorized_keys'
 	git config --global user.email
 	cp /root/.zshrc ~/
@@ -316,7 +291,7 @@ function y2(){
 	
 	typeset -A a_array
 	a_array=(
-	'jazz latin' ''
+	'holmes' 'Qi9EL-al8TI'
        '' '')
 
 	for k in "${(@k)a_array}"; do
@@ -326,17 +301,17 @@ function y2(){
 		#cp $f /cygdrive/h
 	done 
 	
-	ersetz
-	sc2 -o .1 -f "`ls  *.webm |head -1`" -d $dirt
+	#ersetz
+	#sc2 -o .1 -f "`ls  *.webm |head -1`" -d $dirt
 }
 compdef _yt2 yt2
 
  
 # alias/Funktionen
 alias al='alias|grep'
-alias am='alias -m'
 alias d='declare -f'
 alias t='type'
+alias w='alias -m'
 alias wo='who'
 alias whi="which"
 
@@ -350,7 +325,7 @@ alias y="cd"
 alias da="cd ~/django"
 alias dow="cd $dowDir"
 alias mus="cd ~/musik"
-alias mte='cd $mteDir'
+alias mt='cd $mteDir'
 alias o='cd $ZSH_CUSTOM'
 alias oh='cd $ZSH'
 alias un='cd $un'
@@ -424,7 +399,6 @@ alias mst='mysql -uroot d -e "show tables"'
 
 # netzwerk
 alias f='iwgetid -r'
-alias i='ip2 wlan0'
 alias i2='curl ifconfig.me'
 alias ii='iw2 n2'
 alias iw2='iwlist wlan0 scan'
@@ -458,7 +432,7 @@ alias tm="tmux"
 # zsh
 alias e="exec zsh"
 alias ohm='sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
-alias pu='ec $plugins'
+alias p='ec $plugins'
 alias zt="ec $ZSH_THEME"
 
 
@@ -479,9 +453,9 @@ alias ja="java"
 alias le='less -WiNS'
 alias m='man'
 alias ma='mail'
-alias mt='man terminator'
+alias mte='man terminator'
 alias -g n2='|less'
-alias r="expect $lb"
+alias r="expect $lo"
 alias rf='rfkill list'
 alias -g sa='$sa'
 alias -g sm='$sm'

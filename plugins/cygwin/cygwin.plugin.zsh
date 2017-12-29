@@ -14,7 +14,7 @@ lo=$cHome/login
 oh=$cHome/oh-my-zsh.sh
 py=$cHome/$py2
 re=$cHome/$re2
-to=$cHome/$to2
+to=$cHome/todo
 ub=$cHome/$ub2
 zr=$home/.zshrc
 
@@ -26,6 +26,7 @@ alias -g com="$co"
 alias cyb="b $cy"
 alias lb="b $lo"
 alias ob="b $oh"
+alias tb="b $to"
 alias ub="b $ub"
 alias zb="b $zr"
 
@@ -54,8 +55,8 @@ function ki(){
 		ps -ef|grep $1
 }
 
-function mv0(){
-	mvn clean compile
+function m0(){
+	mvn package
 	echo .. kompilieren fertig
 	java -jar target/my-app-2.jar 
 }
@@ -92,7 +93,6 @@ function sho(){
 alias agr='apt-cyg remove';
 alias allpkgs='apt-cyg listall'
 alias arc="echo $arc"
-
 
 alias in='apt-cyg install'
 alias j='ipconfig'
