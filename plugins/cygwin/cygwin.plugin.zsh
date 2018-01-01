@@ -9,10 +9,8 @@ co=$cHome/$co2
 cy=$cHome/$cy2
 dj=$cHome/$dj2
 gi=$cHome/$gi2
-gb3=$cHome/$gb4
 lo=$cHome/login
 oh=$cHome/oh-my-zsh.sh
-py=$cHome/$py2
 re=$cHome/$re2
 to=$cHome/todo
 ub=$cHome/$ub2
@@ -24,8 +22,10 @@ alias arb="b $ar"
 alias cb="b $co"
 alias -g com="$co"
 alias cyb="b $cy"
+alias gb="b $gi"
 alias lb="b $lo"
 alias ob="b $oh"
+alias pb="b pom.xml"
 alias tb="b $to"
 alias ub="b $ub"
 alias zb="b $zr"
@@ -56,9 +56,11 @@ function ki(){
 }
 
 function m0(){
-	mvn package
-	echo .. kompilieren fertig
-	java -jar target/my-app-2.jar 
+	mvn compile
+	target/classes
+	java xmlparser
+	#echo .. kompilieren fertig
+	#java -jar target/my-app-2.jar 
 }
 
 function pd(){

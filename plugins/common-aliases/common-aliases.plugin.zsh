@@ -10,8 +10,6 @@ dj2=plugins/django/django.plugin.zsh; dj=$ZSH_CUSTOM/$dj2
 
 gi2=plugins/git/git.plugin.zsh
 gi=$ZSH_CUSTOM/$gi2
-gi4=functions/_git2
-gi3=$ZSH_CUSTOM/$gi4
 
 lo=$ZSH_CUSTOM/login
 oh=$ZSH_CUSTOM/oh-my-zsh.sh
@@ -26,7 +24,7 @@ ub=$ZSH_CUSTOM/$ub2
 zr=~/.zshrc
 
 un=~/uni
-dirt=/data/data/com.termux/files/home
+dt=/data/data/com.termux/files/home
 
 os=`uname -a |cut -d' ' -f 1`
 
@@ -47,7 +45,8 @@ alias cb="b $co"
 alias -g com="$co"
 alias cyb="b $cy"
 alias gic="c .gitignore"
-#alias lb="b $lo"
+alias gb="b $gi"
+alias lb="b $lo"
 alias ob="b $oh"
 alias rb="b $re"
 alias tb="b $to"
@@ -57,28 +56,23 @@ alias -g zr='$zr' # zshrc
 
 function arg(){
 	# if [ -z $1 ];then;echo Argument fehlt;return; fi
-	((!$#)) && echo Keine Argumente!
+	((!$#)) && echo Keine Argumente!||echo args!
 }
-
-
-function pe(){
-	sed -i "s/\(^plugins=\).*/\1(common-aliases git git-prompt ubuntu zsh-autosuggestions $1)/" $zr
-	exec zsh
-}
-
-function pe2(){
-	sed -i 's/[[:space:]][a-z]+)/)/' $zr
-}
-
 
 
 aaa(){
-
-while true;do
-	echo `curl ifconfig.me` `date` >> ifco
-	sleep 60m
-done
+	while true;do
+		echo `curl ifconfig.me` `date` >> ifco
+		sleep 30m
+	done
 	trap int_trap INT
+}
+
+function er(){
+	neueste=`ls -t | head -1`
+	((!$#)) && 	var=$neueste || var=$1
+	echo Datei $var
+	mv $var $(echo $var| sed -e 's/\(.*\)................\(\..*\)/\1\2/')
 }
 
 
@@ -206,9 +200,14 @@ function ml(){
 }
 
 
-compdef _m m
-#compdef _path_files ml
+function pe(){
+	sed -i "s/\(^plugins=\).*/\1(common-aliases git git-prompt ubuntu zsh-autosuggestions $1)/" $zr
+	exec zsh
+}
 
+function pe2(){
+	sed -i 's/ [a-z]\+)/)/' $zr
+}
 	
 function p2(){
 	grep $1 =(ps aux)
@@ -246,7 +245,6 @@ function schieb(){
 compdef _schieb schieb
 
 function scmysql(){
-	
 	mysqldump d> $(date +"%m_%Y").sql
 	scp -P $1 `ls -t | head -n1` 0.tcp.eu.ngrok.io:/root/sqlBack 
 	#rm $(date +"%m_%Y").sql
@@ -262,11 +260,6 @@ function si(){
 	eval $2
 }
 
-function ss(){
-	cat ~/.ssh/id_rsa.pub | ssh root@$sa 'cat >> ~/.ssh/authorized_keys'
-	git config --global user.email
-	cp /root/.zshrc ~/
-}
 
 function unt(){
 	#schieb;	#a=$(schieb)
@@ -295,14 +288,11 @@ function y2(){
        '' '')
 
 	for k in "${(@k)a_array}"; do
-	  youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=$a_array[$k]"
+	#  youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=$a_array[$k]"
 	done
-	for f in *.webm; do
-		#cp $f /cygdrive/h
-	done 
 	
 	#ersetz
-	#sc2 -o .1 -f "`ls  *.webm |head -1`" -d $dirt
+	sc2 -o .1 -f "`ls  *.m4a |head -1`" -d $dt/musik
 }
 compdef _yt2 yt2
 
@@ -312,6 +302,7 @@ alias al='alias|grep'
 alias d='declare -f'
 alias t='type'
 alias w='alias -m'
+alias ua='unalias'
 alias wo='who'
 alias whi="which"
 
@@ -384,12 +375,6 @@ alias po='ec $prompt'
 alias pz='pr3 zsh'
 alias tt='tty'
 alias us='ec $USER'
-
-#Mail
-alias mm='c .msmtprc'
-alias mf='c .fetchmailrc'
-alias mr='c /etc/mail.rc'
-alias mu='mutt'
 
 
 #mysql

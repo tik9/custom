@@ -1,3 +1,100 @@
 Synchronisation= 2 Richtungen
 Repl= eine Richtung = Spiegelung
 
+ Dabei werden die gleichen Daten abgeglichen und mehrfach (redundant)
+lokal gehalten.
+1. Die sollten am server vorgehalten sein, nicht lokal. Server halten
+Backups vor, nicht Entwicklermaschinen
+2. Es ist nur mehrfach vorhanden, weil jeder Entwickler eine
+Arbeitskopie macht
+3. Wieso schreibst du redundant in Klammern?
+
+Replizieren ist das einseitige Kopieren bzw. die einseitige
+Datenspiegelung, was bei mir nicht vorkommt. Ich beziehe Code vom Server
+und lade ihn auf den Server von einem Client.
+1. Eine Spiegelung wäre ein Mirroring
+2. Es ist zwar eine Art Replikation, aber in dem Fall würde ich eher im
+Sprachgebrauch des Versionierungssystems und dessen Terminologie
+bleiben, also Klon oder "Checkout".
+
+"QuellcodeAdministration" habe ich noch nie gehört als Wort..
+Du meinst "Entwicklung", oder? Du benutzt keine "IDE", sondern arbeitest
+in der Shell und verwendest dabei leichtgewichtige Entwicklungswerkzeuge.
+
+Eigentlich verwechselst du auch die Begriffe "Terminal" und "Shell". Ein
+Terminal ist it-historisch alles was ein Textinterface und ein
+Eingabewerkzeug (wie die Tastatur) hat. Du arbeitest in der Shell.
+
+"des Synchronisierens" -> "der Synchronisierung"
+"Binäre Dateien (Bilder, pdfs) werden nur zu Testzwecken synchronisiert"
+← Wieso ist das so?
+
+Wieso verwendest du einmal bitbucket und einmal github? Welchen *Grund*
+hat das? das würde zumindest mir als Dozent fehlen.
+
+Die frühere Shell von Windows hiess afaik nicht Terminal sondern command.com
+
+"Durch Module kann die Zsh erweitert werden." ← Geht das bei der bash
+nicht? ;-)
+"autoload -U compaudit compinit" ← wieso lädst du auch compaudit, wenn
+du nur compinit erwähnst?
+"Hier werden alle Repos gleich behandelt, es gibt kein Haupt-Repo" <- es
+gibt TECHNISCH kein hauptrepo, das heisst nicht, dass es organisatorisch
+keines geben muss. es kann ja auch nicht jeder überall hin pushen.
+
+"Ein Zweig ist somit allgemein ein Entwicklungsweg " ← Bist du sicher,
+dass du das richtig übersetzt hast? Mein Libreoffice kann leider nicht
+genau sehen, auf was du referenzierst, aber das klingt.. mindestens komisch.
+Ich würde eher was sagen wie "Ein Zweig ist eine Abweichung oder
+Alternative vom Hauptzweig (master) und wird auch im
+Versionskontrollsystem vorgehalten"
+
+"Der Code des Linux Kernels und JQuery liegen z. B. auf solchen
+Quellcode Cloudspeichern. " ← hä? Quellcode Cloudspeichern? Alteeeer...
+Entweder hast du das zu wörtlich übersetzt oder du solltest an der
+Formulierung arbeiten :(
+
+"git clone (Alias gcl) && cd Repo1" ← soll das ausführbarer code sein
+oder nicht? Weil woher kennt das hier dein alias?
+"git add ." ← alter, das ist unsauber, man macht das so wenig wie
+möglich und committed soweit immer genau das, was man ändert, z.B. "git
+add Dat1".
+
+
+"Ein lokaler commit fügt die neuen Änderungen hinzu" ← unsaubere
+begrifflichkeit, was imo daher kommt, dass du nicht erklärst, was bei
+git History/versionskontrolle, Stage und Working Directory ist. ein "git
+add" fügt auch änderungen hinzu, nur wohin? und warum will man git commit?
+
+Hast du das bild mit commits und zweigen selbst gemacht, oder irgendwo
+her kopiert? Referenzen dann bitte angeben.
+
+Du solltest dir überlegen, ob du deine Codeblöcke irgendwie besser
+farblich markierst und einrückst. so ist das zwischen dem schreibtext
+schwer unterscheidbar und auch nicht so klar.... und codestücke im
+fliesstext sind historisch meist kursiv dargestellt...
+
+"Der Befehl youtube-dl ist ein Youtube Terminal Downloader. Diese
+Funktion lädt ein Musikstück auf den Pc und verschiebt dieses auf den
+USB-Stick, falls das erste Argument den Wert usb hat." Also erstmal ist
+das ja ein extra Programm, dass du dann ein bindest. und "Youtube
+Terminal Downloader" klingt so schrecklich falsch :( Du solltest
+klarstellen, dass DEINE Funktion sich um das herumschieben nach dem
+download kümmert und das lädt ja auch nur musikstücke runter, für die
+das Programm die korrekte zugriffsprozeduren auf die onlineportale hat.
+
+"Nach der Zsh Installation wird das Framework Oh-my-Zsh installiert."
+ist das so? geht das nicht automatisch über abhängigkeiten und warum
+nicht gleichzeitig?
+
+"Eine Beispiel-Ausgabe der inbox sieht so aus" ← fehlt da ein bild?
+
+"In An verwende ich " sollte das android oder arduino sein? seite 28...
+
+"aber eher unüblich wegen des Aufblähens der Clients." Und WIESO
+(speicher, use cases, performance)? Was gibt es als alternative (git
+annex z.b.?)  Das fazit könnte noch etwas ausgebaut werden, was man
+verbessern könnte, warum es besser als anderes ist, lernkurve und sowas.
+
+hth,
+Dennis

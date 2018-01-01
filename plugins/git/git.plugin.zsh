@@ -91,15 +91,12 @@ alias a='$(_check); git status'
 alias adc='git rm -r --cached'
 
 function adg(){
-	echo $1 >> .gitignore
+	echo $1 >> .gitignore;git status
 }
 	
 alias cg='c .gitignore'
 alias g='git diff'
 alias ga='$(_check);git add --all;a'
-
-alias gb='b $gb'
-alias gb2='b $gb3'
 
 alias gbr='git branch'
 alias gba='git branch -a'
@@ -216,7 +213,7 @@ alias gstl='git stash list'
 alias gstp='git stash pop;gstl'
 alias gsts='git stash show -p'
 
-alias gt='git checkout -- .'
+alias gt='git checkout -- .;git status'
 
 alias gu='git pull'
 alias gunignore='git update-index --no-assume-unchanged'

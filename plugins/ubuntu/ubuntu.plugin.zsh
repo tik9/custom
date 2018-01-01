@@ -28,6 +28,11 @@ function mut(){
 	mutt -s "test" -- $ad[tk]
 }
 
+function pe(){
+	sed -i "s/\(^plugins=\).*/\1(common-aliases git git-prompt ubuntu zsh-autosuggestions $1)/" $zr
+	exec zsh
+}
+
 
 function q(){
 	# zeige WLAN ssid (iwget)
@@ -42,6 +47,11 @@ function q(){
 	echo Ende
 }
 
+#Mail
+alias mm='c .msmtprc'
+alias mf='c .fetchmailrc'
+alias mr='c /etc/mail.rc'
+alias mu='mutt'
 
 alias abi="abiword"
 alias acd='apt-cache depends'

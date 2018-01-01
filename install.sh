@@ -16,3 +16,9 @@ ipython3 python3-pip
 # openssh-server
 
 echo "${0} fertig"
+
+function ss(){
+	cat ~/.ssh/id_rsa.pub | ssh root@$sa 'cat >> ~/.ssh/authorized_keys'
+	git config --global user.email
+	cp /root/.zshrc ~/
+}
