@@ -11,6 +11,8 @@ function b(){
 	if [[ $(ip2 $svi) = $sv ]]; then; vim;else;/root/src/src_geany-1.28/usr/bin/geany $1 &
 	fi
 }
+
+
 function ci(){
 		echo $@|xclip -selection clipboard
 }

@@ -18,7 +18,7 @@ ipython3 python3-pip
 echo "${0} fertig"
 
 function ss(){
-	cat ~/.ssh/id_rsa.pub | ssh root@$sa 'cat >> ~/.ssh/authorized_keys'
+	`cp_idrsa`
 	git config --global user.email
 	cp /root/.zshrc ~/
 }

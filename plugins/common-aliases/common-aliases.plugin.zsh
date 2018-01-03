@@ -25,6 +25,8 @@ zr=~/.zshrc
 
 un=~/uni
 dt=/data/data/com.termux/files/home
+dtm=storage/music
+
 
 os=`uname -a |cut -d' ' -f 1`
 
@@ -37,6 +39,8 @@ ad[uk]='ukoerner@konzertagentur-koerner.de' #;alias -g uk=$ad['uk']
 
 sa=188.194.163.73
 sm=192.168.43
+sv=192.168.182.129
+svi=ens33
 
 # plugins
 alias anb="b $an"
@@ -75,13 +79,16 @@ function er(){
 	mv $var $(echo $var| sed -e 's/\(.*\)................\(\..*\)/\1\2/')
 }
 
+function cua2(){
+	curl -f $sa:8000 && echo Erfolg || echo Keine Verbindung
+}
 
 function cua(){
 	pkill -P $$
 	trap int_trap int
 	while true; do
+		cua2
 		echo "telnet/curl $sa 8000"
-		curl -f $sa:8000 && echo Erfolg || echo Keine Verbindung
 		#curl localhost:8000
 		sleep 30m 
 		echo $(date +"%T")
@@ -216,8 +223,6 @@ function p2(){
 
 function sc2(){
 	zparseopts -A ARGUMENTS d: f: i: ip: o: p: u:
-
-	dir=storage/music
 	
 	dir=$ARGUMENTS[-d]; 	if [ -z $dir ];then;dir=/root/musik;fi 
 	datei=$ARGUMENTS[-f]; 	if [ -z $datei ];then;datei=`ls -p | grep -v / |head -n1`;fi
@@ -284,15 +289,17 @@ function y2(){
 	
 	typeset -A a_array
 	a_array=(
-	'holmes' 'Qi9EL-al8TI'
+	'mond-lied' 'sFTzBc6CA7Q&t=200s'
        '' '')
 
 	for k in "${(@k)a_array}"; do
-	#  youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=$a_array[$k]"
+	 youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=$a_array[$k]"
 	done
 	
 	#ersetz
-	sc2 -o .1 -f "`ls  *.m4a |head -1`" -d $dt/musik
+	# ffmpeg -i *.webm `ls -t |head -1|cut -d. -f -1`.mp3 
+	# sc2 -o .238 -ip 10.1.31 -f "`ls  *.mp3 |head -1`" -d $dt/$dtm
+	sc2 -o .56 -ip 192.168.188 -f "`ls  *.mp3 |head -1`" -d $dt/$dtm
 }
 compdef _yt2 yt2
 
@@ -403,6 +410,7 @@ alias -g sl="sleep"
 
 
 #ssh
+alias cp_idrsa="cat ~/.ssh/id_rsa.pub | ssh root@$sa 'cat >> ~/.ssh/authorized_keys'"
 alias -g idr=~/.ssh/id_rsa.pub 
 alias -g ida=~/.ssh/authorized_keys 
 alias -g sc=/etc/ssh/sshd_config 

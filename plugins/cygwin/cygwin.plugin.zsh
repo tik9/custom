@@ -36,9 +36,7 @@ dowDir=/cygdrive/C/Users/itdlz-koer/Downloads
 mteDir=$home/mte/
 
 
-function b(){	
-		notepad++ $1 &
-}
+function b(){	notepad++ $1 & }
 
 
 function ci(){
@@ -56,17 +54,13 @@ function ki(){
 }
 
 function m0(){
-	mvn compile
-	target/classes
-	java xmlparser
-	#echo .. kompilieren fertig
-	#java -jar target/my-app-2.jar 
+	# mvn compile
+		# target/classes
+	# java urlparser
+	mvn package
+	java -jar target/lokale-suche-1.jar 
 }
 
-function pd(){
-
-	cygcheck -c|less
-}
 
 function pe(){
 	sed -i "s/\(^plugins=\).*/\1(common-aliases git cygwin $1)/" $zr
@@ -86,10 +80,7 @@ function q(){
 	echo Ende
 }
 
-function sho(){
-
-		apt-cyg show `echo $1`;
-}
+function sho(){apt-cyg show `echo $1`;}
 
 
 alias agr='apt-cyg remove';
@@ -98,8 +89,8 @@ alias arc="echo $arc"
 
 alias in='apt-cyg install'
 alias j='ipconfig'
-alias lb="b $lb"
-alias ob="b $ob"
+
 alias op='cygstart'
+alias pd='cygcheck -c|less'
 alias so='cp /cygdrive/c/Users/itdlz-koer/AppData/Roaming/Microsoft/Bibliography/sources.xml $un'
 alias ter='mintty'

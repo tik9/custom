@@ -186,36 +186,32 @@ alias gin='git init'
 
 alias glgg='git log --graph'
 alias glgm='git log --graph --max-count=10'
-alias glol="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias glola="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
+alias gg='git log --graph --oneline --decorate --all
+'
 alias glp='$(_check); git log -p'
 
-compdef _gitlog gls
 alias go='`_check`;git log'
 alias gp='$(_check);git push;a'
 alias gpsum='git push --set-upstream origin master'
-alias gpv='git push -v'
 
 alias gre='git remote'
 alias gra='git remote add'
 alias grb='git rebase'
 alias grba='git rebase --abort'
-alias grbc='git rebase --continue'
 alias grset='git remote set-url'
 alias grt='cd $(git rev-parse --show-toplevel || echo ".")'
 alias gru='git remote update'
 alias grv='git remote -v'
 
 alias gsb='git status -sb'
-alias gs='git show'
-alias gst='git stash;a'
+alias gs='$(_check); git show'
+alias gst='git stash; a'
 alias gstl='git stash list'
-alias gstp='git stash pop;gstl'
+alias gstp='git stash pop; gstl'
 alias gsts='git stash show -p'
 
 alias gt='git checkout -- .;git status'
 
-alias gu='git pull'
 alias gunignore='git update-index --no-assume-unchanged'
 alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
 alias gupv='git pull --rebase -v'
