@@ -28,7 +28,7 @@ klarstellen, dass DEINE Funktion sich um das herumschieben nach dem
 download kümmert und das lädt ja auch nur musikstücke runter, für die
 das Programm die korrekte zugriffsprozeduren auf die onlineportale hat.
 
-stimmt, der downloader ist echt unwichtig..
+stimmt, der python-downloader ist echt unwichtig, habe dafür meine Funktion besser beschrieben.
 
 "Nach der Zsh Installation wird das Framework Oh-my-Zsh installiert."
 ist das so? geht das nicht automatisch über abhängigkeiten und warum
@@ -43,5 +43,4 @@ https://github.com/robbyrussell/oh-my-zsh
 annex z.b.?)  Das fazit könnte noch etwas ausgebaut werden, was man
 verbessern könnte, warum es besser als anderes ist, lernkurve und sowas.
 
-hth,
-Dennis
+Mein Fazit ist nun um Verbesserungsmöglichkeiten erweitert
