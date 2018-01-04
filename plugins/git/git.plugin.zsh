@@ -60,13 +60,14 @@ function gi(){
 
 	 [[ -n $ARGUMENTS[-m] ]] && mh=$ARGUMENTS[-m] || mh="$1"
 
-	 cd $dir
- 	ec hole $dir
-
+	if -z git rev-parse --git-dir > /dev/null 2>&1;then
+		cd $ZSH_CUSTOM
+		ec "(wechsle zu) $ZSH_CUSTOM"
+	fi
 	 git add . 
 	 git commit -am ${mh} 
 	 git push
-	git log --stat
+	git log --stat|head -10
 }
 
 compdef _gc gc

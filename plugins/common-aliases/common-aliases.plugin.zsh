@@ -25,7 +25,7 @@ zr=~/.zshrc
 
 un=~/uni
 dt=/data/data/com.termux/files/home
-dtm=storage/music
+dtm=~/storage/music
 
 
 os=`uname -a |cut -d' ' -f 1`
@@ -298,8 +298,8 @@ function y2(){
 	
 	#ersetz
 	# ffmpeg -i *.webm `ls -t |head -1|cut -d. -f -1`.mp3 
-	# sc2 -o .238 -ip 10.1.31 -f "`ls  *.mp3 |head -1`" -d $dt/$dtm
-	sc2 -o .56 -ip 192.168.188 -f "`ls  *.mp3 |head -1`" -d $dt/$dtm
+	sc2 -o .56 -ip 192.168.188 -f "`ls |head -1`" -d $dt/$dtm
+	rm `ls|head -1`
 }
 compdef _yt2 yt2
 

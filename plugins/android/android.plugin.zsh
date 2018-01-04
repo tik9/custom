@@ -19,6 +19,9 @@ function te(){
 	
 }
 
+#cd
+alias dt='cd $dtm'
+
 
 alias agr='sudo apt-get remove'
 alias aglu="apt list --upgradable "
@@ -28,6 +31,6 @@ alias arc="echo $arc"
 alias b="vi"
 alias in='apt install'
 alias lo="logcat -s 'syslog:*'"
-alias pla="play-audio"
+alias p='play-audio'
 alias rem="apt remove"
 
