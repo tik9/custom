@@ -15,9 +15,12 @@ function q(){
 }
 
 function te(){
-	printf %s `termux-sms-inbox` | jq '.[0].number' 
-	
+	printf %s `termux-sms-inbox` | jq '.[0].number' 	
 }
+
+cd
+alias p='play-audio'
+alias mu='cd $dtm'
 
 
 alias agr='sudo apt-get remove'
@@ -28,6 +31,5 @@ alias arc="echo $arc"
 alias b="vi"
 alias in='apt install'
 alias lo="logcat -s 'syslog:*'"
-alias pla="play-audio"
 alias rem="apt remove"
 

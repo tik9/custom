@@ -25,7 +25,7 @@ zr=~/.zshrc
 
 un=~/uni
 dt=/data/data/com.termux/files/home
-dtm=storage/music
+dtm=~/storage/music
 
 
 os=`uname -a |cut -d' ' -f 1`
@@ -289,17 +289,18 @@ function y2(){
 	
 	typeset -A a_array
 	a_array=(
-	'mond-lied' 'sFTzBc6CA7Q&t=200s'
+	'baby duck' 'tFoUuFq3vHw&t=16s'
        '' '')
 
 	for k in "${(@k)a_array}"; do
-	 youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=$a_array[$k]"
+	 # youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=$a_array[$k]"
+	 youtube-dl -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=$a_array[$k]"
 	done
 	
 	#ersetz
 	# ffmpeg -i *.webm `ls -t |head -1|cut -d. -f -1`.mp3 
 	# sc2 -o .238 -ip 10.1.31 -f "`ls  *.mp3 |head -1`" -d $dt/$dtm
-	sc2 -o .56 -ip 192.168.188 -f "`ls  *.mp3 |head -1`" -d $dt/$dtm
+	sc2 -o .56 -ip 192.168.188 -f "`ls |head -1`" -d $dt/$dtm
 }
 compdef _yt2 yt2
 
@@ -322,7 +323,7 @@ alias ar="cd ~/arduino"
 alias y="cd"
 alias da="cd ~/django"
 alias dow="cd $dowDir"
-alias mus="cd ~/musik"
+alias mu="cd ~/musik"
 alias mt='cd $mteDir'
 alias o='cd $ZSH_CUSTOM'
 alias oh='cd $ZSH'
@@ -425,7 +426,7 @@ alias tm="tmux"
 # zsh
 alias e="exec zsh"
 alias ohm='sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
-alias p='ec $plugins'
+alias plu='ec $plugins'
 alias zt="ec $ZSH_THEME"
 
 

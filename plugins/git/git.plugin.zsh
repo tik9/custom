@@ -41,7 +41,7 @@ function gc(){
 	zparseopts -A ARGUMENTS m:
 
 	#int a = (b == 5) ? c : d;
-	[[ -n $ARGUMENTS[-m] ]] && mh=$ARGUMENTS[-m] || mh="$1"
+	[[ -n $ARGUMENTS[-m] ]] && mh=$ARGUMENTS[-m] || mh=$@
 
 	printf 'Argument mh ist "%s"\n' "$mh"
 	git commit -am "$mh"
