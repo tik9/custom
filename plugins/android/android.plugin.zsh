@@ -15,12 +15,13 @@ function q(){
 }
 
 function te(){
-	printf %s `termux-sms-inbox` | jq '.[0].number' 
-	
+	printf %s `termux-sms-inbox` | jq '.[0].number' 	
 }
 
 #cd
 alias dt='cd $dtm'
+alias p='play-audio'
+alias mu='cd $dtm'
 
 
 alias agr='sudo apt-get remove'
