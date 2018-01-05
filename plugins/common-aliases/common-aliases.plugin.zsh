@@ -25,7 +25,7 @@ zr=~/.zshrc
 
 un=~/uni
 dt=/data/data/com.termux/files/home
-dtm=~/storage/music
+dtm=storage/music
 
 
 os=`uname -a |cut -d' ' -f 1`
@@ -284,23 +284,19 @@ function y2(){
 		zparseopts -A ARGUMENTS m:
 	m=$ARGUMENTS[-m]
 	
-	if [[ -f $2 ]];then
-	while read name;do;youtube-dl $name;done < $2;return;fi
-	
-	typeset -A a_array
+	# typeset -A a_array
 	a_array=(
-	'baby duck' 'tFoUuFq3vHw&t=16s'
+	'' ''
        '' '')
 
 	for k in "${(@k)a_array}"; do
 	 # youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=$a_array[$k]"
-	 youtube-dl -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=$a_array[$k]"
 	done
 	
 	#ersetz
 	# ffmpeg -i *.webm `ls -t |head -1|cut -d. -f -1`.mp3 
-	sc2 -o .56 -ip 192.168.188 -f "`ls |head -1`" -d $dt/$dtm
-	rm `ls|head -1`
+	sc2 -o .1 -ip $sm -f "`ls |head -1`" -d $dt/$dtm
+	rm "`ls -t|head -1`"
 }
 compdef _yt2 yt2
 
@@ -314,13 +310,8 @@ alias ua='unalias'
 alias wo='who'
 alias whi="which"
 
-# betriebssystem
-alias os="echo $os"
-
 
 #cd's
-alias ar="cd ~/arduino"
-alias y="cd"
 alias da="cd ~/django"
 alias dow="cd $dowDir"
 alias mu="cd ~/musik"
@@ -330,6 +321,7 @@ alias oh='cd $ZSH'
 alias un='cd $un'
 alias uc='cd $un/c'
 alias vs='cd ~/vs/vs'
+alias y="cd"
 
 #curl
 alias c='cu $sa:8000/te'
@@ -340,8 +332,6 @@ alias cu='curl'
 
 #Dateien
 alias cp='cp -r'
-alias lk="lsblk"
-
 alias to='touch'
 
 #Dict
@@ -402,8 +392,8 @@ alias -g re='$sa'
 alias z='/etc/init.d/networking restart'
 
 # ps
-alias ks="ki ssh;ph"
-alias ksl="ki sl;ph"
+alias ks="ki ssh; ph"
+alias ksl="ki sl; pl"
 alias ph="pr ssh"
 alias pr='ps -ef|grep'
 alias pl="pr sleep"
@@ -414,8 +404,6 @@ alias -g sl="sleep"
 alias cp_idrsa="cat ~/.ssh/id_rsa.pub | ssh root@$sa 'cat >> ~/.ssh/authorized_keys'"
 alias -g idr=~/.ssh/id_rsa.pub 
 alias -g ida=~/.ssh/authorized_keys 
-alias -g sc=/etc/ssh/sshd_config 
-alias sd='sshd;ph' 
 
 #tmux
 alias ta="tmux attach"

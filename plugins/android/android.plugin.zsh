@@ -34,4 +34,6 @@ alias in='apt install'
 alias lo="logcat -s 'syslog:*'"
 alias p='play-audio'
 alias rem="apt remove"
+alias sd='sshd;ph' 
+
 

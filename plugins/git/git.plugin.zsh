@@ -11,31 +11,6 @@ function _check(){
 	echo $dir
 }
 
-function current_branch() {
-  git_current_branch
-}
-
-# The list of remotes
-function current_repository() {
-  if ! $_omz_git_git_cmd rev-parse --is-inside-work-tree &> /dev/null; then
-    return
-  fi
-  echo $($_omz_git_git_cmd remote -v | cut -d':' -f 2)
-}
-
-# Pretty log messages
-function _git_log_prettily(){
-  if ! [ -z $1 ]; then
-    git log --pretty=$1
-  fi
-}
-# Warn if the current branch is a WIP
-function work_in_progress() {
-  if $(git log -n 1 2>/dev/null | grep -q -c "\-\-wip\-\-"); then
-    echo "WIP!!"
-  fi
-}
-
 
 function gc(){
 	zparseopts -A ARGUMENTS m:
@@ -58,7 +33,7 @@ function gi(){
 	
 	dir=$(_check)
 
-	 [[ -n $ARGUMENTS[-m] ]] && mh=$ARGUMENTS[-m] || mh="$1"
+	 [[ -n $ARGUMENTS[-m] ]] && mh=$ARGUMENTS[-m] || mh=$@
 
 	if -z git rev-parse --git-dir > /dev/null 2>&1;then
 		cd $ZSH_CUSTOM
@@ -92,12 +67,12 @@ alias a='$(_check); git status'
 alias adc='git rm -r --cached'
 
 function adg(){
-	echo $1 >> .gitignore;git status
+	echo $1 >> .gitignore; git status
 }
 	
 alias cg='c .gitignore'
-alias g='git diff'
-alias ga='$(_check);git add --all;a'
+alias g='$(_check); git diff; git status'
+alias ga='$(_check); git add --all'
 
 alias gbr='git branch'
 alias gba='git branch -a'
