@@ -32,7 +32,7 @@ os=`uname -a |cut -d' ' -f 1`
 
 declare -A ad
 ad[ss]='sstirner@konzertagentur-koerner.de'
-ad[tk]='user153015@gmail.com';alias -g tk=$ad[tk]
+ad[tk]='user153015@gmail.com' ;# alias -g tk=$ad[tk]
 ad[t2]='studienkreis.timo.koerner@gmail.com';alias -g t2=$ad[t2]
 ad[t]='01573 9598 220'
 ad[uk]='ukoerner@konzertagentur-koerner.de' #;alias -g uk=$ad['uk']
@@ -72,13 +72,6 @@ aaa(){
 	trap int_trap INT
 }
 
-function er(){
-	neueste=`ls -t | head -1`
-	((!$#)) && 	var=$neueste || var=$1
-	echo Datei $var
-	mv $var $(echo $var| sed -e 's/\(.*\)................\(\..*\)/\1\2/')
-}
-
 function cua2(){
 	curl -f $sa:8000 && echo Erfolg || echo Keine Verbindung
 }
@@ -93,6 +86,14 @@ function cua(){
 		sleep 30m 
 		echo $(date +"%T")
 	done
+}
+
+
+function er(){
+	neueste=`ls -t | head -1`
+	((!$#)) && 	var=$neueste || var=$1
+	echo Datei $var
+	mv $var $(echo $var| sed -e 's/\(.*\)................\(\..*\)/\1\2/')
 }
 
 
@@ -183,9 +184,11 @@ function lö(){
 }
 
 function mai(){
-		zparseopts -A arg b: t: a:
+	zparseopts -A arg b: t: a:
 		
-	printf "Subject:$arg[-b]\n${arg[-t]} Gruß,Timo" |msmtp $ad[$arg[-a]]
+	printf "Subject:$arg[-b]\n${arg[-t]}" |msmtp $ad[$arg[-a]]
+	
+	#test
 	#printf "Subject:test betreff\ntest body eintrag" |msmtp $ad['tk']
 	tail -n5 ~/.msmtp.log
 }
@@ -232,7 +235,7 @@ function sc2(){
 	user=$ARGUMENTS[-u]; 	if [ -z $user ];then;user=root;fi
 
 	#for datei in *.webm;do
-		printf "Dir: %s, Datei: %s, Port: %s, Ip: %s", $dir,$datei, $port, $ip
+		printf "Dir %s, Datei: %s, Port: %s, okt: %s, Ip: %s" $dir $datei $port $oktett $ip
 		scp -P $port $datei $user@$ip$oktett:$dir
 	#done
 	#rm -rf $datei
@@ -284,19 +287,19 @@ function y2(){
 		zparseopts -A ARGUMENTS m:
 	m=$ARGUMENTS[-m]
 	
-	# typeset -A a_array
+	typeset -A a_array
 	a_array=(
-	'' ''
+	'mozart' '3Nbc5I8w5F8'
        '' '')
 
 	for k in "${(@k)a_array}"; do
-	 # youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=$a_array[$k]"
+	  youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=$a_array[$k]"
 	done
 	
-	#ersetz
+	ersetz
 	# ffmpeg -i *.webm `ls -t |head -1|cut -d. -f -1`.mp3 
-	sc2 -o .1 -ip $sm -f "`ls |head -1`" -d $dt/$dtm
-	rm "`ls -t|head -1`"
+	#sc2 -o .1 -ip $sm -f "`ls |head -1`" -d $dt/$dtm
+	#rm "`ls -t|head -1`"
 }
 compdef _yt2 yt2
 

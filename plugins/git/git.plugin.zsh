@@ -187,6 +187,7 @@ alias gstp='git stash pop; gstl'
 alias gsts='git stash show -p'
 
 alias gt='git checkout -- .;git status'
+alias gu='find . -mindepth 1 -maxdepth 2 -type d -print -exec git -C {} pull \;'
 
 alias gunignore='git update-index --no-assume-unchanged'
 alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
