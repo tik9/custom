@@ -54,11 +54,12 @@ function gl(){
 	ec hole $dir
 	cd $dir
 	git pull
+	git show
 	if [[ $dir = $ZSH_CUSTOM ]];then
 		exec zsh
 	fi
 	
-	git log --stat | head -n 15
+	#git log --stat | head -n 15
 }
 
 
@@ -175,6 +176,7 @@ alias gra='git remote add'
 alias grb='git rebase'
 alias grba='git rebase --abort'
 alias grset='git remote set-url'
+alias grs='curl https://api.github.com/repos/tik9/custom | grep size'
 alias grt='cd $(git rev-parse --show-toplevel || echo ".")'
 alias gru='git remote update'
 alias grv='git remote -v'
@@ -189,11 +191,6 @@ alias gsts='git stash show -p'
 alias gt='git checkout -- .;git status'
 alias gu='find . -mindepth 1 -maxdepth 2 -type d -print -exec git -C {} pull \;'
 
-alias gunignore='git update-index --no-assume-unchanged'
-alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
-alias gupv='git pull --rebase -v'
-
-alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 alias i='$(_check); git log --stat'
 alias n='$(_check); git log --stat -p'
 

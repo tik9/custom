@@ -32,10 +32,10 @@ os=`uname -a |cut -d' ' -f 1`
 
 declare -A ad
 ad[ss]='sstirner@konzertagentur-koerner.de'
-ad[tk]='user153015@gmail.com' ;# alias -g tk=$ad[tk]
+ad[tk]='user153015@gmail.com' ; alias -g tk=$ad[tk]
 ad[t2]='studienkreis.timo.koerner@gmail.com';alias -g t2=$ad[t2]
 ad[t]='01573 9598 220'
-ad[uk]='ukoerner@konzertagentur-koerner.de' #;alias -g uk=$ad['uk']
+ad[uk]='ukoerner@konzertagentur-koerner.de' ;alias -g uk=$ad[uk]
 
 sa=188.194.163.73
 sm=192.168.43
@@ -130,9 +130,10 @@ function int_trap() {
 function ip2(){
 	interf=$1
 	if [ -z $1 ]; then ; interf=wlan0;fi
-		ip addr show $interf | grep -Po 'inet \K[\d.]+'
+	#ip addr show $interf | grep -o 'inet [0-9.]*'|cut -d' ' -f2
+	
+	ip addr show $interf | sed  -n -E 's/   inet ([0-9.]*).*/\1/p'	
 }
-compdef _ip ip2
 
 
 function ipbas {
@@ -186,10 +187,11 @@ function lö(){
 function mai(){
 	zparseopts -A arg b: t: a:
 		
-	printf "Subject:$arg[-b]\n${arg[-t]}" |msmtp $ad[$arg[-a]]
+	#printf "Subject:$arg[-b]\n${arg[-t]}" |msmtp $ad[$arg[-a]]
+	printf "Subject:$arg[-b]\n${arg[-t]}" |msmtp $arg[-a]
 	
 	#test
-	#printf "Subject:test betreff\ntest body eintrag" |msmtp $ad['tk']
+	#printf "Subject:test betreff\ntest body eintrag" |msmtp $ad[tk]
 	tail -n5 ~/.msmtp.log
 }
 compdef _ma mai
@@ -202,10 +204,8 @@ function ma2(){
 
 
 function ml(){
-	zparseopts -A ARGUMENTS l: m:
 	cd ~/musik
 	ffprobe $1 2> >(grep Duration)
-
 	mplayer $1  
 }
 
@@ -228,8 +228,8 @@ function sc2(){
 	zparseopts -A ARGUMENTS d: f: i: ip: o: p: u:
 	
 	dir=$ARGUMENTS[-d]; 	if [ -z $dir ];then;dir=/root/musik;fi 
-	datei=$ARGUMENTS[-f]; 	if [ -z $datei ];then;datei=`ls -p | grep -v / |head -n1`;fi
-	ip=$ARGUMENTS[-ip];		if [ -z $ip ];then;ip=$sm;fi
+	datei=$ARGUMENTS[-f]; 	if [ -z $datei ];then;datei=`ls -t |head -n1`;fi
+	ip=$ARGUMENTS[-ip];		if [ -z $ip ];then;ip=ipbas;fi
 	oktett=$ARGUMENTS[-o];	if [ -z $oktett ];then;oktett=.162;fi
 	port=$ARGUMENTS[-p];	if [ -z $port ];then;port=8022;fi
 	user=$ARGUMENTS[-u]; 	if [ -z $user ];then;user=root;fi
@@ -305,8 +305,9 @@ compdef _yt2 yt2
 
  
 # alias/Funktionen
-alias al='alias|grep'
+alias p='alias|grep'
 alias d='declare -f'
+alias de='declare n2'
 alias t='type'
 alias w='alias -m'
 alias ua='unalias'
@@ -317,7 +318,7 @@ alias whi="which"
 #cd's
 alias da="cd ~/django"
 alias dow="cd $dowDir"
-alias mu="cd ~/musik"
+alias mus="cd ~/musik"
 alias mt='cd $mteDir'
 alias o='cd $ZSH_CUSTOM'
 alias oh='cd $ZSH'
@@ -338,7 +339,6 @@ alias cp='cp -r'
 alias to='touch'
 
 #Dict
-alias wl="echo Dict.;dict -D"
 alias di="dict -d fd-eng-deu"
 alias w2="dict"
 
@@ -360,11 +360,6 @@ alias hgrep="fc -El 0 | grep"
 alias -g H='| head'
 alias tai='tail -f'
 alias -g ti='| tail'
-
-
-#Komprimierung
-alias -s zip="unzip -l"
-alias -s tar="tar tf"
 
 
 # Konsole
@@ -391,8 +386,7 @@ alias iw2='iwlist wlan0 scan'
 alias j=ifconfig
 alias mi='echo $(dig +short myip.opendns.com @resolver1.opendns.com)'
 alias pn='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
-alias -g re='$sa'
-alias z='/etc/init.d/networking restart'
+alias z='/etc/init.d/networking restart; we'
 
 # ps
 alias ks="ki ssh; ph"
@@ -432,7 +426,6 @@ alias dowDir='l $dowDir'
 alias duh='du -h'
 alias ecl="/root/progr/eclipse/eclipse & "
 alias ec="echo"
-alias g+="g++"
 alias -g h="--help |less"
 alias ja="java"
 alias le='less -WiNS'
@@ -444,7 +437,6 @@ alias r="expect $lo"
 alias rf='rfkill list'
 alias -g sa='$sa'
 alias -g sm='$sm'
-alias ter='if [ $os != "CYGWIN_NT-6.1" ]; then;terminator &;fi'
 alias tp='top'
 alias tr='tree'
 alias -g ve='--version'

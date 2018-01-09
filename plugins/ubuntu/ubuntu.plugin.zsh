@@ -83,7 +83,8 @@ alias afu='sudo apt-file update'
 compdef _afu afu='sudo apt-file update'
 alias arc="echo $arc"
 
-alias hi='sudo hibernate'
+alias hi='hibernate'
+alias km='killall mplayer'
 
 alias -s pdf=mupdf
 alias pi=gpicview
