@@ -33,7 +33,6 @@ alias zb="b $zr"
 bim=$(wmic OS get OSArchitecture)
 
 dowDir=/cygdrive/C/Users/itdlz-koer/Downloads
-mteDir=$home/mte/
 
 
 function b(){	notepad++ $1 & }
@@ -54,11 +53,9 @@ function ki(){
 }
 
 function m0(){
-	# mvn compile
-		# target/classes
-	# java urlparser
-	mvn package
-	java -jar target/lokale-suche-1.jar 
+	 mvn compile
+		 target/classes
+	 java urlparser
 }
 
 

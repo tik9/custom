@@ -130,6 +130,7 @@ function int_trap() {
 function ip2(){
 	interf=$1
 	if [ -z $1 ]; then ; interf=wlan0;fi
+	if [ $1 = all ]; then ; ip addr show; return; fi
 	#ip addr show $interf | grep -o 'inet [0-9.]*'|cut -d' ' -f2
 	
 	ip addr show $interf | sed  -n -E 's/   inet ([0-9.]*).*/\1/p'	
@@ -181,7 +182,7 @@ function ki(){
 }
 
 function lö(){
-	rm -rf "$@";ls -a
+	rm -rf "$@";ls -a "$1"
 }
 
 function mai(){
@@ -224,25 +225,25 @@ function p2(){
 }
 
 
-function sc2(){
+function ss(){ssh -p8022 root@$sm.1}
+
+function sc(){
 	zparseopts -A ARGUMENTS d: f: i: ip: o: p: u:
 	
 	dir=$ARGUMENTS[-d]; 	if [ -z $dir ];then;dir=/root/musik;fi 
 	datei=$ARGUMENTS[-f]; 	if [ -z $datei ];then;datei=`ls -t |head -n1`;fi
-	ip=$ARGUMENTS[-ip];		if [ -z $ip ];then;ip=ipbas;fi
+	ip=$ARGUMENTS[-ip];		if [ -z $ip ];then;ip=$sm;fi
 	oktett=$ARGUMENTS[-o];	if [ -z $oktett ];then;oktett=.162;fi
 	port=$ARGUMENTS[-p];	if [ -z $port ];then;port=8022;fi
 	user=$ARGUMENTS[-u]; 	if [ -z $user ];then;user=root;fi
 
 	#for datei in *.webm;do
-		printf "Dir %s, Datei: %s, Port: %s, okt: %s, Ip: %s" $dir $datei $port $oktett $ip
+		printf "Dir %s, Datei: %s, Port: %s, Ip: %s\n" $dir $datei $port "$ip$oktett" 
 		scp -P $port $datei $user@$ip$oktett:$dir
 	#done
 	#rm -rf $datei
 }
-compdef _sc2 s2
-
-function s2(){ssh -p8022 root@$sm.$1}
+compdef _sc2 s1
 
 function schieb(){
 	for i in `seq 1 $1`
@@ -251,6 +252,20 @@ function schieb(){
 }
 
 compdef _schieb schieb
+
+function scm(){
+	
+	dir=$dtm;
+	datei=`ls *.mp3|head -1`
+	ip=$sm
+	oktett=.1
+	port=8022
+
+	printf "Dir %s, Datei: %s, Port: %s,  Ip: %s\n" $dir $datei $port $ip$oktett
+	scp -P $port $datei $ip$oktett:$dir
+	rm -rf $datei
+	
+}
 
 function scmysql(){
 	mysqldump d> $(date +"%m_%Y").sql
@@ -319,7 +334,6 @@ alias whi="which"
 alias da="cd ~/django"
 alias dow="cd $dowDir"
 alias mus="cd ~/musik"
-alias mt='cd $mteDir'
 alias o='cd $ZSH_CUSTOM'
 alias oh='cd $ZSH'
 alias un='cd $un'
@@ -394,7 +408,7 @@ alias ksl="ki sl; pl"
 alias ph="pr ssh"
 alias pr='ps -ef|grep'
 alias pl="pr sleep"
-alias -g sl="sleep"
+alias -g sl=sleep
 
 
 #ssh
@@ -415,10 +429,10 @@ alias plu='ec $plugins'
 alias zt="ec $ZSH_THEME"
 
 
-alias aa='amixer -q sset Master 3%-;amixer get Master'
+alias aa='amixer -q sset Master 3%-; amixer get Master |sed -n 5p'
 alias ac='ack -i'
 alias ad='for k in ${(@k)ad};do ;echo "$k $ad[$k]" ; done'
-alias bb='amixer -q sset Master 3%+;amixer get Master'
+alias bb='amixer -q sset Master 3%+; amixer get Master |sed -n 5p'
 alias c='cat'
 alias dt='date +"%T"'
 alias dh='df -h'
@@ -429,6 +443,7 @@ alias ec="echo"
 alias -g h="--help |less"
 alias ja="java"
 alias le='less -WiNS'
+alias lt='ls -t'
 alias m='man'
 alias ma='mail'
 alias mte='man terminator'
