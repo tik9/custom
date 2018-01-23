@@ -2,11 +2,19 @@
 lsb=`lsb_release -i|cut -d: -f2|sed -e 's/[[:blank:]]//'`
 
 dowDir=/home/t/Downloads
-mteDir=/root/git/mte
+home2=/root
 
 arc=`uname -a |cut -d' ' -f 14`
 
-# https://stackoverflow.com/questions/14919819/passing-arguments-to-a-function-within-an-if-statement-in-bash
+function install(){
+	xclip
+}
+
+function amix(){
+	amixer -q sset Master 3%$1; amixer get Master |sed -n 5p |cut -d ' ' -f6
+}
+
+
 function b(){
 	if [[ $(ip2 $svi) = $sv ]]; then; vim;else;/root/src/src_geany-1.28/usr/bin/geany $1 &
 	fi
@@ -20,6 +28,34 @@ function ci(){
 function co(){
 		xclip -o -selection clipboard
 }
+
+
+function mai(){
+	zparseopts -A arg b: t: a:
+		
+	#printf "Subject:$arg[-b]\n${arg[-t]}" |msmtp $ad[$arg[-a]]
+	printf "Subject:$arg[-b]\n${arg[-t]}" |msmtp $arg[-a]
+	
+	#test
+	#printf "Subject:test betreff\ntest body eintrag" |msmtp $ad[tk]
+	tail -n5 ~/.msmtp.log
+}
+
+
+function ma2(){
+	if [ -z $1 ];then;echo Argument fehlt;return; fi
+	cat email|msmtp $ad[$1] $ad[$2]	
+	tail -n5 ~/.msmtp.log
+}
+
+
+function ml(){
+	cd ~/musik
+	ffprobe $1 2> >(grep Duration)
+	mplayer $1  
+}
+compdef _ml ml
+
 
 function mp(){
 	mupdf $1 &
@@ -51,10 +87,12 @@ function q(){
 
 #Mail
 alias mm='c .msmtprc'
-alias mf='c .fetchmailrc'
-alias mr='c /etc/mail.rc'
 alias mu='mutt'
+alias ma='mail'
 
+
+alias a+="amix +"
+alias a-="amix -"
 alias abi="abiword"
 alias acd='apt-cache depends'
 
@@ -63,11 +101,7 @@ compdef _acp acp='apt-cache policy'
 
 alias acs='apt-cache show'
 alias acse='apt-cache search'
-compdef _acs acse='apt-cache search'
 
-
-alias afs='apt-file search --regexp'
-compdef _afs afs='apt-file search --regexp'
 
 alias agli='apt list --installed'
 compdef _agli agli='apt list --installed'

@@ -23,9 +23,10 @@ ub2=plugins/ubuntu/ubuntu.plugin.zsh
 ub=$ZSH_CUSTOM/$ub2
 zr=~/.zshrc
 
-un=~/uni
+ds=~/storage
 dt=/data/data/com.termux/files/home
-dtm=storage/music
+dtm=~/storage/music
+un=~/uni
 
 
 os=`uname -a |cut -d' ' -f 1`
@@ -91,9 +92,11 @@ function cua(){
 
 function er(){
 	neueste=`ls -t | head -1`
-	((!$#)) && 	var=$neueste || var=$1
-	echo Datei $var
-	mv $var $(echo $var| sed -e 's/\(.*\)................\(\..*\)/\1\2/')
+	((!$#)) && 	dat=$neueste || dat=$1
+	echo "Datei $dat \n"
+	mv "$dat" $(echo "$dat"| sed 's/\(.*\)................\(\..*\)/\1\2/')
+	echo Datei $dat \n
+
 }
 
 
@@ -111,7 +114,7 @@ function ersetz(){
 			rename 'y/A-Z/a-z/' $file
 		fi
 
-		if [[ `pwd` = '/root/uni/c' && $file != *"c_"* ]]; then
+		if [[ `pwd` = '$home2/uni/c' && $file != *"c_"* ]]; then
 			neu_c=c_$file
 			mv $file $neu_c
 			echo c uni pdf: $file
@@ -130,7 +133,7 @@ function int_trap() {
 function ip2(){
 	interf=$1
 	if [ -z $1 ]; then ; interf=wlan0;fi
-	if [ $1 = all ]; then ; ip addr show; return; fi
+	if [[ $1 = all ]]; then ; ip addr show; return; fi
 	#ip addr show $interf | grep -o 'inet [0-9.]*'|cut -d' ' -f2
 	
 	ip addr show $interf | sed  -n -E 's/   inet ([0-9.]*).*/\1/p'	
@@ -145,20 +148,17 @@ function ipbas {
 function ipd(){
 	ip link set wlan0 down
 }
-compdef _ip ipd
 
 
 function ipu(){
 		ip link set wlan0 up
 }
-compdef _ip ipu
 
 
 function iu(){
-	ipd $1;ipu $1
-	ig;p
+	ipd;ipu
+	j
 }
-compdef _ip iu
 
 
 function k(){
@@ -181,51 +181,28 @@ function ki(){
 		ps -ef|grep $1
 }
 
+
 function lö(){
-	rm -rf "$@";ls -a "$1"
+	rm -rf "$@";ls -a
 }
 
-function mai(){
-	zparseopts -A arg b: t: a:
-		
-	#printf "Subject:$arg[-b]\n${arg[-t]}" |msmtp $ad[$arg[-a]]
-	printf "Subject:$arg[-b]\n${arg[-t]}" |msmtp $arg[-a]
-	
-	#test
-	#printf "Subject:test betreff\ntest body eintrag" |msmtp $ad[tk]
-	tail -n5 ~/.msmtp.log
-}
-compdef _ma mai
-
-function ma2(){
-	if [ -z $1 ];then;echo Argument fehlt;return; fi
-	cat email|msmtp $ad[$1] $ad[$2]	
-	tail -n5 ~/.msmtp.log
+function lp(){
+	sed -i 's/ [a-z-]\+)/)/' $zr
+	exec zsh; 
+	echo $plugins
 }
 
 
-function ml(){
-	cd ~/musik
-	ffprobe $1 2> >(grep Duration)
-	mplayer $1  
-}
-
-
-function pe(){
+function pa(){
 	sed -i "s/\(^plugins=\).*/\1(common-aliases git git-prompt ubuntu zsh-autosuggestions $1)/" $zr
 	exec zsh
 }
 
-function pe2(){
-	sed -i 's/ [a-z]\+)/)/' $zr
-}
 	
 function p2(){
 	grep $1 =(ps aux)
 }
 
-
-function ss(){ssh -p8022 root@$sm.1}
 
 function sc(){
 	zparseopts -A ARGUMENTS d: f: i: ip: o: p: u:
@@ -237,13 +214,11 @@ function sc(){
 	port=$ARGUMENTS[-p];	if [ -z $port ];then;port=8022;fi
 	user=$ARGUMENTS[-u]; 	if [ -z $user ];then;user=root;fi
 
-	#for datei in *.webm;do
 		printf "Dir %s, Datei: %s, Port: %s, Ip: %s\n" $dir $datei $port "$ip$oktett" 
 		scp -P $port $datei $user@$ip$oktett:$dir
-	#done
 	#rm -rf $datei
 }
-compdef _sc2 s1
+
 
 function schieb(){
 	for i in `seq 1 $1`
@@ -251,7 +226,6 @@ function schieb(){
 	cp $dowDir/`ls -t $dowDir | head -n1` .
 }
 
-compdef _schieb schieb
 
 function scm(){
 	
@@ -283,6 +257,10 @@ function si(){
 	eval $2
 }
 
+function ss(){
+	((!$#)) && okt=1 || okt=$1
+	ssh -p8022 root@$sm.$okt
+}
 
 function unt(){
 	#schieb;	#a=$(schieb)
@@ -316,7 +294,6 @@ function y2(){
 	#sc2 -o .1 -ip $sm -f "`ls |head -1`" -d $dt/$dtm
 	#rm "`ls -t|head -1`"
 }
-compdef _yt2 yt2
 
  
 # alias/Funktionen
@@ -331,6 +308,7 @@ alias whi="which"
 
 
 #cd's
+alias -g ar="~/arduino"
 alias da="cd ~/django"
 alias dow="cd $dowDir"
 alias mus="cd ~/musik"
@@ -365,7 +343,7 @@ alias ff='find . -type f -name'
 alias fin="find / -name"
 
 #grep
-alias -g gr="|grep -ai --color=auto"
+alias -g gr="|grep -ai"
 alias grep="grep -i"
 alias hgrep="fc -El 0 | grep"
 
@@ -429,7 +407,6 @@ alias plu='ec $plugins'
 alias zt="ec $ZSH_THEME"
 
 
-alias aa='amixer -q sset Master 3%-; amixer get Master |sed -n 5p'
 alias ac='ack -i'
 alias ad='for k in ${(@k)ad};do ;echo "$k $ad[$k]" ; done'
 alias bb='amixer -q sset Master 3%+; amixer get Master |sed -n 5p'
@@ -445,8 +422,6 @@ alias ja="java"
 alias le='less -WiNS'
 alias lt='ls -t'
 alias m='man'
-alias ma='mail'
-alias mte='man terminator'
 alias -g n2='|less'
 alias r="expect $lo"
 alias rf='rfkill list'

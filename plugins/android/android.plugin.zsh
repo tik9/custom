@@ -1,6 +1,12 @@
 arc=`uname -a |cut -d' ' -f 13`
 lsb=`uname -a |cut -d' ' -f 14`
 
+function install(){
+	termux-api play-audio
+	termux-setup-storage
+
+}
+
 function q(){
 
 	datei=test100.zip

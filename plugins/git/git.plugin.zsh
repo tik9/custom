@@ -13,13 +13,7 @@ function _check(){
 
 
 function gc(){
-	zparseopts -A ARGUMENTS m:
-
-	#int a = (b == 5) ? c : d;
-	[[ -n $ARGUMENTS[-m] ]] && mh=$ARGUMENTS[-m] || mh=$@
-
-	printf 'Argument mh ist "%s"\n' "$mh"
-	git commit -am "$mh"
+	git commit -m "$@"
 	git status
 }
 
@@ -29,33 +23,31 @@ compdef _gc gc
 function gi(){
 		zparseopts -A ARGUMENTS m: mzt: m2h: m2t:
 
-	#mh[1]=$ARGUMENTS[-mzh]
-	
 	dir=$(_check)
-
-	 [[ -n $ARGUMENTS[-m] ]] && mh=$ARGUMENTS[-m] || mh=$@
 
 	if -z git rev-parse --git-dir > /dev/null 2>&1;then
 		cd $ZSH_CUSTOM
 		ec "(wechsle zu) $ZSH_CUSTOM"
 	fi
 	 git add . 
-	 git commit -am ${mh} 
+	 out=`git commit -m "$@"`
+	 echo $out
+	 #Everything up-to-date
+
 	 git push
 	git log --stat|head -10
 }
-
-compdef _gc gc
 
 
 function gl(){
 	dir=$(_check)
 	
-	ec hole $dir
+	ec in $dir
 	cd $dir
-	git pull
-	git show
-	if [[ $dir = $ZSH_CUSTOM ]];then
+	out=`git pull`
+	ec $out
+	#git show
+	if [[ $dir = $ZSH_CUSTOM ]] && [ $out != 'Bereits aktuell.' ];then
 		exec zsh
 	fi
 	
@@ -92,69 +84,8 @@ compdef gcount=git
 alias gd='$(_check);git diff'
 alias gdca='git diff --cached'
 
-function gdv() { git diff -w "$@" | view - }
-
-compdef _git gdv=git-diff
-
-alias gdw='git diff --word-diff'
-
 alias gf='git config --list'
 
-function gfg() { git ls-files | grep $@ }
-compdef gfg=grep
-
-
-function ggf() {
-[[ "$#" != 1 ]] && local b="$(git_current_branch)"
-git push --force origin "${b:=$1}"
-}
-
-compdef _git ggf=git-checkout
-
-function ggl() {
-if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
-	git pull origin "${*}"
-else
-	[[ "$#" == 0 ]] && local b="$(git_current_branch)"
-	git pull origin "${b:=$1}"
-fi
-}
-
-compdef _git ggl=git-checkout
-
-
-function ggp() {
-	if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
-		git push origin "${*}"
-	else
-		[[ "$#" == 0 ]] && local b="$(git_current_branch)"
-		git push origin "${b:=$1}"
-	fi
-}
-
-compdef _git ggp=git-checkout
-
-
-alias ggpush='git push origin $(git_current_branch)'
-
-compdef _git ggpush=git-checkout
-
-function ggpnp() {
-	if [[ "$#" == 0 ]]; then
-	ggl && ggp
-	else
-	ggl "${*}" && ggp "${*}"
-	fi
-}
-compdef _git ggpnp=git-checkout
-
-function ggu() {
-	[[ "$#" != 1 ]] && local b="$(git_current_branch)"
-	git pull --rebase origin "${b:=$1}"
-}
-compdef _git ggu=git-checkout
-alias ggpur='ggu'
-compdef _git ggpur=git-checkout
 
 alias ghh='git grep "<<<<<<< HEAD"'
 alias gig='b .gitignore'
@@ -173,12 +104,10 @@ alias gpsum='git push --set-upstream origin master'
 
 alias gre='git remote'
 alias gra='git remote add'
-alias grb='git rebase'
 alias grba='git rebase --abort'
+alias grh='git reset HEAD'
 alias grset='git remote set-url'
 alias grs='curl https://api.github.com/repos/tik9/custom | grep size'
-alias grt='cd $(git rev-parse --show-toplevel || echo ".")'
-alias gru='git remote update'
 alias grv='git remote -v'
 
 alias gsb='git status -sb'

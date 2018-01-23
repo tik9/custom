@@ -1,7 +1,7 @@
 arc=`uname -a |cut -d' ' -f 6`
 
 home=c:/cygwin64/home/itdlz-koer
-# oHome=
+home2=/home/itdlz-koer
 cHome=$home/.oh-my-zsh/custom
 
 an=$cHome/$an2
@@ -60,8 +60,10 @@ function m0(){
 
 
 function pe(){
-	sed -i "s/\(^plugins=\).*/\1(common-aliases git cygwin $1)/" $zr
+	sed -i "s/\(^plugins=.*\))/\1 $1)/" $zr
+	echo $plugins
 	exec zsh
+	echo $plugins
 }
 
 

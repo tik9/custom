@@ -2,7 +2,7 @@
 
 
 _ip(){
-	_arguments '*: :_net_interfaces'
+	_arguments '-all[alle Interfaces]:*:*' '*: :_net_interfaces'
 }
 
 
@@ -11,7 +11,7 @@ _k(){
 }
 
 
-_m(){
+_ml(){
 	_arguments ':datei:_path_files' '*:radio:("http://80.237.156.8:8120" b1)' '-l[loop]'
 	#case "$state" in
     #dateien)
@@ -26,15 +26,10 @@ _ma(){
 }
 
 
-_pe(){
-	cmds=('10' '20' '')
-	_describe 'Minuten zwischen Curl' cmds
-}
-
-
 _pt(){
 	_alternative 'Nummer:pts:((n\:"pts-endnr."))'
 }
+
 
 _sc2(){
 	_arguments '-d[zielverzeichnis]:verz:_files -/' '-f[quell datei]:dateiname:_files' '-p[port]' '-o[letztes Oktett]' '-ip[ip-basis]' 
@@ -42,11 +37,5 @@ _sc2(){
 
 
 _schieb(){
-	_arguments '-f[datei]:datei:_files' '-z[Ziel, wohin]: :_path_files' 
-}
-
-
-
-_yt2(){
-	_alternative 'argumente:eigene args:((u\:"usb einsatz" ku\:"kein usb"))' 'files:filename:_files'
+	_arguments '-w[wieviele]::' 
 }
