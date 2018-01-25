@@ -68,7 +68,7 @@ function mut(){
 
 function pe(){
 	sed -i "s/\(^plugins=\).*/\1(common-aliases git git-prompt ubuntu zsh-autosuggestions $1)/" $zr
-	exec zsh
+	exec zsh && plu
 }
 
 

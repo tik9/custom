@@ -32,13 +32,14 @@ un=~/uni
 os=`uname -a |cut -d' ' -f 1`
 
 declare -A ad
-ad[ss]='sstirner@konzertagentur-koerner.de'
+ad[ss]='sstirner@konzertagentur-koerner.de';alias -g ss=$ad[ss]
 ad[tk]='user153015@gmail.com' ; alias -g tk=$ad[tk]
 ad[t2]='studienkreis.timo.koerner@gmail.com';alias -g t2=$ad[t2]
 ad[t]='01573 9598 220'
 ad[uk]='ukoerner@konzertagentur-koerner.de' ;alias -g uk=$ad[uk]
 
-sa=188.194.163.73
+sab=188.194.163
+sao=.73
 sm=192.168.43
 sv=192.168.182.129
 svi=ens33
@@ -63,7 +64,6 @@ function arg(){
 	# if [ -z $1 ];then;echo Argument fehlt;return; fi
 	((!$#)) && echo Keine Argumente!||echo args!
 }
-
 
 aaa(){
 	while true;do
@@ -194,13 +194,18 @@ function lp(){
 
 
 function pa(){
-	sed -i "s/\(^plugins=\).*/\1(common-aliases git git-prompt ubuntu zsh-autosuggestions $1)/" $zr
+	sed -i "s/\(^plugins=\).*/\1(common-aliases git $1)/" $zr
 	exec zsh
 }
 
 	
 function p2(){
 	grep $1 =(ps aux)
+}
+
+
+function rsyn(){
+	rsync --numeric-ids -avze ssh $1 root@$sab$sao:/root/p/app1 
 }
 
 
@@ -237,8 +242,7 @@ function scm(){
 
 	printf "Dir %s, Datei: %s, Port: %s,  Ip: %s\n" $dir $datei $port $ip$oktett
 	scp -P $port $datei $ip$oktett:$dir
-	rm -rf $datei
-	
+	rm -rf $datei	
 }
 
 function scmysql(){
@@ -314,6 +318,7 @@ alias dow="cd $dowDir"
 alias mus="cd ~/musik"
 alias o='cd $ZSH_CUSTOM'
 alias oh='cd $ZSH'
+alias op='cd /opt/django.git'
 alias un='cd $un'
 alias uc='cd $un/c'
 alias vs='cd ~/vs/vs'
@@ -384,15 +389,17 @@ alias z='/etc/init.d/networking restart; we'
 alias ks="ki ssh; ph"
 alias ksl="ki sl; pl"
 alias ph="pr ssh"
+alias pp='pr python'
 alias pr='ps -ef|grep'
 alias pl="pr sleep"
-alias -g sl=sleep
 
 
 #ssh
 alias cp_idrsa="cat ~/.ssh/id_rsa.pub | ssh root@$sa 'cat >> ~/.ssh/authorized_keys'"
 alias -g idr=~/.ssh/id_rsa.pub 
 alias -g ida=~/.ssh/authorized_keys 
+alias -g cida='c idr >> ida;c ida' 
+alias -g cida2='c id_rsa,pub >> ida' 
 
 #tmux
 alias ta="tmux attach"
@@ -409,7 +416,6 @@ alias zt="ec $ZSH_THEME"
 
 alias ac='ack -i'
 alias ad='for k in ${(@k)ad};do ;echo "$k $ad[$k]" ; done'
-alias bb='amixer -q sset Master 3%+; amixer get Master |sed -n 5p'
 alias c='cat'
 alias dt='date +"%T"'
 alias dh='df -h'
@@ -435,4 +441,4 @@ alias x+='xbacklight -set 40'
 alias x-='xbacklight -dec 10'
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
 
-echo "$0 aktualisiert"
+echo "Common Alias aktualisiert"
