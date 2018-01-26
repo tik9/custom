@@ -1,11 +1,21 @@
 arc=`uname -a |cut -d' ' -f 13`
 lsb=`uname -a |cut -d' ' -f 14`
 
+
+function ci(){
+	termux-clipboard-set $@
+}
+
+function co(){
+	termux-clipboard-get
+
+}
+
 function install(){
 	termux-api play-audio
 	termux-setup-storage
-
 }
+
 
 function q(){
 
@@ -20,8 +30,12 @@ function q(){
 	echo Ende
 }
 
-function te(){
+function inb(){
 	printf %s `termux-sms-inbox` | jq '.[0].number' 	
+}
+
+function sen(){
+	termux-sms-send -n $1 "${@:2}"
 }
 
 #cd

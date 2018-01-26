@@ -27,3 +27,5 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 source $ZSH/custom/oh-my-zsh.sh
 
 PROMPT='%{$fg[cyan]%}%m %{$fg[yellow]%} %(4~|./%2~|%~) %{$fg[cyan]%}%{$reset_color%} → '
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"

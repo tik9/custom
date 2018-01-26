@@ -1,12 +1,8 @@
-ar=plugins/archlinux/archlinux.plugin.zsh
-
 an2=plugins/android/android.plugin.zsh
 an=$ZSH_CUSTOM/$an2
 
 co2=plugins/common-aliases/common-aliases.plugin.zsh; co=$ZSH_CUSTOM/$co2
 cy2=plugins/cygwin/cygwin.plugin.zsh; cy=$ZSH_CUSTOM/$cy2
-
-dj2=plugins/django/django.plugin.zsh; dj=$ZSH_CUSTOM/$dj2
 
 gi2=plugins/git/git.plugin.zsh
 gi=$ZSH_CUSTOM/$gi2
@@ -15,8 +11,6 @@ lo=$ZSH_CUSTOM/login
 oh=$ZSH_CUSTOM/oh-my-zsh.sh
 
 py=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
-
-re2=functions/_rest;re=$ZSH_CUSTOM/$re2
 
 to=$ZSH_CUSTOM/todo
 ub2=plugins/ubuntu/ubuntu.plugin.zsh
@@ -40,6 +34,8 @@ ad[uk]='ukoerner@konzertagentur-koerner.de' ;alias -g uk=$ad[uk]
 
 sab=188.194.163
 sao=.73
+sr=$sab$sao
+
 sm=192.168.43
 sv=192.168.182.129
 svi=ens33
@@ -73,11 +69,11 @@ aaa(){
 	trap int_trap INT
 }
 
-function cua2(){
-	curl -f $sa:8000 && echo Erfolg || echo Keine Verbindung
+function cua(){
+	curl -f $sr:8000 && echo Erfolg || echo Keine Verbindung
 }
 
-function cua(){
+function cua2(){
 	pkill -P $$
 	trap int_trap int
 	while true; do
@@ -198,6 +194,9 @@ function pa(){
 	exec zsh
 }
 
+function pk(){
+	pkill $1; p2 $1
+}
 	
 function p2(){
 	grep $1 =(ps aux)
@@ -319,7 +318,8 @@ alias mus="cd ~/musik"
 alias o='cd $ZSH_CUSTOM'
 alias oh='cd $ZSH'
 alias op='cd /opt/django.git'
-alias un='cd $un'
+alias op='cd /opt/django.git'
+alias pd='pwd'
 alias uc='cd $un/c'
 alias vs='cd ~/vs/vs'
 alias y="cd"
@@ -365,6 +365,7 @@ alias hs='fc -li 9950 n2'
 alias ho='ec $HOST'
 alias pg='pgrep -P $$'
 alias po='ec $prompt'
+alias pw='c /etc/passwd|grep'
 alias pz='pr3 zsh'
 alias tt='tty'
 alias us='ec $USER'
@@ -383,6 +384,7 @@ alias iw2='iwlist wlan0 scan'
 alias j=ifconfig
 alias mi='echo $(dig +short myip.opendns.com @resolver1.opendns.com)'
 alias pn='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
+alias -g sr='$sr'
 alias z='/etc/init.d/networking restart; we'
 
 # ps
