@@ -17,7 +17,7 @@ ub2=plugins/ubuntu/ubuntu.plugin.zsh
 ub=$ZSH_CUSTOM/$ub2
 zr=~/.zshrc
 
-ds=~/storage
+ds=/storage
 dt=/data/data/com.termux/files/home
 dtm=~/storage/music
 un=~/uni
@@ -58,7 +58,7 @@ alias -g zr='$zr' # zshrc
 
 function arg(){
 	# if [ -z $1 ];then;echo Argument fehlt;return; fi
-	((!$#)) && echo Keine Argumente!||echo args!
+	((!$#)) && echo Keine Argumente!||echo args! $@
 }
 
 aaa(){
@@ -74,11 +74,12 @@ function cua(){
 }
 
 function cua2(){
-	pkill -P $$
-	trap int_trap int
+	#pkill -P $$
+	trap int_trap INT
+	
 	while true; do
-		cua2
-		echo "telnet/curl $sa 8000"
+		cua
+		echo "telnet/curl $sr 8000"
 		#curl localhost:8000
 		sleep 30m 
 		echo $(date +"%T")
@@ -120,13 +121,17 @@ function ersetz(){
 	for f in *;do;echo $f;done
 }
 
+function hs(){
+	((!$#))&& beginn='' || beginn=$1
+	fc -li $beginn f
+}
 
 function int_trap() {
     echo "Ctrl-C gedrückt"
 }
 
 
-function ip2(){
+function j(){
 	interf=$1
 	if [ -z $1 ]; then ; interf=wlan0;fi
 	if [[ $1 = all ]]; then ; ip addr show; return; fi
@@ -137,24 +142,11 @@ function ip2(){
 
 
 function ipbas {
-	echo $(echo `ip2` | cut -d . -f -3)	
+	echo $(echo `j` | cut -d . -f -3)	
 }
 
 
-function ipd(){
-	ip link set wlan0 down
-}
-
-
-function ipu(){
-		ip link set wlan0 up
-}
-
-
-function iu(){
-	ipd;ipu
-	j
-}
+function ipu(){ip link set wlan0 up}
 
 
 function k(){
@@ -214,11 +206,11 @@ function sc(){
 	dir=$ARGUMENTS[-d]; 	if [ -z $dir ];then;dir=/root/musik;fi 
 	datei=$ARGUMENTS[-f]; 	if [ -z $datei ];then;datei=`ls -t |head -n1`;fi
 	ip=$ARGUMENTS[-ip];		if [ -z $ip ];then;ip=$sm;fi
-	oktett=$ARGUMENTS[-o];	if [ -z $oktett ];then;oktett=.162;fi
+	oktett=$ARGUMENTS[-o];	if [ -z $oktett ];then;oktett=162;fi
 	port=$ARGUMENTS[-p];	if [ -z $port ];then;port=8022;fi
 	user=$ARGUMENTS[-u]; 	if [ -z $user ];then;user=root;fi
 
-		printf "Dir %s, Datei: %s, Port: %s, Ip: %s\n" $dir $datei $port "$ip$oktett" 
+		printf "Dir %s, Datei: %s, Port: %s, Ip: %s\n" $dir $datei $port "$ip.$oktett" 
 		scp -P $port $datei $user@$ip$oktett:$dir
 	#rm -rf $datei
 }
@@ -302,7 +294,6 @@ function y2(){
 # alias/Funktionen
 alias p='alias|grep'
 alias d='declare -f'
-alias de='declare n2'
 alias t='type'
 alias w='alias -m'
 alias ua='unalias'
@@ -317,7 +308,6 @@ alias dow="cd $dowDir"
 alias mus="cd ~/musik"
 alias o='cd $ZSH_CUSTOM'
 alias oh='cd $ZSH'
-alias op='cd /opt/django.git'
 alias op='cd /opt/django.git'
 alias pd='pwd'
 alias uc='cd $un/c'
@@ -338,7 +328,6 @@ alias to='touch'
 #Dict
 alias di="dict -d fd-eng-deu"
 alias w2="dict"
-
 
 # Editoren
 alias v="vim"
@@ -361,12 +350,9 @@ alias -g ti='| tail'
 
 # Konsole
 alias hist='history'
-alias hs='fc -li 9950 n2'
 alias ho='ec $HOST'
-alias pg='pgrep -P $$'
 alias po='ec $prompt'
 alias pw='c /etc/passwd|grep'
-alias pz='pr3 zsh'
 alias tt='tty'
 alias us='ec $USER'
 
@@ -377,31 +363,33 @@ alias mst='mysql -uroot d -e "show tables"'
 
 
 # netzwerk
-alias f='iwgetid -r'
 alias i2='curl ifconfig.me'
-alias ii='iw2 n2'
 alias iw2='iwlist wlan0 scan'
-alias j=ifconfig
-alias mi='echo $(dig +short myip.opendns.com @resolver1.opendns.com)'
+alias ip2=ifconfig
 alias pn='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
 alias -g sr='$sr'
 alias z='/etc/init.d/networking restart; we'
 
 # ps
+alias ap="ec $$"
 alias ks="ki ssh; ph"
 alias ksl="ki sl; pl"
+alias pg='pgrep -P $$'
 alias ph="pr ssh"
 alias pp='pr python'
 alias pr='ps -ef|grep'
 alias pl="pr sleep"
+alias pz='pr zsh'
+alias -g sl='sleep'
 
 
 #ssh
 alias cp_idrsa="cat ~/.ssh/id_rsa.pub | ssh root@$sa 'cat >> ~/.ssh/authorized_keys'"
 alias -g idr=~/.ssh/id_rsa.pub 
 alias -g ida=~/.ssh/authorized_keys 
-alias -g cida='c idr >> ida;c ida' 
-alias -g cida2='c id_rsa,pub >> ida' 
+alias -g cida_lokal='c idr >> ida;c ida' 
+alias -g cida2='c id_rsa.pub >> ida' 
+alias cida='cp idr .' 
 
 #tmux
 alias ta="tmux attach"
@@ -430,7 +418,7 @@ alias ja="java"
 alias le='less -WiNS'
 alias lt='ls -t'
 alias m='man'
-alias -g n2='|less'
+alias -g f='|less'
 alias r="expect $lo"
 alias rf='rfkill list'
 alias -g sa='$sa'

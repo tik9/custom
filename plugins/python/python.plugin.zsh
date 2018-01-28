@@ -14,7 +14,7 @@ function p3(){
 }
 
 alias kid="pkill python3"
-alias py='/root/progr/pycharm/bin/pycharm.sh&'
+alias pyc='/root/progr/pycharm/bin/pycharm.sh&'
 
 #pip
 alias pdn='pipdeptree --package'

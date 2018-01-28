@@ -94,27 +94,17 @@ alias ma='mail'
 alias a+="amix +"
 alias a-="amix -"
 alias abi="abiword"
-alias acd='apt-cache depends'
 
 alias acp='apt-cache policy' 
-compdef _acp acp='apt-cache policy'
 
 alias acs='apt-cache show'
 alias acse='apt-cache search'
 
-
 alias agli='apt list --installed'
-compdef _agli agli='apt list --installed'
 
 # List available updates only
 alias aglu='sudo apt-get -u upgrade --assume-no'
-compdef _aglu aglu='sudo apt-get -u upgrade --assume-no'
 
-alias ags='apt-get source'  
-compdef _ags ags='apt-get source'
-
-alias afu='sudo apt-file update'
-compdef _afu afu='sudo apt-file update'
 alias arc="echo $arc"
 
 alias hi='hibernate'
@@ -123,8 +113,6 @@ alias km='killall mplayer'
 alias -s pdf=mupdf
 alias pi=gpicview
 
-alias ppap='sudo ppa-purge'
-compdef _ppap ppap='sudo ppa-purge'
 alias s='sudo pm-suspend'
 
 #apt get
@@ -143,25 +131,8 @@ alias in='sudo apt-get install'
 alias rem='sudo apt-get remove'   # ar
 
 
-compdef _ag apg='sudo apt-get'
-compdef _aga aga='sudo apt-get autoclean'
-compdef _agb agb='sudo apt-get build-dep'
-compdef _agc agc='sudo apt-get clean'
-compdef _agd agd='sudo apt-get dselect-upgrade'
-compdef _agi in='sudo apt-get install'
-compdef _agp agp='sudo apt-get purge'
-compdef _agr rem='sudo apt-get remove'
-compdef _agu agu='sudo apt-get update'
-compdef _agud agud='sudo apt-get update && sudo apt-get full-upgrade'
-compdef _agug agug='sudo apt-get upgrade'
-compdef _aguu aguu='sudo apt-get update && sudo apt-get upgrade'
-compdef _agar agar='sudo apt-get autoremove'
-
-# Alle Kernels löschen bis auf den Aktuellen
-alias kclean='sudo aptitude remove -P ?and(~i~nlinux-(ima|hea) \
-	?not(~n`uname -r`))'
-
 alias allpkgs='dpkg --get-selections | grep -v deinstall'
+
 alias pkgsu="apt list --upgradable "
 
 

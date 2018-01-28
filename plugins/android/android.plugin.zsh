@@ -52,7 +52,7 @@ alias arc="echo $arc"
 alias b="vi"
 alias in='apt install'
 alias lo="logcat -s 'syslog:*'"
-alias p='play-audio'
+alias py='play-audio'
 alias rem="apt remove"
 alias sd='sshd;ph' 
 
