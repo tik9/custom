@@ -6,9 +6,6 @@ home2=/root
 
 arc=`uname -a |cut -d' ' -f 14`
 
-function install(){
-	xclip
-}
 
 function amix(){
 	amixer -q sset Master 3%$1; amixer get Master |sed -n 5p |cut -d ' ' -f6
@@ -16,8 +13,8 @@ function amix(){
 
 
 function b(){
-	if [[ $(ip2 $svi) = $sv ]]; then; vim;else;/root/src/src_geany-1.28/usr/bin/geany $1 &
-	fi
+	if [[ $(lsb) = Ubuntu ]]; then; /root/src/src_geany-1.28/usr/bin/geany $1 &
+	else;vim;fi
 }
 
 
@@ -109,11 +106,13 @@ alias arc="echo $arc"
 
 alias hi='hibernate'
 alias km='killall mplayer'
+alias lsb='ec $lsb'
 
 alias -s pdf=mupdf
 alias pi=gpicview
 
 alias s='sudo pm-suspend'
+alias z='/etc/init.d/networking restart; we'
 
 #apt get
 alias apg='sudo apt-get'            # age - but without sudo
@@ -130,21 +129,18 @@ alias agar='sudo apt-get autoremove'
 alias in='sudo apt-get install'  
 alias rem='sudo apt-get remove'   # ar
 
-
 alias allpkgs='dpkg --get-selections | grep -v deinstall'
 
 alias pkgsu="apt list --upgradable "
 
 
-# apt-add-repository with automatic install/upgrade of the desired package
-# Usage: aar ppa:xxxxxx/xxxxxx [packagename]
-# If packagename is not given as 2nd argument the function will ask for it and guess the default by taking
-# the part after the / from the ppa name which is sometimes the right name for the package you want to install
+# apt-add-repository, automatisches installieren/upgrade
+# aar ppa:xxxxxx/xxxxxx [packagename]
 aar() {
 	if [ -n "$2" ]; then
 		PACKAGE=$2
 	else
-		read "PACKAGE?Type in the package name to install/upgrade with this ppa [${1##*/}]: "
+		read "PACKAGE?package name to install/upgrade [${1##*/}]: "
 	fi
 	
 	if [ -z "$PACKAGE" ]; then
@@ -157,11 +153,7 @@ aar() {
 
 # Prints apt history
 # Usage:
-#   apt-history install
-#   apt-history upgrade
-#   apt-history remove
-#   apt-history rollback
-#   apt-history list
+#  e.g. apt-history install
 # Based On: http://linuxcommando.blogspot.com/2008/08/how-to-show-apt-log-history.html
 apt-history () {
   case "$1" in
@@ -191,21 +183,7 @@ apt-history () {
   esac
 }
 
-# Kernel-package building shortcut
-kerndeb () {
-    # temporarily unset MAKEFLAGS ( '-j3' will fail )
-    MAKEFLAGS=$( print - $MAKEFLAGS | perl -pe 's/-j\s*[\d]+//g' )
-    print '$MAKEFLAGS set to '"'$MAKEFLAGS'"
-	appendage='-custom' # this shows up in $ (uname -r )
-    revision=$(date +"%Y%m%d") # this shows up in the .deb file name
 
-    make-kpkg clean
-
-    time fakeroot make-kpkg --append-to-version "$appendage" --revision \
-        "$revision" kernel_image kernel_headers
-}
-
-# List packages by size
 function apt-list-packages {
     dpkg-query -W --showformat='${Installed-Size} ${Package} ${Status}\n' | \
     grep -v deinstall | \

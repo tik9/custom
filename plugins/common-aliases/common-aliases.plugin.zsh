@@ -19,7 +19,7 @@ zr=~/.zshrc
 
 ds=/storage
 dt=/data/data/com.termux/files/home
-dtm=~/storage/music
+dtm=/storage/music
 un=~/uni
 
 
@@ -28,7 +28,6 @@ os=`uname -a |cut -d' ' -f 1`
 declare -A ad
 ad[ss]='sstirner@konzertagentur-koerner.de';alias -g ss=$ad[ss]
 ad[tk]='user153015@gmail.com' ; alias -g tk=$ad[tk]
-ad[t2]='studienkreis.timo.koerner@gmail.com';alias -g t2=$ad[t2]
 ad[t]='01573 9598 220'
 ad[uk]='ukoerner@konzertagentur-koerner.de' ;alias -g uk=$ad[uk]
 
@@ -37,8 +36,6 @@ sao=.73
 sr=$sab$sao
 
 sm=192.168.43
-sv=192.168.182.129
-svi=ens33
 
 # plugins
 alias anb="b $an"
@@ -211,8 +208,7 @@ function sc(){
 	user=$ARGUMENTS[-u]; 	if [ -z $user ];then;user=root;fi
 
 		printf "Dir %s, Datei: %s, Port: %s, Ip: %s\n" $dir $datei $port "$ip.$oktett" 
-		scp -P $port $datei $user@$ip$oktett:$dir
-	#rm -rf $datei
+		scp -P $port $datei $user@$ip.$oktett:$dir
 }
 
 
@@ -303,7 +299,7 @@ alias whi="which"
 
 #cd's
 alias -g ar="~/arduino"
-alias da="cd ~/django"
+alias da="cd /home/pi/django"
 alias dow="cd $dowDir"
 alias mus="cd ~/musik"
 alias o='cd $ZSH_CUSTOM'
@@ -317,20 +313,19 @@ alias y="cd"
 #curl
 alias c='cu $sa:8000/te'
 alias cl='cu localhost:8000'
-alias cm='cu http://$sa:8000/de/admin/'
-alias cu='curl'
+alias cu=curl
 
 
 #Dateien
 alias cp='cp -r'
-alias to='touch'
+alias to=touch
 
 #Dict
 alias di="dict -d fd-eng-deu"
-alias w2="dict"
+alias w2=dict
 
 # Editoren
-alias v="vim"
+alias v=vim
 
 #find
 alias ff='find . -type f -name'
@@ -343,17 +338,17 @@ alias hgrep="fc -El 0 | grep"
 
 
 # head / tail
-alias -g H='| head'
+alias -g H='|head'
 alias tai='tail -f'
 alias -g ti='| tail'
 
 
 # Konsole
-alias hist='history'
+alias hist=history
 alias ho='ec $HOST'
 alias po='ec $prompt'
 alias pw='c /etc/passwd|grep'
-alias tt='tty'
+alias tt=tty
 alias us='ec $USER'
 
 
@@ -368,11 +363,10 @@ alias iw2='iwlist wlan0 scan'
 alias ip2=ifconfig
 alias pn='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
 alias -g sr='$sr'
-alias z='/etc/init.d/networking restart; we'
 
 # ps
 alias ap="ec $$"
-alias ks="ki ssh; ph"
+alias ks="ph;ki ssh; ph"
 alias ksl="ki sl; pl"
 alias pg='pgrep -P $$'
 alias ph="pr ssh"
@@ -385,50 +379,39 @@ alias -g sl='sleep'
 
 #ssh
 alias cp_idrsa="cat ~/.ssh/id_rsa.pub | ssh root@$sa 'cat >> ~/.ssh/authorized_keys'"
-alias -g idr=~/.ssh/id_rsa.pub 
-alias -g ida=~/.ssh/authorized_keys 
 alias -g cida_lokal='c idr >> ida;c ida' 
 alias -g cida2='c id_rsa.pub >> ida' 
-alias cida='cp idr .' 
-
-#tmux
-alias ta="tmux attach"
-alias tl="tmux ls"
-alias tm="tmux"
+alias cida='cp idr .; ga; gc' 
+alias -g idr=~/.ssh/id_rsa.pub 
+alias -g ida=~/.ssh/authorized_keys 
 
 
 # zsh
 alias e="exec zsh"
 alias ohm='sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
 alias plu='ec $plugins'
-alias zt="ec $ZSH_THEME"
+alias x=exit
 
 
 alias ac='ack -i'
 alias ad='for k in ${(@k)ad};do ;echo "$k $ad[$k]" ; done'
 alias c='cat'
 alias dt='date +"%T"'
+alias de='date +"%d.%m.%y"'
 alias dh='df -h'
-alias dowDir='l $dowDir'
 alias duh='du -h'
 alias ecl="/root/progr/eclipse/eclipse & "
 alias ec="echo"
 alias -g h="--help |less"
-alias ja="java"
 alias le='less -WiNS'
 alias lt='ls -t'
 alias m='man'
 alias -g f='|less'
 alias r="expect $lo"
 alias rf='rfkill list'
-alias -g sa='$sa'
-alias -g sm='$sm'
-alias tp='top'
-alias tr='tree'
-alias -g ve='--version'
-alias x='exit'
-alias x+='xbacklight -set 40'
-alias x-='xbacklight -dec 10'
+alias tp=top
+alias -g ve=--version
+alias x+='xbacklight -set 40';alias x-='xbacklight -dec 10'
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
 
 echo "Common Alias aktualisiert"

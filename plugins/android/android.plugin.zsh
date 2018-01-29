@@ -40,11 +40,9 @@ function sen(){
 
 #cd
 alias dt='cd $dtm'
-alias p='play-audio'
 alias mu='cd $dtm'
 
 
-alias agr='sudo apt-get remove'
 alias aglu="apt list --upgradable "
 alias aguu='apt-get update && apt-get upgrade'      #adg
 alias allpkgs="apt list --installed "
@@ -52,8 +50,8 @@ alias arc="echo $arc"
 alias b="vi"
 alias in='apt install'
 alias lo="logcat -s 'syslog:*'"
-alias py='play-audio'
 alias rem="apt remove"
 alias sd='sshd;ph' 
+alias z='play-audio' 
 
 

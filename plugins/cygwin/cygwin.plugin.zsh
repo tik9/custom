@@ -4,30 +4,24 @@ home=c:/cygwin64/home/itdlz-koer
 home2=/home/itdlz-koer
 cHome=$home/.oh-my-zsh/custom
 
-an=$cHome/$an2
 co=$cHome/$co2
 cy=$cHome/$cy2
 dj=$cHome/$dj2
 gi=$cHome/$gi2
 lo=$cHome/login
 oh=$cHome/oh-my-zsh.sh
-re=$cHome/$re2
-to=$cHome/todo
-ub=$cHome/$ub2
 zr=$home/.zshrc
 
+sv=192.168.182.129
+svi=ens33
+
 #plugins
-alias anb="b $an"
-alias arb="b $ar"
 alias cb="b $co"
 alias -g com="$co"
 alias cyb="b $cy"
 alias gb="b $gi"
 alias lb="b $lo"
 alias ob="b $oh"
-alias pb="b pom.xml"
-alias tb="b $to"
-alias ub="b $ub"
 alias zb="b $zr"
 
 bim=$(wmic OS get OSArchitecture)
@@ -80,6 +74,12 @@ function q(){
 }
 
 function sho(){apt-cyg show `echo $1`;}
+
+
+#tmux
+alias ta="tmux attach"
+alias tl="tmux ls"
+alias tm=tmux
 
 
 alias agr='apt-cyg remove';
