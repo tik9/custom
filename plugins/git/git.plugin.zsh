@@ -25,10 +25,6 @@ function gi(){
 
 	dir=$(_check)
 
-	if -z git rev-parse --git-dir > /dev/null 2>&1;then
-		cd $ZSH_CUSTOM
-		ec "(wechsle zu) $ZSH_CUSTOM"
-	fi
 	 git add . 
 	 out=`git commit -m "$@"`
 	 echo $out
@@ -85,7 +81,6 @@ alias gd='$(_check);git diff'
 alias gdca='git diff --cached'
 
 alias gf='git config --list'
-
 
 alias ghh='git grep "<<<<<<< HEAD"'
 alias gig='b .gitignore'

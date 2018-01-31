@@ -119,8 +119,8 @@ function ersetz(){
 }
 
 function hs(){
-	((!$#))&& beginn='' || beginn=$1
-	fc -li $beginn f
+	(!$#) && beginn='' || beginn=$1
+	fc -li $beginn |less
 }
 
 function int_trap() {
@@ -171,16 +171,17 @@ function lö(){
 	rm -rf "$@";ls -a
 }
 
-function lp(){
-	sed -i 's/ [a-z-]\+)/)/' $zr
-	exec zsh; 
+
+function pa(){
+	sed -i "s/\(^plugins=.*\))/\1 $1)/" $zr
+	exec zsh && sleep 3
 	echo $plugins
 }
 
-
-function pa(){
-	sed -i "s/\(^plugins=\).*/\1(common-aliases git $1)/" $zr
-	exec zsh
+function pl(){
+	sed -i 's/ [a-z-]\+)/)/' $zr
+	exec zsh; 
+	echo $plugins
 }
 
 function pk(){
@@ -196,6 +197,10 @@ function rsyn(){
 	rsync --numeric-ids -avze ssh $1 root@$sab$sao:/root/p/app1 
 }
 
+function sstat(){service $1 status}
+function sstar(){service $1 start}
+function srs(){service $1 restart}
+function ssto(){service $1 stop}
 
 function sc(){
 	zparseopts -A ARGUMENTS d: f: i: ip: o: p: u:
@@ -306,7 +311,7 @@ alias o='cd $ZSH_CUSTOM'
 alias oh='cd $ZSH'
 alias op='cd /opt/django.git'
 alias pd='pwd'
-alias uc='cd $un/c'
+alias un='cd $un'
 alias vs='cd ~/vs/vs'
 alias y="cd"
 
@@ -362,26 +367,28 @@ alias i2='curl ifconfig.me'
 alias iw2='iwlist wlan0 scan'
 alias ip2=ifconfig
 alias pn='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
-alias -g sr='$sr'
+alias -g sr=$sr
 
 # ps
 alias ap="ec $$"
-alias ks="ph;ki ssh; ph"
+alias ks="ph; ki ssh; ph"
 alias ksl="ki sl; pl"
-alias pg='pgrep -P $$'
+alias pg=pgrep
+alias pg2='pgrep -P $$'
 alias ph="pr ssh"
 alias pp='pr python'
 alias pr='ps -ef|grep'
-alias pl="pr sleep"
+alias psl="pr sleep"
 alias pz='pr zsh'
-alias -g sl='sleep'
+alias -g sl=sleep
 
 
 #ssh
-alias cp_idrsa="cat ~/.ssh/id_rsa.pub | ssh root@$sa 'cat >> ~/.ssh/authorized_keys'"
-alias -g cida_lokal='c idr >> ida;c ida' 
-alias -g cida2='c id_rsa.pub >> ida' 
-alias cida='cp idr .; ga; gc' 
+alias cia='c ida'
+alias -g cida_lokal='c idr >> ida; c ida' 
+alias cida='cp idr .; ga; gi "id rsa kopiert"' 
+alias cida2='gl; c id_rsa.pub >> ida; c ida' 
+alias cip='ci `c idr`' 
 alias -g idr=~/.ssh/id_rsa.pub 
 alias -g ida=~/.ssh/authorized_keys 
 
@@ -389,7 +396,7 @@ alias -g ida=~/.ssh/authorized_keys
 # zsh
 alias e="exec zsh"
 alias ohm='sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
-alias plu='ec $plugins'
+alias pu='ec $plugins'
 alias x=exit
 
 

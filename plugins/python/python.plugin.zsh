@@ -13,7 +13,6 @@ function p3(){
 		python $@;fi
 }
 
-alias kid="pkill python3"
 alias pyc='/root/progr/pycharm/bin/pycharm.sh&'
 
 #pip

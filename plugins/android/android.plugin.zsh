@@ -52,6 +52,9 @@ alias in='apt install'
 alias lo="logcat -s 'syslog:*'"
 alias rem="apt remove"
 alias sd='sshd;ph' 
+alias tsi='termux-sms-inbox' 
+alias tsh='termux-sms-send -help' 
+alias ts='termux-sms-send' 
 alias z='play-audio' 
 
 
