@@ -20,6 +20,10 @@ _ma(){
 	_arguments '-t[Text]:text2:text3' '-b[Betreff]::' '-a[Adress-Kürzel]::'
 }
 
+_play_audio(){
+	_arguments ':dat:_path_files -W /data/data/com.termux/files/home/storage/music'
+	#_arguments ':dat:_path_files -W /'
+}
 
 _pt(){
 	_alternative 'Nummer:pts:((n\:"pts-endnr."))'
@@ -30,7 +34,3 @@ _sc2(){
 	_arguments '-d[zielverzeichnis]:verz:_files -/' '-f[quell datei]:dateiname:_files' '-p[port]' '-o[letztes Oktett]' '-ip[ip-basis]' 
 }
 
-
-_schieb(){
-	_arguments '-w[wieviele]::' 
-}

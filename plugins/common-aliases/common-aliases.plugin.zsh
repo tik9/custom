@@ -85,12 +85,10 @@ function cua2(){
 
 
 function er(){
-	neueste=`ls -t | head -1`
-	((!$#)) && 	dat=$neueste || dat=$1
+	((!$#)) && 	dat=`ls -t | head -1` || dat=$1
 	echo "Datei $dat \n"
 	mv "$dat" $(echo "$dat"| sed 's/\(.*\)................\(\..*\)/\1\2/')
 	echo Datei $dat \n
-
 }
 
 
@@ -303,17 +301,16 @@ alias whi="which"
 
 
 #cd's
-alias -g ar="~/arduino"
-alias da="cd /home/pi/django"
-alias dow="cd $dowDir"
-alias mus="cd ~/musik"
-alias o='cd $ZSH_CUSTOM'
-alias oh='cd $ZSH'
-alias op='cd /opt/django.git'
-alias pd='pwd'
-alias un='cd $un'
-alias vs='cd ~/vs/vs'
-alias y="cd"
+alias -g ar=~/arduino
+alias da=/home/pi/django
+alias dow=$dowDir
+alias mus=~/musik
+alias -g o=$ZSH_CUSTOM
+alias oh=$ZSH
+alias op=/opt/django.git
+alias pd=pwd
+alias un=$un
+alias y=cd
 
 #curl
 alias c='cu $sa:8000/te'
@@ -389,6 +386,7 @@ alias -g cida_lokal='c idr >> ida; c ida'
 alias cida='cp idr .; ga; gi "id rsa kopiert"' 
 alias cida2='gl; c id_rsa.pub >> ida; c ida' 
 alias cip='ci `c idr`' 
+alias cir='c idr' 
 alias -g idr=~/.ssh/id_rsa.pub 
 alias -g ida=~/.ssh/authorized_keys 
 
@@ -402,17 +400,17 @@ alias x=exit
 
 alias ac='ack -i'
 alias ad='for k in ${(@k)ad};do ;echo "$k $ad[$k]" ; done'
-alias c='cat'
+alias c=cat
 alias dt='date +"%T"'
 alias de='date +"%d.%m.%y"'
 alias dh='df -h'
 alias duh='du -h'
 alias ecl="/root/progr/eclipse/eclipse & "
-alias ec="echo"
+alias ec=echo
 alias -g h="--help |less"
 alias le='less -WiNS'
 alias lt='ls -t'
-alias m='man'
+alias m=man
 alias -g f='|less'
 alias r="expect $lo"
 alias rf='rfkill list'

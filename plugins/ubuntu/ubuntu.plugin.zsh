@@ -1,4 +1,3 @@
-
 lsb=`lsb_release -i|cut -d: -f2|sed -e 's/[[:blank:]]//'`
 
 dowDir=/home/t/Downloads
@@ -112,7 +111,7 @@ alias -s pdf=mupdf
 alias pi=gpicview
 
 alias s='sudo pm-suspend'
-alias z='/etc/init.d/networking restart; we'
+#alias z='/etc/init.d/networking restart; we'
 
 #apt get
 alias apg='sudo apt-get'            # age - but without sudo

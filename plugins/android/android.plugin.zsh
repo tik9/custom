@@ -38,8 +38,13 @@ function sen(){
 	termux-sms-send -n $1 "${@:2}"
 }
 
+function z(){
+	 play-audio $1
+}
+compdef _play_audio z
+
+
 #cd
-alias dt='cd $dtm'
 alias mu='cd $dtm'
 
 
@@ -55,6 +60,6 @@ alias sd='sshd;ph'
 alias tsi='termux-sms-inbox' 
 alias tsh='termux-sms-send -help' 
 alias ts='termux-sms-send' 
-alias z='play-audio' 
+#alias z='play-audio' 
 
 

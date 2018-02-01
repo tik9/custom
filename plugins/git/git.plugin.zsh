@@ -21,8 +21,6 @@ compdef _gc gc
 
 
 function gi(){
-		zparseopts -A ARGUMENTS m: mzt: m2h: m2t:
-
 	dir=$(_check)
 
 	 git add . 
