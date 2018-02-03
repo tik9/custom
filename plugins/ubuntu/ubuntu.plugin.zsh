@@ -18,7 +18,7 @@ function b(){
 
 
 function ci(){
-		echo $@|xclip -selection clipboard
+		echo `eval $@`|xclip -selection clipboard
 }
 
 function co(){
@@ -48,7 +48,8 @@ function ma2(){
 function ml(){
 	cd ~/musik
 	ffprobe $1 2> >(grep Duration)
-	mplayer $1  
+	mplayer $1
+	cd -  
 }
 compdef _ml ml
 
@@ -57,10 +58,6 @@ function mp(){
 	mupdf $1 &
 }
 
-function mut(){
-	#mutt -a $arg[-a] -s "$arg[-s]" -- $arg[-e] < $arg[-t]
-	mutt -s "test" -- $ad[tk]
-}
 
 function pe(){
 	sed -i "s/\(^plugins=\).*/\1(common-aliases git git-prompt ubuntu zsh-autosuggestions $1)/" $zr
@@ -75,9 +72,8 @@ function q(){
 
 	trap int_trap INT
 	echo Ctrl-C zum Beenden des downloads $datei
-
 	wget http://speedtest.wdc01.softlayer.com/downloads/$datei --output-document=/dev/null
-	
+
 	echo Ende
 }
 
@@ -111,7 +107,7 @@ alias -s pdf=mupdf
 alias pi=gpicview
 
 alias s='sudo pm-suspend'
-#alias z='/etc/init.d/networking restart; we'
+alias z='/etc/init.d/networking restart; we'
 
 #apt get
 alias apg='sudo apt-get'            # age - but without sudo
@@ -150,11 +146,9 @@ aar() {
 	sudo apt-get install $PACKAGE
 }
 
-# Prints apt history
-# Usage:
-#  e.g. apt-history install
-# Based On: http://linuxcommando.blogspot.com/2008/08/how-to-show-apt-log-history.html
-apt-history () {
+# z. B. apt-history install
+# http://linuxcommando.blogspot.com/2008/08/how-to-show-apt-log-history.html
+function apt-history () {
   case "$1" in
     install)
       zgrep --no-filename 'install ' $(ls -rt /var/log/dpkg*)

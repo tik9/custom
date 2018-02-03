@@ -19,7 +19,7 @@ zr=~/.zshrc
 
 ds=/storage
 dt=/data/data/com.termux/files/home
-dtm=/storage/music
+dtm=$dt/storage/music
 un=~/uni
 
 
@@ -65,6 +65,7 @@ aaa(){
 	done
 	trap int_trap INT
 }
+
 
 function cua(){
 	curl -f $sr:8000 && echo Erfolg || echo Keine Verbindung
@@ -210,8 +211,9 @@ function sc(){
 	port=$ARGUMENTS[-p];	if [ -z $port ];then;port=8022;fi
 	user=$ARGUMENTS[-u]; 	if [ -z $user ];then;user=root;fi
 
-		printf "Dir %s, Datei: %s, Port: %s, Ip: %s\n" $dir $datei $port "$ip.$oktett" 
-		scp -P $port $datei $user@$ip.$oktett:$dir
+	printf "Dir %s, Datei: %s, Port: %s, Ip: %s\n" $dir $datei $port "$ip.$oktett" 
+	scp -P $port $datei $user@$ip.$oktett:$dir
+	rm $datei
 }
 
 
@@ -224,7 +226,7 @@ function schieb(){
 
 function scm(){
 	
-	dir=$dtm;
+	dir=$dt$dtm;
 	datei=`ls *.mp3|head -1`
 	ip=$sm
 	oktett=.1
@@ -287,6 +289,12 @@ function y2(){
 	# ffmpeg -i *.webm `ls -t |head -1|cut -d. -f -1`.mp3 
 	#sc2 -o .1 -ip $sm -f "`ls |head -1`" -d $dt/$dtm
 	#rm "`ls -t|head -1`"
+}
+
+
+function zeile(){
+	sed -n "$1,+$2p" mbox
+	#sed -n '$1,$($1+$2)p' mbox >> $3
 }
 
  

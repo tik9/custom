@@ -3,7 +3,7 @@ lsb=`uname -a |cut -d' ' -f 14`
 
 
 function ci(){
-	termux-clipboard-set $@
+	termux-clipboard-set `eval $@`
 }
 
 function co(){
@@ -30,8 +30,8 @@ function q(){
 	echo Ende
 }
 
-function inb(){
-	printf %s `termux-sms-inbox` | jq '.[0].number' 	
+function nr(){
+	echo `termux-sms-inbox` | jq '.[0].number' 	
 }
 
 function sen(){
@@ -39,6 +39,7 @@ function sen(){
 }
 
 function z(){
+	 cd $dt$dtm 
 	 play-audio $1
 }
 compdef _play_audio z
@@ -53,6 +54,7 @@ alias aguu='apt-get update && apt-get upgrade'      #adg
 alias allpkgs="apt list --installed "
 alias arc="echo $arc"
 alias b="vi"
+alias dtm='$dtm;l'
 alias in='apt install'
 alias lo="logcat -s 'syslog:*'"
 alias rem="apt remove"
