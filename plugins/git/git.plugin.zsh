@@ -24,8 +24,8 @@ function gi(){
 	dir=$(_check)
 
 	 git add . 
-	 out=`git commit -m "$@"`
-	 echo $out
+	 git commit -m "$@"
+	 #echo $out
 	 #Everything up-to-date
 
 	 git push

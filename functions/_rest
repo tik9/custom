@@ -12,7 +12,7 @@ _k(){
 
 
 _ml(){
-	_arguments ':datei:_path_files -W /root/musik' '*:radio:("http://80.237.156.8:8120" b1)'
+	_arguments ':datei:_path_files -W /root/musik' '*:radio:("http://80.237.156.8:8120")'
 }
 
 

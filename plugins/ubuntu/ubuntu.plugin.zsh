@@ -18,7 +18,11 @@ function b(){
 
 
 function ci(){
-		echo `eval $@`|xclip -selection clipboard
+		echo `$@`|xclip -selection clipboard
+}
+
+function cj(){
+		echo $@ |xclip -selection clipboard
 }
 
 function co(){
@@ -29,7 +33,6 @@ function co(){
 function mai(){
 	zparseopts -A arg b: t: a:
 		
-	#printf "Subject:$arg[-b]\n${arg[-t]}" |msmtp $ad[$arg[-a]]
 	printf "Subject:$arg[-b]\n${arg[-t]}" |msmtp $arg[-a]
 	
 	#test
@@ -67,18 +70,15 @@ function pe(){
 
 function q(){
 	# zeige WLAN ssid (iwget)
-		iwgetid -r;printf "\n";
 	datei=test100.zip
 
 	trap int_trap INT
 	echo Ctrl-C zum Beenden des downloads $datei
 	wget http://speedtest.wdc01.softlayer.com/downloads/$datei --output-document=/dev/null
 
-	echo Ende
 }
 
 #Mail
-alias mm='c .msmtprc'
 alias mu='mutt'
 alias ma='mail'
 
@@ -97,16 +97,14 @@ alias agli='apt list --installed'
 # List available updates only
 alias aglu='sudo apt-get -u upgrade --assume-no'
 
-alias arc="echo $arc"
-
 alias hi='hibernate'
 alias km='killall mplayer'
 alias lsb='ec $lsb'
 
 alias -s pdf=mupdf
-alias pi=gpicview
 
 alias s='sudo pm-suspend'
+alias sp='su pi'
 alias z='/etc/init.d/networking restart; we'
 
 #apt get

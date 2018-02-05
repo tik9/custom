@@ -3,8 +3,13 @@ lsb=`uname -a |cut -d' ' -f 14`
 
 
 function ci(){
-	termux-clipboard-set `eval $@`
+	termux-clipboard-set `$@`
 }
+
+function cj(){
+	termux-clipboard-set $@
+}
+
 
 function co(){
 	termux-clipboard-get
@@ -17,8 +22,11 @@ function install(){
 }
 
 
-function q(){
+function nr(){
+	printf %s `termux-sms-inbox` | jq '.[0].number' 	
+}
 
+function q(){
 	datei=test100.zip
 
 	trap int_trap INT
@@ -30,16 +38,17 @@ function q(){
 	echo Ende
 }
 
-function nr(){
-	echo `termux-sms-inbox` | jq '.[0].number' 	
+
+function se(){
+	nr=`sed -e 's/^"//' -e 's/"$//' <<<\`$1\`` 
+	echo alt: `$1`, neu: $nr
+
+	termux-sms-send -n $nr "${@:2}"
 }
 
-function sen(){
-	termux-sms-send -n $1 "${@:2}"
-}
 
 function z(){
-	 cd $dt$dtm 
+	 cd $dm 
 	 play-audio $1
 }
 compdef _play_audio z

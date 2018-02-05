@@ -17,10 +17,9 @@ ub2=plugins/ubuntu/ubuntu.plugin.zsh
 ub=$ZSH_CUSTOM/$ub2
 zr=~/.zshrc
 
-ds=/storage
-dt=/data/data/com.termux/files/home
-dtm=$dt/storage/music
-un=~/uni
+ds=/storage/emulated/0
+dh=/data/data/com.termux/files/home
+dm=$ds/music
 
 
 os=`uname -a |cut -d' ' -f 1`
@@ -118,7 +117,7 @@ function ersetz(){
 }
 
 function hs(){
-	(!$#) && beginn='' || beginn=$1
+	((!$#)) && beginn='' || beginn=$1
 	fc -li $beginn |less
 }
 
@@ -278,11 +277,11 @@ function y2(){
 	
 	typeset -A a_array
 	a_array=(
-	'mozart' '3Nbc5I8w5F8'
+	'fleissig hw' '-jSvfhXl0pQ'
        '' '')
 
 	for k in "${(@k)a_array}"; do
-	  youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=$a_array[$k]"
+	  youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" $a_array[$k]
 	done
 	
 	ersetz
@@ -317,7 +316,7 @@ alias -g o=$ZSH_CUSTOM
 alias oh=$ZSH
 alias op=/opt/django.git
 alias pd=pwd
-alias un=$un
+alias un=~/uni
 alias y=cd
 
 #curl
