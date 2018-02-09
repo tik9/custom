@@ -18,9 +18,7 @@ ub=$ZSH_CUSTOM/$ub2
 zr=~/.zshrc
 
 ds=/storage/emulated/0
-dh=/data/data/com.termux/files/home
-dm=$ds/music
-
+mu=$ds/music
 
 os=`uname -a |cut -d' ' -f 1`
 
@@ -57,16 +55,12 @@ function arg(){
 	((!$#)) && echo Keine Argumente!||echo args! $@
 }
 
-aaa(){
-	while true;do
-		echo `curl ifconfig.me` `date` >> ifco
-		sleep 30m
-	done
-	trap int_trap INT
+aa(){
+	!-2
 }
 
 
-function cua(){
+function cu(){
 	curl -f $sr:8000 && echo Erfolg || echo Keine Verbindung
 }
 
@@ -75,9 +69,7 @@ function cua2(){
 	trap int_trap INT
 	
 	while true; do
-		cua
-		echo "telnet/curl $sr 8000"
-		#curl localhost:8000
+		cu
 		sleep 30m 
 		echo $(date +"%T")
 	done
@@ -132,7 +124,7 @@ function j(){
 	if [[ $1 = all ]]; then ; ip addr show; return; fi
 	#ip addr show $interf | grep -o 'inet [0-9.]*'|cut -d' ' -f2
 	
-	ip addr show $interf | sed  -n -E 's/   inet ([0-9.]*).*/\1/p'	
+	ip addr show $interf | sed  -n -E 's/   inet ([0-9.]*).*/\1/p'|cut -d. -f4
 }
 
 
@@ -206,13 +198,13 @@ function sc(){
 	dir=$ARGUMENTS[-d]; 	if [ -z $dir ];then;dir=/root/musik;fi 
 	datei=$ARGUMENTS[-f]; 	if [ -z $datei ];then;datei=`ls -t |head -n1`;fi
 	ip=$ARGUMENTS[-ip];		if [ -z $ip ];then;ip=$sm;fi
-	oktett=$ARGUMENTS[-o];	if [ -z $oktett ];then;oktett=162;fi
+	oktett=$ARGUMENTS[-o];	if [ -z $oktett ];then;oktett=1;fi
 	port=$ARGUMENTS[-p];	if [ -z $port ];then;port=8022;fi
 	user=$ARGUMENTS[-u]; 	if [ -z $user ];then;user=root;fi
 
 	printf "Dir %s, Datei: %s, Port: %s, Ip: %s\n" $dir $datei $port "$ip.$oktett" 
 	scp -P $port $datei $user@$ip.$oktett:$dir
-	rm $datei
+	#rm $datei
 }
 
 
@@ -309,7 +301,6 @@ alias whi="which"
 
 #cd's
 alias -g ar=~/arduino
-alias da=/home/pi/django
 alias dow=$dowDir
 alias mus=~/musik
 alias -g o=$ZSH_CUSTOM
@@ -320,9 +311,8 @@ alias un=~/uni
 alias y=cd
 
 #curl
-alias c='cu $sa:8000/te'
-alias cl='cu localhost:8000'
-alias cu=curl
+alias cl='cur localhost:8000'
+alias cur=curl
 
 
 #Dateien
@@ -399,7 +389,7 @@ alias -g ida=~/.ssh/authorized_keys
 
 
 # zsh
-alias e="exec zsh"
+alias e="exec zsh && ec ha we; !-2"
 alias ohm='sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
 alias pu='ec $plugins'
 alias x=exit

@@ -23,7 +23,8 @@ function install(){
 
 
 function nr(){
-	printf %s `termux-sms-inbox` | jq '.[0].number' 	
+	nr=`\`termux-sms-inbox\` | jq '.[0].number'` 	
+	echo `sed -e 's/^"//' -e 's/"$//' <<<\`$nr\`` 
 }
 
 function q(){
@@ -40,37 +41,34 @@ function q(){
 
 
 function se(){
-	nr=`sed -e 's/^"//' -e 's/"$//' <<<\`$1\`` 
-	echo alt: `$1`, neu: $nr
-
-	termux-sms-send -n $nr "${@:2}"
+	echo `$1`
+	termux-sms-send -n `$1` "${@:2}"
 }
 
 
 function z(){
-	 cd $dm 
+	 cd $mu
 	 play-audio $1
 }
 compdef _play_audio z
 
 
 #cd
-alias mu='cd $dtm'
+alias mu='$mu'
+alias ds='$ds'
 
-
+#apt
 alias aglu="apt list --upgradable "
-alias aguu='apt-get update && apt-get upgrade'      #adg
+alias aguu='apt-get update && apt-get upgrade'
 alias allpkgs="apt list --installed "
-alias arc="echo $arc"
-alias b="vi"
-alias dtm='$dtm;l'
 alias in='apt install'
-alias lo="logcat -s 'syslog:*'"
 alias rem="apt remove"
-alias sd='sshd;ph' 
-alias tsi='termux-sms-inbox' 
+
+
+alias arc="echo $arc"
+alias b=vi
+alias ka='ki play-audio'
+alias sd='sshd; ph' 
+alias tsi=termux-sms-inbox
 alias tsh='termux-sms-send -help' 
-alias ts='termux-sms-send' 
-#alias z='play-audio' 
-
-
+alias ts=termux-sms-send 

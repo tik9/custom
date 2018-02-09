@@ -2,6 +2,7 @@
 # Entferne python kompilierter byte-code im aktuellen Verzeichnis oder in einer Verzeichnisliste
 function pyclean() {
     ZSH_PYCLEAN_PLACES=${*:-'.'}
+	find . -path '*/__pycache__/*' -delete
     find ${ZSH_PYCLEAN_PLACES} -type d -name "__pycache__" -delete
 }
 
@@ -13,6 +14,7 @@ function p3(){
 		python $@;fi
 }
 
+alias iy='ipython'
 alias pyc='/root/progr/pycharm/bin/pycharm.sh&'
 
 #pip

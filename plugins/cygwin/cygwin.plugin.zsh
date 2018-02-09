@@ -1,5 +1,5 @@
 arc=`uname -a |cut -d' ' -f 6`
-
+us=/cygdrive/e
 home=c:/cygwin64/home/itdlz-koer
 home2=/home/itdlz-koer
 cHome=$home/.oh-my-zsh/custom
@@ -15,15 +15,6 @@ zr=$home/.zshrc
 sv=192.168.182.129
 svi=ens33
 
-#plugins
-alias cb="b $co"
-alias -g com="$co"
-alias cyb="b $cy"
-alias gb="b $gi"
-alias lb="b $lo"
-alias ob="b $oh"
-alias zb="b $zr"
-
 bim=$(wmic OS get OSArchitecture)
 
 dowDir=/cygdrive/C/Users/itdlz-koer/Downloads
@@ -38,6 +29,10 @@ function ci(){
 
 function co(){
 		cat /dev/clipboard
+}
+
+function cpu(){
+	mv `ls *.mp3 |head -1` /cygdrive/e/
 }
 
 function ki(){
@@ -73,8 +68,17 @@ function q(){
 	echo Ende
 }
 
-function sho(){apt-cyg show `echo $1`;}
+function sho() { apt-cyg show `echo $1` }
 
+
+#plugins
+alias cb="b $co"
+alias -g com="$co"
+alias cyb="b $cy"
+alias gb="b $gi"
+alias lb="b $lo"
+alias ob="b $oh"
+alias zb="b $zr"
 
 #tmux
 alias ta="tmux attach"
@@ -85,6 +89,7 @@ alias tm=tmux
 alias agr='apt-cyg remove';
 alias allpkgs='apt-cyg listall'
 alias arc="echo $arc"
+alias da=~/django
 
 alias in='apt-cyg install'
 alias j='ipconfig'
@@ -93,3 +98,4 @@ alias op='cygstart'
 alias pd='cygcheck -c|less'
 alias so='cp /cygdrive/c/Users/itdlz-koer/AppData/Roaming/Microsoft/Bibliography/sources.xml $un'
 alias ter='mintty'
+alias -g us='$us'

@@ -13,7 +13,7 @@ function _check(){
 
 
 function gc(){
-	git commit -m "$@"
+	git commit -am "$@"
 	git status
 }
 
@@ -69,16 +69,17 @@ alias gcf='git config --list --show-origin'
 alias gcg='b .git/config'
 alias gcl='git clone --recursive'
 alias gclean='git clean -dnx'
+
 alias gcm='git checkout master'
+
 alias gcmsg='git commit -m'
-alias gco='git .git/config'
 alias gcount='git shortlog -sn'
-compdef gcount=git
 
 alias gd='$(_check);git diff'
 alias gdca='git diff --cached'
 
 alias gf='git config --list'
+alias gg='git log --graph --oneline --decorate --all'
 
 alias ghh='git grep "<<<<<<< HEAD"'
 alias gig='b .gitignore'
@@ -86,13 +87,11 @@ alias gignored='git ls-files -v | grep "^[[:lower:]]"'
 alias gin='git init'
 
 alias glgg='git log --graph'
-alias glgm='git log --graph --max-count=10'
-alias gg='git log --graph --oneline --decorate --all
-'
+
 alias glp='$(_check); git log -p'
 
-alias go='`_check`;git log'
-alias gp='$(_check);git push;a'
+alias go='`_check`; git log'
+alias gp='$(_check); git push;a'
 alias gpsum='git push --set-upstream origin master'
 
 alias gre='git remote'
@@ -105,12 +104,13 @@ alias grv='git remote -v'
 
 alias gsb='git status -sb'
 alias gs='$(_check); git show'
+alias gss='git status -s | while read mode file; do echo $mode $file $(stat -c %y $file); done'
 alias gst='git stash; a'
 alias gstl='git stash list'
 alias gstp='git stash pop; gstl'
 alias gsts='git stash show -p'
 
-alias gt='git checkout -- .;git status'
+alias gt='git checkout -- .; git status'
 alias gu='find . -mindepth 1 -maxdepth 2 -type d -print -exec git -C {} pull \;'
 
 alias i='$(_check); git log --stat'
