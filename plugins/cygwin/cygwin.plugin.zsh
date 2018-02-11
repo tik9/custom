@@ -8,8 +8,6 @@ co=$cHome/$co2
 cy=$cHome/$cy2
 dj=$cHome/$dj2
 gi=$cHome/$gi2
-lo=$cHome/login
-oh=$cHome/oh-my-zsh.sh
 zr=$home/.zshrc
 
 sv=192.168.182.129
@@ -24,7 +22,7 @@ function b(){	notepad++ $1 & }
 
 
 function ci(){
-		echo $1 > /dev/clipboard
+		echo `$1` > /dev/clipboard
 }
 
 function co(){
@@ -68,16 +66,12 @@ function q(){
 	echo Ende
 }
 
-function sho() { apt-cyg show `echo $1` }
-
 
 #plugins
 alias cb="b $co"
 alias -g com="$co"
 alias cyb="b $cy"
 alias gb="b $gi"
-alias lb="b $lo"
-alias ob="b $oh"
 alias zb="b $zr"
 
 #tmux
@@ -94,8 +88,5 @@ alias da=~/django
 alias in='apt-cyg install'
 alias j='ipconfig'
 
-alias op='cygstart'
 alias pd='cygcheck -c|less'
-alias so='cp /cygdrive/c/Users/itdlz-koer/AppData/Roaming/Microsoft/Bibliography/sources.xml $un'
-alias ter='mintty'
 alias -g us='$us'

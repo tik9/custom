@@ -11,6 +11,10 @@ function _check(){
 	echo $dir
 }
 
+function adg(){
+	echo $1 >> .gitignore; git status
+}
+
 
 function gc(){
 	git commit -am "$@"
@@ -44,18 +48,15 @@ function gl(){
 	if [[ $dir = $ZSH_CUSTOM ]] && [ $out != 'Bereits aktuell.' ];then
 		exec zsh
 	fi
-	
-	#git log --stat | head -n 15
 }
 
+function grs(){
+	curl https://api.github.com/repos/tik9/$1 | grep size
+}
 
 alias a='$(_check); git status'
 
 alias adc='git rm -r --cached'
-
-function adg(){
-	echo $1 >> .gitignore; git status
-}
 	
 alias cg='c .gitignore'
 alias g='$(_check); git diff; git status'
@@ -68,42 +69,39 @@ alias gcam='git commit -a -m'
 alias gcf='git config --list --show-origin'
 alias gcg='b .git/config'
 alias gcl='git clone --recursive'
+
 alias gclean='git clean -dnx'
 
 alias gcm='git checkout master'
 
 alias gcmsg='git commit -m'
-alias gcount='git shortlog -sn'
+alias gcount='git shortlog -sne --format=format:%cI'
 
 alias gd='$(_check);git diff'
 alias gdca='git diff --cached'
+alias gdo='git diff origin'
 
 alias gf='git config --list'
 alias gg='git log --graph --oneline --decorate --all'
 
-alias ghh='git grep "<<<<<<< HEAD"'
 alias gig='b .gitignore'
 alias gignored='git ls-files -v | grep "^[[:lower:]]"'
 alias gin='git init'
 
-alias glgg='git log --graph'
-
-alias glp='$(_check); git log -p'
-
 alias go='`_check`; git log'
-alias gp='$(_check); git push;a'
+alias gp='$(_check); git push; a'
 alias gpsum='git push --set-upstream origin master'
 
 alias gre='git remote'
 alias gra='git remote add'
-alias grba='git rebase --abort'
-alias grh='git reset HEAD'
-alias grset='git remote set-url'
-alias grs='curl https://api.github.com/repos/tik9/custom | grep size'
+alias grh='git reset HEAD; a'
+alias grset='git remote set-url origin git@github.com:tik9/'
+alias gru='git remote update'
 alias grv='git remote -v'
 
 alias gsb='git status -sb'
 alias gs='$(_check); git show'
+alias gsl='git shortlog --format=format:%cI -e'
 alias gss='git status -s | while read mode file; do echo $mode $file $(stat -c %y $file); done'
 alias gst='git stash; a'
 alias gstl='git stash list'

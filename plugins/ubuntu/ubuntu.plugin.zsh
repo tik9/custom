@@ -31,9 +31,13 @@ function apt-history () {
   esac
 }
 
+function am(){
+	amixer get Master |sed -n 5p |cut -d ' ' -f6 |sed -e 's/\[\([1-9][1-9]%\)]/\1/'
+}
 
 function amix(){
-	amixer -q sset Master 3%$1; amixer get Master |sed -n 5p |cut -d ' ' -f6
+	
+	amixer -q sset Master 3%$1; am
 }
 
 

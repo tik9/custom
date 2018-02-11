@@ -7,12 +7,8 @@ cy2=plugins/cygwin/cygwin.plugin.zsh; cy=$ZSH_CUSTOM/$cy2
 gi2=plugins/git/git.plugin.zsh
 gi=$ZSH_CUSTOM/$gi2
 
-lo=$ZSH_CUSTOM/login
-oh=$ZSH_CUSTOM/oh-my-zsh.sh
-
 py=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
 
-to=$ZSH_CUSTOM/todo
 ub2=plugins/ubuntu/ubuntu.plugin.zsh
 ub=$ZSH_CUSTOM/$ub2
 zr=~/.zshrc
@@ -30,22 +26,18 @@ ad[uk]='ukoerner@konzertagentur-koerner.de' ;alias -g uk=$ad[uk]
 
 sab=188.194.163
 sao=.73
-sr=$sab$sao
+ir=$sab$sao
 
 sm=192.168.43
 
 # plugins
 alias anb="b $an"
-alias arb="b $ar"
 alias cb="b $co"
-alias -g com="$co"
 alias cyb="b $cy"
 alias gic="c .gitignore"
 alias gb="b $gi"
 alias lb="b $lo"
-alias ob="b $oh"
 alias rb="b $re"
-alias tb="b $to"
 alias ub="b $ub"
 alias zb='b $zr'
 alias -g zr='$zr' # zshrc 
@@ -61,7 +53,7 @@ aa(){
 
 
 function cu(){
-	curl -f $sr:8000 && echo Erfolg || echo Keine Verbindung
+	curl -f $ir:8000 && echo Erfolg || echo Keine Verbindung
 }
 
 function cua2(){
@@ -112,6 +104,7 @@ function hs(){
 	((!$#)) && beginn='' || beginn=$1
 	fc -li $beginn |less
 }
+
 
 function int_trap() {
     echo "Ctrl-C gedrückt"
@@ -187,11 +180,6 @@ function rsyn(){
 	rsync --numeric-ids -avze ssh $1 root@$sab$sao:/root/p/app1 
 }
 
-function sstat(){service $1 status}
-function sstar(){service $1 start}
-function srs(){service $1 restart}
-function ssto(){service $1 stop}
-
 function sc(){
 	zparseopts -A ARGUMENTS d: f: i: ip: o: p: u:
 	
@@ -211,7 +199,7 @@ function sc(){
 function schieb(){
 	for i in `seq 1 $1`
 	echo ls|head -n1	
-	cp $dowDir/`ls -t $dowDir | head -n1` .
+	cp $dowDir/"`ls -t $dowDir | head -n1`" .
 }
 
 
@@ -243,6 +231,12 @@ function si(){
 	done
 	eval $2
 }
+
+
+function sstat(){service $1 status}
+function sstar(){service $1 start}
+function srs(){service $1 restart}
+function ssto(){service $1 stop}
 
 function ss(){
 	((!$#)) && okt=1 || okt=$1
@@ -296,7 +290,7 @@ alias t='type'
 alias w='alias -m'
 alias ua='unalias'
 alias wo='who'
-alias whi="which"
+alias wh="which"
 
 
 #cd's
@@ -361,7 +355,7 @@ alias i2='curl ifconfig.me'
 alias iw2='iwlist wlan0 scan'
 alias ip2=ifconfig
 alias pn='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
-alias -g sr=$sr
+alias -g ir=$ir
 
 # ps
 alias ap="ec $$"
@@ -378,14 +372,16 @@ alias -g sl=sleep
 
 
 #ssh
-alias cia='c ida'
+alias cia='c ida f'
 alias -g cida_lokal='c idr >> ida; c ida' 
 alias cida='cp idr .; ga; gi "id rsa kopiert"' 
 alias cida2='gl; c id_rsa.pub >> ida; c ida' 
-alias cip='ci `c idr`' 
+alias cip='cj "c idr"' 
 alias cir='c idr' 
 alias -g idr=~/.ssh/id_rsa.pub 
 alias -g ida=~/.ssh/authorized_keys 
+alias sdc='b /etc/ssh/sshd_config' 
+alias sr='srs sshd' 
 
 
 # zsh
