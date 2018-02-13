@@ -1,3 +1,5 @@
+#echo $SHELL
+
 an2=plugins/android/android.plugin.zsh
 an=$ZSH_CUSTOM/$an2
 
@@ -6,6 +8,8 @@ cy2=plugins/cygwin/cygwin.plugin.zsh; cy=$ZSH_CUSTOM/$cy2
 
 gi2=plugins/git/git.plugin.zsh
 gi=$ZSH_CUSTOM/$gi2
+
+lo=$ZSH_CUSTOM/login
 
 py=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
 
@@ -24,9 +28,9 @@ ad[tk]='user153015@gmail.com' ; alias -g tk=$ad[tk]
 ad[t]='01573 9598 220'
 ad[uk]='ukoerner@konzertagentur-koerner.de' ;alias -g uk=$ad[uk]
 
-sab=188.194.163
-sao=.73
-ir=$sab$sao
+irb=188.194.163
+iro=.73
+ir=$irb$iro
 
 sm=192.168.43
 
@@ -69,10 +73,12 @@ function cua2(){
 
 
 function er(){
-	((!$#)) && 	dat=`ls -t | head -1` || dat=$1
-	echo "Datei $dat \n"
-	mv "$dat" $(echo "$dat"| sed 's/\(.*\)................\(\..*\)/\1\2/')
-	echo Datei $dat \n
+	#((!$#)) && 	dat=`ls -t | head -1` || dat=$1
+	for dat in *;do
+		echo "Datei $dat \n"
+		mv "$dat" $(echo "$dat"| sed 's/\(.*\)................\(\..*\)/\1\2/')
+		echo Datei $dat \n
+	done
 }
 
 
@@ -90,10 +96,10 @@ function ersetz(){
 			rename 'y/A-Z/a-z/' $file
 		fi
 
-		if [[ `pwd` = '$home2/uni/c' && $file != *"c_"* ]]; then
-			neu_c=c_$file
-			mv $file $neu_c
-			echo c uni pdf: $file
+		if [[ `pwd` = '$home2/uni/' && $file != *""* ]]; then
+			neu=pre_$file
+			mv $file $neu
+			echo uni pdf: $file
 		fi
 	done
 	echo "\nDateien nach Op\nAnzahl Ersetzung: $v_ersetz"
@@ -337,11 +343,11 @@ alias -g ti='| tail'
 
 
 # Konsole
+alias he="history |tail -n1|cut -d' ' -f1"
 alias hist=history
 alias ho='ec $HOST'
-alias po='ec $prompt'
-alias pw='c /etc/passwd|grep'
 alias tt=tty
+alias tti='stty icrnl'
 alias us='ec $USER'
 
 
@@ -400,11 +406,12 @@ alias dh='df -h'
 alias duh='du -h'
 alias ecl="/root/progr/eclipse/eclipse & "
 alias ec=echo
+alias -g f='|less'
 alias -g h="--help |less"
 alias le='less -WiNS'
 alias lt='ls -t'
 alias m=man
-alias -g f='|less'
+alias mua='ec $mu'
 alias r="expect $lo"
 alias rf='rfkill list'
 alias tp=top

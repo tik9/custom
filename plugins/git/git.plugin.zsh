@@ -1,7 +1,16 @@
+#source .zprofile;echo $ghtoken
 
 zstyle -s ":vcs_info:git:*:-all-" "command" _omz_git_git_cmd
 : ${_omz_git_git_cmd:=git}
 
+
+function ghd(){
+	curl -X DELETE -H "Authorization: token `echo $ghtoken`" https://api.github.com/repos/$1/$2
+}
+
+function ghs(){
+	curl -v -H "Authorization: token `echo $ghtoken`" https://api.github.com
+}
 
 function _check(){
 	dir=$ZSH_CUSTOM
@@ -108,7 +117,7 @@ alias gstl='git stash list'
 alias gstp='git stash pop; gstl'
 alias gsts='git stash show -p'
 
-alias gt='git checkout -- .; git status'
+alias gt='git checkout -- .; git pull'
 alias gu='find . -mindepth 1 -maxdepth 2 -type d -print -exec git -C {} pull \;'
 
 alias i='$(_check); git log --stat'
