@@ -36,8 +36,11 @@ function am(){
 }
 
 function amix(){
-	
-	amixer -q sset Master 3%$1; am
+	if [[ -n $1 ]];then
+	arg=3%$1
+	else ;echo zero Argumente; arg=30% ; fi;
+	amixer -q sset Master $arg
+	am
 }
 
 

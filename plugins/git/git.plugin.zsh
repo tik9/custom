@@ -15,7 +15,7 @@ function ghs(){
 function _check(){
 	dir=$ZSH_CUSTOM
 	if git rev-parse --git-dir > /dev/null 2>&1;then
-		dir=`pwd`
+		dir=`git rev-parse --show-toplevel`
 	fi	
 	echo $dir
 }
@@ -52,15 +52,16 @@ function gl(){
 	ec in $dir
 	cd $dir
 	out=`git pull`
-	ec $out
-	#git show
+	echo $out
 	if [[ $dir = $ZSH_CUSTOM ]] && [ $out != 'Bereits aktuell.' ];then
 		exec zsh
 	fi
 }
 
 function grs(){
-	curl https://api.github.com/repos/tik9/$1 | grep size
+	dir=$(_check)
+	echo $dir
+	curl https://api.github.com/repos/tik9/$dir | grep size
 }
 
 alias a='$(_check); git status'

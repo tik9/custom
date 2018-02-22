@@ -337,14 +337,14 @@ alias hgrep="fc -El 0 | grep"
 
 
 # head / tail
-alias -g H='|head'
+alias -g he='|head'
 alias tai='tail -f'
 alias -g ti='| tail'
 
 
 # Konsole
-alias he="history |tail -n1|cut -d' ' -f1"
 alias hist=history
+alias hl="history |tail -n1|cut -d' ' -f1"
 alias ho='ec $HOST'
 alias tt=tty
 alias tti='stty icrnl'
@@ -358,7 +358,6 @@ alias mst='mysql -uroot d -e "show tables"'
 
 # netzwerk
 alias i2='curl ifconfig.me'
-alias iw2='iwlist wlan0 scan'
 alias ip2=ifconfig
 alias pn='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
 alias -g ir=$ir
@@ -386,8 +385,6 @@ alias cip='cj "c idr"'
 alias cir='c idr' 
 alias -g idr=~/.ssh/id_rsa.pub 
 alias -g ida=~/.ssh/authorized_keys 
-alias sdc='b /etc/ssh/sshd_config' 
-alias sr='srs sshd' 
 
 
 # zsh
@@ -400,6 +397,7 @@ alias x=exit
 alias ac='ack -i'
 alias ad='for k in ${(@k)ad};do ;echo "$k $ad[$k]" ; done'
 alias c=cat
+alias cm='cal 2018 he -n5'
 alias dt='date +"%T"'
 alias de='date +"%d.%m.%y"'
 alias dh='df -h'
