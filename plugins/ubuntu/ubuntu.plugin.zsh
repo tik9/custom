@@ -51,7 +51,7 @@ function b(){
 
 
 function ci(){
-		echo `$@`|xclip -selection clipboard
+		`$@` | xclip -selection clipboard
 }
 
 function cj(){
@@ -63,7 +63,7 @@ function co(){
 }
 
 
-function mai(){
+function ma(){
 	zparseopts -A arg b: t: a:
 		
 	printf "Subject:$2\n\"${@:3}\"" |msmtp $1
@@ -96,21 +96,15 @@ function mp(){
 }
 
 
-function pe(){
-	sed -i "s/\(^plugins=\).*/\1(common-aliases git git-prompt ubuntu zsh-autosuggestions $1)/" $zr
-	exec zsh && plu
-}
-
 
 function q(){
-	# zeige WLAN ssid (iwget)
 	datei=test100.zip
 
-	trap int_trap INT
+	#trap int_trap INT
 	echo Ctrl-C zum Beenden des downloads $datei
 	wget http://speedtest.wdc01.softlayer.com/downloads/$datei --output-document=/dev/null
-
 }
+
 
 #apt
 alias acp='apt-cache policy' 
@@ -135,10 +129,6 @@ alias in='sudo apt-get install'
 alias pkgsu="apt list --upgradable "
 alias rem='sudo apt-get remove'   # ar
 
-#Mail
-alias mu='mutt'
-alias ma='mail'
-
 
 alias a+="amix +"
 alias a-="amix -"
@@ -148,6 +138,7 @@ alias -g da=/home/pi/django
 alias hi='hibernate'
 alias km='killall mplayer'
 alias lsb='ec $lsb'
+alias mu='mutt'
 
 alias -s pdf=mupdf
 
@@ -155,3 +146,4 @@ alias s='sudo pm-suspend'
 alias sp='su pi'
 alias -g us='$us'
 alias z='/etc/init.d/networking restart; we'
+alias -g xs='| xclip -selection clipboard'

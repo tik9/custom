@@ -1,4 +1,4 @@
-#source .zprofile;echo $ghtoken
+#source ~/.zprofile; echo $ghtoken
 
 zstyle -s ":vcs_info:git:*:-all-" "command" _omz_git_git_cmd
 : ${_omz_git_git_cmd:=git}
@@ -93,6 +93,7 @@ alias gdo='git diff origin'
 
 alias gf='git config --list'
 alias gg='git log --graph --oneline --decorate --all'
+alias gh='echo $ghtoken'
 
 alias gig='b .gitignore'
 alias gignored='git ls-files -v | grep "^[[:lower:]]"'

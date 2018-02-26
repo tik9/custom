@@ -16,6 +16,7 @@ py=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
 ub2=plugins/ubuntu/ubuntu.plugin.zsh
 ub=$ZSH_CUSTOM/$ub2
 zr=~/.zshrc
+zp=~/.zprofile 
 
 ds=/storage/emulated/0
 mu=$ds/music
@@ -43,8 +44,7 @@ alias gb="b $gi"
 alias lb="b $lo"
 alias rb="b $re"
 alias ub="b $ub"
-alias zb='b $zr'
-alias -g zr='$zr' # zshrc 
+
 
 function arg(){
 	# if [ -z $1 ];then;echo Argument fehlt;return; fi
@@ -52,7 +52,8 @@ function arg(){
 }
 
 aa(){
-	!-2
+	sleep 100
+	echo 123
 }
 
 
@@ -183,22 +184,22 @@ function p2(){
 
 
 function rsyn(){
-	rsync --numeric-ids -avze ssh $1 root@$sab$sao:/root/p/app1 
+	rsync --numeric-ids -avze ssh $1 root@$ir:/root/p/app1 
 }
 
 function sc(){
 	zparseopts -A ARGUMENTS d: f: i: ip: o: p: u:
 	
-	dir=$ARGUMENTS[-d]; 	if [ -z $dir ];then;dir=/root/musik;fi 
-	datei=$ARGUMENTS[-f]; 	if [ -z $datei ];then;datei=`ls -t |head -n1`;fi
-	ip=$ARGUMENTS[-ip];		if [ -z $ip ];then;ip=$sm;fi
-	oktett=$ARGUMENTS[-o];	if [ -z $oktett ];then;oktett=1;fi
-	port=$ARGUMENTS[-p];	if [ -z $port ];then;port=8022;fi
-	user=$ARGUMENTS[-u]; 	if [ -z $user ];then;user=root;fi
+	dir=$ARGUMENTS[-d]; 	if [ -z $dir ];then; dir=/root/musik;fi 
+	datei=$ARGUMENTS[-f]; 	if [ -z $datei ];then; datei=`ls -t |head -n1`;fi
+	ip=$ARGUMENTS[-ip];		if [ -z $ip ];then; ip=$sm;fi
+	oktett=$ARGUMENTS[-o];	if [ -z $oktett ];then; oktett=1;fi
+	port=$ARGUMENTS[-p];	if [ -z $port ];then; port=8022;fi
+	user=$ARGUMENTS[-u]; 	if [ -z $user ];then; user=root;fi
 
 	printf "Dir %s, Datei: %s, Port: %s, Ip: %s\n" $dir $datei $port "$ip.$oktett" 
 	scp -P $port $datei $user@$ip.$oktett:$dir
-	#rm $datei
+	rm $datei
 }
 
 
@@ -239,27 +240,20 @@ function si(){
 }
 
 
-function sstat(){service $1 status}
-function sstar(){service $1 start}
-function srs(){service $1 restart}
-function ssto(){service $1 stop}
+function sstat(){ service $1 status }
+function sstar(){ service $1 start }
+function srs(){ service $1 restart }
+function ssto(){ service $1 stop }
 
 function ss(){
 	((!$#)) && okt=1 || okt=$1
 	ssh -p8022 root@$sm.$okt
 }
 
-function unt(){
-	#schieb;	#a=$(schieb)
-	#cd `pwd`
-	# gz: z flag
-	a=`ls -t | head -n1`
-	tar zxvf $a ;#rm $a
-}
 
 function we(){
-	URL='https://www.accuweather.com/en/de/hof/95028/weather-forecast/172202'
-	wget -q -O- "$URL" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print $2": "$13", "$12"°" }'| head -1
+	url='https://www.accuweather.com/en/de/hof/95028/weather-forecast/172202'
+	wget -q -O- "$url" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print $2=($2=="day"?"Tag":"Nach") $1", "substr($13,10,length($13)-6)", "$12"°" }'| head -1
 }
 
 
@@ -311,7 +305,7 @@ alias un=~/uni
 alias y=cd
 
 #curl
-alias cl='cur localhost:8000'
+alias cul='cur localhost:8000'
 alias cur=curl
 
 
@@ -338,11 +332,13 @@ alias hgrep="fc -El 0 | grep"
 
 # head / tail
 alias -g he='|head'
+alias -g erle='(head -n1 && tail -n1)'
 alias tai='tail -f'
 alias -g ti='| tail'
 
 
 # Konsole
+alias cl=clear
 alias hist=history
 alias hl="history |tail -n1|cut -d' ' -f1"
 alias ho='ec $HOST'
@@ -392,6 +388,10 @@ alias e="exec zsh && ec ha we; !-2"
 alias ohm='sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
 alias pu='ec $plugins'
 alias x=exit
+alias zb='b $zr'
+alias -g zp='$zp' # zprofile 
+alias zc='c $zp' # zprofile 
+alias -g zr='$zr' # zshrc 
 
 
 alias ac='ack -i'
@@ -412,6 +412,7 @@ alias m=man
 alias mua='ec $mu'
 alias r="expect $lo"
 alias rf='rfkill list'
+alias so=source
 alias tp=top
 alias -g ve=--version
 alias x+='xbacklight -set 40';alias x-='xbacklight -dec 10'
