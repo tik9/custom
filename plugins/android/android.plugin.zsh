@@ -74,6 +74,6 @@ alias arc="echo $arc"
 alias b=vi
 alias km='ki play-audio'
 alias sd='sshd; ph' 
-alias tsi=termux-sms-inbox
+alias ts=termux-sms-inbox
 alias tsh='termux-sms-send -help' 
 alias ts=termux-sms-send 

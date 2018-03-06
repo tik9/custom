@@ -16,17 +16,11 @@ function apt-history () {
     upgrade|remove)
       zgrep --no-filename $1 $(ls -rt /var/log/dpkg*)
       ;;
-    rollback)
-      zgrep --no-filename upgrade $(ls -rt /var/log/dpkg*) | \
-        grep "$2" -A10000000 | \
-        grep "$3" -B10000000 | \
-        awk '{print $4"="$5}'
-      ;;
-    list)
+    liste)
       zgrep --no-filename '' $(ls -rt /var/log/dpkg*)
       ;;
     *)
-      echo " list - Lists all contains of dpkg logs."
+      echo " e.g liste - Listet alles von dpkg logs."
       ;;
   esac
 }
@@ -99,10 +93,10 @@ function mp(){
 
 function q(){
 	datei=test100.zip
-
 	#trap int_trap INT
-	echo Ctrl-C zum Beenden des downloads $datei
+	#echo Ctrl-C zum Beenden des downloads $datei
 	wget http://speedtest.wdc01.softlayer.com/downloads/$datei --output-document=/dev/null
+	
 }
 
 
@@ -115,15 +109,13 @@ alias agli='apt list --installed'
 alias aglu='sudo apt-get -u upgrade --assume-no'
 alias apg='sudo apt-get'            # age - but without sudo
 alias aga='sudo apt-get autoclean' # aac
-alias agb='sudo apt-get build-dep' # abd
+alias agar='sudo apt-get autoremove -y'
 alias agc='sudo apt-get clean'     # adc
-alias agd='sudo apt-get dselect-upgrade' # ads
 alias agp='sudo apt-get purge'    # ap
 alias agu='sudo apt-get update'   # ad
 alias agud='sudo apt-get update && sudo apt-get full-upgrade' #adu
 alias agug='sudo apt-get upgrade' # ag
 alias aguu='sudo apt-get update && sudo apt-get upgrade'      #adg
-alias agar='sudo apt-get autoremove'
 alias allpkgs='dpkg --get-selections | grep -v deinstall'
 alias in='sudo apt-get install'  
 alias pkgsu="apt list --upgradable "

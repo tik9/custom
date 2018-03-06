@@ -24,6 +24,7 @@ mu=$ds/music
 os=`uname -a |cut -d' ' -f 1`
 
 declare -A ad
+ad[dk]='dkoerner@konzertagentur-koerner.de' ;alias -g dk=$ad[dk]
 ad[ss]='sstirner@konzertagentur-koerner.de';alias -g ss=$ad[ss]
 ad[tk]='user153015@gmail.com' ; alias -g tk=$ad[tk]
 ad[t]='01573 9598 220'
@@ -38,11 +39,7 @@ sm=192.168.43
 # plugins
 alias anb="b $an"
 alias cb="b $co"
-alias cyb="b $cy"
 alias gic="c .gitignore"
-alias gb="b $gi"
-alias lb="b $lo"
-alias rb="b $re"
 alias ub="b $ub"
 
 
@@ -51,11 +48,15 @@ function arg(){
 	((!$#)) && echo Keine Argumente!||echo args! $@
 }
 
-aa(){
-	sleep 100
-	echo 123
+function alterKern(){
+	dpkg --list | grep linux-image | awk '{ print $2 }' | sort -V | sed -n '/'`uname -r`'/q;p'
+	#sed -n '/'`uname -r`'/q;p' : Druckt Zeilen vor aktuellem Kernel
+
 }
 
+function re(){
+	for pack in $@ ; do ; rem $pack -y ; done
+}
 
 function cu(){
 	curl -f $ir:8000 && echo Erfolg || echo Keine Verbindung
@@ -253,7 +254,7 @@ function ss(){
 
 function we(){
 	url='https://www.accuweather.com/en/de/hof/95028/weather-forecast/172202'
-	wget -q -O- "$url" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print $2=($2=="day"?"Tag":"Nach") $1", "substr($13,10,length($13)-6)", "$12"°" }'| head -1
+	wget -q -O- "$url" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print $2=($2=="day"?"Tag":"Nacht") "," $1 ", " substr($13,10,length($13)-6) ", " $12 "°" }'| head -1
 }
 
 
