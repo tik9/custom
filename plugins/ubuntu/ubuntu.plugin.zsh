@@ -93,10 +93,7 @@ function mp(){
 
 function q(){
 	datei=test100.zip
-	#trap int_trap INT
-	#echo Ctrl-C zum Beenden des downloads $datei
 	wget http://speedtest.wdc01.softlayer.com/downloads/$datei --output-document=/dev/null
-	
 }
 
 

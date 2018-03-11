@@ -20,12 +20,13 @@ zp=~/.zprofile
 
 ds=/storage/emulated/0
 mu=$ds/music
+bi=/root/bilder
 
 os=`uname -a |cut -d' ' -f 1`
 
 declare -A ad
 ad[dk]='dkoerner@konzertagentur-koerner.de' ;alias -g dk=$ad[dk]
-ad[ss]='sstirner@konzertagentur-koerner.de';alias -g ss=$ad[ss]
+ad[ss]='sstirner@konzertagentur-koerner.de';alias -g s2=$ad[ss]
 ad[tk]='user153015@gmail.com' ; alias -g tk=$ad[tk]
 ad[t]='01573 9598 220'
 ad[uk]='ukoerner@konzertagentur-koerner.de' ;alias -g uk=$ad[uk]
@@ -194,13 +195,13 @@ function sc(){
 	dir=$ARGUMENTS[-d]; 	if [ -z $dir ];then; dir=/root/musik;fi 
 	datei=$ARGUMENTS[-f]; 	if [ -z $datei ];then; datei=`ls -t |head -n1`;fi
 	ip=$ARGUMENTS[-ip];		if [ -z $ip ];then; ip=$sm;fi
-	oktett=$ARGUMENTS[-o];	if [ -z $oktett ];then; oktett=1;fi
+	oktett=$ARGUMENTS[-o];	if [ -z $oktett ];then; oktett=162;fi
 	port=$ARGUMENTS[-p];	if [ -z $port ];then; port=8022;fi
 	user=$ARGUMENTS[-u]; 	if [ -z $user ];then; user=root;fi
 
 	printf "Dir %s, Datei: %s, Port: %s, Ip: %s\n" $dir $datei $port "$ip.$oktett" 
 	scp -P $port $datei $user@$ip.$oktett:$dir
-	rm $datei
+	#rm $datei
 }
 
 
@@ -254,7 +255,7 @@ function ss(){
 
 function we(){
 	url='https://www.accuweather.com/en/de/hof/95028/weather-forecast/172202'
-	wget -q -O- "$url" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print $2=($2=="day"?"Tag":"Nacht") "," $1 ", " substr($13,10,length($13)-6) ", " $12 "°" }'| head -1
+	wget -q -O- "$url" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print $2=($2=="day"?"Tag":"Nacht") " ; "substr($1, 41, 12) ", " substr($13,10, 13) ", " $12 "°" }'| head -1
 }
 
 
