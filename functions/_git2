@@ -1,10 +1,5 @@
 #compdef git2
 
-_gc(){
-	cmds=('')
-	_describe 'Git Commit Parameter' cmds
-}
-
 _gitlog(){
 	cmds=('--stat:Zeige Dateinamen' '-p: Zeige Inhalte der Dateien' '--graph:Zeige den Graphen')
 	_describe 'Git Log Parameter' cmds

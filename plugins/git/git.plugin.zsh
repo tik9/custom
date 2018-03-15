@@ -25,12 +25,10 @@ function adg(){
 }
 
 
-function gc(){
+function gco(){
 	git commit -am "$@"
 	git status
 }
-
-compdef _gc gc
 
 
 function gi(){

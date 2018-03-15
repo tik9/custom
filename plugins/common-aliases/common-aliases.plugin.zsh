@@ -63,17 +63,6 @@ function cu(){
 	curl -f $ir:8000 && echo Erfolg || echo Keine Verbindung
 }
 
-function cua2(){
-	#pkill -P $$
-	trap int_trap INT
-	
-	while true; do
-		cu
-		sleep 30m 
-		echo $(date +"%T")
-	done
-}
-
 
 function er(){
 	#((!$#)) && 	dat=`ls -t | head -1` || dat=$1
@@ -82,6 +71,7 @@ function er(){
 		mv "$dat" $(echo "$dat"| sed 's/\(.*\)................\(\..*\)/\1\2/')
 		echo Datei $dat \n
 	done
+	l
 }
 
 
@@ -100,9 +90,9 @@ function ersetz(){
 		fi
 
 		if [[ `pwd` = '$home2/uni/' && $file != *""* ]]; then
-			neu=pre_$file
+			neu=$1_$file
 			mv $file $neu
-			echo uni pdf: $file
+			echo neue uni pdf: $neu
 		fi
 	done
 	echo "\nDateien nach Op\nAnzahl Ersetzung: $v_ersetz"
@@ -166,8 +156,7 @@ function lö(){
 
 function pa(){
 	sed -i "s/\(^plugins=.*\))/\1 $1)/" $zr
-	exec zsh && sleep 3
-	echo $plugins
+	exec zsh
 }
 
 function pl(){
@@ -199,7 +188,7 @@ function sc(){
 	port=$ARGUMENTS[-p];	if [ -z $port ];then; port=8022;fi
 	user=$ARGUMENTS[-u]; 	if [ -z $user ];then; user=root;fi
 
-	printf "Dir %s, Datei: %s, Port: %s, Ip: %s\n" $dir $datei $port "$ip.$oktett" 
+	printf "Datei: %s/%s, Port: %s, Ip: %s\n" $dir $datei $port "$ip.$oktett" 
 	scp -P $port $datei $user@$ip.$oktett:$dir
 	#rm $datei
 }
@@ -298,7 +287,7 @@ alias wh="which"
 #cd's
 alias -g ar=~/arduino
 alias dow=$dowDir
-alias mus=~/musik
+alias mus='~/musik; l'
 alias -g o=$ZSH_CUSTOM
 alias oh=$ZSH
 alias op=/opt/django.git
@@ -315,12 +304,6 @@ alias cur=curl
 alias cp='cp -r'
 alias to=touch
 
-#Dict
-alias di="dict -d fd-eng-deu"
-alias w2=dict
-
-# Editoren
-alias v=vim
 
 #find
 alias ff='find . -type f -name'
@@ -342,7 +325,7 @@ alias -g ti='| tail'
 # Konsole
 alias cl=clear
 alias hist=history
-alias hl="history |tail -n1|cut -d' ' -f1"
+alias h2='fc -li `tail -n1`'
 alias ho='ec $HOST'
 alias tt=tty
 alias tti='stty icrnl'
@@ -396,7 +379,6 @@ alias zc='c $zp' # zprofile
 alias -g zr='$zr' # zshrc 
 
 
-alias ac='ack -i'
 alias ad='for k in ${(@k)ad};do ;echo "$k $ad[$k]" ; done'
 alias c=cat
 alias cm='cal 2018 he -n5'
@@ -411,12 +393,13 @@ alias -g h="--help |less"
 alias le='less -WiNS'
 alias lt='ls -t'
 alias m=man
-alias mua='ec $mu'
 alias r="expect $lo"
 alias rf='rfkill list'
 alias so=source
 alias tp=top
+alias v='ack -i'
 alias -g ve=--version
+alias w2=dict
 alias x+='xbacklight -set 40';alias x-='xbacklight -dec 10'
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
 

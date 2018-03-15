@@ -4,7 +4,6 @@ dowDir=/home/t/Downloads
 home2=/root
 
 arc=`uname -a |cut -d' ' -f 14`
-us=/media/t/INTENSO/
 
 # z. B. apt-history install
 # http://linuxcommando.blogspot.com/2008/08/how-to-show-apt-log-history.html
@@ -133,6 +132,5 @@ alias -s pdf=mupdf
 
 alias s='sudo pm-suspend'
 alias sp='su pi'
-alias -g us='$us'
 alias z='/etc/init.d/networking restart; we'
 alias -g xs='| xclip -selection clipboard'
