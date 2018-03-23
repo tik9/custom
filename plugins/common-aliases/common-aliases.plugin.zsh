@@ -55,9 +55,6 @@ function alterKern(){
 
 }
 
-function re(){
-	for pack in $@ ; do ; rem $pack -y ; done
-}
 
 function cu(){
 	curl -f $ir:8000 && echo Erfolg || echo Keine Verbindung
@@ -174,9 +171,15 @@ function p2(){
 }
 
 
+function re(){
+	for pack in $@ ; do ; apt-get remove $pack -y ; done
+}
+
+
 function rsyn(){
 	rsync --numeric-ids -avze ssh $1 root@$ir:/root/p/app1 
 }
+
 
 function sc(){
 	zparseopts -A ARGUMENTS d: f: i: ip: o: p: u:
@@ -200,19 +203,6 @@ function schieb(){
 	cp $dowDir/"`ls -t $dowDir | head -n1`" .
 }
 
-
-function scm(){
-	
-	dir=$dt$dtm;
-	datei=`ls *.mp3|head -1`
-	ip=$sm
-	oktett=.1
-	port=8022
-
-	printf "Dir %s, Datei: %s, Port: %s,  Ip: %s\n" $dir $datei $port $ip$oktett
-	scp -P $port $datei $ip$oktett:$dir
-	rm -rf $datei	
-}
 
 function scmysql(){
 	mysqldump d> $(date +"%m_%Y").sql
@@ -244,7 +234,7 @@ function ss(){
 
 function we(){
 	url='https://www.accuweather.com/en/de/hof/95028/weather-forecast/172202'
-	wget -q -O- "$url" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print $2=($2=="day"?"Tag":"Nacht") " ; "substr($1, 41, 12) ", " substr($13,10, 13) ", " $12 "°" }'| head -1
+	wget -q -O- "$url" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print $2=($2=="day"?"Tag":"Nacht") " ; "substr($1, 41, 12) ", " substr($13,10, 15) ", " $12 "°" }'| head -1
 }
 
 
@@ -325,10 +315,8 @@ alias -g ti='| tail'
 # Konsole
 alias cl=clear
 alias hist=history
-alias h2='fc -li `tail -n1`'
 alias ho='ec $HOST'
 alias tt=tty
-alias tti='stty icrnl'
 alias us='ec $USER'
 
 
@@ -338,8 +326,6 @@ alias mst='mysql -uroot d -e "show tables"'
 
 
 # netzwerk
-alias i2='curl ifconfig.me'
-alias ip2=ifconfig
 alias pn='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
 alias -g ir=$ir
 
@@ -370,28 +356,23 @@ alias -g ida=~/.ssh/authorized_keys
 
 # zsh
 alias e="exec zsh && ec ha we; !-2"
-alias ohm='sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
 alias pu='ec $plugins'
 alias x=exit
 alias zb='b $zr'
-alias -g zp='$zp' # zprofile 
+alias -g zp='source $zp' # zprofile 
 alias zc='c $zp' # zprofile 
 alias -g zr='$zr' # zshrc 
 
 
-alias ad='for k in ${(@k)ad};do ;echo "$k $ad[$k]" ; done'
 alias c=cat
-alias cm='cal 2018 he -n5'
-alias dt='date +"%T"'
-alias de='date +"%d.%m.%y"'
+alias cm='cal 2018 he -n8'
 alias dh='df -h'
-alias duh='du -h'
+alias dt='date +"%T"'
 alias ecl="/root/progr/eclipse/eclipse & "
 alias ec=echo
 alias -g f='|less'
 alias -g h="--help |less"
 alias le='less -WiNS'
-alias lt='ls -t'
 alias m=man
 alias r="expect $lo"
 alias rf='rfkill list'

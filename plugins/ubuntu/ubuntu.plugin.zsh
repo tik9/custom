@@ -30,7 +30,7 @@ function am(){
 
 function amix(){
 	if [[ -n $1 ]];then
-	arg=3%$1
+	arg=10%$1
 	else ;echo zero Argumente; arg=30% ; fi;
 	amixer -q sset Master $arg
 	am
@@ -115,7 +115,7 @@ alias aguu='sudo apt-get update && sudo apt-get upgrade'      #adg
 alias allpkgs='dpkg --get-selections | grep -v deinstall'
 alias in='sudo apt-get install'  
 alias pkgsu="apt list --upgradable "
-alias rem='sudo apt-get remove'   # ar
+alias rem='apt-get remove'   # ar
 
 
 alias a+="amix +"
@@ -123,6 +123,7 @@ alias a-="amix -"
 alias abi="abiword"
 alias -g da=/home/pi/django
 
+alias gpi='gpicview'
 alias hi='hibernate'
 alias km='killall mplayer'
 alias lsb='ec $lsb'
@@ -132,5 +133,5 @@ alias -s pdf=mupdf
 
 alias s='sudo pm-suspend'
 alias sp='su pi'
-alias z='/etc/init.d/networking restart; we'
 alias -g xs='| xclip -selection clipboard'
+alias z='/etc/init.d/networking restart; we; dt'

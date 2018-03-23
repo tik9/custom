@@ -1,6 +1,6 @@
 #compdef manage.py
 
-alias 0="dcd;kp;dr"
+alias restar="dcd;kp;dr"
 alias dcd="cd /home/pi/django"
 alias dm='p3 manage.py'
 alias dr='dm runserver 0.0.0.0:8000'
@@ -14,7 +14,6 @@ alias rs='dm runserver'
 
 typeset -ga nul_args
 nul_args=(
-  '--verbosity=-[verboses Level; 0=minimal output, 1=normal output, 2=all output.]:Verbosity:((0\:minimal 1\:normal 2\:all))'
   '--settings=-[the Python path to a settings module.]:file:_files'
   '--pythonpath=-[a directory to add to the Python path.]:directory:_directories'
   '--traceback[print traceback on exception.]'
