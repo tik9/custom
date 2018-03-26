@@ -98,8 +98,7 @@ alias gignored='git ls-files -v | grep "^[[:lower:]]"'
 alias gin='git init'
 
 alias go='`_check`; git log'
-alias gp='$(_check); git push; a'
-alias gpsum='git push --set-upstream origin master'
+alias gpu='$(_check); git push; a'
 
 alias gre='git remote'
 alias gra='git remote add'

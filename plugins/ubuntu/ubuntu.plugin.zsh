@@ -123,7 +123,7 @@ alias a-="amix -"
 alias abi="abiword"
 alias -g da=/home/pi/django
 
-alias gpi='gpicview'
+alias gp='gpicview'
 alias hi='hibernate'
 alias km='killall mplayer'
 alias lsb='ec $lsb'

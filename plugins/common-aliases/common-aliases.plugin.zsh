@@ -198,9 +198,11 @@ function sc(){
 
 
 function schieb(){
+	echo `ls -t $dowDir | head -n $1`
+
 	for i in `seq 1 $1`
-	echo ls|head -n1	
-	cp $dowDir/"`ls -t $dowDir | head -n1`" .
+	
+	mv $dowDir/"`ls -t $dowDir | head -n1`" .
 }
 
 
@@ -234,7 +236,7 @@ function ss(){
 
 function we(){
 	url='https://www.accuweather.com/en/de/hof/95028/weather-forecast/172202'
-	wget -q -O- "$url" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print $2=($2=="day"?"Tag":"Nacht") " ; "substr($1, 41, 12) ", " substr($13,10, 15) ", " $12 "°" }'| head -1
+	wget -q -O- "$url" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print $2=($2=="day"?"Tag":"Nacht") " ; "substr($1, 41, 12) ", " $13 ", " $12 "°" }'| head -1
 }
 
 
