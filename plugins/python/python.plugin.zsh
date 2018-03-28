@@ -14,13 +14,20 @@ function p3(){
 		python $@;fi
 }
 
+function pd(){
+	pipdeptree -r --package $1
+	echo \n
+	pip show $1
+}
+
 alias iy='ipython'
 alias pyc='/root/progr/pycharm/bin/pycharm.sh&'
 
 #pip
-alias pdn='pipdeptree --package'
+alias pdt='pipdeptree --package'
 alias pdr='pipdeptree -r --package'
 alias pi='p3 -m pip install'
-alias pui='pip uninstall -y'
+alias pu='pip uninstall -y'
 alias pis='pip show'
-alias ppl='p3 -m pip list n2'
+alias po='pip list --outdated f'
+alias ppl='p3 -m pip list f'

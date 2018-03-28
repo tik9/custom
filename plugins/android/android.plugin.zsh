@@ -58,7 +58,7 @@ compdef _play_audio z
 
 
 #cd
-alias -g mu='$mu; l'
+alias mu='$mu; l'
 alias -g ds='$ds; l'
 
 #apt

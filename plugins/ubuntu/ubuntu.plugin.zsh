@@ -5,8 +5,23 @@ home2=/root
 
 arc=`uname -a |cut -d' ' -f 14`
 
-# z. B. apt-history install
-# http://linuxcommando.blogspot.com/2008/08/how-to-show-apt-log-history.html
+function ac(){
+	apt-cache show $1 |less
+}
+
+
+function am(){
+	amixer get Master |sed -n 5p |cut -d ' ' -f6 |sed -e 's/\[\([1-9][1-9]%\)]/\1/'
+}
+
+function amix(){
+	if [[ -n $1 ]];then
+	arg=10%$1
+	else ;echo zero Argumente; arg=30% ; fi;
+	amixer -q sset Master $arg
+	am
+}
+
 function apt-history () {
   case "$1" in
     install)
@@ -19,21 +34,9 @@ function apt-history () {
       zgrep --no-filename '' $(ls -rt /var/log/dpkg*)
       ;;
     *)
-      echo " e.g liste - Listet alles von dpkg logs."
+      echo " e.g liste - Listet dpkg logs"
       ;;
   esac
-}
-
-function am(){
-	amixer get Master |sed -n 5p |cut -d ' ' -f6 |sed -e 's/\[\([1-9][1-9]%\)]/\1/'
-}
-
-function amix(){
-	if [[ -n $1 ]];then
-	arg=10%$1
-	else ;echo zero Argumente; arg=30% ; fi;
-	amixer -q sset Master $arg
-	am
 }
 
 
@@ -95,10 +98,14 @@ function q(){
 	wget http://speedtest.wdc01.softlayer.com/downloads/$datei --output-document=/dev/null
 }
 
+function sess(){
+	sed -i "s/\(cd = { 'sessionid':\).*/\1 \'$1\'}/" soup.py
+	ec \'$1\'
+}
+
 
 #apt
 alias acp='apt-cache policy' 
-alias acs='apt-cache show'
 alias acse='apt-cache search'
 alias agli='apt list --installed'
 # List available updates only
@@ -131,7 +138,7 @@ alias mu='mutt'
 
 alias -s pdf=mupdf
 
-alias s='sudo pm-suspend'
+alias s='pm-suspend'
 alias sp='su pi'
 alias -g xs='| xclip -selection clipboard'
 alias z='/etc/init.d/networking restart; we; dt'

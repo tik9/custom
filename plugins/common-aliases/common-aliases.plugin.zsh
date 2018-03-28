@@ -16,11 +16,11 @@ py=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
 ub2=plugins/ubuntu/ubuntu.plugin.zsh
 ub=$ZSH_CUSTOM/$ub2
 zr=~/.zshrc
-zp=~/.zprofile 
 
+bi=/root/bilder
 ds=/storage/emulated/0
 mu=$ds/music
-bi=/root/bilder
+th=/data/data/com.termux/files/home
 
 os=`uname -a |cut -d' ' -f 1`
 
@@ -30,6 +30,7 @@ ad[ss]='sstirner@konzertagentur-koerner.de';alias -g s2=$ad[ss]
 ad[tk]='user153015@gmail.com' ; alias -g tk=$ad[tk]
 ad[t]='01573 9598 220'
 ad[uk]='ukoerner@konzertagentur-koerner.de' ;alias -g uk=$ad[uk]
+ad[vk]='4917671214205' ;alias -g vk=$ad[vk]
 
 irb=188.194.163
 iro=.73
@@ -52,7 +53,6 @@ function arg(){
 function alterKern(){
 	dpkg --list | grep linux-image | awk '{ print $2 }' | sort -V | sed -n '/'`uname -r`'/q;p'
 	#sed -n '/'`uname -r`'/q;p' : Druckt Zeilen vor aktuellem Kernel
-
 }
 
 
@@ -61,13 +61,11 @@ function cu(){
 }
 
 
-function er(){
+function kuerz(){
 	#((!$#)) && 	dat=`ls -t | head -1` || dat=$1
-	for dat in *;do
-		echo "Datei $dat \n"
-		mv "$dat" $(echo "$dat"| sed 's/\(.*\)................\(\..*\)/\1\2/')
-		echo Datei $dat \n
-	done
+	#for dat in *;do
+		#mv "$dat" $(echo "$dat"| sed 's/\(.*\)................\(\..*\)/\1\2/')
+	#done
 	l
 }
 
@@ -85,15 +83,14 @@ function ersetz(){
 			echo Großbuchst.: $file
 			rename 'y/A-Z/a-z/' $file
 		fi
-
 		if [[ `pwd` = '$home2/uni/' && $file != *""* ]]; then
 			neu=$1_$file
 			mv $file $neu
 			echo neue uni pdf: $neu
 		fi
 	done
-	echo "\nDateien nach Op\nAnzahl Ersetzung: $v_ersetz"
-	for f in *;do;echo $f;done
+	#echo "\nDateien nach Op\nAnzahl Ersetzung: $v_ersetz"
+	#for f in *;do;echo $f;done
 }
 
 function hs(){
@@ -198,11 +195,11 @@ function sc(){
 
 
 function schieb(){
-	echo `ls -t $dowDir | head -n $1`
+	((!$#)) && 	nr=1 || nr=$1
+	echo `ls -t $dowDir | head -n $nr` \n
 
-	for i in `seq 1 $1`
-	
-	mv $dowDir/"`ls -t $dowDir | head -n1`" .
+	for i in `seq 1 $nr`
+		mv $dowDir/"`ls -t $dowDir | head -n1`" .
 }
 
 
@@ -236,6 +233,7 @@ function ss(){
 
 function we(){
 	url='https://www.accuweather.com/en/de/hof/95028/weather-forecast/172202'
+	echo `dt`
 	wget -q -O- "$url" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print $2=($2=="day"?"Tag":"Nacht") " ; "substr($1, 41, 12) ", " $13 ", " $12 "°" }'| head -1
 }
 
@@ -277,13 +275,12 @@ alias wh="which"
 
 
 #cd's
-alias -g ar=~/arduino
-alias dow=$dowDir
+alias ar=~/arduino
+alias -g dow=$dowDir
 alias mus='~/musik; l'
-alias -g o=$ZSH_CUSTOM
+alias o=$ZSH_CUSTOM
 alias oh=$ZSH
 alias op=/opt/django.git
-alias pd=pwd
 alias un=~/uni
 alias y=cd
 
@@ -358,11 +355,9 @@ alias -g ida=~/.ssh/authorized_keys
 
 # zsh
 alias e="exec zsh && ec ha we; !-2"
-alias pu='ec $plugins'
+alias plu='ec $plugins'
 alias x=exit
 alias zb='b $zr'
-alias -g zp='source $zp' # zprofile 
-alias zc='c $zp' # zprofile 
 alias -g zr='$zr' # zshrc 
 
 

@@ -6,14 +6,8 @@ cHome=$home/.oh-my-zsh/custom
 
 co=$cHome/$co2
 cy=$cHome/$cy2
-dj=$cHome/$dj2
 gi=$cHome/$gi2
 zr=$home/.zshrc
-
-sv=192.168.182.129
-svi=ens33
-
-bim=$(wmic OS get OSArchitecture)
 
 dowDir=/cygdrive/C/Users/itdlz-koer/Downloads
 
@@ -37,12 +31,6 @@ function ki(){
 		pkill $1;
 		echo "Prozesse mit $1 \n"
 		ps -ef|grep $1
-}
-
-function m0(){
-	 mvn compile
-		 target/classes
-	 java urlparser
 }
 
 

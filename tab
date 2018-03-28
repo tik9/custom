@@ -1,0 +1,9 @@
+set letztes [lindex $argv 0]
+
+spawn ssh -p 8022 192.168.43.$letztes
+
+expect fingerprint {
+	send yes\r
+}
+
+interact
