@@ -23,9 +23,6 @@ function co(){
 		cat /dev/clipboard
 }
 
-function cpu(){
-	mv `ls *.mp3 |head -1` /cygdrive/e/
-}
 
 function ki(){
 		pkill $1;
@@ -33,13 +30,6 @@ function ki(){
 		ps -ef|grep $1
 }
 
-
-function pe(){
-	sed -i "s/\(^plugins=.*\))/\1 $1)/" $zr
-	echo $plugins
-	exec zsh
-	echo $plugins
-}
 
 
 function q(){
@@ -68,7 +58,7 @@ alias tl="tmux ls"
 alias tm=tmux
 
 
-alias agr='apt-cyg remove';
+alias rem='apt-cyg remove';
 alias allpkgs='apt-cyg listall'
 alias arc="echo $arc"
 alias da=~/django
@@ -76,5 +66,4 @@ alias da=~/django
 alias in='apt-cyg install'
 alias j='ipconfig'
 
-alias pd='cygcheck -c|less'
 alias -g us='$us'

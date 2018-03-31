@@ -36,9 +36,6 @@ function gi(){
 
 	 git add . 
 	 git commit -m "$@"
-	 #echo $out
-	 #Everything up-to-date
-
 	 git push
 	git log --stat|head -10
 }
@@ -62,6 +59,13 @@ function grs(){
 	curl https://api.github.com/repos/tik9/$dir | grep size
 }
 
+
+function grset(){
+	git remote set-url origin git@github.com:tik9/$1
+	git config --list
+}
+
+
 alias a='$(_check); git status'
 
 alias adc='git rm -r --cached'
@@ -69,9 +73,6 @@ alias adc='git rm -r --cached'
 alias cg='c .gitignore'
 alias g='$(_check); git diff; git status'
 alias ga='$(_check); git add --all'
-
-alias gbr='git branch'
-alias gba='git branch -a'
 
 alias gcam='git commit -a -m'
 alias gcf='git config --list --show-origin'
@@ -81,9 +82,6 @@ alias gcl='git clone --recursive'
 alias gclean='git clean -dnx'
 
 alias gcm='git checkout master'
-
-alias gcmsg='git commit -m'
-alias gcount='git shortlog -sne --format=format:%cI'
 
 alias gd='$(_check);git diff'
 alias gdca='git diff --cached'
@@ -103,7 +101,6 @@ alias gpu='$(_check); git push; a'
 alias gre='git remote'
 alias gra='git remote add'
 alias grh='git reset HEAD; a'
-alias grset='git remote set-url origin git@github.com:tik9/'
 alias gru='git remote update'
 alias grv='git remote -v'
 
@@ -117,9 +114,7 @@ alias gstp='git stash pop; gstl'
 alias gsts='git stash show -p'
 
 alias gt='git checkout -- .; git pull'
-alias gu='find . -mindepth 1 -maxdepth 2 -type d -print -exec git -C {} pull \;'
 
-alias i='$(_check); git log --stat'
-alias n='$(_check); git log --stat -p'
+alias glo='$(_check); git log --stat -p'
 
 alias u='cd $(_check);git log --stat | head -n 10'

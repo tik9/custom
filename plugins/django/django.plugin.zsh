@@ -1,6 +1,6 @@
 #compdef manage.py
 
-alias restar="dcd;kp;dr"
+alias 0="dcd;kp;dr"
 alias dcd="cd /home/pi/django"
 alias dm='p3 manage.py'
 alias dr='dm runserver 0.0.0.0:8000'

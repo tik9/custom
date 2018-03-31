@@ -1,7 +1,6 @@
 lsb=`lsb_release -i|cut -d: -f2|sed -e 's/[[:blank:]]//'`
 
 dowDir=/home/t/Downloads
-home2=/root
 
 arc=`uname -a |cut -d' ' -f 14`
 
@@ -71,13 +70,6 @@ function ma(){
 }
 
 
-function ma2(){
-	if [ -z $1 ];then;echo Argument fehlt;return; fi
-	cat email|msmtp $ad[$1] $ad[$2]	
-	tail -n5 ~/.msmtp.log
-}
-
-
 function ml(){
 	cd ~/musik
 	ffprobe $1 2> >(grep Duration)
@@ -98,38 +90,28 @@ function q(){
 	wget http://speedtest.wdc01.softlayer.com/downloads/$datei --output-document=/dev/null
 }
 
-function sess(){
-	sed -i "s/\(cd = { 'sessionid':\).*/\1 \'$1\'}/" soup.py
-	ec \'$1\'
-}
 
 
 #apt
 alias acp='apt-cache policy' 
-alias acse='apt-cache search'
-alias agli='apt list --installed'
+alias acs='apt-cache search'
+alias ali='apt list --installed'
 # List available updates only
-alias aglu='sudo apt-get -u upgrade --assume-no'
-alias apg='sudo apt-get'            # age - but without sudo
-alias aga='sudo apt-get autoclean' # aac
-alias agar='sudo apt-get autoremove -y'
-alias agc='sudo apt-get clean'     # adc
-alias agp='sudo apt-get purge'    # ap
-alias agu='sudo apt-get update'   # ad
-alias agud='sudo apt-get update && sudo apt-get full-upgrade' #adu
-alias agug='sudo apt-get upgrade' # ag
-alias aguu='sudo apt-get update && sudo apt-get upgrade'      #adg
+alias aar='sudo apt autoremove -y'
+alias ap='sudo apt purge'    
+alias au='sudo apt update'   
+alias aud='sudo apt update && sudo apt full-upgrade'
+alias aug='sudo apt upgrade' 
+alias auu='sudo apt update && sudo apt upgrade'   
 alias allpkgs='dpkg --get-selections | grep -v deinstall'
-alias in='sudo apt-get install'  
+alias in='sudo apt install'  
 alias pkgsu="apt list --upgradable "
-alias rem='apt-get remove'   # ar
+alias rem='apt remove'  
 
 
 alias a+="amix +"
 alias a-="amix -"
 alias abi="abiword"
-alias -g da=/home/pi/django
-
 alias gp='gpicview'
 alias hi='hibernate'
 alias km='killall mplayer'
@@ -139,6 +121,5 @@ alias mu='mutt'
 alias -s pdf=mupdf
 
 alias s='pm-suspend'
-alias sp='su pi'
 alias -g xs='| xclip -selection clipboard'
-alias z='/etc/init.d/networking restart; we; dt'
+alias z='/etc/init.d/networking restart; i; dt'

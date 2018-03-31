@@ -99,23 +99,18 @@ function hs(){
 }
 
 
-function int_trap() {
-    echo "Ctrl-C gedrückt"
+function i(){
+	url='https://www.accuweather.com/en/de/hof/95028/weather-forecast/172202'
+	echo `dt`
+	wget -q -O- "$url" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print $2=($2=="day"?"Tag":"Nacht") " ; "substr($1, 41, 12) ", " $13 ", " $12 "°" }'| head -1
 }
 
 
 function j(){
 	interf=$1
 	if [ -z $1 ]; then ; interf=wlan0;fi
-	if [[ $1 = all ]]; then ; ip addr show; return; fi
-	#ip addr show $interf | grep -o 'inet [0-9.]*'|cut -d' ' -f2
 	
-	ip addr show $interf | sed  -n -E 's/   inet ([0-9.]*).*/\1/p'|cut -d. -f4
-}
-
-
-function ipbas {
-	echo $(echo `j` | cut -d . -f -3)	
+	ip addr show $interf | sed  -n -E 's/inet ([0-9.]*).*/\1/p'|cut -d. -f4
 }
 
 
@@ -132,8 +127,6 @@ function k(){
 	echo "Prozesse mit $1 \n";
 	ps -ef|grep $1
 }
-
-compdef _k k
 
 
 function ki(){
@@ -153,18 +146,18 @@ function pa(){
 	exec zsh
 }
 
-function pl(){
-	sed -i 's/ [a-z-]\+)/)/' $zr
-	exec zsh; 
-	echo $plugins
-}
-
 function pk(){
 	pkill $1; p2 $1
 }
 	
 function p2(){
 	grep $1 =(ps aux)
+}
+
+
+function prm(){
+	sed -i 's/ [a-z-]\+)/)/' $zr
+	exec zsh; 
 }
 
 
@@ -231,13 +224,6 @@ function ss(){
 }
 
 
-function we(){
-	url='https://www.accuweather.com/en/de/hof/95028/weather-forecast/172202'
-	echo `dt`
-	wget -q -O- "$url" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print $2=($2=="day"?"Tag":"Nacht") " ; "substr($1, 41, 12) ", " $13 ", " $12 "°" }'| head -1
-}
-
-
 function y2(){
 		zparseopts -A ARGUMENTS m:
 	m=$ARGUMENTS[-m]
@@ -246,52 +232,39 @@ function y2(){
 	a_array=(
 	'fleissig hw' '-jSvfhXl0pQ'
        '' '')
-
 	for k in "${(@k)a_array}"; do
 	  youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" $a_array[$k]
 	done
 	
 	ersetz
-	# ffmpeg -i *.webm `ls -t |head -1|cut -d. -f -1`.mp3 
-	#sc2 -o .1 -ip $sm -f "`ls |head -1`" -d $dt/$dtm
-	#rm "`ls -t|head -1`"
 }
 
 
 function zeile(){
 	sed -n "$1,+$2p" mbox
-	#sed -n '$1,$($1+$2)p' mbox >> $3
 }
 
  
 # alias/Funktionen
-alias p='alias|grep'
 alias d='declare -f'
+alias p='alias|grep'
 alias t='type'
 alias w='alias -m'
-alias ua='unalias'
-alias wo='who'
-alias wh="which"
 
 
 #cd's
 alias ar=~/arduino
+alias -g bi=$bi
 alias -g dow=$dowDir
-alias mus='~/musik; l'
+alias mus=~/musik
 alias o=$ZSH_CUSTOM
 alias oh=$ZSH
-alias op=/opt/django.git
 alias un=~/uni
 alias y=cd
 
 #curl
 alias cul='cur localhost:8000'
 alias cur=curl
-
-
-#Dateien
-alias cp='cp -r'
-alias to=touch
 
 
 #find
@@ -318,6 +291,8 @@ alias ho='ec $HOST'
 alias tt=tty
 alias us='ec $USER'
 
+# ls
+alias lh='ls h'
 
 #mysql
 alias msd='mysql -uroot d'
@@ -329,17 +304,10 @@ alias pn='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
 alias -g ir=$ir
 
 # ps
-alias ap="ec $$"
 alias ks="ph; ki ssh; ph"
-alias ksl="ki sl; pl"
-alias pg=pgrep
-alias pg2='pgrep -P $$'
 alias ph="pr ssh"
 alias pp='pr python'
 alias pr='ps -ef|grep'
-alias psl="pr sleep"
-alias pz='pr zsh'
-alias -g sl=sleep
 
 
 #ssh
@@ -362,7 +330,7 @@ alias -g zr='$zr' # zshrc
 
 
 alias c=cat
-alias cm='cal 2018 he -n8'
+alias cm='cal 2018 he -n 13'
 alias dh='df -h'
 alias dt='date +"%T"'
 alias ecl="/root/progr/eclipse/eclipse & "
@@ -371,13 +339,11 @@ alias -g f='|less'
 alias -g h="--help |less"
 alias le='less -WiNS'
 alias m=man
+alias n=dict
 alias r="expect $lo"
-alias rf='rfkill list'
 alias so=source
-alias tp=top
 alias v='ack -i'
 alias -g ve=--version
-alias w2=dict
 alias x+='xbacklight -set 40';alias x-='xbacklight -dec 10'
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
 
