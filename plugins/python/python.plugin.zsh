@@ -1,4 +1,3 @@
-da=/home/pi/django/
 soup=$da/soup.py
 
 # Entferne python kompilierter byte-code im aktuellen Verzeichnis oder in einer Verzeichnisliste
@@ -17,30 +16,31 @@ function p3(){
 }
 
 function pd(){
-	pipdeptree -r --package $1
-	echo "\n"
-	pip show $1
+	for p in $@;do
+		pipdeptree -r --package $p
+		echo "\n"
+		pip show $p
+	done
 }
 
 function sess(){
-	#((!$#))&&
+	((!$#))&& echo kein Arg;return ||
 	sed -i "s/\(cd = { 'sessionid':\).*/\1 \'$1\'}/" $soup
 	ec \'$1\'
-	python3 $soup
+	p3 $soup
 }
 
 
 alias iy='ipython'
 alias da=$da
-alias op=/opt/django.git
 alias pyc='/root/progr/pycharm/bin/pycharm.sh&'
 
 #pip
 alias pdt='pipdeptree --package'
 alias pdr='pipdeptree -r --package'
 alias pe='pip search'
-alias pi='pip show'
-alias pin='pip install'
+alias pis='pip show'
+alias pi='pip install'
 alias pl='pip list'
 alias pu='pip uninstall -y'
 alias po='pip list --outdated f'

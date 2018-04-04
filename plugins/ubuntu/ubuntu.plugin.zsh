@@ -1,3 +1,6 @@
+
+da=/home/pi/django/
+
 lsb=`lsb_release -i|cut -d: -f2|sed -e 's/[[:blank:]]//'`
 
 dowDir=/home/t/Downloads

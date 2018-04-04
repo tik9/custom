@@ -1,8 +1,11 @@
+
 arc=`uname -a |cut -d' ' -f 6`
 us=/cygdrive/e
 home=c:/cygwin64/home/itdlz-koer
 home2=/home/itdlz-koer
 cHome=$home/.oh-my-zsh/custom
+
+da=$home2/django/
 
 co=$cHome/$co2
 cy=$cHome/$cy2

@@ -75,6 +75,6 @@ alias b=vi
 alias km='ki play-audio'
 alias sd='sshd; ph; echo Letztes Oktett ;j' 
 alias tb="termux-battery-status|sed -n 's/\"percentage\": \([0-9][0-9]\),/\1%/p'"
-alias ti=termux-sms-inbox
+alias ti='termux-sms-inbox | less'
 alias ts=termux-sms-send 
 alias tsh='termux-sms-send -help' 

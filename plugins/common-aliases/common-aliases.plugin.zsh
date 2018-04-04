@@ -1,4 +1,3 @@
-#echo $SHELL
 
 an2=plugins/android/android.plugin.zsh
 an=$ZSH_CUSTOM/$an2
@@ -25,7 +24,6 @@ th=/data/data/com.termux/files/home
 os=`uname -a |cut -d' ' -f 1`
 
 declare -A ad
-ad[dk]='dkoerner@konzertagentur-koerner.de' ;alias -g dk=$ad[dk]
 ad[ss]='sstirner@konzertagentur-koerner.de';alias -g s2=$ad[ss]
 ad[tk]='user153015@gmail.com' ; alias -g tk=$ad[tk]
 ad[t]='01573 9598 220'
@@ -166,11 +164,6 @@ function re(){
 }
 
 
-function rsyn(){
-	rsync --numeric-ids -avze ssh $1 root@$ir:/root/p/app1 
-}
-
-
 function sc(){
 	zparseopts -A ARGUMENTS d: f: i: ip: o: p: u:
 	
@@ -213,38 +206,18 @@ function si(){
 }
 
 
-function sstat(){ service $1 status }
-function sstar(){ service $1 start }
-function srs(){ service $1 restart }
-function ssto(){ service $1 stop }
-
 function ss(){
 	((!$#)) && okt=1 || okt=$1
 	ssh -p8022 root@$sm.$okt
 }
 
-
-function y2(){
-		zparseopts -A ARGUMENTS m:
-	m=$ARGUMENTS[-m]
-	
-	typeset -A a_array
-	a_array=(
-	'fleissig hw' '-jSvfhXl0pQ'
-       '' '')
-	for k in "${(@k)a_array}"; do
-	  youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s" $a_array[$k]
-	done
-	
-	ersetz
+function wlans(){
+	#iwlist wlan0 scan | sed  -n 's/ESSID:"\(.*\)"/\1/p; s/Quality\([0-9]{2}/[0-9]{2}\)"/Qualität \1/p'
+	iwlist wlan0 scan | sed  -n 's/ESSID:"\(.*\)"/\1/p'
 }
 
 
-function zeile(){
-	sed -n "$1,+$2p" mbox
-}
 
- 
 # alias/Funktionen
 alias d='declare -f'
 alias p='alias|grep'
@@ -346,5 +319,6 @@ alias v='ack -i'
 alias -g ve=--version
 alias x+='xbacklight -set 40';alias x-='xbacklight -dec 10'
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
+alias zp='source ~/.zprofile'
 
 echo "Common Alias aktualisiert"
