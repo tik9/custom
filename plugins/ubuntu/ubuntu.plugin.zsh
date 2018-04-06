@@ -44,7 +44,7 @@ function apt-history () {
 
 function b(){
 	if [[ $(lsb) = Ubuntu ]]; then; /root/src/src_geany-1.28/usr/bin/geany $1 &
-	else;vim;fi
+	else;vim $1;fi
 }
 
 

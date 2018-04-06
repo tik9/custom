@@ -1,6 +1,8 @@
 arc=`uname -a |cut -d' ' -f 13`
 lsb=`uname -a |cut -d' ' -f 14`
 
+da=$th/django/
+
 
 function ci(){
 	termux-clipboard-set `$@`
