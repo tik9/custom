@@ -1,7 +1,8 @@
 #compdef manage.py
 
 alias 0="dcd;kp;dr&"
-alias dcd="cd ~/django"
+alias da=$da
+alias dcd="cd $da/django"
 alias dm='p3 manage.py'
 alias dr='dm runserver 0.0.0.0:8000'
 alias dv='echo django version; p3 -c "import django;print(django.get_version())"'

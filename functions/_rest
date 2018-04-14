@@ -21,8 +21,7 @@ _ma(){
 }
 
 _play_audio(){
-	_arguments ':dat:_path_files -W /data/data/com.termux/files/home/storage/music'
-	#_arguments ':dat:_path_files -W /'
+	_arguments ':dat:_path_files -W $th/storage/music'
 }
 
 _pt(){

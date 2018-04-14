@@ -19,6 +19,7 @@ zr=~/.zshrc
 bi=/root/bilder
 ds=/storage/emulated/0
 mu=$ds/music
+
 th=/data/data/com.termux/files/home
 
 os=`uname -a |cut -d' ' -f 1`
@@ -59,36 +60,24 @@ function cu(){
 }
 
 
-function kuerz(){
-	#((!$#)) && 	dat=`ls -t | head -1` || dat=$1
-	#for dat in *;do
-		#mv "$dat" $(echo "$dat"| sed 's/\(.*\)................\(\..*\)/\1\2/')
-	#done
-	l
-}
-
-
 function ersetz(){
-	for file in *; do
+	#for file in *; do
+		file=$1
 		if [[ $file =~ \  ]];then
-			echo Leerzeichen: $file
+			#echo Leerzeichen: $file
 			neu="${file// /_}"
 			mv $file $neu
-		$(v_ersetz++)
 		fi
 		file=$neu
 		if [[ $file =~ '[A-Z]' ]];then
-			echo Großbuchst.: $file
 			rename 'y/A-Z/a-z/' $file
 		fi
 		if [[ `pwd` = '$home2/uni/' && $file != *""* ]]; then
 			neu=$1_$file
 			mv $file $neu
-			echo neue uni pdf: $neu
 		fi
-	done
-	#echo "\nDateien nach Op\nAnzahl Ersetzung: $v_ersetz"
-	#for f in *;do;echo $f;done
+	echo $neu
+	#done
 }
 
 function hs(){
@@ -105,10 +94,10 @@ function i(){
 
 
 function j(){
-	interf=$1
-	if [ -z $1 ]; then ; interf=wlan0;fi
+	letztes=''
+	if [ -z $1 ]; then ; letztes=$(cut -d. -f4); fi
 	
-	ip addr show $interf | sed  -n -E 's/inet ([0-9.]*).*/\1/p'|cut -d. -f4
+	ip addr show wlan0 | sed  -n -E 's/inet ([0-9.]*).*/\1/p'| $letztes
 }
 
 
@@ -131,6 +120,16 @@ function ki(){
 		killall $1;
 		echo "Prozesse mit $1 \n"
 		ps -ef|grep $1
+}
+
+function ku(){
+	((!$#)) && 	dat=`ls -t | head -1` || dat=$1
+	#for dat in *;do
+	neu=$(echo "$dat"| sed 's/\(.*\)................\(\..*\)/\1\2/')
+	mv "$dat" $neu
+	echo $neu
+	#done
+	l
 }
 
 
@@ -217,6 +216,15 @@ function wlans(){
 }
 
 
+function uz(){
+	$dowDir
+	unzip `ls -t|head -1` -d z1
+	rm *.zip
+	mv z1/* $OLDPWD
+	rm z1
+	
+	$OLDPWD
+}
 
 # alias/Funktionen
 alias d='declare -f'

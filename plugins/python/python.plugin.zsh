@@ -32,7 +32,6 @@ function sess(){
 
 
 alias iy='ipython'
-alias da=$da
 alias pyc='/root/progr/pycharm/bin/pycharm.sh&'
 
 #pip
