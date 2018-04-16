@@ -73,7 +73,6 @@ alias rem="apt remove"
 
 
 alias arc="echo $arc"
-alias b=vi
 alias km='ki play-audio'
 alias sd='sshd; ph; echo Letztes Oktett ;j' 
 alias tb="termux-battery-status|sed -n 's/\"percentage\": \([0-9][0-9]\),/\1%/p'"

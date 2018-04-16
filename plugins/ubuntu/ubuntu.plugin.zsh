@@ -64,11 +64,7 @@ function co(){
 function ma(){
 	zparseopts -A arg b: t: a:
 		
-	printf "Subject:$2\n\"${@:3}\"" |msmtp $1
-	#printf "Subject:$arg[-b]\n${arg[-t]}" |msmtp $arg[-a]
-	
-	#test
-	#printf "Subject:test betreff\ntest body eintrag" |msmtp $ad[tk]
+	printf "Subject:$2\n${@:3}" |msmtp $1
 	tail -n5 ~/.msmtp.log
 }
 

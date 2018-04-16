@@ -35,7 +35,7 @@ irb=188.194.163
 iro=.73
 ir=$irb$iro
 
-sm=192.168.43
+sm=192.168.1
 
 # plugins
 alias anb="b $an"
@@ -52,6 +52,12 @@ function arg(){
 function alterKern(){
 	dpkg --list | grep linux-image | awk '{ print $2 }' | sort -V | sed -n '/'`uname -r`'/q;p'
 	#sed -n '/'`uname -r`'/q;p' : Druckt Zeilen vor aktuellem Kernel
+}
+
+
+function cl(){
+	sed -i "s/\(cal 2018 he -n\) [0-9][0-9]/\1 $1/" $co
+	exec zsh
 }
 
 
@@ -95,9 +101,8 @@ function i(){
 
 function j(){
 	letztes=''
-	if [ -z $1 ]; then ; letztes=$(cut -d. -f4); fi
-	
-	ip addr show wlan0 | sed  -n -E 's/inet ([0-9.]*).*/\1/p'| $letztes
+	if [ -z $1 ]; then ; letztes='cut -d. -f4'; fi
+	ip addr show wlan0 | sed  -n -E 's/inet ([0-9.]*).*/\1/p'| eval $letztes
 }
 
 
@@ -266,9 +271,9 @@ alias -g ti='| tail'
 
 
 # Konsole
-alias cl=clear
 alias hist=history
 alias ho='ec $HOST'
+alias sp='su pi'
 alias tt=tty
 alias us='ec $USER'
 
@@ -290,6 +295,9 @@ alias ph="pr ssh"
 alias pp='pr python'
 alias pr='ps -ef|grep'
 
+#remote
+alias ir='ec $ir'
+alias sm='ec $sm'
 
 #ssh
 alias cia='c ida f'
@@ -311,7 +319,7 @@ alias -g zr='$zr' # zshrc
 
 
 alias c=cat
-alias cm='cal 2018 he -n 13'
+alias cm='cal 2018 he -n 14'
 alias dh='df -h'
 alias dt='date +"%T"'
 alias ecl="/root/progr/eclipse/eclipse & "
