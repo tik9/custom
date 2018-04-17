@@ -23,6 +23,11 @@ function pd(){
 	done
 }
 
+function p2(){
+	pip install $1 --upgrade
+}
+
+
 function sess(){
 	((!$#))&& echo kein Arg;return ||
 	sed -i "s/\(cd = { 'sessionid':\).*/\1 \'$1\'}/" $soup

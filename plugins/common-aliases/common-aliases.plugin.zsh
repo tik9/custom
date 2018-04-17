@@ -217,7 +217,7 @@ function ss(){
 
 function wlans(){
 	#iwlist wlan0 scan | sed  -n 's/ESSID:"\(.*\)"/\1/p; s/Quality\([0-9]{2}/[0-9]{2}\)"/Qualität \1/p'
-	iwlist wlan0 scan | sed  -n 's/ESSID:"\(.*\)"/\1/p'
+	iwlist wlan0 scan | sed  -n 's/ESSID:"\(.*\)"/\1/p' | sort
 }
 
 
