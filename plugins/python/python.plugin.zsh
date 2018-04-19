@@ -29,7 +29,7 @@ function p2(){
 
 
 function sess(){
-	((!$#))&& echo kein Arg;return ||
+	((!$#))&& echo kein Arg ||
 	sed -i "s/\(cd = { 'sessionid':\).*/\1 \'$1\'}/" $soup
 	ec \'$1\'
 	p3 $soup
@@ -49,4 +49,4 @@ alias pl='pip list'
 alias pu='pip uninstall -y'
 alias po='pip list --outdated f'
 alias pll='pip list f'
-alias sp='c $soup | sed -n 4p'
+alias sp2='c $soup | sed -n 4p'

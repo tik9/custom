@@ -1,5 +1,6 @@
+echo $USER
 
-da=/home/pi/django/
+da=/home/pi/django
 
 lsb=`lsb_release -i|cut -d: -f2|sed -e 's/[[:blank:]]//'`
 
@@ -60,6 +61,16 @@ function co(){
 		xclip -o -selection clipboard
 }
 
+function in(){
+	apt install $1 -y	
+}
+
+function kp(){
+#if [[ $USER = pi ]];then
+	#pkill python3 ; fi
+	(( $USER = pi )) && sudo pkill python3 || pkill python3 
+	
+}
 
 function ma(){
 	zparseopts -A arg b: t: a:
@@ -89,7 +100,9 @@ function q(){
 	wget http://speedtest.wdc01.softlayer.com/downloads/$datei --output-document=/dev/null
 }
 
-
+function rem(){
+	apt remove $1 -y
+}
 
 #apt
 alias acp='apt-cache policy' 
@@ -103,9 +116,7 @@ alias aud='sudo apt update && sudo apt full-upgrade'
 alias aug='sudo apt upgrade' 
 alias auu='sudo apt update && sudo apt upgrade'   
 alias allpkgs='dpkg --get-selections | grep -v deinstall'
-alias in='sudo apt install'  
 alias pkgsu="apt list --upgradable "
-alias rem='apt remove'  
 
 
 alias a+="amix +"

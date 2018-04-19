@@ -265,7 +265,6 @@ alias hgrep="fc -El 0 | grep"
 
 # head / tail
 alias -g he='|head'
-alias -g erle='(head -n1 && tail -n1)'
 alias tai='tail -f'
 alias -g ti='| tail'
 
@@ -278,7 +277,7 @@ alias tt=tty
 alias us='ec $USER'
 
 # ls
-alias lh='ls h'
+alias lf='ls f'
 
 #mysql
 alias msd='mysql -uroot d'
@@ -296,7 +295,7 @@ alias pp='pr python'
 alias pr='ps -ef|grep'
 
 #remote
-alias ir='ec $ir'
+alias -g ir='ec $ir'
 alias sm='ec $sm'
 
 #ssh
@@ -315,6 +314,7 @@ alias e="exec zsh && ec ha we; !-2"
 alias plu='ec $plugins'
 alias x=exit
 alias zb='b $zr'
+alias zc=$ZSH_CUSTOM
 alias -g zr='$zr' # zshrc 
 
 

@@ -1,18 +1,23 @@
 
 arc=`uname -a |cut -d' ' -f 6`
+
 us=/cygdrive/e
-home=c:/cygwin64/home/itdlz-koer
-home2=/home/itdlz-koer
+cygd=/cygdrive/c
+
+ho=home/itdlz-koer
+home=c:/cygwin64/$ho
+home2=$cygd/cygwin64/$ho
+
 cHome=$home/.oh-my-zsh/custom
 
-da=$home2/django/
+da=/$ho/django
 
 co=$cHome/$co2
 cy=$cHome/$cy2
 gi=$cHome/$gi2
 zr=$home/.zshrc
 
-dowDir=/cygdrive/C/Users/itdlz-koer/Downloads
+dowDir=$cygd/users/itdlz-koer/downloads
 
 
 function b(){	notepad++ $1 & }
@@ -68,5 +73,6 @@ alias da=~/django
 
 alias in='apt-cyg install'
 alias j='ipconfig'
+alias kp='kill python'
 
 alias -g us='$us'
