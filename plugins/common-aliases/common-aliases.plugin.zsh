@@ -55,14 +55,14 @@ function alterKern(){
 }
 
 
-function cl(){
+function cl2(){
 	sed -i "s/\(cal 2018 he -n\) [0-9][0-9]/\1 $1/" $co
 	exec zsh
 }
 
 
-function cu(){
-	curl -f $ir:8000 && echo Erfolg || echo Keine Verbindung
+function cur(){
+	curl -f $ir && echo Erfolg || echo Keine Verbindung
 }
 
 
@@ -200,16 +200,6 @@ function scmysql(){
 }
 
 
-function si(){
-	secs=$(($1 * 60))
-	while [ $secs -gt 0 ]; do
-	   echo -ne "$secs\033[0K\r"
-	   sleep 1; : $((secs--))
-	done
-	eval $2
-}
-
-
 function ss(){
 	((!$#)) && okt=1 || okt=$1
 	ssh -p8022 root@$sm.$okt
@@ -223,10 +213,10 @@ function wlans(){
 
 function uz(){
 	$dowDir
-	unzip `ls -t|head -1` -d z1
-	rm *.zip
-	mv z1/* $OLDPWD
-	rm z1
+	unzip `ls -t|head -1` -d $1
+	#rm *.zip
+	mv $1 $OLDPWD
+	rm $1
 	
 	$OLDPWD
 }
@@ -249,8 +239,8 @@ alias un=~/uni
 alias y=cd
 
 #curl
-alias cul='cur localhost:8000'
-alias cur=curl
+alias cl='cu localhost'
+alias cu=curl
 
 
 #find
@@ -301,8 +291,8 @@ alias sm='ec $sm'
 #ssh
 alias cia='c ida f'
 alias -g cida_lokal='c idr >> ida; c ida' 
-alias cida='cp idr .; ga; gi "id rsa kopiert"' 
-alias cida2='gl; c id_rsa.pub >> ida; c ida' 
+alias cida='ar; cp idr .; ga; gi "id rsa kopiert"' 
+alias cida2='ar; gl; c id_rsa.pub >> ida; c ida' 
 alias cip='cj "c idr"' 
 alias cir='c idr' 
 alias -g idr=~/.ssh/id_rsa.pub 
@@ -319,7 +309,7 @@ alias -g zr='$zr' # zshrc
 
 
 alias c=cat
-alias cm='cal 2018 he -n 14'
+alias cm='cal 2018 he -n 16'
 alias dh='df -h'
 alias dt='date +"%T"'
 alias ecl="/root/progr/eclipse/eclipse & "

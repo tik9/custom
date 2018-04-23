@@ -7,7 +7,9 @@
 spawn ssh root@188.194.163.73
 
 expect rasp {
-	send "da;python3 soup.py\r"
+	send "da;
+	#python3 soup.py
+	\r"
 }
 
 interact

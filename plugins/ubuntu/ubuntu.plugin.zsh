@@ -8,7 +8,7 @@ dowDir=/home/t/Downloads
 
 arc=`uname -a |cut -d' ' -f 14`
 
-function ac(){
+function as(){
 	apt-cache show $1 |less
 }
 
@@ -50,7 +50,8 @@ function b(){
 
 
 function ci(){
-		`$@` | xclip -selection clipboard
+		#`$@` | xclip -selection clipboard
+		$1 | xclip -selection clipboard
 }
 
 function cj(){
@@ -124,12 +125,11 @@ alias a-="amix -"
 alias abi="abiword"
 alias gp='gpicview'
 alias hi='hibernate'
-alias km='killall mplayer'
-alias lsb='ec $lsb'
-alias mu='mutt'
 
 alias -s pdf=mupdf
 
 alias s='pm-suspend'
+alias si='sudo -i'
+alias sr='systemctl restart nginx;systemctl status nginx |sed -n "3p"'
 alias -g xs='| xclip -selection clipboard'
 alias z='/etc/init.d/networking restart; i; dt'

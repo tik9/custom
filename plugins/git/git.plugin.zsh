@@ -92,10 +92,10 @@ alias gg='git log --graph --oneline --decorate --all'
 alias gh='echo $ghtoken'
 
 alias gig='b .gitignore'
-alias gignored='git ls-files -v | grep "^[[:lower:]]"'
 alias gin='git init'
+alias gk='curl https://api.github.com/users/tik9/keys | less'
 
-alias go='`_check`; git log'
+alias go='$(_check); git log --stat -p'
 alias gpu='$(_check); git push; a'
 
 alias gre='git remote'
@@ -107,14 +107,11 @@ alias grv='git remote -v'
 alias gsb='git status -sb'
 alias gs='$(_check); git show'
 alias gsl='git shortlog --format=format:%cI -e'
-alias gss='git status -s | while read mode file; do echo $mode $file $(stat -c %y $file); done'
 alias gst='git stash; a'
 alias gstl='git stash list'
 alias gstp='git stash pop; gstl'
 alias gsts='git stash show -p'
 
 alias gt='git checkout -- .; git pull'
-
-alias glo='$(_check); git log --stat -p'
 
 alias u='cd $(_check);git log --stat | head -n 10'
