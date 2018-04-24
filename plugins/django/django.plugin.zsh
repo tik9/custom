@@ -1,9 +1,10 @@
 #compdef manage.py
 
-alias 0="/root/django;kp;dr&"
-alias da=$da
+alias 0="dt;kp;dru&"
+alias dp=$dp
+alias dt=$dt
 alias dm='p3 manage.py'
-alias dr='dm runserver 0.0.0.0:8000'
+alias dru='dm runserver 0.0.0.0:8000'
 alias dv='echo django version; p3 -c "import django;print(django.get_version())"'
 alias mk="dm makemigrations"
 alias rs='dm runserver'

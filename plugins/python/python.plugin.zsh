@@ -1,4 +1,4 @@
-soup=$da/soup.py
+soup=$dp/soup.py
 
 # Entferne python kompilierter byte-code im aktuellen Verzeichnis oder in einer Verzeichnisliste
 function pyclean() {

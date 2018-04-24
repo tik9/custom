@@ -1,7 +1,7 @@
 arc=`uname -a |cut -d' ' -f 13`
 lsb=`uname -a |cut -d' ' -f 14`
 
-da=$th/django/
+dt=$th/django/
 
 
 function ci(){
@@ -72,9 +72,8 @@ alias in='apt install'
 alias rem="apt remove"
 
 
-alias arc="echo $arc"
 alias km='ki play-audio'
-alias kp='kill python'
+alias kp='kill python3'
 alias sd='sshd; ph; echo Letztes Oktett ;j' 
 alias tb="termux-battery-status|sed -n 's/\"percentage\": \([0-9][0-9]\),/\1%/p'"
 alias ti='termux-sms-inbox | less'

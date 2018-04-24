@@ -1,6 +1,7 @@
 echo $USER
 
-da=/home/pi/django
+dt=/root/django
+dp=/home/pi/django
 
 lsb=`lsb_release -i|cut -d: -f2|sed -e 's/[[:blank:]]//'`
 
@@ -125,11 +126,13 @@ alias a-="amix -"
 alias abi="abiword"
 alias gp='gpicview'
 alias hi='hibernate'
+alias lsb='echo $lsb'
 
 alias -s pdf=mupdf
 
 alias s='pm-suspend'
 alias si='sudo -i'
+alias sp='su pi'
 alias sr='systemctl restart nginx;systemctl status nginx |sed -n "3p"'
 alias -g xs='| xclip -selection clipboard'
 alias z='/etc/init.d/networking restart; i; dt'

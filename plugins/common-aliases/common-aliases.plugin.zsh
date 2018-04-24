@@ -54,6 +54,13 @@ function alterKern(){
 	#sed -n '/'`uname -r`'/q;p' : Druckt Zeilen vor aktuellem Kernel
 }
 
+function cl(){
+	(( !$#)) && po=''||po=$1 
+	(( !# $2)) && da=''||da=$2 
+	#curl localhost:$po
+	#echo $po
+	curl localhost:$po/$da
+}
 
 function cl2(){
 	sed -i "s/\(cal 2018 he -n\) [0-9][0-9]/\1 $1/" $co
@@ -239,7 +246,7 @@ alias un=~/uni
 alias y=cd
 
 #curl
-alias cl='cu localhost'
+#alias cl='curl localhost'
 alias cu=curl
 
 
@@ -262,7 +269,6 @@ alias -g ti='| tail'
 # Konsole
 alias hist=history
 alias ho='ec $HOST'
-alias sp='su pi'
 alias tt=tty
 alias us='ec $USER'
 
@@ -311,7 +317,7 @@ alias -g zr='$zr' # zshrc
 alias c=cat
 alias cm='cal 2018 he -n 16'
 alias dh='df -h'
-alias dt='date +"%T"'
+alias dat='date +"%T"'
 alias ecl="/root/progr/eclipse/eclipse & "
 alias ec=echo
 alias -g f='|less'
