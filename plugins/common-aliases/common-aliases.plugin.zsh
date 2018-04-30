@@ -1,6 +1,5 @@
 
-an2=plugins/android/android.plugin.zsh
-an=$ZSH_CUSTOM/$an2
+a=$ZSH_CUSTOM/plugins/android/android.plugin.zsh
 
 co2=plugins/common-aliases/common-aliases.plugin.zsh; co=$ZSH_CUSTOM/$co2
 cy2=plugins/cygwin/cygwin.plugin.zsh; cy=$ZSH_CUSTOM/$cy2
@@ -35,12 +34,11 @@ irb=188.194.163
 iro=.73
 ir=$irb$iro
 
-sm=192.168.1
+sm=192.168.43
 
 # plugins
-alias anb="b $an"
+alias ab="b $an"
 alias cb="b $co"
-alias gic="c .gitignore"
 alias ub="b $ub"
 
 
@@ -86,7 +84,7 @@ function ersetz(){
 			rename 'y/A-Z/a-z/' $file
 		fi
 		if [[ `pwd` = '$home2/uni/' && $file != *""* ]]; then
-			neu=$1_$file
+			neu=$2_$file
 			mv $file $neu
 		fi
 	echo $neu
@@ -101,8 +99,7 @@ function hs(){
 
 function i(){
 	url='https://www.accuweather.com/en/de/hof/95028/weather-forecast/172202'
-	echo `dt`
-	wget -q -O- "$url" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print $2=($2=="day"?"Tag":"Nacht") " ; "substr($1, 41, 12) ", " $13 ", " $12 "°" }'| head -1
+	wget -q -O- "$url" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print $2=($2=="day"?"Tag":"Nacht")", " $12 "°" ", " substr($1, 41, 12) $13 ", " }'| head -1|awk -F, '{print $1 $2 $3 $4 split($5, a, "\""); print a[2]}' 
 }
 
 
@@ -111,9 +108,6 @@ function j(){
 	if [ -z $1 ]; then ; letztes='cut -d. -f4'; fi
 	ip addr show wlan0 | sed  -n -E 's/inet ([0-9.]*).*/\1/p'| eval $letztes
 }
-
-
-function ipu(){ip link set wlan0 up}
 
 
 function k(){
@@ -159,7 +153,7 @@ function pk(){
 	pkill $1; p2 $1
 }
 	
-function p2(){
+function pr2(){
 	grep $1 =(ps aux)
 }
 
@@ -167,11 +161,6 @@ function p2(){
 function prm(){
 	sed -i 's/ [a-z-]\+)/)/' $zr
 	exec zsh; 
-}
-
-
-function re(){
-	for pack in $@ ; do ; apt-get remove $pack -y ; done
 }
 
 
@@ -193,7 +182,7 @@ function sc(){
 
 function schieb(){
 	((!$#)) && 	nr=1 || nr=$1
-	echo `ls -t $dowDir | head -n $nr` \n
+	echo "`ls -t $dowDir | head -n $nr` \n"
 
 	for i in `seq 1 $nr`
 		mv $dowDir/"`ls -t $dowDir | head -n1`" .
@@ -242,11 +231,11 @@ alias -g dow=$dowDir
 alias mus=~/musik
 alias o=$ZSH_CUSTOM
 alias oh=$ZSH
+alias pw=pwd
 alias un=~/uni
 alias y=cd
 
 #curl
-#alias cl='curl localhost'
 alias cu=curl
 
 
@@ -262,7 +251,7 @@ alias hgrep="fc -El 0 | grep"
 
 # head / tail
 alias -g he='|head'
-alias tai='tail -f'
+alias ta='tail -f'
 alias -g ti='| tail'
 
 
@@ -299,7 +288,6 @@ alias cia='c ida f'
 alias -g cida_lokal='c idr >> ida; c ida' 
 alias cida='ar; cp idr .; ga; gi "id rsa kopiert"' 
 alias cida2='ar; gl; c id_rsa.pub >> ida; c ida' 
-alias cip='cj "c idr"' 
 alias cir='c idr' 
 alias -g idr=~/.ssh/id_rsa.pub 
 alias -g ida=~/.ssh/authorized_keys 
@@ -310,7 +298,6 @@ alias e="exec zsh && ec ha we; !-2"
 alias plu='ec $plugins'
 alias x=exit
 alias zb='b $zr'
-alias zc=$ZSH_CUSTOM
 alias -g zr='$zr' # zshrc 
 
 
@@ -325,11 +312,12 @@ alias -g h="--help |less"
 alias le='less -WiNS'
 alias m=man
 alias n=dict
+alias os="echo $os"
 alias r="expect $lo"
 alias so=source
-alias v='ack -i'
+alias v='ack -iw'
 alias -g ve=--version
-alias x+='xbacklight -set 40';alias x-='xbacklight -dec 10'
+alias x+='xbacklight -set 40'; alias x-='xbacklight -dec 10'
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
 alias zp='source ~/.zprofile'
 

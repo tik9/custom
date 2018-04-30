@@ -1,5 +1,3 @@
-echo $USER
-
 dt=/root/django
 dp=/home/pi/django
 

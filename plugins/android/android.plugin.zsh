@@ -2,6 +2,7 @@ arc=`uname -a |cut -d' ' -f 13`
 lsb=`uname -a |cut -d' ' -f 14`
 
 dt=$th/django/
+zr=$th/.zshrc
 
 
 function ci(){
@@ -28,6 +29,8 @@ function nr(){
 	nr=`termux-sms-inbox | jq '.[0].number'`
 	echo `sed -e 's/^"//' -e 's/"$//' <<<$nr` 
 }
+
+function int_trap(){ echo download ende }
 
 function q(){
 	datei=test100.zip
@@ -68,6 +71,7 @@ alias acs="apt-cache show"
 alias aglu="apt list --upgradable "
 alias aguu='apt-get update && apt-get upgrade'
 alias allpkgs="apt list --installed "
+alias b='vi'
 alias in='apt install'
 alias rem="apt remove"
 
@@ -79,3 +83,4 @@ alias tb="termux-battery-status|sed -n 's/\"percentage\": \([0-9][0-9]\),/\1%/p'
 alias ti='termux-sms-inbox | less'
 alias ts=termux-sms-send 
 alias tsh='termux-sms-send -help' 
+alias zr='vi $zr' 

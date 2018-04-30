@@ -20,10 +20,6 @@ function _check(){
 	echo $dir
 }
 
-function adg(){
-	echo $1 >> .gitignore; git status
-}
-
 
 function gco(){
 	git commit -am "$@"
@@ -88,15 +84,13 @@ alias gdca='git diff --cached'
 alias gdo='git diff origin'
 
 alias gf='git config --list'
-alias gg='git log --graph --oneline --decorate --all'
-alias gh='echo $ghtoken'
+alias gg='$(_check); git log --stat'
 
 alias gig='b .gitignore'
 alias gin='git init'
 alias gk='curl https://api.github.com/users/tik9/keys | less'
 
 alias go='$(_check); git log --stat -p'
-alias gpu='$(_check); git push; a'
 
 alias gre='git remote'
 alias gra='git remote add'
@@ -113,5 +107,6 @@ alias gstp='git stash pop; gstl'
 alias gsts='git stash show -p'
 
 alias gt='git checkout -- .; git pull'
+alias gu='$(_check); git push; a'
 
 alias u='cd $(_check);git log --stat | head -n 10'

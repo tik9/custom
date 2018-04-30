@@ -10,7 +10,8 @@ home2=$cygd/cygwin64/$ho
 
 cHome=$home/.oh-my-zsh/custom
 
-da=/$ho/django
+dp=/$ho/django
+dt=/$ho/d_test
 
 co=$cHome/$co2
 cy=$cHome/$cy2
@@ -69,7 +70,6 @@ alias tm=tmux
 alias rem='apt-cyg remove';
 alias allpkgs='apt-cyg listall'
 alias arc="echo $arc"
-alias da=~/django
 
 alias in='apt-cyg install'
 alias j='ipconfig'
