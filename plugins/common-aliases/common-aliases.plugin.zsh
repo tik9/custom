@@ -37,7 +37,7 @@ ir=$irb$iro
 sm=192.168.43
 
 # plugins
-alias ab="b $an"
+alias ab="b $a"
 alias cb="b $co"
 alias ub="b $ub"
 
@@ -83,7 +83,7 @@ function ersetz(){
 		if [[ $file =~ '[A-Z]' ]];then
 			rename 'y/A-Z/a-z/' $file
 		fi
-		if [[ `pwd` = '$home2/uni/' && $file != *""* ]]; then
+		if [[ -n $2 && $file != *""* ]]; then
 			neu=$2_$file
 			mv $file $neu
 		fi
@@ -97,13 +97,8 @@ function hs(){
 }
 
 
-function i(){
-	url='https://www.accuweather.com/en/de/hof/95028/weather-forecast/172202'
-	wget -q -O- "$url" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print $2=($2=="day"?"Tag":"Nacht")", " $12 "°" ", " substr($1, 41, 12) $13 ", " }'| head -1|awk -F, '{print $1 $2 $3 $4 split($5, a, "\""); print a[2]}' 
-}
 
-
-function j(){
+function j2(){
 	letztes=''
 	if [ -z $1 ]; then ; letztes='cut -d. -f4'; fi
 	ip addr show wlan0 | sed  -n -E 's/inet ([0-9.]*).*/\1/p'| eval $letztes
@@ -158,7 +153,7 @@ function pr2(){
 }
 
 
-function prm(){
+function p_rm(){
 	sed -i 's/ [a-z-]\+)/)/' $zr
 	exec zsh; 
 }
@@ -215,6 +210,47 @@ function uz(){
 	rm $1
 	
 	$OLDPWD
+}
+
+
+function we2(){
+	#para=$1
+	para=hof
+	url="https://api.accuweather.com/locations/v1/cities/autocomplete?q=$para&apikey=d41dfd5e8a1748d0970cba6637647d96&language=en-us&get_param=value"
+	#echo $url
+	wget -q -O- "$url" |jq -r '.[2] | .LocalizedName + " "+ .Key + " "+ .AdministrativeArea.LocalizedName'
+	#wget -q -O- "$url" |jq -r '.[2]'
+	
+	url="https://www.accuweather.com/ajax-service/select-city?cityId=$para&lang=en-us"
+	#wget -q -O- "$url" |less
+}
+
+
+function wea(){
+	para=$1
+	#para=miami
+	zei=1
+	url="https://api.accuweather.com/locations/v1/cities/autocomplete?q=$para&apikey=d41dfd5e8a1748d0970cba6637647d96&language=en-us&get_param=value"
+	#echo $url
+	#wget -q -O- "$url" |jq -r '.[2] | .LocalizedName + " "+ .Key'
+	para=`wget -q -O- "$url" |jq -r '.[2].Key'`
+
+	#url='https://www.accuweather.com/en/de/hof/95028/weather-forecast/172202'
+	url="https://www.accuweather.com/ajax-service/select-city?cityId=$para&lang=de"
+	#echo $url
+		
+	downl=`wget -q -O- "$url"`
+	
+	tag=`echo "$downl" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$2}' | awk "NR==$zei"`
+	tempf=`echo $downl | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$12}' |awk "NR==$zei"`
+	tempa=`echo $downl | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$10}' | awk "NR==$zei"`
+	ort=`echo $downl | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$1}' | awk "NR==$zei"`
+	text=`echo $downl | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$13}' | awk "NR==$zei"`
+	
+	ort=`echo "$ort"| awk -F\" '{print $2}'`
+	text=`echo "$text"| awk -F\" '{print $2}'`
+	echo $tag - gefühlt: $tempf -echt: $tempa - $ort - $text
+	
 }
 
 # alias/Funktionen
@@ -302,14 +338,16 @@ alias -g zr='$zr' # zshrc
 
 
 alias c=cat
-alias cm='cal 2018 he -n 16'
+alias cm='cal 2018 he -n 14'
 alias dh='df -h'
 alias dat='date +"%T"'
 alias ecl="/root/progr/eclipse/eclipse & "
 alias ec=echo
 alias -g f='|less'
 alias -g h="--help |less"
-alias le='less -WiNS'
+alias i='wea hof'
+alias j='wea miami; wea hof'
+alias le=less
 alias m=man
 alias n=dict
 alias os="echo $os"

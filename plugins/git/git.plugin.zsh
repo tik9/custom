@@ -5,11 +5,21 @@ zstyle -s ":vcs_info:git:*:-all-" "command" _omz_git_git_cmd
 
 
 function ghd(){
-	curl -X DELETE -H "Authorization: token `echo $ghtoken`" https://api.github.com/repos/$1/$2
+	curl -X DELETE -H "Authorization: token `echo $token_del`" https://api.github.com/repos/tik9/$1
 }
 
 function ghs(){
-	curl -v -H "Authorization: token `echo $ghtoken`" https://api.github.com
+	curl -v -H "Authorization: token `echo $token_rep`" https://api.github.com
+}
+
+function ghc(){
+	curl -i -H 'Authorization: token `echo $token_rep`' \
+    -d '{ \
+        "name": "b", \
+        "auto_init": true, \
+        "private": false, \
+      }' \
+    https://api.github.com/tik9/repos
 }
 
 function _check(){

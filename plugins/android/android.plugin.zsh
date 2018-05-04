@@ -26,8 +26,8 @@ function install(){
 
 
 function nr(){
-	nr=`termux-sms-inbox | jq '.[0].number'`
-	echo `sed -e 's/^"//' -e 's/"$//' <<<$nr` 
+	echo `termux-sms-inbox | jq -r '.[0].number'`
+	#echo `sed -e 's/^"//' -e 's/"$//' <<<$nr` 
 }
 
 function int_trap(){ echo download ende }

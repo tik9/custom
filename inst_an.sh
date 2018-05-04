@@ -2,18 +2,18 @@
 
 apt install curl expect jq python vim wget zsh -y
 
-# pip install django ipython pipdeptree
+pip install ipython pipdeptree
 
-# apt update
-# apt upgrade -y
+ apt update
+ apt upgrade -y
 
 # oh-my-zsh install. für termux:
 # https://github.com/termux/termux-packages/issues/37
-#git clone git://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh --depth 1
+git clone git://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh --depth 1
 
-#chsh -s zsh
+chsh -s zsh
 
-#cp .zshrc_an $HOME/.zshrc
+cp .zshrc_an $HOME/.zshrc
 cd $HOME/.oh-my-zsh
 rm -rf custom
 
