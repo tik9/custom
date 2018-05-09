@@ -19,6 +19,8 @@ bi=/root/bilder
 ds=/storage/emulated/0
 mu=$ds/music
 
+us=/media/t/BACKUP
+
 th=/data/data/com.termux/files/home
 
 os=`uname -a |cut -d' ' -f 1`
@@ -30,9 +32,7 @@ ad[t]='01573 9598 220'
 ad[uk]='ukoerner@konzertagentur-koerner.de' ;alias -g uk=$ad[uk]
 ad[vk]='4917671214205' ;alias -g vk=$ad[vk]
 
-irb=188.194.163
-iro=.73
-ir=$irb$iro
+ir=188.194.163.73
 
 sm=192.168.43
 
@@ -60,7 +60,7 @@ function cl(){
 	curl localhost:$po/$da
 }
 
-function cl2(){
+function cm2(){
 	sed -i "s/\(cal 2018 he -n\) [0-9][0-9]/\1 $1/" $co
 	exec zsh
 }
@@ -72,10 +72,8 @@ function cur(){
 
 
 function ersetz(){
-	#for file in *; do
 		file=$1
 		if [[ $file =~ \  ]];then
-			#echo Leerzeichen: $file
 			neu="${file// /_}"
 			mv $file $neu
 		fi
@@ -88,7 +86,6 @@ function ersetz(){
 			mv $file $neu
 		fi
 	echo $neu
-	#done
 }
 
 function hs(){
@@ -225,6 +222,9 @@ function we2(){
 	#wget -q -O- "$url" |less
 }
 
+function i(){
+	url='https://www.accuweather.com/en/de/hof/95028/weather-forecast/172202'; wget -q -O- $url | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$0}' |head -1
+}
 
 function wea(){
 	para=$1
@@ -276,8 +276,8 @@ alias cu=curl
 
 
 #find
-alias ff='find . -type f -name'
-alias fin="find / -name"
+alias fin='find . -type f -name'
+alias ff="find / xdev -name"
 
 #grep
 alias -g gr="|grep -ai"
@@ -295,7 +295,7 @@ alias -g ti='| tail'
 alias hist=history
 alias ho='ec $HOST'
 alias tt=tty
-alias us='ec $USER'
+#alias us='ec $USER'
 
 # ls
 alias lf='ls f'
@@ -338,20 +338,20 @@ alias -g zr='$zr' # zshrc
 
 
 alias c=cat
-alias cm='cal 2018 he -n 14'
+alias cm='cal 2018 he -n 17'
 alias dh='df -h'
 alias dat='date +"%T"'
 alias ecl="/root/progr/eclipse/eclipse & "
 alias ec=echo
 alias -g f='|less'
 alias -g h="--help |less"
-alias i='wea hof'
 alias j='wea miami; wea hof'
 alias le=less
 alias m=man
 alias n=dict
 alias os="echo $os"
 alias r="expect $lo"
+alias us=$us
 alias so=source
 alias v='ack -iw'
 alias -g ve=--version
