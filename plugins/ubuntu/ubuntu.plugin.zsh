@@ -3,7 +3,8 @@ dp=/home/pi/django
 
 lsb=`lsb_release -i|cut -d: -f2|sed -e 's/[[:blank:]]//'`
 
-dowDir=/home/t/Downloads
+ht=/home/t
+dow=$ht/Downloads
 
 arc=`uname -a |cut -d' ' -f 14`
 
@@ -104,6 +105,14 @@ function rem(){
 	apt remove $1 -y
 }
 
+function schieb(){
+	((!$#)) && 	nr=1 || nr=$1
+	echo "`ls -t $dow | head -n $nr` \n"
+
+	for i in `seq 1 $nr`
+		mv $dow/"`ls -t $dow | head -n1`" .
+}
+
 #apt
 alias acp='apt-cache policy' 
 alias acs='apt-cache search'
@@ -118,10 +127,15 @@ alias auu='sudo apt update && sudo apt upgrade'
 alias allpkgs='dpkg --get-selections | grep -v deinstall'
 alias pkgsu="apt list --upgradable "
 
+# cds
+alias -g be=$ht/be
+alias -g dow=$dow
+alias gd=~/git/
 
 alias a+="amix +"
 alias a-="amix -"
 alias abi="abiword"
+alias dow="$dow"
 alias gp='gpicview'
 alias hi='hibernate'
 alias lsb='echo $lsb'

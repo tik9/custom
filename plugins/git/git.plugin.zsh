@@ -87,9 +87,6 @@ alias gcl='git clone --recursive'
 
 alias gclean='git clean -dnx'
 
-alias gcm='git checkout master'
-
-alias gd='$(_check);git diff'
 alias gdca='git diff --cached'
 alias gdo='git diff origin'
 
@@ -119,4 +116,4 @@ alias gsts='git stash show -p'
 alias gt='git checkout -- .; git pull'
 alias gu='$(_check); git push; a'
 
-alias u='cd $(_check);git log --stat | head -n 10'
+alias u='cd $(_check);git log --stat | head -n 10; gl'

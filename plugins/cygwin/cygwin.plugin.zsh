@@ -18,7 +18,7 @@ cy=$cHome/$cy2
 gi=$cHome/$gi2
 zr=$home/.zshrc
 
-dowDir=$cygd/users/itdlz-koer/downloads
+dow=$cygd/users/itdlz-koer/downloads
 
 
 function b(){	notepad++ $1 & }
@@ -53,6 +53,17 @@ function q(){
 	echo Ende
 }
 
+function schieb(){
+	((!$#)) && 	nr=1 || nr=$1
+	echo "`ls -t $dow | head -n $nr` \n"
+
+	for i in `seq 1 $nr`
+		mv $dow/"`ls -t $dow | head -n1`" .
+}
+
+# cds
+alias -g dow=$dow
+alias gd=~/git/
 
 #plugins
 alias cb="b $co"
@@ -60,12 +71,6 @@ alias -g com="$co"
 alias cyb="b $cy"
 alias gb="b $gi"
 alias zb="b $zr"
-
-#tmux
-alias ta="tmux attach"
-alias tl="tmux ls"
-alias tm=tmux
-
 
 alias rem='apt-cyg remove';
 alias allpkgs='apt-cyg listall'

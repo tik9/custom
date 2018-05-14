@@ -132,7 +132,7 @@ function ku(){
 
 
 function lö(){
-	rm -rf "$@";ls -a
+	rm -rf "$@";ls
 }
 
 
@@ -169,15 +169,6 @@ function sc(){
 	printf "Datei: %s/%s, Port: %s, Ip: %s\n" $dir $datei $port "$ip.$oktett" 
 	scp -P $port $datei $user@$ip.$oktett:$dir
 	#rm $datei
-}
-
-
-function schieb(){
-	((!$#)) && 	nr=1 || nr=$1
-	echo "`ls -t $dowDir | head -n $nr` \n"
-
-	for i in `seq 1 $nr`
-		mv $dowDir/"`ls -t $dowDir | head -n1`" .
 }
 
 
@@ -263,7 +254,7 @@ alias w='alias -m'
 #cd's
 alias ar=~/arduino
 alias -g bi=$bi
-alias -g dow=$dowDir
+alias -g kl=~/kl
 alias mus=~/musik
 alias o=$ZSH_CUSTOM
 alias oh=$ZSH
@@ -298,7 +289,9 @@ alias tt=tty
 #alias us='ec $USER'
 
 # ls
-alias lf='ls f'
+alias l='ls -lh'
+alias ll='ls f'
+alias lt='ls -t'
 
 #mysql
 alias msd='mysql -uroot d'
