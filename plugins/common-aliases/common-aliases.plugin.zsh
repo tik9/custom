@@ -3,7 +3,7 @@ a=$ZSH_CUSTOM/plugins/android/android.plugin.zsh
 
 co2=plugins/common-aliases/common-aliases.plugin.zsh; co=$ZSH_CUSTOM/$co2
 cy2=plugins/cygwin/cygwin.plugin.zsh; cy=$ZSH_CUSTOM/$cy2
-
+dj=$ZSH_CUSTOM/plugins/django/django.plugin.zsh
 gi2=plugins/git/git.plugin.zsh
 gi=$ZSH_CUSTOM/$gi2
 
@@ -36,11 +36,6 @@ ir=188.194.163.73
 
 sm=192.168.43
 
-# plugins
-alias ab="b $a"
-alias cb="b $co"
-alias ub="b $ub"
-
 
 function arg(){
 	# if [ -z $1 ];then;echo Argument fehlt;return; fi
@@ -72,20 +67,29 @@ function cur(){
 
 
 function ersetz(){
-		file=$1
-		if [[ $file =~ \  ]];then
-			neu="${file// /_}"
-			mv $file $neu
+		#file=$1
+		#if [[ $file =~ \  ]];then
+			#neu="${file// /_}"
+			#mv $file $neu
+		#fi
+		#file=$neu
+		#if [[ $file =~ '[A-Z]' ]];then
+			#rename 'y/A-Z/a-z/' $file
+		#fi
+		#if [[ -n $2 && $file != *""* ]]; then
+			#neu=$2_$file
+			#mv $file $neu
+		#fi
+		
+		if [[ $1 = VID* ]]; then
+			echo Video
+			mv $1 `echo "$1" |sed 's/\(VID_.*\)_.*\(\.3gp\)/\1\2/'`
 		fi
-		file=$neu
-		if [[ $file =~ '[A-Z]' ]];then
-			rename 'y/A-Z/a-z/' $file
+		if [[ $1 = IMG* ]]; then
+		echo Bild
+		mv $1 `echo "$1" |sed 's/\(IMG-.*\)-.*\(\.jpg\)/\1\2/'`
 		fi
-		if [[ -n $2 && $file != *""* ]]; then
-			neu=$2_$file
-			mv $file $neu
-		fi
-	echo $neu
+	#echo $neu
 }
 
 function hs(){
@@ -93,7 +97,9 @@ function hs(){
 	fc -li $beginn |less
 }
 
-
+function i(){
+	url='https://www.accuweather.com/en/de/hof/95028/weather-forecast/172202'; wget -q -O- $url | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$12"°"} ' |head -1
+}
 
 function j2(){
 	letztes=''
@@ -205,42 +211,32 @@ function we2(){
 	#para=$1
 	para=hof
 	url="https://api.accuweather.com/locations/v1/cities/autocomplete?q=$para&apikey=d41dfd5e8a1748d0970cba6637647d96&language=en-us&get_param=value"
-	#echo $url
+
 	wget -q -O- "$url" |jq -r '.[2] | .LocalizedName + " "+ .Key + " "+ .AdministrativeArea.LocalizedName'
-	#wget -q -O- "$url" |jq -r '.[2]'
 	
 	url="https://www.accuweather.com/ajax-service/select-city?cityId=$para&lang=en-us"
-	#wget -q -O- "$url" |less
-}
-
-function i(){
-	url='https://www.accuweather.com/en/de/hof/95028/weather-forecast/172202'; wget -q -O- $url | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$0}' |head -1
 }
 
 function wea(){
 	para=$1
-	#para=miami
 	zei=1
 	url="https://api.accuweather.com/locations/v1/cities/autocomplete?q=$para&apikey=d41dfd5e8a1748d0970cba6637647d96&language=en-us&get_param=value"
-	#echo $url
-	#wget -q -O- "$url" |jq -r '.[2] | .LocalizedName + " "+ .Key'
 	para=`wget -q -O- "$url" |jq -r '.[2].Key'`
 
 	#url='https://www.accuweather.com/en/de/hof/95028/weather-forecast/172202'
 	url="https://www.accuweather.com/ajax-service/select-city?cityId=$para&lang=de"
-	#echo $url
 		
 	downl=`wget -q -O- "$url"`
 	
 	tag=`echo "$downl" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$2}' | awk "NR==$zei"`
-	tempf=`echo $downl | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$12}' |awk "NR==$zei"`
-	tempa=`echo $downl | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$10}' | awk "NR==$zei"`
+	tempg=`echo $downl | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$12}' |awk "NR==$zei"`
+	tempe=`echo $downl | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$10}' | awk "NR==$zei"`
 	ort=`echo $downl | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$1}' | awk "NR==$zei"`
 	text=`echo $downl | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$13}' | awk "NR==$zei"`
 	
 	ort=`echo "$ort"| awk -F\" '{print $2}'`
 	text=`echo "$text"| awk -F\" '{print $2}'`
-	echo $tag - gefühlt: $tempf -echt: $tempa - $ort - $text
+	echo $tag - gefühlt: $tempg -echt: $tempe - $ort - $text
 	
 }
 
@@ -302,6 +298,11 @@ alias mst='mysql -uroot d -e "show tables"'
 alias pn='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
 alias -g ir=$ir
 
+# plugins
+#alias ab="b $a"
+alias cb="b $co"
+alias ub="b $ub"
+
 # ps
 alias ks="ph; ki ssh; ph"
 alias ph="pr ssh"
@@ -331,7 +332,7 @@ alias -g zr='$zr' # zshrc
 
 
 alias c=cat
-alias cm='cal 2018 he -n 17'
+alias cm='cal 2018 |head -n 17| tail -n 7 '
 alias dh='df -h'
 alias dat='date +"%T"'
 alias ecl="/root/progr/eclipse/eclipse & "

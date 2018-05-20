@@ -78,7 +78,7 @@ alias rem="apt remove"
 
 alias km='ki play-audio'
 alias kp='kill python3'
-alias sd='sshd; ph; echo Letztes Oktett ;j' 
+alias sd='sshd; ph; echo Letztes Oktett ;j2' 
 alias tb="termux-battery-status|sed -n 's/\"percentage\": \([0-9][0-9]\),/\1%/p'"
 alias ti='termux-sms-inbox | less'
 alias ts=termux-sms-send 

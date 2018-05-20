@@ -5,6 +5,8 @@ lsb=`lsb_release -i|cut -d: -f2|sed -e 's/[[:blank:]]//'`
 
 ht=/home/t
 dow=$ht/Downloads
+is='/run/user/1000/gvfs/mtp:host=%5Busb%3A002%2C034%5D/Interner\ gemeinsamer\ Speicher'
+wa='WhatsApp/Media/WhatsApp\ Images'
 
 arc=`uname -a |cut -d' ' -f 14`
 
@@ -67,8 +69,6 @@ function in(){
 }
 
 function kp(){
-#if [[ $USER = pi ]];then
-	#pkill python3 ; fi
 	(( $USER = pi )) && sudo pkill python3 || pkill python3 
 	
 }
@@ -128,13 +128,14 @@ alias allpkgs='dpkg --get-selections | grep -v deinstall'
 alias pkgsu="apt list --upgradable "
 
 # cds
+alias a1=~/a1
 alias -g be=$ht/be
 alias -g dow=$dow
 alias gd=~/git/
 
 alias a+="amix +"
 alias a-="amix -"
-alias abi="abiword"
+alias ab="abiword"
 alias dow="$dow"
 alias gp='gpicview'
 alias hi='hibernate'
@@ -146,5 +147,6 @@ alias s='pm-suspend'
 alias si='sudo -i'
 alias sp='su pi'
 alias sr='systemctl restart nginx;systemctl status nginx |sed -n "3p"'
+alias wa=$is/$wa
 alias -g xs='| xclip -selection clipboard'
 alias z='/etc/init.d/networking restart; i; dt'
