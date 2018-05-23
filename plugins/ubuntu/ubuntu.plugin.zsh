@@ -10,9 +10,7 @@ wa='WhatsApp/Media/WhatsApp\ Images'
 
 arc=`uname -a |cut -d' ' -f 14`
 
-function as(){
-	apt-cache show $1 |less
-}
+
 
 
 function am(){
@@ -42,6 +40,10 @@ function apt-history () {
       echo " e.g liste - Listet dpkg logs"
       ;;
   esac
+}
+
+function as(){
+	apt show $1 |less
 }
 
 
@@ -114,8 +116,9 @@ function schieb(){
 }
 
 #apt
-alias acp='apt-cache policy' 
-alias acs='apt-cache search'
+alias acp='apt policy' 
+alias acs='apt show'
+alias acse='apt search'
 alias ali='apt list --installed'
 # List available updates only
 alias aar='sudo apt autoremove -y'
@@ -125,7 +128,7 @@ alias aud='sudo apt update && sudo apt full-upgrade'
 alias aug='sudo apt upgrade' 
 alias auu='sudo apt update && sudo apt upgrade'   
 alias allpkgs='dpkg --get-selections | grep -v deinstall'
-alias pkgsu="apt list --upgradable "
+alias pkg="apt list --upgradable "
 
 # cds
 alias a1=~/a1
@@ -139,14 +142,14 @@ alias ab="abiword"
 alias dow="$dow"
 alias gp='gpicview'
 alias hi='hibernate'
+alias lez='	echo "`ls -t $dow | head -n1` \n"'
 alias lsb='echo $lsb'
 
 alias -s pdf=mupdf
 
 alias s='pm-suspend'
 alias si='sudo -i'
-alias sp='su pi'
 alias sr='systemctl restart nginx;systemctl status nginx |sed -n "3p"'
 alias wa=$is/$wa
 alias -g xs='| xclip -selection clipboard'
-alias z='/etc/init.d/networking restart; i; dt'
+alias z='/etc/init.d/networking restart; i'
