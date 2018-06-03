@@ -26,7 +26,6 @@ th=/data/data/com.termux/files/home
 os=`uname -a |cut -d' ' -f 1`
 
 declare -A ad
-ad[ss]='sstirner@konzertagentur-koerner.de';alias -g s2=$ad[ss]
 ad[tk]='user153015@gmail.com' ; alias -g tk=$ad[tk]
 ad[t]='01573 9598 220'
 ad[uk]='ukoerner@konzertagentur-koerner.de' ;alias -g uk=$ad[uk]
@@ -34,7 +33,7 @@ ad[vk]='4917671214205' ;alias -g vk=$ad[vk]
 
 ir=188.194.163.73
 
-sm=192.168.43
+im=192.168.43
 
 
 function arg(){
@@ -76,10 +75,6 @@ function ersetz(){
 		#if [[ $file =~ '[A-Z]' ]];then
 			#rename 'y/A-Z/a-z/' $file
 		#fi
-		#if [[ -n $2 && $file != *""* ]]; then
-			#neu=$2_$file
-			#mv $file $neu
-		#fi
 		
 		if [[ $1 = VID* ]]; then
 			echo Video
@@ -98,6 +93,7 @@ function hs(){
 }
 
 function i(){
+	date +%T
 	url='https://www.accuweather.com/en/de/hof/95028/weather-forecast/172202'; wget -q -O- $url | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$12"°"} ' |head -1
 }
 
@@ -128,11 +124,9 @@ function ki(){
 
 function ku(){
 	((!$#)) && 	dat=`ls -t | head -1` || dat=$1
-	#for dat in *;do
 	neu=$(echo "$dat"| sed 's/\(.*\)................\(\..*\)/\1\2/')
 	mv "$dat" $neu
 	echo $neu
-	#done
 	l
 }
 
@@ -142,9 +136,15 @@ function lö(){
 }
 
 
-function pa(){
+function pad(){
 	sed -i "s/\(^plugins=.*\))/\1 $1)/" $zr
 	exec zsh
+}
+
+function pa(){
+	if [ $# -eq 2 ];then; outp=$2 ; else ;outp=$1;fi
+	echo $2
+	pandoc -V geometry:margin=1in -o $outp.pdf $1.md ; mupdf $outp.pdf
 }
 
 function pk(){
@@ -167,7 +167,7 @@ function sc(){
 	
 	dir=$ARGUMENTS[-d]; 	if [ -z $dir ];then; dir=/root/musik;fi 
 	datei=$ARGUMENTS[-f]; 	if [ -z $datei ];then; datei=`ls -t |head -n1`;fi
-	ip=$ARGUMENTS[-ip];		if [ -z $ip ];then; ip=$sm;fi
+	ip=$ARGUMENTS[-ip];		if [ -z $ip ];then; ip=$im;fi
 	oktett=$ARGUMENTS[-o];	if [ -z $oktett ];then; oktett=162;fi
 	port=$ARGUMENTS[-p];	if [ -z $port ];then; port=8022;fi
 	user=$ARGUMENTS[-u]; 	if [ -z $user ];then; user=root;fi
@@ -186,8 +186,8 @@ function scmysql(){
 
 
 function ss(){
-	((!$#)) && okt=1 || okt=$1
-	ssh -p8022 root@$sm.$okt
+	((!$#)) && ok=1 || ok=$1
+	ssh -p8022 root@$im.$ok
 }
 
 function wlans(){
@@ -295,7 +295,7 @@ alias mst='mysql -uroot d -e "show tables"'
 
 
 # netzwerk
-alias pn='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
+alias r='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
 alias -g ir=$ir
 
 # plugins
@@ -311,7 +311,7 @@ alias pr='ps -ef|grep'
 
 #remote
 alias -g ir='ec $ir'
-alias sm='ec $sm'
+alias -g im='ec $im'
 
 #ssh
 alias cia='c ida f'
@@ -319,6 +319,7 @@ alias -g cida_lokal='c idr >> ida; c ida'
 alias cida='ar; cp idr .; ga; gi "id rsa kopiert"' 
 alias cida2='ar; gl; c id_rsa.pub >> ida; c ida' 
 alias cir='c idr' 
+alias cs=~/.ssh 
 alias -g idr=~/.ssh/id_rsa.pub 
 alias -g ida=~/.ssh/authorized_keys 
 
@@ -337,6 +338,7 @@ alias dh='df -h'
 alias dat='date +"%T"'
 alias ecl="/root/progr/eclipse/eclipse & "
 alias ec=echo
+alias ex="expect $lo"
 alias -g f='|less'
 alias -g h="--help |less"
 alias j='wea miami; wea hof'
@@ -344,12 +346,9 @@ alias le=less
 alias m=man
 alias n=dict
 alias os="echo $os"
-alias r="expect $lo"
 alias us=$us
 alias so=source
-alias v='ack -iw'
 alias -g ve=--version
-alias x+='xbacklight -set 40'; alias x-='xbacklight -dec 10'
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
 alias zp='source ~/.zprofile'
 

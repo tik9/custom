@@ -63,7 +63,6 @@ function schieb(){
 
 # cds
 alias -g dow=$dow
-alias gd=~/git/
 
 #plugins
 alias cb="b $co"
@@ -72,12 +71,10 @@ alias cyb="b $cy"
 alias gb="b $gi"
 alias zb="b $zr"
 
-alias rem='apt-cyg remove';
 alias allpkgs='apt-cyg listall'
 alias arc="echo $arc"
-
+alias ic='ipconfig'
 alias in='apt-cyg install'
-alias j='ipconfig'
 alias kp='kill python'
-
+alias rem='apt-cyg remove';
 alias -g us='$us'

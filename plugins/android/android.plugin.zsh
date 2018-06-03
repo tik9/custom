@@ -63,24 +63,24 @@ compdef _play_audio z
 
 
 #cd
-alias mu='$mu; l'
-alias -g ds='$ds; l'
+alias mu='$mu'
+alias -g ds='$ds'
+alias -g dc='DCIM/Camera'
 
 #apt
-alias acs="apt-cache show"
+alias ap="apt policy"
+alias as="apt show"
+alias ase="apt search"
 alias aglu="apt list --upgradable "
 alias aguu='apt-get update && apt-get upgrade'
-alias allpkgs="apt list --installed "
-alias b='vi'
+alias pkg="apt list --installed "
 alias in='apt install'
 alias rem="apt remove"
 
-
+alias ic='ifconfig'
 alias km='ki play-audio'
-alias kp='kill python3'
 alias sd='sshd; ph; echo Letztes Oktett ;j2' 
 alias tb="termux-battery-status|sed -n 's/\"percentage\": \([0-9][0-9]\),/\1%/p'"
-alias ti='termux-sms-inbox | less'
 alias ts=termux-sms-send 
-alias tsh='termux-sms-send -help' 
+alias v='vi'
 alias zr='vi $zr' 

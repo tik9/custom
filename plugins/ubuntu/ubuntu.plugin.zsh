@@ -116,13 +116,11 @@ function schieb(){
 }
 
 #apt
-alias acp='apt policy' 
-alias acs='apt show'
-alias acse='apt search'
+alias ase='apt search'
 alias ali='apt list --installed'
 # List available updates only
 alias aar='sudo apt autoremove -y'
-alias ap='sudo apt purge'    
+alias ap='apt policy' 
 alias au='sudo apt update'   
 alias aud='sudo apt update && sudo apt full-upgrade'
 alias aug='sudo apt upgrade' 
@@ -134,7 +132,7 @@ alias pkg="apt list --upgradable "
 alias a1=~/a1
 alias -g be=$ht/be
 alias -g dow=$dow
-alias gd=~/git/
+alias gd=~/git/cv
 
 alias a+="amix +"
 alias a-="amix -"
@@ -142,6 +140,7 @@ alias ab="abiword"
 alias dow="$dow"
 alias gp='gpicview'
 alias hi='hibernate'
+alias ic='ifconfig'
 alias lez='	echo "`ls -t $dow | head -n1` \n"'
 alias lsb='echo $lsb'
 
@@ -150,6 +149,7 @@ alias -s pdf=mupdf
 alias s='pm-suspend'
 alias si='sudo -i'
 alias sr='systemctl restart nginx;systemctl status nginx |sed -n "3p"'
+alias v='ack -iw'
 alias wa=$is/$wa
 alias -g xs='| xclip -selection clipboard'
 alias z='/etc/init.d/networking restart; i'
