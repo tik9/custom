@@ -65,7 +65,7 @@ compdef _play_audio z
 #cd
 alias mu='$mu'
 alias -g ds='$ds'
-alias -g dc='DCIM/Camera'
+alias -g dc='$ds/DCIM/Camera'
 
 #apt
 alias ap="apt policy"

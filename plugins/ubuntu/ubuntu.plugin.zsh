@@ -12,7 +12,6 @@ arc=`uname -a |cut -d' ' -f 14`
 
 
 
-
 function am(){
 	amixer get Master |sed -n 5p |cut -d ' ' -f6 |sed -e 's/\[\([1-9][1-9]%\)]/\1/'
 }

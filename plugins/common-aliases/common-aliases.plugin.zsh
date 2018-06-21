@@ -33,7 +33,9 @@ ad[vk]='4917671214205' ;alias -g vk=$ad[vk]
 
 ir=188.194.163.73
 
-im=192.168.43
+ih=192.168.0
+mo=135 ; la=109
+im=$ih.$mo
 
 
 function arg(){
@@ -92,10 +94,14 @@ function hs(){
 	fc -li $beginn |less
 }
 
+
 function i(){
 	date +%T
-	url='https://www.accuweather.com/en/de/hof/95028/weather-forecast/172202'; wget -q -O- $url | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$12"°"} ' |head -1
+	url='https://www.accuweather.com/en/de/hepberg/85120/weather-forecast/172784'
+	wget -q -O- $url | awk -F\' '/acm_RecentLocationsCarousel\.push/{ print$0 } ' |head -1
+	#wget -q -O- $url | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$12"°"} ' |head -1
 }
+
 
 function j2(){
 	letztes=''
@@ -121,6 +127,7 @@ function ki(){
 		echo "Prozesse mit $1 \n"
 		ps -ef|grep $1
 }
+
 
 function ku(){
 	((!$#)) && 	dat=`ls -t | head -1` || dat=$1
@@ -186,36 +193,11 @@ function scmysql(){
 
 
 function ss(){
-	((!$#)) && ok=1 || ok=$1
-	ssh -p8022 root@$im.$ok
+	((!$#)) && ok=$mo || ok=$1
+	ssh -p8022 root@$ih.$ok
+	#ssh root@$ih.$ok
 }
 
-function wlans(){
-	#iwlist wlan0 scan | sed  -n 's/ESSID:"\(.*\)"/\1/p; s/Quality\([0-9]{2}/[0-9]{2}\)"/Qualität \1/p'
-	iwlist wlan0 scan | sed  -n 's/ESSID:"\(.*\)"/\1/p' | sort
-}
-
-
-function uz(){
-	$dowDir
-	unzip `ls -t|head -1` -d $1
-	#rm *.zip
-	mv $1 $OLDPWD
-	rm $1
-	
-	$OLDPWD
-}
-
-
-function we2(){
-	#para=$1
-	para=hof
-	url="https://api.accuweather.com/locations/v1/cities/autocomplete?q=$para&apikey=d41dfd5e8a1748d0970cba6637647d96&language=en-us&get_param=value"
-
-	wget -q -O- "$url" |jq -r '.[2] | .LocalizedName + " "+ .Key + " "+ .AdministrativeArea.LocalizedName'
-	
-	url="https://www.accuweather.com/ajax-service/select-city?cityId=$para&lang=en-us"
-}
 
 function wea(){
 	para=$1
@@ -237,8 +219,26 @@ function wea(){
 	ort=`echo "$ort"| awk -F\" '{print $2}'`
 	text=`echo "$text"| awk -F\" '{print $2}'`
 	echo $tag - gefühlt: $tempg -echt: $tempe - $ort - $text
-	
 }
+
+
+function wlans(){
+	#iwlist wlan0 scan | sed  -n 's/ESSID:"\(.*\)"/\1/p; s/Quality\([0-9]{2}/[0-9]{2}\)"/Qualität \1/p'
+	iwlist wlan0 scan | sed  -n 's/ESSID:"\(.*\)"/\1/p' | sort
+}
+
+
+function uz(){
+	$dowDir
+	unzip `ls -t|head -1` -d $1
+	#rm *.zip
+	mv $1 $OLDPWD
+	rm $1
+	
+	$OLDPWD
+}
+
+
 
 # alias/Funktionen
 alias d='declare -f'
@@ -341,7 +341,7 @@ alias ec=echo
 alias ex="expect $lo"
 alias -g f='|less'
 alias -g h="--help |less"
-alias j='wea miami; wea hof'
+alias j='wea miami; wea hepberg'
 alias le=less
 alias m=man
 alias n=dict
