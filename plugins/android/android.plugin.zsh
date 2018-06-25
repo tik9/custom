@@ -25,6 +25,13 @@ function install(){
 }
 
 
+function j2(){
+	letztes=''
+	if [ -z $1 ]; then ; letztes='cut -d. -f4'; fi
+	ip addr show wlan0 | sed  -n -E 's/inet ([0-9.]*).*/\1/p'| eval $letztes
+}
+
+
 function nr(){
 	echo `termux-sms-inbox | jq -r '.[0].number'`
 	#echo `sed -e 's/^"//' -e 's/"$//' <<<$nr` 

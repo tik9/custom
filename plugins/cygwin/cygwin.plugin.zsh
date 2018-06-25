@@ -32,6 +32,12 @@ function co(){
 		cat /dev/clipboard
 }
 
+function j2(){
+	letztes=''
+	if [ -z $1 ]; then ; letztes='cut -d. -f4'; fi
+	ipconfig| sed  -n -E 's/ip v4 Adresse ([0-9.]*).*/\1/p'| eval $letztes
+}
+
 
 function ki(){
 		pkill $1;

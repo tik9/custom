@@ -7,8 +7,8 @@ zstyle ':completion:*' special-dirs true
 
 fpath=($ZSH/custom/functions $fpath)
 
-autoload _rest
-_rest 
+#autoload _rest
+#_rest 
 
 DISABLE_AUTO_UPDATE="true"
 

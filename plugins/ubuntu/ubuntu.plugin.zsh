@@ -47,7 +47,7 @@ function as(){
 
 
 function b(){
-	if [[ $(lsb) = Ubuntu ]]; then; /root/src/src_geany-1.28/usr/bin/geany $1 &
+	if [[ `lsb_release -i|cut -d: -f2|sed -e 's/[[:blank:]]//'` = Ubuntu ]]; then; /root/src/src_geany-1.28/usr/bin/geany $1 &
 	else;vim $1;fi
 }
 
@@ -67,6 +67,12 @@ function co(){
 
 function in(){
 	apt install $1 -y	
+}
+
+function j2(){
+	letztes=''
+	if [ -z $1 ]; then ; letztes='cut -d. -f4'; fi
+	ip addr show wlan0 | sed  -n -E 's/inet ([0-9.]*).*/\1/p'| eval $letztes
 }
 
 function kp(){
@@ -141,7 +147,6 @@ alias gp='gpicview'
 alias hi='hibernate'
 alias ic='ifconfig'
 alias lez='	echo "`ls -t $dow | head -n1` \n"'
-alias lsb='echo $lsb'
 
 alias -s pdf=mupdf
 

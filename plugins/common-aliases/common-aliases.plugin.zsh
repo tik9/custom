@@ -7,7 +7,6 @@ dj=$ZSH_CUSTOM/plugins/django/django.plugin.zsh
 gi2=plugins/git/git.plugin.zsh
 gi=$ZSH_CUSTOM/$gi2
 
-lo=$ZSH_CUSTOM/login
 
 py=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
 
@@ -34,7 +33,7 @@ ad[vk]='4917671214205' ;alias -g vk=$ad[vk]
 ir=188.194.163.73
 
 ih=192.168.0
-mo=135 ; la=109
+mo=135 ; la=109 ; ra=111
 im=$ih.$mo
 
 
@@ -45,7 +44,7 @@ function arg(){
 
 function alterKern(){
 	dpkg --list | grep linux-image | awk '{ print $2 }' | sort -V | sed -n '/'`uname -r`'/q;p'
-	#sed -n '/'`uname -r`'/q;p' : Druckt Zeilen vor aktuellem Kernel
+	#sed -n '/'`uname -r`'/q;p' : Druckt zeilelen vor aktuellem Kernel
 }
 
 function cl(){
@@ -68,15 +67,6 @@ function cur(){
 
 
 function ersetz(){
-		#file=$1
-		#if [[ $file =~ \  ]];then
-			#neu="${file// /_}"
-			#mv $file $neu
-		#fi
-		#file=$neu
-		#if [[ $file =~ '[A-Z]' ]];then
-			#rename 'y/A-Z/a-z/' $file
-		#fi
 		
 		if [[ $1 = VID* ]]; then
 			echo Video
@@ -87,6 +77,16 @@ function ersetz(){
 		mv $1 `echo "$1" |sed 's/\(IMG-.*\)-.*\(\.jpg\)/\1\2/'`
 		fi
 	#echo $neu
+}
+
+function ex(){
+	if [[ `ip addr show wlan0 | sed  -En 's/   inet ([0-9.]*).*/\1/p'|sed -e 's/^ //' | cut -f -3 -d .` = 192.168.0 ]]; then
+	
+	#expect $ZSH_CUSTOM/login
+		ssh 192.168.0.111
+	else
+		ssh $ir
+	fi
 }
 
 function hs(){
@@ -100,13 +100,6 @@ function i(){
 	url='https://www.accuweather.com/en/de/hepberg/85120/weather-forecast/172784'
 	wget -q -O- $url | awk -F\' '/acm_RecentLocationsCarousel\.push/{ print$0 } ' |head -1
 	#wget -q -O- $url | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$12"°"} ' |head -1
-}
-
-
-function j2(){
-	letztes=''
-	if [ -z $1 ]; then ; letztes='cut -d. -f4'; fi
-	ip addr show wlan0 | sed  -n -E 's/inet ([0-9.]*).*/\1/p'| eval $letztes
 }
 
 
@@ -184,6 +177,10 @@ function sc(){
 	#rm $datei
 }
 
+function sc2(){
+	scp $1  $ir:/root/django/media/pics
+
+}
 
 function scmysql(){
 	mysqldump d> $(date +"%m_%Y").sql
@@ -198,10 +195,14 @@ function ss(){
 	#ssh root@$ih.$ok
 }
 
+function s2(){
+	((!$#)) && ok=$ra || ok=$1
+	ssh root@$ih.$ok
+}
 
 function wea(){
 	para=$1
-	zei=1
+	zeile=1
 	url="https://api.accuweather.com/locations/v1/cities/autocomplete?q=$para&apikey=d41dfd5e8a1748d0970cba6637647d96&language=en-us&get_param=value"
 	para=`wget -q -O- "$url" |jq -r '.[2].Key'`
 
@@ -210,11 +211,11 @@ function wea(){
 		
 	downl=`wget -q -O- "$url"`
 	
-	tag=`echo "$downl" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$2}' | awk "NR==$zei"`
-	tempg=`echo $downl | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$12}' |awk "NR==$zei"`
-	tempe=`echo $downl | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$10}' | awk "NR==$zei"`
-	ort=`echo $downl | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$1}' | awk "NR==$zei"`
-	text=`echo $downl | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$13}' | awk "NR==$zei"`
+	tag=`echo "$downl" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$2}' | awk "NR==$zeile"`
+	tempg=`echo $downl | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$12}' |awk "NR==$zeile"`
+	tempe=`echo $downl | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$10}' | awk "NR==$zeile"`
+	ort=`echo $downl | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$1}' | awk "NR==$zeile"`
+	text=`echo $downl | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$13}' | awk "NR==$zeile"`
 	
 	ort=`echo "$ort"| awk -F\" '{print $2}'`
 	text=`echo "$text"| awk -F\" '{print $2}'`
@@ -338,10 +339,10 @@ alias dh='df -h'
 alias dat='date +"%T"'
 alias ecl="/root/progr/eclipse/eclipse & "
 alias ec=echo
-alias ex="expect $lo"
 alias -g f='|less'
 alias -g h="--help |less"
-alias j='wea miami; wea hepberg'
+#alias j='wea miami; wea hepberg'
+alias j='wea miami; wea lenting'
 alias le=less
 alias m=man
 alias n=dict
