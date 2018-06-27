@@ -1,4 +1,5 @@
 #source ~/.zprofile; echo $ghtoken
+gitdat=--date=format:'%d.%m.%Y %H:%M'
 
 zstyle -s ":vcs_info:git:*:-all-" "command" _omz_git_git_cmd
 : ${_omz_git_git_cmd:=git}
@@ -31,19 +32,12 @@ function _check(){
 }
 
 
-function gco(){
-	git commit -am "$@"
-	git status
-}
-
-
 function gi(){
 	dir=$(_check)
 
-	 git add . 
-	 git commit -m "$@"
+	 git commit -am "$@"
 	 git push
-	git log --stat|head -10
+	git log --stat $gitdat | head -10
 }
 
 
@@ -91,29 +85,22 @@ alias gdca='git diff --cached'
 alias gdo='git diff origin'
 
 alias gf='git config --list'
-alias gg='$(_check); git log --stat'
+alias gg='$(_check); git log --stat $gitdat'
 
 alias gig='b .gitignore'
 alias gin='git init'
 alias gk='curl https://api.github.com/users/tik9/keys | less'
 
-alias go='$(_check); git log --stat -p'
+alias go='$(_check); git log --stat -p $gitdat'
 
 alias gre='git remote'
-alias gra='git remote add'
-alias grh='git reset HEAD; a'
-alias gru='git remote update'
+alias gra='git remote add origin'
+alias gru='git remote update origin'
 alias grv='git remote -v'
 
-alias gsb='git status -sb'
 alias gs='$(_check); git show'
-alias gsl='git shortlog --format=format:%cI -e'
-alias gst='git stash; a'
-alias gstl='git stash list'
-alias gstp='git stash pop; gstl'
-alias gsts='git stash show -p'
 
 alias gt='git checkout -- .; git pull'
 alias gu='$(_check); git push; a'
 
-alias u='cd $(_check);git log --stat | head -n 10; gl'
+alias u='cd $(_check);git log --stat $gitdat | head -n 10; gl'

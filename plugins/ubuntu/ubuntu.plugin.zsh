@@ -1,7 +1,6 @@
 dt=/root/django
 dp=/home/pi/django
 
-lsb=`lsb_release -i|cut -d: -f2|sed -e 's/[[:blank:]]//'`
 
 ht=/home/t
 dow=$ht/Downloads
@@ -9,7 +8,6 @@ is='/run/user/1000/gvfs/mtp:host=%5Busb%3A002%2C034%5D/Interner\ gemeinsamer\ Sp
 wa='WhatsApp/Media/WhatsApp\ Images'
 
 arc=`uname -a |cut -d' ' -f 14`
-
 
 
 function am(){

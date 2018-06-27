@@ -34,7 +34,7 @@ ir=188.194.163.73
 
 ih=192.168.0
 mo=135 ; la=109 ; ra=111
-im=$ih.$mo
+im=$ih.$mo ; ihr=$ih.$ra
 
 
 function arg(){
@@ -50,13 +50,11 @@ function alterKern(){
 function cl(){
 	(( !$#)) && po=''||po=$1 
 	(( !# $2)) && da=''||da=$2 
-	#curl localhost:$po
-	#echo $po
 	curl localhost:$po/$da
 }
 
 function cm2(){
-	sed -i "s/\(cal 2018 he -n\) [0-9][0-9]/\1 $1/" $co
+	sed -i "s/\(cal 2018 |head -n\) [0-9][0-9]\( | tail -n\) [0-9]/\1 $1\2 $2/" $co
 	exec zsh
 }
 
@@ -88,6 +86,11 @@ function ex(){
 		ssh $ir
 	fi
 }
+
+function ge(){
+	grep -r $1 * 	
+}
+
 
 function hs(){
 	((!$#)) && beginn='' || beginn=$1
@@ -200,7 +203,7 @@ function s2(){
 	ssh root@$ih.$ok
 }
 
-function wea(){
+function we(){
 	para=$1
 	zeile=1
 	url="https://api.accuweather.com/locations/v1/cities/autocomplete?q=$para&apikey=d41dfd5e8a1748d0970cba6637647d96&language=en-us&get_param=value"
@@ -224,7 +227,6 @@ function wea(){
 
 
 function wlans(){
-	#iwlist wlan0 scan | sed  -n 's/ESSID:"\(.*\)"/\1/p; s/Quality\([0-9]{2}/[0-9]{2}\)"/Qualität \1/p'
 	iwlist wlan0 scan | sed  -n 's/ESSID:"\(.*\)"/\1/p' | sort
 }
 
@@ -251,12 +253,9 @@ alias w='alias -m'
 #cd's
 alias ar=~/arduino
 alias -g bi=$bi
-alias -g kl=~/kl
 alias mus=~/musik
 alias o=$ZSH_CUSTOM
 alias oh=$ZSH
-alias pw=pwd
-alias un=~/uni
 alias y=cd
 
 #curl
@@ -317,7 +316,7 @@ alias -g im='ec $im'
 #ssh
 alias cia='c ida f'
 alias -g cida_lokal='c idr >> ida; c ida' 
-alias cida='ar; cp idr .; ga; gi "id rsa kopiert"' 
+alias cida='ar; cp idr .; gi "id rsa kopiert" ; c idr' 
 alias cida2='ar; gl; c id_rsa.pub >> ida; c ida' 
 alias cir='c idr' 
 alias cs=~/.ssh 
@@ -334,21 +333,21 @@ alias -g zr='$zr' # zshrc
 
 
 alias c=cat
-alias cm='cal 2018 |head -n 17| tail -n 7 '
+alias cm='cal 2018 |head -n 22 | tail -n 9'
 alias dh='df -h'
-alias dat='date +"%T"'
+alias da='date +"%T"'
 alias ecl="/root/progr/eclipse/eclipse & "
 alias ec=echo
 alias -g f='|less'
 alias -g h="--help |less"
-#alias j='wea miami; wea hepberg'
-alias j='wea miami; wea lenting'
+alias j='we miami; we hof'
 alias le=less
 alias m=man
 alias n=dict
 alias os="echo $os"
-alias us=$us
+alias pw=pwd
 alias so=source
+alias un='pr uws; pr ngi'
 alias -g ve=--version
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
 alias zp='source ~/.zprofile'

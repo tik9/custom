@@ -1,5 +1,5 @@
 
-plugins=(common-aliases git git-prompt ubuntu zsh-autosuggestions python django    )
+plugins=(common-aliases git git-prompt zsh-autosuggestions )
 
 export ZSH=/usr/share/oh-my-zsh
 
