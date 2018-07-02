@@ -35,8 +35,8 @@ function co(){
 function j2(){
 	letztes=''
 	if [ -z $1 ]; then ; letztes='cut -d. -f4'; fi
-	#ipconfig| sed  -n -E 's/IPv4-Adresse .......... : ([0-9.]*).*/\1/p'| eval $letztes
-ipconfig | grep -i IPv4-Adresse | head -n2
+	$cygd/Windows/System32/ipconfig.exe| sed  -n -E 's/IPv4-Adresse *. . ... . . . . . . : ([0-9.]*)/\1/p' | eval $letztes
+	/cygdrive/c/Windows/System32/ipconfig | grep -i IPv4-Adresse | head -n2|tail -n1
 }
 
 

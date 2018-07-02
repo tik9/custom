@@ -1,5 +1,5 @@
 #source ~/.zprofile; echo $ghtoken
-gitdat=--date=format:'%d.%m.%Y %H:%M'
+gitdat=--date=format:'%A, %d.%m.%Y %H:%M'
 
 zstyle -s ":vcs_info:git:*:-all-" "command" _omz_git_git_cmd
 : ${_omz_git_git_cmd:=git}

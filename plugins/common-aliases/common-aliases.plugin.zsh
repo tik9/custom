@@ -36,6 +36,19 @@ ih=192.168.0
 mo=135 ; la=109 ; ra=111
 im=$ih.$mo ; ihr=$ih.$ra
 
+function aa(){
+	#rasp
+	#tm
+	#mv * ..
+	# smart
+	#dc
+	#scp * root@$ih.$la:/root/vid
+	#lapt
+	#cd vid
+	#scp * $ir:/root/django/media/pics
+	lö *
+
+}
 
 function arg(){
 	# if [ -z $1 ];then;echo Argument fehlt;return; fi
