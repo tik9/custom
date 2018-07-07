@@ -132,26 +132,19 @@ alias allpkgs='dpkg --get-selections | grep -v deinstall'
 alias pkg="apt list --upgradable "
 
 # cds
-alias a1=~/a1
-alias -g be=$ht/be
 alias -g dow=$dow
-alias gd=~/git/cv
+alias vd=/root/vid
 
 alias a+="amix +"
 alias a-="amix -"
-alias ab="abiword"
 alias dow="$dow"
 alias gp='gpicview'
 alias hi='hibernate'
-alias ic='ifconfig'
-alias lez='	echo "`ls -t $dow | head -n1` \n"'
 
 alias -s pdf=mupdf
 
 alias s='pm-suspend'
 alias si='sudo -i'
-alias sr='systemctl restart nginx;systemctl status nginx |sed -n "3p"'
 alias v='ack -iw'
 alias wa=$is/$wa
-alias -g xs='| xclip -selection clipboard'
 alias z='/etc/init.d/networking restart; i'

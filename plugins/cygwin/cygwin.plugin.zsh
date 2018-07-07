@@ -21,7 +21,7 @@ zr=$home/.zshrc
 dow=$cygd/users/itdlz-koer/downloads
 
 
-function b(){	notepad++ $1 & }
+function b(){ /cygdrive/c/notepad++/notepad++.exe $1 & }
 
 
 function ci(){
@@ -36,7 +36,6 @@ function j2(){
 	letztes=''
 	if [ -z $1 ]; then ; letztes='cut -d. -f4'; fi
 	$cygd/Windows/System32/ipconfig.exe| sed  -n -E 's/IPv4-Adresse *. . ... . . . . . . : ([0-9.]*)/\1/p' | eval $letztes
-	/cygdrive/c/Windows/System32/ipconfig | grep -i IPv4-Adresse | head -n2|tail -n1
 }
 
 

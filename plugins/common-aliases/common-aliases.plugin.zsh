@@ -6,10 +6,7 @@ cy2=plugins/cygwin/cygwin.plugin.zsh; cy=$ZSH_CUSTOM/$cy2
 dj=$ZSH_CUSTOM/plugins/django/django.plugin.zsh
 gi2=plugins/git/git.plugin.zsh
 gi=$ZSH_CUSTOM/$gi2
-
-
 py=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
-
 ub2=plugins/ubuntu/ubuntu.plugin.zsh
 ub=$ZSH_CUSTOM/$ub2
 zr=~/.zshrc
@@ -33,22 +30,9 @@ ad[vk]='4917671214205' ;alias -g vk=$ad[vk]
 ir=188.194.163.73
 
 ih=192.168.0
-mo=135 ; la=109 ; ra=111
+mo=135 ; il=$ih.109 ; ra=111
 im=$ih.$mo ; ihr=$ih.$ra
 
-function aa(){
-	#rasp
-	#tm
-	#mv * ..
-	# smart
-	#dc
-	#scp * root@$ih.$la:/root/vid
-	#lapt
-	#cd vid
-	#scp * $ir:/root/django/media/pics
-	lö *
-
-}
 
 function arg(){
 	# if [ -z $1 ];then;echo Argument fehlt;return; fi
@@ -94,9 +78,9 @@ function ex(){
 	if [[ `ip addr show wlan0 | sed  -En 's/   inet ([0-9.]*).*/\1/p'|sed -e 's/^ //' | cut -f -3 -d .` = 192.168.0 ]]; then
 	
 	#expect $ZSH_CUSTOM/login
-		ssh 192.168.0.111
+		ssh root@192.168.0.111
 	else
-		ssh $ir
+		ssh root@$ir
 	fi
 }
 
@@ -178,6 +162,7 @@ function p_rm(){
 }
 
 
+
 function sc(){
 	zparseopts -A ARGUMENTS d: f: i: ip: o: p: u:
 	
@@ -214,6 +199,29 @@ function ss(){
 function s2(){
 	((!$#)) && ok=$ra || ok=$1
 	ssh root@$ih.$ok
+}
+
+
+function vid(){
+	
+	#rasp
+	ssh root@$ihr "cd $dt/media/pics; mv * .."
+
+	# smart
+	scp -P8022 $im:$ds/DCIM/Camera/"*" $ihr:/root/django/media/pics 
+	
+	#lapt
+	#cd vid
+	#scp * $ir:/root/django/media/pics
+}
+
+
+function vi2(){
+		ssh $im -p8022 "rm $ds/DCIM/Camera/*"
+}
+
+function vl {
+	ffprobe $1 2> >(grep Duration)
 }
 
 function we(){

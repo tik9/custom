@@ -8,7 +8,7 @@ alias dru='dm runserver 0.0.0.0:8000'
 alias dv='echo django version; p3 -c "import django;print(django.get_version())"'
 alias mk="dm makemigrations"
 alias rs='dm runserver'
-alias -g tm='$dt/media/pics'
+alias tm='$dt/media/pics'
 
 
 typeset -ga nul_args

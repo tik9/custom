@@ -71,8 +71,9 @@ compdef _play_audio z
 
 #cd
 alias mu='$mu'
-alias -g ds='$ds'
-alias -g dc='$ds/DCIM/Camera'
+alias ds='$ds'
+alias dc='$ds/DCIM/Camera'
+alias wa='$ds/WhatsApp/Media/WhatsApp\ Images '
 
 #apt
 alias ap="apt policy"
@@ -84,6 +85,7 @@ alias pkg="apt list --installed "
 alias in='apt install'
 alias rem="apt remove"
 
+alias ab='b $a'
 alias ic='ifconfig'
 alias km='ki play-audio'
 alias sd='sshd; ph; echo Letztes Oktett ;j2' 
