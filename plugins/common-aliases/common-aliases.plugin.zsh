@@ -4,11 +4,10 @@ a=$ZSH_CUSTOM/plugins/android/android.plugin.zsh
 co2=plugins/common-aliases/common-aliases.plugin.zsh; co=$ZSH_CUSTOM/$co2
 cy2=plugins/cygwin/cygwin.plugin.zsh; cy=$ZSH_CUSTOM/$cy2
 dj=$ZSH_CUSTOM/plugins/django/django.plugin.zsh
-gi2=plugins/git/git.plugin.zsh
-gi=$ZSH_CUSTOM/$gi2
+gi=$ZSH_CUSTOM/plugins/git/git.plugin.zsh
 py=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
-ub2=plugins/ubuntu/ubuntu.plugin.zsh
-ub=$ZSH_CUSTOM/$ub2
+ub=$ZSH_CUSTOM/plugins/ubuntu/ubuntu.plugin.zsh
+
 zr=~/.zshrc
 
 bi=/root/bilder
@@ -27,11 +26,11 @@ ad[t]='01573 9598 220'
 ad[uk]='ukoerner@konzertagentur-koerner.de' ;alias -g uk=$ad[uk]
 ad[vk]='4917671214205' ;alias -g vk=$ad[vk]
 
-ir=188.194.163.73
 
-ih=192.168.0
-mo=135 ; il=$ih.109 ; ra=111
-im=$ih.$mo ; ihr=$ih.$ra
+ih=192.168.0; il=$ih.109
+mo=135 ; im=$ih.$mo ; 
+ra=111; ir=$ih.$ra
+irr=188.194.163.73
 
 
 function arg(){
@@ -56,11 +55,6 @@ function cm2(){
 }
 
 
-function cur(){
-	curl -f $ir && echo Erfolg || echo Keine Verbindung
-}
-
-
 function ersetz(){
 		
 		if [[ $1 = VID* ]]; then
@@ -80,7 +74,7 @@ function ex(){
 	#expect $ZSH_CUSTOM/login
 		ssh root@192.168.0.111
 	else
-		ssh root@$ir
+		ssh root@$irr
 	fi
 }
 
@@ -99,7 +93,6 @@ function i(){
 	date +%T
 	url='https://www.accuweather.com/en/de/hepberg/85120/weather-forecast/172784'
 	wget -q -O- $url | awk -F\' '/acm_RecentLocationsCarousel\.push/{ print$0 } ' |head -1
-	#wget -q -O- $url | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$12"°"} ' |head -1
 }
 
 
@@ -179,7 +172,7 @@ function sc(){
 }
 
 function sc2(){
-	scp $1  $ir:/root/django/media/pics
+	scp $1  $il:/root
 
 }
 
@@ -201,14 +194,21 @@ function s2(){
 	ssh root@$ih.$ok
 }
 
+function upload {
+	curl -F "dat=@$1" --cookie csrftoken=M1XreITl3Ys0DARMvsjmcMQGwJHhsD1be61K9ziuH0JXNlbJKRI8nlgg8yrejeic -H "X-CSRFToken: M1XreITl3Ys0DARMvsjmcMQGwJHhsD1be61K9ziuH0JXNlbJKRI8nlgg8yrejeic" $ir:8000/dat
+}
+
 
 function vid(){
 	
 	#rasp
-	ssh root@$ihr "cd $dt/media/pics; mv * .."
+	ssh root@$ir "cd $dt/media/pics; mv * .."
 
 	# smart
-	scp -P8022 $im:$ds/DCIM/Camera/"*" $ihr:/root/django/media/pics 
+	scp -P8022 $im:$ds/DCIM/Camera/"*" root@$ir:/root/django/media/pics 
+	#scp -P8022 $im:$ds/DCIM/Camera/"*" . 
+	#scp * $ir:/root/django/media/pics 
+	#scp -P8022 $im:$ds/DCIM/Camera/"*" root@$il:/root/vid 
 	
 	#lapt
 	#cd vid
@@ -227,11 +227,11 @@ function vl {
 function we(){
 	para=$1
 	zeile=1
-	url="https://api.accuweather.com/locations/v1/cities/autocomplete?q=$para&apikey=d41dfd5e8a1748d0970cba6637647d96&language=en-us&get_param=value"
-	para=`wget -q -O- "$url" |jq -r '.[2].Key'`
+	#url="https://api.accuweather.com/locations/v1/cities/autocomplete?q=$para&apikey=d41dfd5e8a1748d0970cba6637647d96&language=en-us&get_param=value"
+	#para=`wget -q -O- "$url" |jq -r '.[2].Key'`
 
-	#url='https://www.accuweather.com/en/de/hof/95028/weather-forecast/172202'
-	url="https://www.accuweather.com/ajax-service/select-city?cityId=$para&lang=de"
+	url='https://www.accuweather.com/en/de/hepberg/85120/weather-forecast/172202'
+	#url="https://www.accuweather.com/ajax-service/select-city?cityId=$para&lang=de"
 		
 	downl=`wget -q -O- "$url"`
 	
@@ -261,7 +261,6 @@ function uz(){
 	
 	$OLDPWD
 }
-
 
 
 # alias/Funktionen
@@ -315,12 +314,7 @@ alias msd='mysql -uroot d'
 alias mst='mysql -uroot d -e "show tables"'
 
 
-# netzwerk
-alias r='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
-alias -g ir=$ir
-
 # plugins
-#alias ab="b $a"
 alias cb="b $co"
 alias ub="b $ub"
 
@@ -330,8 +324,9 @@ alias ph="pr ssh"
 alias pp='pr python'
 alias pr='ps -ef|grep'
 
-#remote
-alias -g ir='ec $ir'
+#ip's
+alias ir='ec $ir'
+alias irr='ec $irr'
 alias -g im='ec $im'
 
 #ssh
@@ -354,23 +349,20 @@ alias -g zr='$zr' # zshrc
 
 
 alias c=cat
-alias cm='cal 2018 |head -n 22 | tail -n 9'
+alias cm='cal 2018 |head -n 23 | tail -n 100'
 alias dh='df -h'
 alias da='date +"%T"'
-alias ecl="/root/progr/eclipse/eclipse & "
+alias di=dict
 alias ec=echo
 alias -g f='|less'
 alias -g h="--help |less"
-alias j='we miami; we hof'
 alias le=less
 alias m=man
-alias n=dict
-alias os="echo $os"
 alias pw=pwd
+alias r='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
 alias so=source
-alias un='pr uws; pr ngi'
+alias tp=top
 alias -g ve=--version
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
-alias zp='source ~/.zprofile'
 
 echo "Common Alias aktualisiert"

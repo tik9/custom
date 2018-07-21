@@ -1,16 +1,6 @@
 #compdef rest
 
 
-_ip(){
-	_arguments '-all[alle Interfaces]:*:*' '*: :_net_interfaces'
-}
-
-
-_k(){
-	_alternative "pids:process ID:($(ps -A o cmd=))"
-}
-
-
 _ml(){
 	_arguments ':datei:_path_files -W /root/musik' '*:radio:("http://80.237.156.8:8120")'
 }
@@ -22,14 +12,5 @@ _ma(){
 
 _play_audio(){
 	_arguments ':dat:_path_files -W $th/storage/music'
-}
-
-_pt(){
-	_alternative 'Nummer:pts:((n\:"pts-endnr."))'
-}
-
-
-_sc2(){
-	_arguments '-d[zielverzeichnis]:verz:_files -/' '-f[quell datei]:dateiname:_files' '-p[port]' '-o[letztes Oktett]' '-ip[ip-basis]' 
 }
 

@@ -1,6 +1,0 @@
-#compdef git2
-
-_gitlog(){
-	cmds=('--stat:Zeige Dateinamen' '-p: Zeige Inhalte der Dateien' '--graph:Zeige den Graphen')
-	_describe 'Git Log Parameter' cmds
-}

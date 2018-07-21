@@ -3,6 +3,7 @@ lsb=`uname -a |cut -d' ' -f 14`
 
 dt=$th/django/
 zr=$th/.zshrc
+wa='$ds/WhatsApp/Media'
 
 
 function ci(){
@@ -72,8 +73,9 @@ compdef _play_audio z
 #cd
 alias mu='$mu'
 alias ds='$ds'
-alias dc='$ds/DCIM/Camera'
-alias wa='$ds/WhatsApp/Media/WhatsApp\ Images '
+alias dc='$ds/DCIM/Camera; l'
+alias wi='$wa/WhatsApp\ Images; l'
+alias wi='$wa/WhatsApp\ Video; l'
 
 #apt
 alias ap="apt policy"

@@ -1,6 +1,6 @@
 
 arc=`uname -a |cut -d' ' -f 6`
-
+ipconfig=$cygd/Windows/System32/ipconfig.exe
 us=/cygdrive/e
 cygd=/cygdrive/c
 
@@ -35,7 +35,7 @@ function co(){
 function j2(){
 	letztes=''
 	if [ -z $1 ]; then ; letztes='cut -d. -f4'; fi
-	$cygd/Windows/System32/ipconfig.exe| sed  -n -E 's/IPv4-Adresse *. . ... . . . . . . : ([0-9.]*)/\1/p' | eval $letztes
+	$ipconfig| sed  -n -E 's/IPv4-Adresse *. . ... . . . . . . : ([0-9.]*)/\1/p' | eval $letztes
 }
 
 
@@ -79,7 +79,7 @@ alias zb="b $zr"
 
 alias allpkgs='apt-cyg listall'
 alias arc="echo $arc"
-alias ic='ipconfig'
+alias ic='$ipconfig'
 alias in='apt-cyg install'
 alias kp='kill python'
 alias rem='apt-cyg remove';

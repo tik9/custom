@@ -87,12 +87,11 @@ function ma(){
 
 
 function ml(){
-	cd ~/musik
+	#cd ~/musik
 	ffprobe $1 2> >(grep Duration)
 	mplayer $1
-	cd -  
 }
-compdef _ml ml
+#compdef _ml ml
 
 
 function mp(){
@@ -133,11 +132,11 @@ alias pkg="apt list --upgradable "
 
 # cds
 alias -g dow=$dow
-alias vd=/root/vid
+alias vd='/root/vid;l'
 
 alias a+="amix +"
 alias a-="amix -"
-alias dow="$dow"
+alias dow="$dow; l"
 alias gp='gpicview'
 alias hi='hibernate'
 

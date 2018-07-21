@@ -102,5 +102,6 @@ alias gs='$(_check); git show'
 
 alias gt='git checkout -- .; git pull'
 alias gu='$(_check); git push; a'
+alias n='$(_check); git log | head -n5 |tail -n3'
 
 alias u='cd $(_check);git log --stat $gitdat | head -n 10; gl'
