@@ -4,7 +4,7 @@ ipconfig=$cygd/Windows/System32/ipconfig.exe
 us=/cygdrive/e
 cygd=/cygdrive/c
 
-ho=home/itdlz-koer
+ho=home/tk
 home=c:/cygwin64/$ho
 home2=$cygd/cygwin64/$ho
 
@@ -18,7 +18,7 @@ cy=$cHome/$cy2
 gi=$cHome/$gi2
 zr=$home/.zshrc
 
-dow=$cygd/users/itdlz-koer/downloads
+dow=$cygd/users/tk/downloads
 
 
 function b(){ /cygdrive/c/notepad++/notepad++.exe $1 & }

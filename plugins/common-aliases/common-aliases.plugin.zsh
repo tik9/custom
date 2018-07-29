@@ -65,13 +65,11 @@ function ersetz(){
 		echo Bild
 		mv $1 `echo "$1" |sed 's/\(IMG-.*\)-.*\(\.jpg\)/\1\2/'`
 		fi
-	#echo $neu
 }
 
 function ex(){
 	if [[ `ip addr show wlan0 | sed  -En 's/   inet ([0-9.]*).*/\1/p'|sed -e 's/^ //' | cut -f -3 -d .` = 192.168.0 ]]; then
 	
-	#expect $ZSH_CUSTOM/login
 		ssh root@192.168.0.111
 	else
 		ssh root@$irr
@@ -115,6 +113,12 @@ function ki(){
 }
 
 
+function kp(){
+	(( $USER = pi )) && sudo pkill python3 || pkill python3 
+	
+}
+
+
 function ku(){
 	((!$#)) && 	dat=`ls -t | head -1` || dat=$1
 	neu=$(echo "$dat"| sed 's/\(.*\)................\(\..*\)/\1\2/')
@@ -129,14 +133,13 @@ function lö(){
 }
 
 
-function pad(){
+function p_add(){
 	sed -i "s/\(^plugins=.*\))/\1 $1)/" $zr
 	exec zsh
 }
 
 function pa(){
-	if [ $# -eq 2 ];then; outp=$2 ; else ;outp=$1;fi
-	echo $2
+	outp=$1
 	pandoc -V geometry:margin=1in -o $outp.pdf $1.md ; mupdf $outp.pdf
 }
 
@@ -154,27 +157,6 @@ function p_rm(){
 	exec zsh; 
 }
 
-
-
-function sc(){
-	zparseopts -A ARGUMENTS d: f: i: ip: o: p: u:
-	
-	dir=$ARGUMENTS[-d]; 	if [ -z $dir ];then; dir=/root/musik;fi 
-	datei=$ARGUMENTS[-f]; 	if [ -z $datei ];then; datei=`ls -t |head -n1`;fi
-	ip=$ARGUMENTS[-ip];		if [ -z $ip ];then; ip=$im;fi
-	oktett=$ARGUMENTS[-o];	if [ -z $oktett ];then; oktett=162;fi
-	port=$ARGUMENTS[-p];	if [ -z $port ];then; port=8022;fi
-	user=$ARGUMENTS[-u]; 	if [ -z $user ];then; user=root;fi
-
-	printf "Datei: %s/%s, Port: %s, Ip: %s\n" $dir $datei $port "$ip.$oktett" 
-	scp -P $port $datei $user@$ip.$oktett:$dir
-	#rm $datei
-}
-
-function sc2(){
-	scp $1  $il:/root
-
-}
 
 function scmysql(){
 	mysqldump d> $(date +"%m_%Y").sql
@@ -194,25 +176,19 @@ function s2(){
 	ssh root@$ih.$ok
 }
 
-function upload {
-	curl -F "dat=@$1" --cookie csrftoken=M1XreITl3Ys0DARMvsjmcMQGwJHhsD1be61K9ziuH0JXNlbJKRI8nlgg8yrejeic -H "X-CSRFToken: M1XreITl3Ys0DARMvsjmcMQGwJHhsD1be61K9ziuH0JXNlbJKRI8nlgg8yrejeic" $ir:8000/dat
+
+function uz(){
+	$dowDir
+	unzip `ls -t|head -1` -d $1
+	#rm *.zip
+	mv $1 $OLDPWD
+	rm $1
+	
+	$OLDPWD
 }
 
-
-function vid(){
-	
-	#rasp
-	ssh root@$ir "cd $dt/media/pics; mv * .."
-
-	# smart
-	scp -P8022 $im:$ds/DCIM/Camera/"*" root@$ir:/root/django/media/pics 
-	#scp -P8022 $im:$ds/DCIM/Camera/"*" . 
-	#scp * $ir:/root/django/media/pics 
-	#scp -P8022 $im:$ds/DCIM/Camera/"*" root@$il:/root/vid 
-	
-	#lapt
-	#cd vid
-	#scp * $ir:/root/django/media/pics
+function upload {
+	curl -F "dat=@$1" --cookie csrftoken=M1XreITl3Ys0DARMvsjmcMQGwJHhsD1be61K9ziuH0JXNlbJKRI8nlgg8yrejeic -H "X-CSRFToken: M1XreITl3Ys0DARMvsjmcMQGwJHhsD1be61K9ziuH0JXNlbJKRI8nlgg8yrejeic" $ir:8000/dat
 }
 
 
@@ -220,9 +196,6 @@ function vi2(){
 		ssh $im -p8022 "rm $ds/DCIM/Camera/*"
 }
 
-function vl {
-	ffprobe $1 2> >(grep Duration)
-}
 
 function we(){
 	para=$1
@@ -251,16 +224,6 @@ function wlans(){
 	iwlist wlan0 scan | sed  -n 's/ESSID:"\(.*\)"/\1/p' | sort
 }
 
-
-function uz(){
-	$dowDir
-	unzip `ls -t|head -1` -d $1
-	#rm *.zip
-	mv $1 $OLDPWD
-	rm $1
-	
-	$OLDPWD
-}
 
 
 # alias/Funktionen
@@ -297,6 +260,11 @@ alias -g he='|head'
 alias ta='tail -f'
 alias -g ti='| tail'
 
+#ip's
+alias il='ec $il'
+alias im='ec $im'
+alias ir='ec $ir'
+alias irr='ec $irr'
 
 # Konsole
 alias hist=history
@@ -324,10 +292,6 @@ alias ph="pr ssh"
 alias pp='pr python'
 alias pr='ps -ef|grep'
 
-#ip's
-alias ir='ec $ir'
-alias irr='ec $irr'
-alias -g im='ec $im'
 
 #ssh
 alias cia='c ida f'
@@ -349,9 +313,10 @@ alias -g zr='$zr' # zshrc
 
 
 alias c=cat
-alias cm='cal 2018 |head -n 23 | tail -n 100'
+alias cm='cal 2018 |head -n 25 | tail -n 10'
 alias dh='df -h'
 alias da='date +"%T"'
+alias dat='date +"Tag %d"'
 alias di=dict
 alias ec=echo
 alias -g f='|less'

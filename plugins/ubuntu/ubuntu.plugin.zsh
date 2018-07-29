@@ -1,9 +1,13 @@
+#ec `hostname`
+
 dt=/root/django
 dp=/home/pi/django
 
 
 ht=/home/t
-dow=$ht/Downloads
+hu=/home/uk
+
+
 is='/run/user/1000/gvfs/mtp:host=%5Busb%3A002%2C034%5D/Interner\ gemeinsamer\ Speicher'
 wa='WhatsApp/Media/WhatsApp\ Images'
 
@@ -63,6 +67,14 @@ function co(){
 		xclip -o -selection clipboard
 }
 
+
+function dol {
+
+	if [[ `hostname` = uk ]]; then; ho=$hu; else; ho=$ht;fi
+	$ho/Downloads
+}
+
+
 function in(){
 	apt install $1 -y	
 }
@@ -73,10 +85,8 @@ function j2(){
 	ip addr show wlan0 | sed  -n -E 's/inet ([0-9.]*).*/\1/p'| eval $letztes
 }
 
-function kp(){
-	(( $USER = pi )) && sudo pkill python3 || pkill python3 
-	
-}
+
+
 
 function ma(){
 	zparseopts -A arg b: t: a:
@@ -117,6 +127,29 @@ function schieb(){
 		mv $dow/"`ls -t $dow | head -n1`" .
 }
 
+
+function vid(){
+	
+	#rasp
+	ssh root@$ir "cd $dt/media; find . -maxdepth 1 -type f -exec mv {} alt \;"
+
+	# smart
+	#scp -P8022 $im:$ds/DCIM/Camera/"*" root@$ir:/root/django/media 
+	
+	#scp -P8022 $im:$ds/DCIM/Camera/"*" root@$il:/root/bilder 
+	#rasp
+	#ssh root@$ir 'ls $dt/media'
+	#lapt
+	#cd vid
+	scp $1 $ir:/root/django/media
+}
+
+
+function vl {
+	ffprobe $1 2> >(grep Duration)
+}
+
+
 #apt
 alias ase='apt search'
 alias ali='apt list --installed'
@@ -136,7 +169,6 @@ alias vd='/root/vid;l'
 
 alias a+="amix +"
 alias a-="amix -"
-alias dow="$dow; l"
 alias gp='gpicview'
 alias hi='hibernate'
 

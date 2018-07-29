@@ -62,6 +62,10 @@ function se2(){
 	termux-sms-send -n $1 "${@:2}"
 }
 
+function vid {
+		scp $ds/DCIM/Camera/"*" root@$ir:/root/django/media 
+}
+
 
 function z(){
 	 cd $mu
