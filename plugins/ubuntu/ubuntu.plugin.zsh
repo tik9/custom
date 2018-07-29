@@ -71,7 +71,7 @@ function co(){
 function dol {
 
 	if [[ `hostname` = uk ]]; then; ho=$hu; else; ho=$ht;fi
-	$ho/Downloads
+	cd $ho/Downloads ; ls -tl
 }
 
 
@@ -149,6 +149,10 @@ function vl {
 	ffprobe $1 2> >(grep Duration)
 }
 
+function max {
+	cd $hu/Downloads
+	mplayer -vf rotate=1 `ls -t|head -1`
+}
 
 #apt
 alias ase='apt search'
