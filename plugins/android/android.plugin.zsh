@@ -62,7 +62,7 @@ function se2(){
 	termux-sms-send -n $1 "${@:2}"
 }
 
-function vid {
+function vid_sc {
 		scp $ds/DCIM/Camera/"*" root@$ir:/root/django/media 
 }
 
@@ -75,9 +75,9 @@ compdef _play_audio z
 
 
 #cd
-alias mu='$mu'
 alias ds='$ds'
 alias dc='$ds/DCIM/Camera; l'
+alias mu='$mu; l'
 alias wi='$wa/WhatsApp\ Images; l'
 alias wi='$wa/WhatsApp\ Video; l'
 
