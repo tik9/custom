@@ -53,16 +53,21 @@ function gl(){
 	fi
 }
 
-function grs(){
-	dir=$(_check)
-	echo $dir
-	curl https://api.github.com/repos/tik9/$dir | grep size
-}
-
 
 function grset(){
 	git remote set-url origin git@github.com:tik9/$1
 	git config --list
+}
+
+
+function u {
+	cd $(_check)
+	git log --stat $gitdat | head -n 10
+	out=`git pull`
+	echo $out
+	if [ $out != 'Bereits aktuell.' ];then
+		git log --stat $gitdat | head -n 10
+	fi
 }
 
 
@@ -82,7 +87,6 @@ alias gcl='git clone --recursive'
 alias gclean='git clean -dnx'
 
 alias gdca='git diff --cached'
-alias gdo='git diff origin'
 
 alias gf='git config --list'
 alias gg='$(_check); git log --stat $gitdat'
@@ -103,5 +107,3 @@ alias gs='$(_check); git show'
 alias gt='git checkout -- .; git pull'
 alias gu='$(_check); git push; a'
 alias n='$(_check); git log | head -n5 |tail -n3'
-
-alias u='cd $(_check);git log --stat $gitdat | head -n 10; gl'

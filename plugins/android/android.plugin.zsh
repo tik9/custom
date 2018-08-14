@@ -3,7 +3,6 @@ lsb=`uname -a |cut -d' ' -f 14`
 
 dt=$th/django/
 zr=$th/.zshrc
-wa='$ds/WhatsApp/Media'
 
 
 function ci(){
@@ -75,7 +74,7 @@ compdef _play_audio z
 
 
 #cd
-alias ds='$ds'
+alias ds='$ds; l'
 alias dc='$ds/DCIM/Camera; l'
 alias mu='$mu; l'
 alias wi='$wa/WhatsApp\ Images; l'

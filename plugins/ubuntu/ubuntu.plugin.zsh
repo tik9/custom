@@ -135,22 +135,6 @@ function schieb(){
 }
 
 
-function vid(){
-	
-	#rasp
-	ssh root@$ir "cd $dt/media; find . -maxdepth 1 -type f -exec mv {} alt \;"
-
-	# smart
-	#scp -P8022 $im:$ds/DCIM/Camera/"*" root@$ir:/root/django/media 
-	
-	#scp -P8022 $im:$ds/DCIM/Camera/"*" root@$il:/root/bilder 
-	#rasp
-	#ssh root@$ir 'ls $dt/media'
-	#lapt
-	#cd vid
-	scp $1 $ir:/root/django/media
-}
-
 
 function vl {
 	ffprobe $1 2> >(grep Duration)

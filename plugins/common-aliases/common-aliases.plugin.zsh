@@ -12,7 +12,9 @@ zr=~/.zshrc
 
 bi=/root/bilder
 ds=/storage/emulated/0
+dc=$ds/DCIM/Camera/
 mu=$ds/music
+wa=$ds/WhatsApp/Media
 
 us=/media/t/BACKUP
 
@@ -28,9 +30,9 @@ ad[vk]='4917671214205' ;alias -g vk=$ad[vk]
 
 
 ih=192.168.0; il=$ih.109
-mo=135 ; im=$ih.$mo ; 
-ra=111; ir=$ih.$ra
-irr=188.194.163.73
+mo=105 ; im=$ih.$mo ; 
+ra=101; ir=$ih.$ra
+irr=188.194.100.58
 
 
 function arg(){
@@ -40,7 +42,7 @@ function arg(){
 
 function alterKern(){
 	dpkg --list | grep linux-image | awk '{ print $2 }' | sort -V | sed -n '/'`uname -r`'/q;p'
-	#sed -n '/'`uname -r`'/q;p' : Druckt zeilelen vor aktuellem Kernel
+	#sed -n '/'`uname -r`'/q;p' : Druckt zeilen vor aktuellem Kernel
 }
 
 function cl(){
@@ -50,7 +52,7 @@ function cl(){
 }
 
 function cm2(){
-	sed -i "s/\(cal 2018 |head -n\) [0-9][0-9]\( | tail -n\) [0-9]/\1 $1\2 $2/" $co
+	sed -i "s/\(cal 2018 |head -n\) [0-9][0-9]\( | tail -n\) [0-9][0-9]/\1 $1\2 $2/" $co
 	exec zsh
 }
 
@@ -70,7 +72,7 @@ function ersetz(){
 function ex(){
 	if [[ `ip addr show wlan0 | sed  -En 's/   inet ([0-9.]*).*/\1/p'|sed -e 's/^ //' | cut -f -3 -d .` = 192.168.0 ]]; then
 	
-		ssh root@192.168.0.111
+		ssh root@$ir
 	else
 		ssh root@$irr
 	fi
@@ -183,8 +185,6 @@ function uz(){
 	#rm *.zip
 	mv $1 $OLDPWD
 	rm $1
-	
-	$OLDPWD
 }
 
 function upload {
@@ -194,10 +194,31 @@ function upload {
 }
 
 
-function vi2(){
-		ssh $im -p8022 "rm $ds/DCIM/Camera/*"
+function vid(){
+	
+	#rasp
+	ssh root@$ir "cd $dt/media; find . -maxdepth 1 -type f -exec mv {} alt \;"
+
+	# smart
+	scp -P8022 $im:$ds/DCIM/Camera/"*" root@$ir:/root/django/media 
+	
+	#scp -P8022 $im:$ds/DCIM/Camera/"*" root@$il:/root/bilder 
+
+	#rasp
+	#ssh root@$ir 'ls $dt/media'
+
+	#lapt
+	#scp $1 $ir:/root/django/media
 }
 
+function vi2 {
+	ssh $im -p8022 "rm $dc/*"
+}
+
+function vi3 {
+	ssh $im -p8022 "ls $dc"
+
+}
 
 function we(){
 	para=$1
@@ -315,7 +336,7 @@ alias -g zr='$zr' # zshrc
 
 
 alias c=cat
-alias cm='cal 2018 |head -n 25 | tail -n 10'
+alias cm='cal 2018 |head -n 31 | tail -n 13'
 alias dh='df -h'
 alias da='date +"%T"'
 alias dat='date +"Tag %d"'
@@ -327,6 +348,7 @@ alias le=less
 alias m=man
 alias pw=pwd
 alias r='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
+alias sl=sleep
 alias so=source
 alias tp=top
 alias -g ve=--version
