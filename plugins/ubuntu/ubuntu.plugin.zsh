@@ -11,7 +11,7 @@ hu=/home/uk
 is='/run/user/1000/gvfs/mtp:host=%5Busb%3A002%2C034%5D/Interner\ gemeinsamer\ Speicher'
 wa='WhatsApp/Media/WhatsApp\ Images'
 
-arc=`uname -a |cut -d' ' -f 14`
+lsb=`lsb_release -i|cut -d: -f2|sed -e 's/[[:blank:]]//'`
 
 
 function am(){
@@ -23,25 +23,8 @@ function amix(){
 	arg=10%$1
 	else ;echo zero Argumente; arg=30% ; fi;
 	amixer -q sset Master $arg
-	am
 }
 
-function apt-history () {
-  case "$1" in
-    install)
-      zgrep --no-filename 'install ' $(ls -rt /var/log/dpkg*)
-      ;;
-    upgrade|remove)
-      zgrep --no-filename $1 $(ls -rt /var/log/dpkg*)
-      ;;
-    liste)
-      zgrep --no-filename '' $(ls -rt /var/log/dpkg*)
-      ;;
-    *)
-      echo " e.g liste - Listet dpkg logs"
-      ;;
-  esac
-}
 
 function as(){
 	apt show $1 |less
@@ -49,18 +32,17 @@ function as(){
 
 
 function b(){
-	if [[ `lsb_release -i|cut -d: -f2|sed -e 's/[[:blank:]]//'` = Ubuntu ]]; then; /root/src/src_geany-1.28/usr/bin/geany $1 &
+	if [[ $lsb = Ubuntu ]]; then; /root/src/src_geany-1.28/usr/bin/geany $1 &
 	else;vim $1;fi
 }
 
 
 function ci(){
-		#`$@` | xclip -selection clipboard
 		$1 | xclip -selection clipboard
 }
 
 function cj(){
-		echo $@ |xclip -selection clipboard
+		echo $1 |xclip -selection clipboard
 }
 
 function co(){
@@ -133,7 +115,6 @@ function schieb(){
 	for i in `seq 1 $nr`
 		mv $dow/"`ls -t $dow | head -n1`" .
 }
-
 
 
 function vl {

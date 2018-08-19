@@ -21,18 +21,22 @@ us=/media/t/BACKUP
 th=/data/data/com.termux/files/home
 
 os=`uname -a |cut -d' ' -f 1`
+ipadr=`ip addr show wlan0 | sed  -En 's/    inet ([0-9.]*).*/\1/p'`
 
 declare -A ad
 ad[tk]='user153015@gmail.com' ; alias -g tk=$ad[tk]
 ad[t]='01573 9598 220'
-ad[uk]='ukoerner@konzertagentur-koerner.de' ;alias -g uk=$ad[uk]
-ad[vk]='4917671214205' ;alias -g vk=$ad[vk]
 
 
+mh=192.168.43 ; iho=$mh.1 # mobil hotspot 
 ih=192.168.0; il=$ih.109
 mo=105 ; im=$ih.$mo ; 
 ra=101; ir=$ih.$ra
 irr=188.194.100.58
+
+function cra {
+	scp $1 $ir:/root
+}
 
 
 function arg(){
@@ -70,7 +74,7 @@ function ersetz(){
 }
 
 function ex(){
-	if [[ `ip addr show wlan0 | sed  -En 's/   inet ([0-9.]*).*/\1/p'|sed -e 's/^ //' | cut -f -3 -d .` = 192.168.0 ]]; then
+	if [[ `$ipadr | cut -f -3 -d .` = 192.168.0 ]]; then
 	
 		ssh root@$ir
 	else
@@ -145,47 +149,41 @@ function pa(){
 	pandoc -V geometry:margin=1in -o $outp.pdf $1.md ; mupdf $outp.pdf
 }
 
+
 function pk(){
 	pkill $1; p2 $1
 }
+	
 	
 function pr2(){
 	grep $1 =(ps aux)
 }
 
 
-function p_rm(){
+function p_rm {
 	sed -i 's/ [a-z-]\+)/)/' $zr
 	exec zsh; 
 }
 
 
-function scmysql(){
+function scmysql {
 	mysqldump d> $(date +"%m_%Y").sql
-	scp -P $1 `ls -t | head -n1` 0.tcp.eu.ngrok.io:/root/sqlBack 
-	#rm $(date +"%m_%Y").sql
+	scp `ls -t | head -n1` $il:/root/sqlBack 
+	rm $(date +"%m_%Y").sql
 }
 
 
 function ss(){
-	((!$#)) && ok=$mo || ok=$1
-	ssh -p8022 root@$ih.$ok
+	((!$#)) && ip=$im || ip = $1
+	ssh -p8022 root@$ip
 	#ssh root@$ih.$ok
 }
 
 function s2(){
-	((!$#)) && ok=$ra || ok=$1
-	ssh root@$ih.$ok
+	((!$#)) && ip=$ra || ip=$1
+	ssh root@$$ip
 }
 
-
-function uz(){
-	$dowDir
-	unzip `ls -t|head -1` -d $1
-	#rm *.zip
-	mv $1 $OLDPWD
-	rm $1
-}
 
 function upload {
 	if [ -z $2 ];then; pc=localhost ; else; pc=$2 ; fi
@@ -288,6 +286,8 @@ alias il='ec $il'
 alias im='ec $im'
 alias ir='ec $ir'
 alias irr='ec $irr'
+alias j='ec $ipadr'
+alias j2='ec $ipadr|cut -d. -f4'
 
 # Konsole
 alias hist=history

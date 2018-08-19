@@ -32,10 +32,15 @@ function j2(){
 }
 
 
-function nr(){
+function n2 {
 	echo `termux-sms-inbox | jq -r '.[0].number'`
-	#echo `sed -e 's/^"//' -e 's/"$//' <<<$nr` 
 }
+
+
+function nr {
+	termux-contact-list |jq -r --arg v1 "$1" '.[] | select(.name==$v1)|.number'
+	}
+
 
 function int_trap(){ echo download ende }
 
