@@ -19,6 +19,7 @@ wa=$ds/WhatsApp/Media
 us=/media/t/BACKUP
 
 th=/data/data/com.termux/files/home
+dt=$th/django/
 
 os=`uname -a |cut -d' ' -f 1`
 ipadr=`ip addr show wlan0 | sed  -En 's/    inet ([0-9.]*).*/\1/p'`
@@ -62,15 +63,14 @@ function cm2(){
 
 
 function ersetz(){
-		
-		if [[ $1 = VID* ]]; then
-			echo Video
-			mv $1 `echo "$1" |sed 's/\(VID_.*\)_.*\(\.3gp\)/\1\2/'`
-		fi
-		if [[ $1 = IMG* ]]; then
-		echo Bild
-		mv $1 `echo "$1" |sed 's/\(IMG-.*\)-.*\(\.jpg\)/\1\2/'`
-		fi
+	if [[ $1 = VID* ]]; then
+		echo Video
+		mv $1 `echo "$1" |sed 's/\(VID_.*\)_.*\(\.3gp\)/\1\2/'`
+	fi
+	if [[ $1 = IMG* ]]; then
+	echo Bild
+	mv $1 `echo "$1" |sed 's/\(IMG-.*\)-.*\(\.jpg\)/\1\2/'`
+	fi
 }
 
 function ex(){
@@ -118,11 +118,6 @@ function ki(){
 		ps -ef|grep $1
 }
 
-
-function kp(){
-	(( $USER = pi )) && sudo pkill python3 || pkill python3 
-	
-}
 
 
 function ku(){
@@ -260,7 +255,7 @@ alias -g bi=$bi
 alias mus=~/musik
 alias o=$ZSH_CUSTOM
 alias oh=$ZSH
-alias y=cd
+alias y='cd; l'
 
 #curl
 alias cu=curl

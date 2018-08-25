@@ -1,8 +1,6 @@
 arc=`uname -a |cut -d' ' -f 13`
 lsb=`uname -a |cut -d' ' -f 14`
 
-dt=$th/django/
-zr=$th/.zshrc
 
 
 function ci(){
@@ -38,7 +36,8 @@ function n2 {
 
 
 function nr {
-	termux-contact-list |jq -r --arg v1 "$1" '.[] | select(.name==$v1)|.number'
+	if [ -z $1 ]; then; nr=vi; else; nr=$1;fi
+	termux-contact-list |jq -r --arg v1 "$nr" '.[] | select(.name==$v1)|.number'
 	}
 
 
@@ -58,8 +57,7 @@ function q(){
 
 
 function se(){
-	echo `nr`
-	termux-sms-send -n `nr` "$@"
+	termux-sms-send -n `nr $1 | sed -e 's/ //g' ` "${@:2}"
 }
 
 function se2(){
@@ -83,7 +81,7 @@ alias ds='$ds; l'
 alias dc='$ds/DCIM/Camera; l'
 alias mu='$mu; l'
 alias wi='$wa/WhatsApp\ Images; l'
-alias wi='$wa/WhatsApp\ Video; l'
+alias wv='$wa/WhatsApp\ Video; l'
 
 #apt
 alias ap="apt policy"

@@ -3,7 +3,6 @@
 dt=/root/django
 dp=/home/pi/django
 
-
 ht=/home/t
 hu=/home/uk
 
@@ -76,7 +75,6 @@ function j2(){
 
 
 
-
 function ma(){
 	zparseopts -A arg b: t: a:
 		
@@ -86,8 +84,6 @@ function ma(){
 
 
 function ml(){
-	#cd ~/musik
-	ffprobe $1 2> >(grep Duration)
 	mplayer $1
 }
 #compdef _ml ml
@@ -96,7 +92,6 @@ function ml(){
 function mp(){
 	mupdf $1 &
 }
-
 
 
 function q(){
