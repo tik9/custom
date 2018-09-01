@@ -344,7 +344,7 @@ alias m=man
 alias pw=pwd
 alias r='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
 alias sl=sleep
-alias so=source
+alias to=touch
 alias tp=top
 alias -g ve=--version
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'

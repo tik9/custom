@@ -6,6 +6,8 @@ dp=/home/pi/django
 ht=/home/t
 hu=/home/uk
 
+dow=$ht/Downloads
+
 
 is='/run/user/1000/gvfs/mtp:host=%5Busb%3A002%2C034%5D/Interner\ gemeinsamer\ Speicher'
 wa='WhatsApp/Media/WhatsApp\ Images'
@@ -99,16 +101,16 @@ function q(){
 	wget http://speedtest.wdc01.softlayer.com/downloads/$datei --output-document=/dev/null
 }
 
-function rem(){
+function re {
 	apt remove $1 -y
 }
 
-function schieb(){
-	((!$#)) && 	nr=1 || nr=$1
-	echo "`ls -t $dow | head -n $nr` \n"
+function schieb {
+	echo "`ls -t $dow | head -n 1` \n"
 
 	for i in `seq 1 $nr`
 		mv $dow/"`ls -t $dow | head -n1`" .
+	ls
 }
 
 

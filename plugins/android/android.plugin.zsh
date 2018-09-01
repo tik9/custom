@@ -84,14 +84,15 @@ alias wi='$wa/WhatsApp\ Images; l'
 alias wv='$wa/WhatsApp\ Video; l'
 
 #apt
+alias aar='sudo apt autoremove -y'
+alias ali="apt list --installed "
 alias ap="apt policy"
 alias as="apt show"
 alias ase="apt search"
-alias aglu="apt list --upgradable "
-alias aguu='apt-get update && apt-get upgrade'
-alias pkg="apt list --installed "
+alias auu='apt-get update && apt-get upgrade'
 alias in='apt install'
-alias rem="apt remove"
+alias pkg="apt list --upgradable "
+alias re="apt remove"
 
 alias ab='b $a'
 alias ic='ifconfig'
