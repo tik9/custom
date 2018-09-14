@@ -19,7 +19,8 @@ wa=$ds/WhatsApp/Media
 us=/media/t/BACKUP
 
 th=/data/data/com.termux/files/home
-dt=$th/django/
+dt=/root/django/
+tm=$dt/media
 
 os=`uname -a |cut -d' ' -f 1`
 ipadr=`ip addr show wlan0 | sed  -En 's/    inet ([0-9.]*).*/\1/p'`
@@ -73,14 +74,6 @@ function ersetz(){
 	fi
 }
 
-function ex(){
-	if [[ `$ipadr | cut -f -3 -d .` = 192.168.0 ]]; then
-	
-		ssh root@$ir
-	else
-		ssh root@$irr
-	fi
-}
 
 function ge(){
 	grep -r $1 * 	
@@ -93,10 +86,13 @@ function hs(){
 }
 
 
-function i(){
-	date +%T
-	url='https://www.accuweather.com/en/de/hepberg/85120/weather-forecast/172784'
-	wget -q -O- $url | awk -F\' '/acm_RecentLocationsCarousel\.push/{ print$0 } ' |head -1
+function i {
+	if [[ `echo $ipadr | cut -f -3 -d .` = 192.168.0 ]]; then
+	
+		ssh root@$ir
+	else
+		ssh root@$irr
+	fi
 }
 
 
@@ -181,21 +177,21 @@ function s2(){
 
 
 function upload {
-	if [ -z $2 ];then; pc=localhost ; else; pc=$2 ; fi
+	if [ -z $3 ];then; pc=localhost ; else; pc=$3 ; fi
 	#echo $pc, $1, $2
-	curl -F "dat=@$1" --cookie csrftoken=M1XreITl3Ys0DARMvsjmcMQGwJHhsD1be61K9ziuH0JXNlbJKRI8nlgg8yrejeic -H "X-CSRFToken: M1XreITl3Ys0DARMvsjmcMQGwJHhsD1be61K9ziuH0JXNlbJKRI8nlgg8yrejeic" $pc:8000/dat
+	curl -F "dat=@$1" --cookie csrftoken=M1XreITl3Ys0DARMvsjmcMQGwJHhsD1be61K9ziuH0JXNlbJKRI8nlgg8yrejeic -H "X-CSRFToken: M1XreITl3Ys0DARMvsjmcMQGwJHhsD1be61K9ziuH0JXNlbJKRI8nlgg8yrejeic" $pc:8000/$2
 }
 
 
 function vid(){
 	
 	#rasp
-	ssh root@$ir "cd $dt/media; find . -maxdepth 1 -type f -exec mv {} alt \;"
+	#ssh root@$ir "cd $dt/media; find . -maxdepth 1 -type f -exec mv {} alt \;"
 
 	# smart
-	scp -P8022 $im:$ds/DCIM/Camera/"*" root@$ir:/root/django/media 
+	#scp -P8022 $im:$ds/DCIM/Camera/"*" root@$ir:/root/django/media 
 	
-	#scp -P8022 $im:$ds/DCIM/Camera/"*" root@$il:/root/bilder 
+	scp -P8022 $im:$ds/DCIM/Camera/"*" root@$il:/root/vid 
 
 	#rasp
 	#ssh root@$ir 'ls $dt/media'
@@ -213,12 +209,7 @@ function vi3 {
 
 }
 
-function we(){
-	para=$1
-	zeile=1
-	#url="https://api.accuweather.com/locations/v1/cities/autocomplete?q=$para&apikey=d41dfd5e8a1748d0970cba6637647d96&language=en-us&get_param=value"
-	#para=`wget -q -O- "$url" |jq -r '.[2].Key'`
-
+function we2 {
 	url='https://www.accuweather.com/en/de/hepberg/85120/weather-forecast/172202'
 	#url="https://www.accuweather.com/ajax-service/select-city?cityId=$para&lang=de"
 		
@@ -236,7 +227,14 @@ function we(){
 }
 
 
-function wlans(){
+function we {
+	date +%T
+	url='https://www.accuweather.com/en/de/hepberg/85120/weather-forecast/172784'
+	wget -q -O- $url | awk -F\' '/acm_RecentLocationsCarousel\.push/{ print$0 } ' |head -1
+}
+
+
+function wlans {
 	iwlist wlan0 scan | sed  -n 's/ESSID:"\(.*\)"/\1/p' | sort
 }
 
@@ -251,7 +249,7 @@ alias w='alias -m'
 
 #cd's
 alias ar=~/arduino
-alias -g bi=$bi
+alias bi=$bi
 alias mus=~/musik
 alias o=$ZSH_CUSTOM
 alias oh=$ZSH
@@ -263,7 +261,7 @@ alias cu=curl
 
 #find
 alias fin='find . -type f -name'
-alias ff="find / xdev -name"
+alias ff="find / -xdev -name"
 
 #grep
 alias -g gr="|grep -ai"
@@ -272,7 +270,6 @@ alias hgrep="fc -El 0 | grep"
 
 
 # head / tail
-alias -g he='|head'
 alias ta='tail -f'
 alias -g ti='| tail'
 
@@ -338,7 +335,7 @@ alias dat='date +"Tag %d"'
 alias di=dict
 alias ec=echo
 alias -g f='|less'
-alias -g h="--help |less"
+alias -g hel="--help |less"
 alias le=less
 alias m=man
 alias pw=pwd

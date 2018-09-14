@@ -99,6 +99,7 @@ alias ic='ifconfig'
 alias km='ki play-audio'
 alias sd='sshd; ph; echo Letztes Oktett ;j2' 
 alias tb="termux-battery-status|sed -n 's/\"percentage\": \([0-9][0-9]\),/\1%/p'"
+alias ti=termux-sms-inbox 
 alias ts=termux-sms-send 
 alias v='vi'
 alias zr='vi $zr' 

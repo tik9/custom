@@ -148,4 +148,4 @@ alias s='pm-suspend'
 alias si='sudo -i'
 alias v='ack -iw'
 alias wa=$is/$wa
-alias z='/etc/init.d/networking restart; i'
+alias z='/etc/init.d/networking restart; we'
