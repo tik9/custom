@@ -12,7 +12,7 @@ zr=~/.zshrc
 
 bi=/root/bilder
 ds=/storage/emulated/0
-dc=$ds/DCIM/Camera/
+dc=$ds/DCIM/Camera
 mu=$ds/music
 wa=$ds/WhatsApp/Media
 
@@ -24,6 +24,7 @@ tm=$dt/media
 
 os=`uname -a |cut -d' ' -f 1`
 ipadr=`ip addr show wlan0 | sed  -En 's/    inet ([0-9.]*).*/\1/p'`
+ipadre=`ip addr show eth0 | sed  -En 's/    inet ([0-9.]*).*/\1/p'`
 
 declare -A ad
 ad[tk]='user153015@gmail.com' ; alias -g tk=$ad[tk]
@@ -32,8 +33,12 @@ ad[t]='01573 9598 220'
 
 mh=192.168.43 ; iho=$mh.1 # mobil hotspot 
 ih=192.168.0; il=$ih.109
-mo=105 ; im=$ih.$mo ; 
-ra=101; ir=$ih.$ra
+#mo=105 ;
+mo=100 ;
+ im=$ih.$mo ; 
+#ra=101; 
+ra=103; 
+ir=$ih.$ra
 irr=188.194.100.58
 
 function cra {
@@ -63,7 +68,7 @@ function cm2(){
 }
 
 
-function ersetz(){
+function ersetz {
 	if [[ $1 = VID* ]]; then
 		echo Video
 		mv $1 `echo "$1" |sed 's/\(VID_.*\)_.*\(\.3gp\)/\1\2/'`
@@ -163,9 +168,13 @@ function scmysql {
 	rm $(date +"%m_%Y").sql
 }
 
+function se {
+	ssh $im -p8022 	termux-sms-send -n "`nr $1 | sed -e 's/ //g' ` \"${@:2}\""
+}
+
 
 function ss(){
-	((!$#)) && ip=$im || ip = $1
+	if [ -z $1 ]; then; ip=$im ; else; ip=$ih.$1;fi
 	ssh -p8022 root@$ip
 	#ssh root@$ih.$ok
 }
@@ -186,12 +195,12 @@ function upload {
 function vid(){
 	
 	#rasp
-	#ssh root@$ir "cd $dt/media; find . -maxdepth 1 -type f -exec mv {} alt \;"
+	ssh root@$ir "cd $dt/media; find . -maxdepth 1 -type f -exec mv {} alt \;"
 
 	# smart
 	#scp -P8022 $im:$ds/DCIM/Camera/"*" root@$ir:/root/django/media 
 	
-	scp -P8022 $im:$ds/DCIM/Camera/"*" root@$il:/root/vid 
+	#scp -P8022 $im:$ds/DCIM/Camera/"*" root@$il:/root/vid 
 
 	#rasp
 	#ssh root@$ir 'ls $dt/media'
@@ -201,7 +210,9 @@ function vid(){
 }
 
 function vi2 {
+	ssh $im -p8022 "ls $dc"
 	ssh $im -p8022 "rm $dc/*"
+	ssh $im -p8022 "echo nun leer; ls $dc"
 }
 
 function vi3 {
@@ -279,6 +290,7 @@ alias im='ec $im'
 alias ir='ec $ir'
 alias irr='ec $irr'
 alias j='ec $ipadr'
+alias ej='ec $ipadre'
 alias j2='ec $ipadr|cut -d. -f4'
 
 # Konsole
@@ -336,6 +348,7 @@ alias di=dict
 alias ec=echo
 alias -g f='|less'
 alias -g hel="--help |less"
+alias ie=identify
 alias le=less
 alias m=man
 alias pw=pwd

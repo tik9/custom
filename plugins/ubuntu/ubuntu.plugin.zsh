@@ -46,7 +46,20 @@ function cj(){
 		echo $1 |xclip -selection clipboard
 }
 
-function co(){
+function cb {
+	convert $1 -resize 50% $1
+	identify $1
+}
+
+function cv {
+	#scp -P8022 $im:$ds/DCIM/Camera/"*" root@$il:/root/vid 
+
+	#ffmpeg -i `ls -t|head -1`  -strict -2 ${ echo ${ ls -t | head -1 } | sed 's/\.[^.]*/.mp4/'}
+	ffmpeg -i $1  -strict -2 `echo $1 | sed 's/\.[^.]*/.mp4/'`
+	ls
+	}
+
+function cop {
 		xclip -o -selection clipboard
 }
 
@@ -146,6 +159,7 @@ alias -s pdf=mupdf
 
 alias s='pm-suspend'
 alias si='sudo -i'
+alias up='upload  `ls -t|head -1` vid $ir  '
 alias v='ack -iw'
 alias wa=$is/$wa
 alias z='/etc/init.d/networking restart; we'

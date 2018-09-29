@@ -2,7 +2,7 @@
 
 alias 0="dt;kp;dru &!"
 alias dp=$dp
-alias dt=$dt
+alias dt="$dt"
 alias dm='p3 manage.py'
 alias dru='dm runserver 0.0.0.0:8000'
 alias dv='echo django version; p3 -c "import django;print(django.get_version())"'
