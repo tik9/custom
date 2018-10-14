@@ -13,18 +13,16 @@ zr=~/.zshrc
 bi=/root/bilder
 ds=/storage/emulated/0
 dc=$ds/DCIM/Camera
+th=/data/data/com.termux/files/home
 mu=$ds/music
 wa=$ds/WhatsApp/Media
 
 us=/media/t/BACKUP
 
-th=/data/data/com.termux/files/home
 dt=/root/django/
 tm=$dt/media
 
 os=`uname -a |cut -d' ' -f 1`
-ipadr=`ip addr show wlan0 | sed  -En 's/    inet ([0-9.]*).*/\1/p'`
-ipadre=`ip addr show eth0 | sed  -En 's/    inet ([0-9.]*).*/\1/p'`
 
 declare -A ad
 ad[tk]='user153015@gmail.com' ; alias -g tk=$ad[tk]
@@ -35,11 +33,11 @@ mh=192.168.43 ; iho=$mh.1 # mobil hotspot
 ih=192.168.0; il=$ih.109
 #mo=105 ;
 mo=100 ;
- im=$ih.$mo ; 
+im=$ih.$mo ; 
 #ra=101; 
 ra=103; 
 ir=$ih.$ra
-irr=188.194.100.58
+#irr=`curl ipinfo.io/ip`
 
 function cra {
 	scp $1 $ir:/root
@@ -90,15 +88,6 @@ function hs(){
 	fc -li $beginn |less
 }
 
-
-function i {
-	if [[ `echo $ipadr | cut -f -3 -d .` = 192.168.0 ]]; then
-	
-		ssh root@$ir
-	else
-		ssh root@$irr
-	fi
-}
 
 
 function k(){
@@ -195,12 +184,12 @@ function upload {
 function vid(){
 	
 	#rasp
-	ssh root@$ir "cd $dt/media; find . -maxdepth 1 -type f -exec mv {} alt \;"
+	#ssh root@$ir "cd $dt/media; find . -maxdepth 1 -type f -exec mv {} alt \;"
 
 	# smart
 	#scp -P8022 $im:$ds/DCIM/Camera/"*" root@$ir:/root/django/media 
 	
-	#scp -P8022 $im:$ds/DCIM/Camera/"*" root@$il:/root/vid 
+	scp -P8022 $im:$ds/DCIM/Camera/"*" root@$il:/root/vid 
 
 	#rasp
 	#ssh root@$ir 'ls $dt/media'
@@ -287,11 +276,10 @@ alias -g ti='| tail'
 #ip's
 alias il='ec $il'
 alias im='ec $im'
+alias ipi='curl ipinfo.io/ip'
 alias ir='ec $ir'
-alias irr='ec $irr'
-alias j='ec $ipadr'
-alias ej='ec $ipadre'
-alias j2='ec $ipadr|cut -d. -f4'
+#alias irr='ec $irr'
+
 
 # Konsole
 alias hist=history
@@ -301,7 +289,7 @@ alias tt=tty
 
 # ls
 alias l='ls -lh'
-alias ll='ls f'
+alias ll='ls | less'
 alias lt='ls -t'
 
 #mysql

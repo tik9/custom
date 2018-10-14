@@ -17,6 +17,19 @@ function co(){
 
 }
 
+
+function i {
+	if [[ `echo $ipadr | cut -f -3 -d .` = 192.168.0 ]]; then
+	
+		ssh root@$ir
+	else
+		irr=`curl -s ipinfo.io/ip`
+		ec $irr
+		ssh root@$irr
+	fi
+}
+
+
 function install(){
 	termux-api play-audio
 	termux-setup-storage
@@ -93,6 +106,12 @@ alias auu='apt-get update && apt-get upgrade'
 alias in='apt install'
 alias pkg="apt list --upgradable "
 alias re="apt remove"
+
+#ips
+alias j='ec $ipadr'
+alias ej='ec $ipadre'
+alias j2='ec $ipadr|cut -d. -f4'
+
 
 alias ab='b $a'
 alias ic='ifconfig'

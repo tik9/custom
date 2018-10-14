@@ -8,6 +8,8 @@ hu=/home/uk
 
 dow=$ht/Downloads
 
+ipadr=`ip addr show wlan0 | sed  -En 's/    inet ([0-9.]*).*/\1/p'`
+ipadre=`ip addr show eth0 | sed  -En 's/    inet ([0-9.]*).*/\1/p'`
 
 is='/run/user/1000/gvfs/mtp:host=%5Busb%3A002%2C034%5D/Interner\ gemeinsamer\ Speicher'
 wa='WhatsApp/Media/WhatsApp\ Images'
@@ -75,6 +77,18 @@ function dre {
 	if [[ `hostname` = uk ]]; then; ho=$hu; else; ho=$ht;fi
 	cd $ho/Downloads
 	mplayer -vf rotate=1 `ls -t|head -1`
+}
+
+
+function i {
+	if [[ `echo $ipadr | cut -f -3 -d .` = 192.168.0 ]]; then
+		
+		ssh root@$ir
+	else
+		irr=`curl -s ipinfo.io/ip`
+		ec $irr
+		ssh root@$irr
+	fi
 }
 
 
@@ -150,12 +164,18 @@ alias pkg="apt list --upgradable "
 alias -g dow=$dow
 alias vd='/root/vid;l'
 
+# ips
+alias j='ec $ipadr'
+alias ej='ec $ipadre'
+alias j2='ec $ipadr|cut -d. -f4'
+
 alias a+="amix +"
 alias a-="amix -"
 alias gp='gpicview'
 alias hi='hibernate'
 
 alias -s pdf=mupdf
+alias -s mp4=mplayer
 
 alias s='pm-suspend'
 alias si='sudo -i'
