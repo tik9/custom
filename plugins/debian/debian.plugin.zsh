@@ -11,9 +11,6 @@ dow=$ht/Downloads
 ipadr=`ip addr show wlan0 | sed  -En 's/    inet ([0-9.]*).*/\1/p'`
 ipadre=`ip addr show eth0 | sed  -En 's/    inet ([0-9.]*).*/\1/p'`
 
-is='/run/user/1000/gvfs/mtp:host=%5Busb%3A002%2C034%5D/Interner\ gemeinsamer\ Speicher'
-wa='WhatsApp/Media/WhatsApp\ Images'
-
 lsb=`lsb_release -i|cut -d: -f2|sed -e 's/[[:blank:]]//'`
 
 
@@ -53,12 +50,14 @@ function cb {
 	identify $1
 }
 
+
 function cv {
 	#scp -P8022 $im:$ds/DCIM/Camera/"*" root@$il:/root/vid 
 
 	#ffmpeg -i `ls -t|head -1`  -strict -2 ${ echo ${ ls -t | head -1 } | sed 's/\.[^.]*/.mp4/'}
-	ffmpeg -i $1  -strict -2 `echo $1 | sed 's/\.[^.]*/.mp4/'`
-	ls
+	
+	ffmpeg -i $ak  -strict -2 `echo $akt | sed 's/\.[^.]*/.mp4/'`
+	ls -lt
 	}
 
 function cop {
@@ -74,21 +73,29 @@ function dol {
 
 
 function dre {
-	if [[ `hostname` = uk ]]; then; ho=$hu; else; ho=$ht;fi
-	cd $ho/Downloads
-	mplayer -vf rotate=1 `ls -t|head -1`
+	#if [[ `hostname` = uk ]]; then; ho=$hu; else; ho=$ht;fi
+	#cd $ho/Downloads
+	if [[ -n $1 ]]; then
+	dat=$1; else
+	dat=`ls -t|head -1`
+	fi
+	mplayer -vf rotate=1 $dat
 }
 
 
 function i {
 	if [[ `echo $ipadr | cut -f -3 -d .` = 192.168.0 ]]; then
-		
 		ssh root@$ir
 	else
-		irr=`curl -s ipinfo.io/ip`
 		ec $irr
 		ssh root@$irr
 	fi
+}
+
+function i2 {
+	irc=`curl -s ipinfo.io/ip`
+	echo curl: $irc - alt: $irr
+	sed -i "s/\(irr=\).*/\1$irc/" $co
 }
 
 
@@ -115,7 +122,6 @@ function ma(){
 function ml(){
 	mplayer $1
 }
-#compdef _ml ml
 
 
 function mp(){
@@ -145,6 +151,12 @@ function vl {
 	ffprobe $1 2> >(grep Duration)
 }
 
+
+function z2(){
+	 cd $mu
+	 mplayer $1
+}
+compdef _play_audio_Ub z2
 
 
 #apt

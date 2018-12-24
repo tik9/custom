@@ -32,7 +32,7 @@ function _check(){
 }
 
 
-function gi(){
+function gt(){
 	dir=$(_check)
 
 	 git commit -am "$@"
@@ -104,6 +104,5 @@ alias grv='git remote -v'
 
 alias gs='$(_check); git show'
 
-alias gt='git checkout -- .; git pull'
 alias gu='$(_check); git push; a'
 alias n='$(_check); git log | head -n5 |tail -n3'

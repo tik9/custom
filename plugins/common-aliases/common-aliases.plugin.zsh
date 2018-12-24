@@ -1,21 +1,24 @@
+ti='de63721500 0000 5052 4271 181'
+ak=`ls -t|head -1`
 
 a=$ZSH_CUSTOM/plugins/android/android.plugin.zsh
-
 co2=plugins/common-aliases/common-aliases.plugin.zsh; co=$ZSH_CUSTOM/$co2
 cy2=plugins/cygwin/cygwin.plugin.zsh; cy=$ZSH_CUSTOM/$cy2
+db=$ZSH_CUSTOM/plugins/debian/debian.plugin.zsh
 dj=$ZSH_CUSTOM/plugins/django/django.plugin.zsh
 gi=$ZSH_CUSTOM/plugins/git/git.plugin.zsh
 py=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
-ub=$ZSH_CUSTOM/plugins/ubuntu/ubuntu.plugin.zsh
 
 zr=~/.zshrc
 
-bi=/root/bilder
+ho=/home/t
+bi=$ho/bilder
 ds=/storage/emulated/0
 dc=$ds/DCIM/Camera
 th=/data/data/com.termux/files/home
-mu=$ds/music
-wa=$ds/WhatsApp/Media
+mu=/root/musik
+mua=$ds/music
+wa=$ds/WhatsApp/Media\ Images
 
 us=/media/t/BACKUP
 
@@ -32,20 +35,26 @@ ad[t]='01573 9598 220'
 mh=192.168.43 ; iho=$mh.1 # mobil hotspot 
 ih=192.168.0; il=$ih.109
 #mo=105 ;
-mo=100 ;
+mo=108 ;
 im=$ih.$mo ; 
 #ra=101; 
-ra=103; 
+ra=104; 
 ir=$ih.$ra
-#irr=`curl ipinfo.io/ip`
+irr=178.27.248.226
 
-function cra {
-	scp $1 $ir:/root
+# Datei ändern
+function cm2(){
+	sed -i "s/\(cal 2018 |head -n\) [0-9][0-9]\( | tail -n\) [0-9][0-9]/\1 $1\2 $2/" $co
+	exec zsh
+}
+
+function p_rm {
+	sed -i 's/ [a-z-]\+)/)/' $zr
+	exec zsh; 
 }
 
 
 function arg(){
-	# if [ -z $1 ];then;echo Argument fehlt;return; fi
 	((!$#)) && echo Keine Argumente!||echo args! $@
 }
 
@@ -60,11 +69,6 @@ function cl(){
 	curl localhost:$po/$da
 }
 
-function cm2(){
-	sed -i "s/\(cal 2018 |head -n\) [0-9][0-9]\( | tail -n\) [0-9][0-9]/\1 $1\2 $2/" $co
-	exec zsh
-}
-
 
 function ersetz {
 	if [[ $1 = VID* ]]; then
@@ -75,11 +79,6 @@ function ersetz {
 	echo Bild
 	mv $1 `echo "$1" |sed 's/\(IMG-.*\)-.*\(\.jpg\)/\1\2/'`
 	fi
-}
-
-
-function ge(){
-	grep -r $1 * 	
 }
 
 
@@ -129,11 +128,6 @@ function p_add(){
 	exec zsh
 }
 
-function pa(){
-	outp=$1
-	pandoc -V geometry:margin=1in -o $outp.pdf $1.md ; mupdf $outp.pdf
-}
-
 
 function pk(){
 	pkill $1; p2 $1
@@ -145,11 +139,6 @@ function pr2(){
 }
 
 
-function p_rm {
-	sed -i 's/ [a-z-]\+)/)/' $zr
-	exec zsh; 
-}
-
 
 function scmysql {
 	mysqldump d> $(date +"%m_%Y").sql
@@ -158,19 +147,9 @@ function scmysql {
 }
 
 function se {
-	ssh $im -p8022 	termux-sms-send -n "`nr $1 | sed -e 's/ //g' ` \"${@:2}\""
-}
+	nr=`ssh $im -p8022 termux-contact-list |jq -r --arg wert "$1" '.[] | select(.name==$wert)|.number'`
+	ssh $im -p8022 	termux-sms-send -n "$nr \"${@:2}\""
 
-
-function ss(){
-	if [ -z $1 ]; then; ip=$im ; else; ip=$ih.$1;fi
-	ssh -p8022 root@$ip
-	#ssh root@$ih.$ok
-}
-
-function s2(){
-	((!$#)) && ip=$ra || ip=$1
-	ssh root@$$ip
 }
 
 
@@ -181,21 +160,27 @@ function upload {
 }
 
 
+function vi1 {
+	ssh $im -p8022 "ls $dc"
+}
+
+
 function vid(){
+	verz=/root/django/media
 	
 	#rasp
 	#ssh root@$ir "cd $dt/media; find . -maxdepth 1 -type f -exec mv {} alt \;"
 
 	# smart
-	#scp -P8022 $im:$ds/DCIM/Camera/"*" root@$ir:/root/django/media 
+	#scp -P8022 $im:$ds/DCIM/Camera/"*" root@$ir:$verz 
 	
-	scp -P8022 $im:$ds/DCIM/Camera/"*" root@$il:/root/vid 
+	scp -P8022 $im:$dc/"*" root@$il:/root/vid 
 
 	#rasp
 	#ssh root@$ir 'ls $dt/media'
 
 	#lapt
-	#scp $1 $ir:/root/django/media
+	#scp $1 $ir:$verz
 }
 
 function vi2 {
@@ -204,10 +189,7 @@ function vi2 {
 	ssh $im -p8022 "echo nun leer; ls $dc"
 }
 
-function vi3 {
-	ssh $im -p8022 "ls $dc"
 
-}
 
 function we2 {
 	url='https://www.accuweather.com/en/de/hepberg/85120/weather-forecast/172202'
@@ -239,7 +221,6 @@ function wlans {
 }
 
 
-
 # alias/Funktionen
 alias d='declare -f'
 alias p='alias|grep'
@@ -260,7 +241,10 @@ alias cu=curl
 
 
 #find
-alias fin='find . -type f -name'
+function fin {
+	find . -type f -name $1
+}
+
 alias ff="find / -xdev -name"
 
 #grep
@@ -278,19 +262,17 @@ alias il='ec $il'
 alias im='ec $im'
 alias ipi='curl ipinfo.io/ip'
 alias ir='ec $ir'
-#alias irr='ec $irr'
 
 
 # Konsole
 alias hist=history
 alias ho='ec $HOST'
 alias tt=tty
-#alias us='ec $USER'
 
 # ls
 alias l='ls -lh'
 alias ll='ls | less'
-alias lt='ls -t'
+alias lt='ls -lht'
 
 #mysql
 alias msd='mysql -uroot d'
@@ -299,7 +281,8 @@ alias mst='mysql -uroot d -e "show tables"'
 
 # plugins
 alias cb="b $co"
-alias ub="b $ub"
+alias db="b $db"
+alias gi="b $gi"
 
 # ps
 alias ks="ph; ki ssh; ph"
@@ -310,14 +293,12 @@ alias pr='ps -ef|grep'
 
 #ssh
 alias cia='c ida f'
-alias -g cida_lokal='c idr >> ida; c ida' 
 alias cida='ar; cp idr .; gi "id rsa kopiert" ; c idr' 
 alias cida2='ar; gl; c id_rsa.pub >> ida; c ida' 
-alias cir='c idr' 
-alias cs=~/.ssh 
 alias -g idr=~/.ssh/id_rsa.pub 
 alias -g ida=~/.ssh/authorized_keys 
-
+alias sr='ssh root@$ir'
+alias ss='ssh -p8022 $im'
 
 # zsh
 alias e="exec zsh && ec ha we; !-2"
@@ -334,10 +315,10 @@ alias da='date +"%T"'
 alias dat='date +"Tag %d"'
 alias di=dict
 alias ec=echo
-alias -g f='|less'
+alias -g le='|less'
 alias -g hel="--help |less"
 alias ie=identify
-alias le=less
+alias les=less
 alias m=man
 alias pw=pwd
 alias r='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
