@@ -1,6 +1,6 @@
 arc=`uname -a |cut -d' ' -f 13`
 lsb=`uname -a |cut -d' ' -f 14`
-
+mua=$ds/music
 
 
 function ci(){
@@ -83,7 +83,7 @@ function vid_sc {
 
 
 function z(){
-	 cd $mu
+	 cd $mua
 	 play-audio $1
 }
 compdef _play_audio z
@@ -115,7 +115,7 @@ alias j2='ec $ipadr|cut -d. -f4'
 
 alias ab='b $a'
 alias ic='ifconfig'
-alias km='ki play-audio'
+alias mua=$mua
 alias sd='sshd; ph; echo Letztes Oktett ;j2' 
 alias tb="termux-battery-status|sed -n 's/\"percentage\": \([0-9][0-9]\),/\1%/p'"
 alias ti=termux-sms-inbox 

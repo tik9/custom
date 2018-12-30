@@ -11,16 +11,12 @@ py=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
 
 zr=~/.zshrc
 
-ho=/home/t
 bi=$ho/bilder
 ds=/storage/emulated/0
 dc=$ds/DCIM/Camera
 th=/data/data/com.termux/files/home
 mu=/root/musik
-mua=$ds/music
 wa=$ds/WhatsApp/Media\ Images
-
-us=/media/t/BACKUP
 
 dt=/root/django/
 tm=$dt/media
@@ -29,7 +25,7 @@ os=`uname -a |cut -d' ' -f 1`
 
 declare -A ad
 ad[tk]='user153015@gmail.com' ; alias -g tk=$ad[tk]
-ad[t]='01573 9598 220'
+ad[t]='01573 9598 220 1'
 
 
 mh=192.168.43 ; iho=$mh.1 # mobil hotspot 
@@ -42,7 +38,8 @@ ra=104;
 ir=$ih.$ra
 irr=178.27.248.226
 
-# Datei ändern
+
+# Bearbeiten von Dateien
 function cm2(){
 	sed -i "s/\(cal 2018 |head -n\) [0-9][0-9]\( | tail -n\) [0-9][0-9]/\1 $1\2 $2/" $co
 	exec zsh
@@ -51,6 +48,12 @@ function cm2(){
 function p_rm {
 	sed -i 's/ [a-z-]\+)/)/' $zr
 	exec zsh; 
+}
+
+
+function p_add(){
+	sed -i "s/\(^plugins=.*\))/\1 $1)/" $zr
+	exec zsh
 }
 
 
@@ -123,12 +126,6 @@ function lö(){
 }
 
 
-function p_add(){
-	sed -i "s/\(^plugins=.*\))/\1 $1)/" $zr
-	exec zsh
-}
-
-
 function pk(){
 	pkill $1; p2 $1
 }
@@ -169,7 +166,6 @@ function vid(){
 	verz=/root/django/media
 	
 	#rasp
-	#ssh root@$ir "cd $dt/media; find . -maxdepth 1 -type f -exec mv {} alt \;"
 
 	# smart
 	#scp -P8022 $im:$ds/DCIM/Camera/"*" root@$ir:$verz 
@@ -190,22 +186,17 @@ function vi2 {
 }
 
 
-
 function we2 {
-	url='https://www.accuweather.com/en/de/hepberg/85120/weather-forecast/172202'
-	#url="https://www.accuweather.com/ajax-service/select-city?cityId=$para&lang=de"
+	url='https://www.accuweather.com/en/de/hepberg/85120/weather-forecast/172784'
 		
 	downl=`wget -q -O- "$url"`
+	#echo $downl
+	ort=`echo $downl | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$1}' 
+	#| awk "NR==$zeile"`
 	
-	tag=`echo "$downl" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$2}' | awk "NR==$zeile"`
-	tempg=`echo $downl | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$12}' |awk "NR==$zeile"`
-	tempe=`echo $downl | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$10}' | awk "NR==$zeile"`
-	ort=`echo $downl | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$1}' | awk "NR==$zeile"`
-	text=`echo $downl | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$13}' | awk "NR==$zeile"`
-	
-	ort=`echo "$ort"| awk -F\" '{print $2}'`
-	text=`echo "$text"| awk -F\" '{print $2}'`
-	echo $tag - gefühlt: $tempg -echt: $tempe - $ort - $text
+	#ort=`echo "$ort"| awk -F\" '{print $2}'`
+	#text=`echo "$text"| awk -F\" '{print $2}'`
+	echo $ort
 }
 
 
@@ -231,7 +222,7 @@ alias w='alias -m'
 #cd's
 alias ar=~/arduino
 alias bi=$bi
-alias mus=~/musik
+alias mu=$mu
 alias o=$ZSH_CUSTOM
 alias oh=$ZSH
 alias y='cd; l'
@@ -292,7 +283,6 @@ alias pr='ps -ef|grep'
 
 
 #ssh
-alias cia='c ida f'
 alias cida='ar; cp idr .; gi "id rsa kopiert" ; c idr' 
 alias cida2='ar; gl; c id_rsa.pub >> ida; c ida' 
 alias -g idr=~/.ssh/id_rsa.pub 
@@ -301,7 +291,7 @@ alias sr='ssh root@$ir'
 alias ss='ssh -p8022 $im'
 
 # zsh
-alias e="exec zsh && ec ha we; !-2"
+alias e="exec zsh"
 alias plu='ec $plugins'
 alias x=exit
 alias zb='b $zr'
@@ -309,7 +299,7 @@ alias -g zr='$zr' # zshrc
 
 
 alias c=cat
-alias cm='cal 2018 |head -n 31 | tail -n 13'
+alias cm='cal 2018 |head -n 40 | tail -n 10'
 alias dh='df -h'
 alias da='date +"%T"'
 alias dat='date +"Tag %d"'
@@ -317,7 +307,7 @@ alias di=dict
 alias ec=echo
 alias -g le='|less'
 alias -g hel="--help |less"
-alias ie=identify
+alias -g irc=$ir:/root
 alias les=less
 alias m=man
 alias pw=pwd
@@ -325,7 +315,7 @@ alias r='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
 alias sl=sleep
 alias to=touch
 alias tp=top
+alias v2='ssh root@$ir "cd $dt/media; find . -maxdepth 1 -type f -exec mv {} alt \;"'
+
 alias -g ve=--version
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
-
-echo "Common Alias aktualisiert"

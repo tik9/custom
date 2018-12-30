@@ -8,11 +8,13 @@ hu=/home/uk
 
 dow=$ht/Downloads
 
-ipadr=`ip addr show wlan0 | sed  -En 's/    inet ([0-9.]*).*/\1/p'`
-ipadre=`ip addr show eth0 | sed  -En 's/    inet ([0-9.]*).*/\1/p'`
-
 lsb=`lsb_release -i|cut -d: -f2|sed -e 's/[[:blank:]]//'`
 
+function ipad {
+	if [[ hostname = 't-laptop' ]]; then; wint=wlan0; lint=eth0;
+	else; wint= ; lint= ;fi
+	$(ip addr show $($1) | sed  -En 's/    inet ([0-9.]*).*/\1/p')
+}
 
 function am(){
 	amixer get Master |sed -n 5p |cut -d ' ' -f6 |sed -e 's/\[\([1-9][1-9]%\)]/\1/'
