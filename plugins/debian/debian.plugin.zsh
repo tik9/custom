@@ -10,11 +10,6 @@ dow=$ht/Downloads
 
 lsb=`lsb_release -i|cut -d: -f2|sed -e 's/[[:blank:]]//'`
 
-function ipad {
-	if [[ hostname = 't-laptop' ]]; then; wint=wlan0; lint=eth0;
-	else; wint= ; lint= ;fi
-	$(ip addr show $($1) | sed  -En 's/    inet ([0-9.]*).*/\1/p')
-}
 
 function am(){
 	amixer get Master |sed -n 5p |cut -d ' ' -f6 |sed -e 's/\[\([1-9][1-9]%\)]/\1/'
@@ -105,13 +100,6 @@ function in(){
 	apt install $1 -y	
 }
 
-function j2(){
-	letztes=''
-	if [ -z $1 ]; then ; letztes='cut -d. -f4'; fi
-	ip addr show wlan0 | sed  -n -E 's/inet ([0-9.]*).*/\1/p'| eval $letztes
-}
-
-
 
 function ma(){
 	zparseopts -A arg b: t: a:
@@ -158,7 +146,7 @@ function z2(){
 	 cd $mu
 	 mplayer $1
 }
-compdef _play_audio_Ub z2
+compdef _ml z2
 
 
 #apt
@@ -180,7 +168,6 @@ alias vd='/root/vid;l'
 
 # ips
 alias j='ec $ipadr'
-alias ej='ec $ipadre'
 alias j2='ec $ipadr|cut -d. -f4'
 
 alias a+="amix +"

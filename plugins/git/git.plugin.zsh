@@ -84,8 +84,6 @@ alias gcf='git config --list --show-origin'
 alias gcg='b .git/config'
 alias gcl='git clone --recursive'
 
-alias gclean='git clean -dnx'
-
 alias gdca='git diff --cached'
 
 alias gf='git config --list'
@@ -93,13 +91,10 @@ alias gg='$(_check); git log --stat $gitdat'
 
 alias gig='b .gitignore'
 alias gin='git init'
-alias gk='curl https://api.github.com/users/tik9/keys | less'
 
 alias go='$(_check); git log --stat -p $gitdat'
 
 alias gre='git remote'
-alias gra='git remote add origin'
-alias gru='git remote update origin'
 alias grv='git remote -v'
 
 alias gs='$(_check); git show'

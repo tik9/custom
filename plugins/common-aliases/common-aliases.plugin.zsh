@@ -22,6 +22,7 @@ dt=/root/django/
 tm=$dt/media
 
 os=`uname -a |cut -d' ' -f 1`
+ipadr=`ip addr show wlan0 | sed -n -E 's/^[ ]*inet ([0-9.]*).*/\1/p'`
 
 declare -A ad
 ad[tk]='user153015@gmail.com' ; alias -g tk=$ad[tk]
@@ -153,7 +154,7 @@ function se {
 function upload {
 	if [ -z $3 ];then; pc=localhost ; else; pc=$3 ; fi
 	#echo $pc, $1, $2
-	curl -F "dat=@$1" --cookie csrftoken=M1XreITl3Ys0DARMvsjmcMQGwJHhsD1be61K9ziuH0JXNlbJKRI8nlgg8yrejeic -H "X-CSRFToken: M1XreITl3Ys0DARMvsjmcMQGwJHhsD1be61K9ziuH0JXNlbJKRI8nlgg8yrejeic" $pc:8000/$2
+	curl -F "dat=@$1" --cookie csrftoken=AzhMJQpnEuMHFneLdAL7Hp2CessJySSBKypcoVDSnXjTQtn0oHBvkrXbDk3GfDM8 -H "X-CSRFToken: AzhMJQpnEuMHFneLdAL7Hp2CessJySSBKypcoVDSnXjTQtn0oHBvkrXbDk3GfDM8" $pc/$2
 }
 
 
@@ -185,25 +186,14 @@ function vi2 {
 	ssh $im -p8022 "echo nun leer; ls $dc"
 }
 
-
-function we2 {
-	url='https://www.accuweather.com/en/de/hepberg/85120/weather-forecast/172784'
-		
-	downl=`wget -q -O- "$url"`
-	#echo $downl
-	ort=`echo $downl | awk -F\' '/acm_RecentLocationsCarousel\.push/{print$1}' 
-	#| awk "NR==$zeile"`
-	
-	#ort=`echo "$ort"| awk -F\" '{print $2}'`
-	#text=`echo "$text"| awk -F\" '{print $2}'`
-	echo $ort
-}
-
-
 function we {
-	date +%T
-	url='https://www.accuweather.com/en/de/hepberg/85120/weather-forecast/172784'
-	wget -q -O- $url | awk -F\' '/acm_RecentLocationsCarousel\.push/{ print$0 } ' |head -1
+	#date +%T
+	url='http://www.accuweather.com/en/de/hof/95028/weather-forecast/172202'
+	
+	wget -q -O- "$url" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print $2": "$16", "$12"°" }'| head -1
+
+	#url='https://www.accuweather.com/en/de/hepberg/85120/weather-forecast/172784'
+	#wget -q -O- $url | awk -F\' '/acm_RecentLocationsCarousel\.push/{ print$0 } ' |head -1
 }
 
 
@@ -308,7 +298,7 @@ alias ec=echo
 alias -g le='|less'
 alias -g hel="--help |less"
 alias -g irc=$ir:/root
-alias les=less
+alias es=less
 alias m=man
 alias pw=pwd
 alias r='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
