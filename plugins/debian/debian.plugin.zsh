@@ -2,6 +2,7 @@
 
 dt=/root/django
 dp=/home/pi/django
+tm=$dt/media
 
 ht=/home/t
 hu=/home/uk
@@ -49,12 +50,11 @@ function cb {
 
 
 function cv {
-	#scp -P8022 $im:$ds/DCIM/Camera/"*" root@$il:/root/vid 
+	m=$( date +"%b" |tr '[A-Z]' '[a-z]' )
 
-	#ffmpeg -i `ls -t|head -1`  -strict -2 ${ echo ${ ls -t | head -1 } | sed 's/\.[^.]*/.mp4/'}
-	
-	ffmpeg -i $ak  -strict -2 `echo $akt | sed 's/\.[^.]*/.mp4/'`
-	ls -lt
+	#ffmpeg -i $ak  -strict -2 `echo $ak | sed 's/\.[^.]*/.mp4/'`
+	ffmpeg -i $ak  -strict -2 `echo $m.mp4`
+	ls -lth
 	}
 
 function cop {
@@ -110,8 +110,10 @@ function ma(){
 
 
 function ml(){
+	cd $mu
 	mplayer $1
 }
+compdef _ml ml
 
 
 function mp(){

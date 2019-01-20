@@ -1,6 +1,5 @@
 arc=`uname -a |cut -d' ' -f 13`
 lsb=`uname -a |cut -d' ' -f 14`
-mua=$ds/music
 
 
 function ci(){

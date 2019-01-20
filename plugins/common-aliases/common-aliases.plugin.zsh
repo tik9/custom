@@ -11,22 +11,20 @@ py=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
 
 zr=~/.zshrc
 
-bi=$ho/bilder
+bi=/home/t/bilder
 ds=/storage/emulated/0
 dc=$ds/DCIM/Camera
 th=/data/data/com.termux/files/home
 mu=/root/musik
+mua=$ds/music
 wa=$ds/WhatsApp/Media\ Images
-
-dt=/root/django/
-tm=$dt/media
 
 os=`uname -a |cut -d' ' -f 1`
 ipadr=`ip addr show wlan0 | sed -n -E 's/^[ ]*inet ([0-9.]*).*/\1/p'`
 
-declare -A ad
-ad[tk]='user153015@gmail.com' ; alias -g tk=$ad[tk]
-ad[t]='01573 9598 220 1'
+declare -A adr
+adr[tk]='user153015@gmail.com' ; alias -g tk="ec $adr[tk]"
+adr[t]='01573 9598 220 1'
 
 
 mh=192.168.43 ; iho=$mh.1 # mobil hotspot 
@@ -42,7 +40,7 @@ irr=178.27.248.226
 
 # Bearbeiten von Dateien
 function cm2(){
-	sed -i "s/\(cal 2018 |head -n\) [0-9][0-9]\( | tail -n\) [0-9][0-9]/\1 $1\2 $2/" $co
+	sed -i "s/\(cal 2019 |head -n\) [0-9][0-9]\( | tail -n\) [0-9][0-9]/\1 $1\2 $2/" $co
 	exec zsh
 }
 
@@ -67,12 +65,6 @@ function alterKern(){
 	#sed -n '/'`uname -r`'/q;p' : Druckt zeilen vor aktuellem Kernel
 }
 
-function cl(){
-	(( !$#)) && po=''||po=$1 
-	(( !# $2)) && da=''||da=$2 
-	curl localhost:$po/$da
-}
-
 
 function ersetz {
 	if [[ $1 = VID* ]]; then
@@ -90,7 +82,6 @@ function hs(){
 	((!$#)) && beginn='' || beginn=$1
 	fc -li $beginn |less
 }
-
 
 
 function k(){
@@ -126,16 +117,10 @@ function lö(){
 	rm -rf "$@";ls
 }
 
-
-function pk(){
-	pkill $1; p2 $1
-}
-	
 	
 function pr2(){
 	grep $1 =(ps aux)
 }
-
 
 
 function scmysql {
@@ -186,17 +171,6 @@ function vi2 {
 	ssh $im -p8022 "echo nun leer; ls $dc"
 }
 
-function we {
-	#date +%T
-	url='http://www.accuweather.com/en/de/hof/95028/weather-forecast/172202'
-	
-	wget -q -O- "$url" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print $2": "$16", "$12"°" }'| head -1
-
-	#url='https://www.accuweather.com/en/de/hepberg/85120/weather-forecast/172784'
-	#wget -q -O- $url | awk -F\' '/acm_RecentLocationsCarousel\.push/{ print$0 } ' |head -1
-}
-
-
 function wlans {
 	iwlist wlan0 scan | sed  -n 's/ESSID:"\(.*\)"/\1/p' | sort
 }
@@ -231,7 +205,6 @@ alias ff="find / -xdev -name"
 #grep
 alias -g gr="|grep -ai"
 alias grep="grep -i"
-alias hgrep="fc -El 0 | grep"
 
 
 # head / tail
@@ -239,8 +212,6 @@ alias ta='tail -f'
 alias -g ti='| tail'
 
 #ip's
-alias il='ec $il'
-alias im='ec $im'
 alias ipi='curl ipinfo.io/ip'
 alias ir='ec $ir'
 
@@ -261,6 +232,7 @@ alias mst='mysql -uroot d -e "show tables"'
 
 
 # plugins
+alias ad="b $a"
 alias cb="b $co"
 alias db="b $db"
 alias gi="b $gi"
@@ -289,7 +261,7 @@ alias -g zr='$zr' # zshrc
 
 
 alias c=cat
-alias cm='cal 2018 |head -n 40 | tail -n 10'
+alias cm='cal 2019 |head -n 10 | tail -n 10'
 alias dh='df -h'
 alias da='date +"%T"'
 alias dat='date +"Tag %d"'
