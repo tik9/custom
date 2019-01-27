@@ -39,12 +39,14 @@ function j2(){
 }
 
 
-function ki(){
+function ki {
 		pkill $1;
 		echo "Prozesse mit $1 \n"
 		ps -ef|grep $1
 }
 
+
+function ml { /cygdrive/c/mplayer/mplayer.exe $1 }
 
 
 function q(){

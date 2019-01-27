@@ -1,7 +1,9 @@
+#echo 
+
 ti='de63721500 0000 5052 4271 181'
 ak=`ls -t|head -1`
 
-a=$ZSH_CUSTOM/plugins/android/android.plugin.zsh
+ad=$ZSH_CUSTOM/plugins/android/android.plugin.zsh
 co2=plugins/common-aliases/common-aliases.plugin.zsh; co=$ZSH_CUSTOM/$co2
 cy2=plugins/cygwin/cygwin.plugin.zsh; cy=$ZSH_CUSTOM/$cy2
 db=$ZSH_CUSTOM/plugins/debian/debian.plugin.zsh
@@ -137,6 +139,8 @@ function se {
 
 
 function upload {
+	#ushkvzEAj30sm0oBpz1kkgw4ITFXfsEz9gFKNYu91TN8FExcg1kSxIgNw9SEXPKy
+	
 	if [ -z $3 ];then; pc=localhost ; else; pc=$3 ; fi
 	#echo $pc, $1, $2
 	curl -F "dat=@$1" --cookie csrftoken=AzhMJQpnEuMHFneLdAL7Hp2CessJySSBKypcoVDSnXjTQtn0oHBvkrXbDk3GfDM8 -H "X-CSRFToken: AzhMJQpnEuMHFneLdAL7Hp2CessJySSBKypcoVDSnXjTQtn0oHBvkrXbDk3GfDM8" $pc/$2
@@ -196,9 +200,7 @@ alias cu=curl
 
 
 #find
-function fin {
-	find . -type f -name $1
-}
+alias fin='find . -type f -name'
 
 alias ff="find / -xdev -name"
 
@@ -228,12 +230,12 @@ alias lt='ls -lht'
 
 #mysql
 alias msd='mysql -uroot d'
-alias mst='mysql -uroot d -e "show tables"'
+alias ms='mysql -uroot d -e "show tables"'
 
 
 # plugins
-alias ad="b $a"
-alias cb="b $co"
+alias ad="b $ad"
+alias co="b $co"
 alias db="b $db"
 alias gi="b $gi"
 

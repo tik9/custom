@@ -30,8 +30,8 @@ function as(){
 
 
 function b(){
-	if [[ $lsb = Ubuntu ]]; then; /root/src/src_geany-1.28/usr/bin/geany $1 &
-	else;vim $1;fi
+	if [[ `hostname` = t-laptop ]]; then; /root/src/src_geany-1.28/usr/bin/geany $1 &
+	else; geany $1 & ;fi
 }
 
 
@@ -49,7 +49,7 @@ function cb {
 }
 
 
-function cv {
+function cov {
 	m=$( date +"%b" |tr '[A-Z]' '[a-z]' )
 
 	#ffmpeg -i $ak  -strict -2 `echo $ak | sed 's/\.[^.]*/.mp4/'`
@@ -109,8 +109,8 @@ function ma(){
 }
 
 
-function ml(){
-	cd $mu
+function ml {
+	if [[ $1 != http://80.237.156.8:8120 ]]; then ; cd $mu ; fi
 	mplayer $1
 }
 compdef _ml ml
@@ -129,6 +129,13 @@ function q(){
 function re {
 	apt remove $1 -y
 }
+
+
+function s {
+	if [[ `hostname` = t-laptop ]] ; then ; pm-suspend ; else
+	lxqt-leave --suspend ; fi
+}
+
 
 function schieb {
 	echo "`ls -t $dow | head -n 1` \n"
@@ -154,7 +161,6 @@ compdef _ml z2
 #apt
 alias ase='apt search'
 alias ali='apt list --installed'
-# List available updates only
 alias aar='sudo apt autoremove -y'
 alias ap='apt policy' 
 alias au='sudo apt update'   
@@ -172,15 +178,17 @@ alias vd='/root/vid;l'
 alias j='ec $ipadr'
 alias j2='ec $ipadr|cut -d. -f4'
 
+#programme
+alias -s md=b
+alias -s mp4=mplayer
+alias -s pdf=mupdf
+
+
 alias a+="amix +"
 alias a-="amix -"
 alias gp='gpicview'
 alias hi='hibernate'
-
-alias -s pdf=mupdf
-alias -s mp4=mplayer
-
-alias s='pm-suspend'
+alias sd='lxqt-leave --shutdown'
 alias si='sudo -i'
 alias up='upload  `ls -t|head -1` vid $ir  '
 alias v='ack -iw'
