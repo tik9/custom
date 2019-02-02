@@ -1,5 +1,6 @@
 arc=`uname -a |cut -d' ' -f 13`
 lsb=`uname -a |cut -d' ' -f 14`
+ipadr=`ip addr show wlan0 | sed -n -E 's/^[ ]*inet ([0-9.]*).*/\1/p'`
 
 
 function ci(){
@@ -108,7 +109,6 @@ alias re="apt remove"
 
 #ips
 alias j='ec $ipadr'
-alias ej='ec $ipadre'
 alias j2='ec $ipadr|cut -d. -f4'
 
 

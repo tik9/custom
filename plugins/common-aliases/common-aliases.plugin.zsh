@@ -1,5 +1,3 @@
-#echo 
-
 ti='de63721500 0000 5052 4271 181'
 ak=`ls -t|head -1`
 
@@ -19,15 +17,13 @@ dc=$ds/DCIM/Camera
 th=/data/data/com.termux/files/home
 mu=/root/musik
 mua=$ds/music
-wa=$ds/WhatsApp/Media\ Images
+wa="$ds/WhatsApp/Media/WhatsApp\ Images"
 
 os=`uname -a |cut -d' ' -f 1`
-ipadr=`ip addr show wlan0 | sed -n -E 's/^[ ]*inet ([0-9.]*).*/\1/p'`
 
 declare -A adr
 adr[tk]='user153015@gmail.com' ; alias -g tk="ec $adr[tk]"
 adr[t]='01573 9598 220 1'
-
 
 mh=192.168.43 ; iho=$mh.1 # mobil hotspot 
 ih=192.168.0; il=$ih.109
@@ -52,13 +48,13 @@ function p_rm {
 }
 
 
-function p_add(){
+function p_add {
 	sed -i "s/\(^plugins=.*\))/\1 $1)/" $zr
 	exec zsh
 }
 
 
-function arg(){
+function arg {
 	((!$#)) && echo Keine Argumente!||echo args! $@
 }
 
@@ -175,6 +171,15 @@ function vi2 {
 	ssh $im -p8022 "echo nun leer; ls $dc"
 }
 
+
+function wab {
+	
+	ssh -p8022 $im "ls $wa"
+	scp -P8022 $im:$wa/"*" root@$il:/home/t/bilder/max_jan19 
+	cd /home/t/bilder
+}
+
+
 function wlans {
 	iwlist wlan0 scan | sed  -n 's/ESSID:"\(.*\)"/\1/p' | sort
 }
@@ -189,7 +194,9 @@ alias w='alias -m'
 
 #cd's
 alias ar=~/arduino
-alias bi=$bi
+alias -g be=/home/t/bewerbung
+alias -g bi=$bi
+alias cv=/root/cv
 alias mu=$mu
 alias o=$ZSH_CUSTOM
 alias oh=$ZSH
@@ -215,7 +222,6 @@ alias -g ti='| tail'
 
 #ip's
 alias ipi='curl ipinfo.io/ip'
-alias ir='ec $ir'
 
 
 # Konsole
@@ -271,7 +277,6 @@ alias di=dict
 alias ec=echo
 alias -g le='|less'
 alias -g hel="--help |less"
-alias -g irc=$ir:/root
 alias es=less
 alias m=man
 alias pw=pwd

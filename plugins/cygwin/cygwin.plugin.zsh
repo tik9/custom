@@ -21,16 +21,7 @@ zr=$home/.zshrc
 dow=$cygd/users/tk/downloads
 
 
-function b(){ /cygdrive/c/notepad++/notepad++.exe $1 & }
-
-
-function ci(){
-		echo `$1` > /dev/clipboard
-}
-
-function co(){
-		cat /dev/clipboard
-}
+function b { /cygdrive/c/notepad++/notepad++.exe $1 & }
 
 function j2(){
 	letztes=''
@@ -76,12 +67,11 @@ alias -g dow=$dow
 alias cb="b $co"
 alias -g com="$co"
 alias cyb="b $cy"
-alias gb="b $gi"
 alias zb="b $zr"
 
 alias allpkgs='apt-cyg listall'
 alias arc="echo $arc"
-alias ic='$ipconfig'
+alias j='$ipconfig'
 alias in='apt-cyg install'
 alias kp='kill python'
 alias rem='apt-cyg remove';

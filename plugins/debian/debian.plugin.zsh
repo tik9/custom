@@ -10,6 +10,7 @@ hu=/home/uk
 dow=$ht/Downloads
 
 lsb=`lsb_release -i|cut -d: -f2|sed -e 's/[[:blank:]]//'`
+ipadr=`ip addr show wlan0 | sed -n -E 's/^[ ]*inet ([0-9.]*).*/\1/p'`
 
 
 function am(){
@@ -80,7 +81,7 @@ function dre {
 }
 
 
-function i {
+function ir {
 	if [[ `echo $ipadr | cut -f -3 -d .` = 192.168.0 ]]; then
 		ssh root@$ir
 	else
