@@ -1,13 +1,11 @@
 #ec `hostname`
 
-dt=/root/django
 dp=/home/pi/django
-tm=$dt/media
+tm=$dp/media
 
 ht=/home/t
 hu=/home/uk
 
-dow=$ht/Downloads
 
 lsb=`lsb_release -i|cut -d: -f2|sed -e 's/[[:blank:]]//'`
 ipadr=`ip addr show wlan0 | sed -n -E 's/^[ ]*inet ([0-9.]*).*/\1/p'`
@@ -180,6 +178,7 @@ alias j='ec $ipadr'
 alias j2='ec $ipadr|cut -d. -f4'
 
 #programme
+alias -s jpg=gpicview
 alias -s md=b
 alias -s mp4=mplayer
 alias -s pdf=mupdf

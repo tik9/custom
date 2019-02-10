@@ -10,13 +10,15 @@ gi=$ZSH_CUSTOM/plugins/git/git.plugin.zsh
 py=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
 
 zr=~/.zshrc
+ds=/storage/emulated/0
 
 bi=/home/t/bilder
-ds=/storage/emulated/0
 dc=$ds/DCIM/Camera
-th=/data/data/com.termux/files/home
+doa=$ds/Download
+dod=$ht/Downloads
 mu=/root/musik
 mua=$ds/music
+th=/data/data/com.termux/files/home
 wa="$ds/WhatsApp/Media/WhatsApp\ Images"
 
 os=`uname -a |cut -d' ' -f 1`
@@ -94,24 +96,21 @@ function k(){
 }
 
 
-function ki(){
+function ki {
 		killall $1;
 		echo "Prozesse mit $1 \n"
 		ps -ef|grep $1
 }
 
 
-
-function ku(){
+function kue {
 	((!$#)) && 	dat=`ls -t | head -1` || dat=$1
 	neu=$(echo "$dat"| sed 's/\(.*\)................\(\..*\)/\1\2/')
 	mv "$dat" $neu
-	echo $neu
-	l
 }
 
 
-function lö(){
+function lö {
 	rm -rf "$@";ls
 }
 
@@ -121,25 +120,30 @@ function pr2(){
 }
 
 
-function scmysql {
-	mysqldump d> $(date +"%m_%Y").sql
-	scp `ls -t | head -n1` $il:/root/sqlBack 
-	rm $(date +"%m_%Y").sql
-}
-
-function se {
+function tse {
 	nr=`ssh $im -p8022 termux-contact-list |jq -r --arg wert "$1" '.[] | select(.name==$wert)|.number'`
+	echo $nr
 	ssh $im -p8022 	termux-sms-send -n "$nr \"${@:2}\""
 
 }
 
+function ti {
+	ssh $im -p8022 termux-sms-inbox
+}
+
+
+
+function tnr {
+	termux-contact-list |jq -r --arg v1 "$1" '.[] | select(.name==$v1)|.number'
+	}
+
 
 function upload {
 	#ushkvzEAj30sm0oBpz1kkgw4ITFXfsEz9gFKNYu91TN8FExcg1kSxIgNw9SEXPKy
-	
-	if [ -z $3 ];then; pc=localhost ; else; pc=$3 ; fi
-	#echo $pc, $1, $2
-	curl -F "dat=@$1" --cookie csrftoken=AzhMJQpnEuMHFneLdAL7Hp2CessJySSBKypcoVDSnXjTQtn0oHBvkrXbDk3GfDM8 -H "X-CSRFToken: AzhMJQpnEuMHFneLdAL7Hp2CessJySSBKypcoVDSnXjTQtn0oHBvkrXbDk3GfDM8" $pc/$2
+	csrf=AzhMJQpnEuMHFneLdAL7Hp2CessJySSBKypcoVDSnXjTQtn0oHBvkrXbDk3GfDM8
+	#for f in * ; do
+		curl -F "dat=@$1" --cookie csrftoken=$csrf -H "X-CSRFToken: $csrf" localhost/$2
+	#done
 }
 
 
@@ -173,10 +177,9 @@ function vi2 {
 
 
 function wab {
-	
 	ssh -p8022 $im "ls $wa"
-	scp -P8022 $im:$wa/"*" root@$il:/home/t/bilder/max_jan19 
-	cd /home/t/bilder
+	scp -P8022 $im:$wa/"*" root@$il:/home/t/bilder/
+	#cd /home/t/bilder
 }
 
 
@@ -195,11 +198,12 @@ alias w='alias -m'
 #cd's
 alias ar=~/arduino
 alias -g be=/home/t/bewerbung
-alias -g bi=$bi
+alias bi=$bi
 alias cv=/root/cv
-alias mu=$mu
+alias mus=$mu
 alias o=$ZSH_CUSTOM
 alias oh=$ZSH
+alias sa=/etc/nginx/sites-available
 alias y='cd; l'
 
 #curl
@@ -216,10 +220,6 @@ alias -g gr="|grep -ai"
 alias grep="grep -i"
 
 
-# head / tail
-alias ta='tail -f'
-alias -g ti='| tail'
-
 #ip's
 alias ipi='curl ipinfo.io/ip'
 
@@ -235,19 +235,14 @@ alias ll='ls | less'
 alias lt='ls -lht'
 
 #mysql
-alias msd='mysql -uroot d'
-alias ms='mysql -uroot d -e "show tables"'
-
 
 # plugins
-alias ad="b $ad"
 alias co="b $co"
 alias db="b $db"
 alias gi="b $gi"
 
 # ps
 alias ks="ph; ki ssh; ph"
-alias ph="pr ssh"
 alias pp='pr python'
 alias pr='ps -ef|grep'
 
@@ -257,6 +252,7 @@ alias cida='ar; cp idr .; gi "id rsa kopiert" ; c idr'
 alias cida2='ar; gl; c id_rsa.pub >> ida; c ida' 
 alias -g idr=~/.ssh/id_rsa.pub 
 alias -g ida=~/.ssh/authorized_keys 
+alias ph='pr ssh'
 alias sr='ssh root@$ir'
 alias ss='ssh -p8022 $im'
 
@@ -272,7 +268,7 @@ alias c=cat
 alias cm='cal 2019 |head -n 10 | tail -n 10'
 alias dh='df -h'
 alias da='date +"%T"'
-alias dat='date +"Tag %d"'
+alias dt='date +"Tag %d"'
 alias di=dict
 alias ec=echo
 alias -g le='|less'

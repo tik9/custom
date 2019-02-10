@@ -1,15 +1,9 @@
 #compdef manage.py
 
-alias 0="dt;kp;dru &!"
+alias 0="uwsgi --socket :8001 --module myproject.wsgi --py-autoreload 1&"
 alias dp=$dp
-alias dt=$dt
 alias dm='p3 manage.py'
-alias dru='dm runserver 0.0.0.0:8000'
-alias dv='echo django version; p3 -c "import django;print(django.get_version())"'
-alias mk="dm makemigrations"
-alias rs='dm runserver'
-alias tm='$tm; l'
-
+alias tm=$tm
 
 typeset -ga nul_args
 nul_args=(
@@ -385,11 +379,7 @@ _applist() {
   local line
   local -a apps
   _call_program help-command "python -c \"import os.path as op, re, django.conf, sys;\\
-                                          bn=op.basename(op.abspath(op.curdir));[sys\\
-                                          .stdout.write(str(re.sub(r'^%s\.(.*?)$' %
-                                          bn, r'\1', i)) + '\n') for i in django.conf.settings.\\
-                                          INSTALLED_APPS if re.match(r'^%s' % bn, i)]\"" \
-                             | while read -A line; do apps=($line $apps) done
+bn=op.basename(op.abspath(op.curdir));[sys\\.stdout.write(str(re.sub(r'^%s\.(.*?)$' %bn, r'\1', i)) + '\n') for i in django.conf.settings.\\INSTALLED_APPS if re.match(r'^%s' % bn, i)]\"" | while read -A line; do apps=($line $apps) done
   _values 'Application' $apps && ret=0
 }
 

@@ -3,21 +3,6 @@ lsb=`uname -a |cut -d' ' -f 14`
 ipadr=`ip addr show wlan0 | sed -n -E 's/^[ ]*inet ([0-9.]*).*/\1/p'`
 
 
-function ci(){
-	termux-clipboard-set `$@`
-}
-
-function cj(){
-	termux-clipboard-set $@
-}
-
-
-function co(){
-	termux-clipboard-get
-
-}
-
-
 function i {
 	if [[ `echo $ipadr | cut -f -3 -d .` = 192.168.0 ]]; then
 	
@@ -41,17 +26,6 @@ function j2(){
 	if [ -z $1 ]; then ; letztes='cut -d. -f4'; fi
 	ip addr show wlan0 | sed  -n -E 's/inet ([0-9.]*).*/\1/p'| eval $letztes
 }
-
-
-function n2 {
-	echo `termux-sms-inbox | jq -r '.[0].number'`
-}
-
-
-function nr {
-	if [ -z $1 ]; then; nr=vi; else; nr=$1;fi
-	termux-contact-list |jq -r --arg v1 "$nr" '.[] | select(.name==$v1)|.number'
-	}
 
 
 function int_trap(){ echo download ende }
