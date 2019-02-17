@@ -49,7 +49,7 @@ function cb {
 
 
 function cov {
-	m=$( date +"%b" |tr '[A-Z]' '[a-z]' )
+	m="max_$( date +"%b" |tr '[A-Z]' '[a-z]' )2019"
 
 	#ffmpeg -i $ak  -strict -2 `echo $ak | sed 's/\.[^.]*/.mp4/'`
 	ffmpeg -i $ak  -strict -2 `echo $m.mp4`
@@ -137,17 +137,13 @@ function s {
 
 
 function schieb {
-	echo "`ls -t $dow | head -n 1` \n"
+	echo "`ls -t $dod | head -n 1` \n"
 
 	for i in `seq 1 $nr`
-		mv $dow/"`ls -t $dow | head -n1`" .
+		mv $dod/"`ls -t $dod | head -n1`" .
 	ls
 }
 
-
-function vl {
-	ffprobe $1 2> >(grep Duration)
-}
 
 
 function z2(){
@@ -178,6 +174,7 @@ alias j='ec $ipadr'
 alias j2='ec $ipadr|cut -d. -f4'
 
 #programme
+alias -s 3gp=mplayer
 alias -s jpg=gpicview
 alias -s md=b
 alias -s mp4=mplayer

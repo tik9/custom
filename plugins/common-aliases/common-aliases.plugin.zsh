@@ -15,7 +15,7 @@ ds=/storage/emulated/0
 bi=/home/t/bilder
 dc=$ds/DCIM/Camera
 doa=$ds/Download
-dod=$ht/Downloads
+dod=/home/t/Downloads
 mu=/root/musik
 mua=$ds/music
 th=/data/data/com.termux/files/home
@@ -132,17 +132,15 @@ function ti {
 }
 
 
-
 function tnr {
 	termux-contact-list |jq -r --arg v1 "$1" '.[] | select(.name==$v1)|.number'
 	}
 
 
 function upload {
-	#ushkvzEAj30sm0oBpz1kkgw4ITFXfsEz9gFKNYu91TN8FExcg1kSxIgNw9SEXPKy
 	csrf=AzhMJQpnEuMHFneLdAL7Hp2CessJySSBKypcoVDSnXjTQtn0oHBvkrXbDk3GfDM8
 	#for f in * ; do
-		curl -F "dat=@$1" --cookie csrftoken=$csrf -H "X-CSRFToken: $csrf" localhost/$2
+		curl -F "dat=@$1" --cookie csrftoken=$csrf -H "X-CSRFToken: $csrf" localhost:8000/$2
 	#done
 }
 
@@ -153,7 +151,7 @@ function vi1 {
 
 
 function vid(){
-	verz=/root/django/media
+	verz=/home/pi/django/media
 	
 	#rasp
 
@@ -170,16 +168,16 @@ function vid(){
 }
 
 function vi2 {
-	ssh $im -p8022 "ls $dc"
-	ssh $im -p8022 "rm $dc/*"
-	ssh $im -p8022 "echo nun leer; ls $dc"
+	ssh $im -p8022 "ls $wa $dc"
+	ssh $im -p8022 "rm $dc/* $wa/*"
+	ssh $im -p8022 "echo nun leer; ls $dc $wa"
 }
 
 
 function wab {
 	ssh -p8022 $im "ls $wa"
 	scp -P8022 $im:$wa/"*" root@$il:/home/t/bilder/
-	#cd /home/t/bilder
+	cd /home/t/bilder
 }
 
 
@@ -197,13 +195,15 @@ alias w='alias -m'
 
 #cd's
 alias ar=~/arduino
-alias -g be=/home/t/bewerbung
+alias be=/home/t/bewerbung
 alias bi=$bi
 alias cv=/root/cv
+alias dod=$dod
 alias mus=$mu
 alias o=$ZSH_CUSTOM
 alias oh=$ZSH
-alias sa=/etc/nginx/sites-available
+alias sa='/etc/nginx/sites-available;ls'
+alias se='/etc/nginx/sites-enabled; ls'
 alias y='cd; l'
 
 #curl
@@ -232,7 +232,7 @@ alias tt=tty
 # ls
 alias l='ls -lh'
 alias ll='ls | less'
-alias lt='ls -lht'
+alias lt='ls -lht | less'
 
 #mysql
 
@@ -280,7 +280,7 @@ alias r='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
 alias sl=sleep
 alias to=touch
 alias tp=top
-alias v2='ssh root@$ir "cd $dt/media; find . -maxdepth 1 -type f -exec mv {} alt \;"'
+alias v2='cd $dp/media; find . -maxdepth 1 -type f -exec mv {} alt \;'
 
 alias -g ve=--version
 alias yt='youtube-dl -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
