@@ -65,13 +65,13 @@ compdef _play_audio z
 
 #cd
 alias ds='$ds; l'
-alias dc='$ds/DCIM/Camera; l'
+alias bca='$bca; l'
 alias mu='$mu; l'
-alias wi='$wa/WhatsApp\ Images; l'
-alias wv='$wa/WhatsApp\ Video; l'
+alias bwa='$bwa;l'
+alias vwa='$wa/WhatsApp\ Video; l'
 
 #apt
-alias aar='sudo apt autoremove -y'
+alias aar='apt autoremove -y'
 alias ali="apt list --installed "
 alias ap="apt policy"
 alias as="apt show"

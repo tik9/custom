@@ -154,14 +154,15 @@ compdef _ml z2
 
 
 #apt
+alias ad='apt depends'
+alias ard='apt rdepends'
 alias ase='apt search'
 alias ali='apt list --installed'
-alias aar='sudo apt autoremove -y'
-alias ap='apt policy' 
-alias au='sudo apt update'   
-alias aud='sudo apt update && sudo apt full-upgrade'
-alias aug='sudo apt upgrade' 
-alias auu='sudo apt update && sudo apt upgrade'   
+alias aar='apt autoremove -y'
+alias au='apt update'   
+alias aud='apt update && sudo apt full-upgrade'
+alias aug='apt upgrade' 
+alias auu='apt update && sudo apt upgrade'   
 alias allpkgs='dpkg --get-selections | grep -v deinstall'
 alias pkg="apt list --upgradable "
 

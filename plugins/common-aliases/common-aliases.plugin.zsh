@@ -13,13 +13,13 @@ zr=~/.zshrc
 ds=/storage/emulated/0
 
 bi=/home/t/bilder
-dc=$ds/DCIM/Camera
+bca=$ds/DCIM/Camera
+bwa="$ds/WhatsApp/Media/WhatsApp\ Images"
 doa=$ds/Download
 dod=/home/t/Downloads
 mu=/root/musik
 mua=$ds/music
 th=/data/data/com.termux/files/home
-wa="$ds/WhatsApp/Media/WhatsApp\ Images"
 
 os=`uname -a |cut -d' ' -f 1`
 
@@ -121,14 +121,11 @@ function pr2(){
 
 
 function tse {
-	nr=`ssh $im -p8022 termux-contact-list |jq -r --arg wert "$1" '.[] | select(.name==$wert)|.number'`
+	#nr=`ssh $im -p8022 termux-contact-list |jq -r --arg wert "$1" '.[] | select(.name==$wert)|.number'`
+	nr=0037061593847
 	echo $nr
 	ssh $im -p8022 	termux-sms-send -n "$nr \"${@:2}\""
 
-}
-
-function ti {
-	ssh $im -p8022 termux-sms-inbox
 }
 
 
@@ -175,9 +172,9 @@ function vi2 {
 
 
 function wab {
-	ssh -p8022 $im "ls $wa"
-	scp -P8022 $im:$wa/"*" root@$il:/home/t/bilder/
-	cd /home/t/bilder
+	ssh -p8022 $im "ls $bwa"
+	akt=$(mkdir $( date +"%b" |tr '[A-Z]' '[a-z]' ))
+	scp -P8022 $im:$bwa/"*".jpg root@$il:$bi/$akt
 }
 
 
@@ -199,6 +196,7 @@ alias be=/home/t/bewerbung
 alias bi=$bi
 alias cv=/root/cv
 alias dod=$dod
+alias dok=/root/Dokumente
 alias mus=$mu
 alias o=$ZSH_CUSTOM
 alias oh=$ZSH
