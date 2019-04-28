@@ -191,4 +191,4 @@ alias si='sudo -i'
 alias up='upload  `ls -t|head -1` vid $ir  '
 alias v='ack -iw'
 alias wa=$is/$wa
-alias z='/etc/init.d/networking restart; we'
+alias z='/etc/init.d/networking restart'

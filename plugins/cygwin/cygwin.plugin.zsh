@@ -1,12 +1,10 @@
 
 arc=`uname -a |cut -d' ' -f 6`
-ipconfig=$cygd/Windows/System32/ipconfig.exe
-us=/cygdrive/e
 cygd=/cygdrive/c
+ipconfig=$cygd/Windows/System32/ipconfig.exe
 
 ho=home/tk
-home=c:/cygwin64/$ho
-home2=$cygd/cygwin64/$ho
+home=$cygd/cygwin64/$ho
 
 cHome=$home/.oh-my-zsh/custom
 
@@ -60,14 +58,6 @@ function schieb(){
 		mv $dow/"`ls -t $dow | head -n1`" .
 }
 
-# cds
-alias -g dow=$dow
-
-#plugins
-alias cb="b $co"
-alias -g com="$co"
-alias cyb="b $cy"
-alias zb="b $zr"
 
 alias allpkgs='apt-cyg listall'
 alias arc="echo $arc"
@@ -75,4 +65,3 @@ alias j='$ipconfig'
 alias in='apt-cyg install'
 alias kp='kill python'
 alias rem='apt-cyg remove';
-alias -g us='$us'

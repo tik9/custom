@@ -11,6 +11,7 @@ py=$ZSH_CUSTOM/plugins/python/python.plugin.zsh
 
 zr=~/.zshrc
 ds=/storage/emulated/0
+wpa=/etc/wpa_supplicant/wpa_supplicant.conf
 
 bi=/home/t/bilder
 bca=$ds/DCIM/Camera
@@ -24,18 +25,16 @@ th=/data/data/com.termux/files/home
 os=`uname -a |cut -d' ' -f 1`
 
 declare -A adr
-adr[tk]='user153015@gmail.com' ; alias -g tk="ec $adr[tk]"
+adr[tk]='user153015@gmail.com' ; alias -g tk=$adr[tk]
 adr[t]='01573 9598 220 1'
 
 mh=192.168.43 ; iho=$mh.1 # mobil hotspot 
-ih=192.168.0; il=$ih.109
-#mo=105 ;
-mo=108 ;
-im=$ih.$mo ; 
-#ra=101; 
-ra=104; 
-ir=$ih.$ra
+ih=192.168.0; 
+il=$mh.162
+im=$mh.1 ; 
+
 irr=178.27.248.226
+ir2=2.247.254.220
 
 
 # Bearbeiten von Dateien
@@ -115,8 +114,15 @@ function lö {
 }
 
 	
-function pr2(){
-	grep $1 =(ps aux)
+function prh {
+	sed -i /priority=2/s/^.// $wpa
+	cat $wpa
+}
+
+
+function prl {
+	sed -i /priority=2/s/^/#/ $wpa
+	cat $wpa
 }
 
 
@@ -143,7 +149,7 @@ function upload {
 
 
 function vi1 {
-	ssh $im -p8022 "ls $dc"
+	ssh $im -p8022 "ls $bwa"
 }
 
 
@@ -155,7 +161,7 @@ function vid(){
 	# smart
 	#scp -P8022 $im:$ds/DCIM/Camera/"*" root@$ir:$verz 
 	
-	scp -P8022 $im:$dc/"*" root@$il:/root/vid 
+	scp -P8022 $im:$bca/"*" root@$il:/root/vid 
 
 	#rasp
 	#ssh root@$ir 'ls $dt/media'
@@ -165,16 +171,16 @@ function vid(){
 }
 
 function vi2 {
-	ssh $im -p8022 "ls $wa $dc"
-	ssh $im -p8022 "rm $dc/* $wa/*"
-	ssh $im -p8022 "echo nun leer; ls $dc $wa"
+	ssh $im2 -p8022 "ls $bwa $bca"
+	ssh $im2 -p8022 "rm $bca/* $bwa/*"
+	ssh $im2 -p8022 "echo nun leer; ls $bca $bwa"
 }
 
 
 function wab {
-	ssh -p8022 $im "ls $bwa"
-	akt=$(mkdir $( date +"%b" |tr '[A-Z]' '[a-z]' ))
-	scp -P8022 $im:$bwa/"*".jpg root@$il:$bi/$akt
+	ssh -p8022 $im2 "ls $bca"
+	akt=$( date +"%b" |tr '[A-Z]' '[a-z]' )
+	scp -P8022 $im2:$bca/"*".jpg root@$il2:$bi/$akt
 }
 
 
@@ -263,7 +269,7 @@ alias -g zr='$zr' # zshrc
 
 
 alias c=cat
-alias cm='cal 2019 |head -n 10 | tail -n 10'
+alias cm='cal 2019 |head -n 18 | tail -n 8'
 alias dh='df -h'
 alias da='date +"%T"'
 alias dt='date +"Tag %d"'
@@ -274,7 +280,6 @@ alias -g hel="--help |less"
 alias es=less
 alias m=man
 alias pw=pwd
-alias r='ping `if [ $os = Linux ]; then;echo -c 4;fi` google.de'
 alias sl=sleep
 alias to=touch
 alias tp=top

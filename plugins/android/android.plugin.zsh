@@ -15,22 +15,22 @@ function i {
 }
 
 
-function install(){
+function install {
 	termux-api play-audio
 	termux-setup-storage
 }
 
 
-function j2(){
+function j2 {
 	letztes=''
 	if [ -z $1 ]; then ; letztes='cut -d. -f4'; fi
 	ip addr show wlan0 | sed  -n -E 's/inet ([0-9.]*).*/\1/p'| eval $letztes
 }
 
 
-function int_trap(){ echo download ende }
+function int_trap { echo download ende }
 
-function q(){
+function q {
 	datei=test100.zip
 
 	trap int_trap INT
@@ -43,11 +43,11 @@ function q(){
 }
 
 
-function se(){
+function se {
 	termux-sms-send -n `nr $1 | sed -e 's/ //g' ` "${@:2}"
 }
 
-function se2(){
+function se2 {
 	termux-sms-send -n $1 "${@:2}"
 }
 
