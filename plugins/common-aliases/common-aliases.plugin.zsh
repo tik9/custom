@@ -1,19 +1,29 @@
 # alias/Funktionen
 alias d='declare -f'
-alias agr='alias|grep'
+alias ag='alias|grep'
 alias t='type'
 alias m='alias -m'
+
+#calendar
+alias ca='ncal -A2'
 
 # zsh
 alias e="exec zsh"
 alias plu='ec $plugins'
 alias x=exit
 
+#cds
+alias o=$ZSH_CUSTOM
+alias y=cd
+
+
 alias c=cat
-alias e="exec zsh"
-alias m=man
+alias ec="echo"
+alias di=dict
+alias ma=man
 alias pw=pwd
 alias s=pm-suspend
+
 
 function b(){
 	if [[ `hostname` = t-laptop ]]; then; /root/src/src_geany-1.28/usr/bin/geany $1 &
@@ -70,9 +80,9 @@ alias p='ps -f'
 alias sortnr='sort -n -r'
 alias unexport='unset'
 
-alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
+#~ alias rm='rm -i'
+#~ alias cp='cp -i'
+#~ alias mv='mv -i'
 
 # zsh is able to auto-do some kungfoo
 # depends on the SUFFIX :)
