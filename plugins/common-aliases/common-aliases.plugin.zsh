@@ -1,8 +1,8 @@
 # alias/Funktionen
-alias d='declare -f'
 alias ag='alias|grep'
-alias t='type'
+alias d='declare -f'
 alias m='alias -m'
+alias t='type'
 
 #calendar
 alias ca='ncal -A2'
@@ -23,16 +23,18 @@ alias di=dict
 alias ma=man
 alias pw=pwd
 alias s=pm-suspend
+alias z='/etc/init.d/networking restart'
 
-function wlans {iwlist wlan0 scan | sed -n 's/ESSID:"\(.*\)"/\1/p;s/Quality=\([0-9][0-9]\/[0-9][0-9]\).*/\1/p'
+function wlans {
+	iwlist wlan0 scan | $(sed -n 's/ESSID:"\(.*\)"/\1/p;s/Quality=\([0-9][0-9]\/[0-9][0-9]\).*/\1/p')
 }
 
-function b{
+function b {
 	if [[ `hostname` = t-laptop ]]; then; /root/src/src_geany-1.28/usr/bin/geany $1 &
 	else; geany $1 & ;fi
 }
 
-function q{
+function q(){
 	datei=test100.zip
 	wget http://speedtest.wdc01.softlayer.com/downloads/$datei --output-document=/dev/null
 }
