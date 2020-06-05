@@ -1,11 +1,12 @@
 # alias/Funktionen
+alias ag='alias | grep'
 alias d='declare -f'
-alias ag='alias|grep'
-alias t='type'
 alias m='alias -m'
+alias t='type'
 
 #calendar
 alias ca='ncal -A2'
+alias da='date'
 
 # zsh
 alias e="exec zsh"
@@ -13,26 +14,38 @@ alias plu='ec $plugins'
 alias x=exit
 
 #cds
+alias j='/var/www/html/'
+
 alias o=$ZSH_CUSTOM
 alias y=cd
 
 
 alias c=cat
-alias ec="echo"
+alias ec=echo
 alias di=dict
 alias ma=man
 alias pw=pwd
 alias s=pm-suspend
+alias z='/etc/init.d/networking restart'
 
+function ic {
+	ifconfig|sed -n  
+	's/\s\{8\}inet\s\(192\.168\.[0-9]\{2\}\.[0-9]\{3\}\).*/\1/p'
+}
 
-function b(){
+function wlans {
+	iwlist wlan0 scan | $(sed -n 's/ESSID:"\(.*\)"/\1/p;s/Quality=\([0-9][0-9]\/[0-9][0-9]\).*/\1/p')
+}
+
+function b {
 	if [[ `hostname` = t-laptop ]]; then; /root/src/src_geany-1.28/usr/bin/geany $1 &
 	else; geany $1 & ;fi
 }
 
 function q(){
-	datei=test100.zip
-	wget http://speedtest.wdc01.softlayer.com/downloads/$datei --output-document=/dev/null
+	datei = test100.zip wget
+	http://speedtest.wdc01.softlayer.com/downloads/$datei 
+	--output-document=/dev/null
 }
 
 
@@ -66,7 +79,6 @@ alias -g LL="2>&1 | less"
 alias -g CA="2>&1 | cat -A"
 alias -g NE="2> /dev/null"
 alias -g NUL="> /dev/null 2>&1"
-alias -g P="2>&1| pygmentize -l pytb"
 
 alias dud='du -d 1 -h'
 alias duf='du -sh *'
