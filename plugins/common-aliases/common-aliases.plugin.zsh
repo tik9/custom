@@ -43,9 +43,8 @@ function b {
 }
 
 function q(){
-	datei = test100.zip wget
-	http://speedtest.wdc01.softlayer.com/downloads/$datei 
-	--output-document=/dev/null
+	datei = test100.zip
+	wget http://speedtest.wdc01.softlayer.com/downloads/$datei --output-document=/dev/null
 }
 
 
