@@ -43,7 +43,7 @@ function b {
 }
 
 function q(){
-	datei = test100.zip
+	set datei = test100.zip
 	wget http://speedtest.wdc01.softlayer.com/downloads/$datei --output-document=/dev/null
 }
 
@@ -61,7 +61,7 @@ alias lS='ls -1FSsh'
 alias lart='ls -1Fcart'
 alias lrt='ls -1Fcrt'
 
-alias zshrc='${=EDITOR} ~/.zshrc' # Quick access to the ~/.zshrc file
+alias zshrc='${=EDITOR} ~/.zshrc'
 
 alias grep='grep --color'
 alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS} '
