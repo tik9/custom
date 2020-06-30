@@ -1,0 +1,28 @@
+#!/bin/bash
+
+sudoe='/etc/sudoers'
+cust='custom'
+omz='/root/.oh-my-zsh/custom'
+ssh_conf='/etc/ssh/sshd_config'
+
+apt install git zsh curl vim openssh-server  -y
+chsh -s /bin/zsh
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+cd $omz
+
+rm -rf $cust
+git clone https://github.com/tik9/$cust.git
+cd $cust
+
+git push --set-upstream origin master
+git config --global user.email ""
+
+#sed time
+sed -i -e "USER ALL=(ALL) NOPASSWD: ALL" $sudoe
+sed -i '$ d' $sudoe
+
+sed -i -e '#PubkeyAuthentication yes' 
+
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
