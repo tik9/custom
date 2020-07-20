@@ -1,5 +1,5 @@
 		
-plugins=(common-aliases git git-prompt zsh-autosuggestions )
+plugins=(common-aliases git zsh-autosuggestions )
 
 export ZSH=/usr/share/oh-my-zsh
 
