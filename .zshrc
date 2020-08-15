@@ -1,14 +1,9 @@
 		
-plugins=(common-aliases git zsh-autosuggestions )
+plugins=(common-aliases debian git zsh-autosuggestions )
 
 export ZSH=/usr/share/oh-my-zsh
 
 zstyle ':completion:*' special-dirs true
-
-fpath=($ZSH/custom/functions $fpath)
-
-#autoload _rest
-#_rest 
 
 DISABLE_AUTO_UPDATE="true"
 

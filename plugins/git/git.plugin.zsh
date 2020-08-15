@@ -30,7 +30,7 @@ function work_in_progress() {
 # (sorted alphabetically)
 #
 
-alias g='git'
+alias gi='git'
 
 #~ alias ga='git add'
 alias ga='git add --all'

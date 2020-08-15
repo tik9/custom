@@ -1,12 +1,2 @@
 
 ZSH=/data/data/com.termux/files/home/.oh-my-zsh
-
-zstyle ':completion:*' special-dirs true
-
-fpath=($ZSH/custom/functions $fpath)
-
-plugins=(common-aliases android git zsh-autosuggestions python ) 
-
-source $ZSH/custom/oh-my-zsh.sh
-
-PROMPT='%{$fg[cyan]%} Tablet / Smart %{$fg[yellow]%} %(4~|.../%3~|%~)%{$fg[cyan]%}%{$reset_color%} → '

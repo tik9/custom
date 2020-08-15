@@ -2,6 +2,7 @@
 alias ag='alias | grep'
 alias d='declare -f'
 alias m='alias -m'
+alias si='sudo -i'
 alias t='type'
 
 #calendar
@@ -14,10 +15,12 @@ alias plu='ec $plugins'
 alias x=exit
 
 #cds
-alias j='/var/www/html/'
+alias cv='/home/t/cv'
+alias ml='/root/ml'
+
 
 alias o=$ZSH_CUSTOM
-alias y=cd
+alias pm='pm-suspend'
 
 
 alias c=cat
@@ -28,23 +31,39 @@ alias pw=pwd
 alias s=pm-suspend
 alias z='/etc/init.d/networking restart'
 
+
+function ch {
+	chromium-browser --auto-open-devtools-for-tabs $1 &
+}
+
+
+function g {
+	sudo geany $1 &
+}
+
 function ic {
-	ifconfig|sed -n  
+	ip addr show wlp2s0 | sed -n  
 	's/\s\{8\}inet\s\(192\.168\.[0-9]\{2\}\.[0-9]\{3\}\).*/\1/p'
 }
 
-function wlans {
-	iwlist wlan0 scan | $(sed -n 's/ESSID:"\(.*\)"/\1/p;s/Quality=\([0-9][0-9]\/[0-9][0-9]\).*/\1/p')
-}
+function p {
+	datei=cv_en
+	
+	input=input/$datei.md
+	output=output/$datei.html
+	pandoc $input -o $output -s;killall chrome; ch $output
 
-function b {
-	if [[ `hostname` = t-laptop ]]; then; /root/src/src_geany-1.28/usr/bin/geany $1 &
-	else; geany $1 & ;fi
 }
 
 function q(){
-	set datei = test100.zip
+	datei=test100.zip
+	
 	wget http://speedtest.wdc01.softlayer.com/downloads/$datei --output-document=/dev/null
+}
+
+
+function wlans {
+	iwlist wlan0 scan | $(sed -n 's/ESSID:"\(.*\)"/\1/p;s/Quality=\([0-9][0-9]\/[0-9][0-9]\).*/\1/p')
 }
 
 
@@ -66,7 +85,7 @@ alias zshrc='${=EDITOR} ~/.zshrc'
 alias grep='grep --color'
 alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS} '
 
-alias t='tail -f'
+alias le='less'
 
 # Command line head / tail shortcuts
 alias -g H='| head'
@@ -87,7 +106,7 @@ alias ff='find . -type f -name'
 alias h='history'
 alias hgrep="fc -El 0 | grep"
 alias help='man'
-alias p='ps -f'
+alias psf='ps -f'
 alias sortnr='sort -n -r'
 alias unexport='unset'
 
