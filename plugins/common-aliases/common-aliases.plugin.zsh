@@ -20,16 +20,18 @@ alias ml='/root/ml'
 
 
 alias o=$ZSH_CUSTOM
-alias pm='pm-suspend'
+alias pm='sudo pm-suspend'
 
 
 alias c=cat
+alias cc='xclip -selection clipboard'
 alias ec=echo
 alias di=dict
 alias ma=man
 alias pw=pwd
+alias ra='vlc -I curses http://provisioning.streamtheworld.com/pls/CKFRAM.pls'
 alias s=pm-suspend
-alias z='/etc/init.d/networking restart'
+alias z='service network-manager restart'
 
 
 function ch {
