@@ -17,19 +17,24 @@ alias x=exit
 #cds
 alias cv='~/cv'
 alias ml='~/ml'
-
+alias lt='~/lt'
 
 alias o=$ZSH_CUSTOM
 alias pm='sudo pm-suspend'
 
 
 alias c=cat
+alias cc='xclip -selection clipboard'
 alias ec=echo
 alias di=dict
 alias key="ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y 2>&1 >/dev/null"
 alias ma=man
 alias pw=pwd
-alias z='/etc/init.d/networking restart'
+alias ra='vlc -I curses http://provisioning.streamtheworld.com/pls/CKFRAM.pls'
+alias s=pm-suspend
+alias li='lt;less php/php-quiz.md'
+alias v=vi
+alias z='service network-manager restart'
 
 
 function ch {
@@ -74,8 +79,6 @@ function wlans {
 alias l='ls -lFh'     #size,show type,human readable
 alias la='ls -lAFh'   #long list,show almost all,show type,human readable
 alias lr='ls -tRFh'   #sorted by date,recursive,show type,human readable
-alias lt='ls -ltFh'   #long list,sorted by date,show type,human readable
-alias ll='ls -l'      #long list
 alias ldot='ls -ld .*'
 alias lS='ls -1FSsh'
 alias lart='ls -1Fcart'
@@ -93,7 +96,6 @@ alias -g H='| head'
 alias -g T='| tail'
 alias -g G='| grep'
 alias -g L="| less"
-alias -g M="| most"
 alias -g LL="2>&1 | less"
 alias -g CA="2>&1 | cat -A"
 alias -g NE="2> /dev/null"
