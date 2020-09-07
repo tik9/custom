@@ -15,20 +15,20 @@ alias plu='ec $plugins'
 alias x=exit
 
 #cds
-alias cv='/home/t/cv'
-alias ml='/root/ml'
+alias cv='~/cv'
+alias ml='~/ml'
 
 
 alias o=$ZSH_CUSTOM
-alias pm='pm-suspend'
+alias pm='sudo pm-suspend'
 
 
 alias c=cat
 alias ec=echo
 alias di=dict
+alias key="ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y 2>&1 >/dev/null"
 alias ma=man
 alias pw=pwd
-alias s=pm-suspend
 alias z='/etc/init.d/networking restart'
 
 
@@ -42,8 +42,9 @@ function g {
 }
 
 function ic {
-	ip addr show wlp2s0 | sed -n  
-	's/\s\{8\}inet\s\(192\.168\.[0-9]\{2\}\.[0-9]\{3\}\).*/\1/p'
+	ipa=$(ip addr show wlp2s0)
+	 echo $ipa | sed -n 's/\s\{4\}inet\s\(192\.168\.[0-9]\{2\}\.[0-9]\{3\}\).*/\1/p'
+	 #~ inet \(192\.168\.43\.[0-9]*\).*/\1/p
 }
 
 function p {

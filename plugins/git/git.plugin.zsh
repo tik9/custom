@@ -94,8 +94,7 @@ alias gfo='git fetch origin'
 
 alias gfg='git ls-files | grep'
 
-alias gg='git gui citool'
-alias gga='git gui citool --amend'
+alias gg='git log'
 
 function ggf() {
   [[ "$#" != 1 ]] && local b="$(git_current_branch)"
