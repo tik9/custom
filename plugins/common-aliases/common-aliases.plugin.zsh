@@ -15,10 +15,11 @@ alias plu='ec $plugins'
 alias x=exit
 
 #cds
-alias cv='~/cv'
-alias ml='~/ml'
-alias lt='~/lt'
-
+alias cv=~/cv
+alias cv2=/home/t/cv
+alias ml=~/ml
+alias lt=~/lt
+alias lt2=/home/t/lt
 alias o=$ZSH_CUSTOM
 alias pm='sudo pm-suspend'
 
@@ -30,6 +31,7 @@ alias di=dict
 alias key="ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y 2>&1 >/dev/null"
 alias ma=man
 alias pw=pwd
+alias qp=qpdfview
 alias ra='vlc -I curses http://provisioning.streamtheworld.com/pls/CKFRAM.pls'
 alias s=pm-suspend
 alias li='lt;less php/php-quiz.md'
@@ -37,10 +39,20 @@ alias v=vi
 alias z='service network-manager restart'
 
 
+cv=/home/t/cv
+cvo=$cv/output
+
 function ch {
-	chromium-browser --auto-open-devtools-for-tabs $1 &
+	#~ --auto-open-devtools-for-tabs
+	chromium-browser  $1 &
 }
 
+function cpa {
+	
+	ag=p3
+	cp $cv/anschreiben.md $cv/anschreiben_$ag.md
+
+}
 
 function g {
 	sudo geany $1 &
@@ -52,12 +64,24 @@ function ic {
 	 #~ inet \(192\.168\.43\.[0-9]*\).*/\1/p
 }
 
+function lx {
+	lximage-qt $1 &	
+}
+
 function p {
+
+	datei=
+	datei=anschreiben_$datei
 	datei=cv_en
-	
-	input=input/$datei.md
-	output=output/$datei.html
-	pandoc $input -o $output -s;killall chrome; ch $output
+	datei=`ls -t $cv | head -1`
+	datei=${datei%.md}
+	echo $datei
+	#return
+	input=$cv/$datei.md
+	output=$cvo/$datei.html
+	pandoc $input -o $output -s; 
+	#~ killall chrome; 
+	ch $output
 
 }
 

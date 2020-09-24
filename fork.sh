@@ -1,13 +1,14 @@
 verz=~/lt
-lt=https://github.com/Ebazhanov/in-quiz-questions
+cl=https://github.com/tik9/repo
+cl_maintainer=https://github.com/account/repo
 
-#git clone $lt $verz 
+git clone $cl $verz 
 cd $verz
 
-git remote add upstream $lt
+git remote add upstream $cl_maintainer
 git pull upstream master
 
 
-#~ git checkout -b feature
+#~ git checkout -b branch
 
-#~ git push origin feature
+#~ git push origin branch
