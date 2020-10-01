@@ -1,12 +1,33 @@
+
+function a {
+
+	datei=ep
+	datei=anschreiben_$datei
+	
+	#datei=cv_en
+	
+	#datei=`ls -t $cv | head -1`
+	
+	datei=${datei%.md}
+	echo $datei
+	input=$cv/$datei.md
+	output=$cvo/$datei.html
+	pandoc $input -o $output -s; 
+	ch $output
+
+}
+
+
 # alias/Funktionen
 alias ag='alias | grep'
+alias co='chown t'
 alias d='declare -f'
 alias m='alias -m'
 alias si='sudo -i'
 alias t='type'
 
 #calendar
-alias ca='ncal -A2'
+alias cal='ncal -A2'
 alias da='date'
 
 # zsh
@@ -16,7 +37,7 @@ alias x=exit
 
 #cds
 alias cv=~/cv
-alias cv2=/home/t/cv
+alias c2=/home/t/cv
 alias ml=~/ml
 alias lt=~/lt
 alias lt2=/home/t/lt
@@ -33,7 +54,7 @@ alias ma=man
 alias pw=pwd
 alias qp=qpdfview
 alias ra='vlc -I curses http://provisioning.streamtheworld.com/pls/CKFRAM.pls'
-alias s=pm-suspend
+alias s='sudo -i'
 alias li='lt;less php/php-quiz.md'
 alias v=vi
 alias z='service network-manager restart'
@@ -41,6 +62,11 @@ alias z='service network-manager restart'
 
 cv=/home/t/cv
 cvo=$cv/output
+
+function = {
+  echo "$@" | bc -l
+}
+
 
 function ch {
 	#~ --auto-open-devtools-for-tabs
@@ -66,23 +92,6 @@ function ic {
 
 function lx {
 	lximage-qt $1 &	
-}
-
-function p {
-
-	datei=
-	datei=anschreiben_$datei
-	datei=cv_en
-	datei=`ls -t $cv | head -1`
-	datei=${datei%.md}
-	echo $datei
-	#return
-	input=$cv/$datei.md
-	output=$cvo/$datei.html
-	pandoc $input -o $output -s; 
-	#~ killall chrome; 
-	ch $output
-
 }
 
 function q(){
@@ -130,12 +139,10 @@ alias duf='du -sh *'
 alias fd='find . -type d -name'
 alias ff='find . -type f -name'
 
-alias h='history'
+alias h=/home/t
+alias hi=history
 alias hgrep="fc -El 0 | grep"
-alias help='man'
 alias psf='ps -f'
-alias sortnr='sort -n -r'
-alias unexport='unset'
 
 #~ alias rm='rm -i'
 #~ alias cp='cp -i'
