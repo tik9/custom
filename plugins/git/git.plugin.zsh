@@ -268,3 +268,6 @@ function grename() {
     git push --set-upstream origin "$2"
   fi
 }
+
+alias i='git diff'
+alias t='git log'

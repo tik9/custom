@@ -1,19 +1,44 @@
 
+function cp_an {
+	cp $cv/anschreiben.md $cv/$datei.md
+	
+}
+
 function a {
 
-	datei=ep
-	datei=anschreiben_$datei
-	
 	#datei=cv_en
 	
 	#datei=`ls -t $cv | head -1`
+	#datei=${datei%.md}
 	
-	datei=${datei%.md}
 	echo $datei
 	input=$cv/$datei.md
-	output=$cvo/$datei.html
-	pandoc $input -o $output -s; 
-	ch $output
+	html_out=$cvo/$datei.html
+	#pandoc $input -o $html_out -s
+	
+	wkhtmltopdf $html_out $home/$datei.pdf
+
+	ch $html_out
+	qp $home/$datei.pdf
+
+}
+
+function p {
+	#datei=$cv/cv_de
+	bew=bewerbung.pdf
+	pdfunite $home/$datei.pdf $home/cv_$bew $home/$bew
+	qp $home/$bew
+
+}
+
+function qp {
+	qpdfview $1 &
+}
+
+function qpd {
+	start=''
+	ziel=''
+	qpdf $start --pages . 2-6 -- $ziel
 
 }
 
@@ -52,15 +77,17 @@ alias di=dict
 alias key="ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y 2>&1 >/dev/null"
 alias ma=man
 alias pw=pwd
-alias qp=qpdfview
 alias ra='vlc -I curses http://provisioning.streamtheworld.com/pls/CKFRAM.pls'
 alias s='sudo -i'
-alias li='lt;less php/php-quiz.md'
+alias li='lt;less'
 alias v=vi
 alias z='service network-manager restart'
 
+datei=
+datei=anschreiben_$datei
 
-cv=/home/t/cv
+home=/home/t
+cv=$home/cv
 cvo=$cv/output
 
 function = {
@@ -71,13 +98,6 @@ function = {
 function ch {
 	#~ --auto-open-devtools-for-tabs
 	chromium-browser  $1 &
-}
-
-function cpa {
-	
-	ag=p3
-	cp $cv/anschreiben.md $cv/anschreiben_$ag.md
-
 }
 
 function g {
@@ -96,7 +116,6 @@ function lx {
 
 function q(){
 	datei=test100.zip
-	
 	wget http://speedtest.wdc01.softlayer.com/downloads/$datei --output-document=/dev/null
 }
 
@@ -108,7 +127,6 @@ function wlans {
 
 # Advanced Aliases.
 
-# ls, the common ones I use a lot shortened for rapid fire usage
 alias l='ls -lFh'     #size,show type,human readable
 alias la='ls -lAFh'   #long list,show almost all,show type,human readable
 alias lr='ls -tRFh'   #sorted by date,recursive,show type,human readable
@@ -139,14 +157,11 @@ alias duf='du -sh *'
 alias fd='find . -type d -name'
 alias ff='find . -type f -name'
 
-alias h=/home/t
+alias h=$home
 alias hi=history
 alias hgrep="fc -El 0 | grep"
 alias psf='ps -f'
 
-#~ alias rm='rm -i'
-#~ alias cp='cp -i'
-#~ alias mv='mv -i'
 
 # zsh is able to auto-do some kungfoo
 # depends on the SUFFIX :)
@@ -170,11 +185,8 @@ if is-at-least 4.2.0; then
   for ft in $_media_fts; do alias -s $ft=mplayer; done
 
   #read documents
-  alias -s pdf=acroread
-  alias -s ps=gv
-  alias -s dvi=xdvi
-  alias -s chm=xchm
-  alias -s djvu=djview
+  alias -s pdf=qpdfview
+  alias -s md=geany
 
   #list whats inside packed file
   alias -s zip="unzip -l"
