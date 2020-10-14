@@ -1,47 +1,4 @@
 
-function cp_an {
-	cp $cv/anschreiben.md $cv/$datei.md
-	
-}
-
-function a {
-
-	#datei=cv_en
-	
-	#datei=`ls -t $cv | head -1`
-	#datei=${datei%.md}
-	
-	echo $datei
-	input=$cv/$datei.md
-	html_out=$cvo/$datei.html
-	#pandoc $input -o $html_out -s
-	
-	wkhtmltopdf $html_out $home/$datei.pdf
-
-	ch $html_out
-	qp $home/$datei.pdf
-
-}
-
-function p {
-	#datei=$cv/cv_de
-	bew=bewerbung.pdf
-	pdfunite $home/$datei.pdf $home/cv_$bew $home/$bew
-	qp $home/$bew
-
-}
-
-function qp {
-	qpdfview $1 &
-}
-
-function qpd {
-	start=''
-	ziel=''
-	qpdf $start --pages . 2-6 -- $ziel
-
-}
-
 
 # alias/Funktionen
 alias ag='alias | grep'
@@ -94,11 +51,40 @@ function = {
   echo "$@" | bc -l
 }
 
+function a {
+
+	#datei=cv_en
+	
+	#datei=`ls -t $cv | head -1`
+	#datei=${datei%.md}
+	
+	echo $datei
+	input=$cv/$datei.md
+	html_out=$cvo/$datei.html
+	#pandoc $input -o $html_out -s
+	
+	wkhtmltopdf $html_out $home/$datei.pdf
+
+	ch $html_out
+	qp $home/$datei.pdf
+
+}
+
 
 function ch {
 	#~ --auto-open-devtools-for-tabs
 	chromium-browser  $1 &
 }
+
+function common_a {
+	sed -i 's/plugins=(git)/plugins=(common-aliases git)/' ~/.zshrc
+}
+
+function cp_an {
+	cp $cv/anschreiben.md $cv/$datei.md
+	
+}
+
 
 function g {
 	sudo geany $1 &
@@ -114,9 +100,29 @@ function lx {
 	lximage-qt $1 &	
 }
 
+
+function p {
+	#datei=$cv/cv_de
+	bew=bewerbung.pdf
+	pdfunite $home/$datei.pdf $home/cv_$bew $home/$bew
+	qp $home/$bew
+
+}
+
 function q(){
 	datei=test100.zip
 	wget http://speedtest.wdc01.softlayer.com/downloads/$datei --output-document=/dev/null
+}
+
+function qp {
+	qpdfview $1 &
+}
+
+function qpd {
+	start=''
+	ziel=''
+	qpdf $start --pages . 2-6 -- $ziel
+
 }
 
 
