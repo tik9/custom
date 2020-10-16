@@ -10,22 +10,27 @@ alias t='type'
 
 #calendar
 alias cal='ncal -A2'
-alias da='date'
+alias da=date
 
 # zsh
 alias e="exec zsh"
+alias p=ps
+alias pa='ec $PATH'
+alias us_pa='export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games'
 alias plu='ec $plugins'
 alias x=exit
 
 #cds
 alias cv=~/cv
 alias c2=/home/t/cv
+alias hw=/home/tk
 alias ml=~/ml
 alias lt=~/lt
 alias lt2=/home/t/lt
 alias o=$ZSH_CUSTOM
+alias oh=$ZSH
 alias pm='sudo pm-suspend'
-
+alias sy=/home/tk/symfony
 
 alias c=cat
 alias cc='xclip -selection clipboard'
@@ -47,8 +52,18 @@ home=/home/t
 cv=$home/cv
 cvo=$cv/output
 
-function = {
+function bc_ {
   echo "$@" | bc -l
+}
+
+function find_ex {
+	if [ -z "$2" ]; then
+	# print $2
+	ex=''; else
+	# print $2 'else'
+	ex=$2; fi
+	# echo $ex
+	find / -path $ex -prune -false -o -name $1
 }
 
 function a {
@@ -70,14 +85,9 @@ function a {
 
 }
 
-
 function ch {
 	#~ --auto-open-devtools-for-tabs
 	chromium-browser  $1 &
-}
-
-function common_a {
-	sed -i 's/plugins=(git)/plugins=(common-aliases git)/' ~/.zshrc
 }
 
 function cp_an {
@@ -101,13 +111,19 @@ function lx {
 }
 
 
-function p {
+function pd {
 	#datei=$cv/cv_de
 	bew=bewerbung.pdf
 	pdfunite $home/$datei.pdf $home/cv_$bew $home/$bew
 	qp $home/$bew
 
 }
+
+
+function plu_f {
+	sed -i 's/.*plugins=(.*/plugins=(common-aliases debian git zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
+}
+
 
 function q(){
 	datei=test100.zip
@@ -122,16 +138,12 @@ function qpd {
 	start=''
 	ziel=''
 	qpdf $start --pages . 2-6 -- $ziel
-
 }
-
 
 function wlans {
 	iwlist wlan0 scan | $(sed -n 's/ESSID:"\(.*\)"/\1/p;s/Quality=\([0-9][0-9]\/[0-9][0-9]\).*/\1/p')
 }
 
-
-# Advanced Aliases.
 
 alias l='ls -lFh'     #size,show type,human readable
 alias la='ls -lAFh'   #long list,show almost all,show type,human readable
@@ -143,15 +155,12 @@ alias lrt='ls -1Fcrt'
 
 alias zshrc='${=EDITOR} ~/.zshrc'
 
-alias grep='grep --color'
-alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS} '
-
 alias le='less'
 
 # Command line head / tail shortcuts
 alias -g H='| head'
 alias -g T='| tail'
-alias -g G='| grep'
+alias -g gr='| grep'
 alias -g L="| less"
 alias -g LL="2>&1 | less"
 alias -g CA="2>&1 | cat -A"

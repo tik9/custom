@@ -1,9 +1,12 @@
 		
-plugins=(common-aliases debian git zsh-autosuggestions )
+plugins=(common-aliases debian git zsh-autosuggestions zsh-syntax-highlighting)
 
-export ZSH=/usr/share/oh-my-zsh
+# export ZSH=/usr/share/oh-my-zsh
+export ZSH="/home/tk/.oh-my-zsh"
 
-zstyle ':completion:*' special-dirs true
+# zstyle ':completion:*' special-dirs true
+
+ZSH_THEME="robbyrussell"
 
 DISABLE_AUTO_UPDATE="true"
 
@@ -17,3 +20,5 @@ get_ssid(){
 
 # nur windows wsl2
 #export PATH=/mnt/c/notepad++:/mnt/c/git/cmd:$PATH
+#  /mnt/c/Programme/Docker/Docker/resources/bin
+# /mnt/C/ProgramData\DockerDesktop\version-binalias git=git.exe
