@@ -1,4 +1,24 @@
+home=/home/tk
+sprache=en
+cv=$home/cv
+cvo=$cv/output
+output=anschreiben_ha
 
+ca=~/.oh-my-zsh/custom/plugins/common-aliases/common-aliases.plugin.zsh
+
+function se_ag {
+	sed -i "/ags=\[/a {j:'$1',\na:'$2'}," $cv/media/ags.js
+}
+
+function se_bew {
+	sed -i 's/^output=anschreiben_.*$/output=anschreiben_'$1'/' $ca 
+	sed -i "s/^sprache=.*$/sprache=$2/" $ca
+	# exec zsh
+	# sleep 2
+	# echo output $output
+	cp $cv/anschreiben_$2.md $cv/anschreiben_$1.md
+	code $cv/anschreiben_$1.md
+}
 
 # alias/Funktionen
 alias ag='alias | grep'
@@ -8,49 +28,69 @@ alias m='alias -m'
 alias si='sudo -i'
 alias t='type'
 
+# apache
+conf=/etc/apache2/sites-available/mein.conf
+cu='curl localhost'
+
 #calendar
 alias cal='ncal -A2'
 alias da=date
+
+#cds
+alias cv=~/cv
+alias c2=$home/cv
+alias dv=$home/devilbox
+alias hw=$home
+alias ml=~/ml
+alias lt=~/lt
+alias lt2=$home/lt
+alias o=$ZSH_CUSTOM
+alias oh=$ZSH
+
 
 # zsh
 alias e="exec zsh"
 alias p=ps
 alias pa='ec $PATH'
-alias us_pa='export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games'
+alias pa_wi='/mnt/c/Windows/system32/cmd.exe /c echo %path%'
+alias pa_def='export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games'
 alias plu='ec $plugins'
 alias x=exit
 
-#cds
-alias cv=~/cv
-alias c2=/home/t/cv
-alias hw=/home/tk
-alias ml=~/ml
-alias lt=~/lt
-alias lt2=/home/t/lt
-alias o=$ZSH_CUSTOM
-alias oh=$ZSH
-alias pm='sudo pm-suspend'
-alias sy=/home/tk/symfony
 
 alias c=cat
 alias cc='xclip -selection clipboard'
 alias ec=echo
 alias di=dict
+alias grep='grep --color=auto'
 alias key="ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y 2>&1 >/dev/null"
 alias ma=man
+alias pm='sudo pm-suspend'
 alias pw=pwd
 alias ra='vlc -I curses http://provisioning.streamtheworld.com/pls/CKFRAM.pls'
 alias s='sudo -i'
 alias li='lt;less'
-alias v=vi
 alias z='service network-manager restart'
 
-datei=
-datei=anschreiben_$datei
+function a {
 
-home=/home/t
-cv=$home/cv
-cvo=$cv/output
+	#output=cv_en
+	
+	#output=`ls -t $cv | head -1`
+	#output=${output%.md}
+	
+	echo $output
+	output_md=$cv/$output.md
+	html_out=$cvo/$output.html
+	pandoc $output_md -o $html_out -s
+	
+	# wkhtmltopdf $html_out $home/$output.pdf
+
+	ch $html_out
+	# qp $home/$output.pdf
+
+}
+
 
 function bc_ {
   echo "$@" | bc -l
@@ -66,33 +106,10 @@ function find_ex {
 	find / -path $ex -prune -false -o -name $1
 }
 
-function a {
-
-	#datei=cv_en
-	
-	#datei=`ls -t $cv | head -1`
-	#datei=${datei%.md}
-	
-	echo $datei
-	input=$cv/$datei.md
-	html_out=$cvo/$datei.html
-	#pandoc $input -o $html_out -s
-	
-	wkhtmltopdf $html_out $home/$datei.pdf
-
-	ch $html_out
-	qp $home/$datei.pdf
-
-}
 
 function ch {
 	#~ --auto-open-devtools-for-tabs
 	chromium-browser  $1 &
-}
-
-function cp_an {
-	cp $cv/anschreiben.md $cv/$datei.md
-	
 }
 
 
@@ -112,9 +129,9 @@ function lx {
 
 
 function pd {
-	#datei=$cv/cv_de
+	#output=$cv/cv_de
 	bew=bewerbung.pdf
-	pdfunite $home/$datei.pdf $home/cv_$bew $home/$bew
+	pdfunite $home/$output.pdf $home/cv_$bew $home/$bew
 	qp $home/$bew
 
 }
@@ -126,8 +143,8 @@ function plu_f {
 
 
 function q(){
-	datei=test100.zip
-	wget http://speedtest.wdc01.softlayer.com/downloads/$datei --output-document=/dev/null
+	output=test100.zip
+	wget http://speedtest.wdc01.softlayer.com/downloads/$output --output-document=/dev/null
 }
 
 function qp {
@@ -158,14 +175,12 @@ alias zshrc='${=EDITOR} ~/.zshrc'
 alias le='less'
 
 # Command line head / tail shortcuts
-alias -g H='| head'
-alias -g T='| tail'
-alias -g gr='| grep'
-alias -g L="| less"
+alias -g H=|head
+alias -g T=|tail
+alias -g gr='|grep'
+alias -g L='|less'
 alias -g LL="2>&1 | less"
 alias -g CA="2>&1 | cat -A"
-alias -g NE="2> /dev/null"
-alias -g NUL="> /dev/null 2>&1"
 
 alias dud='du -d 1 -h'
 alias duf='du -sh *'
