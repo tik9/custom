@@ -2,4 +2,5 @@
 plugins/example
 example.zsh
 themes
-plugins/zsh-syntax-highlighting/
+plugins/zsh-syntax-highlighting
+plugins/.vscode
