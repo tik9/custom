@@ -1,46 +1,6 @@
 home=/home/tk
-sprache=en
-cv=$home/cv
-cvo=$cv/output
-output=anschreiben_ey
 
 ps_profile_pfad=/mnt/c/Users/User/Documents/WindowsPowerShell
-
-ca=~/.oh-my-zsh/custom/plugins/common-aliases/common-aliases.plugin.zsh
-js=$cv/media/js.js
-
-function se_ag {
-	sed -i "/ags=\[/a {j:'$1',\na:'$2'}," $cv/media/ags.js
-}
-
-function se_bew { # firma sprache
-	rm $output
-	sed -i 's/^output=anschreiben_.*$/output=anschreiben_'$1'/' $ca 
-	sed -i "s/^sprache=.*$/sprache=$2/" $ca
-	# sed -i "s/^sprache=.*$/sprache=$2/" $js
-
-	cp $cv/anschreiben_$2.md $cv/anschreiben_$1.md
-	code $cv/anschreiben_$1.md
-}
-
-function a {
-
-	#output=cv_en
-	
-	#output=`ls -t $cv | head -1`
-	#output=${output%.md}
-	
-	echo $output
-	output_md=$cv/$output.md
-	html_out=$cvo/$output.html
-	pandoc $output_md -o $html_out -s
-	
-	# wkhtmltopdf $html_out $home/$output.pdf
-
-	# ch $html_out
-	# qp $home/$output.pdf
-
-}
 
 # alias/Funktionen
 alias ag='alias | grep'
@@ -51,8 +11,7 @@ alias m='alias -m'
 alias si='sudo -i'
 alias t='type'
 
-# apache
-conf=/etc/apache2/sites-available/mein.conf
+alias -g ca=~/.oh-my-zsh/custom/plugins/common-aliases/common-aliases.plugin.zsh 
 cu='curl localhost'
 
 #calendar
@@ -62,7 +21,6 @@ alias da=date
 #cds
 alias cv=~/cv
 alias c2=$home/cv
-alias dv=$home/devilbox
 alias hw=$home
 alias ml=~/ml
 alias lt=~/lt
@@ -70,10 +28,8 @@ alias lt2=$home/lt
 alias o=$ZSH_CUSTOM
 alias oh=$ZSH
 
-
 # zsh
 alias e="exec zsh"
-alias p=ps
 alias pa='ec $PATH'
 alias pa_wi='/mnt/c/Windows/system32/cmd.exe /c echo %path%'
 alias pa_def='export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games'
@@ -89,10 +45,10 @@ alias grep='grep --color=auto'
 alias key="ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y 2>&1 >/dev/null"
 alias ma=man
 alias pm='sudo pm-suspend'
+alias pr='code /mnt/c/Users/User/documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1'
 alias pw=pwd
-alias ra='vlc -I curses http://provisioning.streamtheworld.com/pls/CKFRAM.pls'
+alias ra='vlc.exe -I curses http://provisioning.streamtheworld.com/pls/CKFRAM.pls'
 alias s='sudo -i'
-alias li='lt;less'
 alias z='service network-manager restart'
 
 
