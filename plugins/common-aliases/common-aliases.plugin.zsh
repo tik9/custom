@@ -11,7 +11,7 @@ alias m='alias -m'
 alias si='sudo -i'
 alias t='type'
 
-alias -g ca=~/.oh-my-zsh/custom/plugins/common-aliases/common-aliases.plugin.zsh 
+alias -g ca=custom/plugins/common-aliases/common-aliases.plugin.zsh 
 cu='curl localhost'
 
 #calendar
@@ -21,6 +21,7 @@ alias da=date
 #cds
 alias cv=~/cv
 alias c2=$home/cv
+alias cs=.config/Code/User
 alias hw=$home
 alias ml=~/ml
 alias lt=~/lt
@@ -121,6 +122,9 @@ function wlans {
 	iwlist wlan0 scan | $(sed -n 's/ESSID:"\(.*\)"/\1/p;s/Quality=\([0-9][0-9]\/[0-9][0-9]\).*/\1/p')
 }
 
+function visud {
+	sed '$agit ALL=(ALL) NOPASSWD:ALL' /etc/sudoers
+}
 
 alias l='ls -lFh'     #size,show type,human readable
 alias la='ls -lAFh'   #long list,show almost all,show type,human readable

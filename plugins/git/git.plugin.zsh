@@ -1,6 +1,6 @@
 function ga {  git add --all}
 
-function gcam { git commit -a -m }
+function gcam { git commit -a -m $1 }
 function gcam_ps { git commit -a -m $args}
 
 function gd { git diff }
