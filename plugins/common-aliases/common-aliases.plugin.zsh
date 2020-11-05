@@ -11,7 +11,7 @@ alias m='alias -m'
 alias si='sudo -i'
 alias t='type'
 
-alias -g ca=custom/plugins/common-aliases/common-aliases.plugin.zsh 
+alias -g ca=$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh 
 cu='curl localhost'
 
 #calendar
