@@ -1,10 +1,10 @@
 home=/home/tk
 cv=~/cv
-ca=~/.oh-my-zsh/custom/plugins/common-aliases/common-aliases.plugin.zsh
+ca=$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
 sprache=Success
 cvo=$cv/output
 fa=Cu
-output=anschreiben_Cu
+output=anschreiben_$fa
 
 ps_profile_pfad=/mnt/c/Users/User/Documents/WindowsPowerShell
 
@@ -17,7 +17,7 @@ alias m='alias -m'
 alias si='sudo -i'
 alias t='type'
 
-alias -g ca=$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh 
+alias -g ca=$ca 
 cu='curl localhost'
 
 #calendar
@@ -69,17 +69,13 @@ function se_bew { # firma sprache
     #    sed -i "/ags=\[/a {a:'$fa',\nj:'$job'}," $cv/media/ags.js
 		# sed  -i 's/^fa=.*$/fa='$fa_kurz'/' $ca
 
-        # sed -i 's/^output=anschreiben_.*$/output=anschreiben_'$fa_kurz'/' $ca
-
         if [ -n $3 ]; then; sed -i "s/^sprache=.*$/sprache=$3/" $ca ; fi
-       # echo output $output
 
         # cp $cv/anschreiben_$sprache.md $cv/anschreiben_$fa_kurz.md
         # code $cv/anschreiben_$fa_kurz.md
  }
 
 function a {
-
     #    output=cv_en
        #output=${output%.md}
        output=`ls -t $cv | head -1`;neu=${output:0:-3};md=$cv/$neu.md;html=$cvo/$neu.html;pandoc $md -o $html -s
@@ -132,9 +128,7 @@ function wlans {
 	iwlist wlan0 scan | $(sed -n 's/ESSID:"\(.*\)"/\1/p;s/Quality=\([0-9][0-9]\/[0-9][0-9]\).*/\1/p')
 }
 
-function visud {
-	sed '$agit ALL=(ALL) NOPASSWD:ALL' /etc/sudoers
-}
+function visud { $us=git ; sed '$a'$us' ALL=(ALL) NOPASSWD:ALL' /etc/sudoers }
 
 alias l='ls -lFh'     #size,show type,human readable
 alias la='ls -lAFh'   #long list,show almost all,show type,human readable
