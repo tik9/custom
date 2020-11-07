@@ -1,1 +1,64 @@
-<mxfile host="app.diagrams.net" modified="2020-11-07T08:46:21.444Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36" version="13.9.2" etag="KeI_Bu1epHT18FVo841W" type="github"><diagram id="_88A1yu--IX8Nm97F5vP">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2020-11-07T09:25:19.841Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36" etag="qNEA5GPTUD-hsbLMA0e3" version="13.9.2" type="github">
+  <diagram id="_88A1yu--IX8Nm97F5vP" name="Page-1">
+    <mxGraphModel dx="1422" dy="705" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="U1FNyuARhomV-lPgzFkJ-1" value="Win" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="U1FNyuARhomV-lPgzFkJ-2" value="Tablet" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="330" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="U1FNyuARhomV-lPgzFkJ-3" value="Raspberry" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="83" y="400" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="U1FNyuARhomV-lPgzFkJ-4" value="" style="endArrow=classic;html=1;entryX=-0.008;entryY=0.65;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="U1FNyuARhomV-lPgzFkJ-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="200" y="260" as="sourcePoint" />
+            <mxPoint x="250" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="U1FNyuARhomV-lPgzFkJ-5" value="1.1 ask for id_rsa" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="203" y="266" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="U1FNyuARhomV-lPgzFkJ-7" value="" style="endArrow=classic;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="137" y="280" as="sourcePoint" />
+            <mxPoint x="137" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="U1FNyuARhomV-lPgzFkJ-8" value="2. push id_rsa&lt;br&gt;ssh-copy-id" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="137" y="320" width="99" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="U1FNyuARhomV-lPgzFkJ-10" value="&lt;h1&gt;&lt;span&gt;Access the Raspberry from a Tablet&amp;nbsp;&lt;/span&gt;&lt;/h1&gt;&lt;p&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;font-size: 12px ; font-weight: normal&quot;&gt;Pub/Private Key Access&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;font-size: 12px&quot;&gt;&lt;b&gt;Win&lt;/b&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 12px ; font-weight: normal&quot;&gt;: Lenovo Laptop, Windows 10, Terminal App:&amp;nbsp;&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;font-size: 12px&quot;&gt;&lt;b&gt;Tablet&lt;/b&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 12px ; font-weight: normal&quot;&gt;: Samsung Galaxy, Android 9, Termux&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;b&gt;Raspberry&lt;/b&gt;: Model 3B, Debian Stretch (9)&lt;/li&gt;&lt;li&gt;Condition: Tablet can send id_rsa to Win&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;/p&gt;&lt;div&gt;&lt;span style=&quot;font-size: 12px ; font-weight: normal&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="60" y="40" width="590" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="U1FNyuARhomV-lPgzFkJ-11" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="266" as="sourcePoint" />
+            <mxPoint x="390" y="436" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="U1FNyuARhomV-lPgzFkJ-12" value="" style="endArrow=classic;html=1;entryX=1.025;entryY=0.883;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="427" as="sourcePoint" />
+            <mxPoint x="206" y="429.98" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="U1FNyuARhomV-lPgzFkJ-14" value="3. Connect via ssh&amp;nbsp;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="392" y="350" width="118" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="U1FNyuARhomV-lPgzFkJ-15" value="" style="endArrow=classic;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" edge="1" parent="1" source="U1FNyuARhomV-lPgzFkJ-2" target="U1FNyuARhomV-lPgzFkJ-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="310" y="235" as="sourcePoint" />
+            <mxPoint x="440" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="U1FNyuARhomV-lPgzFkJ-16" value="1.2 send id_rsa" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="204" y="215" width="120" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
