@@ -1,4 +1,3 @@
-alias aar='apt autoremove -y'
 
 function as(){
 	apt show $1
@@ -13,29 +12,9 @@ function re {
 }
 
 
-# Use apt or aptitude if installed, fallback is apt-get
-# You can just set apt_pref='apt-get' to override it.
-
-if [[ -z $apt_pref || -z $apt_upgr ]]; then
-    if [[ -e $commands[apt] ]]; then
-        apt_pref='apt'
-        apt_upgr='upgrade'
-    elif [[ -e $commands[aptitude] ]]; then
-        apt_pref='aptitude'
-        apt_upgr='safe-upgrade'
-    else
-        apt_pref='apt-get'
-        apt_upgr='upgrade'
-    fi
-fi
-
-# Use sudo by default if it's installed
-if [[ -e $commands[sudo] ]]; then
-    use_sudo=1
-fi
-
 
 # Some self-explanatory aliases
+alias aar='apt autoremove -y'
 alias acs="apt-cache search"
 alias aps='aptitude search'
 alias as="aptitude -F '* %p -> %d \n(%v/%V)' --no-gui --disable-columns search"
@@ -49,79 +28,40 @@ alias asrc='apt-get source'
 alias app='apt-cache policy'
 
 # superuser operations ######################################################
-if [[ $use_sudo -eq 1 ]]; then
-# commands using sudo #######
-    alias aac="sudo $apt_pref autoclean"
-    alias abd="sudo $apt_pref build-dep"
-    alias ac="sudo $apt_pref clean"
-    alias ad="sudo $apt_pref update"
-    alias adg="sudo $apt_pref update && sudo $apt_pref $apt_upgr"
-    alias adu="sudo $apt_pref update && sudo $apt_pref dist-upgrade"
-    alias afu="sudo apt-file update"
-    alias au="sudo $apt_pref $apt_upgr"
-    alias ai="sudo $apt_pref install"
+# if [[ $use_sudo -eq 1 ]]; then
+# commands using  #######
+    alias ac=" apt clean"
+    alias ad=" apt update"
+    alias adg=" apt update &&  apt upgrade"
+    alias adu=" apt update &&  apt dist-upgrade"
+    alias afu=" apt-file update"
+    alias ali=" apt list --installed"
+    alias alu=" apt list --upgradable"
+    alias au=" apt upgrade"
+    alias ai=" apt install"
     # Install all packages given on the command line while using only the first word of each line:
     # acs ... | ail
-    alias ail="sed -e 's/  */ /g' -e 's/ *//' | cut -s -d ' ' -f 1 | xargs sudo $apt_pref install"
-    alias ap="sudo $apt_pref purge"
-    alias ar="sudo $apt_pref remove"
+    alias ail="sed -e 's/  */ /g' -e 's/ *//' | cut -s -d ' ' -f 1 | xargs  apt install"
+    alias ap=" apt purge"
+    alias ar=" apt remove"
 
     # apt-get only
-    alias ads="sudo apt-get dselect-upgrade"
+    alias ads=" apt-get dselect-upgrade"
 
     # Install all .deb files in the current directory.
     # Warning: you will need to put the glob in single quotes if you use:
     # glob_subst
-    alias dia="sudo dpkg -i ./*.deb"
-    alias di="sudo dpkg -i"
+    alias dia=" dpkg -i ./*.deb"
+    alias di=" dpkg -i"
 
     # Remove ALL kernel images and headers EXCEPT the one in use
-    alias kclean='sudo aptitude remove -P ?and(~i~nlinux-(ima|hea) ?not(~n$(uname -r)))'
-
-
-# commands using su #########
-else
-    alias aac="su -ls '$apt_pref autoclean' root"
-    function abd() {
-        cmd="su -lc '$apt_pref build-dep $@' root"
-        print "$cmd"
-        eval "$cmd"
-    }
-    alias ac="su -ls '$apt_pref clean' root"
-    alias ad="su -lc '$apt_pref update' root"
-    alias adg="su -lc '$apt_pref update && aptitude $apt_upgr' root"
-    alias adu="su -lc '$apt_pref update && aptitude dist-upgrade' root"
-    alias afu="su -lc '$apt-file update'"
-    alias au="su -lc '$apt_pref $apt_upgr' root"
-    function ai() {
-        cmd="su -lc 'aptitude -P install $@' root"
-        print "$cmd"
-        eval "$cmd"
-    }
-    function ap() {
-        cmd="su -lc '$apt_pref -P purge $@' root"
-        print "$cmd"
-        eval "$cmd"
-    }
-    function ar() {
-        cmd="su -lc '$apt_pref -P remove $@' root"
-        print "$cmd"
-        eval "$cmd"
-    }
-
-    # Install all .deb files in the current directory
-    # Assumes glob_subst is off
-    alias dia='su -lc "dpkg -i ./*.deb" root'
-    alias di='su -lc "dpkg -i" root'
-
-    # Remove ALL kernel images and headers EXCEPT the one in use
-    alias kclean='su -lc "aptitude remove -P ?and(~i~nlinux-(ima|hea) ?not(~n$(uname -r)))" root'
-fi
+    alias kclean=' aptitude remove -P ?and(~i~nlinux-(ima|hea) ?not(~n$(uname -r)))'
+# fi
 
 # Completion ################################################################
 
 #
-# Registers a compdef for $1 that calls $apt_pref with the commands $2
+# Registers a compdef for $1 that calls apt with the commands $2
 # To do that it creates a new completion function called _apt_pref_$2
 #
 function apt_pref_compdef() {
@@ -130,8 +70,8 @@ function apt_pref_compdef() {
 
     eval "function ${f}() {
         shift words;
-        service=\"\$apt_pref\";
-        words=(\"\$apt_pref\" '$2' \$words);
+        service=\"\apt\";
+        words=(\"\apt\" '$2' \$words);
         ((CURRENT++))
         test \"\${apt_pref}\" = 'aptitude' && _aptitude || _apt
     }"
@@ -144,7 +84,7 @@ apt_pref_compdef abd "build-dep"
 apt_pref_compdef ac  "clean"
 apt_pref_compdef ad  "update"
 apt_pref_compdef afu "update"
-apt_pref_compdef au  "$apt_upgr"
+apt_pref_compdef au  "upgrade"
 apt_pref_compdef ai  "install"
 apt_pref_compdef ail "install"
 apt_pref_compdef ap  "purge"
@@ -164,7 +104,7 @@ alias mydeb='time dpkg-buildpackage -rfakeroot -us -uc'
 function apt-copy() {
     print '#!/bin/sh'"\n" > apt-copy.sh
 
-    cmd='$apt_pref install'
+    cmd='apt install'
 
     for p in ${(f)"$(aptitude search -F "%p" --disable-columns \~i)"}; {
         cmd="${cmd} ${p}"
