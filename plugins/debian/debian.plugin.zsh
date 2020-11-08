@@ -1,7 +1,5 @@
 
-function as(){
-	apt show $1
-}
+alias as='apt show'
 
 function in(){
 	apt install $1 -y	

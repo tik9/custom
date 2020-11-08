@@ -56,6 +56,22 @@ alias ra='vlc.exe -I curses http://provisioning.streamtheworld.com/pls/CKFRAM.pl
 alias s='sudo -i'
 alias z='service network-manager restart'
 
+function cp_key {
+	root_ip=192.168.178
+	final_ip=root@$root_ip.36
+	source_ip=$root_ip.38
+	id_rsa=/root/id_rsa.pub
+	id_rsa_src=.ssh/id_rsa.pub
+	ssh $source_ip -p8022 "./exp p scp -o 'StrictHostKeyChecking no' $id_rsa_src $final_ip:$id_rsa" 
+	ssh $final_ip "rm $id_rsa"
+	ssh $final_ip 'cat /root/id_rsa.pub >> .ssh/authorized_keys'
+	ss_ak $final_ip
+}
+
+
+function ss_ak {
+	ssh $@ 'cat .ssh/authorized_keys'
+}
 
 function bc_ { echo "$@" | bc -l }
 
@@ -145,6 +161,10 @@ alias le='less'
 # Command line head / tail shortcuts
 alias -g H=|head
 alias -g T=|tail
+function g {
+	grep $@ -r |less
+}
+
 alias -g gr='|grep'
 alias -g L='|less'
 alias -g LL="2>&1 | less"
