@@ -1,17 +1,21 @@
 home=/home/tk
-cv=~/cv
 ca=$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
-sprache=Success
+cs=.config/Code/User
+cs=/mnt/c/Users/User/appdata/roaming/code/user
+cv=~/cv
 cvo=$cv/output
 fa=Cu
 output=anschreiben_$fa
+sprache=en
 
-ps_profile_pfad=/mnt/c/Users/User/Documents/WindowsPowerShell
+prof_home=/mnt/c/Users/User/Documents/WindowsPowerShell
 
 # alias/Funktionen
 alias ag='alias | grep'
 alias cho='chown t'
 alias co=code
+alias coc='code $ca'
+alias cop='code $prof_home/Microsoft.PowerShell_profile.ps1'
 alias d='declare -f'
 alias m='alias -m'
 alias si='sudo -i'
@@ -25,7 +29,7 @@ alias cal='ncal -A2'
 alias da=date
 
 #cds
-alias cs=.config/Code/User
+alias cs=$cs
 alias cv=$cv
 alias c2=$home/cv
 alias ml=~/ml
@@ -33,6 +37,7 @@ alias lt=~/lt
 alias lt2=$home/lt
 alias o=$ZSH_CUSTOM
 alias oh=$ZSH
+alias ph=$prof_home
 
 # zsh
 alias e="exec zsh"
@@ -115,8 +120,9 @@ function g { sudo geany $1 }
 
 function ic {
 	geraet=wlp2s0
+	geraet=eth0
 	ipa=$(ip addr show $geraet)
-	 echo $ipa | sed -n 's/\s\{4\}inet\s\(192\.168\.[0-9]\{2\}\.[0-9]\{3\}\).*/\1/p'
+	 echo $ipa | sed -n 's/\s\{4\}inet\s\([0-9]\{3\}\.[0-9]\{2\}\.[0-9]\{3\}\.[0-9]\{2\}\).*/\1/p'
 	 #~ inet \(192\.168\.43\.[0-9]*\).*/\1/p
 }
 
@@ -173,8 +179,8 @@ alias dud='du -d 1 -h'
 alias duf='du -sh *'
 alias fd='find . -type d -name'
 alias ff='find . -type f -name'
-alias hi=history
 alias hgrep="fc -El 0 | grep"
+alias hi=history
 
 alias -s pdf=SumatraPDF.exe
 alias -s tar='tar tf'

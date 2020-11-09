@@ -33,7 +33,7 @@ alias app='apt-cache policy'
     alias adg=" apt update &&  apt upgrade"
     alias adu=" apt update &&  apt dist-upgrade"
     alias afu=" apt-file update"
-    alias ali=" apt list --installed"
+    alias ali=" apt list --installed | less"
     alias alu=" apt list --upgradable"
     alias au=" apt upgrade"
     alias ai=" apt install"
@@ -56,9 +56,6 @@ alias app='apt-cache policy'
     alias kclean=' aptitude remove -P ?and(~i~nlinux-(ima|hea) ?not(~n$(uname -r)))'
 # fi
 
-# Completion ################################################################
-
-#
 # Registers a compdef for $1 that calls apt with the commands $2
 # To do that it creates a new completion function called _apt_pref_$2
 #
