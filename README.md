@@ -1,7 +1,28 @@
-#### "Oh My Zsh" /customized/ ZSH Shell, WSL Linux Debian and Ubuntu ####
+## /Customized/ ZSH Shell and Powershell Profile on Windows and WSL ###
 
-### Combination with the Powershell Profile###
+&nbsp;  
+### bothenv.[zsh][ps1] ###  
 
-- The [gemeinsam.zsh](https://github.com/tik9/custom/blob/master/gemeinsam.zsh) is used in both environments Powershell and WSL/Debian and Ubuntu
-- Sourced by "exec zsh"
-- In Powershell it is called "gemeinsam.ps1" and is also sourced in the profile
+&nbsp;
+
+| Feature| Linux |  Powershell |
+|----------|:-------------:|------:|
+| Environment | Debian/WSL/Zsh   | Windows native |
+| Locationfolder |  [Custom](https://github.com/tik9/custom)  | [WindowsPowershell](https://github.com/tik9/prs) |
+| Source Call |  exec zsh |  . $profile|
+| Name | [bothenv.zsh](https://github.com/tik9/custom/blob/master/bothenv.zsh) |[bothenv.ps1](https://github.com/tik9/prs/blob/master/bothenv.ps1)|
+| Sourced from |  automatic |  [profile.ps1](https://github.com/tik9/prs/blob/master/Microsoft.PowerShell_profile.ps1)|
+|Content   |  Functions |     Functions
+|Content   |  Functions |     Functions
+|Own release | 1 | 1
+
+&nbsp;  
+&nbsp;  
+### Environment ###
+&nbsp;  
+
+| Feature |     Linux    |  Windows |
+|----------|:-------------:|------:|
+| OS |  Debian 9 | 10 Build 2004 |
+| Hardware | WSL/AMD x86_64 |   PC 64 bit Processor |
+| Version Shell | Zsh 5 |    Powershell 5 |

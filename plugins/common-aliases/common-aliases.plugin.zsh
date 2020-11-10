@@ -1,10 +1,12 @@
+home_wsl=/home/tk
+
 ca=$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
 cs=.config/Code/User
 cs=/mnt/c/Users/User/appdata/roaming/code/user
 cv=~/cv
 cvo=$cv/output
+doks=$home_wsl/doks
 fa=Cu
-home_wsl=/home/tk
 ho=/mnt/c/Users/User
 myd=$home_wsl/documents
 oh=$ZSH
