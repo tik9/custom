@@ -1,21 +1,21 @@
-home=/home/tk
 ca=$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
 cs=.config/Code/User
 cs=/mnt/c/Users/User/appdata/roaming/code/user
 cv=~/cv
 cvo=$cv/output
 fa=Cu
+home_wsl=/home/tk
+ho=/mnt/c/Users/User
+myd=$home_wsl/documents
+oh=$ZSH
 output=anschreiben_$fa
+prof_home=$ho/Documents/WindowsPowerShell
 sprache=en
-
-prof_home=/mnt/c/Users/User/Documents/WindowsPowerShell
+zsh_cu=$ZSH_CUSTOM
 
 # alias/Funktionen
 alias ag='alias | grep'
 alias cho='chown t'
-alias co=code
-alias coc='code $ca'
-alias cop='code $prof_home/Microsoft.PowerShell_profile.ps1'
 alias d='declare -f'
 alias m='alias -m'
 alias si='sudo -i'
@@ -24,20 +24,16 @@ alias t='type'
 alias -g ca=$ca 
 cu='curl localhost'
 
-#calendar
-alias cal='ncal -A2'
-alias da=date
-
 #cds
-alias cs=$cs
 alias cv=$cv
-alias c2=$home/cv
-alias ml=~/ml
-alias lt=~/lt
-alias lt2=$home/lt
-alias o=$ZSH_CUSTOM
-alias oh=$ZSH
-alias ph=$prof_home
+alias c2=$hw/cv
+alias g=/gt
+
+
+# code
+alias co=code
+alias coc='code $ca'
+alias cop='code $prof_home/Microsoft.PowerShell_profile.ps1'
 
 # zsh
 alias e="exec zsh"
@@ -116,11 +112,15 @@ function find_ex {
 
 function ch { chromium-browser  $1 &  }
 
-function g { sudo geany $1 }
+function ge { sudo geany $1 }
 
 function ic {
 	geraet=wlp2s0
 	geraet=eth0
+	declare -A ip_ar=( [o1]=3 [o2]=2 [o3]=3 [o4]=2)
+
+	echo ${ip_ar[o1]}
+
 	ipa=$(ip addr show $geraet)
 	 echo $ipa | sed -n 's/\s\{4\}inet\s\([0-9]\{3\}\.[0-9]\{2\}\.[0-9]\{3\}\.[0-9]\{2\}\).*/\1/p'
 	 #~ inet \(192\.168\.43\.[0-9]*\).*/\1/p
@@ -131,8 +131,8 @@ function lx { lximage-qt $1 & }
 function pd {
 	#output=$cv/cv_de
 	bew=bewerbung.pdf
-	pdfunite $home/$output.pdf $home/cv_$bew $home/$bew
-	qp $home/$bew
+	pdfunite $hw/$output.pdf $hw/cv_$bew $hw/$bew
+	qp $hw/$bew
 }
 
 function plu_f {
