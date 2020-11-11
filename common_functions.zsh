@@ -1,5 +1,6 @@
 function tes { echo 1} 
 
+#set location
 function ... { cd ..\.. }
 function .. { cd .. }
 function cs { cd $cs }
@@ -12,5 +13,7 @@ function oh { cd $oh }
 function ph { cd $prof_home }
 function pl { cd $home_wsl/pl }
 
+
 function coc { code $ca }
 function cop { code "$prof_home/Microsoft.PowerShell_profile.ps1" }
+function ll { ls |more }
