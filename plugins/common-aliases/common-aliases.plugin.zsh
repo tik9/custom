@@ -30,12 +30,19 @@ cu='curl localhost'
 alias cv=$cv
 alias c2=$hw/cv
 alias g=/gt
-
+alias dow=/home/tk/snap/chromium/1382/Downloads 
 
 # code
 alias co=code
-alias coc='code $ca'
-alias cop='code $prof_home/Microsoft.PowerShell_profile.ps1'
+# alias coc='code $ca'
+# alias cop='code $prof_home/Microsoft.PowerShell_profile.ps1'
+
+# py, pip
+alias pip=pip3
+alias pl='pip list |less'
+alias pi='pip install'
+alias pre='pip uninstall'
+alias python=python3
 
 # zsh
 alias e="exec zsh"

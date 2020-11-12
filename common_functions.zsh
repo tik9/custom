@@ -4,6 +4,7 @@ function tes { echo 1}
 function ... { cd ..\.. }
 function .. { cd .. }
 function cs { cd $cs }
+function dok { cd $home_wsl/doks }
 function ho { cd ~ }
 function hw { cd $home_wsl }
 function ml { cd $home_wsl/ml }
