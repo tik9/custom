@@ -1,13 +1,14 @@
-## /Customized/ ZSH and Powershell Profile on Windows and WSL
+## ZSH and Powershell Profile under one common roof on Windows and WSL
 &nbsp;
 
 If you frequently use **both environments** Linux **Zsh** and Windows **Powershell** and want to **share aliases across shell environments** like 
 
-- jumping to a folder with cd
-- showing a list of files with ls
+- jumping to a **pre-defined folder** with cd
+- showing a list of files with **ls in combination with less**
 - writing gs instead of **git status**
 
  these repos are for you.  
+&nbsp;
  
   **Motivation:** Find **common code** that works on both systems.  
   &nbsp;

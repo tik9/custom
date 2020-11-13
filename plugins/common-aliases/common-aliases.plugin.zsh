@@ -39,7 +39,7 @@ alias co=code
 
 # py, pip
 alias pip=pip3
-alias pl='pip list |less'
+alias pli='pip list |less'
 alias pi='pip install'
 alias pre='pip uninstall'
 alias python=python3
@@ -54,7 +54,7 @@ alias x=exit
 
 
 alias c=cat
-alias cc='xclip -selection clipboard'
+alias -g cc='|xclip -selection clipboard'
 alias ec=echo
 alias grep='grep --color=auto'
 alias key="ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y 2>&1 >/dev/null"
@@ -64,7 +64,13 @@ alias pr='code /mnt/c/Users/User/documents/WindowsPowerShell/Microsoft.PowerShel
 alias pw=pwd
 alias ra='vlc.exe -I curses http://provisioning.streamtheworld.com/pls/CKFRAM.pls'
 alias s='sudo -i'
+alias to=touch
 alias z='service network-manager restart'
+
+
+function bc_ { echo "$@" | bc -l }
+
+function ch { chromium-browser  $1 &  }
 
 function cp_key {
 	root_ip=192.168.178
@@ -78,36 +84,6 @@ function cp_key {
 	ss_ak $final_ip
 }
 
-
-function ss_ak {
-	ssh $@ 'cat .ssh/authorized_keys'
-}
-
-function bc_ { echo "$@" | bc -l }
-
-function se_bew { # firma sprache
-    #    rm $output
-		job="$2"
-		fa=$1
-		fa_kurz=${fa:0:2}
-
-       sed -i "/ags=\[/a \n" $cv/media/ags.js
-    #    sed -i "/ags=\[/a {a:'$fa',\nj:'$job'}," $cv/media/ags.js
-		# sed  -i 's/^fa=.*$/fa='$fa_kurz'/' $ca
-
-        if [ -n $3 ]; then; sed -i "s/^sprache=.*$/sprache=$3/" $ca ; fi
-
-        # cp $cv/anschreiben_$sprache.md $cv/anschreiben_$fa_kurz.md
-        # code $cv/anschreiben_$fa_kurz.md
- }
-
-function a {
-    #    output=cv_en
-       #output=${output%.md}
-       output=`ls -t $cv | head -1`;neu=${output:0:-3};md=$cv/$neu.md;html=$cvo/$neu.html;pandoc $md -o $html -s
-	   ch $html
-}
-
 function find_ex {
 	if [ -z "$2" ]; then
 	# print $2
@@ -118,34 +94,23 @@ function find_ex {
 	find / -path $ex -prune -false -o -name $1
 }
 
-
-function ch { chromium-browser  $1 &  }
-
 function ge { sudo geany $1 }
 
-function ic {
-	geraet=wlp2s0
-	geraet=eth0
-	declare -A ip_ar=( [o1]=3 [o2]=2 [o3]=3 [o4]=2)
+function lx { lximage-qt $1 & }
 
-	echo ${ip_ar[o1]}
-
-	ipa=$(ip addr show $geraet)
-	 echo $ipa | sed -n 's/\s\{4\}inet\s\([0-9]\{3\}\.[0-9]\{2\}\.[0-9]\{3\}\.[0-9]\{2\}\).*/\1/p'
-	 #~ inet \(192\.168\.43\.[0-9]*\).*/\1/p
+function pand {
+    #    output=cv_en
+       #output=${output%.md}
+       output=`ls -t $cv | head -1`;neu=${output:0:-3};md=$cv/$neu.md;html=$cvo/$neu.html;pandoc $md -o $html -s
+	   ch $html
 }
 
-function lx { lximage-qt $1 & }
 
 function pd {
 	#output=$cv/cv_de
 	bew=bewerbung.pdf
 	pdfunite $hw/$output.pdf $hw/cv_$bew $hw/$bew
 	qp $hw/$bew
-}
-
-function plu_f {
-	sed -i 's/.*plugins=(.*/plugins=(common-aliases debian git zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
 }
 
 
@@ -155,11 +120,6 @@ function qp { qpdfview $1 & }
 
 function qpd { start=''; ziel=''; qpdf $start --pages . 2-6 -- $ziel }
 
-function wlans {
-	iwlist wlan0 scan | $(sed -n 's/ESSID:"\(.*\)"/\1/p;s/Quality=\([0-9][0-9]\/[0-9][0-9]\).*/\1/p')
-}
-
-function visud { $us=git ; sed '$a'$us' ALL=(ALL) NOPASSWD:ALL' /etc/sudoers }
 
 alias l='ls -lFh'     #size,show type,human readable
 alias la='ls -lAFh'   #long list,show almost all,show type,human readable
