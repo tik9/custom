@@ -1,18 +1,21 @@
 home_wsl=/home/tk
+ho=/mnt/c/Users/User
 
-ca=$ZSH_CUSTOM/plugins/common-aliases/common-aliases.plugin.zsh
+plu=$ZSH_CUSTOM/plugins
+ca=$plu/common-aliases/common-aliases.plugin.zsh
+
 cs=.config/Code/User
-cs=/mnt/c/Users/User/appdata/roaming/code/user
+cs=$up/appdata/roaming/code/user
 cv=~/cv
 cvo=$cv/output
 doks=$home_wsl/doks
 fa=Cu
-ho=/mnt/c/Users/User
 myd=$home_wsl/documents
 oh=$ZSH
 output=anschreiben_$fa
 prof_home=$ho/Documents/WindowsPowerShell
 sprache=en
+up=$ho
 zsh_cu=$ZSH_CUSTOM
 
 # alias/Funktionen
@@ -49,7 +52,7 @@ alias e="exec zsh"
 alias pa='ec $PATH'
 alias pa_wi='/mnt/c/Windows/system32/cmd.exe /c echo %path%'
 alias pa_def='export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games'
-alias plu='ec $plugins'
+alias plg='ec $plugins'
 alias x=exit
 
 
@@ -60,11 +63,12 @@ alias grep='grep --color=auto'
 alias key="ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y 2>&1 >/dev/null"
 alias ma=man
 alias pm='sudo pm-suspend'
-alias pr='code /mnt/c/Users/User/documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1'
+alias pr="code $up/documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1"
 alias pw=pwd
 alias ra='vlc.exe -I curses http://provisioning.streamtheworld.com/pls/CKFRAM.pls'
 alias s='sudo -i'
 alias to=touch
+alias us='echo $USER'
 alias z='service network-manager restart'
 
 
@@ -121,7 +125,7 @@ function qp { qpdfview $1 & }
 function qpd { start=''; ziel=''; qpdf $start --pages . 2-6 -- $ziel }
 
 
-alias l='ls -lFh'     #size,show type,human readable
+alias lst='ls -lFh'     #size,show type,human readable
 alias la='ls -lAFh'   #long list,show almost all,show type,human readable
 alias lr='ls -tRFh'   #sorted by date,recursive,show type,human readable
 alias ldot='ls -ld .*'

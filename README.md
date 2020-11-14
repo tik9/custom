@@ -10,7 +10,10 @@ If you frequently use **both environments** Linux **Zsh** and Windows **Powershe
  these repos are for you.  
 &nbsp;
  
-  **Motivation:** Find **common code** that works on both systems.  
+  **Motivation**
+   
+  Find **common code** that works on both systems. Example: [common_functions.zsh](https://github.com/tik9/custom/blob/master/common_functions.zsh) and [common_functions.ps1](https://github.com/tik9/prs/blob/master/common_functions.ps1)
+
   &nbsp;
 
 At present, two files will be shared across the environments (see details in each table):
@@ -82,7 +85,20 @@ At present, two files will be shared across the environments (see details in eac
 | Sourced from |  [.zshrc](https://github.com/tik9/custom/blob/master/.zshrc) |  [profile.ps1](https://github.com/tik9/prs/blob/master/Microsoft.PowerShell_profile.ps1)|
 | Based from| [Oh-myzsh](https://github.com/ohmyzsh/ohmyzsh) | Copy and paste ;)
 
+&nbsp;  
+&nbsp;  
+
+
+### Observations in daily use
+
+
+| Feature |     Linux |  Windows |
+|----------|:---------:|----------:|
+Variable def. | Def. before use | Def. does not have to be before use
+Line Endings | Needs LF | Works with either LF or CRLF
 
 &nbsp;  
 
-Send a PR if you want to contribute
+Send a **PR** if you want to contribute
+
+&nbsp;  
