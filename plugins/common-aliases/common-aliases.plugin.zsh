@@ -23,7 +23,6 @@ alias ag='alias | grep'
 alias cho='chown t'
 alias d='declare -f'
 alias m='alias -m'
-alias si='sudo -i'
 alias t='type'
 
 alias -g ca=$ca 
@@ -35,10 +34,10 @@ alias c2=$hw/cv
 alias g=/gt
 alias dow=/home/tk/snap/chromium/1382/Downloads 
 
-# code
+# progr
+alias c=cat
 alias co=code
-# alias coc='code $ca'
-# alias cop='code $prof_home/Microsoft.PowerShell_profile.ps1'
+alias na=nano
 
 # py, pip
 alias pip=pip3
@@ -55,8 +54,6 @@ alias pa_def='export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbi
 alias plg='ec $plugins'
 alias x=exit
 
-
-alias c=cat
 alias -g cc='|xclip -selection clipboard'
 alias ec=echo
 alias grep='grep --color=auto'
@@ -146,7 +143,6 @@ function g {
 
 alias -g gr='|grep'
 alias -g L='|less'
-alias -g LL="2>&1 | less"
 
 alias dud='du -d 1 -h'
 alias duf='du -sh *'

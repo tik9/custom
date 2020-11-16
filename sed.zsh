@@ -37,9 +37,9 @@ function ic {
 
 function pls {
 # input=$( echo $1| tr -d '[:space:]')
-input=$( echo $1| sed -e 's/ /_/g')
-$input=$($input | tr '[:upper:]' '[:lower:]')
-str="| [$1](https://github.com/tik9/pluralsight/blob/master/$input.md) | ok |"
+	input=$( echo $1| sed -e 's/ /_/g')
+	$input=$($input | tr '[:upper:]' '[:lower:]')
+	str="| [$1](https://github.com/tik9/pluralsight/blob/master/$input.md) | ok |"
 
 echo $str
 }
