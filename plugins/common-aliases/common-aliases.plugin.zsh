@@ -1,21 +1,22 @@
-home_wsl=/home/tk
 ho=/mnt/c/Users/User
+prof_home=$ho/Documents/WindowsPowerShell
 
 plu=$ZSH_CUSTOM/plugins
-ca=$plu/common-aliases/common-aliases.plugin.zsh
 
+ca=$prof_home/Microsoft.PowerShell_profile.ps1
+cf=$ZSH_CUSTOM/common_functions.zsh
 cs=.config/Code/User
-cs=$up/appdata/roaming/code/user
+cs=$ho/appdata/roaming/code/user
 cv=~/cv
 cvo=$cv/output
-doks=$home_wsl/doks
+dat=$0
+doks=$HOME/doks
 fa=Cu
-myd=$home_wsl/documents
+gim=$HOME/ml/gitmanager.sh
+myd=$HOME/documents
 oh=$ZSH
 output=anschreiben_$fa
-prof_home=$ho/Documents/WindowsPowerShell
 sprache=en
-up=$ho
 zsh_cu=$ZSH_CUSTOM
 
 # alias/Funktionen
@@ -24,9 +25,6 @@ alias cho='chown t'
 alias d='declare -f'
 alias m='alias -m'
 alias t='type'
-
-alias -g ca=$ca 
-cu='curl localhost'
 
 #cds
 alias cv=$cv
@@ -55,12 +53,12 @@ alias plg='ec $plugins'
 alias x=exit
 
 alias -g cc='|xclip -selection clipboard'
+alias cu='curl localhost'
 alias ec=echo
 alias grep='grep --color=auto'
 alias key="ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y 2>&1 >/dev/null"
 alias ma=man
 alias pm='sudo pm-suspend'
-alias pr="code $up/documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1"
 alias pw=pwd
 alias ra='vlc.exe -I curses http://provisioning.streamtheworld.com/pls/CKFRAM.pls'
 alias s='sudo -i'
@@ -84,7 +82,6 @@ function cp_key {
 	ssh $final_ip 'cat /root/id_rsa.pub >> .ssh/authorized_keys'
 	ss_ak $final_ip
 }
-
 function find_ex {
 	if [ -z "$2" ]; then
 	# print $2
@@ -126,9 +123,6 @@ alias lst='ls -lFh'     #size,show type,human readable
 alias la='ls -lAFh'   #long list,show almost all,show type,human readable
 alias lr='ls -tRFh'   #sorted by date,recursive,show type,human readable
 alias ldot='ls -ld .*'
-alias lS='ls -1FSsh'
-alias lart='ls -1Fcart'
-alias lrt='ls -1Fcrt'
 
 alias -g zshrc=~/.zshrc
 
