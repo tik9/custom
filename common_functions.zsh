@@ -1,5 +1,3 @@
-function tes { echo 1} 
-
 
 # code
 function ca { code $ca }
@@ -25,6 +23,7 @@ function hw { cd $HOME }
 function lt { cd $HOME/lt }
 function ml { cd $HOME/ml }
 function myd { cd $myd }
+function mym { cd $mym }
 function o { cd $zsh_cu }
 function oh { cd $oh }
 function ph { cd $prof_home }

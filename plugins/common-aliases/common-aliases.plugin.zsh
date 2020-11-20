@@ -1,8 +1,6 @@
 ho=/mnt/c/Users/User
 prof_home=$ho/Documents/WindowsPowerShell
-
 plu=$ZSH_CUSTOM/plugins
-
 ca=$prof_home/Microsoft.PowerShell_profile.ps1
 cf=$ZSH_CUSTOM/common_functions.zsh
 cs=.config/Code/User
@@ -14,6 +12,7 @@ doks=$HOME/doks
 fa=Cu
 gim=$HOME/ml/gitmanager.sh
 myd=$HOME/documents
+mym=$ho/music
 oh=$ZSH
 output=anschreiben_$fa
 sprache=en
