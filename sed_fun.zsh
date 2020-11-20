@@ -1,3 +1,5 @@
+
+
 function ak {
 	ssh $@ 'cat .ssh/authorized_keys'
 }
@@ -9,8 +11,7 @@ function bew { # firma sprache
 		fa=$1
 		fa_kurz=${fa:0:2}
 
-       sed -i "/ags=\[/a \n" $cv/media/ags.js
-    #    sed -i "/ags=\[/a {a:'$fa',\nj:'$job'}," $cv/media/ags.js
+       sed -i '/ags = \[/a {a:"'$fa'",\nj:"'$job'"},' $cv/media/ags.js
 		# sed  -i 's/^fa=.*$/fa='$fa_kurz'/' $ca
 
         if [ -n $3 ]; then; sed -i "s/^sprache=.*$/sprache=$3/" $ca ; fi
@@ -18,6 +19,18 @@ function bew { # firma sprache
         # cp $cv/anschreiben_$sprache.md $cv/anschreiben_$fa_kurz.md
         # code $cv/anschreiben_$fa_kurz.md
  }
+
+function cp_key {
+	root_ip=192.168.178
+	final_ip=root@$root_ip.36
+	source_ip=$root_ip.38
+	id_rsa=/root/id_rsa.pub
+	id_rsa_src=.ssh/id_rsa.pub
+	ssh $source_ip -p8022 "./exp p scp -o 'StrictHostKeyChecking no' $id_rsa_src $final_ip:$id_rsa" 
+	ssh $final_ip "rm $id_rsa"
+	ssh $final_ip 'cat /root/id_rsa.pub >> .ssh/authorized_keys'
+	ss_ak $final_ip
+}
 
 function gh {
 	sed 's/\(\s*url.*\)\(gith.*$\)/\1@'$1'\2/' .git/config

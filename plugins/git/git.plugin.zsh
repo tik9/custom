@@ -1,7 +1,7 @@
 function ga { git add --all }
 function gb { git branch }
 
-function gcam { git commit -a -m $1 }
+function gc { git commit -a -m $1 }
 function cg { git commit -a -m $args }
 
 function gd { git diff }

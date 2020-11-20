@@ -8,6 +8,7 @@ function gim { code $gim }
 # cp
 function cpcf { cp $zsh_cu/common_functions.zsh $prof_home/common_functions.ps1 }
 function cpg { cp $plu/git/git.plugin.zsh $prof_home\git.ps1 }
+function cpr { cp $zsh_cu/Readme.md $prof_home }
 
 # ls
 function l { ls}

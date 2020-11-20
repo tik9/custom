@@ -23,7 +23,6 @@ At present, two files will be shared across the environments (see details in eac
 &nbsp;
 
 ## Getting Started
-&nbsp;
 
 - a running **Oh-My-Zsh** and **$profile Powershell**
 - Fork my [repo zsh](https://github.com/tik9/custom) **and/or**
@@ -35,15 +34,14 @@ At present, two files will be shared across the environments (see details in eac
 &nbsp;
 
 ## Preconditions
-&nbsp;
 
 - Running **Oh-My-Zsh** and **$profile Powershell**
 - In order to run Oh-My-Zsh you need **Zsh installed**.
 - They do not have to be on the same PC, e. g. they can work separately
+
 &nbsp;
 
 ## To be done (Tbd)
-&nbsp;
 
 - Automatic copying of the two zsh and ps1 files between systems
 
@@ -51,7 +49,6 @@ At present, two files will be shared across the environments (see details in eac
 
 
 ### Both in Common 
-&nbsp;
 
 | Feature| Linux |  Powershell |
 |----------|:-------------:|------:|
@@ -61,10 +58,10 @@ At present, two files will be shared across the environments (see details in eac
 | Source Call |  exec zsh |  . $profile|
 |Release Version | 1 | 1
 
+
 &nbsp;
 ### 1. Common Functions
 
-&nbsp;
 
 | Feature| Linux |  Powershell |
 |----------|:-------------:|------:|
@@ -76,8 +73,7 @@ At present, two files will be shared across the environments (see details in eac
 
 &nbsp;  
 &nbsp;  
-### 2. git
-&nbsp;  
+### 2. Git
 
 | Feature |     Linux    |  Windows |
 |----------|:-------------:|------:|
@@ -100,5 +96,3 @@ Line Endings | Needs LF | Works with either LF or CRLF
 &nbsp;  
 
 Send a **PR** if you want to contribute
-
-&nbsp;  
