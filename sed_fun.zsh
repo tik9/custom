@@ -8,16 +8,14 @@ function ak {
 function bew { # firma sprache
     #    rm $output
 		job="$2"
-		fa=$1
+		fa="$1"
+		fa=open
 		fa_kurz=${fa:0:2}
 
-       sed -i '/ags = \[/a {a:"'$fa'",\nj:"'$job'"},' $cv/media/ags.js
-		# sed  -i 's/^fa=.*$/fa='$fa_kurz'/' $ca
+        # if [ -n $3 ]; then; sed -i "s/^sprache=.*$/sprache=$3/" $ca ; fi
 
-        if [ -n $3 ]; then; sed -i "s/^sprache=.*$/sprache=$3/" $ca ; fi
-
-        # cp $cv/anschreiben_$sprache.md $cv/anschreiben_$fa_kurz.md
-        # code $cv/anschreiben_$fa_kurz.md
+        cp $cv/anschreiben_en.md $cv/anschreiben_$fa_kurz.md
+        code $cv/anschreiben_$fa_kurz.md
  }
 
 function cp_key {
@@ -48,13 +46,17 @@ function ic {
 	 #~ inet \(192\.168\.43\.[0-9]*\).*/\1/p
 }
 
-function pls {
-# input=$( echo $1| tr -d '[:space:]')
-	input=$( echo $1| sed -e 's/ /_/g')
-	$input=$($input | tr '[:upper:]' '[:lower:]')
-	str="| [$1](https://github.com/tik9/pluralsight/blob/master/$input.md) | ok |"
-
-echo $str
+function pand {
+    #    output=cv_en
+		cvo=$cv/output
+    #    output=${output%.md}
+       output=`ls -t $cv | head -1`
+	   neu=${output:0:-3}
+	   md=$cv/$neu.md
+	   html=$cvo/$neu.html
+	   echo $html
+	#    pandoc $md -o $html -s
+	#    ch $html
 }
 
 function plu_f {

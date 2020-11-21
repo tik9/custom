@@ -24,6 +24,7 @@ function gpu { git push }
 
 function gs { git status }
 function gsh { git show }
+function grv { git remote -v }
 
 function gsq {
     git rebase -i HEAD~5

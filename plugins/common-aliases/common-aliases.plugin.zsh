@@ -10,13 +10,11 @@ cv=~/cv
 cvo=$cv/output
 dat=$0
 doks=$HOME/doks
-fa=Cu
 gim=$HOME/ml/gitmanager.sh
 myd=$HOME/documents
 mym=$ho/music
 oh=$ZSH
 output=anschreiben_$fa
-sprache=en
 zsh_cu=$ZSH_CUSTOM
 
 # alias/Funktionen
@@ -85,13 +83,6 @@ function find_ex {
 function ge { sudo geany $1 }
 
 function lx { lximage-qt $1 & }
-
-function pand {
-    #    output=cv_en
-       #output=${output%.md}
-       output=`ls -t $cv | head -1`;neu=${output:0:-3};md=$cv/$neu.md;html=$cvo/$neu.html;pandoc $md -o $html -s
-	   ch $html
-}
 
 
 function pd {
