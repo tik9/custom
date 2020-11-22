@@ -11,7 +11,7 @@ function gg { git log }
 
 function gi {
     ga
-    gcam $1
+    gc $1
     gpu
 }
 
@@ -21,7 +21,7 @@ function glum { git pull upstream master }
 function gm { git commit -m }
 
 function gpu { git push }
-
+function gpus { git push --set-upstream origin master }
 function gs { git status }
 function gsh { git show }
 function grv { git remote -v }

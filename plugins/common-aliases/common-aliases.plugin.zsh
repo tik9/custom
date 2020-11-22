@@ -67,7 +67,7 @@ alias z='service network-manager restart'
 
 function bc_ { echo "$@" | bc -l }
 
-function chr { chromium-browser  $1 &  }
+function chr { /snap/bin/chromium  $1 &  }
 
 
 function find_ex {
@@ -83,15 +83,6 @@ function find_ex {
 function ge { sudo geany $1 }
 
 function lx { lximage-qt $1 & }
-
-
-function pd {
-	#output=$cv/cv_de
-	bew=bewerbung.pdf
-	pdfunite $hw/$output.pdf $hw/cv_$bew $hw/$bew
-	qp $hw/$bew
-}
-
 
 function q(){ wget http://speedtest.wdc01.softlayer.com/downloads/test100.zip --output-document=/dev/null }
 

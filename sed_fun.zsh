@@ -34,29 +34,52 @@ function gh {
 	sed 's/\(\s*url.*\)\(gith.*$\)/\1@'$1'\2/' .git/config
 }
 
+function gtbare {
+	ip=192.168.178.36
+	repo=vsform.git
+	# ssh $ip \
+	# 'mkdir /gt/vsform.git
+	# cd /gt/vsform.git
+	# touch /gt/vsform.git/t      
+	# echo Repo für das Konfig. von VSCode > description   
+	# git init --bare'
+
+	git remote add origin git@$ip:/gt/$repo
+	git remote -v
+}
+
 function ic {
 	geraet=wlp2s0
-	geraet=eth0
-	declare -A ip_ar=( [o1]=3 [o2]=2 [o3]=3 [o4]=2)
+	# geraet=eth0
+	declare -A ip_ar=( [o1]=3 [o2]=3 [o3]=3 [o4]=2)
 
-	echo ${ip_ar[o1]}
+	# echo ${ip_ar[o1]}
 
 	ipa=$(ip addr show $geraet)
-	 echo $ipa | sed -n 's/\s\{4\}inet\s\([0-9]\{3\}\.[0-9]\{2\}\.[0-9]\{3\}\.[0-9]\{2\}\).*/\1/p'
+	 echo $ipa | sed -n 's/\s\{4\}inet\s\([0-9]\{3\}\.[0-9]\{3\}\.[0-9]\{3\}\.[0-9]\{2\}\).*/\1/p'
 	 #~ inet \(192\.168\.43\.[0-9]*\).*/\1/p
 }
 
 function pand {
     #    output=cv_en
+cv=~/cv
+	mot=motivation.pdf
+		app_ready=refre.pdf
 		cvo=$cv/output
     #    output=${output%.md}
-       output=`ls -t $cv | head -1`
-	   neu=${output:0:-3}
-	   md=$cv/$neu.md
-	   html=$cvo/$neu.html
-	   echo $html
+    #    output=`ls -t $cv | head -1`
+	#    neu=${output:0:-3}
+	#    md=$cv/$neu.md
+	#    html=$cv/$neu.html
+	#    echo $html
 	#    pandoc $md -o $html -s
-	#    ch $html
+	#    /snap/bin/chromium $html
+	#output=$cv/cv_de
+
+	# wkhtmltopdf $html ~/$mot 
+	pdfunite ~/$mot $cvo/cv_en.pdf ~/ref.pdf ~/$app_ready
+	qp ~/$app_ready
+
 }
 
 function plu_f {
