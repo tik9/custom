@@ -9,6 +9,18 @@ function gdc { git diff --cached }
 
 function gg { git log }
 
+function gstart {
+# echo "# psrandom" >> README.md
+# echo "# psrandom" |out-file README.md
+
+    git init
+    git add README.md
+    git commit -m "first commit"
+    git remote add origin https://github.com/tik9/psrandom.git
+    git push -u origin main
+
+}
+
 function gi {
     ga
     gc $1
@@ -22,6 +34,7 @@ function gm { git commit -m }
 
 function gpu { git push }
 function gpus { git push --set-upstream origin master }
+function grs { git restore . }
 function gs { git status }
 function gsh { git show }
 function grv { git remote -v }

@@ -14,7 +14,7 @@ gim=$HOME/ml/gitmanager.sh
 myd=$HOME/documents
 mym=$ho/music
 oh=$ZSH
-output=anschreiben_$fa
+pl=$HOME/pl
 zsh_cu=$ZSH_CUSTOM
 
 # alias/Funktionen
@@ -25,8 +25,6 @@ alias m='alias -m'
 alias t='type'
 
 #cds
-alias cv=$cv
-alias c2=$hw/cv
 alias g=/gt
 alias dow=/home/tk/snap/chromium/1382/Downloads 
 
@@ -52,6 +50,7 @@ alias x=exit
 
 alias -g cc='|xclip -selection clipboard'
 alias cu='curl localhost'
+alias dh='df -h'
 alias ec=echo
 alias grep='grep --color=auto'
 alias key="ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y 2>&1 >/dev/null"
@@ -69,7 +68,6 @@ function bc_ { echo "$@" | bc -l }
 
 function chr { /snap/bin/chromium  $1 &  }
 
-
 function find_ex {
 	if [ -z "$2" ]; then
 	# print $2
@@ -79,6 +77,8 @@ function find_ex {
 	# echo $ex
 	find / -path $ex -prune -false -o -name $1
 }
+
+function g { grep $@ -r |less }
 
 function ge { sudo geany $1 }
 
@@ -103,9 +103,6 @@ alias le='less'
 # Command line head / tail shortcuts
 alias -g H=|head
 alias -g T=|tail
-function g {
-	grep $@ -r |less
-}
 
 alias -g gr='|grep'
 alias -g L='|less'

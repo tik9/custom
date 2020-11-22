@@ -18,17 +18,18 @@ function ll { ls |more }
 function ... { cd ..\.. }
 function .. { cd .. }
 function cs { cd $cs }
+function cv { cd $cv }
 function dok { cd $HOME/doks }
 function ho { cd $up }
 function hw { cd $HOME }
 function lt { cd $HOME/lt }
-function ml { cd $HOME/ml }
+function ml { cd $ml }
 function myd { cd $myd }
 function mym { cd $mym }
 function o { cd $zsh_cu }
 function oh { cd $oh }
 function ph { cd $prof_home }
-function pl { cd $HOME/pl }
+function pl { cd $pl }
 function plu { cd $plu }
 
 function pw { pwd}
