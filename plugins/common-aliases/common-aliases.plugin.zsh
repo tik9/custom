@@ -10,11 +10,13 @@ cv=~/cv
 cvo=$cv/output
 dat=$0
 doks=$HOME/doks
-gim=$HOME/ml/gitmanager.sh
+ml=$HOME/ml
+gim=$ml/gitmanager.sh
 myd=$HOME/documents
-mym=$ho/music
+mu=$ho/music
 oh=$ZSH
 pl=$HOME/pl
+pr=$HOME/psrandom
 zsh_cu=$ZSH_CUSTOM
 
 # alias/Funktionen
@@ -33,12 +35,6 @@ alias c=cat
 alias co=code
 alias na=nano
 
-# py, pip
-alias pip=pip3
-alias pli='pip list |less'
-alias pi='pip install'
-alias pre='pip uninstall'
-alias python=python3
 
 # zsh
 alias e="exec zsh"
@@ -113,6 +109,7 @@ alias fd='find . -type d -name'
 alias ff='find . -type f -name'
 alias hgrep="fc -El 0 | grep"
 alias hi=history
+alias pg='ps -ef |grep'
 
 alias -s pdf=SumatraPDF.exe
 alias -s tar='tar tf'

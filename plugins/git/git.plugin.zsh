@@ -10,14 +10,6 @@ function gdc { git diff --cached }
 function gg { git log }
 
 function gstart {
-# echo "# psrandom" >> README.md
-# echo "# psrandom" |out-file README.md
-
-    git init
-    git add README.md
-    git commit -m "first commit"
-    git remote add origin https://github.com/tik9/psrandom.git
-    git push -u origin main
 
 }
 
@@ -40,9 +32,18 @@ function gsh { git show }
 function grv { git remote -v }
 
 function gsq {
-    git rebase -i HEAD~5
+    # git rebase -i HEAD~5
 
-    # git reset --hard HEAD~5
-    # git merge --squash HEAD@ { 1 }
-    # git commit
+    git reset --hard HEAD~2
+    git merge --squash HEAD@{1}
+    git commit
+}
+
+function gini {
+
+    git init
+    git add .
+    git commit -m "first commit"
+    git remote add origin https://github.com/tik9/psrandom.git
+    git push -u origin master
 }

@@ -10,20 +10,11 @@ function re {
 }
 
 
-
 # Some self-explanatory aliases
 alias aar='apt autoremove -y'
-alias acs="apt-cache search"
-alias aps='aptitude search'
-alias as="aptitude -F '* %p -> %d \n(%v/%V)' --no-gui --disable-columns search"
+alias acs="apt-search"
 
-# apt-file
-alias afs='apt-file search --regexp'
-
-
-# These are apt-get only
-alias asrc='apt-get source'
-alias app='apt-cache policy'
+alias app='apt policy'
 
 # superuser operations ######################################################
 # if [[ $use_sudo -eq 1 ]]; then
@@ -43,8 +34,6 @@ alias app='apt-cache policy'
     alias ap=" apt purge"
     alias ar=" apt remove"
 
-    # apt-get only
-    alias ads=" apt-get dselect-upgrade"
 
     # Install all .deb files in the current directory.
     # Warning: you will need to put the glob in single quotes if you use:
