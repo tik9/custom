@@ -37,13 +37,14 @@ function gtbare {
 function ic {
 	geraet=wlp2s0
 	geraet=eth0
-	declare -A ip_ar=( [o1]=3 [o2]=2 [o3]=3 [o4]=2)
-
-	# echo ${ip_ar[o1]}
+	ip_ar=(3 2 3 2)
 
 	ipa=$(ip addr show $geraet)
-	 echo $ipa | sed -n 's/\s\{4\}inet\s\([0-9]\{'${ip_ar[o1]}'\}\.[0-9]\{'${ip_ar[o2]}'\}\.[0-9]\{3\}\.[0-9]\{2\}\).*/\1/p'
-	 #~ inet \(192\.168\.43\.[0-9]*\).*/\1/p
+	 ipa=$(echo $ipa | sed -n 's/\s\{4\}inet\s\([0-9]\{'${ip_ar[1]}'\}\.[0-9]\{'${ip_ar[2]}'\}\.[0-9]\{'${ip_ar[3]}'\}\.[0-9]\{'${ip_ar[4]}'\}\).*/\1/p')
+	 #~ inet \(192\.168\.178\.[0-9]*\).*/\1/p
+	 fst3=${ipa:0:-3}.$1
+	#  echo $fst3
+	 ssh $fst3 -p$2
 }
 
 
