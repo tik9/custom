@@ -53,7 +53,10 @@ function plu_f {
 }
 
 
-function visud { $us=git ; sed '$a'$us' ALL=(ALL) NOPASSWD:ALL' /etc/sudoers }
+function visud { 
+	us=git
+	sed '$a'$us' ALL=(ALL) NOPASSWD:ALL' /etc/sudoers 
+}
 
 function wlans {
 	iwlist wlan0 scan | $(sed -n 's/ESSID:"\(.*\)"/\1/p;s/Quality=\([0-9][0-9]\/[0-9][0-9]\).*/\1/p')

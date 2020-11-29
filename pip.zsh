@@ -1,5 +1,5 @@
 # alias pip=pip3
-function pip3 { pip3.exe $@}
+# function pip3 { pip3.exe $@}
 function pli { pip list |more }
 function pi { pip install $1}
 function plo { pip list --outdated}

@@ -79,12 +79,14 @@ function g { grep $@ -r |less }
 function ge { sudo geany $1 }
 
 function lx { lximage-qt $1 & }
-
+function np { grep -c ^processor /proc/cpuinfo; nproc }
 function q(){ wget http://speedtest.wdc01.softlayer.com/downloads/test100.zip --output-document=/dev/null }
 
 function qp { qpdfview $1 & }
 
 function qpd { start=''; ziel=''; qpdf $start --pages . 2-6 -- $ziel }
+
+function vse {  echo $(code --list-extensions) > extensions.txt}
 
 
 alias lst='ls -lFh'     #size,show type,human readable
