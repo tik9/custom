@@ -1,8 +1,8 @@
 ho=/mnt/c/Users/User
-prof_home=$ho/Documents/WindowsPowerShell
+ph=$ho/Documents/WindowsPowerShell
 plu=$ZSH_CUSTOM/plugins
 bs=$ho/AppData\Roaming\Brackets
-ca=$prof_home/Microsoft.PowerShell_profile.ps1
+ca=$ph/Microsoft.PowerShell_profile.ps1
 cf=$ZSH_CUSTOM/common_functions.zsh
 cs=.config/Code/User
 cs=$ho/appdata/roaming/code/user
@@ -12,11 +12,13 @@ dat=$0
 doks=$HOME/doks
 ml=$HOME/ml
 gim=$ml/gitmanager.sh
+hw=$HOME
 myd=$HOME/documents
 mu=$ho/music
 oh=$ZSH
 pl=$HOME/pl
 pr=$HOME/psrandom
+tm=$HOME/tesseractToMarkdown
 zsh_cu=$ZSH_CUSTOM
 
 # alias/Funktionen

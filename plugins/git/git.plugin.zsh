@@ -38,12 +38,3 @@ function gsq {
     git merge --squash HEAD@{1}
     git commit
 }
-
-function gini {
-
-    git init
-    git add .
-    git commit -m "first commit"
-    git remote add origin https://github.com/tik9/psrandom.git
-    git push -u origin master
-}

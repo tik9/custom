@@ -26,17 +26,17 @@ function ... { cd ..\.. }
 function .. { cd .. }
 function cs { cd $cs }
 function cv { cd $cv }
-function dok { cd $HOME/doks }
+function dok { cd $hw/doks }
 function ho { cd $up }
-function hw { cd $HOME }
-function lt { cd $HOME/lt }
+function hw { cd $hw }
 function ml { cd $ml }
 function myd { cd $myd }
 function mu { cd $mu }
 function o { cd $zsh_cu }
 function oh { cd $oh }
-function ph { cd $prof_home }
+function ph { cd $ph }
 function pl { cd $pl }
 function plu { cd $plu }
 function pr { cd $pr }
 function pw { pwd}
+function tm { cd $tm }
