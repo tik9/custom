@@ -25,8 +25,8 @@ At present, two files will be shared across the environments (see details in eac
 ## Getting Started
 
 - a running **Oh-My-Zsh** and **$profile Powershell**
-- Fork my [repo zsh](https://github.com/tik9/custom) **and/or**
-- Fork my [repo powershell](https://github.com/tik9/prs)
+- Fork [this repo](.) **and/or**
+- Fork my [repo powershell](https://github.com/tik9/psprofile)
 - Choose the appropriate folders in your OS for the repos
 - You can use each repo on its own, but the full benefit is to use both
 
@@ -50,25 +50,25 @@ At present, two files will be shared across the environments (see details in eac
 
 ### Both in Common 
 
-| Feature| Linux |  Powershell |
-|----------|:-------------:|------:|
-|Content   |  Functions | Functions
-| Version Shell | Zsh 5 | Powershell 5 |
-| Environment | Debian/WSL/Zsh   | Windows native |
-| Source Call |  exec zsh |  . $profile|
-|Release Version | 1 | 1
+ Feature| Linux |  Powershell 
+---------|:-------------:|------:
+Content   |  Functions | Functions
+ Version Shell | Zsh 5 | Powershell 5 
+ Environment | Debian/WSL/Zsh   | Windows native 
+ Source Call |  exec zsh |  . $profile
+Release Version | 1 | 1
 
 
 &nbsp;
 ### 1. Common Functions
 
 
-| Feature| Linux |  Powershell |
-|----------|:-------------:|------:|
-| Locationfolder | [Custom](https://github.com/tik9/custom)  | [WindowsPowershell](https://github.com/tik9/prs) |
-| Name | [common_functions.zsh](https://github.com/tik9/custom/blob/master/common_functions.zsh) |[common_functions.ps1](https://github.com/tik9/prs/blob/master/common_functions.ps1)|
-| Sourced from |  automatic | [profile.ps1](https://github.com/tik9/prs/blob/master/Microsoft.PowerShell_profile.ps1)|
-| Based from| [Oh-myzsh](https://github.com/ohmyzsh/ohmyzsh) | [Useful Aliases](https://gist.github.com/timsneath/19867b12eee7fd5af2ba)
+ Feature| Linux |  Powershell 
+--------|:-------:|------:
+ Locationfolder | [Custom](https://github.com/tik9/custom)  |[WindowsPowershell](https://github.com/tik9/psprofile) 
+ Name | [common_functions.zsh](common_functions.zsh) |[common_functions.ps1](https://github.com/tik9/psprofile/blob/master/common_functions.ps1)
+ Sourced from |  automatic | [profile.ps1](https://github.com/tik9/psprofile/blob/master/Microsoft.PowerShell_profile.ps1)
+ Based from| [Oh-myzsh](https://github.com/ohmyzsh/ohmyzsh) | [Useful Aliases](https://gist.github.com/timsneath/19867b12eee7fd5af2ba)
 
 
 &nbsp;  
