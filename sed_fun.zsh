@@ -17,26 +17,14 @@ function cp_key {
 }
 
 function gh {
-	sed 's/\(\s*url.*\)\(gith.*$\)/\1@'$1'\2/' .git/config
+	sed 's/\(.\+tps:\/\/\)\(gith.\+$\)/\1'$1'@\2/' .git/config
 }
 
-function gtbare {
-	ip=192.168.178.36
-	repo=vsform.git
-	# ssh $ip \
-	# 'mkdir /gt/vsform.git
-	# cd /gt/vsform.git
-	# touch /gt/vsform.git/t      
-	# echo Repo für das Konfig. von VSCode > description   
-	# git init --bare'
-
-	# git remote add origin git@$ip:/gt/$repo
-	# git remote -v
-}
 
 function ic {
 	geraet=wlp2s0
 	geraet=eth0
+	geraet=wlan0
 
 	ipa=$(ip addr show $geraet)
 	 ipa=$(echo $ipa | sed -n 's/\s\{4\}inet\s\([0-9]\{3\}\.[0-9]\{3\}\.[0-9]\+\.[0-9]\+\).*/\1/p')

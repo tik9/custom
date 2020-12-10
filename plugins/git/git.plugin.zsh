@@ -10,12 +10,16 @@ function gdc { git diff --cached }
 function gg { git log }
 
 function gstart {
+    git init
+    git add README.md
+    git commit -m "first commit"
+    git push -u origin master
 
 }
 
-function gi {
+function giwf {
     ga
-    gc $1
+    git commit -m 'commit'
     gpu
 }
 

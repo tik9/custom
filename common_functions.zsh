@@ -6,10 +6,10 @@ function dat { code $dat }
 function gim { code $gim }
 
 # cp
-function cpcf { cp $zsh_cu/common_functions.zsh $prof_home/common_functions.ps1 }
-function cpg { cp $plu/git/git.plugin.zsh $prof_home\git.ps1 }
-function cpr { cp $zsh_cu/Readme.md $prof_home }
-function cppi { cp $zsh_cu/pip.zsh $prof_home/pip.ps1 }
+function cpcf { cp $zsh_cu/common_functions.zsh $ph/common_functions.ps1 }
+function cpg { cp $plu/git/git.plugin.zsh $ph\git.ps1 }
+function cpr { cp $zsh_cu/Readme.md $ph }
+function cppi { cp $zsh_cu/pip.zsh $ph/pip.ps1 }
 
 function cplw {
     dat=$1
@@ -27,7 +27,8 @@ function .. { cd .. }
 function cs { cd $cs }
 function cv { cd $cv }
 function dok { cd $hw/doks }
-function ho { cd $up }
+function fs { cd $fs }
+function ho { cd $ho }
 function hw { cd $hw }
 function ml { cd $ml }
 function myd { cd $myd }
