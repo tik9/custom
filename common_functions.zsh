@@ -28,8 +28,10 @@ function cs { cd $cs }
 function cv { cd $cv }
 function dok { cd $hw/doks }
 function fs { cd $fs }
+function gt { cd $gt }
 function ho { cd $ho }
 function hw { cd $hw }
+function lt { cd $lt }
 function ml { cd $ml }
 function myd { cd $myd }
 function mu { cd $mu }

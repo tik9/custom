@@ -9,13 +9,7 @@ function gdc { git diff --cached }
 
 function gg { git log }
 
-function gstart {
-    git init
-    git add README.md
-    git commit -m "first commit"
-    git push -u origin master
-
-}
+function gic { git commit -am 'commit'}
 
 function giwf {
     ga
@@ -26,13 +20,21 @@ function giwf {
 function gll { git pull }
 function glg { git log --stat }
 function glum { git pull upstream master }
-function gm { git commit -m }
 
 function gpu { git push }
 function gpus { git push --set-upstream origin master }
 function grs { git restore . }
 function gs { git status }
 function gsh { git show }
+
+function gstart {
+    git init
+    git add README.md
+    git commit -m "first commit"
+    git push -u origin master
+
+}
+
 function grv { git remote -v }
 
 function gsq {

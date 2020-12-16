@@ -10,8 +10,10 @@ cv=~/cv
 cvo=$cv/output
 dat=$0
 doks=$HOME/doks
+gt=$HOME/gt
 ml=$HOME/ml
-gim=$ml/gitmanager.sh
+
+gim=$gt/gitmanager.sh
 hw=$HOME
 myd=$HOME/documents
 mu=$ho/music
