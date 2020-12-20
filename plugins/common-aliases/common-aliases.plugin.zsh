@@ -10,7 +10,7 @@ cv=~/cv
 cvo=$cv/output
 dat=$0
 doks=$HOME/doks
-gt=$HOME/gt
+gt=$HOME/git
 ml=$HOME/ml
 
 gim=$gt/gitmanager.sh
@@ -21,7 +21,7 @@ oh=$ZSH
 pl=$HOME/pl
 pr=$HOME/psrandom
 tm=$HOME/tesseractToMarkdown
-zsh_cu=$ZSH_CUSTOM
+o=$ZSH_CUSTOM
 
 # alias/Funktionen
 alias ag='alias | grep'

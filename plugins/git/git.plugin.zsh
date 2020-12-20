@@ -13,7 +13,7 @@ function gic { git commit -am 'commit'}
 
 function giwf {
     ga
-    git commit -m 'commit'
+    git commit -m 'commit from function giwf'
     gpu
 }
 
