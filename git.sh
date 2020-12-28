@@ -1,58 +1,3 @@
-function gitman {
-    home=/home/tk
-    w_home=/mnt/c/Users/User
-    elems=(tesseractToMarkdown further-skill-tests)
-    repo=(
-        # "$w_home/appdata/roaming/code/user"
-        #  "$w_home/documents/WindowsPowerShell" 
-        #  "$home/.oh-my-zsh/custom"
-    )
-    # echo ${#repo[@]} vz
-
-    echo -e "\n[*** Start Gitman"
-
-    # $home=\\wsl$\debian/home/tk
-
-    commit='Newest commit'
-
-    # cmd=pull
-    # cmd=status
-    # remote update
-    cmd='add .'
-    # cmd="commit -m '$commit'"
-    # cmd=push
-    # clone https://github.com/tik9/$elem.git $home/$elem
-
-    for elem in ${elems[@]} ; do
-    # git "$elem"
-    echo $elem
-    done
-
-
-    # for elem in ${repo[@]} ; do
-    #     echo done1
-    #     # gi_do $elem
-    # done
-
-    cm_find=`find $home -maxdepth 1 -not -type f -and -not -name '.*'`
-
-    for dir_home in $cm_find; do
-        if [ -d $dir_home/.git ];
-        then
-            gi_do $dir_home
-        fi
-    done
-
-    echo -e "\n[*** End Gitman"
-
-}
-
-function gi_do {
-    cd $1
-    echo -e "\n[***  Git $cmd: " $1
-    git $cmd
-}
-
 function gtnew {
     repo=further-skill-tests
     dir=$HOME/$repo
@@ -91,9 +36,8 @@ function gtbare {
 	# ls -a $dir'
 }
 
-function fork {
+function gtfork {
     repogit=$1
-    repogit=AlexZeitler/posh-git-alias
     user=$(echo $repogit|cut -d'/' -f1)
     repo=$(echo $repogit|cut -d'/' -f2)
 

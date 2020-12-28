@@ -13,12 +13,11 @@ doks=$HOME/doks
 gt=$HOME/git
 ml=$HOME/ml
 
-gim=$gt/gitmanager.sh
 hw=$HOME
 myd=$HOME/documents
 mu=$ho/music
 oh=$ZSH
-pl=$HOME/pl
+pl=$HOME/pluralsight-skill-tests
 pr=$HOME/psrandom
 tm=$HOME/tesseractToMarkdown
 o=$ZSH_CUSTOM
@@ -43,9 +42,6 @@ alias na=nano
 # zsh
 alias e="exec zsh"
 alias pa='ec $PATH'
-alias pa_wi='/mnt/c/Windows/system32/cmd.exe /c echo %path%'
-alias pa_def='export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games'
-alias plg='ec $plugins'
 alias x=exit
 
 alias -g cc='|xclip -selection clipboard'
@@ -93,9 +89,7 @@ function qpd { start=''; ziel=''; qpdf $start --pages . 2-6 -- $ziel }
 function vse {  echo $(code --list-extensions) > extensions.txt}
 
 
-alias lst='ls -lFh'     #size,show type,human readable
 alias la='ls -lAFh'   #long list,show almost all,show type,human readable
-alias lr='ls -tRFh'   #sorted by date,recursive,show type,human readable
 alias ldot='ls -ld .*'
 
 alias -g zshrc=~/.zshrc
@@ -109,13 +103,8 @@ alias -g T=|tail
 alias -g gr='|grep'
 alias -g L='|less'
 
-alias dud='du -d 1 -h'
-alias duf='du -sh *'
 alias fd='find . -type d -name'
 alias ff='find . -type f -name'
-alias hgrep="fc -El 0 | grep"
-alias hi=history
 alias pg='ps -ef |grep'
 
 alias -s pdf=SumatraPDF.exe
-alias -s tar='tar tf'
