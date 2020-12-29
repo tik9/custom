@@ -6,6 +6,7 @@ ca=$ph/Microsoft.PowerShell_profile.ps1
 cf=$ZSH_CUSTOM/common_functions.zsh
 cs=.config/Code/User
 cs=$ho/appdata/roaming/code/user
+cs2=~/.config/code/User
 cv=~/cv
 cvo=$cv/output
 dat=$0

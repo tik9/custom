@@ -16,6 +16,7 @@ function ll { ls |more }
 function ... { cd ..\.. }
 function .. { cd .. }
 function cs { cd $cs }
+function cs2 { cd $cs2 }
 function cv { cd $cv }
 function dok { cd $hw/doks }
 function fs { cd $fs }
