@@ -4,6 +4,8 @@ function pli { pip list |more }
 function pi { pip install $1}
 function plo { pip list --outdated}
 function pre { pip uninstall $1}
+function psh { pip show $1 }
+function pu { pip install --upgrade $1 }
 function python { python3}
 
 function pipu {

@@ -16,8 +16,8 @@ function cp_key {
 	ss_ak $final_ip
 }
 
-function gh {
-	sed 's/\(.\+tps:\/\/\)\(gith.\+$\)/\1'$1'@\2/' .git/config
+function ghi {
+	sed 's/\(.\+https:\/\/\)\(gith.\+$\)/\1'$1'@\2/' .git/config
 }
 
 

@@ -8,7 +8,6 @@ cs=.config/Code/User
 cs=$ho/appdata/roaming/code/user
 cs2=~/.config/code/User
 cv=~/cv
-cvo=$cv/output
 dat=$0
 doks=$HOME/doks
 gt=$HOME/git
