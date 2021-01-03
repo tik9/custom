@@ -1,27 +1,3 @@
-function gtnew {
-    repo=further-skill-tests
-    dir=$HOME/$repo
-
-    repogro=${repo^}
-    echo Repogross $repogro
-    exit
-
-    mkdir ~/$repo
-    echo "## $repogro" > $dir/README.md
-
-    git init
-    git add .
-    git commit -m "first commit"
-    git remote add origin 
-    git push -u origin master
- 
-    userhost=https://github.com/tik9/$repo.git
-    userhost=git@$ip:/gt/$repo
-	git remote add origin $userhost
-	git remote -v
-}
-}
-
 function gtbare {
 	ip=192.168.178.36
 	repo=bilder

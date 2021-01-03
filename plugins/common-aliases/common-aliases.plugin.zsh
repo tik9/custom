@@ -1,17 +1,19 @@
 ho=/mnt/c/Users/User
+ho=$HOME
+ho=/home/tk
 ph=$ho/Documents/WindowsPowerShell
+ph=$ho/.config/powershell
 plu=$ZSH_CUSTOM/plugins
 bs=$ho/AppData\Roaming\Brackets
 ca=$ph/Microsoft.PowerShell_profile.ps1
 cf=$ZSH_CUSTOM/common_functions.zsh
 cs=.config/Code/User
 cs=$ho/appdata/roaming/code/user
-cs2=~/.config/code/User
+cs2=~/.config/Code/User
 cv=~/cv
-dat=$0
-doks=$HOME/doks
+gh=$HOME/ghpage
 gt=$HOME/git
-ml=$HOME/ml
+ml=$ho/ml
 
 hw=$HOME
 myd=$HOME/documents
@@ -49,11 +51,10 @@ alias cu='curl localhost'
 alias dh='df -h'
 alias ec=echo
 alias grep='grep --color=auto'
-alias key="ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y 2>&1 >/dev/null"
+alias hif='history -E'
 alias ma=man
 alias pm='sudo pm-suspend'
 alias pw=pwd
-alias ra='vlc.exe -I curses http://provisioning.streamtheworld.com/pls/CKFRAM.pls'
 alias s='sudo -i'
 alias to=touch
 alias us='echo $USER'
@@ -85,8 +86,6 @@ function q(){ wget http://speedtest.wdc01.softlayer.com/downloads/test100.zip --
 function qp { qpdfview $1 & }
 
 function qpd { start=''; ziel=''; qpdf $start --pages . 2-6 -- $ziel }
-
-function vse {  echo $(code --list-extensions) > extensions.txt}
 
 
 alias la='ls -lAFh'   #long list,show almost all,show type,human readable

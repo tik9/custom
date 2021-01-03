@@ -35,6 +35,8 @@ function gstart {
 
 }
 
+function gru { git remote update }
+
 function grv { git remote -v }
 
 function gsq {

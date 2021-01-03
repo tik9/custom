@@ -12,13 +12,14 @@ function cpg { cp $plu/git/git.plugin.zsh $ph\git.ps1 }
 function l { ls}
 function ll { ls |more }
 
+function vse { echo $(code --list-extensions)|tr ' ' '\n' > extensions.txt}
+
 #set location
 function ... { cd ..\.. }
 function .. { cd .. }
 function cs { cd $cs }
 function cs2 { cd $cs2 }
 function cv { cd $cv }
-function dok { cd $hw/doks }
 function fs { cd $fs }
 function gt { cd $gt }
 function hi { history }
@@ -36,3 +37,4 @@ function plu { cd $plu }
 function pr { cd $pr }
 function pw { pwd}
 function tm { cd $tm }
+function gh { cd $gh }
