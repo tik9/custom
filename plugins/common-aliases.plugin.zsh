@@ -1,1 +1,0 @@
-gh=/home/tk/ghpagegh=/home/tk/ghpage

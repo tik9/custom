@@ -9,19 +9,21 @@ ca=$ph/Microsoft.PowerShell_profile.ps1
 cf=$ZSH_CUSTOM/common_functions.zsh
 cs=.config/Code/User
 cs=$ho/appdata/roaming/code/user
-cs2=~/.config/Code/User
-cv=~/cv
-gh=$HOME/ghpage
-gt=$HOME/git
+cs2=$ho/.config/Code/User
+cv=$ho/cv
+fs=$ho/further-skill-tests
+gh=$ho/ghpage
+gt=$ho/git
 ml=$ho/ml
 
-hw=$HOME
-myd=$HOME/documents
+hw=$ho
+lt=$ho/lt
+myd=$ho/documents
 mu=$ho/music
 oh=$ZSH
-pl=$HOME/pluralsight-skill-tests
-pr=$HOME/psrandom
-tm=$HOME/tesseractToMarkdown
+pl=$ho/pluralsight-skill-tests
+pr=$ho/psrandom
+tm=$ho/tesseractToMarkdown
 o=$ZSH_CUSTOM
 
 # alias/Funktionen
@@ -77,7 +79,7 @@ function find_ex {
 
 function g { grep $@ -r |less }
 
-function ge { sudo geany $1 }
+function ge { geany $1& }
 
 function lx { lximage-qt $1 & }
 function np { grep -c ^processor /proc/cpuinfo; nproc }
@@ -96,8 +98,8 @@ alias -g zshrc=~/.zshrc
 alias le='less'
 
 # Command line head / tail shortcuts
-alias -g H=|head
-alias -g T=|tail
+alias -g H='|head'
+alias -g T='|tail'
 
 alias -g gr='|grep'
 alias -g L='|less'
