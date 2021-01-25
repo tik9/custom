@@ -1,32 +1,36 @@
 #!/bin/bash
 
 sudoe=/etc/sudoers
-cust=custom
 
-omz=.oh-my-zsh
+
+omz=$HOME/.oh-my-zsh
+#echo $omz
+
+cust=custom
 omz_cu=$omz/$cust
 
-apt install curl git zsh wget -y
-chsh -s /bin/zsh
+#apt install curl git zsh wget -y
+#chsh -s /bin/zsh
 
-# sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-cd $omz
+#rm -rf $omz_cu
 
-rm -rf $cust
-git clone https://github.com/tik9/$cust.git
+#cd $omz
+#git clone https://github.com/tik9/$cust.git
 
-cp $cust/.zshrc $HOME
-# git config --global user.email ""
+#cp $omz_cu/.zshrc $HOME
+
+#git config --global user.email ""
 
 #sed
-sed -i -e "USER ALL=(ALL) NOPASSWD: ALL" $sudoe
+#sed -i -e "USER ALL=(ALL) NOPASSWD: ALL" $sudoe
 # sed -i '$ d' $sudoe
 
 # sed -i -e '#PubkeyAuthentication yes' 
 
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+#git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+#git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 #termux
 # /data/data/com.termux/files/home

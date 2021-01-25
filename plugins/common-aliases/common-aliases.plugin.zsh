@@ -67,6 +67,9 @@ function bc_ { echo "$@" | bc -l }
 
 function chr { /snap/bin/chromium  $1 &  }
 
+function dos2u { for i in *;do if [[ -f $i ]]; then sed -i 's/\r$//' "$i"; fi; done }
+
+
 function find_ex {
 	if [ -z "$2" ]; then
 	# print $2
