@@ -1,8 +1,5 @@
 #!/bin/bash
 
-sudoe=/etc/sudoers
-
-
 omz=$HOME/.oh-my-zsh
 #echo $omz
 
@@ -12,7 +9,7 @@ omz_cu=$omz/$cust
 #apt install curl git zsh wget -y
 #chsh -s /bin/zsh
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 #rm -rf $omz_cu
 
@@ -21,16 +18,9 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 #cp $omz_cu/.zshrc $HOME
 
-#git config --global user.email ""
+git config --global user.email ""
 
-#sed
-#sed -i -e "USER ALL=(ALL) NOPASSWD: ALL" $sudoe
-# sed -i '$ d' $sudoe
-
-# sed -i -e '#PubkeyAuthentication yes' 
-
-#git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-#git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 #termux
 # /data/data/com.termux/files/home

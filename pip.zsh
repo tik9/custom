@@ -5,7 +5,7 @@ function plo { pip list --outdated}
 function pre { pip uninstall $@}
 function psh { pip show $1 }
 function pu { pip install --upgrade $1 }
-function python { python3}
+# function python { python3}
 
 function pipu {
     pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
