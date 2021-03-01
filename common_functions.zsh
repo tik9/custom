@@ -12,6 +12,7 @@ function vse { echo $(code --list-extensions)|tr ' ' '\n' > extensions.txt}
 #set location
 function ... { cd ..\.. }
 function .. { cd .. }
+function be { cd $be }
 function cs { cd $cs }
 function cv { cd $cv }
 function cy { cd $cy }
