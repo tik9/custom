@@ -1,21 +1,25 @@
 ho=/mnt/c/Users/User
-ho=$HOME
-ho=/home/tk
+
+# if [ $hostname = 'wsl' ];then
+	# ho=/mnt/c/Users/User ; fi
+
+hw=$HOME
 ph=$ho/Documents/WindowsPowerShell
 ph=$ho/.config/powershell
 plu=$ZSH_CUSTOM/plugins
-bs=$ho/AppData\Roaming\Brackets
+jekyll=$ho/downloads/PortableJekyll-master
+
+be=$jekyll/bewerbung
 ca=$ph/Microsoft.PowerShell_profile.ps1
 cf=$ZSH_CUSTOM/common_functions.zsh
 cs=.config/Code/User
 cs=$ho/appdata/roaming/code/user
 cs2=$ho/.config/Code/User
-cv=$ho/tik9.github.io.git
-cy=$ho/cpyth
+cv=$jekyll/tik9.github.io.git
+cy=$hw/cpython
 ga=$ho/game
 gt=$ho/git
 
-hw=$ho
 myd=$ho/documents
 o=$ZSH_CUSTOM
 
