@@ -1,7 +1,7 @@
 
 # cp
 function cpc { cp $o/common_functions.zsh $ph/common_functions.ps1 }
-function cpg { cp $plu/git/git.plugin.zsh $ph\git.ps1 }
+function cpg { cp $plu/git/git.plugin.zsh $ph/git.ps1 }
 
 # ls
 function l { ls}
