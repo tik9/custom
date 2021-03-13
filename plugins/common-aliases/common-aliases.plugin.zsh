@@ -1,4 +1,5 @@
 ho=/mnt/c/Users/User
+#ho=$HOME
 
 # if [ $hostname = 'wsl' ];then
 	# ho=/mnt/c/Users/User ; fi
@@ -9,16 +10,21 @@ ph=$ho/.config/powershell
 plu=$ZSH_CUSTOM/plugins
 jekyll=$ho/downloads/PortableJekyll-master
 
-be=$jekyll/bewerbung
+be=bewerbung
+#be=$jekyll/$be
+be=$hw/$be
 ca=$ph/Microsoft.PowerShell_profile.ps1
 cf=$ZSH_CUSTOM/common_functions.zsh
 cs=.config/Code/User
-cs=$ho/appdata/roaming/code/user
-cs2=$ho/.config/Code/User
-cv=$jekyll/tik9.github.io.git
+cs=$hw/appdata/roaming/code/user
+cs2=$hw/.config/Code/User
+cv=tik9.github.io.git
+#cv=$jekyll/$cv
+cv=$hw/$cv
 cy=$hw/cpython
-ga=$ho/game
-gt=$ho/git
+ga=$jekyll/game
+ga=$hw/game
+gt=$hw/git
 
 myd=$ho/documents
 o=$ZSH_CUSTOM
@@ -45,6 +51,7 @@ alias x=exit
 alias -g cc='|xclip -selection clipboard'
 alias cu='curl localhost'
 alias dh='df -h'
+alias di=dict
 alias ec=echo
 alias grep='grep --color=auto'
 alias hif='history -E'

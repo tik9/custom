@@ -16,34 +16,22 @@ alias acs="apt-search"
 
 alias app='apt policy'
 
-# superuser operations ######################################################
-# if [[ $use_sudo -eq 1 ]]; then
-# commands using  #######
-    alias ac=" apt clean"
-    alias ad=" apt update"
-    alias adg=" apt update &&  apt upgrade"
-    alias adu=" apt update &&  apt dist-upgrade"
-    alias afu=" apt-file update"
-    alias ali=" apt list --installed | less"
-    alias alu=" apt list --upgradable"
-    alias au=" apt upgrade"
-    alias ai=" apt install"
-    # Install all packages given on the command line while using only the first word of each line:
-    # acs ... | ail
-    alias ail="sed -e 's/  */ /g' -e 's/ *//' | cut -s -d ' ' -f 1 | xargs  apt install"
-    alias ap=" apt purge"
-    alias ar=" apt remove"
+alias ac=" apt clean"
+alias ad=" apt update"
+alias adg=" apt update &&  apt upgrade"
+alias adu=" apt update &&  apt dist-upgrade"
+alias afu=" apt-file update"
+alias ali=" apt list --installed | less"
+alias alu=" apt list --upgradable"
+alias au=" apt upgrade"
+alias ai=" apt install"
+# Install all packages given on the command line while using only the first word of each line:
+# acs ... | ail
+alias ail="sed -e 's/  */ /g' -e 's/ *//' | cut -s -d ' ' -f 1 | xargs  apt install"
+alias ap=" apt purge"
+alias ar=" apt remove"
 
 
-    # Install all .deb files in the current directory.
-    # Warning: you will need to put the glob in single quotes if you use:
-    # glob_subst
-    alias dia=" dpkg -i ./*.deb"
-    alias di=" dpkg -i"
-
-    # Remove ALL kernel images and headers EXCEPT the one in use
-    alias kclean=' aptitude remove -P ?and(~i~nlinux-(ima|hea) ?not(~n$(uname -r)))'
-# fi
 
 # Registers a compdef for $1 that calls apt with the commands $2
 # To do that it creates a new completion function called _apt_pref_$2
