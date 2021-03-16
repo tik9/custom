@@ -1,8 +1,9 @@
-ho=/mnt/c/Users/User
-#ho=$HOME
 
 # if [ $hostname = 'wsl' ];then
 	# ho=/mnt/c/Users/User ; fi
+
+ho=/mnt/c/Users/User
+
 
 hw=$HOME
 ph=$ho/Documents/WindowsPowerShell
@@ -28,6 +29,8 @@ gt=$hw/git
 
 myd=$ho/documents
 o=$ZSH_CUSTOM
+rt=$ho/rest-test
+ws=$hw/workspace1.code-workspace
 
 # alias/Funktionen
 alias ag='alias | grep'

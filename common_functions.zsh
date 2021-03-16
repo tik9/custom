@@ -13,6 +13,7 @@ function vse { echo $(code --list-extensions)|tr ' ' '\n' > extensions.txt}
 function ... { cd ..\.. }
 function .. { cd .. }
 function be { cd $be }
+function ca { cd $ca }
 function cs { cd $cs }
 function cv { cd $cv }
 function cy { cd $cy }
@@ -24,3 +25,5 @@ function hw { cd $hw }
 function o { cd $o }
 function ph { cd $ph }
 function pw { pwd}
+function rt { cd $rt}
+function ws { more $ws}
