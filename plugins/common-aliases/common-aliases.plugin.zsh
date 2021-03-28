@@ -3,14 +3,12 @@
 
 ho=/mnt/c/Users/User
 
-
 hw=$HOME
 ph=$ho/Documents/WindowsPowerShell
 ph=$ho/.config/powershell
 plu=$ZSH_CUSTOM/plugins
-jekyll=$ho/downloads/PortableJekyll-master
 
-be=$jekyll/bewerbung
+be=$ho/bewerbung
 ca=$ph/Microsoft.PowerShell_profile.ps1
 cf=$ZSH_CUSTOM/common_functions.zsh
 cs=.config/Code/User
@@ -30,7 +28,11 @@ ws=$hw/workspace1.code-workspace
 alias ag='alias | grep'
 alias d='declare -f'
 alias m='alias -m'
-alias t='type'
+alias t=type
+
+#node
+alias n='npm'
+alias noi='npm i'
 
 #cds
 alias dow=/home/tk/snap/chromium/1382/Downloads 

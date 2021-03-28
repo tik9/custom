@@ -3,6 +3,11 @@
 function cpc { cp $o/common_functions.zsh $ph/common_functions.ps1 }
 function cpg { cp $plu/git/git.plugin.zsh $ph/git.ps1 }
 
+# node
+function nl { npm ls }
+function nov { node -v}
+function ns { npm start}
+
 # ls
 function l { ls}
 function ll { ls |more }
