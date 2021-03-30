@@ -6,7 +6,7 @@ ho=/mnt/c/Users/User
 
 hw=$HOME
 ph=$ho/Documents/WindowsPowerShell
-ph=$ho/.config/powershell
+# ph=$ho/.config/powershell
 plu=$ZSH_CUSTOM/plugins
 
 be=$ho/bewerbung
@@ -16,11 +16,9 @@ cs=.config/Code/User
 cs=$hw/appdata/roaming/code/user
 cs2=$hw/.config/Code/User
 cv=tik9.github.io.git
-#cv=$jekyll/$cv
-cv=$hw/$cv
+cv=$ho/$cv
 cy=$hw/cpython
-ga=$jekyll/game
-ga=$hw/game
+ga=$ho/game
 gt=$hw/git
 
 myd=$ho/documents
