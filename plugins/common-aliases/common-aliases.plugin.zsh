@@ -32,6 +32,13 @@ alias d='declare -f'
 alias m='alias -m'
 alias t=type
 
+# termux
+tp='termux-media-player play'
+ts='termux-media-player stop'
+tv='termux-volume music'
+y=./ytdl
+
+
 #node
 alias n='npm'
 alias noi='npm i'
