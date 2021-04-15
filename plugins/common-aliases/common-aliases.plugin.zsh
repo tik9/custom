@@ -1,35 +1,41 @@
-
-# if [ $hostname = 'wsl' ];then
-	# ho=/mnt/c/Users/User ; fi
-
-ho=/mnt/c/Users/User
-
-hw=$HOME
+# echo $hostname
+if [ $hostname = 'wsl' ];then
+	ho=/mnt/c/Users/User ; 
 ph=$ho/Documents/WindowsPowerShell
-# ph=$ho/.config/powershell
+cs=$ho/appdata/roaming/code/user
+	else ho=$HOME;
+ph=$ho/.config/powershell
+cs=$ho/.config/Code/User	
+	fi
+
+echo $ho
+
 plu=$ZSH_CUSTOM/plugins
 
 be=$ho/bewerbung
 ca=$ph/Microsoft.PowerShell_profile.ps1
 cf=$ZSH_CUSTOM/common_functions.zsh
-cs=.config/Code/User
-cs=$hw/appdata/roaming/code/user
-cs2=$hw/.config/Code/User
-cv=tik9.github.io.git
-cv=$ho/$cv
-cy=$hw/cpython
+cv=$ho/tik9.github.io.git
+cy=$ho/cpython
 ga=$ho/game
-gt=$hw/git
+gt=$ho/git
 
 myd=$ho/documents
 o=$ZSH_CUSTOM
 rt=$ho/rest-test
-ws=$hw/workspace1.code-workspace
+ws=$ho/workspace.code-workspace
+
+#node
+alias n=npm
+alias nog='npm i -g'
+alias noi='npm i'
+alias nr='npm run'
 
 # alias/Funktionen
+alias a='alias -m'
 alias ag='alias | grep'
 alias d='declare -f'
-alias m='alias -m'
+alias p="echo $plugins"
 alias t=type
 
 # termux
@@ -39,13 +45,6 @@ tv='termux-volume music'
 y=./ytdl
 
 
-#node
-alias n='npm'
-alias noi='npm i'
-
-#cds
-alias dow=/home/tk/snap/chromium/1382/Downloads 
-
 # progr
 alias c=cat
 alias co=code
@@ -53,13 +52,14 @@ alias na=nano
 
 
 # zsh
-alias e="exec zsh"
+alias e='exec zsh'
 alias x=exit
 
 alias -g cc='|xclip -selection clipboard'
 alias cu='curl localhost'
 alias dh='df -h'
 alias di=dict
+alias dow=/home/tk/snap/chromium/1382/Downloads 
 alias ec=echo
 alias grep='grep --color=auto'
 alias hif='history -E'
@@ -67,8 +67,7 @@ alias ma=man
 alias pm='sudo pm-suspend'
 alias s='sudo -i'
 alias to=touch
-alias us='echo $USER'
-alias z='service network-manager restart'
+alias -g zshrc=~/.zshrc
 
 
 function bc_ { echo "$@" | bc -l }
@@ -100,11 +99,6 @@ function qp { qpdfview $1 & }
 
 function qpd { start=''; ziel=''; qpdf $start --pages . 2-6 -- $ziel }
 
-
-alias la='ls -lAFh'   #long list,show almost all,show type,human readable
-alias ldot='ls -ld .*'
-
-alias -g zshrc=~/.zshrc
 
 alias le='less'
 

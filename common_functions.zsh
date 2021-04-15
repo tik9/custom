@@ -4,7 +4,6 @@ function cpc { cp $o/common_functions.zsh $ph/common_functions.ps1 }
 function cpg { cp $o/plugins/git/git.plugin.zsh $ph/git.ps1 }
 
 # node
-function nb { npm run build }
 function nd { npm run dev }
 function nl { npm ls }
 function nov { node -v}
@@ -22,7 +21,6 @@ function ... { cd ..\.. }
 function .. { cd .. }
 function be { cd $be }
 function ca { cd $ca }
-function cs { cd $cs }
 function cv { cd $cv }
 function cy { cd $cy }
 function gt { cd $gt }
