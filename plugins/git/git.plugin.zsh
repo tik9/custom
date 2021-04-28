@@ -1,7 +1,7 @@
 function gb { git branch }
 
 function gc { git commit -a -m $1 }
-function cg { git commit -a -m $args }
+function gcp { git commit -a -m $args }
 function ga { git add . }
 function gd { git diff }
 function gdc { git diff --cached }

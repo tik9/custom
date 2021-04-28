@@ -1,24 +1,23 @@
-# echo $hostname
-if [ $hostname = 'wsl' ];then
-	ho=/mnt/c/Users/User ; 
+hw = '/home/tk'
+
+# echo $HOST
+if [[ $HOST == 'wsl' ]];then
+	ho=/mnt/c/Users/User
 ph=$ho/Documents/WindowsPowerShell
 cs=$ho/appdata/roaming/code/user
-	else ho=$HOME;
+	else 
+	ho=$HOME
 ph=$ho/.config/powershell
 cs=$ho/.config/Code/User	
 	fi
 
-echo $ho
-
 plu=$ZSH_CUSTOM/plugins
 
 be=$ho/bewerbung
-ca=$ph/Microsoft.PowerShell_profile.ps1
-cf=$ZSH_CUSTOM/common_functions.zsh
-cv=$ho/tik9.github.io.git
+cv=$ho/tik9.github.io
 cy=$ho/cpython
 ga=$ho/game
-gt=$ho/git
+gt=$ho/gman
 
 myd=$ho/documents
 o=$ZSH_CUSTOM
@@ -55,7 +54,10 @@ alias na=nano
 alias e='exec zsh'
 alias x=exit
 
-alias -g cc='|xclip -selection clipboard'
+function cc {
+    echo $@ |xclip -selection clipboard
+}
+
 alias cu='curl localhost'
 alias dh='df -h'
 alias di=dict
@@ -67,12 +69,9 @@ alias ma=man
 alias pm='sudo pm-suspend'
 alias s='sudo -i'
 alias to=touch
-alias -g zshrc=~/.zshrc
 
 
-function bc_ { echo "$@" | bc -l }
-
-function chr { /snap/bin/chromium  $1 &  }
+function chr { /usr/bin/chromium  $1 &  }
 
 function dos2u { for i in *;do if [[ -f $i ]]; then sed -i 's/\r$//' "$i"; fi; done }
 
@@ -99,18 +98,19 @@ function qp { qpdfview $1 & }
 
 function qpd { start=''; ziel=''; qpdf $start --pages . 2-6 -- $ziel }
 
-
 alias le='less'
 
 # Command line head / tail shortcuts
 alias -g H='|head'
 alias -g T='|tail'
 
-alias -g gr='|grep'
-alias -g L='|less'
+alias -g gre=' | grep'
+alias -g L=' | less'
 
 alias fd='find . -type d -name'
 alias ff='find . -type f -name'
 alias pg='ps -ef |grep'
 
 alias -s pdf=SumatraPDF.exe
+
+echo $0 loaded

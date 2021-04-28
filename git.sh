@@ -2,11 +2,11 @@ function gtbare {
 	ip=192.168.178.36
  	 ssh git@$ip \
 	 "
-	 mkdir /gt/bewerbung.git 
-	 cd /gt/bewerbung.git
-	 echo ###Bewerbungen### > description
+	 mkdir /gt/.git 
+	 cd /gt/.git
+	 echo ###### > description
 	 git init --bare
 	 "
 }
 
-gtbare
+echo $0 loaded

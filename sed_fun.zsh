@@ -16,27 +16,23 @@ function cp_key {
 	ss_ak $final_ip
 }
 
-function ghi {
-	sed 's/\(.\+https:\/\/\)\(gith.\+$\)/\1'$1'@\2/' .git/config
-}
-
 
 function ic {
 	geraet=wlp2s0
-	geraet=eth0
-	geraet=wlan0
+	geraet=enx00e04c680015
 
 	ipa=$(ip addr show $geraet)
-	 ipa=$(echo $ipa | sed -n 's/\s\{4\}inet\s\([0-9]\{3\}\.[0-9]\{3\}\.[0-9]\+\.[0-9]\+\).*/\1/p')
-	 #~ inet \(192\.168\.178\.[0-9]*\).*/\1/p
-	# fst3=${ipa:0:-3}.$1
-	 echo ipa,geraet $ipa $geraet
-	#  ssh $fst3 -p$2
+	 ipa=$(echo $ipa | sed -nr 's/\s+inet\s([0-9]{3}\.[0-9]{3}\.[0-9]+\.[0-9]+).*/\1/p')
+	 echo "$ipa \n$geraet"
 }
 
+function ic2 {
+	ipa=$(ifconfig | sed -nr 's/\s+inet\s([0-9]{3}\.[0-9]{3}\.[0-9]+\.[0-9]+).*/\1/p')
+	echo $ipa
+}
 
 function plu_f {
-	sed -i 's/.*plugins=(.*/plugins=(common-aliases debian git zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
+	sed -i 's/.*plugins=(.*/plugins=(common-aliases debian git zsh-autosuggestions)/' ~/.zshrc
 }
 
 
@@ -48,3 +44,5 @@ function visud {
 function wlans {
 	iwlist wlan0 scan | $(sed -n 's/ESSID:"\(.*\)"/\1/p;s/Quality=\([0-9][0-9]\/[0-9][0-9]\).*/\1/p')
 }
+
+echo $0 loaded
