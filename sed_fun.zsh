@@ -42,7 +42,8 @@ function visud {
 }
 
 function wlans {
-	iwlist wlan0 scan | $(sed -n 's/ESSID:"\(.*\)"/\1/p;s/Quality=\([0-9][0-9]\/[0-9][0-9]\).*/\1/p')
+	if=wlp2s0
+	iwlist $if scan | $(sed -n 's/ESSID:"\(.*\)"/\1/p;s/Quality=\([0-9][0-9]\/[0-9][0-9]\).*/\1/p')
 }
 
 echo $0 loaded

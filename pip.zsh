@@ -5,7 +5,7 @@ else
 fi
 
 function pli { pip list |more }
-function pi { pip install $1}
+function pin { pip install $1}
 function plo { pip list --outdated}
 function pre { pip uninstall $@}
 function psh { pip show $1 }

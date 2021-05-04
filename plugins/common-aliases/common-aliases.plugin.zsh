@@ -1,4 +1,4 @@
-hw = '/home/tk'
+hw='/home/tk'
 
 # echo $HOST
 if [[ $HOST == 'wsl' ]];then
@@ -24,6 +24,12 @@ o=$ZSH_CUSTOM
 rt=$ho/rest-test
 ws=$ho/workspace.code-workspace
 
+# ifconfig
+alias i=ifconfig
+alias iu='dhclient enx00e04c680015'
+alias iw='ifconfig wlp2s0 down'
+alias pi='ping 8.8.8.8 -c2'
+
 #node
 alias n=npm
 alias nog='npm i -g'
@@ -34,7 +40,6 @@ alias nr='npm run'
 alias a='alias -m'
 alias ag='alias | grep'
 alias d='declare -f'
-alias p="echo $plugins"
 alias t=type
 
 # termux
