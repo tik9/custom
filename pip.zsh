@@ -4,7 +4,7 @@ else
     function pip { pip3.exe $@}
 fi
 
-function pli { pip list |more }
+function pli { pip list |less }
 function pin { pip install $1}
 function plo { pip list --outdated}
 function pre { pip uninstall $@}
@@ -16,4 +16,8 @@ function pipu {
     pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U
 }
 
-echo $0 loaded
+b=$0
+a=("${(s|custom/|)b}")
+echo $a[2] loaded
+
+# echo $0 loaded

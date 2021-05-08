@@ -24,11 +24,16 @@ o=$ZSH_CUSTOM
 rt=$ho/rest-test
 ws=$ho/workspace.code-workspace
 
+#ssh
+alias sd=sshd
+alias pgs='ps -ef |grep ssh'
+alias ss='service ssh start'
+
 # ifconfig
 alias i=ifconfig
-alias iu='dhclient enx00e04c680015'
-alias iw='ifconfig wlp2s0 down'
-alias pi='ping 8.8.8.8 -c2'
+alias iu='dhclient enx00e04c680015;i'
+alias iw='ifconfig wlp2s0 down ; i'
+alias p='ping 8.8.8.8 -c2'
 
 #node
 alias n=npm
@@ -70,6 +75,7 @@ alias dow=/home/tk/snap/chromium/1382/Downloads
 alias ec=echo
 alias grep='grep --color=auto'
 alias hif='history -E'
+alias ll='ls | less'
 alias ma=man
 alias pm='sudo pm-suspend'
 alias s='sudo -i'
@@ -103,13 +109,13 @@ function qp { qpdfview $1 & }
 
 function qpd { start=''; ziel=''; qpdf $start --pages . 2-6 -- $ziel }
 
-alias le='less'
 
 # Command line head / tail shortcuts
 alias -g H='|head'
 alias -g T='|tail'
 
-alias -g gre=' | grep'
+alias -g gr=' | grep'
+alias le='less'
 alias -g L=' | less'
 
 alias fd='find . -type d -name'
@@ -118,4 +124,6 @@ alias pg='ps -ef |grep'
 
 alias -s pdf=SumatraPDF.exe
 
-echo $0 loaded
+b=$0
+a=("${(s|common-aliases/|)b}")
+echo $a[2] loaded

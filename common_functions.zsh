@@ -10,10 +10,6 @@ function nov { node -v}
 function ns { npm start}
 function ng { npm ls -g }
 
-# ls
-function l { ls}
-function ll { ls |more }
-
 function vse { echo $(code --list-extensions)|tr ' ' '\n' > extensions.txt}
 
 #set location
@@ -31,3 +27,7 @@ function ph { cd $ph }
 function pw { pwd}
 function rt { cd $rt}
 function ws { more $ws}
+
+b=$0
+a=("${(s|custom/|)b}")
+echo $a[2] loaded

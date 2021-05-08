@@ -46,4 +46,7 @@ function wlans {
 	iwlist $if scan | $(sed -n 's/ESSID:"\(.*\)"/\1/p;s/Quality=\([0-9][0-9]\/[0-9][0-9]\).*/\1/p')
 }
 
-echo $0 loaded
+b=$0
+a=("${(s|custom/|)b}")
+
+echo $a[2] loaded
