@@ -7,7 +7,7 @@ zstyle ':completion:*' special-dirs true
 DISABLE_AUTO_UPDATE="true"
 
 # path+=('/home/tk/.local/bin/')
-PATH=/snap/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 source $ZSH/oh-my-zsh.sh
 
@@ -21,6 +21,3 @@ get_ssid(){
 
 unalias ll
 
-# Install Ruby Gems to ~/gems
-export GEM_HOME="$HOME/gems"
-export PATH="$HOME/gems/bin:$PATH"

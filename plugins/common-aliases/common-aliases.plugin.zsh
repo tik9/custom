@@ -1,28 +1,37 @@
-hw='/home/tk'
 
 # echo $HOST
-if [[ $HOST == 'wsl' ]];then
+if [[ $HOST == tik ]];then
 	ho=/mnt/c/Users/User
-ph=$ho/Documents/WindowsPowerShell
-cs=$ho/appdata/roaming/code/user
-	else 
-	ho=$HOME
-ph=$ho/.config/powershell
-cs=$ho/.config/Code/User	
+configpws=documents/windowsPowerShell
+cu=appdata/roaming/code/user
+	elif [[ $HOST == t--pc ]];then 
+	ho=/home/tk
+configpws=.config/powershell
+cu=.config/Code/User	
+eth=enx00e04c680015
 	fi
+cs=$ho/$cu
+ph=$ho/$configpws
 
 plu=$ZSH_CUSTOM/plugins
 
-be=$ho/bewerbung
 cv=$ho/tik9.github.io
 cy=$ho/cpython
-ga=$ho/game
-gt=$ho/gman
 
-myd=$ho/documents
+gt=$ho/gman
+i=ifconfig
 o=$ZSH_CUSTOM
 rt=$ho/rest-test
 ws=$ho/workspace.code-workspace
+
+#lan
+eth=eth0
+wlan=wlp2s0
+#ips
+root_ip=192.168.178
+rasp_ip=$root_ip.36
+termux_port=-p8022
+termux_ip=38
 
 #ssh
 alias sd=sshd
@@ -30,9 +39,10 @@ alias pgs='ps -ef |grep ssh'
 alias ss='service ssh start'
 
 # ifconfig
-alias i=ifconfig
-alias iu='dhclient enx00e04c680015;i'
-alias iw='ifconfig wlp2s0 down ; i'
+alias ild='ifconfig $eth down; i'
+alias iu='dhclient $eth;iwd;i'
+alias iwd='ifconfig $wlan down; i'
+alias iwu='ifconfig $wlan up; i'
 alias p='ping 8.8.8.8 -c2'
 
 #node
@@ -68,7 +78,8 @@ function cc {
     echo $@ |xclip -selection clipboard
 }
 
-alias cu='curl localhost'
+alias cur='curl localhost'
+alias d2u='dos2unix /mnt/c/Users/User/.oh-my-zsh/custom/*'
 alias dh='df -h'
 alias di=dict
 alias dow=/home/tk/snap/chromium/1382/Downloads 
@@ -84,16 +95,13 @@ alias to=touch
 
 function chr { /usr/bin/chromium  $1 &  }
 
-function dos2u { for i in *;do if [[ -f $i ]]; then sed -i 's/\r$//' "$i"; fi; done }
+function d3u { for i in *;do if [[ -f $i ]]; then sed -i 's/\r$//' "$i"; fi; done }
 
 
 function find_ex {
 	if [ -z "$2" ]; then
-	# print $2
 	ex=''; else
-	# print $2 'else'
 	ex=$2; fi
-	# echo $ex
 	find / -path $ex -prune -false -o -name $1
 }
 
@@ -115,7 +123,7 @@ alias -g H='|head'
 alias -g T='|tail'
 
 alias -g gr=' | grep'
-alias le='less'
+alias le=less
 alias -g L=' | less'
 
 alias fd='find . -type d -name'
@@ -124,6 +132,7 @@ alias pg='ps -ef |grep'
 
 alias -s pdf=SumatraPDF.exe
 
+
 b=$0
-a=("${(s|common-aliases/|)b}")
+a=("${(s|custom/plugins/common-aliases/|)b}")
 echo $a[2] loaded

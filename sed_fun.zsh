@@ -5,24 +5,23 @@ function ak {
 }	
 
 function cp_key {
-	root_ip=192.168.178
-	final_ip=root@$root_ip.36
-	source_ip=$root_ip.38
+	
+	source_ip=$root_ip.$termux_ip
 	id_rsa=/root/id_rsa.pub
 	id_rsa_src=.ssh/id_rsa.pub
-	ssh $source_ip -p8022 "./exp p scp -o 'StrictHostKeyChecking no' $id_rsa_src $final_ip:$id_rsa" 
-	ssh $final_ip "rm $id_rsa"
-	ssh $final_ip 'cat /root/id_rsa.pub >> .ssh/authorized_keys'
-	ss_ak $final_ip
+	ssh $source_ip $termux_port "./exp p scp -o 'StrictHostKeyChecking no' $id_rsa_src $rasp_ip:$id_rsa" 
+	ssh $rasp_ip "rm $id_rsa"
+	ssh $rasp_ip 'cat /root/id_rsa.pub >> .ssh/authorized_keys'
+	ss_ak $rasp_ip
 }
 
 
 function ic {
-	geraet=wlp2s0
-	geraet=enx00e04c680015
+	geraet=$wlan
+	geraet=$eth
 
 	ipa=$(ip addr show $geraet)
-	 ipa=$(echo $ipa | sed -nr 's/\s+inet\s([0-9]{3}\.[0-9]{3}\.[0-9]+\.[0-9]+).*/\1/p')
+	 ipa=$(echo $ipa | sed -nr 's/\s+inet\s([0-9]{3}\.[0-9]+\.[0-9]+\.[0-9]+).*/\1/p')
 	 echo "$ipa \n$geraet"
 }
 
