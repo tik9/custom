@@ -7,6 +7,8 @@ function cpg { cp $o/plugins/git/git.plugin.zsh $ph/git.ps1 }
 function nd { npm run dev }
 function nl { npm ls }
 function ng { npm ls -g }
+function nofu { npm config set fund false --global }
+
 
 function vse { echo $(code --list-extensions)|tr ' ' '\n' > extensions.txt}
 

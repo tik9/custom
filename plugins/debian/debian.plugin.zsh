@@ -9,19 +9,15 @@ function re {
 	apt remove $1 -y
 }
 
-
 # Some self-explanatory aliases
 alias aar='apt autoremove -y'
-alias acs="apt-search"
+alias acs='apt search'
 
-alias app='apt policy'
-
-alias ac=" apt clean"
 alias ad=" apt update"
 alias adg=" apt update &&  apt upgrade"
-alias adu=" apt update &&  apt dist-upgrade"
 alias ali="apt list --installed | less"
-alias alu=" apt list --upgradable"
+alias alg="apt list --installed | grep"
+alias alu='apt list --upgradable'
 alias au=" apt upgrade"
 alias ai=" apt install"
 # Install all packages given on the command line while using only the first word of each line:

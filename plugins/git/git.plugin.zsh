@@ -32,11 +32,9 @@ function gw {
 }
 
 # log
-function glg { git log --stat }
-function glog { git log }
 function gg { git log -1 --date=format:"%Y/%m/%d" --format="%ad" }
+function go { git log --stat }
 
 # diff
-
 function gd { git diff }
 function gdc { git diff --cached }

@@ -1,5 +1,6 @@
 
 # echo $HOST
+eth=eth0
 if [[ $HOST == tik ]];then
 	ho=/mnt/c/Users/User
 configpws=documents/windowsPowerShell
@@ -21,17 +22,17 @@ cy=$ho/cpython
 gt=$ho/gman
 i=ifconfig
 o=$ZSH_CUSTOM
+ob=~/.config/openbox/lxqt-rc.xml
 rt=$ho/rest-test
 ws=$ho/workspace.code-workspace
 
 #lan
-eth=eth0
 wlan=wlp2s0
 #ips
 root_ip=192.168.178
 rasp_ip=$root_ip.36
 termux_port=-p8022
-termux_ip=38
+termux_ip="$root_ip.38 $termux_port"
 
 #ssh
 alias sd=sshd
@@ -43,25 +44,20 @@ alias ild='ifconfig $eth down; i'
 alias iu='dhclient $eth;iwd;i'
 alias iwd='ifconfig $wlan down; i'
 alias iwu='ifconfig $wlan up; i'
-alias p='ping 8.8.8.8 -c2'
+alias pi='ping 8.8.8.8 -c3'
 
-#node
-alias n=npm
-alias nog='npm i -g'
-alias noi='npm i'
-alias nr='npm run'
 
 # alias/Funktionen
 alias a='alias -m'
 alias ag='alias | grep'
 alias d='declare -f'
+alias p=pwsh
 alias t=type
 
 # termux
 tp='termux-media-player play'
 ts='termux-media-player stop'
 tv='termux-volume music'
-y=./ytdl
 
 
 # progr
@@ -90,19 +86,22 @@ alias ll='ls | less'
 alias ma=man
 alias pm='sudo pm-suspend'
 alias s='sudo -i'
+alias st='su tk'
 alias to=touch
 
 
 function chr { /usr/bin/chromium  $1 &  }
 
-function d3u { for i in *;do if [[ -f $i ]]; then sed -i 's/\r$//' "$i"; fi; done }
+function d3u {
+	 for f in $(find . -type f -not -path '*/.git/*');do sed -i 's/\r$//' $f;done;
+	 }
 
 
 function find_ex {
 	if [ -z "$2" ]; then
 	ex=''; else
 	ex=$2; fi
-	find / -path $ex -prune -false -o -name $1
+	find / -not -path $ex -name $1 -type f
 }
 
 function g { grep $@ -r |less }
@@ -111,6 +110,8 @@ function ge { geany $1& }
 
 function lx { lximage-qt $1 & }
 function np { grep -c ^processor /proc/cpuinfo; nproc }
+function pig { ping $1 -c3 }
+
 function q(){ wget http://speedtest.wdc01.softlayer.com/downloads/test100.zip --output-document=/dev/null }
 
 function qp { qpdfview $1 & }
