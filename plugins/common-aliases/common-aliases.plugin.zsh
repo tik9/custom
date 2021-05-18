@@ -1,3 +1,10 @@
+# netsh
+# interface show interface
+# ip set dns name="ethernet 9" source="static" address="192.168.178.1"
+$gt="$ho/gman"
+function pig { ping $args -c3 }
+$cf='common_functions.ps1'
+$a=usebasicparsing
 
 # echo $HOST
 eth=eth0
@@ -28,6 +35,7 @@ ws=$ho/workspace.code-workspace
 
 #lan
 wlan=wlp2s0
+
 #ips
 root_ip=192.168.178
 rasp_ip=$root_ip.36
@@ -127,7 +135,7 @@ alias -g gr=' | grep'
 alias le=less
 alias -g L=' | less'
 
-alias fd='find . -type d -name'
+alias fd=fdfind
 alias ff='find . -type f -name'
 alias pg='ps -ef |grep'
 
