@@ -17,7 +17,7 @@ alias ad=" apt update"
 alias adg=" apt update &&  apt upgrade"
 alias ali="apt list --installed | less"
 alias alg="apt list --installed | grep"
-alias alu='apt list --upgradable'
+alias al='apt list --upgradable'
 alias au=" apt upgrade"
 alias ai=" apt install"
 # Install all packages given on the command line while using only the first word of each line:

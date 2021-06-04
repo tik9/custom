@@ -17,11 +17,12 @@ function ... { cd ..\.. }
 function .. { cd .. }
 function cv { cd $cv }
 function cy { cd $cy }
+function dn { echo $dn }
 function gt { cd $gt }
 function hi { history }
 function ho { cd $ho }
 function hw { cd $hw }
-function i {  $i }
+function ll { ls | more }
 function o { cd $o }
 function ph { cd $ph }
 function pw { pwd}
