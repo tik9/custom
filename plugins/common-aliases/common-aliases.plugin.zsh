@@ -1,56 +1,39 @@
-# ip mai: 178.27.249.89
+# ip juni: 178.27.249.89
 
-# set-alias i ipconfig
-
-# $setdns=Get-NetAdapter  -Name "Ethernet 9" | Set-DnsClientServerAddress -ServerAddresses 192.168.178.1;Get-DNSClientServerAddress
-# $dn=echo exit | nslookup | findstr ":"
-
-# $gt="$ho/gman"
-# select-ob psversion raus
-# function pig { ping $args -c3 }
-# $cf='common_functions.ps1'
-# $a=usebasicparsing
-
-# git submodule add https://github.com/dahlbyk/posh-git
-# Add-PoshGitToProfile
-# echo 'ignore = dirty'|out-file .gitmodules
-
-# curl -v -H 'Authorization: token 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' https://api.github.com
-
-# l get-childitem, ll rm
-
-# cp common_functions
-
-
+# dateien kopieren von $o nach psprofi
+#  set-alias dn 'echo exit | nslookup | findstr ":"' -- funktion machen
+# rm function e { . $profile }
+# Get-DNSClientServerAddress von setdns als set-alias dns
+# function l { get-childitem $args}
+# function ll { get-childitem $args|more}
 
 # echo $HOST
+
 eth=eth0
 if [[ $HOST == tik ]];then
 	ho=/mnt/c/Users/User
-	configpws=documents/windowsPowerShell
-	cu=appdata/roaming/code/user
+	cu=$ho/appdata/roaming/code/user
 	alias -s pdf=SumatraPDF.exe
+	ph=$ho/documents/windowsPowerShell
+	ws=$ho/workspace.code-workspace
 elif [[ $HOST == t--pc ]];then 
 	ho=/home/tk
-	configpws=.config/powershell
-	cu=.config/Code/User	
-	eth=enx00e04c680015
-	wlan=wlp2s0
+	config=$ho/.config
+	cu=$config/Code/User
 	dn=$(systemd-resolve --status)
+	eth=enx00e04c680015
+	ph=$config/powershell
+	wlan=wlp2s0
+	ws=$config/Code/Workspaces/1619293380488/workspace.json
 fi
-cs=$ho/$cu
-ph=$ho/$configpws
 
 plu=$ZSH_CUSTOM/plugins
 
 cv=$ho/tik9.github.io
 cy=$ho/cpython
-
+fb=$ho/fritzbox
 gt=$ho/gman
 o=$ZSH_CUSTOM
-ob=~/.config/openbox/lxqt-rc.xml
-rt=$ho/rest-test
-ws=$ho/workspace.code-workspace
 
 
 # alias
@@ -60,8 +43,9 @@ alias d='declare -f'
 alias p=pwsh
 alias t=type
 
-# dns
-dn=$(cat /etc/resolv.conf)
+# fritzbox
+fbw=2g
+alias fs=$fb/fritzBoxShell.sh
 
 # ifconfig
 alias i=ifconfig
@@ -84,6 +68,7 @@ alias pk=pkill
 #ssh
 alias sd=sshd
 alias pgs='ps -ef |grep ssh'
+alias pks='pkill ssh'
 alias ss='service ssh start'
 
 # progr
@@ -100,33 +85,41 @@ tv='termux-volume music'
 alias e='exec zsh'
 alias x=exit
 alias zv='zsh --version'
- 
 
-function cc {
-    echo $@ |xclip -selection clipboard
-}
 
 alias cur='curl localhost'
-alias d2u='dos2unix /mnt/c/Users/User/.oh-my-zsh/custom/*'
 alias dh='df -h'
 alias di=dict
-alias dow=/home/tk/snap/chromium/1382/Downloads 
 alias ec=echo
 alias grep='grep --color=auto'
 alias hif='history -E'
 alias ma=man
 alias pm='sudo pm-suspend'
 alias s='sudo -i'
-alias st='su tk'
 alias to=touch
 
 
-function chr { /usr/bin/chromium  $1 &  }
+function add_zsh_plugin {
+	file=plugins/$1
+	# echo "b=$0\na=${(s|zsh$1|)b}\necho $a[2] loaded"
+	echo string='$0\nnew=(${(s|custom/plugins/$1/|)string})\necho $new[2] loaded'>>! $file
+	# string=1/3
+	# a=(${(@s|/|)string})
+	# echo $a
+}
+
+
+function cc {
+    echo $@ |xclip -selection clipboard
+}
+
+function chr { /usr/bin/chromium  $1 & }
 
 function d3u {
 	 for f in $(find . -type f -not -path '*/.git/*');do sed -i 's/\r$//' $f;done;
 	 }
 
+function dn2 { cat /etc/resolv.conf}
 
 function find_ex {
 	if [ -z "$2" ]; then
@@ -157,14 +150,8 @@ alias -g L=' | less'
 alias fd=fdfind
 alias ff='find . -type f -name'
 
-function add_zsh_plugin {
-	file=plugins/$1
-	# echo "b=$0\na=${(s|zsh$1|)b}\necho $a[2] loaded"
-	echo string='$0\nnew=(${(s|custom/plugins/$1/|)string})\necho $new[2] loaded'>>! $file
-	# string=1/3
-	# a=(${(@s|/|)string})
-	# echo $a
-}
+
+function vse { echo $(code --list-extensions)|tr ' ' '\n' > extensions.txt}
 
 
 b=$0

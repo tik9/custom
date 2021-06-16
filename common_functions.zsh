@@ -10,21 +10,20 @@ function ng { npm ls -g }
 function nofu { npm config set fund false --global }
 
 
-function vse { echo $(code --list-extensions)|tr ' ' '\n' > extensions.txt}
-
 #set location
 function ... { cd ..\.. }
 function .. { cd .. }
 function cv { cd $cv }
 function cy { cd $cy }
-function dn { echo $dn }
 function gt { cd $gt }
-function hi { history }
 function ho { cd $ho }
 function hw { cd $hw }
-function ll { ls | more }
 function o { cd $o }
 function ph { cd $ph }
-function pw { pwd}
 function rt { cd $rt}
+
+function dn { echo $dn }
+function hi { history }
+function ll { ls | more }
+function pw { pwd}
 function ws { more $ws}

@@ -1,8 +1,11 @@
+function ga { git add . }
 function gb { git branch }
 
 function gc { git commit -a -m $1 }
 function gcp { git commit -a -m $args }
-function ga { git add . }
+
+function gcl { git config --show-origin --list}
+function gds { git diff --summary}
 
 function gic { git commit -am 'commit'}
 
@@ -15,6 +18,7 @@ function gpus { git push --set-upstream origin master }
 function grs { git restore . }
 function gs { git status }
 function gsh { git show }
+function gve { git --version }
 
 function gstart {
     git init
@@ -38,3 +42,4 @@ function go { git log --stat }
 # diff
 function gd { git diff }
 function gdc { git diff --cached }
+function gds { git diff --summary }
