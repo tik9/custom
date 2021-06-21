@@ -1,19 +1,22 @@
 # ip juni: 178.27.249.89
 
-# dateien kopieren von $o nach psprofi
-#  set-alias dn 'echo exit | nslookup | findstr ":"' -- funktion machen
-# rm function e { . $profile }
-# Get-DNSClientServerAddress von setdns als set-alias dns
-# function l { get-childitem $args}
-# function ll { get-childitem $args|more}
+# $be="$ho/bewerbung"
+# $cu = "$ho/appdata/roaming/code/user"
 
-# echo $HOST
+# cs entfernen, nur cu
+# . "$ph/pip.ps1"
+# function rma { rm $args -Force -Confirm:$false -Recurse}
+# function pr { pip uninstall $args -y }
+# pi ping alias rm
+# function pms {python.exe -m site}
+# function pyl {cd C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages}
+# function pys {cd 'C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.1520.0_x64__qbz5n2kfra8p0\lib\site-packages'
+# cp common func
 
 eth=eth0
 if [[ $HOST == tik ]];then
 	ho=/mnt/c/Users/User
 	cu=$ho/appdata/roaming/code/user
-	alias -s pdf=SumatraPDF.exe
 	ph=$ho/documents/windowsPowerShell
 	ws=$ho/workspace.code-workspace
 elif [[ $HOST == t--pc ]];then 
@@ -27,8 +30,7 @@ elif [[ $HOST == t--pc ]];then
 	ws=$config/Code/Workspaces/1619293380488/workspace.json
 fi
 
-plu=$ZSH_CUSTOM/plugins
-
+be=$ho/bewerbung
 cv=$ho/tik9.github.io
 cy=$ho/cpython
 fb=$ho/fritzbox

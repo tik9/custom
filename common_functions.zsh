@@ -11,19 +11,19 @@ function nofu { npm config set fund false --global }
 
 
 #set location
-function ... { cd ..\.. }
+function ... { cd ../.. }
 function .. { cd .. }
+function be { cd $be }
 function cv { cd $cv }
 function cy { cd $cy }
+function fb { cd $fb }
 function gt { cd $gt }
 function ho { cd $ho }
-function hw { cd $hw }
 function o { cd $o }
 function ph { cd $ph }
-function rt { cd $rt}
+
 
 function dn { echo $dn }
-function hi { history }
 function ll { ls | more }
 function pw { pwd}
 function ws { more $ws}
