@@ -1,17 +1,13 @@
 # ip juni: 178.27.249.89
 
-# $be="$ho/bewerbung"
-# $cu = "$ho/appdata/roaming/code/user"
+# cp ssh.ps1, wlan.ps1
+#ips
+# $ip_ro='192.168.178'
+# $ip_ra="$root_ip.36"
+# $port_ter='-p8022'
+# $ip_te="$root_ip.38 $port_ter"
+# $fb="$ho/fritzbox"
 
-# cs entfernen, nur cu
-# . "$ph/pip.ps1"
-# function rma { rm $args -Force -Confirm:$false -Recurse}
-# function pr { pip uninstall $args -y }
-# pi ping alias rm
-# function pms {python.exe -m site}
-# function pyl {cd C:\Users\User\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages}
-# function pys {cd 'C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.1520.0_x64__qbz5n2kfra8p0\lib\site-packages'
-# cp common func
 
 eth=eth0
 if [[ $HOST == tik ]];then
@@ -58,10 +54,10 @@ alias iwu='ifconfig $wlan up; i'
 alias pi='ping 8.8.8.8 -c3'
 
 #ips
-root_ip=192.168.178
-rasp_ip=$root_ip.36
-termux_port=-p8022
-termux_ip="$root_ip.38 $termux_port"
+ip_ro=192.168.178
+ip_ra=$root_ip.36
+port_ter=-p8022
+ip_te="$root_ip.38 $port_ter"
 
 # ps
 alias pg='ps -ef |grep'
