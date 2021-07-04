@@ -1,12 +1,17 @@
 # ip juni: 178.27.249.89
+# ip juli 188.192.5.132
 
-# cp ssh.ps1, wlan.ps1
-#ips
-# $ip_ro='192.168.178'
-# $ip_ra="$root_ip.36"
-# $port_ter='-p8022'
-# $ip_te="$root_ip.38 $port_ter"
-# $fb="$ho/fritzbox"
+# set-alias s start-process
+# set-alias pic [Environment]::GetFolderPath("Mypictures")
+# if [[ $HOST == tik ]];then ;alias -s pdf=sumatrapdf.exe
+# else alias -s pdf=qpdfview;fi
+# $termux_ip = "$root_ip.38"
+# vscode . "C:\Users\User\Documents\WindowsPowerShell/§file"
+#
+#pip pr mit pli
+# function psh { pip show $args }
+
+# fb cp comm func
 
 
 eth=eth0
