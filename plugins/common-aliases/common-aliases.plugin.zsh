@@ -1,26 +1,17 @@
-# ip juni: 178.27.249.89
-# ip juli 188.192.5.132
 
-# set-alias s start-process
-# set-alias pic [Environment]::GetFolderPath("Mypictures")
-# if [[ $HOST == tik ]];then ;alias -s pdf=sumatrapdf.exe
-# else alias -s pdf=qpdfview;fi
-# $termux_ip = "$root_ip.38"
-# vscode . "C:\Users\User\Documents\WindowsPowerShell/§file"
-#
-#pip pr mit pli
-# function psh { pip show $args }
-
-# fb cp comm func
+# fritzbox aliase raus
+# $ipf=$ip_ro.1
 
 
 eth=eth0
 if [[ $HOST == tik ]];then
+	alias -s pdf=sumatrapdf.exe
 	ho=/mnt/c/Users/User
 	cu=$ho/appdata/roaming/code/user
 	ph=$ho/documents/windowsPowerShell
 	ws=$ho/workspace.code-workspace
 elif [[ $HOST == t--pc ]];then 
+	alias -s pdf=qpdfview
 	ho=/home/tk
 	config=$ho/.config
 	cu=$config/Code/User
@@ -46,30 +37,25 @@ alias d='declare -f'
 alias p=pwsh
 alias t=type
 
-# fritzbox
-fbw=2g
-alias fs=$fb/fritzBoxShell.sh
 
 # ifconfig
 alias i=ifconfig
-alias ild='ifconfig $eth down; i'
 alias iu='dhclient $eth;iwd;i'
-alias iwd='ifconfig $wlan down'
-alias iwu='ifconfig $wlan up; i'
 alias pi='ping 8.8.8.8 -c3'
 
 #ips
-ip_ro=192.168.178
-ip_ra=$root_ip.36
+ipro=192.168.178
+ipf=$ip_ro.1
+ipra=$root_ip.36
 port_ter=-p8022
-ip_te="$root_ip.38 $port_ter"
+ip_te="$root_ip.38 -p8022"
 
 # ps
 alias pg='ps -ef |grep'
 alias pk=pkill
 
 #ssh
-alias sd=sshd
+alias sd='sshd;pgs'
 alias pgs='ps -ef |grep ssh'
 alias pks='pkill ssh'
 alias ss='service ssh start'
@@ -78,6 +64,11 @@ alias ss='service ssh start'
 alias c=cat
 alias co=code
 alias na=nano
+
+# suffix
+alias -s 3gp=mplayer
+alias -s mp3=mplayer
+alias -s webm=mplayer
 
 # termux
 tp='termux-media-player play'
@@ -90,14 +81,16 @@ alias x=exit
 alias zv='zsh --version'
 
 
+alias b=bash
 alias cur='curl localhost'
 alias dh='df -h'
 alias di=dict
 alias ec=echo
 alias grep='grep --color=auto'
+alias h='sudo pm-suspend'
 alias hif='history -E'
+alias hi='\history -E'
 alias ma=man
-alias pm='sudo pm-suspend'
 alias s='sudo -i'
 alias to=touch
 
@@ -113,10 +106,10 @@ function add_zsh_plugin {
 
 
 function cc {
-    echo $@ |xclip -selection clipboard
+    echo `$@` |xclip -selection clipboard
 }
 
-function chr { /usr/bin/chromium  $1 & }
+function cl { echo $@ |xclip -selection clipboard }
 
 function d3u {
 	 for f in $(find . -type f -not -path '*/.git/*');do sed -i 's/\r$//' $f;done;

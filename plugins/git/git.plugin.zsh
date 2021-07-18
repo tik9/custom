@@ -1,31 +1,12 @@
 function ga { git add . }
 function gb { git branch }
+function gcm { git checkout master }
 
-function gc { git commit -a -m $1 }
-function gcp { git commit -a -m $args }
+function gcsl { git config --show-origin --list}
 
-function gcl { git config --show-origin --list}
-function gds { git diff --summary}
-
-function gic { git commit -am 'commit'}
-
-function gll { git pull }
-
-function glum { git pull upstream master }
-
-function gpu { git push }
-function gpus { git push --set-upstream origin master }
 function grs { git restore . }
 function gs { git status }
 function gsh { git show }
-function gve { git --version }
-
-function gstart {
-    git init
-    git add README.md
-    git commit -m "first commit"
-    git push -u origin master
-}
 
 function grv { git remote -v }
 
@@ -35,11 +16,27 @@ function gw {
     gpu
 }
 
-# log
-function gg { git log -1 --date=format:"%Y/%m/%d" --format="%ad" }
-function go { git log --stat }
+# commit
+function gcl { git commit -am $1 }
+function gcw { git commit -am $args }
+function gic { git commit -am 'commit'}
 
 # diff
 function gd { git diff }
 function gdc { git diff --cached }
 function gds { git diff --summary }
+function gdl { git diff $1 }
+function gdw { git diff $args }
+
+# log
+function gg { git log -1 --date=format:"%Y/%m/%d" --format="%ad" }
+function go { git log --stat }
+function gst { git log --pretty=format:"%H %an %ad" --date=short }
+
+# pull
+function gll { git pull }
+function gpl { git pull origin master }
+
+# push
+function gpu { git push }
+function gpus { git push --set-upstream origin master }

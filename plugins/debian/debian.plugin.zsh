@@ -5,26 +5,19 @@ function in(){
 	apt install $1 -y	
 }
 
-function re {
-	apt remove $1 -y
-}
-
-# Some self-explanatory aliases
 alias aar='apt autoremove -y'
-alias acs='apt search'
 
-alias ad=" apt update"
-alias adg=" apt update &&  apt upgrade"
+alias ad="apt update"
+alias adg="apt update && apt upgrade"
 alias ali="apt list --installed | less"
 alias alg="apt list --installed | grep"
-alias al='apt list --upgradable'
-alias au=" apt upgrade"
-alias ai=" apt install"
+alias al='apt list --upgradable | less'
+alias au="apt upgrade"
+alias ai="apt install"
 # Install all packages given on the command line while using only the first word of each line:
-# acs ... | ail
+# apt search ... | ail
 alias ail="sed -e 's/  */ /g' -e 's/ *//' | cut -s -d ' ' -f 1 | xargs  apt install"
-alias ap=" apt purge"
-alias ar=" apt remove"
+alias ar="apt remove"
 
 
 

@@ -24,6 +24,7 @@ function ph { cd $ph }
 
 
 function dn { echo $dn }
+function ipf { echo $ipf }
 function ll { ls | more }
 function pw { pwd}
 function ws { more $ws}
