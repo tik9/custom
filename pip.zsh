@@ -1,8 +1,4 @@
-if [[ $HOST == 't--pc' ]];then
-function pip { pip3 $@}
-else
-    function pip { pip3.exe $@}
-fi
+alias pip=pip3
 
 function pli { pip list |less }
 function pin { pip install $1}

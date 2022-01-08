@@ -6,6 +6,7 @@ function gcsl { git config --show-origin --list}
 
 function grs { git restore . }
 function gs { git status }
+function gsl { git status --long }
 function gsh { git show }
 
 function grv { git remote -v }

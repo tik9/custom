@@ -1,7 +1,5 @@
 
-# fritzbox aliase raus
-# $ipf=$ip_ro.1
-
+# posh git link am ende rm
 
 eth=eth0
 if [[ $HOST == tik ]];then
@@ -140,7 +138,7 @@ function qpd { start=''; ziel=''; qpdf $start --pages . 2-6 -- $ziel }
 
 
 alias -g gr=' | grep'
-alias le=less
+alias le='less -m'
 alias -g L=' | less'
 
 alias fd=fdfind

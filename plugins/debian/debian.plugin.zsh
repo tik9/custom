@@ -2,7 +2,7 @@
 alias as='apt show'
 
 function in(){
-	apt install $1 -y	
+	sudo apt install $1 -y	
 }
 
 alias aar='apt autoremove -y'
