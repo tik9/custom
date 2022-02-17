@@ -1,22 +1,17 @@
 
-alias as='apt show'
 
 function in(){
 	sudo apt install $1 -y	
 }
 
-alias aar='apt autoremove -y'
-
 alias ad="apt update"
-alias adg="apt update && apt upgrade"
+alias adg="sudo apt update && sudo apt upgrade"
 alias ali="apt list --installed | less"
 alias alg="apt list --installed | grep"
 alias al='apt list --upgradable | less'
+alias as='apt show'
 alias au="apt upgrade"
-alias ai="apt install"
-# Install all packages given on the command line while using only the first word of each line:
-# apt search ... | ail
-alias ail="sed -e 's/  */ /g' -e 's/ *//' | cut -s -d ' ' -f 1 | xargs  apt install"
+alias aar='apt autoremove -y'
 alias ar="apt remove"
 
 

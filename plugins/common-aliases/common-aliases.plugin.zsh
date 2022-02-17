@@ -18,7 +18,6 @@ fi
 
 cv=$ho/tik9.github.io
 cy=$ho/cpython
-fb=$ho/fritzbox
 gt=$ho/gman
 o=$ZSH_CUSTOM
 
