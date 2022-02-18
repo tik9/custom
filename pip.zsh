@@ -1,15 +1,20 @@
-alias pip=pip3
-
 function pli { pip list |less }
 function pin { pip install $1}
 function plo { pip list --outdated}
 function pre { pip uninstall $@}
 function psh { pip show $1 }
 function pu { pip install --upgrade $1 }
-# function python { python3}
 
 function pipu {
     pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U
+}
+
+function pipdep {
+    PACKAGE=$1
+    pip download $PACKAGE -d /tmp --no-binary :all:-v 2>&1 \
+    | grep Collecting \
+    | cut -d' ' -f2 \
+    | grep -Ev "$PACKAGE(~|=|\!|>|<|$)"
 }
 
 b=$0

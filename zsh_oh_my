@@ -3,8 +3,7 @@
 omz=$HOME/.oh-my-zsh
 #echo $omz
 
-cust=custom
-omz_cu=$omz/$cust
+omz_cu=$omz/custom
 
 #apt install curl git zsh wget -y
 #chsh -s /bin/zsh
@@ -14,15 +13,10 @@ omz_cu=$omz/$cust
 #rm -rf $omz_cu
 
 #cd $omz
-#git clone https://github.com/tik9/$cust.git
+#git clone https://github.com/tik9/custom.git
 
 #cp $omz_cu/.zshrc $HOME
 
 git config --global user.email ""
 
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
-#termux
-# /data/data/com.termux/files/home
-
-# PROMPT='%(?.%F{green}√.%F{red}?%?)%f %B%F{240}%1~%f%b %# '
