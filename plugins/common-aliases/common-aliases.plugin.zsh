@@ -1,14 +1,14 @@
 
+ho=/home/tk
 
 eth=eth0
 if [[ $HOST == tik ]];then
+	how=/mnt/c/Users/User
 	alias -s pdf=sumatrapdf.exe
-	ho=/mnt/c/Users/User
-	cu=$ho/appdata/roaming/code/user
-	ph=$ho/documents/windowsPowerShell
+	cu=$how/appdata/roaming/code/user
+	ph=$how/documents/windowsPowerShell
 elif [[ $HOST == t--pc ]];then 
 	alias -s pdf=qpdfview
-	ho=/home/tk
 	config=$ho/.config
 	cu=$config/Code/User
 	eth=enx00e04c680015

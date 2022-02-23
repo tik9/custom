@@ -1,39 +1,40 @@
-function ga { git add . }
-function gb { git branch }
-function gcm { git checkout master }
+alias ga='git add .'
+alias gb='git branch' 
 
-function grs { git restore . }
-function gs { git status }
-function gsl { git status --long }
-function gsh { git show }
+alias grs='git restore .'
+alias gs='git status --long'
+alias gst='git status'
+alias gsh='git show'
 
-function grv { git remote -v }
+alias grv='git remote -v'
 
 function gw {
     git add .
     git commit -m 'commit from tik/t--pc'
-    gpu
+    $(gp)
 }
 
+# checkout
+
+alias gcm='git checkout master' 
+alias gci='git checkout main'
+
 # commit
-function gcl { git commit -am $1 }
-function gcw { git commit -am $args }
-function gic { git commit -am 'commit from wsltik/t--pc'}
+alias gc="git commit -am"
+alias gic="git commit -am 'commit from wsltik/t--pc'"
 
 # diff
-function gd { git diff }
-function gdc { git diff --cached }
-function gds { git diff --summary }
-function gdl { git diff $1 }
-function gdw { git diff $args }
+alias gd='git diff'
+alias gdc='git diff --cached'
 
 # log
-function gg { git log -1 --date=format:"%Y/%m/%d" --format="%ad" }
-function go { git log --stat }
+alias g1='git log -1'
+alias gg='git log -1 --date=format:"%Y/%m/%d" --format="%ad"'
+alias go='git log --stat'
 
 # pull
-function gl { git pull }
+alias gl='git pull' 
 
 # push
-function gpu { git push }
-function gpus { git push --set-upstream origin master }
+alias gp='git push'
+alias gpus='git push --set-upstream origin master'
