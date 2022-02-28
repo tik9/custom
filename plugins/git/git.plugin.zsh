@@ -37,4 +37,4 @@ alias gl='git pull'
 
 # push
 alias gp='git push'
-alias gpus='git push --set-upstream origin master'
+alias gpu='git push --set-upstream origin master'

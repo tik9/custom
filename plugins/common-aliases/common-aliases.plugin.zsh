@@ -27,7 +27,9 @@ alias t=type
 # cd
 alias cv="cd $ho/tik9.github.io"
 alias cy="cd $ho/cpython"
+alias gm="cd $ho/gman"
 alias o="cd $ZSH_CUSTOM"
+alias sp="cd $ho/spa"
 
 # ifconfig
 alias i=ifconfig

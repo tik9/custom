@@ -1,83 +1,25 @@
 
-
-function in(){
-	sudo apt install $1 -y	
-}
-
-alias ad="apt update"
+alias ad="sudo apt update"
 alias adg="sudo apt update && sudo apt upgrade"
 alias ali="apt list --installed | less"
 alias alg="apt list --installed | grep"
 alias al='apt list --upgradable | less'
 alias as='apt show'
-alias au="apt upgrade"
-alias aar='apt autoremove -y'
-alias ar="apt remove"
+alias au="sudo apt upgrade"
+alias aar='sudo apt autoremove -y'
+alias ar="sudo apt remove"
+alias in='sudo apt install -y'
 
 
-
-# Registers a compdef for $1 that calls apt with the commands $2
-# To do that it creates a new completion function called _apt_pref_$2
-#
-function apt_pref_compdef() {
-    local f fb
-    f="_apt_pref_${2}"
-
-    eval "function ${f}() {
-        shift words;
-        service=\"\apt\";
-        words=(\"\apt\" '$2' \$words);
-        ((CURRENT++))
-        test \"\${apt_pref}\" = 'aptitude' && _aptitude || _apt
-    }"
-
-    compdef "$f" "$1"
-}
-
-apt_pref_compdef aac "autoclean"
-apt_pref_compdef abd "build-dep"
-apt_pref_compdef ac  "clean"
-apt_pref_compdef ad  "update"
-apt_pref_compdef afu "update"
-apt_pref_compdef au  "upgrade"
-apt_pref_compdef ai  "install"
-apt_pref_compdef ail "install"
-apt_pref_compdef ap  "purge"
-apt_pref_compdef ar  "remove"
-apt_pref_compdef ads "dselect-upgrade"
-
-# Misc. #####################################################################
 # print all installed packages
 alias allpkgs='aptitude search -F "%p" --disable-columns ~i'
 
-# Create a basic .deb package
-alias mydeb='time dpkg-buildpackage -rfakeroot -us -uc'
-
-
-# Functions #################################################################
-# create a simple script that can be used to 'duplicate' a system
-function apt-copy() {
-    print '#!/bin/sh'"\n" > apt-copy.sh
-
-    cmd='apt install'
-
-    for p in ${(f)"$(aptitude search -F "%p" --disable-columns \~i)"}; {
-        cmd="${cmd} ${p}"
-    }
-
-    print $cmd "\n" >> apt-copy.sh
-
-    chmod +x apt-copy.sh
-}
-
 # Prints apt history
-# Usage:
 #   apt-history install
 #   apt-history upgrade
 #   apt-history remove
 #   apt-history rollback
 #   apt-history list
-# Based On: https://linuxcommando.blogspot.com/2008/08/how-to-show-apt-log-history.html
 function apt-history() {
   case "$1" in
     install)
