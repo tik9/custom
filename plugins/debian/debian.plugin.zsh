@@ -1,8 +1,8 @@
 
 alias ad="sudo apt update"
 alias adg="sudo apt update && sudo apt upgrade"
-alias ali="apt list --installed | less"
-alias alg="apt list --installed | grep"
+alias ai="apt list --installed | grep"
+alias ail="apt list --installed | less"
 alias al='apt list --upgradable | less'
 alias as='apt show'
 alias au="sudo apt upgrade"
