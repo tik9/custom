@@ -10,4 +10,4 @@ function ph { cd $ph }
 
 
 function ll { ls | more }
-function pw { pwd}
+function p { pwd}

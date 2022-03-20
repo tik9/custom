@@ -3,25 +3,30 @@ alias gb='git branch'
 
 alias grs='git restore .'
 alias gs='git status --long'
-alias gst='git status'
 alias gsh='git show'
 
-alias grv='git remote -v'
+alias gr='git remote -v'
 
 function gw {
     git add .
-    git commit -m 'commit from tik/t--pc'
+    git commit -m "$1"
     $(gp)
 }
 
-# checkout
+function gh {
+    git add .
+    git commit -m "$1"
+    $(gh)
+}
 
+# checkout - merge
 alias gcm='git checkout master' 
 alias gci='git checkout main'
+alias gmm='git merge master' 
 
 # commit
-alias gc="git commit -am"
-alias gic="git commit -am 'commit from wsltik/t--pc'"
+alias gc="git add .;git commit -am"
+alias gic="git add .;git commit -am 'commit from wsltik/t--pc'"
 
 # diff
 alias gd='git diff'
@@ -36,5 +41,6 @@ alias go='git log --stat'
 alias gl='git pull' 
 
 # push
+alias gh='git push heroku'
 alias gp='git push'
 alias gpu='git push --set-upstream origin master'

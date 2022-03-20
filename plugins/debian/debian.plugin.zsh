@@ -18,7 +18,6 @@ alias allpkgs='aptitude search -F "%p" --disable-columns ~i'
 #   apt-history install
 #   apt-history upgrade
 #   apt-history remove
-#   apt-history rollback
 #   apt-history list
 function apt-history() {
   case "$1" in
@@ -28,12 +27,6 @@ function apt-history() {
     upgrade|remove)
       zgrep --no-filename $1 $(ls -rt /var/log/dpkg*)
       ;;
-    rollback)
-      zgrep --no-filename upgrade $(ls -rt /var/log/dpkg*) | \
-        grep "$2" -A10000000 | \
-        grep "$3" -B10000000 | \
-        awk '{print $4"="$5}'
-      ;;
     list)
       zgrep --no-filename '' $(ls -rt /var/log/dpkg*)
       ;;
@@ -42,7 +35,6 @@ function apt-history() {
       echo " install - Lists all packages that have been installed."
       echo " upgrade - Lists all packages that have been upgraded."
       echo " remove - Lists all packages that have been removed."
-      echo " rollback - Lists rollback information."
       echo " list - Lists all contains of dpkg logs."
       ;;
   esac

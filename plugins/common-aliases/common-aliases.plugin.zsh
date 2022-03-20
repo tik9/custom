@@ -13,7 +13,6 @@ elif [[ $HOST == t--pc ]];then
 	cu=$config/Code/User
 	eth=enx00e04c680015
 	ph=$config/powershell
-	wlan=wlp2s0
 fi
 
 o=$ZSH_CUSTOM
@@ -29,7 +28,7 @@ alias cv="cd $ho/tik9.github.io"
 alias cy="cd $ho/cpython"
 alias gm="cd $ho/gman"
 alias o="cd $ZSH_CUSTOM"
-alias sp="cd $ho/spa"
+alias pp="cd $ho/php"
 
 # ifconfig
 alias i=ifconfig
@@ -39,10 +38,13 @@ alias iu='dhclient $eth;i'
 ipro=192.168.178
 ipf=$ip_ro.1
 
+# php
+alias p8='php -S localhost:8000'
+alias p88='php -S localhost:8080'
+alias pc='php composer.phar'
 
 # progr
 alias c=cat
-alias co=code
 alias na=nano
 
 # zsh
@@ -53,17 +55,21 @@ alias x=exit
 alias dh='df -h'
 alias di=dict
 alias ec=echo
-alias grep='grep --color=auto'
 alias hi='\history -E'
-alias ma=man
-alias s='sudo -i'
-alias to=touch
+alias le="less -m $@"
+alias -g L=' | less'
+alias m=man
+alias s=sudo
 
 
 function cc {
     echo `$@` |xclip -selection clipboard
 }
 
+function ifco {
+	ipa=$(ifconfig | sed -nr 's/\s+inet\s([0-9]{3}\.[0-9]{3}\.[0-9]+\.[0-9]+).*/\1/p')
+	echo $ipa
+}
 
 function g { grep $@ -r |less }
 
@@ -75,10 +81,6 @@ function qp { qpdfview $1 & }
 
 function qpd { start=''; ziel=''; qpdf $start --pages . 2-6 -- $ziel }
 
-
-alias -g gr=' | grep'
-alias le="less -m $@"
-alias -g L=' | less'
 
 b=$0
 a=(${(s|custom/plugins/common-aliases/|)b})
