@@ -5,6 +5,12 @@ function pre { pip uninstall $@}
 function psh { pip show $1 }
 function pu { pip install --upgrade $1 }
 
+function pipunall {
+  # non-GNU xargs does not support nor need `--no-run-if-empty`
+  local xargs="xargs --no-run-if-empty"
+  xargs --version 2>/dev/null | grep -q GNU || xargs="xargs"
+  pip list --format freeze | cut -d= -f1 | ${=xargs} pip uninstall
+}
 function pipu {
     pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U
 }

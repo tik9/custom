@@ -12,8 +12,6 @@ alias nu="pnpm update"
 # pnpm package names are lowercase
 # Thus, we've used camelCase for the following aliases:
 
-
-
 # List top-level installed packages
 alias npmL0="pnpm ls --depth=0"
 

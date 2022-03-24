@@ -21,12 +21,13 @@ function gh {
 
 # checkout - merge
 alias gcm='git checkout master' 
+alias gch='git checkout .'
 alias gci='git checkout main'
 alias gmm='git merge master' 
 
 # commit
-alias gc="git add .;git commit -am"
-alias gic="git add .;git commit -am 'commit from wsltik/t--pc'"
+alias gc='git add .;git commit -am'
+alias gic='git commit -am'
 
 # diff
 alias gd='git diff'
