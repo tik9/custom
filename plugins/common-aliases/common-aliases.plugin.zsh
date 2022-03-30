@@ -29,11 +29,11 @@ alias cv="cd $ho/tik9.github.io"
 alias cy="cd $ho/cpython"
 alias gm="cd $ho/gman"
 alias o="cd $ZSH_CUSTOM"
-alias sp="cd $ho/spa"
+
 
 # ifconfig
 alias i=ifconfig
-alias iu='dhclient $eth;i'
+alias iu='sudo dhclient $eth; ifconfig'
 
 #ips
 ipro=192.168.178
@@ -42,7 +42,6 @@ ipf=$ip_ro.1
 
 # progr
 alias c=cat
-alias co=code
 alias na=nano
 
 # zsh
@@ -56,6 +55,7 @@ alias ec=echo
 alias grep='grep --color=auto'
 alias hi='\history -E'
 alias ma=man
+alias p=ps
 alias s='sudo -i'
 alias to=touch
 
