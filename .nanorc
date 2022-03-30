@@ -1,0 +1,6 @@
+# save with ctrl s
+bind ^S savefile main
+# not work
+#set tempfile
+
+set linenumbers
