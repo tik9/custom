@@ -1,18 +1,26 @@
 
-ho=/home/tk
 
 eth=eth0
 if [[ $HOST == tik ]];then
+	pc=win
+	ho=/home/tk
 	how=/mnt/c/Users/User
 	alias -s pdf=sumatrapdf.exe
 	cu=$how/appdata/roaming/code/user
 	ph=$how/documents/windowsPowerShell
 elif [[ $HOST == t--pc ]];then 
+	pc=linux
+	ho=/home/tk
 	alias -s pdf=qpdfview
 	config=$ho/.config
 	cu=$config/Code/User
 	eth=enx00e04c680015
 	ph=$config/powershell
+elif [[ $HOST == tis-Mac-mini.fritz.box ]];then
+	pc=mac
+	ho=/users/thome
+	eth=en4
+	cu="$ho/Library/Application Support/Code/User"
 fi
 
 o=$ZSH_CUSTOM
@@ -42,7 +50,6 @@ ipf=$ip_ro.1
 # php
 alias p8='php -S localhost:8000'
 alias p88='php -S localhost:8080'
-alias pc='php composer.phar'
 
 # progr
 alias c=cat
@@ -57,17 +64,24 @@ alias dh='df -h'
 alias di=dict
 alias ec=echo
 alias hi='\history -E'
-alias p=ps
-alias si='sudo -i'
-alias to=touch
 alias le="less -m $@"
 alias -g L=' | less'
 alias m=man
+alias p=ps
 alias s=sudo
-
+alias shr='printf "¯\_(ツ)_/¯" | pbcopy'
+alias si='sudo -i'
+alias to=touch
 
 function cc {
     echo `$@` |xclip -selection clipboard
+}
+function ccm {
+    echo `$@` |pbcopy
+}
+
+function cb {
+    echo "$@" |pbcopy
 }
 
 function ifco {
