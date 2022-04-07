@@ -3,24 +3,21 @@
 eth=eth0
 if [[ $HOST == tik ]];then
 	pc=win
-	ho=/home/tk
 	how=/mnt/c/Users/User
-	alias -s pdf=sumatrapdf.exe
 	cu=$how/appdata/roaming/code/user
 	ph=$how/documents/windowsPowerShell
 elif [[ $HOST == t--pc ]];then 
 	pc=linux
-	ho=/home/tk
-	alias -s pdf=qpdfview
-	config=$ho/.config
-	cu=$config/Code/User
+	config=$HOME/.config
 	eth=enx00e04c680015
+	cu=$config/Code/User
 	ph=$config/powershell
 elif [[ $HOST == tis-Mac-mini.fritz.box ]];then
 	pc=mac
-	ho=/users/thome
-	eth=en4
-	cu="$ho/Library/Application Support/Code/User"
+	config=$HOME/.config
+	eth=en6
+	cu="$HOME/Library/Application Support/Code/User"
+	ph=$config/powershell
 fi
 
 o=$ZSH_CUSTOM
@@ -32,11 +29,11 @@ alias d='declare -f'
 alias t=type
 
 # cd
-alias cv="cd $ho/tik9.github.io"
-alias cy="cd $ho/cpython"
-alias gm="cd $ho/gman"
+alias cv="cd $HOME/tik9.github.io"
+alias cy="cd $HOME/cpython"
+alias gm="cd $HOME/gman"
 alias o="cd $ZSH_CUSTOM"
-alias pp="cd $ho/php"
+alias pp="cd $HOME/php"
 
 
 # ifconfig
@@ -53,7 +50,7 @@ alias p88='php -S localhost:8080'
 
 # progr
 alias c=cat
-alias na=nano
+alias n=nano
 
 # zsh
 alias e='exec zsh'
@@ -63,18 +60,20 @@ alias x=exit
 alias dh='df -h'
 alias di=dict
 alias ec=echo
+alias -g gre='|grep'
 alias hi='\history -E'
 alias le="less -m $@"
 alias -g L=' | less'
 alias m=man
 alias p=ps
+alias pw=pwd
 alias s=sudo
 alias shr='printf "¯\_(ツ)_/¯" | pbcopy'
 alias si='sudo -i'
 alias to=touch
 
 function cc {
-    echo `$@` |xclip -selection clipboard
+    echo `$@`|xclip -selection clipboard
 }
 function ccm {
     echo `$@` |pbcopy

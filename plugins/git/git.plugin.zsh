@@ -8,14 +8,12 @@ alias gsh='git show'
 alias gr='git remote -v'
 
 function gw {
-    git add .
-    git commit -m "$1"
+    git commit -am "$1"
     $(gp)
 }
 
 function gh {
-    git add .
-    git commit -m "$1"
+    git commit -am "$1"
     $(gh)
 }
 

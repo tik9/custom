@@ -1,12 +1,12 @@
 word=aab
-	go_on=1
-    tries=0
+go_on=1
+tries=0
 while [ $go_on -eq 1 ]
 	do
     tries=$(expr $tries + 1)
-	guess=
-	  read -n 3 -p "What is guess: " guess
-	guess=$(echo "$guess" | awk '{print toupper($0)}')
+	# guess=
+  read -n 3 -p "What is guess: " guess
+	# guess=$(echo "$guess" | awk '{print toupper($0)}')
 	state=
   for i in {0..2}
   do
