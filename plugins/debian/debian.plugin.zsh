@@ -9,6 +9,7 @@ alias au="sudo apt upgrade"
 alias aar='sudo apt autoremove -y'
 alias ar="sudo apt remove"
 alias in='sudo apt install -y'
+alias iu='sudo dhclient $eth; ifconfig'
 
 
 # print all installed packages
@@ -40,7 +41,6 @@ function apt-history() {
   esac
 }
 
-
 # List packages by size
 function apt-list-packages() {
     dpkg-query -W --showformat='${Installed-Size} ${Package} ${Status}\n' | \
@@ -48,3 +48,7 @@ function apt-list-packages() {
     sort -n | \
     awk '{print $1" "$2}'
 }
+
+b=$0
+a=(${(s|custom/plugins/debian/|)b})
+echo $a[2] loaded

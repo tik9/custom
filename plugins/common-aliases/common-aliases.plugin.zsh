@@ -12,13 +12,7 @@ elif [[ $HOST == t--pc ]];then
 	eth=enx00e04c680015
 	cu=$config/Code/User
 	ph=$config/powershell
-elif [[ $HOST == tis-Mac-mini.fritz.box ]];then
-	pc=mac
-	config=$HOME/.config
-	eth=en6
-	cu="$HOME/Library/Application Support/Code/User"
-	ph=$config/powershell
-fi
+elif [[ $HOST == tis-Mac-mini.fritz.box ]];then; pc=mac;fi
 
 o=$ZSH_CUSTOM
 
@@ -38,10 +32,10 @@ alias pp="cd $HOME/php"
 
 # ifconfig
 alias i=ifconfig
-alias iu='sudo dhclient $eth; ifconfig'
 
 #ips
 ipro=192.168.178
+ipsm=192.168.43
 ipf=$ip_ro.1
 
 # php
@@ -97,7 +91,6 @@ function q(){ wget http://speedtest.wdc01.softlayer.com/downloads/test100.zip --
 function qp { qpdfview $1 & }
 
 function qpd { start=''; ziel=''; qpdf $start --pages . 2-6 -- $ziel }
-
 
 b=$0
 a=(${(s|custom/plugins/common-aliases/|)b})
