@@ -1,6 +1,4 @@
 
-
-eth=eth0
 if [[ $HOST == tik ]];then
 	pc=win
 	how=/mnt/c/Users/User
@@ -23,15 +21,18 @@ alias d='declare -f'
 alias t=type
 
 # cd
-alias cv="cd $HOME/tik9.github.io"
+alias cv="cd $HOME/tik"
 alias cy="cd $HOME/cpython"
-alias gm="cd $HOME/gman"
+alias dw="cd $HOME/downloads"
 alias o="cd $ZSH_CUSTOM"
 alias pp="cd $HOME/php"
 
+# grep
+alias -g gre='|grep'
+alias rgr='grep -r'
 
 # ifconfig
-alias i=ifconfig
+alias i='ifconfig|less'
 
 #ips
 ipro=192.168.178
@@ -52,9 +53,8 @@ alias x=exit
 
 
 alias dh='df -h'
-alias di=dict
+alias da='date +%R'
 alias ec=echo
-alias -g gre='|grep'
 alias hi='\history -E'
 alias le="less -m $@"
 alias -g L=' | less'
@@ -62,20 +62,9 @@ alias m=man
 alias p=ps
 alias pw=pwd
 alias s=sudo
-alias shr='printf "¯\_(ツ)_/¯" | pbcopy'
 alias si='sudo -i'
 alias to=touch
 
-function cc {
-    echo `$@`|xclip -selection clipboard
-}
-function ccm {
-    echo `$@` |pbcopy
-}
-
-function cb {
-    echo "$@" |pbcopy
-}
 
 function ifco {
 	ipa=$(ifconfig | sed -nr 's/\s+inet\s([0-9]{3}\.[0-9]{3}\.[0-9]+\.[0-9]+).*/\1/p')
@@ -84,13 +73,7 @@ function ifco {
 
 function g { grep $@ -r |less }
 
-function lx { lximage-qt $1 & }
-
 function q(){ wget http://speedtest.wdc01.softlayer.com/downloads/test100.zip --output-document=/dev/null }
-
-function qp { qpdfview $1 & }
-
-function qpd { start=''; ziel=''; qpdf $start --pages . 2-6 -- $ziel }
 
 b=$0
 a=(${(s|custom/plugins/common-aliases/|)b})

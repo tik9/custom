@@ -1,6 +1,7 @@
 alias ga='git add .'
 alias gb='git branch' 
-
+alias gls='git ls-files|less' 
+alias gm='git merge' 
 alias grs='git restore .'
 alias gs='git status --long'
 alias gsh='git show'

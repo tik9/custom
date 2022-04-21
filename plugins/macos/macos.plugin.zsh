@@ -6,9 +6,20 @@ cu="$HOME/Library/Application Support/Code/User"
 ph=$config/powershell
 
 alias et="ipconfig getifaddr $eth"
+alias shr='printf "¯\_(ツ)_/¯" | pbcopy'
 alias wi="ipconfig getifaddr $wifi"
 alias w-off="networksetup -setairportpower WI-FI off"
 alias w-on="networksetup -setairportpower WI-FI on"
+
+alias pi=$HOME/pictures
+
+function cc {
+    echo `$@` |pbcopy
+}
+
+function cb {
+    echo "$@" |pbcopy
+}
 
 # Handle $0 according to the standard:
 # https://zdharma-continuum.github.io/Zsh-100-Commits-Club/Zsh-Plugin-Standard.html
@@ -22,11 +33,6 @@ alias ofd='open_command $PWD'
 alias showfiles="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hidefiles="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
-# Bluetooth restart
-function btrestart() {
-  sudo kextunload -b com.apple.iokit.BroadcomBluetoothHostControllerUSBTransport
-  sudo kextload -b com.apple.iokit.BroadcomBluetoothHostControllerUSBTransport
-}
 
 function _omz_macos_get_frontmost_app() {
   osascript 2>/dev/null <<EOF

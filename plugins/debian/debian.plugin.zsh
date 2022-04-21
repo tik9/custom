@@ -8,9 +8,15 @@ alias as='apt show'
 alias au="sudo apt upgrade"
 alias aar='sudo apt autoremove -y'
 alias ar="sudo apt remove"
+alias di=dict
 alias in='sudo apt install -y'
 alias iu='sudo dhclient $eth; ifconfig'
 
+function cc {
+    echo `$@`|xclip -selection clipboard
+}
+
+function qpd { start=''; ziel=''; qpdf $start --pages . 2-6 -- $ziel }
 
 # print all installed packages
 alias allpkgs='aptitude search -F "%p" --disable-columns ~i'
