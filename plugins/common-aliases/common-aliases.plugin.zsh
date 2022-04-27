@@ -24,6 +24,7 @@ alias t=type
 alias cv="cd $HOME/tik"
 alias cy="cd $HOME/cpython"
 alias dw="cd $HOME/downloads"
+alias gn="cd $HOME/gman"
 alias o="cd $ZSH_CUSTOM"
 alias pp="cd $HOME/php"
 
@@ -46,6 +47,11 @@ alias p88='php -S localhost:8080'
 # progr
 alias c=cat
 alias n=nano
+
+# python
+alias pv='python -V'
+alias sv='source venv/bin/activate'
+alias wp='which python'
 
 # zsh
 alias e='exec zsh'

@@ -1,21 +1,30 @@
 #!/bin/bash
 
+ip=192.168.178.20
+ip=192.168.43.1
+
+termux-setup-storage
+
+apt-get update && apt-get -y upgrade
+
 omz=$HOME/.oh-my-zsh
+omz_cu=$omz/custom
 #echo $omz
 
-omz_cu=$omz/custom
+apt install git man zsh -y
+yes|sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-#chsh -s /bin/zsh
+chsh -s zsh
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+rm -rf $omz_cu
 
-#rm -rf $omz_cu
+cd $omz
+git clone https://github.com/tik9/custom.git
 
-#cd $omz
-git clone git@github.com:tik9/custom
-
-#cp $omz_cu/.zshrc $HOME
+cp $omz_cu/.zshrc $HOME
 
 git config --global user.email ""
 
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions $omz_cu/plugins/zsh-autosuggestions
+
+ssh $ip -p8022 'termux-wifi-enable false'
