@@ -1,30 +1,22 @@
 #!/bin/bash
 
-ip=192.168.178.20
-ip=192.168.43.1
+ip=192.168.178
+ip=192.168.43
 
-termux-setup-storage
-
-apt-get update && apt-get -y upgrade
-
-omz=$HOME/.oh-my-zsh
-omz_cu=$omz/custom
-#echo $omz
-
-apt install git man zsh -y
-yes|sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-chsh -s zsh
-
+# apt update && apt -y upgrade
+# apt install git man zsh -y
+# printf 'y\n'|sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# chsh -s zsh
+omz=$HOME/.oh-my-zsh;omz_cu=$omz/custom;
 rm -rf $omz_cu
-
 cd $omz
 git clone https://github.com/tik9/custom.git
 
+# termux-setup-storage
 cp $omz_cu/.zshrc $HOME
-
-git config --global user.email ""
-
 git clone https://github.com/zsh-users/zsh-autosuggestions $omz_cu/plugins/zsh-autosuggestions
+source ~/.zshrc
 
-ssh $ip -p8022 'termux-wifi-enable false'
+# install termux api from f-droid
+# pkg install termux-api
+# termux-wifi-enable false

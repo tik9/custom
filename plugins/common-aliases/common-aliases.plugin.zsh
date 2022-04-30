@@ -23,9 +23,10 @@ alias t=type
 # cd
 alias cv="cd $HOME/tik"
 alias cy="cd $HOME/cpython"
+alias doc="cd $HOME/documents"
 alias dw="cd $HOME/downloads"
 alias gn="cd $HOME/gman"
-alias o="cd $ZSH_CUSTOM"
+alias u="cd $ZSH_CUSTOM"
 alias pp="cd $HOME/php"
 
 # grep
@@ -45,7 +46,8 @@ alias p8='php -S localhost:8000'
 alias p88='php -S localhost:8080'
 
 # progr
-alias c=cat
+alias -g c=cat
+alias co=code
 alias n=nano
 
 # python
@@ -65,6 +67,7 @@ alias hi='\history -E'
 alias le="less -m $@"
 alias -g L=' | less'
 alias m=man
+alias mc='man curl'
 alias p=ps
 alias pw=pwd
 alias s=sudo
@@ -80,6 +83,10 @@ function ifco {
 function g { grep $@ -r |less }
 
 function q(){ wget http://speedtest.wdc01.softlayer.com/downloads/test100.zip --output-document=/dev/null }
+
+function qp {
+	 qpdf --empty --pages *.pdf -- $1.pdf
+	 }
 
 b=$0
 a=(${(s|custom/plugins/common-aliases/|)b})

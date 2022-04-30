@@ -1,31 +1,22 @@
 
+alias aar='sudo apt autoremove -y'
 alias ad="sudo apt update"
 alias adg="sudo apt update && sudo apt upgrade"
 alias ai="apt list --installed | grep"
 alias ail="apt list --installed | less"
-alias al='apt list --upgradable | less'
+alias al='apt list --upgradable'
+alias ar="sudo apt remove"
 alias as='apt show'
 alias au="sudo apt upgrade"
-alias aar='sudo apt autoremove -y'
-alias ar="sudo apt remove"
 alias di=dict
 alias in='sudo apt install -y'
 alias iu='sudo dhclient $eth; ifconfig'
+alias pm='sudo pm-suspend'
 
-function cc {
-    echo `$@`|xclip -selection clipboard
-}
+function cb { echo "$@"|xclip -selection clipboard }
+function cc { echo `$@`|xclip -selection clipboard }
 
-function qpd { start=''; ziel=''; qpdf $start --pages . 2-6 -- $ziel }
 
-# print all installed packages
-alias allpkgs='aptitude search -F "%p" --disable-columns ~i'
-
-# Prints apt history
-#   apt-history install
-#   apt-history upgrade
-#   apt-history remove
-#   apt-history list
 function apt-history() {
   case "$1" in
     install)
@@ -39,9 +30,9 @@ function apt-history() {
       ;;
     *)
       echo "Parameters:"
-      echo " install - Lists all packages that have been installed."
-      echo " upgrade - Lists all packages that have been upgraded."
-      echo " remove - Lists all packages that have been removed."
+      echo " install - Lists all installed packages."
+      echo " upgrade - Lists all upgraded packages."
+      echo " remove - Lists all removed packages."
       echo " list - Lists all contains of dpkg logs."
       ;;
   esac

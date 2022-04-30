@@ -1,4 +1,4 @@
-plugins=(common-aliases debian git zsh-autosuggestions )
+plugins=(common-aliases debian git pip zsh-autosuggestions )
 
 export ZSH=~/.oh-my-zsh
 

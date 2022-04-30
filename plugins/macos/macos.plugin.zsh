@@ -1,17 +1,23 @@
+wifi=moto;wifi1=timo; wifi2=huawei
+
+wifipass=$(cat $ZSH/custom/env)
 
 config=$HOME/.config
 eth=en6
-wifi=en1
+wintf=en1
 cu="$HOME/Library/Application Support/Code/User"
 ph=$config/powershell
 
-alias et="ipconfig getifaddr $eth"
+alias o=open
 alias shr='printf "¯\_(ツ)_/¯" | pbcopy'
-alias wi="ipconfig getifaddr $wifi"
-alias w-off="networksetup -setairportpower WI-FI off"
-alias w-on="networksetup -setairportpower WI-FI on"
 
+# net
+alias et="ipconfig getifaddr $eth"
+alias wi="ipconfig getifaddr $wintf"
 alias pi=$HOME/pictures
+alias off-w="networksetup -setairportpower WI-FI off"
+alias on-w="networksetup -setairportpower WI-FI on"
+alias wl='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport scan'
 
 function cc {
     echo `$@` |pbcopy
@@ -19,6 +25,14 @@ function cc {
 
 function cb {
     echo "$@" |pbcopy
+}
+
+function qp {
+	 qpdf --object-streams=generate --empty --pages *.pdf -- $1.pdf
+	 }
+
+function wifi {
+  networksetup -setairportnetwork $wintf $wifi $wifipass
 }
 
 # Handle $0 according to the standard:
