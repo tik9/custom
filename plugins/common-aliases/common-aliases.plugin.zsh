@@ -16,18 +16,19 @@ o=$ZSH_CUSTOM
 
 # alias
 alias am='alias -m'
-alias ag='alias | grep'
+alias a='alias | grep'
 alias d='declare -f'
 alias t=type
 
 # cd
-alias cv="cd $HOME/tik"
-alias cy="cd $HOME/cpython"
+y=$HOME/cpython
 alias doc="cd $HOME/documents"
 alias dw="cd $HOME/downloads"
 alias gn="cd $HOME/gman"
-alias u="cd $ZSH_CUSTOM"
+alias k="cd $HOME/tik"
 alias pp="cd $HOME/php"
+alias u="cd $ZSH_CUSTOM"
+alias y="cd $y"
 
 # grep
 alias -g gre='|grep'
@@ -41,9 +42,13 @@ ipro=192.168.178
 ipsm=192.168.43
 ipf=$ip_ro.1
 
+#man
+alias m=man
+alias mc='man curl'
+alias mg='man grep'
+
 # php
-alias p8='php -S localhost:8000'
-alias p88='php -S localhost:8080'
+alias p8='s php -S localhost:80'
 
 # progr
 alias -g c=cat
@@ -57,6 +62,7 @@ alias wp='which python'
 
 # zsh
 alias e='exec zsh'
+alias pl='echo $plugins'
 alias x=exit
 
 
@@ -66,8 +72,6 @@ alias ec=echo
 alias hi='\history -E'
 alias le="less -m $@"
 alias -g L=' | less'
-alias m=man
-alias mc='man curl'
 alias p=ps
 alias pw=pwd
 alias s=sudo

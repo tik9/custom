@@ -1,32 +1,35 @@
 
-alias aar='sudo apt autoremove -y'
-alias ad="sudo apt update"
-alias adg="sudo apt update && sudo apt upgrade"
-alias ai="apt list --installed | grep"
-alias ail="apt list --installed | less"
-alias al='apt list --upgradable'
-alias ar="sudo apt remove"
-alias as='apt show'
-alias au="sudo apt upgrade"
 alias di=dict
-alias in='sudo apt install -y'
 alias iu='sudo dhclient $eth; ifconfig'
 alias pm='sudo pm-suspend'
+
+# apt
+alias aar='sudo apt autoremove -y'
+alias ad="sudo apt-get update"
+alias adg="sudo apt-get update && sudo apt upgrade"
+alias ai="apt-get list --installed | grep"
+alias ail="apt list --installed | less"
+alias al='apt-get list --upgradable'
+alias ar="sudo apt remove"
+alias as='apt-get show'
+alias au="sudo apt upgrade"
+alias in='sudo apt install -y'
+
+function de {
+  apt-get show "$@" | grep -E 'Description|^'
+}
 
 function cb { echo "$@"|xclip -selection clipboard }
 function cc { echo `$@`|xclip -selection clipboard }
 
 
-function apt-history() {
+function apt-hi() {
   case "$1" in
-    install)
-      zgrep --no-filename 'install ' $(ls -rt /var/log/dpkg*)
-      ;;
-    upgrade|remove)
-      zgrep --no-filename $1 $(ls -rt /var/log/dpkg*)
+    upgrade|remove|install)
+      grep $1 /var/log/dpkg.log
       ;;
     list)
-      zgrep --no-filename '' $(ls -rt /var/log/dpkg*)
+      grep '' /var/log/dpkg.log
       ;;
     *)
       echo "Parameters:"

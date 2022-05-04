@@ -1,30 +1,14 @@
 
-# If you would like to change the cheeseshops used for autocomplete set
-# ZSH_PIP_INDEXES in your zshrc. If one of your indexes are bogus you won't get
-# any kind of error message, pip will just not autocomplete from them. Double
-# check!
-#
-# If you would like to clear your cache, go ahead and do a
-# "zsh-pip-clear-cache".
-
-alias pin='pip install'
+alias par='pip uninstall -y'
+alias pi='pip install'
 alias pli='pip list |less'
 alias po='pip list --outdated'
-alias pre='pip uninstall'
-alias psh='pip show $1 '
+alias psh='pip show'
 alias pu='pip install --upgrade'
 
 
 function pipu {
     pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U
-}
-
-function pipdep {
-    PACKAGE=$1
-    pip download $PACKAGE -d /tmp --no-binary :all:-v 2>&1 \
-    | grep Collecting \
-    | cut -d' ' -f2 \
-    | grep -Ev "$PACKAGE(~|=|\!|>|<|$)"
 }
 
 if [[ -d "${XDG_CACHE_HOME:-$HOME/.cache}/pip" ]]; then

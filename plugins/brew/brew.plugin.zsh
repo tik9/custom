@@ -1,10 +1,15 @@
 alias ad='brew update && brew outdated'
 alias ai='brew ls'
 alias ar='brew uninstall'
+alias as='clear &&brew info'
 alias au='brew upgrade && brew cleanup'
 alias auf='brew upgrade --formula'
 alias auc='brew upgrade --cask && brew cleanup'
 alias in='brew install'
+
+function de {
+  brew desc $1 | cut -d: -f2|awk '{$1=$1;print}' 
+}
 
 function pkg_remote_size {
   pkg=$(brew info --json=v1 $1 | jq -r '.[0].bottle.stable.files.arm64_monterey.url')

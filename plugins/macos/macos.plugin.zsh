@@ -8,13 +8,16 @@ wintf=en1
 cu="$HOME/Library/Application Support/Code/User"
 ph=$config/powershell
 
+
 alias o=open
+alias pd="python $y/dict.py"
+alias pic=$HOME/pictures
 alias shr='printf "¯\_(ツ)_/¯" | pbcopy'
+
 
 # net
 alias et="ipconfig getifaddr $eth"
 alias wi="ipconfig getifaddr $wintf"
-alias pi=$HOME/pictures
 alias off-w="networksetup -setairportpower WI-FI off"
 alias on-w="networksetup -setairportpower WI-FI on"
 alias wl='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport scan'
@@ -31,8 +34,12 @@ function qp {
 	 qpdf --object-streams=generate --empty --pages *.pdf -- $1.pdf
 	 }
 
-function wifi {
+function wifi_set {
   networksetup -setairportnetwork $wintf $wifi $wifipass
+}
+
+function wifi_get {
+  /System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -I | awk -F: '/ SSID/{print $2}'
 }
 
 # Handle $0 according to the standard:
