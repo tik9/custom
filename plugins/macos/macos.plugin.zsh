@@ -22,12 +22,18 @@ alias off-w="networksetup -setairportpower WI-FI off"
 alias on-w="networksetup -setairportpower WI-FI on"
 alias wl='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport scan'
 
+function cb {
+    echo "$@" |pbcopy
+}
+
 function cc {
     echo `$@` |pbcopy
 }
 
-function cb {
-    echo "$@" |pbcopy
+
+function di {
+  source $HOME/cpython/venv/bin/activate
+  python3 dict.py $1
 }
 
 function qp {

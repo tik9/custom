@@ -1,5 +1,6 @@
 alias cg='cat .gitignore'
-alias ga='git add'
+alias ga='git add .'
+alias gaa='git add'
 alias gb='git branch' 
 alias gls='git ls-files|less' 
 alias gm='git merge' 
