@@ -32,8 +32,9 @@ function cc {
 
 
 function di {
-  source $HOME/cpython/venv/bin/activate
-  python3 dict.py $1
+  y=$HOME/cpython
+  source $y/venv/bin/activate
+  python3 $y/dict.py $1
 }
 
 function qp {

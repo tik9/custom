@@ -1,4 +1,10 @@
 
+# requirement file
+alias pire="pip install -r requirements.txt"
+alias pr="cat requirements.txt"
+alias pre="pip freeze > requirements.txt"
+
+
 alias par='pip uninstall -y'
 alias pi='pip install'
 alias pli='pip list |less'
@@ -7,9 +13,7 @@ alias psh='pip show'
 alias pu='pip install --upgrade'
 
 
-function pipu {
-    pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U
-}
+function pipu { pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U }
 
 if [[ -d "${XDG_CACHE_HOME:-$HOME/.cache}/pip" ]]; then
   ZSH_PIP_CACHE_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/pip/zsh-cache"
@@ -89,12 +93,6 @@ if (( $+commands[pip3] && !$+commands[pip] )); then
 else
   alias pip="noglob pip"
 fi
-
-# Create requirements file
-alias pipreq="pip freeze > requirements.txt"
-
-# Install packages from requirements file
-alias pipir="pip install -r requirements.txt"
 
 # Update all installed packages
 function pipupall {

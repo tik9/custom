@@ -22,8 +22,7 @@ alias t=type
 
 # cd
 y=$HOME/cpython
-alias ch="cd $HOME/changeroo-portal"
-alias doc="cd $HOME/documents"
+alias ch="cd $HOME/user-portal-back-end"
 alias dw="cd $HOME/downloads"
 alias gn="cd $HOME/gman"
 alias k="cd $HOME/tik"
