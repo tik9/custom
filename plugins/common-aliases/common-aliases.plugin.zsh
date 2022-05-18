@@ -62,7 +62,9 @@ alias sv='source venv/bin/activate'
 alias wp='which python3'
 
 # zsh
-alias e='exec zsh'
+alias cz="cat $HOME/.zshrc"
+alias e='. $HOME/.zshrc'
+alias ep="echo $PATH"
 alias pl='echo $plugins'
 alias x=exit
 
@@ -75,6 +77,7 @@ alias es=esrua
 alias hi='\history -E'
 alias le="less -m $@"
 alias -g L=' | less'
+alias nov='node --version'
 alias p=ps
 alias ph=vendor/bin/phpunit
 alias pw=pwd
