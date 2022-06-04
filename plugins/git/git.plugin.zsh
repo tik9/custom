@@ -1,29 +1,19 @@
+
 alias cg='cat .gitignore'
 alias ga='git add .'
 alias gaa='git add'
 alias gb='git branch' 
 alias gls='git ls-files|less' 
 alias gr='git remote -v'
+alias grm='git rm --cached'
 alias grs='git restore'
 alias gs='git status --long'
 alias gw='git show'
 
-function gcenv {
-    file=.env && git checkout $(git rev-list -n 1 HEAD -- $file)^ -- $file
-}
-
-function gh {
-    git commit -am "$1"
-    $(gh)
-}
-
-function gcp {
-    git commit -am "$1"
-    $(gp)
-}
-
-
-function webserve { if [ $PWD = $HOME/tik ] ; then sh test/test.sh servergh ;fi }
+function gcenv { file=.env && git checkout $(git rev-list -n 1 HEAD -- $file)^ -- $file }
+function gcp { git commit -am "$1" && $(gp) }
+function webserve { if [ $PWD = $HOME/tik ] ; then sh $PWD/test/test.sh servergh ;fi }
+function webserve_he { git commit -am "$1" && git push heroku && sh test/test.sh serverhe }
 
 # checkout - merge
 alias gch='git checkout .'
@@ -33,8 +23,8 @@ alias gmm='git merge master'
 
 
 # commit
-alias gc='git add . && git commit -am'
-alias gic='git commit -am'
+alias gic='git add . && git commit -am'
+alias gc='git commit -am'
 
 # diff
 alias gd='git diff'
@@ -49,6 +39,6 @@ alias go='git log --stat'
 alias gl='git pull' 
 
 # push
-alias gh='git push heroku && sh test/test.sh serverhe'
+alias gh='git push heroku'
 alias gp='git push && webserve'
 alias gpu='git push --set-upstream origin master'

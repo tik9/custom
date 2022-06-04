@@ -68,8 +68,7 @@ alias ep="echo $PATH"
 alias pl='echo $plugins'
 alias x=exit
 
-
-alias cpa='cat package.json'
+alias cl=clear
 alias dh='df -h'
 alias da='date +%R'
 alias ec=echo
@@ -86,18 +85,13 @@ alias si='sudo -i'
 alias to=touch
 alias w=which
 
-function ifco {
-	ipa=$(ifconfig | sed -nr 's/\s+inet\s([0-9]{3}\.[0-9]{3}\.[0-9]+\.[0-9]+).*/\1/p')
-	echo $ipa
-}
+function ifco { echo $(ifconfig | sed -nr 's/\s+inet\s([0-9]{3}\.[0-9]{3}\.[0-9]+\.[0-9]+).*/\1/p') }
 
 function g { grep $@ -r |less }
 
 function q(){ wget http://speedtest.wdc01.softlayer.com/downloads/test100.zip --output-document=/dev/null }
 
-function qp {
-	 qpdf --empty --pages *.pdf -- $1.pdf
-	 }
+function qp { qpdf --empty --pages *.pdf -- $1.pdf }
 
 b=$0
 a=(${(s|custom/plugins/common-aliases/|)b})
