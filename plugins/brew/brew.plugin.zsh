@@ -5,6 +5,7 @@ alias as='clear &&brew info'
 alias au='brew upgrade && brew cleanup'
 alias auf='brew upgrade --formula'
 alias auc='brew upgrade --cask && brew cleanup'
+alias bi='brew info'
 alias in='brew install'
 
 function de {

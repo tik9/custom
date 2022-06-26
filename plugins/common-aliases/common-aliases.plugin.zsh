@@ -26,7 +26,6 @@ alias ch="cd $HOME/user-portal-back-end"
 alias dw="cd $HOME/downloads"
 alias gn="cd $HOME/gman"
 alias k="cd $HOME/tik"
-alias pp="cd $HOME/php"
 alias u="cd $ZSH_CUSTOM"
 alias y="cd $y"
 
@@ -46,6 +45,7 @@ ipf=$ip_ro.1
 alias m=man
 alias mc='man curl'
 alias mg='man grep'
+alias mt='man test'
 
 # php
 alias p8='s php -S localhost:80'

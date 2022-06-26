@@ -3,7 +3,7 @@ alias cg='cat .gitignore'
 alias ga='git add .'
 alias gaa='git add'
 alias gb='git branch' 
-alias gls='git ls-files|less' 
+alias gi='git ls-files|less' 
 alias gr='git remote -v'
 alias grm='git rm --cached'
 alias grs='git restore'
@@ -25,6 +25,11 @@ alias gmm='git merge master'
 # commit
 alias gic='git add . && git commit -am'
 alias gc='git commit -am'
+
+function gcp {
+    git commit -am "$1"
+    git push
+}
 
 # diff
 alias gd='git diff'
