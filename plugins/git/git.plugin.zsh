@@ -8,15 +8,17 @@ alias gr='git remote -v'
 alias grm='git rm --cached'
 alias grs='git restore'
 alias gs='git status --long'
-alias gw='git show'
+alias gsp='git stash pop'
+alias gt='git stash'
 
 function gcenv { file=.env && git checkout $(git rev-list -n 1 HEAD -- $file)^ -- $file }
+
 function gcp { git commit -am "$1" && $(gp) }
-function webserve { if [ $PWD = $HOME/tik ] ; then sh $PWD/test/test.sh servergh ;fi }
+
+
 function webserve_he { git commit -am "$1" && git push heroku && sh test/test.sh serverhe }
 
 # checkout - merge
-alias gch='git checkout .'
 alias gci='git checkout main'
 alias gcm='git checkout master' 
 alias gmm='git merge master' 
@@ -25,6 +27,13 @@ alias gmm='git merge master'
 # commit
 alias gic='git add . && git commit -am'
 alias gc='git commit -am'
+
+function deploy_gh {
+    # git rm --cached .env
+    grm .env
+    gc '.env removed'
+    gp
+}
 
 function gcp {
     git commit -am "$1"
@@ -45,5 +54,5 @@ alias gl='git pull'
 
 # push
 alias gh='git push heroku'
-alias gp='git push && webserve'
+alias gp='git push'
 alias gpu='git push --set-upstream origin master'

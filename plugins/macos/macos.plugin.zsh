@@ -1,13 +1,11 @@
+
 wifi=moto;wifi1=timo; wifi2=huawei
 
 wifipass=$(cat $ZSH/custom/env)
 
-config=$HOME/.config
 eth=en6
 wintf=en1
 cu="$HOME/Library/Application Support/Code/User"
-ph=$config/powershell
-
 
 alias o=open
 alias pd="python $y/dict.py"
@@ -22,13 +20,9 @@ alias off-w="networksetup -setairportpower WI-FI off"
 alias on-w="networksetup -setairportpower WI-FI on"
 alias wl='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport scan'
 
-function cb {
-    echo "$@" |pbcopy
-}
+function cb { echo "$@" |pbcopy }
 
-function cc {
-    echo `$@` |pbcopy
-}
+function cc { echo `$@` |pbcopy }
 
 
 function di {
@@ -37,38 +31,15 @@ function di {
   python3 $y/dict.py $1
 }
 
-function qp {
-	 qpdf --object-streams=generate --empty --pages *.pdf -- $1.pdf
-	 }
+function ppo { sudo lsof -nP -i4TCP:$1 | grep LISTEN;sudo lsof -i -P | grep LISTEN | grep :$1 }
 
-function wifi_set {
-  networksetup -setairportnetwork $wintf $wifi $wifipass
-}
+function qp { qpdf --object-streams=generate --empty --pages *.pdf -- $1.pdf }
 
-function wifi_get {
-  /System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -I | awk -F: '/ SSID/{print $2}'
-}
+function wifi_set { networksetup -setairportnetwork $wintf $wifi $wifipass}
 
-# Handle $0 according to the standard:
-# https://zdharma-continuum.github.io/Zsh-100-Commits-Club/Zsh-Plugin-Standard.html
-0="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
-0="${${(M)0:#/*}:-$PWD/$0}"
-
-# Open the current directory in a Finder window
-alias ofd='open_command $PWD'
-
-# Show/hide hidden files in the Finder
-alias showfiles="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
-alias hidefiles="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+function wifi_get { /System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -I | awk -F: '/ SSID/{print $2}' }
 
 
-function _omz_macos_get_frontmost_app() {
-  osascript 2>/dev/null <<EOF
-    tell application "System Events"
-      name of first item of (every process whose frontmost is true)
-    end tell
-EOF
-}
 
 function tab() {
   # Must not have trailing semicolon, for iTerm compatibility

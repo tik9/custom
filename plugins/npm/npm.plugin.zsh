@@ -1,10 +1,9 @@
 
 alias ca='less package.json'
-alias nf="npm info"
+alias ce='cat .env'
 alias ni='npm i'
 alias nig='npm i -g'
 alias nl="npm list"
-alias nl0="npm ls --depth=0"
 alias nlg="sudo npm list -g"
 alias no="npm outdated"
 alias npm="npm --no-fund"

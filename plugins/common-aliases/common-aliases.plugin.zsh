@@ -45,13 +45,14 @@ ipf=$ip_ro.1
 alias m=man
 alias mc='man curl'
 alias mg='man grep'
+alias ms='man sed'
 alias mt='man test'
 
 # php
 alias p8='s php -S localhost:80'
 
 # progr
-alias -g c=cat
+alias c=cat
 alias co=code
 alias n=nano
 
@@ -80,12 +81,13 @@ alias nov='node --version'
 alias p=ps
 alias ph=vendor/bin/phpunit
 alias pw=pwd
+alias rr='rm -rf'
 alias s=sudo
 alias si='sudo -i'
 alias to=touch
 alias w=which
 
-function ifco { echo $(ifconfig | sed -nr 's/\s+inet\s([0-9]{3}\.[0-9]{3}\.[0-9]+\.[0-9]+).*/\1/p') }
+function ifco { echo $(ifconfig)|sed -E 's/inet ([0-9]{3}\.[0-9]{3}\.[0-9]{3}\.[0-9]+).*/\1/'|grep inet }
 
 function g { grep $@ -r |less }
 
