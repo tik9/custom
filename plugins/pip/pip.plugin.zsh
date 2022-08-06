@@ -1,10 +1,4 @@
 
-# requirement file
-alias pire="pip install -r requirements.txt"
-alias pr="cat requirements.txt"
-alias pre="pip freeze > requirements.txt"
-
-
 alias par='pip uninstall -y'
 alias pi='pip install'
 alias pli='pip list |less'

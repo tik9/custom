@@ -10,6 +10,7 @@ alias grs='git restore'
 alias gs='git status --long'
 alias gsp='git stash pop'
 alias gt='git stash'
+alias gw='git show'
 
 function gcenv { file=.env && git checkout $(git rev-list -n 1 HEAD -- $file)^ -- $file }
 

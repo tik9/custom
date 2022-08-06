@@ -21,24 +21,17 @@ alias d='declare -f'
 alias t=type
 
 # cd
-y=$HOME/cpython
-alias ch="cd $HOME/user-portal-back-end"
 alias dw="cd $HOME/downloads"
-alias gn="cd $HOME/gman"
 alias k="cd $HOME/tik"
+alias n="cd $HOME/netlify"
 alias u="cd $ZSH_CUSTOM"
-alias y="cd $y"
-
-# grep
-alias -g gre='|grep'
-alias rgr='grep -r'
+alias y="cd $HOME/cpython"
 
 # ifconfig
 alias i='ifconfig|less'
 
 #ips
 ipro=192.168.178
-ipsm=192.168.43
 ipf=$ip_ro.1
 
 #man
@@ -48,19 +41,21 @@ alias mg='man grep'
 alias ms='man sed'
 alias mt='man test'
 
-# php
-alias p8='s php -S localhost:80'
-
 # progr
 alias c=cat
 alias co=code
-alias n=nano
+alias na=nano
 
 # python
 alias pv='python -V'
 alias py='python3'
 alias sv='source venv/bin/activate'
 alias wp='which python3'
+
+# ssh
+alias sd=sshd
+alias pd='ps -ef|grep ssh'
+
 
 # zsh
 alias cz="cat $HOME/.zshrc"

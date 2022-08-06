@@ -2,6 +2,7 @@
 alias ca='less package.json'
 alias ce='cat .env'
 alias ni='npm i'
+alias nin='npm info'
 alias nig='npm i -g'
 alias nl="npm list"
 alias nlg="sudo npm list -g"

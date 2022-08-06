@@ -1,16 +1,13 @@
 alias ad='brew update && brew outdated'
 alias ai='brew ls'
 alias ar='brew uninstall'
-alias as='clear &&brew info'
+alias as='clear && brew info'
 alias au='brew upgrade && brew cleanup'
 alias auf='brew upgrade --formula'
 alias auc='brew upgrade --cask && brew cleanup'
-alias bi='brew info'
 alias in='brew install'
 
-function de {
-  brew desc $1 | cut -d: -f2|awk '{$1=$1;print}' 
-}
+function de { brew desc $1 | cut -d: -f2|awk '{$1=$1;print}' ;}
 
 function pkg_remote_size {
   pkg=$(brew info --json=v1 $1 | jq -r '.[0].bottle.stable.files.arm64_monterey.url')
@@ -18,8 +15,7 @@ function pkg_remote_size {
 }
 
 function pkg_size {
-  brew list --formula | xargs brew info |sed 's|/opt/homebrew/Cellar/||'| sort -k1 |egrep --color '\d*\.\d*(KB|MB|GB)'
-}
+  brew list --formula | xargs brew info |sed 's|/opt/homebrew/Cellar/||'| sort -k1 |egrep --color '\d*\.\d*(KB|MB|GB)' ;}
 
 function brews() {
   local formulae="$(brew leaves | xargs brew deps --installed --for-each)"

@@ -3,7 +3,7 @@ wifi=moto;wifi1=timo; wifi2=huawei
 
 wifipass=$(cat $ZSH/custom/env)
 
-eth=en6
+eth=en0
 wintf=en1
 cu="$HOME/Library/Application Support/Code/User"
 
