@@ -221,34 +221,6 @@ function pushdf() {
   pushd "$(pfd)"
 }
 
-function pxd() {
-  dirname $(osascript 2>/dev/null <<EOF
-    if application "Xcode" is running then
-      tell application "Xcode"
-        return path of active workspace document
-      end tell
-    end if
-EOF
-)
-}
-
-function cdx() {
-  cd "$(pxd)"
-}
-
-function quick-look() {
-  (( $# > 0 )) && qlmanage -p $* &>/dev/null &
-}
-
-function man-preview() {
-  # Don't let Preview.app steal focus if the man page doesn't exist
-  man -w "$@" &>/dev/null && man -t "$@" | open -f -a Preview || man "$@"
-}
-compdef _man man-preview
-
-function vncviewer() {
-  open vnc://$@
-}
 
 # Remove .DS_Store files recursively in a directory, default .
 function rmdsstore() {
@@ -270,13 +242,6 @@ function freespace(){
   diskutil secureErase freespace 0 $1
 }
 
-_freespace() {
-  local -a disks
-  disks=("${(@f)"$(df | awk '/^\/dev\/disk/{ printf $1 ":"; for (i=9; i<=NF; i++) printf $i FS; print "" }')"}")
-  _describe disks disks
-}
-
-compdef _freespace freespace
 
 b=$0
 a=(${(s|custom/plugins/macos/|)b})
