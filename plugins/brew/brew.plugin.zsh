@@ -1,3 +1,4 @@
+
 alias ad='brew update && brew outdated'
 alias ai='brew ls'
 alias ar='brew uninstall'
@@ -17,18 +18,6 @@ function pkg_remote_size {
 function pkg_size {
   brew list --formula | xargs brew info |sed 's|/opt/homebrew/Cellar/||'| sort -k1 |egrep --color '\d*\.\d*(KB|MB|GB)' ;}
 
-function brews() {
-  local formulae="$(brew leaves | xargs brew deps --installed --for-each)"
-  local casks="$(brew list --cask)"
-
-  local blue="$(tput setaf 4)"
-  local bold="$(tput bold)"
-  local off="$(tput sgr0)"
-
-  echo "${blue}==>${off} ${bold}Formulae${off}"
-  echo "${formulae}" | sed "s/^\(.*\):\(.*\)$/\1${blue}\2${off}/"
-  echo "\n${blue}==>${off} ${bold}Casks${off}\n${casks}"
-}
 
 b=$0
 a=(${(s|custom/plugins/brew/|)b})
