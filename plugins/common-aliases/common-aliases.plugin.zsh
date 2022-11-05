@@ -17,6 +17,8 @@ alias d='declare -f'
 alias t=type
 
 # cd
+alias au="cd $HOME/downloads/aufgaben_lukas"
+alias b="cd $HOME/bewerbung"
 alias dw="cd $HOME/downloads"
 alias f="cd $HOME/fun"
 alias k="cd $HOME/tik"
@@ -53,11 +55,6 @@ alias wp='which python3'
 alias sd=sshd
 alias pd='ps -ef|grep ssh'
 
-
-# zsh
-alias e='. $HOME/.zshrc'
-alias x=exit
-
 alias cl=clear
 alias cu=curl
 alias dh='df -h'
@@ -66,18 +63,18 @@ alias hi='\history -E'
 alias i='ifconfig|less'
 alias le="less -m $@"
 alias lt="l -t"
+alias o=open
 alias pw=pwd
 alias rr='rm -rf'
 alias s=sudo
 alias to=touch
+alias x=exit
 
 function ifco { echo $(ifconfig)|sed -E 's/inet ([0-9]{3}\.[0-9]{3}\.[0-9]{3}\.[0-9]+).*/\1/'|grep inet }
 
 function g { grep $@ -r |less }
 
 function q(){ wget http://speedtest.wdc01.softlayer.com/downloads/test100.zip --output-document=/dev/null }
-
-function qp { qpdf --empty --pages *.pdf -- $1.pdf }
 
 
 b=$0
