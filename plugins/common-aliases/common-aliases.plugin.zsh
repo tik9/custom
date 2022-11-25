@@ -17,11 +17,11 @@ alias d='declare -f'
 alias t=type
 
 # cd
-alias au="cd $HOME/downloads/aufgaben_lukas"
 alias b="cd $HOME/bewerbung"
 alias dw="cd $HOME/downloads"
 alias f="cd $HOME/fun"
 alias k="cd $HOME/tik"
+alias p="cd $HOME/apps"
 alias u="cd $ZSH_CUSTOM"
 alias y="cd $HOME/cpython"
 
@@ -29,14 +29,10 @@ alias y="cd $HOME/cpython"
 alias m=man
 alias mc='man curl'
 alias mg='man grep'
-alias mj='man jq'
 alias ms='man sed'
-alias mt='man test'
 
 # netlif
-alias cn='c netlify.toml'
-alias n='ntl'
-alias nd='ntl dev'
+alias n='ntl dev'
 alias nf='ntl functions:invoke'
 # function nf { ntl functions:invoke --name $1 --port 8888 ;}
 
@@ -58,6 +54,7 @@ alias pd='ps -ef|grep ssh'
 alias cl=clear
 alias cu=curl
 alias dh='df -h'
+alias e='exec zsh'
 alias ec=echo
 alias hi='\history -E'
 alias i='ifconfig|less'
@@ -65,7 +62,6 @@ alias le="less -m $@"
 alias lt="l -t"
 alias o=open
 alias pw=pwd
-alias rr='rm -rf'
 alias s=sudo
 alias to=touch
 alias x=exit
