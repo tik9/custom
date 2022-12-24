@@ -32,13 +32,13 @@ If you frequently use both environments Linux Zsh and Windows Powershell and wan
 
 ### Feature Comparison
 
- Feature| Linux |  Powershell 
----------|:-------------:|------:
-Content   |  Functions | Functions
- Version Shell | Zsh 5 | Powershell 7 
- Environment | Debian/WSL/Zsh   | Windows native 
- Source Call |  exec zsh |  . $profile
- Github Repo | [Custom](https://github.com/tik9/custom)  |[WindowsPowershell](https://github.com/tik9/psprofile) 
- Name | [common_functions.zsh](common_functions.zsh) |[common_functions.ps1](https://github.com/tik9/psprofile/blob/master/common_functions.ps1)
- Source `cmd` |  `exec zsh` | `. profile.ps1`
- Based on| [Oh-myzsh](https://github.com/ohmyzsh/ohmyzsh) | Own Ideas
+ | Feature       |                     Linux                      |                                                                                 Powershell |
+ | ------------- | :--------------------------------------------: | -----------------------------------------------------------------------------------------: |
+ | Content       |                   Functions                    |                                                                                  Functions |
+ | Version Shell |                     Zsh 5                      |                                                                               Powershell 7 |
+ | Environment   |                 Debian/WSL/Zsh                 |                                                                             Windows native |
+ | Source Call   |                    exec zsh                    |                                                                                 . $profile |
+ | Github Repo   |    [Custom](https://github.com/tik9/custom)    |                                     [WindowsPowershell](https://github.com/tik9/psprofile) |
+ | Name          |  [common_functions.zsh](common_functions.zsh)  | [common_functions.ps1](https://github.com/tik9/psprofile/blob/master/common_functions.ps1) |
+ | Source `cmd`  |                   `exec zsh`                   |                                                                            `. profile.ps1` |
+ | Based on      | [Oh-myzsh](https://github.com/ohmyzsh/ohmyzsh) |                                                                                  Own Ideas |

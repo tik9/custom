@@ -17,19 +17,22 @@ alias d='declare -f'
 alias t=type
 
 # cd
-alias b="cd $HOME/bewerbung"
 alias dw="cd $HOME/downloads"
 alias f="cd $HOME/fun"
 alias k="cd $HOME/tik"
-alias p="cd $HOME/apps"
+alias r="cd $HOME/tire"
 alias u="cd $ZSH_CUSTOM"
 alias y="cd $HOME/cpython"
+
+#gatsby
+alias g=gatsby
+alias dg='gatsby develop'
+
 
 #man
 alias m=man
 alias mc='man curl'
 alias mg='man grep'
-alias ms='man sed'
 
 # netlif
 alias n='ntl dev'
@@ -42,7 +45,6 @@ alias co=code
 alias na=nano
 
 # python
-alias pv='python3 -V'
 alias py='python3'
 alias sv='source venv/bin/activate'
 alias wp='which python3'
@@ -68,7 +70,6 @@ alias x=exit
 
 function ifco { echo $(ifconfig)|sed -E 's/inet ([0-9]{3}\.[0-9]{3}\.[0-9]{3}\.[0-9]+).*/\1/'|grep inet }
 
-function g { grep $@ -r |less }
 
 function q(){ wget http://speedtest.wdc01.softlayer.com/downloads/test100.zip --output-document=/dev/null }
 

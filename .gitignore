@@ -1,6 +1,5 @@
-env
+.env
 example.zsh
 plugins/example
 plugins/zsh-autosuggestions
-plugins/composer
 themes
