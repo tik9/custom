@@ -7,16 +7,13 @@ alias pm='sudo pm-suspend'
 alias aar='sudo apt autoremove -y'
 alias ad="sudo apt-get update"
 alias ai="apt list --installed | grep"
-alias ail="apt list --installed | less"
 alias al='apt list --upgradable'
 alias ar="sudo apt remove"
 alias as='apt show'
 alias au="sudo apt upgrade"
 alias in='sudo apt install -y'
 
-function de {
-  apt-get show "$@" | grep -E 'Description|^'
-}
+function de {  apt show "$@" | grep -E 'Description|^' }
 
 function cb { echo "$@"|xclip -selection clipboard }
 function cc { echo `$@`|xclip -selection clipboard }

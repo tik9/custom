@@ -17,6 +17,8 @@ alias d='declare -f'
 alias t=type
 
 # cd
+alias ap="cd $HOME/apps"
+alias cv="cd $HOME/cv2"
 alias dw="cd $HOME/downloads"
 alias f="cd $HOME/fun"
 alias k="cd $HOME/tik"
@@ -63,7 +65,7 @@ alias i='ifconfig|less'
 alias le="less -m $@"
 alias lt="l -t"
 alias o=open
-alias pw=pwd
+alias p=pwd
 alias s=sudo
 alias to=touch
 alias x=exit
