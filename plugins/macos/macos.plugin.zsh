@@ -1,7 +1,7 @@
 
 wifi=moto;wifi1=timo; wifi2=huawei
 
-wifipass=$(cat $ZSH/custom/env)
+wifipass=$(cat $ZSH/custom/.env)
 
 eth=en0
 wintf=en1

@@ -9,3 +9,4 @@ alias npm="npm --no-fund"
 alias nr="npm run"
 alias nu="npm uninstall"
 alias nun='nig netlify-cli'
+alias nup='npm update'

@@ -18,11 +18,12 @@ alias t=type
 
 # cd
 alias ap="cd $HOME/apps"
+alias b="cd $HOME/bewerbung"
 alias cv="cd $HOME/cv2"
 alias dw="cd $HOME/downloads"
 alias f="cd $HOME/fun"
-alias k="cd $HOME/tik"
-alias r="cd $HOME/tire"
+alias h="cd $HOME/nh"
+alias r="cd $HOME/re"
 alias u="cd $ZSH_CUSTOM"
 alias y="cd $HOME/cpython"
 
@@ -39,6 +40,7 @@ alias mg='man grep'
 # netlif
 alias n='ntl dev'
 alias nf='ntl functions:invoke'
+alias nt=ntl
 # function nf { ntl functions:invoke --name $1 --port 8888 ;}
 
 # progr
@@ -55,6 +57,7 @@ alias wp='which python3'
 alias sd=sshd
 alias pd='ps -ef|grep ssh'
 
+alias ce='cat .env'
 alias cl=clear
 alias cu=curl
 alias dh='df -h'
@@ -70,10 +73,15 @@ alias s=sudo
 alias to=touch
 alias x=exit
 
-function ifco { echo $(ifconfig)|sed -E 's/inet ([0-9]{3}\.[0-9]{3}\.[0-9]{3}\.[0-9]+).*/\1/'|grep inet }
+scp_img(){
+    dir=storage/dcim/Camera/
+    scp -r user@192.168.43.1:$dir /Users/thome
+}
+
+ifco() { echo $(ifconfig)|sed -E 's/inet ([0-9]{3}\.[0-9]{3}\.[0-9]{3}\.[0-9]+).*/\1/'|grep inet }
 
 
-function q(){ wget http://speedtest.wdc01.softlayer.com/downloads/test100.zip --output-document=/dev/null }
+q(){ wget http://speedtest.wdc01.softlayer.com/downloads/test100.zip --output-document=/dev/null }
 
 
 b=$0
