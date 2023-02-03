@@ -1,5 +1,6 @@
 
 alias cg='cat .gitignore'
+alias cog='code .gitignore'
 alias ga='git add .'
 alias gb='git branch' 
 alias gc='git commit -am'

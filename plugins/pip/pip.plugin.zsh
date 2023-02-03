@@ -1,13 +1,16 @@
 
-alias par='pip uninstall -y'
+alias pa='pip uninstall -y'
+alias ph='pip show'
 alias pi='pip install'
+alias pl='pip list'
 alias pli='pip list |less'
 alias po='pip list --outdated'
-alias psh='pip show'
 alias pu='pip install --upgrade'
 
 
-function pipu { pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U }
+function pipu { 
+  pip --disable-pip-version-check list --outdated --format=json | python -c "import json, sys; print('\n'.join([x['name'] for x in json.load(sys.stdin)]))"
+}
 
 
 # Update all installed packages
