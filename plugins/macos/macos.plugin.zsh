@@ -1,8 +1,6 @@
 
 wifi=moto;wifi1=timo; wifi2=huawei
 
-wifipass=$(cat $ZSH/custom/.env)
-
 eth=en0
 wintf=en1
 cu="$HOME/Library/Application Support/Code/User"
@@ -18,8 +16,6 @@ alias wl='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Reso
 function cb { echo "$@" |pbcopy }
 
 function cc { echo `$@` |pbcopy }
-
-function wifi_set { networksetup -setairportnetwork $wintf $wifi $wifipass}
 
 function wifi_get { /System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -I | awk -F: '/ SSID/{print $2}' }
 

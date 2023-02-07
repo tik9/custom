@@ -48,13 +48,14 @@ alias lt="l -t"
 alias nr='cb 01573 9598 220'
 alias o=open
 alias p=pwd
+alias rf='rm -rf'
 alias s=sudo
 alias to=touch
 alias x=exit
 
 scp_img(){
     dir=storage/dcim/Camera/
-    scp -r user@192.168.43.1:$dir /Users/thome
+    scp -r -P8022 user@192.168.43.1:$dir /Users/thome
 }
 
 ifco() { echo $(ifconfig)|sed -E 's/inet ([0-9]{3}\.[0-9]{3}\.[0-9]{3}\.[0-9]+).*/\1/'|grep inet }
