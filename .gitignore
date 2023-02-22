@@ -1,5 +1,2 @@
 .env
-example.zsh
-plugins/example
 plugins/zsh-autosuggestions
-themes

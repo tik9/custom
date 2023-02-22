@@ -8,17 +8,13 @@ alias po='pip list --outdated'
 alias pu='pip install --upgrade'
 
 
-function pipu { 
-  pip --disable-pip-version-check list --outdated --format=json | python -c "import json, sys; print('\n'.join([x['name'] for x in json.load(sys.stdin)]))"
+function piplistout { 
+  pip list --outdated --format=json | python3 -c "import json, sys; print('\n'.join([x['name'] for x in json.load(sys.stdin)]))"
 }
 
 
-# Update all installed packages
-function pipupall {
-  # non-GNU xargs does not support nor need `--no-run-if-empty`
-  local xargs="xargs --no-run-if-empty"
-  xargs --version 2>/dev/null | grep -q GNU || xargs="xargs"
-  pip list --outdated --format freeze | cut -d= -f1 | ${=xargs} pip install --upgrade
+function pipu {
+pip3 list --outdated --format=json | jq -r '.[] | "\(.name)==\(.latest_version)"' | xargs -n1 pip3 install --upgrade
 }
 
 b=$0

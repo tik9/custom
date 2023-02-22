@@ -1,20 +1,21 @@
 #!/bin/bash
 
-ip=192.168.178
-ip=192.168.43
-
-# apt update && apt -y upgrade
-# apt install git man zsh -y
-# printf 'y\n'|sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# install git wget zsh -y
 # chsh -s zsh
-omz=$HOME/.oh-my-zsh; omz_cu=$omz/custom;
-rm -rf $omz_cu
-cd $omz
-# git clone https://github.com/tik9/custom.git
 
-# termux-setup-storage
-cp $omz_cu/.zshrc $HOME
-git clone https://github.com/zsh-users/zsh-autosuggestions $omz_cu/plugins/zsh-autosuggestions
+# gh_content=https://raw.githubusercontent.com; printf 'y\n' | sh -c "$(curl -fsSL $gh_content/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+wget -O .zshrc $gh_content/tik9/custom/master/.zshrc
+
+# omz=$HOME/.oh-my-zsh; omz_cu=$omz/custom;
+# cd $omz
+# rm -rf $omz_cu
+
+# gih=https://github.com; git clone $gih/tik9/custom.git
+
+# update && upgrade
+
+# git clone $gih/zsh-users/zsh-autosuggestions $omz_cu/plugins/zsh-autosuggestions
 source ~/.zshrc
 
 # install termux api from f-droid

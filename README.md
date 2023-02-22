@@ -1,44 +1,21 @@
-## ZSH and Powershell Profile under one common roof on Windows and WSL/Debian
-&nbsp;
+## ZSH Aliases
 
-If you frequently use both environments Linux Zsh and Windows Powershell and want to **share aliases across shell environments** like 
-
-- jumping to a pre-defined folder with `cd`
-- writing `lah` instead of `ls -lah`
-
- these repos are for you.  
+You have Zsh and want to **use  aliases and functions** like 
+- `l` instead of `ls -lah`
+- `q` instead of `wget http://speedtest.wdc01.softlayer.com/downloads/test100.zip --output-document=/dev/null` to get your internet speed
+  
 &nbsp;
  
-  **Motivation**
-   
-  Find common code that works on both systems: [common_functions.zsh](blob/master/common_functions.zsh) and [common_functions.ps1](https://github.com/tik9/psprofile/blob/master/common_functions.ps1)
-
-  &nbsp;
-
-## Getting Started
-
-- Prepare a running Oh-My-Zsh and $profile Powershell installation
-- *Fork* [zsh](https://github.com/tik9/custom/) and [powershell](https://github.com/tik9/psprofile)
-- You can use each repo on its own, but the full benefit is to use both
+ ### Getting Started
+- Get`git`, `curl`, a unix like OS and [Zsh](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH#how-to-install-zsh-on-many-platforms)
+- Get Oh-My-Zsh[(https://github.com/ohmyzsh/ohmyzsh)] with `sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
+- *Fork* [this repo](https://github.com/tik9/custom/)
+- Get to know my custom plugin [common-aliases.zsh](blob/master/plugins/common-aliases/common-aliases.plugin.zsh)
+- Edit .zshrc with e.g. `plugins=(git)` to only load the **git** plugin
 
 &nbsp;
 
-## To be done
-
-- Automatic copying of the zsh and ps1 files between systems
-
-&nbsp;
-
-
-### Feature Comparison
-
- | Feature       |                     Linux                      |                                                                                 Powershell |
- | ------------- | :--------------------------------------------: | -----------------------------------------------------------------------------------------: |
- | Content       |                   Functions                    |                                                                                  Functions |
- | Version Shell |                     Zsh 5                      |                                                                               Powershell 7 |
- | Environment   |                 Debian/WSL/Zsh                 |                                                                             Windows native |
- | Source Call   |                    exec zsh                    |                                                                                 . $profile |
- | Github Repo   |    [Custom](https://github.com/tik9/custom)    |                                     [WindowsPowershell](https://github.com/tik9/psprofile) |
- | Name          |  [common_functions.zsh](common_functions.zsh)  | [common_functions.ps1](https://github.com/tik9/psprofile/blob/master/common_functions.ps1) |
- | Source `cmd`  |                   `exec zsh`                   |                                                                            `. profile.ps1` |
- | Based on      | [Oh-myzsh](https://github.com/ohmyzsh/ohmyzsh) |                                                                                  Own Ideas |
+### Facts
+ - Used version Zsh: 5
+ - Oh-My-Zsh has lots of useful `plugins`
+ - Refresh/reload Zsh command after change: `exec zsh`

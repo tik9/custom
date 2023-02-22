@@ -9,7 +9,7 @@ alias ap="cd $HOME/apo"
 alias b="cd $HOME/bewerbung"
 alias cv="cd $HOME/cv2"
 alias dw="cd $HOME/downloads"
-alias r="cd $HOME/re"
+alias f="cd $HOME/fun"
 alias u="cd $ZSH_CUSTOM"
 alias y="cd $HOME/cpython"
 
@@ -41,6 +41,7 @@ alias pd='ps -ef|grep ssh'
 alias ce='cat .env'
 alias dh='df -h'
 alias e='exec zsh'
+alias ec='echo'
 alias hi='\history -E'
 alias i='ifconfig|less'
 alias le="less -m $@"
@@ -52,6 +53,7 @@ alias rf='rm -rf'
 alias s=sudo
 alias to=touch
 alias x=exit
+alias zv='zsh --version'
 
 scp_img(){
     dir=storage/dcim/Camera/
