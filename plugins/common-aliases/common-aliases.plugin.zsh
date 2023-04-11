@@ -5,10 +5,9 @@ alias d='declare -f'
 alias t=type
 
 # cd
-alias ap="cd $HOME/apo"
-alias b="cd $HOME/bewerbung"
-alias cv="cd $HOME/cv2"
+alias dc="cd $HOME/documents"
 alias dw="cd $HOME/downloads"
+alias lk="cd $HOME/downloads/nachhilfe/lukas"
 alias f="cd $HOME/fun"
 alias u="cd $ZSH_CUSTOM"
 alias y="cd $HOME/cpython"

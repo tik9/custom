@@ -1,10 +1,11 @@
 
-wifi=moto;wifi1=timo; wifi2=huawei
-
 eth=en0
 wintf=en1
 cu="$HOME/Library/Application Support/Code/User"
 
+# bluetooth
+alias b=blueutil
+alias bt='blueutil -p toggle'
 
 # net
 alias et="ipconfig getifaddr $eth"
