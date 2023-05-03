@@ -3,6 +3,7 @@ eth=en0
 wintf=en1
 cu="$HOME/Library/Application Support/Code/User"
 
+
 # bluetooth
 alias b=blueutil
 alias bt='blueutil -p toggle'
@@ -13,6 +14,9 @@ alias wi="ipconfig getifaddr $wintf"
 alias off-w="networksetup -setairportpower WI-FI off"
 alias on-w="networksetup -setairportpower WI-FI on"
 alias wl='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport scan'
+
+alias i='ifconfig|less'
+alias mo='echo 01573|pbcopy'
 
 function cb { echo "$@" |pbcopy }
 

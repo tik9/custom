@@ -1,5 +1,5 @@
 
-alias iu='sudo dhclient $eth; ifconfig'
+alias iu='sudo dhclient $eth'
 alias pm='sudo pm-suspend'
 
 # apt
