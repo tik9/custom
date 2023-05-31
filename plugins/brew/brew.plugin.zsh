@@ -3,7 +3,7 @@
 alias ad='brew update && brew outdated'
 alias al='brew ls'
 alias ar='brew uninstall'
-alias as='clear && brew info'
+alias as='brew info'
 alias au='brew upgrade && brew cleanup'
 alias auf='brew upgrade --formula'
 alias auc='brew upgrade --cask && brew cleanup'

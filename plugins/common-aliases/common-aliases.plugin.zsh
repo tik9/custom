@@ -1,12 +1,12 @@
 
 # alias
 alias a='alias | grep'
-alias de='declare -f'
+alias d='declare -f'
 alias t=type
 
 # cd
 alias dc="cd $HOME/documents"
-alias d="cd $HOME/downloads"
+alias dw="cd $HOME/downloads"
 alias f="cd"
 alias u="cd $ZSH_CUSTOM"
 alias y="cd $HOME/cpython"

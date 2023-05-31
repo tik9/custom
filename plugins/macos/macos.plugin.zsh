@@ -20,7 +20,7 @@ alias mo='echo 01573|pbcopy'
 
 function cb { echo "$@" |pbcopy }
 
-function cc { echo `$@` |pbcopy }
+function cc { `$@` |pbcopy }
 
 function wifi_get { /System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -I | awk -F: '/ SSID/{print $2}' }
 
