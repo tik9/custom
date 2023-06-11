@@ -31,7 +31,6 @@ alias wp='which python3'
 alias sd=sshd
 alias pd='ps -ef|grep ssh'
 
-alias adr='echo timo körner, Bergstr. 15, 85120 Hepberg'
 alias ce='cat .env'
 alias dh='df -h'
 alias e='exec zsh'
@@ -40,7 +39,6 @@ alias hi='\history -E'
 alias i='ip a'
 alias le="less -m $@"
 alias lt="l -t"
-alias nr='ec 01573 9598 220'
 alias o=open
 alias p=pwd
 alias rf='rm -rf'
@@ -55,7 +53,7 @@ scp_img(){
     scp -r -P8022 user@192.168.43.1:$dir /Users/thome
 }
 
-ifco() { echo $(ifconfig)|sed -E 's/inet ([0-9]{3}\.[0-9]{3}\.[0-9]{3}\.[0-9]+).*/\1/'|grep inet }
+ifco() { echo $(ip a) | sed -E 's/inet ([0-9]{3}\.[0-9]{3}\.[0-9]{3}\.[0-9]+).*/\1/' | grep inet }
 
 
 q(){ wget http://speedtest.wdc01.softlayer.com/downloads/test100.zip --output-document=/dev/null }
