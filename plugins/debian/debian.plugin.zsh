@@ -1,5 +1,5 @@
 
-alias iu='sudo dhclient $eth'
+alias iu='sudo dhclient enx00e04c680015'
 alias pm='sudo pm-suspend'
 
 # apt

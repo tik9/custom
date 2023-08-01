@@ -7,7 +7,6 @@ alias t=type
 # cd
 alias dc="cd $HOME/documents"
 alias dw="cd $HOME/downloads"
-alias f="cd"
 alias u="cd $ZSH_CUSTOM"
 alias y="cd $HOME/cpython"
 
@@ -35,6 +34,7 @@ alias ce='cat .env'
 alias dh='df -h'
 alias e='exec zsh'
 alias ec='echo'
+alias g='grep -r'
 alias hi='\history -E'
 alias i='ip a'
 alias le="less -m $@"
@@ -47,6 +47,10 @@ alias sh='sudo halt'
 alias to=touch
 alias x=exit
 alias zv='zsh --version'
+
+f(){
+    cp $1 /Users/thome/ttt_gui
+}
 
 scp_img(){
     dir=storage/dcim/Camera/

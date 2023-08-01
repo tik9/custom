@@ -6,7 +6,7 @@ alias gc='git commit -am'
 alias gd='git diff'
 alias gi='git ls-files|less' 
 alias gl='git pull' 
-alias gr='git remote -v'
+alias grv='git remote -v'
 alias gs='git status --long'
 alias gw='git show'
 
