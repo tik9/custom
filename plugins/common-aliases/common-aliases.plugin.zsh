@@ -38,7 +38,7 @@ alias g='grep -r'
 alias hi='\history -E'
 alias i='ip a'
 alias le="less -m $@"
-alias lt="l -t"
+alias l="ls -t"
 alias o=open
 alias p=pwd
 alias rf='rm -rf'
@@ -48,9 +48,6 @@ alias to=touch
 alias x=exit
 alias zv='zsh --version'
 
-f(){
-    cp $1 /Users/thome/ttt_gui
-}
 
 scp_img(){
     dir=storage/dcim/Camera/
