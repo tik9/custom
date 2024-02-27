@@ -13,7 +13,8 @@ alias u="cd $ZSH_CUSTOM"
 alias y="cd $HOME/cpython"
 
 # progr
-alias c=cat
+alias c=curl
+alias ca=cat
 alias co=code
 
 # python
@@ -24,6 +25,7 @@ alias wp='which python3'
 alias sd=sshd
 alias pd='ps -ef|grep ssh'
 
+alias da='date +%X'
 alias dh='df -h'
 alias e='exec zsh'
 alias ec='echo'
@@ -36,6 +38,7 @@ alias p=pwd
 alias rf='rm -rf'
 alias s=sudo
 alias to=touch
+alias w='curl wttr.in'
 alias x=exit
 
 

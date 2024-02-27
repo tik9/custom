@@ -8,7 +8,7 @@ alias po='pip list --outdated'
 alias pu='pip install --upgrade'
 
 
-function piplistout { 
+function plistout { 
   pip list --outdated --format=json | python3 -c "import json, sys; print('\n'.join([x['name'] for x in json.load(sys.stdin)]))"
 }
 

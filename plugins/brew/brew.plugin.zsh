@@ -1,9 +1,7 @@
 
-# brew
+alias a='brew info'
 alias ad='brew update && brew outdated'
 alias al='brew ls'
-alias ar='brew uninstall'
-alias a='brew info'
 alias au='brew upgrade && brew cleanup'
 alias auf='brew upgrade --formula'
 alias auc='brew upgrade --cask && brew cleanup'
@@ -17,7 +15,10 @@ function pkg_remote_size {
 }
 
 function pkg_size {
-  brew list --formula | xargs brew info |sed 's|/opt/homebrew/Cellar/||'| sort -k1 |egrep --color '\d*\.\d*(KB|MB|GB)' ;}
+  brew list --formula | xargs -n1 -P8 -I {} \
+    sh -c "brew info {} | egrep '[0-9]* files, ' | sed 's/^.*[0-9]* files, \(.*\)).*$/{} \1/'" | \
+    sort -h -r -k2 - | column -t
+  }
 
 
 b=$0

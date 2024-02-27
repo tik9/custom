@@ -1,19 +1,26 @@
 
 pdfs(){
+    united_pdf=united.pdf
     privat=$HOME/Documents/privat
-    output=$HOME/united.pdf
-    output2=$HOME/united2.pdf
-    file=$(ls $HOME/*.pdf)
-    # echo $file
-    pdfunite $file $output
-    # ls $HOME
-    ps2pdf -dPDFSETTINGS=/ebook $output $output2
-    # rm $output
-    # mv $output2 $output
-    mv $output $privat
-    ls -l $privat
+    united=$HOME/$united_pdf
+    united2=$HOME/united2.pdf
+    files=$(ls $HOME/*.pdf)
+    
+    pdfunite $files $united
+    
+    # ls -lh $united
+    
+    ps2pdf -dPDFSETTINGS=/ebook $united $united2
+    
+    # ls -lh $united2
+    
+    mv $united2 $united && mv $united $privat
+    
+    # ls -lh $privat/$united_pdf
+
+    rm $HOME/*.pdf
 }
-# pdfs
+pdfs
 
 
 mvfile(){
