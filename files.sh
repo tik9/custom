@@ -6,7 +6,8 @@ pdfs(){
     united2=$HOME/united2.pdf
     files=$(ls $HOME/*.pdf)
     
-    pdfunite $files $united
+    pdfunite $files $united && 
+    # rm $HOME/*.pdf
     
     # ls -lh $united
     
@@ -15,23 +16,21 @@ pdfs(){
     # ls -lh $united2
     
     mv $united2 $united && mv $united $privat
-    
-    # ls -lh $privat/$united_pdf
+    cd $privat
+    ls -lh $privat/$united_pdf
+    open $privat/$united_pdf
 
-    rm $HOME/*.pdf
 }
 pdfs
 
 
 mvfile(){
     file=$(ls -t $HOME/downloads/* | head -1)
-
-    for file in $HOME/downloads/*.pdf ; do
     if echo $file | grep -q Honorar ; then
         mv $file $HOME/documents/steuer/studienkreis
         return
     fi
-    done
     echo no file found
+
 }
 # mvfile

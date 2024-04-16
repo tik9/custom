@@ -1,19 +1,20 @@
 
 # alias
 alias ag='alias | grep'
-alias d='declare -f'
+alias de='declare -f'
 alias t=type
 
 # cd
+alias d="cd $HOME/downloads"
 alias dc="cd $HOME/documents"
-alias dw="cd $HOME/downloads"
 alias f="cd $HOME/fun"
-alias n="cd $HOME/nh"
+alias mu="cd $HOME/Music"
 alias u="cd $ZSH_CUSTOM"
 alias y="cd $HOME/cpython"
 
 # progr
-alias c=curl
+alias c='bc<<<'
+alias cu=curl
 alias ca=cat
 alias co=code
 
@@ -33,6 +34,7 @@ alias i='ip a'
 alias le="less -m $@"
 alias l="ls -t"
 alias m=man
+alias mp=mplayer
 alias o=open
 alias p=pwd
 alias rf='rm -rf'
