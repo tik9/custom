@@ -18,8 +18,9 @@ alias wl='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Reso
 alias an='echo Hallo, ich würde ihn für 30 € nehmen, bitte melden falls er für den genannten Preis nicht genommen wird.|pbcopy'
 alias ar='echo Timo Körner, Bergstr. 15, 85120 Hepberg | pbcopy'
 alias em='ec user153015@gmail.com | pbcopy'
-alias ib='ec de63721 500 0000 5052 4271 | pbcopy'
-alias nr='ec 01573 9598 220 | pbcopy'
+alias ib='ec de39 5001 0517 5447 5823 49 | pbcopy'
+alias ib2='ec de63721 500 0000 5052 4271 | pbcopy'
+alias nr='ec 015739598220 | pbcopy'
 
 
 function cb { echo "$@" |pbcopy }

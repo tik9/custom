@@ -1,12 +1,23 @@
 
+unzip(){
+    downloads=$HOME/downloads
+    cd $downloads
+    find ./ -name \*.zip -exec unzip {} \
+    rm -f *.zip
+}
+
 pdfs(){
-    united_pdf=united.pdf
     privat=$HOME/Documents/privat
+    united_pdf=$privat/united.pdf
     united=$HOME/$united_pdf
     united2=$HOME/united2.pdf
+
+    new_file=dienstaufsicht.pdf
+    
     files=$(ls $HOME/*.pdf)
     
-    pdfunite $files $united && 
+    pdfunite $files $united
+    #  && 
     # rm $HOME/*.pdf
     
     # ls -lh $united
@@ -17,8 +28,8 @@ pdfs(){
     
     mv $united2 $united && mv $united $privat
     cd $privat
-    ls -lh $privat/$united_pdf
-    open $privat/$united_pdf
+    mv $united_pdf $privat/$new_file      
+    open $privat/$new_file
 
 }
 pdfs
