@@ -9,18 +9,17 @@ alias bt='blueutil -p toggle'
 
 # net
 alias et="ipconfig getifaddr $eth"
-alias wi="ipconfig getifaddr $wintf"
+alias n=networkQuality
 alias off-w="networksetup -setairportpower WI-FI off"
 alias on-w="networksetup -setairportpower WI-FI on"
+alias wi="ipconfig getifaddr $wintf"
 alias wl='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport scan'
 
 # pbcopy
-alias an='echo Hallo, ich würde es für 50 € nehmen, bitte melden falls er für den genannten Preis nicht genommen wird.|pbcopy'
+alias an='echo Hallo, ich würde es für 50 € nehmen, bitte nur melden falls der Preis in Frage kommt.|pbcopy'
 alias adr='echo Timo Körner, Bergstr. 15, 85120 Hepberg | pbcopy'
-alias dep='ec 8030249059 | pbcopy'
 alias em='ec user153015@gmail.com | pbcopy'
 alias ib='ec de39 5001 0517 5447 5823 49 | pbcopy'
-alias i2='ec de63 7215 0000 0050 5242 71 | pbcopy'
 alias nr='ec 015739598220 | pbcopy'
 
 function cp_mount {
@@ -37,6 +36,7 @@ function wifi_get { /System/Library/PrivateFrameworks/Apple80211.framework/Resou
 function os_ver { sw_vers -productVersion }
 
 function psp {
+    pdfunite *.pdf $1
     ps2pdf -dPDFSETTINGS=/ebook $1 $2 &&
     rm $1
 }    
