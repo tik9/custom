@@ -1,6 +1,6 @@
 
 # alias
-alias ag='alias | grep'
+alias a='alias | grep'
 alias de='declare -f'
 alias t=type
 
@@ -8,6 +8,7 @@ alias t=type
 alias dc="cd $HOME/documents"
 alias dt="cd $HOME/desktop"
 alias dw="cd $HOME/downloads"
+alias tu="cd $HOME/tut"
 alias u="cd $ZSH_CUSTOM"
 alias y="cd $HOME/cpython"
 
@@ -27,18 +28,17 @@ alias sd=sshd
 alias pd='ps -ef|grep ssh'
 
 alias da='date +%X'
-alias dh='df -h'
 alias e='exec zsh'
 alias ec='echo'
 alias h='history'
+alias i=ifconfig
 alias le="less -m $@"
 alias l="ls -t"
 alias m=man
-alias mp=mplayer
 alias o=open
 alias p=pwd
 alias rf='rm -rf'
-alias s=sudo
+alias su=sudo
 alias to=touch
 alias x=exit
 
@@ -47,10 +47,14 @@ ip=192.168.178.20
 # ip=192.168.43.1
 img_dir=storage/dcim/Camera/
 
-scp_img(){scp -r -P8022 user@$ip:$img_dir /Users/thome;}
+faculty(){
+    w=$1
+    n=$(( $w - 1 ))
+    m="$w"
+    W=$(for g in $(seq $n);do m=$(echo "scale=10;$m*$g" | bc); done; echo "$m")
+    echo $W
+}
 
-rm_img(){ssh -p8022 $ip "rm $img_dir/*";}
-# rm_img
 
 ifco() { echo $(ip a) | sed -E 's/inet ([0-9]{3}\.[0-9]{3}\.[0-9]{3}\.[0-9]+).*/\1/' | grep inet }
 
@@ -63,7 +67,7 @@ uzip(){
     find ./ -name \*.zip -exec unzip {} \; &&
 
     rm iCloud\ Photos/*.MOV
-    rm -f *.zip
+    # rm -f *.zip
 }
 
 w(){

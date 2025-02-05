@@ -4,6 +4,7 @@ alias ad='brew update && brew outdated'
 alias al='brew ls'
 alias ar='brew uninstall'
 alias au='brew upgrade && brew cleanup'
+alias bi='brew info'
 alias in='brew install'
 
 function d { brew desc --eval-all $1 | cut -d: -f2|awk '{$1=$1;print}' ;}
