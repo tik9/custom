@@ -43,8 +43,6 @@ alias to=touch
 alias x=exit
 
 
-ip=192.168.178.20
-# ip=192.168.43.1
 img_dir=storage/dcim/Camera/
 
 faculty(){
@@ -58,7 +56,7 @@ faculty(){
 
 ifco() { echo $(ip a) | sed -E 's/inet ([0-9]{3}\.[0-9]{3}\.[0-9]{3}\.[0-9]+).*/\1/' | grep inet }
 
-q(){ wget http://speedtest.wdc01.softlayer.com/downloads/test100.zip --output-document=/dev/null }
+q(){ wget -O /dev/null http://speedtest.belwue.net/1G ; }
 
 resolution(){system_profiler -json SPDisplaysDataType 2>/dev/null | python3 -c "import sys,json;d=next(i for i in json.load(sys.stdin)['SPDisplaysDataType'][0]['spdisplays_ndrvs'] if 'spdisplays_main' in i);print(d['_spdisplays_pixels'])";}
 

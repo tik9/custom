@@ -23,12 +23,12 @@ alias em2='ec timo@tik1.net | pbcopy'
 alias fn='ec 08456 9524 297|pbcopy'
 alias ib='ec de39 5001 0517 5447 5823 49 | pbcopy'
 alias nr='ec 015739598220 | pbcopy'
-alias nh='ec Hallo, ich bin der Mathe Nachhilfelehrer. Kannst du bitte für den gemeinsamen Termin zusätzliche Unterlagen mit Eingrenzung der Aufgaben für meine Vorbereitung mailen. Die Unterlagen vom Studienkreis - wenn geschickt - habe ich. Bitte zusätzlichen Stoff mailen wenn 1. vorhanden UND 2. für die erste Stunde wichtig ist. | pbcopy'
+alias nh='ec Hallo, ich bin der neue Mathe Nachhilfelehrer vom Studienkreis Online. Kannst du bitte für den gemeinsamen Termin zusätzliche Unterlagen für die Vorbereitung mailen. Die Unterlagen vom Studienkreis -  - habe ich. Bitte zusätzlichen Stoff mailen wenn 1. vorhanden UND 2. für die erste Stunde wichtig ist. | pbcopy'
 
 
-alias s='open -b com.apple.systempreferences'
-alias osv=sw_vers
 alias cpu='sysctl -n machdep.cpu.brand_string'
+alias os=sw_vers
+alias s='open -b com.apple.systempreferences'
 
 
 
@@ -40,7 +40,6 @@ function cp_mount {
 
 function wifi_get { /System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -I | awk -F: '/ SSID/{print $2}' }
 
-function os_ver { sw_vers -productVersion }
 
 function psp {
     all_files=(*)

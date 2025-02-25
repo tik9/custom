@@ -1,10 +1,9 @@
 
-alias iu='sudo dhclient enx00e04c680015'
 alias pm='sudo pm-suspend'
 
 # apt
 alias aar='sudo apt autoremove -y'
-alias ad="sudo apt-get update"
+alias ad="sudo apt update"
 alias ai="apt list --installed | grep"
 alias al='apt list --upgradable'
 alias ar="sudo apt remove"
