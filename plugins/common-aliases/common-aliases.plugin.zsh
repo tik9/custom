@@ -19,9 +19,11 @@ alias ca=cat
 alias co=code
 
 
-# python
-alias sv='source venv/bin/activate'
-alias wp='which python3'
+# rm
+alias rf='rm -rf'
+alias rp='rm *.pdf'
+alias rz='rm *.zip'
+
 
 # ssh
 alias sd=sshd
@@ -37,7 +39,6 @@ alias l="ls -t"
 alias m=man
 alias o=open
 alias p=pwd
-alias rf='rm -rf'
 alias su=sudo
 alias to=touch
 alias x=exit

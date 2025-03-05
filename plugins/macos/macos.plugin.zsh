@@ -22,7 +22,7 @@ alias em='ec user153015@gmail.com | pbcopy'
 alias em2='ec timo@tik1.net | pbcopy'
 alias fn='ec 08456 9524 297|pbcopy'
 alias ib='ec de39 5001 0517 5447 5823 49 | pbcopy'
-alias nr='ec 015739598220 | pbcopy'
+alias nr='ec 0157 3959 8220 | pbcopy'
 alias nh='ec Hallo, ich bin der neue Mathe Nachhilfelehrer vom Studienkreis Online. Kannst du bitte für den gemeinsamen Termin zusätzliche Unterlagen für die Vorbereitung mailen. Die Unterlagen vom Studienkreis -  - habe ich. Bitte zusätzlichen Stoff mailen wenn 1. vorhanden UND 2. für die erste Stunde wichtig ist. | pbcopy'
 
 
@@ -45,12 +45,12 @@ function psp {
     all_files=(*)
     new_file=${all_files[1]::-5}
     big=${new_file}_big.pdf
-    # ec ${new_file}_big.pdf
-    pdfunite *.pdf $big &&
-    ps2pdf -dPDFSETTINGS=/ebook $big ${new_file}.pdf &&
-    files_nr=(*<0-9>*(.))
+    ec ${new_file}_big.pdf
+    # pdfunite *.pdf $big &&
+    # ps2pdf -dPDFSETTINGS=/ebook $big ${new_file}.pdf &&
+    # files_nr=(*<0-9>*(.))
     
-    # clean it
+    # clean
     # rm $big && rm $files_nr
 
 }    

@@ -1,4 +1,78 @@
 
+main=do
+  putStrLn ("Steps: "++show (step (3,3) West)++", turn: "++show (turnRight2 West))
+  
+  putStrLn ""
+  mapM_ print (trip ((4, 4), West) [S, R, S])
+  putStrLn ""
+  mapM_ print (map (action ((5,5),South)) [S,L,R])
+
+
+preorder E = ""
+preorder ( N left ch right ) = ch : preorder left ++ preorder right
+
+minChar E = Nothing
+minChar ( N l x r ) =
+ case ( minChar l , minChar r ) of
+ ( Nothing , Nothing ) -> Just x
+ ( Just lc , Nothing ) -> Just ( min lc x )
+ ( Nothing , Just rc ) -> Just ( min x rc )
+ ( Just lc , Just rc ) -> Just ( min ( min lc x ) rc )
+
+treeop c _ E = c
+treeop c f ( N l x r ) = f ( treeop c f l , x , treeop c f r )
+
+preorder2 = treeop " . " (\( l ,x , r ) -> x : l ++ r )
+
+preorder3 tree = treeop "" (\(leftStr, x, rightStr) -> leftStr ++ [x] ++ rightStr) tree
+
+minchar2 = treeop Nothing f
+ where
+f ( Nothing ,x , Nothing ) = Just x
+f ( Just l , x , Nothing ) = Just ( min l x )
+f ( Nothing ,x , Just r ) = Just ( min x r )
+f ( Just l , x , Just r ) = Just ( min ( min l x ) r )
+
+minChar3 = treeop Nothing
+ (\( l ,x , r ) -> Just ( minimum ( x : [ y | Just y <- [l , r ]])))
+
+data Direction = North | East | South | West
+ deriving ( Show , Enum ) -- fuer turnRight ’/ turnLeft ’
+data Action = L | R | S
+ deriving Show
+type State = (( Int , Int ) , Direction )
+
+step (x , y ) North = (x , y +1)
+step (x , y ) South = (x ,y -1)
+step (x , y ) East = ( x +1 , y )
+step (x , y ) West = (x -1 , y )
+
+turnRight North = East
+turnRight East = South
+turnRight South = West
+turnRight West = North
+
+turnLeft North = West
+turnLeft West = South
+turnLeft South = East
+turnLeft East = North
+
+turnRight2 West = North
+turnRight2 d = succ d
+
+turnLeft2 North = West
+turnLeft2 d = pred d
+
+action ( pos , d ) L = ( pos , turnLeft d )
+action ( pos , d ) R = ( pos , turnRight d )
+action ( pos , d ) S = ( step pos d , d )
+
+trip s [] = [ s ]
+trip s ( a : actions ) = s : trip ( action s a ) actions
+
+trip2 = scanl action
+
+
 quicksort [ ] = [ ]
 quicksort [ x ] = [ x ]
 quicksort ( p : xs ) =
@@ -11,7 +85,7 @@ quicksort2 ( p : xs ) = quicksort2 smaller ++ p : quicksort2 bigger
  smaller = filter (\x -> x < p ) xs
  bigger = filter (\x -> x >= p ) xs
 
- 
+
 thrice f x = f ( f ( f x ))
 thrice2 f = \x -> f ( f ( f x ))
 thrice3 f = f . f . f
