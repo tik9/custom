@@ -4,12 +4,11 @@ wintf=en1
 
 
 # bluetooth
-alias b=blueutil
 alias bt='blueutil -p toggle'
 
 # net
 alias et="ipconfig getifaddr $eth"
-alias n=networkQuality
+alias ne=networkQuality
 alias off-w="networksetup -setairportpower WI-FI off"
 alias on-w="networksetup -setairportpower WI-FI on"
 alias wi="ipconfig getifaddr $wintf"
@@ -20,12 +19,17 @@ alias an='echo Hallo, ich würde es für 50 € nehmen, bitte nur melden falls d
 alias adr='echo Timo Körner, Bergstr. 15, 85120 Hepberg | pbcopy'
 alias em='ec user153015@gmail.com | pbcopy'
 alias em2='ec timo@tik1.net | pbcopy'
+alias es='ec studienkreis.timo.koerner@gmail.com | pbcopy'
 alias fn='ec 08456 9524 297|pbcopy'
 alias ib='ec de39 5001 0517 5447 5823 49 | pbcopy'
 alias nr='ec 0157 3959 8220 | pbcopy'
-alias nh='ec Hallo, ich bin der neue Mathe Nachhilfelehrer vom Studienkreis Online. Kannst du bitte für den gemeinsamen Termin zusätzliche Unterlagen für die Vorbereitung mailen. Die Unterlagen vom Studienkreis -  - habe ich. Bitte zusätzlichen Stoff mailen wenn 1. vorhanden UND 2. für die erste Stunde wichtig ist. | pbcopy'
+alias nh='ec Hallo, ich bin der neue Mathe Nachhilfelehrer. Kannst du bitte für den gemeinsamen Termin  Unterlagen für die Vorbereitung mailen. | pbcopy'
+alias nh2='ec Hallo, ich biete Online Nachhilfe per google meet. Der Preis ist 18 € für 45 Minuten. Das Material als Pdf oder Bild bitte über Whatsapp schicken mit einem Terminvorschlag für die erste Stunde an 0157 3959 8220 | pbcopy'
+
+alias st='ec Die Adresse ist Alte Landstraße 8, 85101 Lenting. Es gibt oberhalb bzw. nördlich eine Baustelle, die Zufahrt zum Haus ist an der Gaststätte Hofmark vorbei, also von Süden|pbcopy'
 
 
+#cpu, system
 alias cpu='sysctl -n machdep.cpu.brand_string'
 alias os=sw_vers
 alias s='open -b com.apple.systempreferences'
@@ -40,20 +44,9 @@ function cp_mount {
 
 function wifi_get { /System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -I | awk -F: '/ SSID/{print $2}' }
 
-
-function psp {
-    all_files=(*)
-    new_file=${all_files[1]::-5}
-    big=${new_file}_big.pdf
-    ec ${new_file}_big.pdf
-    # pdfunite *.pdf $big &&
-    # ps2pdf -dPDFSETTINGS=/ebook $big ${new_file}.pdf &&
-    # files_nr=(*<0-9>*(.))
-    
-    # clean
-    # rm $big && rm $files_nr
-
-}    
+function cc {
+    echo "$@"|pbcopy
+}
 
 function unzip_ {
     downl=$HOME/downloads

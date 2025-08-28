@@ -7,6 +7,20 @@ main=do
   putStrLn ""
   mapM_ print (map (action ((5,5),South)) [S,L,R])
 
+data Tree = E | N Tree Char Tree deriving (Show)
+
+fromPreorder str =
+ case fromPreHelp str of
+ (tree, "") -> tree  -- Input is fully consumed
+ (_, rest)  -> error ("Exceeding input: " ++ rest)
+
+fromPreHelp "" = error "Insufficient input"  -- Handle empty input
+fromPreHelp ('.':rest) = (E, rest)          -- '.' represents an empty tree
+fromPreHelp (ch:rest) = (N left ch right, restR)
+ where
+ (left, restL) = fromPreHelp rest    -- Construct left subtree
+ (right, restR) = fromPreHelp restL  -- Construct right subtree
+
 
 preorder E = ""
 preorder ( N left ch right ) = ch : preorder left ++ preorder right
